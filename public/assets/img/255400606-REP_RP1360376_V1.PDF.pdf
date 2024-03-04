@@ -1,0 +1,2385 @@
+<!DOCTYPE html>
+<html
+    lang="nl"
+    dir="ltr"
+    class="antialiased bg-gray-100 filament js-focus-visible"
+>
+    <head>
+        
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="26iK3XP4MhSR3CQKYQ7pxp7KkY2FI5RHhwH1zfuS">
+
+        
+        
+        <title> bewerken -  LVA Liftadvies</title>
+
+        
+
+        <style>
+            [x-cloak=""], [x-cloak="x-cloak"], [x-cloak="1"] { display: none !important; }
+            @media (max-width: 1023px) { [x-cloak="-lg"] { display: none !important; } }
+            @media (min-width: 1024px) { [x-cloak="lg"] { display: none !important; } }
+            :root {
+                --sidebar-width: 20rem;
+                --collapsed-sidebar-width: 5.4rem;
+            }
+        </style>
+
+        <!-- Livewire Styles -->
+<style >
+    [wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid], [wire\:loading\.inline-flex] {
+        display: none;
+    }
+
+    [wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short], [wire\:loading\.delay\.long], [wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest] {
+        display:none;
+    }
+
+    [wire\:offline] {
+        display: none;
+    }
+
+    [wire\:dirty]:not(textarea):not(input):not(select) {
+        display: none;
+    }
+
+    input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {
+        animation-duration: 50000s;
+        animation-name: livewireautofill;
+    }
+
+    @keyframes livewireautofill { from {} }
+</style>
+
+                    <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
+        
+                                    <link rel="stylesheet" href="https://portal.lvaliftadvies.nl/filament/assets/filament-export-0.2.0.css" />
+                    
+        <link rel="stylesheet" href="https://portal.lvaliftadvies.nl/filament/assets/app.css?id=ceb9a486dfc44ebe8adaa3bd510821e8" />
+
+        
+
+                    <script>
+                const theme = localStorage.getItem('theme')
+
+                if ((theme === 'dark') || (! theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark')
+                }
+            </script>
+        
+        
+    </head>
+
+    <body class="filament-body bg-gray-100 text-gray-900 dark:text-gray-100 dark:bg-gray-900">
+        
+
+        <div class="filament-app-layout flex w-full min-h-screen overflow-x-clip">
+        <div
+            x-data="{}"
+            x-cloak
+            x-show="$store.sidebar.isOpen"
+            x-transition.opacity.500ms
+            x-on:click="$store.sidebar.close()"
+            class="filament-sidebar-close-overlay fixed inset-0 z-20 w-full h-full bg-gray-900/50 lg:hidden"
+        ></div>
+
+        <aside
+    x-data="{}"
+            x-cloak
+        x-bind:class="$store.sidebar.isOpen ? 'filament-sidebar-open translate-x-0 max-w-[20em] lg:max-w-[var(--sidebar-width)]' : '-translate-x-full lg:translate-x-0 lg:max-w-[var(--collapsed-sidebar-width)] rtl:lg:-translate-x-0 rtl:translate-x-full'"
+        class="filament-sidebar fixed inset-y-0 left-0 rtl:left-auto rtl:right-0 z-20 flex flex-col h-screen overflow-hidden shadow-2xl transition-all bg-white lg:border-r rtl:lg:border-r-0 rtl:lg:border-l w-[var(--sidebar-width)] lg:z-0 dark:bg-gray-800 dark:border-gray-700"
+>
+    <header class="filament-sidebar-header border-b h-[4rem] shrink-0 flex items-center justify-center relative dark:border-gray-700">
+        <div
+            x-cloak
+            class="flex items-center jusify-center px-6 w-full lg:px-4"
+            x-show="$store.sidebar.isOpen || false || false"
+        >
+                            <button
+                    type="button"
+                    class="filament-sidebar-collapse-button shrink-0 hidden lg:flex items-center justify-center w-10 h-10 text-primary-500 rounded-full hover:bg-gray-500/5 focus:bg-primary-500/10 focus:outline-none"
+                    x-on:click.stop="$store.sidebar.isOpen ? $store.sidebar.close() : $store.sidebar.open()"
+                    x-transition:enter="lg:transition delay-100"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                >
+                    <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.25 7.5L16 12L20.25 16.5M3.75 12H12M3.75 17.25H16M3.75 6.75H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            
+            <a
+                href="/"
+                data-turbo="false"
+                class="block w-full lg:ml-3"
+            >
+                <style>
+
+    
+    body {
+        font-family: 'Verdana';
+        font-size: 12px; /* 40px/16=2.5em */
+    }
+    </style>
+    
+    
+    <img src="https://lirp.cdn-website.com/95f5634d/dms3rep/multi/opt/LVA+liftadvies+2014-156w.jpg" alt="Logo" class="h-10">            </a>
+        </div>
+
+                    <button
+                type="button"
+                class="filament-sidebar-close-button shrink-0 flex items-center justify-center w-10 h-10 text-primary-500 rounded-full hover:bg-gray-500/5 focus:bg-primary-500/10 focus:outline-none"
+                x-on:click.stop="$store.sidebar.isOpen ? $store.sidebar.close() : $store.sidebar.open()"
+                x-show="(! $store.sidebar.isOpen) && true"
+                x-transition:enter="lg:transition delay-100"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+            >
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+            </header>
+
+    <nav class="flex-1 py-6 overflow-x-hidden overflow-y-auto filament-sidebar-nav">
+                
+
+        
+        <script>
+            if (localStorage.getItem('collapsedGroups') === null) {
+                localStorage.setItem('collapsedGroups', JSON.stringify([]))
+            }
+        </script>
+
+        <ul class="px-6 space-y-6">
+                            <li x-data="{ label: null }" class="filament-sidebar-group">
+    
+    <ul
+        x-show="! ($store.sidebar.groupIsCollapsed(label) && $store.sidebar.isOpen)"
+        x-collapse.duration.200ms
+        class="text-sm space-y-1 -mx-3"
+    >
+        <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Dashboard',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Dashboard
+            </span>
+
+                    </div>
+    </a>
+</li>
+                                            <li class="filament-sidebar-item overflow-hidden filament-sidebar-item-active">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/elevators"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Liften',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition bg-primary-500 text-white"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Liften
+            </span>
+
+                    </div>
+    </a>
+</li>
+                                            <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/incidents"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Storingen',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Storingen
+            </span>
+
+                    </div>
+    </a>
+</li>
+    </ul>
+</li>
+
+                                    <li>
+                        <div class="border-t -mr-6 rtl:-mr-auto rtl:-ml-6 dark:border-gray-700"></div>
+                    </li>
+                                            <li x-data="{ label: 'filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions' }" class="filament-sidebar-group">
+            <button
+                            x-on:click.prevent="$store.sidebar.toggleCollapsedGroup(label)"
+                                        x-show="$store.sidebar.isOpen"
+                        class="flex items-center justify-between w-full"
+        >
+            <div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+                
+                <p class="flex-1 font-bold uppercase text-xs tracking-wider">
+                    filament-spatie-roles-permissions::filament-spatie.section.roles_and_permissions
+                </p>
+            </div>
+
+                            <svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" x-cloak="1" class="w-3 h-3 text-gray-600 transition dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+</svg>                    </button>
+    
+    <ul
+        x-show="! ($store.sidebar.groupIsCollapsed(label) && $store.sidebar.isOpen)"
+        x-collapse.duration.200ms
+        class="text-sm space-y-1 -mx-3 mt-2"
+    >
+        <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/roles"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Filament Spatie Roles Permissions::filament Spatie.section.roles',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Filament Spatie Roles Permissions::filament Spatie.section.roles
+            </span>
+
+                    </div>
+    </a>
+</li>
+                                            <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/permissions"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Filament Spatie Roles Permissions::filament Spatie.section.permissions',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Filament Spatie Roles Permissions::filament Spatie.section.permissions
+            </span>
+
+                    </div>
+    </a>
+</li>
+    </ul>
+</li>
+
+                                    <li>
+                        <div class="border-t -mr-6 rtl:-mr-auto rtl:-ml-6 dark:border-gray-700"></div>
+                    </li>
+                                            <li x-data="{ label: 'Relaties' }" class="filament-sidebar-group">
+            <button
+                            x-on:click.prevent="$store.sidebar.toggleCollapsedGroup(label)"
+                                        x-show="$store.sidebar.isOpen"
+                        class="flex items-center justify-between w-full"
+        >
+            <div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+                
+                <p class="flex-1 font-bold uppercase text-xs tracking-wider">
+                    Relaties
+                </p>
+            </div>
+
+                            <svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" x-cloak="1" class="w-3 h-3 text-gray-600 transition dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+</svg>                    </button>
+    
+    <ul
+        x-show="! ($store.sidebar.groupIsCollapsed(label) && $store.sidebar.isOpen)"
+        x-collapse.duration.200ms
+        class="text-sm space-y-1 -mx-3 mt-2"
+    >
+        <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/contacts"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Contactpersonen',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Contactpersonen
+            </span>
+
+                    </div>
+    </a>
+</li>
+                                            <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/customers"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Relaties',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Relaties
+            </span>
+
+                    </div>
+    </a>
+</li>
+    </ul>
+</li>
+
+                                    <li>
+                        <div class="border-t -mr-6 rtl:-mr-auto rtl:-ml-6 dark:border-gray-700"></div>
+                    </li>
+                                            <li x-data="{ label: 'Basisgegevens' }" class="filament-sidebar-group">
+            <button
+                            x-on:click.prevent="$store.sidebar.toggleCollapsedGroup(label)"
+                                        x-show="$store.sidebar.isOpen"
+                        class="flex items-center justify-between w-full"
+        >
+            <div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+                
+                <p class="flex-1 font-bold uppercase text-xs tracking-wider">
+                    Basisgegevens
+                </p>
+            </div>
+
+                            <svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" x-cloak="1" class="w-3 h-3 text-gray-600 transition dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+</svg>                    </button>
+    
+    <ul
+        x-show="! ($store.sidebar.groupIsCollapsed(label) && $store.sidebar.isOpen)"
+        x-collapse.duration.200ms
+        class="text-sm space-y-1 -mx-3 mt-2"
+    >
+        <li class="filament-sidebar-item overflow-hidden">
+    <a
+        href="https://portal.lvaliftadvies.nl/beheer/users"
+        
+        x-on:click="window.matchMedia(`(max-width: 1024px)`).matches && $store.sidebar.close()"
+                    x-data="{ tooltip: {} }"
+            x-init="
+                Alpine.effect(() => {
+                    if (Alpine.store('sidebar').isOpen) {
+                        tooltip = false
+                    } else {
+                        tooltip = {
+                            content: 'Gebruikers',
+                            theme: Alpine.store('theme') === 'light' ? 'dark' : 'light',
+                            placement: document.dir === 'rtl' ? 'left' : 'right',
+                        }
+                    }
+                })
+            "
+            x-tooltip.html="tooltip"
+                class="flex items-center justify-center gap-3 px-3 py-2 rounded-lg font-medium transition hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+        <svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+</svg>
+        <div class="flex flex-1"
+                            x-data="{}"
+                x-show="$store.sidebar.isOpen"
+                    >
+            <span>
+                Gebruikers
+            </span>
+
+                    </div>
+    </a>
+</li>
+    </ul>
+</li>
+
+                                    </ul>
+
+                
+    </nav>
+
+    </aside>
+
+        <div
+                            x-data="{}"
+                x-bind:class="{
+                    'lg:pl-[var(--collapsed-sidebar-width)] rtl:lg:pr-[var(--collapsed-sidebar-width)]': ! $store.sidebar.isOpen,
+                    'filament-main-sidebar-open lg:pl-[var(--sidebar-width)] rtl:lg:pr-[var(--sidebar-width)]': $store.sidebar.isOpen,
+                }"
+                x-bind:style="'display: flex'" 
+                        class="filament-main flex-col gap-y-6 w-screen flex-1 rtl:lg:pl-0 hidden h-full transition-all"
+        >
+            <header class="filament-main-topbar sticky top-0 z-10 flex h-16 w-full shrink-0 items-center border-b bg-white dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center w-full px-2 sm:px-4 md:px-6 lg:px-8">
+        <button
+            x-cloak
+            x-data="{}"
+            x-on:click="$store.sidebar.isOpen ? $store.sidebar.close() : $store.sidebar.open()"
+            class="filament-sidebar-open-button shrink-0 flex items-center justify-center w-10 h-10 text-primary-500 rounded-full hover:bg-gray-500/5 focus:bg-primary-500/10 focus:outline-none lg:mr-4 rtl:lg:mr-0 rtl:lg:ml-4 lg:hidden"
+        >
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+
+        <div class="flex items-center justify-between flex-1">
+            <div class="filament-breadcrumbs flex-1">
+    <ul class="hidden gap-4 items-center font-medium text-sm lg:flex dark:text-white">
+                    <li>
+                <a
+                    href="https://portal.lvaliftadvies.nl/beheer/elevators"
+                    class="dark:text-gray-300"
+                >
+                    Liften Overzicht
+                </a>
+            </li>
+
+                            <li class="h-6 border-r border-gray-300 -skew-x-12 dark:border-gray-500"></li>
+                                <li>
+                <a
+                    href="https://portal.lvaliftadvies.nl/beheer/elevators/428/edit"
+                    class="dark:text-gray-300"
+                >
+                    
+                </a>
+            </li>
+
+                            <li class="h-6 border-r border-gray-300 -skew-x-12 dark:border-gray-500"></li>
+                                <li>
+                <a
+                    href="#"
+                    class="text-gray-500 dark:text-gray-400"
+                >
+                    Bewerken
+                </a>
+            </li>
+
+                        </ul>
+</div>
+
+            <div wire:id="PYliKxU25GGUosihcJRk" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;PYliKxU25GGUosihcJRk&quot;,&quot;name&quot;:&quot;filament.core.global-search&quot;,&quot;locale&quot;:&quot;nl&quot;,&quot;path&quot;:&quot;beheer\/elevators\/428\/edit&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;790e5a06&quot;,&quot;data&quot;:{&quot;search&quot;:&quot;&quot;},&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;e0a79ae7c23fef68e53fe7d05d0fa580253e6daba8740a1671f5c3d3f4a49692&quot;}}" class="filament-global-search flex items-center ml-4">
+        
+
+            <div class="relative">
+            <div class="filament-global-search-input">
+    <label for="globalSearchInput" class="sr-only">
+        Globaal zoeken
+    </label>
+
+    <div class="relative group max-w-md">
+        <span class="absolute inset-y-0 left-0 flex items-center justify-center w-10 h-10 text-gray-500 pointer-events-none group-focus-within:text-primary-500 dark:text-gray-400">
+            <svg wire:loading.remove.delay="1" wire:target="search" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+</svg>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-5 h-5" wire:loading.delay="wire:loading.delay" wire:target="search">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+        </span>
+
+        <input
+            wire:model.debounce.500ms="search"
+            id="globalSearchInput"
+            placeholder="Zoeken"
+            type="search"
+            autocomplete="off"
+            class="block w-full h-10 pl-10 bg-gray-400/10 placeholder-gray-500 border-transparent transition duration-75  focus:bg-white focus:placeholder-gray-400 focus:border-primary-500 focus:ring-1 focus:ring-inset focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+        >
+    </div>
+</div>
+
+                    </div>
+    
+        
+</div>
+
+<!-- Livewire Component wire-end:PYliKxU25GGUosihcJRk -->
+            <div wire:id="IdgRCLIIe48tr5l6S5WU" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;IdgRCLIIe48tr5l6S5WU&quot;,&quot;name&quot;:&quot;filament.core.notifications&quot;,&quot;locale&quot;:&quot;nl&quot;,&quot;path&quot;:&quot;beheer\/elevators\/428\/edit&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[&quot;notificationSent&quot;,&quot;notificationsSent&quot;,&quot;notificationClosed&quot;]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;203e6b7c&quot;,&quot;data&quot;:{&quot;isFilamentNotificationsComponent&quot;:true,&quot;notifications&quot;:[]},&quot;dataMeta&quot;:{&quot;wireables&quot;:[&quot;notifications&quot;]},&quot;checksum&quot;:&quot;43f29565676acdd196a408a07b8d5ca2337c39e7737df4bfa9146f22bb026108&quot;}}">
+    <div
+        class="filament-notifications pointer-events-none fixed inset-4 z-50 mx-auto flex gap-3 items-end flex-col-reverse justify-end"
+        role="status"
+    >
+            </div>
+
+    
+            <div
+    x-data="{}"
+    x-init="
+        window.addEventListener('EchoLoaded', () => {
+            window.Echo.private('App.Models.User.11')
+                .notification((notification) => {
+                    setTimeout(
+                        () => $wire.handleBroadcastNotification(notification),
+                        500,
+                    )
+                })
+                .listen('.database-notifications.sent', () => {
+                    setTimeout(() => $wire.call('$refresh'), 500)
+                })
+        })
+
+        if (window.Echo) {
+            window.dispatchEvent(new CustomEvent('EchoLoaded'))
+        }
+    "
+    
+></div>
+    </div>
+
+<!-- Livewire Component wire-end:IdgRCLIIe48tr5l6S5WU -->
+            <div
+    class="filament-dropdown"
+    x-data="{
+        toggle: function (event) {
+            $refs.panel.toggle(event)
+        },
+        open: function (event) {
+            $refs.panel.open(event)
+        },
+        close: function (event) {
+            $refs.panel.close(event)
+        },
+    }"
+>
+    <div
+        x-on:click="toggle"
+        class="filament-dropdown-trigger cursor-pointer ml-4"
+    >
+        <div
+    class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center dark:bg-gray-900"
+    style="background-image: url('https://ui-avatars.com/api/?name=D&amp;color=FFFFFF&amp;background=c9dd4b')"
+></div>
+    </div>
+
+    <div
+        x-ref="panel"
+        x-float.placement.bottom-end.flip.offset="{ offset: 8 }"
+        x-cloak
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:leave-end="opacity-0 scale-95"
+                class="filament-dropdown-panel absolute z-10 w-full divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-black/5 transition dark:divide-gray-700 dark:bg-gray-800 dark:ring-white/10 max-w-[14rem]"
+    >
+        <div class="filament-dropdown-header flex w-full p-3 text-sm">
+                    <svg class="filament-dropdown-header-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+</svg>        
+        <span class="filament-dropdown-header-label">
+            Denise
+        </span>
+    </div>
+    
+    
+
+    <div class="filament-dropdown-list p-1" dark-mode="dark-mode" x-data="{
+            mode: null,
+
+            theme: null,
+
+            init: function () {
+                this.theme = localStorage.getItem('theme') || (this.isSystemDark() ? 'dark' : 'light')
+                this.mode = localStorage.getItem('theme') ? 'manual' : 'auto'
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+                    if (this.mode === 'manual') return
+
+                    if (event.matches && (! document.documentElement.classList.contains('dark'))) {
+                        this.theme = 'dark'
+
+                        document.documentElement.classList.add('dark')
+                    } else if ((! event.matches) && document.documentElement.classList.contains('dark')) {
+                        this.theme = 'light'
+
+                        document.documentElement.classList.remove('dark')
+                    }
+                })
+
+                $watch('theme', () => {
+                    if (this.mode === 'auto') return
+
+                    localStorage.setItem('theme', this.theme)
+
+                    if (this.theme === 'dark' && (! document.documentElement.classList.contains('dark'))) {
+                        document.documentElement.classList.add('dark')
+                    } else if (this.theme === 'light' && document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark')
+                    }
+
+                    $dispatch('dark-mode-toggled', this.theme)
+                })
+            },
+
+            isSystemDark: function () {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches
+            },
+        }">
+    <div>
+                            <button
+        type="button"
+        wire:loading.attr="disabled"
+        
+        
+        class="filament-dropdown-list-item filament-dropdown-item group flex w-full items-center whitespace-nowrap rounded-md p-2 text-sm focus:outline-none hover:text-white focus:text-white hover:bg-primary-500 focus:bg-primary-500" x-show="theme === 'dark'" x-on:click="close(); mode = 'manual'; theme = 'light'"
+    >
+                    <svg wire:loading.remove.delay="" wire:target="" class="filament-dropdown-list-item-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 group-hover:text-white group-focus:text-white text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+</svg>        
+        
+        <span class="filament-dropdown-list-item-label truncate">
+            Lichte weergave inschakelen
+        </span>
+
+            </button>
+
+                <button
+        type="button"
+        wire:loading.attr="disabled"
+        
+        
+        class="filament-dropdown-list-item filament-dropdown-item group flex w-full items-center whitespace-nowrap rounded-md p-2 text-sm focus:outline-none hover:text-white focus:text-white hover:bg-primary-500 focus:bg-primary-500" x-show="theme === 'light'" x-on:click="close(); mode = 'manual'; theme = 'dark'"
+    >
+                    <svg wire:loading.remove.delay="" wire:target="" class="filament-dropdown-list-item-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 group-hover:text-white group-focus:text-white text-primary-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+</svg>        
+        
+        <span class="filament-dropdown-list-item-label truncate">
+            Donkere weergave inschakelen
+        </span>
+
+            </button>
+                    </div>
+
+                                    <a class="filament-dropdown-list-item filament-dropdown-item group flex w-full items-center whitespace-nowrap rounded-md p-2 text-sm focus:outline-none hover:text-white focus:text-white hover:bg-primary-500 focus:bg-primary-500" href="https://portal.lvaliftadvies.nl/beheer/screen/lock">
+                    <svg class="filament-dropdown-list-item-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 group-hover:text-white group-focus:text-white text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+</svg>        
+        <span class="filament-dropdown-list-item-label truncate">
+            filament-lockscreen::default.user_menu_title
+        </span>
+
+            </a>
+                    
+        <form action="https://portal.lvaliftadvies.nl/filament/logout" method="post">
+        <input type="hidden" name="_token" value="26iK3XP4MhSR3CQKYQ7pxp7KkY2FI5RHhwH1zfuS">
+        <button
+            type="submit"
+            class="filament-dropdown-list-item filament-dropdown-item group flex w-full items-center whitespace-nowrap rounded-md p-2 text-sm focus:outline-none hover:text-white focus:text-white hover:bg-primary-500 focus:bg-primary-500"
+        >
+                            <svg class="filament-dropdown-list-item-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 group-hover:text-white group-focus:text-white text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"/>
+</svg>            
+            <span class="filament-dropdown-list-item-label truncate">
+                Uitloggen
+            </span>
+
+                    </button>
+    </form>
+</div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</header>
+
+            <div class="filament-main-content flex-1 w-full px-4 mx-auto md:px-6 lg:px-8 max-w-full">
+                
+
+                <div wire:id="g6G3srzCJzkjUMj5q49Y" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;g6G3srzCJzkjUMj5q49Y&quot;,&quot;name&quot;:&quot;app.filament.resources.elevator-resource.pages.edit-elevator&quot;,&quot;locale&quot;:&quot;nl&quot;,&quot;path&quot;:&quot;beheer\/elevators\/428\/edit&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[],&quot;path&quot;:&quot;https:\/\/portal.lvaliftadvies.nl\/beheer\/elevators\/428\/edit?fetch=https%3A%2F%2Fportaal.liftinstituut.nl%2Freport%2F255400606-REP_RP1360376_V1.PDF.pdf&amp;activeRelationManager=0&quot;},&quot;serverMemo&quot;:{&quot;children&quot;:{&quot;App\\Filament\\Resources\\ElevatorResource\\RelationManagers\\InspectionsRelationManager&quot;:{&quot;id&quot;:&quot;8JIz60y0WmwGZzDGRMhJ&quot;,&quot;tag&quot;:&quot;div&quot;}},&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;ea69d51c&quot;,&quot;data&quot;:{&quot;data&quot;:{&quot;id&quot;:428,&quot;customer_id&quot;:null,&quot;created_at&quot;:null,&quot;updated_at&quot;:&quot;2023-06-13T11:35:51.000000Z&quot;,&quot;name&quot;:&quot;&quot;,&quot;mailbox&quot;:&quot;&quot;,&quot;construction_year&quot;:&quot;&quot;,&quot;unit_no&quot;:&quot;46000008801&quot;,&quot;nobo_no&quot;:&quot;255400606&quot;,&quot;remark&quot;:&quot;keuringsrapport in mapje&quot;,&quot;manufacture&quot;:&quot;Schindler&quot;,&quot;maintenance_company&quot;:&quot;VEBO Liftsupport&quot;,&quot;agreements&quot;:&quot;&quot;,&quot;management_id&quot;:null,&quot;check_date&quot;:&quot;2021-05-21&quot;,&quot;check_date_valid&quot;:&quot;2022-11-01&quot;,&quot;address_id&quot;:428,&quot;deleted_at&quot;:null,&quot;description&quot;:null,&quot;check_valid_date&quot;:null,&quot;check_valid&quot;:null,&quot;inspection_company_id&quot;:null,&quot;check_remark&quot;:null,&quot;supplier_id&quot;:null,&quot;maintenance_company_id&quot;:&quot;528&quot;,&quot;management_contact_id&quot;:null,&quot;incident&quot;:null,&quot;stand_still&quot;:null,&quot;stand_still_dated&quot;:null,&quot;status_id&quot;:null,&quot;total_maintenance_year&quot;:null,&quot;own_management&quot;:0,&quot;&quot;:null,&quot;relation_id&quot;:null},&quot;previousUrl&quot;:&quot;https:\/\/portal.lvaliftadvies.nl\/beheer\/elevators\/428\/edit?activeRelationManager=0&quot;,&quot;mountedAction&quot;:null,&quot;mountedActionData&quot;:[],&quot;componentFileAttachments&quot;:[],&quot;mountedFormComponentAction&quot;:null,&quot;mountedFormComponentActionArguments&quot;:[],&quot;mountedFormComponentActionData&quot;:[],&quot;mountedFormComponentActionComponent&quot;:null,&quot;activeRelationManager&quot;:0,&quot;record&quot;:[]},&quot;dataMeta&quot;:{&quot;models&quot;:{&quot;record&quot;:{&quot;class&quot;:&quot;App\\Models\\Elevator&quot;,&quot;id&quot;:428,&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}}},&quot;checksum&quot;:&quot;7fc136898649bdf4481e7aad91e9ec729522f75f595e3195fdaf9494d4c3372a&quot;}}" class="filament-page filament-resources-edit-record-page filament-resources-elevators filament-resources-record-428">
+    <div class="space-y-6">
+                    <header class="filament-header space-y-2 items-start justify-between sm:flex sm:space-y-0 sm:space-x-4  sm:rtl:space-x-reverse sm:py-4">
+    <div>
+        <h1 class="filament-header-heading text-2xl  tracking-tight">
+    bewerken
+</h1>
+
+            </div>
+
+
+    <div
+            class="filament-page-actions flex flex-wrap items-center gap-4 justify-start shrink-0"
+        >
+                            <button
+                    x-mousetrap.global.mod-d
+                        type="button"
+        wire:loading.attr="disabled"
+        wire:loading.class.delay="opacity-70 cursor-wait"
+        wire:target="mountAction('delete')"
+        
+        x-data="{
+            form: null,
+            isUploadingFile: false,
+        }"
+                    x-bind:class="{ 'opacity-70 cursor-wait': isUploadingFile }"
+                x-bind:disabled="isUploadingFile"
+        x-init="
+            form = $el.closest('form')
+
+            form?.addEventListener('file-upload-started', () => {
+                isUploadingFile = true
+            })
+
+            form?.addEventListener('file-upload-finished', () => {
+                isUploadingFile = false
+            })
+        "
+        class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-danger-600 hover:bg-danger-500 focus:bg-danger-700 focus:ring-offset-danger-700 filament-page-button-action" wire:click="mountAction(&#039;delete&#039;)" dusk="filament.admin.action.delete"
+    >
+                    
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin filament-button-icon w-5 h-5 mr-1 -ml-2 rtl:ml-1 rtl:-mr-2" x-cloak="x-cloak" wire:loading.delay="wire:loading.delay" wire:target="mountAction(&#039;delete&#039;)">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+                    
+        <span class="flex items-center gap-1">
+                            <span class="">
+                    Verwijderen
+                </span>
+                    </span>
+
+            </button>
+
+                    </div>
+    </header>
+        
+        
+
+        
+        
+
+        <form
+    x-data="{ isUploadingFile: false }"
+    x-on:submit="if (isUploadingFile) $event.preventDefault()"
+    x-on:file-upload-started="isUploadingFile = true"
+    x-on:file-upload-finished="isUploadingFile = false"
+    class="filament-form space-y-6" wire:submit.prevent="save"
+>
+    <div class="grid grid-cols-1      filament-forms-component-container gap-6">
+    <div class="col-span-full">
+    <div >
+    <div class="grid grid-cols-1   lg:grid-cols-2   filament-forms-component-container gap-6">
+    <div class="col-span-full">
+    <div
+        id="data.relatie-gegevens"
+    class="filament-forms-section-component rounded-xl border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800"
+    
+>
+    <div
+        class="filament-forms-section-header-wrapper flex overflow-hidden rounded-t-xl rtl:space-x-reverse min-h-[56px] items-center bg-gray-100 px-4 py-2 dark:bg-gray-900"
+            >
+        <div
+            class="filament-forms-section-header flex-1 space-y-1"
+        >
+            <h3
+                class="pointer-events-none flex flex-row items-center font-bold tracking-tight text-xl"
+            >
+                
+                Relatie gegevens
+            </h3>
+
+                    </div>
+
+            </div>
+
+    <div
+                class="filament-forms-section-content-wrapper"
+    >
+        <div
+            class="filament-forms-section-content p-6"
+        >
+            <div class="grid grid-cols-1   lg:grid-cols-4   filament-forms-component-container gap-6">
+    <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.name.Filament\Forms\Components\TextInput">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.name"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Volledige naam    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-text-input-component group flex items-center space-x-2 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="flex-1">
+            <input
+                                    x-data="{}"
+                    wire:model.defer="data.name"
+                    type="text"
+                                dusk="filament.forms.data.name"
+                
+                
+                
+                
+                id="data.name"
+                
+                
+                
+                
+                                    
+                    
+                    
+                    
+                    
+                                
+                class="filament-forms-input block w-full rounded-lg shadow-sm outline-none transition duration-75 focus:ring-1 focus:ring-inset disabled:opacity-70 dark:bg-gray-700 dark:text-white"
+                x-bind:class="{
+                    'border-gray-300 focus:border-primary-500 focus:ring-primary-500': ! (
+                        'data.name' in $wire.__instance.serverMemo.errors
+                    ),
+                    'dark:border-gray-600 dark:focus:border-primary-500':
+                        ! ('data.name' in $wire.__instance.serverMemo.errors) && true,
+                    'border-danger-600 ring-danger-600 focus:border-danger-500 focus:ring-danger-500':
+                        'data.name' in $wire.__instance.serverMemo.errors,
+                    'dark:border-danger-400 dark:ring-danger-400 dark:focus:border-danger-500 dark:focus:ring-danger-500':
+                        'data.name' in $wire.__instance.serverMemo.errors && true,
+                }"
+            />
+        </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+            
+        <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.unit_no.Filament\Forms\Components\TextInput">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.unit_no"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Unitnummer    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-text-input-component group flex items-center space-x-2 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="flex-1">
+            <input
+                                    x-data="{}"
+                    wire:model.defer="data.unit_no"
+                    type="text"
+                                dusk="filament.forms.data.unit_no"
+                
+                
+                
+                
+                id="data.unit_no"
+                
+                
+                
+                
+                                    
+                    
+                    
+                    
+                    
+                                
+                class="filament-forms-input block w-full rounded-lg shadow-sm outline-none transition duration-75 focus:ring-1 focus:ring-inset disabled:opacity-70 dark:bg-gray-700 dark:text-white"
+                x-bind:class="{
+                    'border-gray-300 focus:border-primary-500 focus:ring-primary-500': ! (
+                        'data.unit_no' in $wire.__instance.serverMemo.errors
+                    ),
+                    'dark:border-gray-600 dark:focus:border-primary-500':
+                        ! ('data.unit_no' in $wire.__instance.serverMemo.errors) && true,
+                    'border-danger-600 ring-danger-600 focus:border-danger-500 focus:ring-danger-500':
+                        'data.unit_no' in $wire.__instance.serverMemo.errors,
+                    'dark:border-danger-400 dark:ring-danger-400 dark:focus:border-danger-500 dark:focus:ring-danger-500':
+                        'data.unit_no' in $wire.__instance.serverMemo.errors && true,
+                }"
+            />
+        </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+            
+        <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.nobo_no.Filament\Forms\Components\TextInput">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.nobo_no"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Nobo nr    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-text-input-component group flex items-center space-x-2 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="flex-1">
+            <input
+                                    x-data="{}"
+                    wire:model.defer="data.nobo_no"
+                    type="text"
+                                dusk="filament.forms.data.nobo_no"
+                
+                
+                
+                
+                id="data.nobo_no"
+                
+                
+                
+                
+                                    
+                    
+                    
+                    
+                    
+                                
+                class="filament-forms-input block w-full rounded-lg shadow-sm outline-none transition duration-75 focus:ring-1 focus:ring-inset disabled:opacity-70 dark:bg-gray-700 dark:text-white"
+                x-bind:class="{
+                    'border-gray-300 focus:border-primary-500 focus:ring-primary-500': ! (
+                        'data.nobo_no' in $wire.__instance.serverMemo.errors
+                    ),
+                    'dark:border-gray-600 dark:focus:border-primary-500':
+                        ! ('data.nobo_no' in $wire.__instance.serverMemo.errors) && true,
+                    'border-danger-600 ring-danger-600 focus:border-danger-500 focus:ring-danger-500':
+                        'data.nobo_no' in $wire.__instance.serverMemo.errors,
+                    'dark:border-danger-400 dark:ring-danger-400 dark:focus:border-danger-500 dark:focus:ring-danger-500':
+                        'data.nobo_no' in $wire.__instance.serverMemo.errors && true,
+                }"
+            />
+        </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+            
+        <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.construction_year.Filament\Forms\Components\TextInput">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.construction_year"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Constructiejaar  nr    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-text-input-component group flex items-center space-x-2 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="flex-1">
+            <input
+                                    x-data="{}"
+                    wire:model.defer="data.construction_year"
+                    type="text"
+                                dusk="filament.forms.data.construction_year"
+                
+                
+                
+                
+                id="data.construction_year"
+                
+                
+                
+                
+                                    
+                    
+                    
+                    
+                    
+                                
+                class="filament-forms-input block w-full rounded-lg shadow-sm outline-none transition duration-75 focus:ring-1 focus:ring-inset disabled:opacity-70 dark:bg-gray-700 dark:text-white"
+                x-bind:class="{
+                    'border-gray-300 focus:border-primary-500 focus:ring-primary-500': ! (
+                        'data.construction_year' in $wire.__instance.serverMemo.errors
+                    ),
+                    'dark:border-gray-600 dark:focus:border-primary-500':
+                        ! ('data.construction_year' in $wire.__instance.serverMemo.errors) && true,
+                    'border-danger-600 ring-danger-600 focus:border-danger-500 focus:ring-danger-500':
+                        'data.construction_year' in $wire.__instance.serverMemo.errors,
+                    'dark:border-danger-400 dark:ring-danger-400 dark:focus:border-danger-500 dark:focus:ring-danger-500':
+                        'data.construction_year' in $wire.__instance.serverMemo.errors && true,
+                }"
+            />
+        </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+            
+        <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.management_id.Filament\Forms\Components\Select">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.management_id"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Beheerder    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-select-component group flex items-center space-x-1 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="min-w-0 flex-1">
+                            <div
+                    x-data="selectFormComponent({
+                                isHtmlAllowed: false,
+                                getOptionLabelUsing: async () => {
+                                    return await $wire.getSelectOptionLabel('data.management_id')
+                                },
+                                getOptionLabelsUsing: async () => {
+                                    return await $wire.getSelectOptionLabels('data.management_id')
+                                },
+                                getOptionsUsing: async () => {
+                                    return await $wire.getSelectOptions('data.management_id')
+                                },
+                                getSearchResultsUsing: async (search) => {
+                                    return await $wire.getSelectSearchResults('data.management_id', search)
+                                },
+                                isAutofocused: false,
+                                isMultiple: false,
+                                hasDynamicOptions: false,
+                                hasDynamicSearchResults: false,
+                                loadingMessage: 'Laden...',
+                                maxItems: null,
+                                maxItemsMessage: 'Er kunnen maar  geselecteerd worden.',
+                                noSearchResultsMessage: 'Er zijn geen resultaten voor je zoekopdracht.',
+                                options: JSON.parse('[{\u0022label\u0022:\u0022VB\\u0026T Vastgoedmanagement B.V.\u0022,\u0022value\u0022:\u00221\u0022},{\u0022label\u0022:\u0022Hoekstra Vastgoedbeheer B.V.\u0022,\u0022value\u0022:\u00222\u0022},{\u0022label\u0022:\u0022MVGM Breda\u0022,\u0022value\u0022:\u00223\u0022},{\u0022label\u0022:\u0022MVGM Groningen\u0022,\u0022value\u0022:\u00224\u0022},{\u0022label\u0022:\u0022Van der Linden Vastgoedmanagement  B.V.\u0022,\u0022value\u0022:\u00225\u0022},{\u0022label\u0022:\u0022Schep Vastgoedmanagers B.V.\u0022,\u0022value\u0022:\u00226\u0022},{\u0022label\u0022:\u0022MVGM Amersfoort\u0022,\u0022value\u0022:\u00227\u0022},{\u0022label\u0022:\u0022NMG Vastgoed B.V.\u0022,\u0022value\u0022:\u00228\u0022},{\u0022label\u0022:\u0022Van der Borden Vastgoed\u0022,\u0022value\u0022:\u00229\u0022},{\u0022label\u0022:\u0022MVGM Wonen\u0022,\u0022value\u0022:\u002211\u0022},{\u0022label\u0022:\u0022Cushman \\u0026 Wakefield\u0022,\u0022value\u0022:\u002212\u0022},{\u0022label\u0022:\u0022MVGM Rotterdam\u0022,\u0022value\u0022:\u002213\u0022},{\u0022label\u0022:\u0022VvE Beheer Starrip\u0022,\u0022value\u0022:\u002214\u0022},{\u0022label\u0022:\u0022Twinss VvE Beheer\u0022,\u0022value\u0022:\u002215\u0022},{\u0022label\u0022:\u0022VT2000\u0022,\u0022value\u0022:\u002216\u0022},{\u0022label\u0022:\u0022JWA Beheer \u0022,\u0022value\u0022:\u002217\u0022},{\u0022label\u0022:\u0022MVGM VvE Beheer\u0022,\u0022value\u0022:\u002218\u0022},{\u0022label\u0022:\u0022MVGM Amsterdam\u0022,\u0022value\u0022:\u002219\u0022},{\u0022label\u0022:\u0022Westhavendomein VvE Beheer B.V.\u0022,\u0022value\u0022:\u002220\u0022},{\u0022label\u0022:\u0022VvE NL\u0022,\u0022value\u0022:\u002221\u0022},{\u0022label\u0022:\u0022VVE Diensten Nederland Rotterdam B.V.\u0022,\u0022value\u0022:\u002222\u0022},{\u0022label\u0022:\u0022Pilaster VvE Beheer\u0022,\u0022value\u0022:\u002223\u0022},{\u0022label\u0022:\u0022Gebouwonderhouden.nl\u0022,\u0022value\u0022:\u002224\u0022},{\u0022label\u0022:\u0022REBO Vastgoedmanagement B.V.\u0022,\u0022value\u0022:\u002225\u0022},{\u0022label\u0022:\u0022CBRE B.V.\u0022,\u0022value\u0022:\u002226\u0022},{\u0022label\u0022:\u0022Holland2Stay\u0022,\u0022value\u0022:\u002227\u0022},{\u0022label\u0022:\u0022Square Four B.V.\u0022,\u0022value\u0022:\u002228\u0022},{\u0022label\u0022:\u0022Hoen Vastgoedbeheer\u0022,\u0022value\u0022:\u002229\u0022},{\u0022label\u0022:\u0022Edelwonen B.V.\u0022,\u0022value\u0022:\u002230\u0022},{\u0022label\u0022:\u0022Newomij Vastgoed \u0022,\u0022value\u0022:\u002231\u0022},{\u0022label\u0022:\u0022Sweco Vastgoedmanagement\u0022,\u0022value\u0022:\u002232\u0022},{\u0022label\u0022:\u0022Atrium Vastgoedmanagement B.V.\u0022,\u0022value\u0022:\u002233\u0022},{\u0022label\u0022:\u0022Orange Capital Partners\u0022,\u0022value\u0022:\u002234\u0022},{\u0022label\u0022:\u0022LVA Liftbeheer B.V.\u0022,\u0022value\u0022:\u002238\u0022},{\u0022label\u0022:\u0022VVE Beheer WijSamen\u0022,\u0022value\u0022:\u002239\u0022},{\u0022label\u0022:\u0022Moerman \\u0026 De Jong Makelaars\u0022,\u0022value\u0022:\u002240\u0022},{\u0022label\u0022:\u0022VVE JWA Beheer Rijnmond\u0022,\u0022value\u0022:\u002241\u0022},{\u0022label\u0022:\u0022De Nieuwe Wereld Vastgoedbeheer\u0022,\u0022value\u0022:\u002242\u0022},{\u0022label\u0022:\u0022Sturm en De Neeve B.V.\u0022,\u0022value\u0022:\u002243\u0022},{\u0022label\u0022:\u0022Dreef 5, Vastgoedbeheer\u0022,\u0022value\u0022:\u002246\u0022},{\u0022label\u0022:\u0022AHAM Vastgoed B.V.\u0022,\u0022value\u0022:\u002247\u0022},{\u0022label\u0022:\u0022Stichting VO Haaglanden\u0022,\u0022value\u0022:\u002250\u0022},{\u0022label\u0022:\u0022Niet Van Toepassing\u0022,\u0022value\u0022:\u002251\u0022},{\u0022label\u0022:\u0022Trinity Rotterdam C.V.\u0022,\u0022value\u0022:\u002252\u0022},{\u0022label\u0022:\u0022AG Keynesplein 4 Cooperatieve U.A\u0022,\u0022value\u0022:\u002253\u0022},{\u0022label\u0022:\u0022Metterwoon Vastgoed BV\u0022,\u0022value\u0022:\u002254\u0022},{\u0022label\u0022:\u0022Staate Beheer\u0022,\u0022value\u0022:\u002255\u0022},{\u0022label\u0022:\u0022Woonbron VvE Beheer\u0022,\u0022value\u0022:\u002256\u0022},{\u0022label\u0022:\u0022Van Roemburg VvE Beheer\u0022,\u0022value\u0022:\u002257\u0022},{\u0022label\u0022:\u0022Reurings VvE Beheer\u0022,\u0022value\u0022:\u002258\u0022},{\u0022label\u0022:\u0022Urban Interest Vastgoed B.V.\u0022,\u0022value\u0022:\u002259\u0022}]'),
+                                optionsLimit: 50,
+                                placeholder: 'Selecteer een optie',
+                                position: null,
+                                isPlaceholderSelectionDisabled: false,
+                                searchDebounce: 1000,
+                                searchingMessage: 'Zoeken...',
+                                searchPrompt: 'Start met typen om te zoeken...',
+                                searchableOptionFields: JSON.parse('[\u0022label\u0022]'),
+                                state: $wire.entangle(&#039;data.management_id&#039;).defer,
+                            })"
+                    x-on:keydown.esc="select.dropdown.isActive && $event.stopPropagation()"
+                    wire:ignore
+                    class="filament-forms-input"
+                    x-bind:class="{
+                        'choices--error': 'data.management_id' in $wire.__instance.serverMemo.errors,
+                    }"
+                >
+                    <select
+                        x-ref="input"
+                        id="data.management_id"
+                        
+                        
+                        
+                    ></select>
+                </div>
+                    </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+            
+        <div class="col-span-1" wire:key="g6G3srzCJzkjUMj5q49Y.data.relation_id.Filament\Forms\Components\Select">
+    <div class="filament-forms-field-wrapper">
+    
+    <div class="space-y-2">
+                    <div
+                class="flex items-center justify-between space-x-2 rtl:space-x-reverse"
+            >
+                                    <label
+    class="filament-forms-field-wrapper-label inline-flex items-center space-x-3 rtl:space-x-reverse" for="data.relation_id"
+>
+    
+
+    <span
+        class="text-sm font-medium leading-4 text-gray-700 dark:text-gray-300"
+    >
+        
+        Beheerder    </span>
+
+    
+</label>
+                
+                            </div>
+        
+        <div
+        class="filament-forms-select-component group flex items-center space-x-1 rtl:space-x-reverse"
+    >
+        
+        
+        
+        <div class="min-w-0 flex-1">
+                            <div
+                    x-data="selectFormComponent({
+                                isHtmlAllowed: false,
+                                getOptionLabelUsing: async () => {
+                                    return await $wire.getSelectOptionLabel('data.relation_id')
+                                },
+                                getOptionLabelsUsing: async () => {
+                                    return await $wire.getSelectOptionLabels('data.relation_id')
+                                },
+                                getOptionsUsing: async () => {
+                                    return await $wire.getSelectOptions('data.relation_id')
+                                },
+                                getSearchResultsUsing: async (search) => {
+                                    return await $wire.getSelectSearchResults('data.relation_id', search)
+                                },
+                                isAutofocused: false,
+                                isMultiple: false,
+                                hasDynamicOptions: false,
+                                hasDynamicSearchResults: false,
+                                loadingMessage: 'Laden...',
+                                maxItems: null,
+                                maxItemsMessage: 'Er kunnen maar  geselecteerd worden.',
+                                noSearchResultsMessage: 'Er zijn geen resultaten voor je zoekopdracht.',
+                                options: JSON.parse('[{\u0022label\u0022:\u0022Catella\u0022,\u0022value\u0022:\u00221\u0022},{\u0022label\u0022:\u0022Altera Vastgoed N.V.\u0022,\u0022value\u0022:\u00222\u0022},{\u0022label\u0022:\u0022Altera Vastgoed N.V.\u0022,\u0022value\u0022:\u00223\u0022},{\u0022label\u0022:\u0022Amvest Residential Core Fund\u0022,\u0022value\u0022:\u00224\u0022},{\u0022label\u0022:\u0022Aegon N.V.\u0022,\u0022value\u0022:\u00225\u0022},{\u0022label\u0022:\u0022Signal Real Estate Opp.(Lux) Inv.IN Sarl\u0022,\u0022value\u0022:\u00226\u0022},{\u0022label\u0022:\u0022MVGM Amersfoort \u0022,\u0022value\u0022:\u00227\u0022},{\u0022label\u0022:\u0022Metterwoon Vastgoed B.V.\u0022,\u0022value\u0022:\u00228\u0022},{\u0022label\u0022:\u0022NL Resiport B.V.\u0022,\u0022value\u0022:\u00229\u0022},{\u0022label\u0022:\u0022Vivada Properties I B.V.\u0022,\u0022value\u0022:\u002210\u0022},{\u0022label\u0022:\u0022Vivada Properties V Non-Randstad\u0022,\u0022value\u0022:\u002211\u0022},{\u0022label\u0022:\u0022Vivada Properties V Randstad\u0022,\u0022value\u0022:\u002212\u0022},{\u0022label\u0022:\u0022Vivada Properties III Randstad\u0022,\u0022value\u0022:\u002213\u0022},{\u0022label\u0022:\u0022Vivada Properties VII Rotterdam\u0022,\u0022value\u0022:\u002214\u0022},{\u0022label\u0022:\u0022Vivada Properties IX Rotterdam\u0022,\u0022value\u0022:\u002215\u0022},{\u0022label\u0022:\u0022Vivada Properties XI - Staate Beheer\u0022,\u0022value\u0022:\u002216\u0022},{\u0022label\u0022:\u0022Blue Residential\u0022,\u0022value\u0022:\u002217\u0022},{\u0022label\u0022:\u0022Stg. Bewaring van Milplaats I\u0022,\u0022value\u0022:\u002218\u0022},{\u0022label\u0022:\u0022RCP WONINGFONDS XI\u0022,\u0022value\u0022:\u002219\u0022},{\u0022label\u0022:\u0022NL Bilthoven Property 9 B.V.\u0022,\u0022value\u0022:\u002220\u0022},{\u0022label\u0022:\u0022FS NL Zuid Property 12 B.V\u0022,\u0022value\u0022:\u002221\u0022},{\u0022label\u0022:\u0022NL Property I B.V.\u0022,\u0022value\u0022:\u002222\u0022},{\u0022label\u0022:\u0022NL Reguliersdwarsstraat Property 6 B.V.\u0022,\u0022value\u0022:\u002223\u0022},{\u0022label\u0022:\u0022PCS Ouderenzorg Haarlemmermeer loc horizon\u0022,\u0022value\u0022:\u002224\u0022},{\u0022label\u0022:\u0022VvE Maaszicht\u0022,\u0022value\u0022:\u002225\u0022},{\u0022label\u0022:\u0022VvE Zeelandiahoeve 63 t\\\/m 109\u0022,\u0022value\u0022:\u002226\u0022},{\u0022label\u0022:\u0022VvE Zeelandiahoeve 111 t\\\/m 159\u0022,\u0022value\u0022:\u002227\u0022},{\u0022label\u0022:\u0022VvE Kringloop 1-159 \u0022,\u0022value\u0022:\u002228\u0022},{\u0022label\u0022:\u0022VvE Ouverture 1-20 \u0022,\u0022value\u0022:\u002229\u0022},{\u0022label\u0022:\u00221012 VvE Parel \u0022,\u0022value\u0022:\u002230\u0022},{\u0022label\u0022:\u00221013 VvE Robijn\u0022,\u0022value\u0022:\u002231\u0022},{\u0022label\u0022:\u0022VvE Overkampweg \u0022,\u0022value\u0022:\u002232\u0022},{\u0022label\u0022:\u0022VvE Boven NP aan de Grootzuil \u0022,\u0022value\u0022:\u002233\u0022},{\u0022label\u0022:\u0022VvE Mondriaan \u0022,\u0022value\u0022:\u002234\u0022},{\u0022label\u0022:\u0022VvE Louis Raemaekersstraat \u0022,\u0022value\u0022:\u002235\u0022},{\u0022label\u0022:\u0022Stichting BPF voor de Koopvaardij  ?\u0022,\u0022value\u0022:\u002236\u0022},{\u0022label\u0022:\u0022VvE Tuinboog\u0022,\u0022value\u0022:\u002237\u0022},{\u0022label\u0022:\u0022VvE Overkamppark Toren 1\u0022,\u0022value\u0022:\u002238\u0022},{\u0022label\u0022:\u0022VvE Flatgebouw De Halte \u0022,\u0022value\u0022:\u002239\u0022},{\u0022label\u0022:\u0022VvE Victoria\u0022,\u0022value\u0022:\u002240\u0022},{\u0022label\u0022:\u0022VvE De Imelda \u0022,\u0022value\u0022:\u002241\u0022},{\u0022label\u0022:\u0022VvE Deltaplein 273B \u0022,\u0022value\u0022:\u002242\u0022},{\u0022label\u0022:\u0022VvE Soetensteeg \u0022,\u0022value\u0022:\u002243\u0022},{\u0022label\u0022:\u0022VvE t Span\u0022,\u0022value\u0022:\u002244\u0022},{\u0022label\u0022:\u0022VvE Dreefzicht\u0022,\u0022value\u0022:\u002245\u0022},{\u0022label\u0022:\u0022VvE Genua\u0022,\u0022value\u0022:\u002246\u0022},{\u0022label\u0022:\u0022VvE De Vecht\u0022,\u0022value\u0022:\u002247\u0022},{\u0022label\u0022:\u0022VvE Julianaduin\u0022,\u0022value\u0022:\u002248\u0022},{\u0022label\u0022:\u0022VvE Offenbachstraat 1-109 \u0022,\u0022value\u0022:\u002249\u0022},{\u0022label\u0022:\u0022Stichting VO  Haaglanden \u0022,\u0022value\u0022:\u002250\u0022},{\u0022label\u0022:\u0022VvE lunet 2-8\u0022,\u0022value\u0022:\u002251\u0022},{\u0022label\u0022:\u0022Krebeco Real Estate\u0022,\u0022value\u0022:\u002252\u0022},{\u0022label\u0022:\u0022Stichting Gezondheidscentrum Elst \u0022,\u0022value\u0022:\u002253\u0022},{\u0022label\u0022:\u0022Service Apotheken Veenendaal BV\u0022,\u0022value\u0022:\u002254\u0022},{\u0022label\u0022:\u0022Maboma C.V.\u0022,\u0022value\u0022:\u002255\u0022},{\u0022label\u0022:\u0022BVLP 1-3 B.V. \u0022,\u0022value\u0022:\u002256\u0022},{\u0022label\u0022:\u0022Veluwe Invest B.V. \u0022,\u0022value\u0022:\u002257\u0022},{\u0022label\u0022:\u0022VvE Kloppend Hart Huis\u0022,\u0022value\u0022:\u002258\u0022},{\u0022label\u0022:\u0022Amvest Residential Core Fund CV\u0022,\u0022value\u0022:\u002259\u0022},{\u0022label\u0022:\u0022Altera vastgoed N.V. \u0022,\u0022value\u0022:\u002260\u0022},{\u0022label\u0022:\u0022Amvest Real Estate B.V\u0022,\u0022value\u0022:\u002261\u0022},{\u0022label\u0022:\u0022Holding Dealmans BV \u0022,\u0022value\u0022:\u002262\u0022},{\u0022label\u0022:\u0022Beleggingsmij Stadscentrum Zoetermeer \u0022,\u0022value\u0022:\u002263\u0022},{\u0022label\u0022:\u0022Stg Pensioenfonds Metaal\\u0026techniek MVGM\u0022,\u0022value\u0022:\u002264\u0022},{\u0022label\u0022:\u0022SSP Dutch Properties 1 GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002265\u0022},{\u0022label\u0022:\u0022CESHF01 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002266\u0022},{\u0022label\u0022:\u0022KVBW PropCo NL New West\u0022,\u0022value\u0022:\u002267\u0022},{\u0022label\u0022:\u0022CWE 01 Niederlande GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002268\u0022},{\u0022label\u0022:\u0022BERF 14 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002269\u0022},{\u0022label\u0022:\u0022SSP Dutch Properties 2 GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002270\u0022},{\u0022label\u0022:\u0022CWE 03 Niederlande GmbH \\u0026 Co. KG \u0022,\u0022value\u0022:\u002271\u0022},{\u0022label\u0022:\u0022BERF 13 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002272\u0022},{\u0022label\u0022:\u0022CESHF02 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002273\u0022},{\u0022label\u0022:\u0022CMW 01 Niederlande GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002274\u0022},{\u0022label\u0022:\u0022Panta Rhei Properies 1 GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002275\u0022},{\u0022label\u0022:\u0022CDR II Properties 1 GmbH \\u0026 Co.KG\u0022,\u0022value\u0022:\u002276\u0022},{\u0022label\u0022:\u0022BERF 05 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002277\u0022},{\u0022label\u0022:\u0022BERF 01 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002278\u0022},{\u0022label\u0022:\u0022CESHF03 GmbH \\u0026 CO KG\u0022,\u0022value\u0022:\u002279\u0022},{\u0022label\u0022:\u0022CER III Netherlands 01 S.\\u00e0.r.l. \u0022,\u0022value\u0022:\u002280\u0022},{\u0022label\u0022:\u0022Panta Rhei Properies 2 GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002281\u0022},{\u0022label\u0022:\u0022BERF 11 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002282\u0022},{\u0022label\u0022:\u0022BERF 04 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002283\u0022},{\u0022label\u0022:\u0022BERF 06 GmbH \\u0026 Co KG\u0022,\u0022value\u0022:\u002284\u0022},{\u0022label\u0022:\u0022CDR2 Catella Real Estate AG \u0022,\u0022value\u0022:\u002285\u0022},{\u0022label\u0022:\u0022Panta Rhei Properies 3 GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002286\u0022},{\u0022label\u0022:\u0022CER III Master Holdco S.\\u00e0.r.l. \u0022,\u0022value\u0022:\u002287\u0022},{\u0022label\u0022:\u0022Catella Real Estate AG\u0022,\u0022value\u0022:\u002288\u0022},{\u0022label\u0022:\u0022CER III Netherlands 02 S.\\u00e0.r.l. \u0022,\u0022value\u0022:\u002289\u0022},{\u0022label\u0022:\u0022Samen Om \u0022,\u0022value\u0022:\u002290\u0022},{\u0022label\u0022:\u0022Altera Vastgoed N.V\u0022,\u0022value\u0022:\u002291\u0022},{\u0022label\u0022:\u0022KVBW PropCo NL GmbH \\u0026 Co. KG\u0022,\u0022value\u0022:\u002292\u0022},{\u0022label\u0022:\u0022Hotel The James Rotterdam B.V.\u0022,\u0022value\u0022:\u002293\u0022},{\u0022label\u0022:\u0022Eindhoven Beukenlaan B.V. \u0022,\u0022value\u0022:\u002294\u0022},{\u0022label\u0022:\u0022VvE The Beech\u0022,\u0022value\u0022:\u002295\u0022},{\u0022label\u0022:\u0022VvE BD7\u0022,\u0022value\u0022:\u002296\u0022},{\u0022label\u0022:\u0022Briljantlaan Vastgoed CV\u0022,\u0022value\u0022:\u002297\u0022},{\u0022label\u0022:\u0022KVBW PropCo NL Maastricht GMBH \\u0026 Co KG \u0022,\u0022value\u0022:\u002298\u0022},{\u0022label\u0022:\u0022KVBW PropcCo NL Diemen GMBH \\u0026 Co KG\u0022,\u0022value\u0022:\u002299\u0022},{\u0022label\u0022:\u0022KVBW PropCo NL Maastricht Blok 9 Cooperatief UA \u0022,\u0022value\u0022:\u0022100\u0022},{\u0022label\u0022:\u0022Ontwikkelingsmaatschappij Eindhovenseweg Waalre BV \u0022,\u0022value\u0022:\u0022101\u0022},{\u0022label\u0022:\u0022Einstein CV \u0022,\u0022value\u0022:\u0022102\u0022},{\u0022label\u0022:\u0022Sweet Lake Europe BV \u0022,\u0022value\u0022:\u0022103\u0022},{\u0022label\u0022:\u0022TD CV\u0022,\u0022value\u0022:\u0022104\u0022},{\u0022label\u0022:\u0022The Lee Towers BV\u0022,\u0022value\u0022:\u0022105\u0022},{\u0022label\u0022:\u0022Rotterdam Europort B.V. \u0022,\u0022value\u0022:\u0022106\u0022},{\u0022label\u0022:\u0022VvE Gebouw Hertofhof \u0022,\u0022value\u0022:\u0022107\u0022},{\u0022label\u0022:\u0022VvE Gebouw Oosterpoort \u0022,\u0022value\u0022:\u0022108\u0022},{\u0022label\u0022:\u0022RMJ Groep B.V.\u0022,\u0022value\u0022:\u0022109\u0022},{\u0022label\u0022:\u0022Europahuis B.V.\u0022,\u0022value\u0022:\u0022110\u0022},{\u0022label\u0022:\u0022MA Hotelschool Develop CV\u0022,\u0022value\u0022:\u0022111\u0022},{\u0022label\u0022:\u0022Kanonstraat 4 BV \u0022,\u0022value\u0022:\u0022112\u0022},{\u0022label\u0022:\u0022Lichtstad Bedrijfsschool BV\u0022,\u0022value\u0022:\u0022113\u0022},{\u0022label\u0022:\u0022VvE The Castle\u0022,\u0022value\u0022:\u0022114\u0022},{\u0022label\u0022:\u0022Kilwijkstraat Dordrecht BV\u0022,\u0022value\u0022:\u0022115\u0022},{\u0022label\u0022:\u0022WFC III CV\u0022,\u0022value\u0022:\u0022116\u0022},{\u0022label\u0022:\u0022Lichttoren BV\u0022,\u0022value\u0022:\u0022117\u0022},{\u0022label\u0022:\u0022check \u0022,\u0022value\u0022:\u0022118\u0022},{\u0022label\u0022:\u0022Markt C.V.\u0022,\u0022value\u0022:\u0022119\u0022},{\u0022label\u0022:\u0022VvE Studio 56 \u0022,\u0022value\u0022:\u0022120\u0022},{\u0022label\u0022:\u0022Nijenoord CV\u0022,\u0022value\u0022:\u0022121\u0022},{\u0022label\u0022:\u0022KVBW PropCo NL Groningen GmbH \\u0026 Co\u0022,\u0022value\u0022:\u0022122\u0022},{\u0022label\u0022:\u0022De Zwarte Toren CV\u0022,\u0022value\u0022:\u0022123\u0022},{\u0022label\u0022:\u0022Rappard 30 B.V.\u0022,\u0022value\u0022:\u0022124\u0022},{\u0022label\u0022:\u0022Roer Capelle CV\u0022,\u0022value\u0022:\u0022125\u0022},{\u0022label\u0022:\u0022Hotel2Stay\u0022,\u0022value\u0022:\u0022126\u0022},{\u0022label\u0022:\u0022De Groene Toren C.V. \u0022,\u0022value\u0022:\u0022127\u0022},{\u0022label\u0022:\u0022Holland2Stay\u0022,\u0022value\u0022:\u0022128\u0022},{\u0022label\u0022:\u0022Mathildelaan C.V.\u0022,\u0022value\u0022:\u0022129\u0022},{\u0022label\u0022:\u0022Claver Reale Estate B.V.\u0022,\u0022value\u0022:\u0022130\u0022},{\u0022label\u0022:\u0022Het Vliegend Hert C.V.\u0022,\u0022value\u0022:\u0022131\u0022},{\u0022label\u0022:\u0022VvE Cruquius Blok 2.2 Gebouw C-Zuid\u0022,\u0022value\u0022:\u0022132\u0022},{\u0022label\u0022:\u0022VvE Woongebouw The Grid\u0022,\u0022value\u0022:\u0022133\u0022},{\u0022label\u0022:\u0022VvE Woongebouw The Wave\u0022,\u0022value\u0022:\u0022134\u0022},{\u0022label\u0022:\u0022Koningsbos B.V. \u0022,\u0022value\u0022:\u0022135\u0022},{\u0022label\u0022:\u0022Demo bedrijf\u0022,\u0022value\u0022:\u002290001\u0022},{\u0022label\u0022:\u0022LVA Liftadvies\u0022,\u0022value\u0022:\u002290002\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290003\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290005\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290006\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290007\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290008\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290009\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290010\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290011\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290012\u0022},{\u0022label\u0022:null,\u0022value\u0022:\u002290013\u0022}]'),
+                                optionsLimit: 50,
+                                placeholder: 'Selecteer een optie',
+                                position: null,
+                                isPlaceholderSelectionDisabled: false,
+                                searchDebounce: 1000,
+                                searchingMessage: 'Zoeken...',
+                                searchPrompt: 'Start met typen om te zoeken...',
+                                searchableOptionFields: JSON.parse('[\u0022label\u0022]'),
+                                state: $wire.entangle(&#039;data.relation_id&#039;).defer,
+                            })"
+                    x-on:keydown.esc="select.dropdown.isActive && $event.stopPropagation()"
+                    wire:ignore
+                    class="filament-forms-input"
+                    x-bind:class="{
+                        'choices--error': 'data.relation_id' in $wire.__instance.serverMemo.errors,
+                    }"
+                >
+                    <select
+                        x-ref="input"
+                        id="data.relation_id"
+                        
+                        
+                        
+                    ></select>
+                </div>
+                    </div>
+
+        
+        
+            </div>
+
+        
+            </div>
+</div>
+</div>
+</div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+            <div
+            class="filament-page-actions flex flex-wrap items-center gap-4 justify-start filament-form-actions"
+        >
+                            <button
+                    x-mousetrap.global.mod-s
+                        type="submit"
+        wire:loading.attr="disabled"
+        wire:loading.class.delay="opacity-70 cursor-wait"
+        wire:target="save"
+        
+        x-data="{
+            form: null,
+            isUploadingFile: false,
+        }"
+                    x-bind:class="{ 'opacity-70 cursor-wait': isUploadingFile }"
+                x-bind:disabled="isUploadingFile"
+        x-init="
+            form = $el.closest('form')
+
+            form?.addEventListener('file-upload-started', () => {
+                isUploadingFile = true
+            })
+
+            form?.addEventListener('file-upload-finished', () => {
+                isUploadingFile = false
+            })
+        "
+        class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-page-button-action" dusk="filament.admin.action.save"
+    >
+                    
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin filament-button-icon w-5 h-5 mr-1 -ml-2 rtl:ml-1 rtl:-mr-2" x-cloak="x-cloak" wire:loading.delay="wire:loading.delay" wire:target="save">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+                    
+        <span class="flex items-center gap-1">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin filament-button-icon w-5 h-5 mr-1 -ml-2 rtl:ml-1 rtl:-mr-2" x-show="isUploadingFile" x-cloak="x-cloak">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+
+                <span x-show="isUploadingFile" x-cloak>
+                    Bestand uploaden...
+                </span>
+
+                <span x-show="! isUploadingFile" class="">
+                    Wijzigingen opslaan
+                </span>
+                    </span>
+
+            </button>
+
+                            <a
+                                class="filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800 filament-page-button-action" href="https://portal.lvaliftadvies.nl/beheer/elevators/428/edit?activeRelationManager=0" dusk="filament.admin.action.cancel"
+    >
+        
+        <span class="">
+            Annuleren
+        </span>
+
+            </a>
+
+                    </div>
+</form>
+    
+            
+    
+                        <div aria-hidden="true" class="filament-hr border-t dark:border-gray-700"></div>
+        
+        <div class="filament-resources-relation-managers-container space-y-2">
+            <div class="flex justify-center">
+            <nav class="filament-tabs flex overflow-x-auto items-center p-1 space-x-1 rtl:space-x-reverse text-sm text-gray-600 bg-gray-500/5 rounded-xl dark:bg-gray-500/20">
+    <button
+                        wire:click="$set('activeRelationManager', &#039;0&#039;)"
+                                                    aria-selected
+                            tabindex="0"
+                                                role="tab"
+                        type="button"
+                        class="flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-inset text-primary-600 shadow bg-white dark:text-white dark:bg-primary-600"
+                    >
+                                                    Keuringen
+                                            </button>
+                                    
+                    <button
+                        wire:click="$set('activeRelationManager', &#039;1&#039;)"
+                                                    tabindex="-1"
+                                                role="tab"
+                        type="button"
+                        class="flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-inset hover:text-gray-800 focus:text-primary-600 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400"
+                    >
+                                                    Onderhoudsbeurten
+                                            </button>
+                                    
+                    <button
+                        wire:click="$set('activeRelationManager', &#039;2&#039;)"
+                                                    tabindex="-1"
+                                                role="tab"
+                        type="button"
+                        class="flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-inset hover:text-gray-800 focus:text-primary-600 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400"
+                    >
+                                                    Maintenancy Contracts
+                                            </button>
+</nav>
+        </div>
+    
+            <div
+                            id="relationManager0"
+                role="tabpanel"
+                tabindex="0"
+                        class="space-y-4 focus:outline-none"
+        >
+                            
+                <div wire:id="8JIz60y0WmwGZzDGRMhJ" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;8JIz60y0WmwGZzDGRMhJ&quot;,&quot;name&quot;:&quot;app.filament.resources.elevator-resource.relation-managers.inspections-relation-manager&quot;,&quot;locale&quot;:&quot;nl&quot;,&quot;path&quot;:&quot;beheer\/elevators\/428\/edit&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;v&quot;:&quot;acj&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[],&quot;path&quot;:&quot;https:\/\/portal.lvaliftadvies.nl\/beheer\/elevators\/428\/edit?fetch=https%3A%2F%2Fportaal.liftinstituut.nl%2Freport%2F255400606-REP_RP1360376_V1.PDF.pdf&quot;},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;26f3f949&quot;,&quot;data&quot;:{&quot;ownerRecord&quot;:[],&quot;pageClass&quot;:&quot;App\\Filament\\Resources\\ElevatorResource\\Pages\\EditElevator&quot;,&quot;tableRecordsPerPage&quot;:10,&quot;page&quot;:1,&quot;paginators&quot;:{&quot;page&quot;:1,&quot;inspectionsRelationManagerPage&quot;:1},&quot;isTableReordering&quot;:false,&quot;tableColumnSearchQueries&quot;:[],&quot;tableSearchQuery&quot;:&quot;&quot;,&quot;selectedTableRecords&quot;:[],&quot;tableSortColumn&quot;:null,&quot;tableSortDirection&quot;:null,&quot;toggledTableColumns&quot;:[],&quot;isTableLoaded&quot;:false,&quot;mountedTableAction&quot;:null,&quot;mountedTableActionData&quot;:[],&quot;mountedTableActionRecord&quot;:null,&quot;mountedTableBulkAction&quot;:null,&quot;mountedTableBulkActionData&quot;:[],&quot;tableFilters&quot;:null,&quot;componentFileAttachments&quot;:[],&quot;mountedFormComponentAction&quot;:null,&quot;mountedFormComponentActionArguments&quot;:[],&quot;mountedFormComponentActionData&quot;:[],&quot;mountedFormComponentActionComponent&quot;:null,&quot;inspectionsRelationManagerPage&quot;:1},&quot;dataMeta&quot;:{&quot;models&quot;:{&quot;ownerRecord&quot;:{&quot;class&quot;:&quot;App\\Models\\Elevator&quot;,&quot;id&quot;:428,&quot;relations&quot;:[],&quot;connection&quot;:&quot;mysql&quot;,&quot;collectionClass&quot;:null}}},&quot;checksum&quot;:&quot;152c486300959f821309dcff61ea68e6789906f00100fb5dccc90d8d620a55b2&quot;}}" class="filament-resource-relation-manager">
+    <div
+    x-data="{
+        hasHeader: true,
+
+        isLoading: false,
+
+        selectedRecords: [],
+
+        shouldCheckUniqueSelection: true,
+
+        init: function () {
+            $wire.on('deselectAllTableRecords', () => this.deselectAllRecords())
+
+            $watch('selectedRecords', () => {
+                if (! this.shouldCheckUniqueSelection) {
+                    this.shouldCheckUniqueSelection = true
+
+                    return
+                }
+
+                this.selectedRecords = [...new Set(this.selectedRecords)]
+
+                this.shouldCheckUniqueSelection = false
+            })
+        },
+
+        mountBulkAction: function (name) {
+            $wire.mountTableBulkAction(name, this.selectedRecords)
+        },
+
+        toggleSelectRecordsOnPage: function () {
+            let keys = this.getRecordsOnPage()
+
+            if (this.areRecordsSelected(keys)) {
+                this.deselectRecords(keys)
+
+                return
+            }
+
+            this.selectRecords(keys)
+        },
+
+        getRecordsOnPage: function () {
+            let keys = []
+
+            for (checkbox of $el.getElementsByClassName(
+                'filament-tables-record-checkbox',
+            )) {
+                keys.push(checkbox.value)
+            }
+
+            return keys
+        },
+
+        selectRecords: function (keys) {
+            for (key of keys) {
+                if (this.isRecordSelected(key)) {
+                    continue
+                }
+
+                this.selectedRecords.push(key)
+            }
+        },
+
+        deselectRecords: function (keys) {
+            for (key of keys) {
+                let index = this.selectedRecords.indexOf(key)
+
+                if (index === -1) {
+                    continue
+                }
+
+                this.selectedRecords.splice(index, 1)
+            }
+        },
+
+        selectAllRecords: async function () {
+            this.isLoading = true
+
+            this.selectedRecords = await $wire.getAllSelectableTableRecordKeys()
+
+            this.isLoading = false
+        },
+
+        deselectAllRecords: function () {
+            this.selectedRecords = []
+        },
+
+        isRecordSelected: function (key) {
+            return this.selectedRecords.includes(key)
+        },
+
+        areRecordsSelected: function (keys) {
+            return keys.every((key) => this.isRecordSelected(key))
+        },
+    }"
+    class="filament-tables-component"
+    >
+    <div
+    class="filament-tables-container rounded-xl border border-gray-300 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+>
+    <div
+            class="filament-tables-header-container"
+            x-show="hasHeader = true || selectedRecords.length"
+            
+        >
+                            <div
+                    class="px-2 pt-2"
+                >
+                    <div class="filament-tables-header px-4 py-2 mb-2">
+    <div
+        class="flex flex-col gap-4 md:-mr-2 md:flex-row md:items-start md:justify-between"
+    >
+        <div>
+                            <h2
+    class="filament-tables-header-heading text-xl font-bold tracking-tight"
+>
+    Keuringen
+</h2>
+            
+                            <p class="filament-tables-header-description">
+    
+</p>
+                    </div>
+
+        <div
+    class="filament-tables-actions-container flex items-center gap-4 flex-wrap justify-end shrink-0"
+>
+                        <button
+                        type="button"
+        wire:loading.attr="disabled"
+        wire:loading.class.delay="opacity-70 cursor-wait"
+        wire:target="mountTableAction('create')"
+        
+        x-data="{
+            form: null,
+            isUploadingFile: false,
+        }"
+                    x-bind:class="{ 'opacity-70 cursor-wait': isUploadingFile }"
+                x-bind:disabled="isUploadingFile"
+        x-init="
+            form = $el.closest('form')
+
+            form?.addEventListener('file-upload-started', () => {
+                isUploadingFile = true
+            })
+
+            form?.addEventListener('file-upload-finished', () => {
+                isUploadingFile = false
+            })
+        "
+        class="filament-button filament-button-size-sm inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors focus:outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2rem] px-3 text-sm text-white shadow focus:ring-white border-transparent bg-primary-600 hover:bg-primary-500 focus:bg-primary-700 focus:ring-offset-primary-700 filament-tables-button-action" wire:click="mountTableAction(&#039;create&#039;)" dusk="filament.tables.action.create"
+    >
+                    
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin filament-button-icon w-4 h-4 mr-1 -ml-1.5 rtl:ml-1 rtl:-mr-1.5" x-cloak="x-cloak" wire:loading.delay="wire:loading.delay" wire:target="mountTableAction(&#039;create&#039;)">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+                    
+        <span class="flex items-center gap-1">
+                            <span class="">
+                    Keuring toevoegen
+                </span>
+                    </span>
+
+            </button>
+
+            </div>
+    </div>
+</div>
+
+                    <div aria-hidden="true" class="filament-hr border-t dark:border-gray-700" x-show="false || selectedRecords.length"></div>
+                </div>
+            
+            
+            <div
+                x-show="false || selectedRecords.length"
+                x-cloak
+                class="filament-tables-header-toolbar flex h-14 items-center justify-between p-2"
+                x-bind:class="{
+                    'gap-2': false || selectedRecords.length,
+                }"
+            >
+                <div class="flex items-center gap-2">
+                    
+                                            <div
+    class="filament-dropdown filament-tables-bulk-actions" x-show="selectedRecords.length"
+    x-data="{
+        toggle: function (event) {
+            $refs.panel.toggle(event)
+        },
+        open: function (event) {
+            $refs.panel.open(event)
+        },
+        close: function (event) {
+            $refs.panel.close(event)
+        },
+    }"
+>
+    <div
+        x-on:click="toggle"
+        class="filament-dropdown-trigger cursor-pointer"
+    >
+        <button
+                            title="Acties openen"
+                        type="button"
+        
+                class="filament-icon-button flex items-center justify-center rounded-full relative hover:bg-gray-500/5 focus:outline-none disabled:opacity-70 disabled:cursor-not-allowed disabled:pointer-events-none text-primary-500 focus:bg-primary-500/10 dark:hover:bg-gray-300/5 w-10 h-10 filament-tables-bulk-actions-trigger" x-cloak="x-cloak"
+    >
+                    <span class="sr-only">
+                Acties openen
+            </span>
+        
+        <svg wire:loading.remove.delay="" wire:target="" class="filament-icon-button-icon w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+</svg>
+        
+            </button>
+    </div>
+
+    <div
+        x-ref="panel"
+        x-float.placement.bottom-start.flip.offset="{ offset: 8 }"
+        x-cloak
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:leave-end="opacity-0 scale-95"
+                class="filament-dropdown-panel absolute z-10 w-full divide-y divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-black/5 transition dark:divide-gray-700 dark:bg-gray-800 dark:ring-white/10 max-w-[14rem]"
+    >
+        <div class="filament-dropdown-list p-1" dark-mode="dark-mode">
+    <button
+        type="button"
+        wire:loading.attr="disabled"
+        
+        
+        class="filament-dropdown-list-item filament-dropdown-item group flex w-full items-center whitespace-nowrap rounded-md p-2 text-sm focus:outline-none hover:text-white focus:text-white hover:bg-danger-500 focus:bg-danger-500 filament-tables-bulk-action" x-on:click="mountBulkAction(&#039;delete&#039;)"
+    >
+                    <svg wire:loading.remove.delay="" wire:target="" class="filament-dropdown-list-item-icon mr-2 h-5 w-5 rtl:ml-2 rtl:mr-0 group-hover:text-white group-focus:text-white text-danger-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+</svg>        
+        
+        <span class="filament-dropdown-list-item-label truncate">
+            Geselecteerde verwijderen
+        </span>
+
+            </button>
+</div>
+    </div>
+</div>
+                                    </div>
+
+                            </div>
+        </div>
+
+                    <div
+    wire:key="8JIz60y0WmwGZzDGRMhJ.table.selection.indicator"
+    x-cloak
+    class="filament-tables-selection-indicator flex flex-wrap items-center gap-1 whitespace-nowrap bg-primary-500/10 px-4 py-2 text-sm border-t dark:border-gray-700" x-show="selectedRecords.length"
+>
+    
+
+    <div class="flex-1">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin mr-3 inline-block h-4 w-4 text-primary-500 rtl:ml-3 rtl:mr-0" x-show="isLoading">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+
+        <span
+            class="dark:text-white"
+            x-text="
+                window.pluralize('1 record geselecteerd.|:count records geselecteerd.', selectedRecords.length, {
+                    count: selectedRecords.length,
+                })
+            "
+        ></span>
+
+        <span
+            id="8JIz60y0WmwGZzDGRMhJ.table.selection.indicator.record-count.0"
+            x-show="0 !== selectedRecords.length"
+        >
+            <button
+                x-on:click="selectAllRecords"
+                class="text-sm font-medium text-primary-600"
+                type="button"
+            >
+                Selecteer alle 0.
+            </button>
+        </span>
+
+        <span>
+            <button
+                x-on:click="deselectAllRecords"
+                class="text-sm font-medium text-primary-600"
+                type="button"
+            >
+                Alles deselecteren.
+            </button>
+        </span>
+    </div>
+
+    
+</div>
+        
+        
+        <div
+                        class="filament-tables-table-container relative overflow-x-auto dark:border-gray-700 border-t"
+            x-bind:class="{
+                'rounded-t-xl': ! hasHeader,
+                'border-t': hasHeader,
+            }"
+        >
+                                                <div class="flex items-center justify-center p-4">
+                        <div
+    class="filament-tables-empty-state mx-auto flex flex-1 flex-col items-center justify-center space-y-6 bg-white p-6 text-center dark:bg-gray-800"
+>
+    <div
+        class="flex h-16 w-16 items-center justify-center rounded-full bg-primary-50 text-primary-500 dark:bg-gray-700"
+    >
+        <svg wire:loading.remove.delay="1" wire:target="previousPage,nextPage,gotoPage,sortTable,tableFilters,resetTableFiltersForm,tableSearchQuery,tableColumnSearchQueries,tableRecordsPerPage" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+</svg>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-spin h-6 w-6" wire:loading.delay="wire:loading.delay" wire:target="previousPage,nextPage,gotoPage,sortTable,tableFilters,resetTableFiltersForm,tableSearchQuery,tableColumnSearchQueries,tableRecordsPerPage">
+    <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd" d="M12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="currentColor"></path>
+    <path d="M2 12C2 6.47715 6.47715 2 12 2V5C8.13401 5 5 8.13401 5 12H2Z" fill="currentColor"></path>
+</svg>
+    </div>
+
+    <div class="max-w-md space-y-1">
+        <h2
+    class="filament-tables-empty-state-heading text-xl font-bold tracking-tight dark:text-white"
+>
+    Geen records gevonden
+</h2>
+
+                    <p
+    class="filament-tables-empty-state-description whitespace-normal text-sm font-medium text-gray-500 dark:text-gray-400"
+>
+    
+</p>
+            </div>
+
+    
+    </div>
+                    </div>
+                                    </div>
+</div>
+
+    <form wire:submit.prevent="callMountedTableAction">
+        
+        <div
+    x-data="{ isOpen: false }"
+    x-trap.noscroll="isOpen"
+            x-on:close-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-table-action') isOpen = false"
+        x-on:open-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-table-action') isOpen = true"
+            role="dialog"
+    aria-modal="true"
+    class="filament-modal block"
+>
+    
+
+    <div
+        x-show="isOpen"
+        x-transition:enter="ease duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-cloak
+        class="fixed inset-0 z-40 flex items-center min-h-screen overflow-y-auto overflow-x-hidden transition p-4"
+    >
+        <div
+                                                x-on:click="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-table-action' })"
+                                        aria-hidden="true"
+            class="filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+        ></div>
+
+        <div
+            x-show="isOpen"
+                            x-on:keydown.window.escape="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-table-action' })"
+                        x-transition:enter="ease duration-300"
+            x-transition:leave="ease duration-300"
+                            x-transition:enter-start="translate-y-8"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-8"
+                        x-cloak
+            class="relative w-full cursor-pointer pointer-events-none my-auto" x-init="livewire = $wire.__instance" x-on:modal-closed.stop="if ('mountedTableAction' in livewire?.serverMemo.data) {
+                    livewire.set('mountedTableAction', null)
+                }
+
+                if ('mountedTableActionRecord' in livewire?.serverMemo.data) {
+                    livewire.set('mountedTableActionRecord', null)
+                }"
+        >
+            <div
+                class="filament-modal-window w-full p-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto hidden max-w-sm"
+            >
+                                    <button
+                        tabindex="-1"
+                        type="button"
+                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                    >
+                        <svg title="__('filament-support::components/modal.actions.close.label')" x-on:click="isOpen = false" tabindex="-1" class="filament-modal-close-button h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+</svg>
+                        <span class="sr-only">
+                            filament-support::components/modal.actions.close.label
+                        </span>
+                    </button>
+                
+                <div
+                    class="space-y-2"
+                >
+                    
+                    
+                    <div
+                        class="filament-modal-content space-y-2"
+                    >
+                        
+                        
+                        
+                    </div>
+
+                    
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+    <form wire:submit.prevent="callMountedTableBulkAction">
+        
+        <div
+    x-data="{ isOpen: false }"
+    x-trap.noscroll="isOpen"
+            x-on:close-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-table-bulk-action') isOpen = false"
+        x-on:open-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-table-bulk-action') isOpen = true"
+            role="dialog"
+    aria-modal="true"
+    class="filament-modal block"
+>
+    
+
+    <div
+        x-show="isOpen"
+        x-transition:enter="ease duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-cloak
+        class="fixed inset-0 z-40 flex items-center min-h-screen overflow-y-auto overflow-x-hidden transition p-4"
+    >
+        <div
+                                                x-on:click="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-table-bulk-action' })"
+                                        aria-hidden="true"
+            class="filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+        ></div>
+
+        <div
+            x-show="isOpen"
+                            x-on:keydown.window.escape="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-table-bulk-action' })"
+                        x-transition:enter="ease duration-300"
+            x-transition:leave="ease duration-300"
+                            x-transition:enter-start="translate-y-8"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-8"
+                        x-cloak
+            class="relative w-full cursor-pointer pointer-events-none my-auto" x-init="livewire = $wire.__instance" x-on:modal-closed.stop="if ('mountedTableBulkAction' in livewire?.serverMemo.data) livewire.set('mountedTableBulkAction', null)"
+        >
+            <div
+                class="filament-modal-window w-full p-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto hidden max-w-sm"
+            >
+                                    <button
+                        tabindex="-1"
+                        type="button"
+                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                    >
+                        <svg title="__('filament-support::components/modal.actions.close.label')" x-on:click="isOpen = false" tabindex="-1" class="filament-modal-close-button h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+</svg>
+                        <span class="sr-only">
+                            filament-support::components/modal.actions.close.label
+                        </span>
+                    </button>
+                
+                <div
+                    class="space-y-2"
+                >
+                    
+                    
+                    <div
+                        class="filament-modal-content space-y-2"
+                    >
+                        
+                        
+                        
+                    </div>
+
+                    
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+            <form wire:submit.prevent="callMountedFormComponentAction">
+    <div
+    x-data="{ isOpen: false }"
+    x-trap.noscroll="isOpen"
+            x-on:close-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-form-component-action') isOpen = false"
+        x-on:open-modal.window="if ($event.detail.id === '8JIz60y0WmwGZzDGRMhJ-form-component-action') isOpen = true"
+            role="dialog"
+    aria-modal="true"
+    class="filament-modal block"
+>
+    
+
+    <div
+        x-show="isOpen"
+        x-transition:enter="ease duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-cloak
+        class="fixed inset-0 z-40 flex items-center min-h-screen overflow-y-auto overflow-x-hidden transition p-4"
+    >
+        <div
+                                                x-on:click="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-form-component-action' })"
+                                        aria-hidden="true"
+            class="filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+        ></div>
+
+        <div
+            x-show="isOpen"
+                            x-on:keydown.window.escape="$dispatch('close-modal', { id: '8JIz60y0WmwGZzDGRMhJ-form-component-action' })"
+                        x-transition:enter="ease duration-300"
+            x-transition:leave="ease duration-300"
+                            x-transition:enter-start="translate-y-8"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-8"
+                        x-cloak
+            class="relative w-full cursor-pointer pointer-events-none my-auto" x-init="livewire = $wire.__instance" x-on:modal-closed.stop="if ('mountedFormComponentAction' in livewire?.serverMemo.data) livewire.set('mountedFormComponentAction', null)"
+        >
+            <div
+                class="filament-modal-window w-full p-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto hidden max-w-sm"
+            >
+                                    <button
+                        tabindex="-1"
+                        type="button"
+                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                    >
+                        <svg title="__('filament-support::components/modal.actions.close.label')" x-on:click="isOpen = false" tabindex="-1" class="filament-modal-close-button h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+</svg>
+                        <span class="sr-only">
+                            filament-support::components/modal.actions.close.label
+                        </span>
+                    </button>
+                
+                <div
+                    class="space-y-2"
+                >
+                    
+                    
+                    <div
+                        class="filament-modal-content space-y-2"
+                    >
+                        
+                        
+                        
+                    </div>
+
+                    
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+    </div>
+
+</div>
+
+<!-- Livewire Component wire-end:8JIz60y0WmwGZzDGRMhJ -->                    </div>
+    </div>
+
+        
+
+        
+        
+
+            </div>
+
+    <form wire:submit.prevent="callMountedAction">
+        
+        <div
+    x-data="{ isOpen: false }"
+    x-trap.noscroll="isOpen"
+            x-on:close-modal.window="if ($event.detail.id === 'page-action') isOpen = false"
+        x-on:open-modal.window="if ($event.detail.id === 'page-action') isOpen = true"
+            role="dialog"
+    aria-modal="true"
+    class="filament-modal block"
+>
+    
+
+    <div
+        x-show="isOpen"
+        x-transition:enter="ease duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-cloak
+        class="fixed inset-0 z-40 flex items-center min-h-screen overflow-y-auto overflow-x-hidden transition p-4"
+    >
+        <div
+                                                x-on:click="$dispatch('close-modal', { id: 'page-action' })"
+                                        aria-hidden="true"
+            class="filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+        ></div>
+
+        <div
+            x-show="isOpen"
+                            x-on:keydown.window.escape="$dispatch('close-modal', { id: 'page-action' })"
+                        x-transition:enter="ease duration-300"
+            x-transition:leave="ease duration-300"
+                            x-transition:enter-start="translate-y-8"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-8"
+                        x-cloak
+            class="relative w-full cursor-pointer pointer-events-none my-auto"
+        >
+            <div
+                class="filament-modal-window w-full p-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto hidden max-w-sm"
+            >
+                                    <button
+                        tabindex="-1"
+                        type="button"
+                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                    >
+                        <svg title="__('filament-support::components/modal.actions.close.label')" x-on:click="isOpen = false" tabindex="-1" class="filament-modal-close-button h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+</svg>
+                        <span class="sr-only">
+                            filament-support::components/modal.actions.close.label
+                        </span>
+                    </button>
+                
+                <div
+                    class="space-y-2"
+                >
+                    
+                    
+                    <div
+                        class="filament-modal-content space-y-2"
+                    >
+                        
+                        
+                        
+                    </div>
+
+                    
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </form>
+
+    <form wire:submit.prevent="callMountedFormComponentAction">
+    <div
+    x-data="{ isOpen: false }"
+    x-trap.noscroll="isOpen"
+            x-on:close-modal.window="if ($event.detail.id === 'g6G3srzCJzkjUMj5q49Y-form-component-action') isOpen = false"
+        x-on:open-modal.window="if ($event.detail.id === 'g6G3srzCJzkjUMj5q49Y-form-component-action') isOpen = true"
+            role="dialog"
+    aria-modal="true"
+    class="filament-modal block"
+>
+    
+
+    <div
+        x-show="isOpen"
+        x-transition:enter="ease duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        x-cloak
+        class="fixed inset-0 z-40 flex items-center min-h-screen overflow-y-auto overflow-x-hidden transition p-4"
+    >
+        <div
+                                                x-on:click="$dispatch('close-modal', { id: 'g6G3srzCJzkjUMj5q49Y-form-component-action' })"
+                                        aria-hidden="true"
+            class="filament-modal-close-overlay fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+        ></div>
+
+        <div
+            x-show="isOpen"
+                            x-on:keydown.window.escape="$dispatch('close-modal', { id: 'g6G3srzCJzkjUMj5q49Y-form-component-action' })"
+                        x-transition:enter="ease duration-300"
+            x-transition:leave="ease duration-300"
+                            x-transition:enter-start="translate-y-8"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-8"
+                        x-cloak
+            class="relative w-full cursor-pointer pointer-events-none my-auto" x-init="livewire = $wire.__instance" x-on:modal-closed.stop="if ('mountedFormComponentAction' in livewire?.serverMemo.data) livewire.set('mountedFormComponentAction', null)"
+        >
+            <div
+                class="filament-modal-window w-full p-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto hidden max-w-sm"
+            >
+                                    <button
+                        tabindex="-1"
+                        type="button"
+                        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+                    >
+                        <svg title="__('filament-support::components/modal.actions.close.label')" x-on:click="isOpen = false" tabindex="-1" class="filament-modal-close-button h-4 w-4 cursor-pointer text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+  <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+</svg>
+                        <span class="sr-only">
+                            filament-support::components/modal.actions.close.label
+                        </span>
+                    </button>
+                
+                <div
+                    class="space-y-2"
+                >
+                    
+                    
+                    <div
+                        class="filament-modal-content space-y-2"
+                    >
+                        
+                        
+                        
+                    </div>
+
+                    
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+    </div>
+
+<!-- Livewire Component wire-end:g6G3srzCJzkjUMj5q49Y -->
+
+                
+            </div>
+
+            <div class="filament-main-footer py-4 shrink-0">
+                <div class="filament-footer flex items-center justify-center">
+    
+
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </div>
+
+        
+
+        <!-- Livewire Scripts -->
+
+<script src="/livewire/livewire.js?id=90730a3b0e7144480175" data-turbo-eval="false" data-turbolinks-eval="false" ></script>
+<script data-turbo-eval="false" data-turbolinks-eval="false" >
+    if (window.livewire) {
+	    console.warn('Livewire: It looks like Livewire\'s @livewireScripts JavaScript assets have already been loaded. Make sure you aren\'t loading them twice.')
+	}
+
+    window.livewire = new Livewire();
+    window.livewire.devTools(true);
+    window.Livewire = window.livewire;
+    window.livewire_app_url = '';
+    window.livewire_token = '26iK3XP4MhSR3CQKYQ7pxp7KkY2FI5RHhwH1zfuS';
+
+	/* Make sure Livewire loads first. */
+	if (window.Alpine) {
+	    /* Defer showing the warning so it doesn't get buried under downstream errors. */
+	    document.addEventListener("DOMContentLoaded", function () {
+	        setTimeout(function() {
+	            console.warn("Livewire: It looks like AlpineJS has already been loaded. Make sure Livewire\'s scripts are loaded before Alpine.\\n\\n Reference docs for more info: http://laravel-livewire.com/docs/alpine-js")
+	        })
+	    });
+	}
+
+	/* Make Alpine wait until Livewire is finished rendering to do its thing. */
+    window.deferLoadingAlpine = function (callback) {
+        window.addEventListener('livewire:load', function () {
+            callback();
+        });
+    };
+
+    let started = false;
+
+    window.addEventListener('alpine:initializing', function () {
+        if (! started) {
+            window.livewire.start();
+
+            started = true;
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (! started) {
+            window.livewire.start();
+
+            started = true;
+        }
+    });
+</script>
+
+        <script>
+            window.filamentData = [];
+        </script>
+
+        
+        
+        <script defer src="https://portal.lvaliftadvies.nl/filament/assets/app.js?id=de109909e799e20eb15da26295309fa5"></script>
+
+        
+                                    <script defer src="https://portal.lvaliftadvies.nl/filament/assets/filament-export-0.2.0.js"></script>
+                    
+        
+        
+
+        
+    </body>
+</html>

@@ -1,0 +1,79 @@
+.btn-120 {
+	width: 120px !important;
+}
+
+.btn-150 {
+	width: 150px !important;
+}
+
+.pageico {
+	height: 60px;
+	padding-right: 10px;
+	margin-right: 10px;
+	float: left;
+	border-right: 1px solid #EFEFEF;
+}
+
+h1 {
+	font-weight: normal !important;
+}
+
+.loading {
+
+	text-align: center;
+	margin: auto;
+	width: 640px;
+	padding: 30px;
+	margin: auto;
+	display: block;
+}
+
+.loading_indicator {
+	border: 16px solid #f3f3f3;
+	/* Light grey */
+	border-top: 16px solid #80BB3C;
+	/* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	text-align: center;
+	animation: spin 2s linear infinite;
+}
+
+.loading-div {
+	/* create a custom class so you 
+       do not run into specificity issues 
+       against bootstraps styles
+       which tends to work better than using !important 
+       (future you will thank you later)*/
+
+	background-color: rgba(245, 245, 245, 1);
+	opacity: .4;
+}
+
+.loading_indicator_small {
+	border: 5px solid #f3f3f3;
+	/* Light grey */
+	border-top: 5px solid #80BB3C;
+	/* Blue */
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	animation: spin 2s linear infinite;
+}
+
+.card {
+
+	-webkit-box-shadow: none !important;
+	;
+	-moz-box-shadow: none !important;
+	;
+	box-shadow: none !important;
+	;
+}
+
+.card-header {
+	border-radius: 10px;
+	border: 0px !important;
+}
