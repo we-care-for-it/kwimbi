@@ -6,7 +6,7 @@ use App\Models\Elevator;
 use App\Models\Customer;
 use App\Models\Management;
 use App\Models\Supplier;
-use App\Models\Address;
+use App\Models\Location;
 
 use App\Models\managementCompany;
 
@@ -50,6 +50,30 @@ class index extends Component
     public $check_date_valid;
     public $remark;
     public $showAddModal;
+    public $edit_id;
+
+  
+    public $supplier_id;
+    public $address_id;
+    public $inspection_company_id;
+    public $maintenance_company_id;
+    public $stopping_places;
+    public $carrying_capacity;
+    public $energy_label;
+    public $stretcher_elevator;
+    public $fire_elevator;
+    public $name;
+    public $speakconnection;
+    public $object_type_id;
+    public $status_id;
+    public $location_id;
+
+    public $locations_relation = [];
+
+ 
+
+
+
 
 
     public $countdocument = 0;
@@ -99,6 +123,8 @@ class index extends Component
 
     public function mount()
     {
+
+        $this->status_id = 1;
        if (session()
             ->get('elevator_relation_search_filters'))
           {
@@ -106,6 +132,8 @@ class index extends Component
 
            }
 
+
+      
            $this->countFilters();
 
     }
@@ -136,20 +164,32 @@ class index extends Component
     }
     public function render()
     {
+
+     
+        
         return view('livewire.company.elevators.index', [
         'elevators' =>  $this->rows,
-        'customers'             => Customer::select('id', 'name')->where('name', '!=', '')->orderBy('name', 'asc')->get(),
+        'customers'  => Customer::orderBy('name', 'asc')->get(),
         'managements' => managementCompany::orderBy('name', 'asc')->get() ,
         'inspectionCompanys' => inspectionCompany::orderBy('name', 'asc')->get() ,
+        'suppliers' => Supplier::orderBy('name', 'asc')->get() ,
         'maintenanceCompanys' => maintenanceCompany::orderBy('name', 'asc')->get() ,
-        'addresses' => Address::orderBy('name', 'asc')->get() ,
+        'locations' => Location::orderBy('name', 'asc')->get() ,
+       
        ]);
    
     }
 
+    public function search_loctions_by_relation() {
+ 
+        
+        $this->locations_relation =  Location::orderBy('name', 'asc')->get();
+ 
+    }
+
  public function updatedFilters()
      {
-   //   dd('s');
+   //   
    //
 
 //   $this->elevators = [];
@@ -162,7 +202,9 @@ class index extends Component
 
 
   public function countFilters(){
-    $this->cntFilters = $this->filters['search'] ? 1 : 0 +  $this->count_($this->filters['place']) +  $this->count_($this->filters['management_id']) +  $this->count_($this->filters['maintenance_company_id']) +  $this->count_($this->filters['inspection_company_id']) +  $this->count_($this->filters['customer_id']);
+    $this->cntFilters = ($this->filters['search'] ? 1 : 0) +($this->filters['place'] ? 1 : 0) + ($this->filters['management_id'] ? 1 : 0) + ($this->filters['maintenance_company_id'] ? 1 : 0)  + ($this->filters['inspection_company_id'] ? 1 : 0)   + ($this->filters['customer_id'] ? 1 : 0) ;
+    
+ 
   }
 
   public function updatedSelectPage($value)
@@ -255,9 +297,7 @@ class index extends Component
                                  ->orwhere('name', 'like', '%' . $this->filters['search'] . '%')
                                  ->orwhere('unit_no', 'like', '%' . $this->filters['search'] . '%')
                                  ->orwhere('nobo_no', 'like', '%' . $this->filters['search'] . '%');
-                         })
-
-                             ->OrWhere('description', 'like', '%' . $this->filters['search'] . '%');
+                         });;
                          //  ->OrWhere('description', );
 
 
@@ -288,8 +328,47 @@ class index extends Component
           $this->resetPage();
              // persist to database here
          }
+
+         public function clear(){
+
+         }
      
 
+
+         public function save(){
+
+
+            $elevator = [
+                'name' => $this->name,
+                'stretcher_elevator' => $this->stretcher_elevator,
+                'fire_elevator' => $this->fire_elevator,
+                'energy_label' => $this->energy_label,
+                'speakconnection' => $this->speakconnection,
+                'stopping_places' => $this->stopping_places,
+                'nobo_no' => $this->nobo_no,
+                'unit_no' => $this->unit_no,
+                'object_type_id' => $this->object_type_id,
+                'status_id' => $this->status_id,
+                'maintenance_company_id' => $this->maintenance_company_id,
+                'construction_year' => $this->construction_year,
+                'inspection_company_id' =>$this->inspection_company_id,
+                'customer_id' =>$this->customer_id,
+                'address_id' =>$this->location_id,
+            ];
+             
+
+ 
+    
+            $insert_elevator = Elevator::create($elevator); // don't forget to fill $fillable in Model
+    
+            pnotify()->addSuccess('Lift toegevoegd');
+ 
+    
+            
+    
+            return redirect('/objects/' . $insert_elevator->id );
+         }
+     
 
         
 }

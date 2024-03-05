@@ -48,10 +48,10 @@
           </div>
 
        <div class="nav-item ">
-          <a wire:navigate  class="nav-link @if(request()->is('objects/*') or  request()->is('objects'))  active @endif "
-              href="/objects">
+          <a wire:navigate  class="nav-link @if(request()->is('elevators/*') or  request()->is('elevators'))  active @endif "
+              href="/elevators">
               <i class="bi-people nav-icon"></i>
-              <span class="nav-link-title">Objecten</span>
+              <span class="nav-link-title">Liften</span>
             </a>
 
           </div>
@@ -75,8 +75,8 @@
           </div>
 
           <div class="nav-item ">
-            <a wire:navigate  class="nav-link @if(request()->is('debtors/*') or  request()->is('debtors'))  active @endif "
-              href="/debtors">
+            <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
+              href="/customers">
               <i class="bi-people nav-icon"></i>
               <span class="nav-link-title">Relaties</span>
             </a>

@@ -13,18 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('addressess', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
+            $table->dateTime('last_edit_at')->nullable();
+            $table->integer('last_edit_by')->nullable();
             $table->string('name')->nullable();
             $table->string('zipcode')->nullable();     
             $table->string('place')->nullable();
+            $table->string('slug')->nullable();
             $table->string('address')->nullable();
-            $table->string('complexnumber')->nullable();
-            $table->string('remark')->nullable();
-            $table->integer('management_id')->nullable();
-            $table->integer('customer_id')->nullable();
+            $table->string('emailaddress')->nullable();
+            $table->string('phonenumber')->nullable();
         });
     }
 
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inspection_companies');
+        Schema::dropIfExists('customers');
     }
 };

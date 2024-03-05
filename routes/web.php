@@ -140,7 +140,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 
          //Management companies
         
-         Route::get('/management.companies', \App\Http\Livewire\Company\managementCompanies\Index::class);
+         Route::get('/management-companies', \App\Http\Livewire\Company\managementCompanies\Index::class);
          Route::group(['prefix' => 'managementcompanies', ],
          function ()
          {
@@ -160,7 +160,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 
 
         
-         Route::get('/maintenance.companies', \App\Http\Livewire\Company\maintenanceCompanies\Index::class);
+         Route::get('/maintenancy-companies', \App\Http\Livewire\Company\maintenanceCompanies\Index::class);
          Route::group(['prefix' => 'maintenancecompanies', ],
          function ()
          {
@@ -168,7 +168,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
           //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
          });
 
-         Route::get('/inspection.companies', \App\Http\Livewire\Company\inspectionCompanies\Index::class);
+         Route::get('/inspection-companies', \App\Http\Livewire\Company\inspectionCompanies\Index::class);
          Route::group(['prefix' => 'inspectioncompanies', ],
          function ()
          {

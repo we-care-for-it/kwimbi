@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('team_invitations', function (Blueprint $table) {
+        Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
-            $table->string('email');
-            $table->string('role')->nullable();
             $table->timestamps();
-
-            $table->unique(['team_id', 'email']);
+            $table->softDeletes();
+            $table->date('plan_date')->nullable();
+            $table->integer('status_id')->nullable();
+            $table->date('execution_date')->nullable();
+            $table->longtext('remark')->nullable();
+            $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team_invitations');
+        //
     }
 };

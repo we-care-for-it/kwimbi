@@ -1,22 +1,29 @@
 <div class="container-fluid">
-   <div class="page-header">
+
+<div class="page-header  my-3">
       <div class="row align-items-center">
- 
          <div class="col">
-         <img src="/assets/img/ico/users.png" class = "pageico">
-            <h1 class="page-header-title">  Eigenaren <span class="text-muted   ms-2"> ({{ $items->Total()}})</h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> eigenaren gevonden</span>
+            <h1 class="page-header-title">
+               Relaties
          </div>
          <div class="col-auto">
-            <button type="button" onclick="history.back()" style=" width: 150px; " class="btn btn-soft-primary" >
-            Terug
+
+  
+               <button type="button" class="btn btn-primary btn-sm  btn-120" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
+                  Toevoegen
+               </button>
+ 
+
+            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
+               <i class="fa-solid fa-arrow-left"></i>
             </button>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success" >
-            Toevoegen
-            </button>
+
          </div>
       </div>
    </div>
+
+
+ 
    <div class="row ">
       <div class="col-xl-12">
          <div class="card">
@@ -106,6 +113,15 @@
             
                                     <x-table.cell>
                                        <div style = "float: right">
+
+                                       <a href="/customer/{{$item->slug}}"> 
+                                       <button style="float: right"
+                                          class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
+                                          <i class="bi bi-eye"></i>
+                                       </button>
+                                       </a>
+
+
                                        <button type="button" wire:click = "edit({{$item->id}})" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" >
                             <i class="fa-solid fa-pencil"></i>  
                             </button>
@@ -117,47 +133,57 @@
                            </x-table>
                            @else
                            <div class="flex justify-center items-center space-x-2">
-                              <div class = "row">
-                                 <div class = "col-md-2">
-                                    <img src = "/assets/img/empty_state_search_not_found.svg" style = "height: 200px">
-                                 </div>
-                                 <div class = "col-md-10">
-                                    <div class = "pt-3">
+                                
+                           <center>
+                                    
+                                       <img src='/assets/img/illu/1-1-740x592.png'
+                                          style="max-width: 500px; width: 100%;">
+
                                        <h4>Helaas......</h4>
                                        @if($this->cntFilters)
-                                       Geen addressen gevonden met de huidige
-                                       filters...
-                                       <hr>
-                                       <h5>Mogelijke oplossingen</h5>
-                                       <ul style="list-style-type: square;">
-                                          <li >Voeg een <a href = "#"   data-bs-toggle="modal" data-bs-target="#crudModal">nieuwe</a> adres toe in de database</li>
-                                          <li>Pas eventueel de filters aan</li>
-                                       </ul>
+                                       Geen gegevens gevonden met de huidige filters...
+            
+                            
                                        @else
-                                       Geen adressen gevonden in het systeem
-                                       <hr>
-                                       <h5>Mogelijke oplossingen</h5>
-                                       <ul style="list-style-type: square;">
-                                          <li>Voeg een <a href = "#"   data-bs-toggle="modal" data-bs-target="#crudModal" >nieuw</a> adres toe in de database</li>
-                                       </ul>
+                                    Geen relaties gevonden in de database
                                        @endif
-                                    </div>
-                                 </div>
-                              </div>       </div>
+ 
+                                       <div class = "clear-fix pt-3"></div>               
+               <button type="button" class="btn btn-primary btn-sm  btn-120" data-bs-toggle="modal" data-bs-target="#crudModal"  wire:click="clear()">
+                  Toevoegen
+               </button>
+ 
+
+                                        
+                              
+                                 </center>
+
+
                            </div>
                            @endif
-                           </div>
+                 
                      </div>
            
                </div>
             </div>
-            @if($items->links())
-            <div wire:loading.remove class="card-footer bg-light ">
-               <div class = "float-end ">
-               {{ $items->links() }}
-                        </div>
+
+
+
+         <div class="card-footer">
+            <div class="clearfix  ">
+               <div class="float-start">@if(count($items))
+                  <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
+                     </b>
+                  </p>
+                  @endif</div>
+               <div class="float-end"> @if($items->links())
+                  {{ $items->links() }}
+                  @endif</div>
             </div>
-            @endif
+         </div>
+
+
+
          </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -194,7 +220,7 @@
    <div wire:ignore.self class="modal fade" id="crudModal" tabindex="-1" role="dialog" aria-labelledby="crudModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header">Relatie gegevens
   
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -252,9 +278,11 @@
             </div>
             <div class="modal-footer">
 
+            @if($edit_id)
             <button   wire:click="delete({{$edit_id}})"     wire:confirm.prompt="Weet je zeker dat je deze beheerder wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"    type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fa-solid fa-trash"></i>  
                </button> 
+               @endif
 
 
 
@@ -271,9 +299,9 @@
    </div>
 </div>
 <script>
-      document.addEventListener('livewire:init', () => {
-         Livewire.on('close-crud-modal', (event) => {
-            $('#crudModal').modal('hide');
-         });
+   document.addEventListener('livewire:init', () => {
+      Livewire.on('close-crud-modal', (event) => {
+         $('#crudModal').modal('hide');
       });
-  </script>
+   });
+</script>

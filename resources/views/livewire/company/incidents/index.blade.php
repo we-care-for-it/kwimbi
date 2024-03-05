@@ -1,27 +1,22 @@
 <div class="container-fluid">
-
-
-
-
-   
-   <div class="page-header">
+   <div class="page-header  my-3">
       <div class="row align-items-center">
- 
          <div class="col">
-         <img src="/assets/img/ico/users.png" class = "pageico">
-            <h1 class="page-header-title">  Storingen <span class="text-muted   ms-2"> ({{ $items->Total()}})</h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
+            <h1 class="page-header-title">
+               Storingen
          </div>
          <div class="col-auto">
 
-         
-            <button type="button" onclick="history.back()" style=" width: 150px; " class="btn btn-soft-primary" >
-            Terug
+    
+
+            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
+               <i class="fa-solid fa-arrow-left"></i>
             </button>
- 
+
          </div>
       </div>
    </div>
+ 
    <div class="row ">
       <div class="col-xl-12">
          <div class="card">
@@ -216,33 +211,27 @@
                            </x-table>
                            @else
                            <div class="flex justify-center items-center space-x-2">
-                              <div class = "row">
-                                 <div class = "col-md-2">
-                                    <img src = "/assets/img/empty_state_search_not_found.svg" style = "height: 200px">
-                                 </div>
-                                 <div class = "col-md-10">
-                                    <div class = "pt-3">
-                                       <h4>Helaas......</h4>
+                                
+                                 <center>
+                                    <div>
+                                       <img src='/assets/img/illu/1-1-740x592.png'
+                                          style="max-width: 500px; width: 100%;">
+
+                                       <h4>Geen storingen gevonden......</h4>
                                        @if($this->cntFilters)
-                                       Geen gegevens gevonden met de huidige
-                                       filters...
+                                       Geen gegevens gevonden met de huidige filters...
                                        <hr>
-                                       <h5>Mogelijke oplossingen</h5>
-                                       <ul style="list-style-type: square;">
-                                          <li >Voeg een <a href = "#"   data-bs-toggle="modal" data-bs-target="#crudModal">nieuwe</a> adres toe in de database</li>
-                                          <li>Pas eventueel de filters aan</li>
-                                       </ul>
+                              
                                        @else
-                                       Geen gegevens gevonden in het systeem
-                                       <hr>
-                                       <h5>Mogelijke oplossingen</h5>
-                                       <ul style="list-style-type: square;">
-                                          <li>Voeg een <a href = "#"   data-bs-toggle="modal" data-bs-target="#crudModal" >nieuw</a> adres toe in de database</li>
-                                       </ul>
+                                       Geen storingen gevonden in het systeem. Een storing aanmaken kan via het liften overzicht
                                        @endif
+
+                                        
                                     </div>
-                                 </div>
-                              </div>
+                                 </center>
+
+
+                     
                            </div>
                            @endif
                         </div>
@@ -250,11 +239,23 @@
                   </div>
                </div>
             </div>
-            @if($items->links())
-            <div wire:loading.remove class="card-footer bg-light">
-               {{ $items->links() }}
-            </div>
-            @endif
+         
+            <div class="card-footer">
+
+<div class="clearfix  ">
+   <div class="float-start">@if(count($items))
+      <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
+         </b>
+      </p>
+      @endif</div>
+   <div class="float-end"> @if($items->links())
+      {{ $items->links() }}
+      @endif</div>
+</div>
+
+</div>
+
+
          </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -313,3 +314,4 @@
 
     
 </div>
+

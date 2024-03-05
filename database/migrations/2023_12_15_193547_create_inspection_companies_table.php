@@ -8,12 +8,10 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('inspection_companies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
@@ -22,20 +20,18 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('zipcode')->nullable();     
             $table->string('place')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('website')->nullable();
             $table->string('address')->nullable();
-            $table->string('emailaddress')->nullable();
+            $table->string('general_emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('inspection_companies');
     }
 };

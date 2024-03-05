@@ -173,15 +173,17 @@ a:link{
 
   } .cnt_table_result{
     border-left: 1px solid #EFEFEF;
-    min-width:50px!important;
+    min-width:34px!important;
 
-    float: right;
+    float: left;
     text-align: center;
   }.cnt_table_result_l{
    border: 0px;
-    min-width:50px!important;
+   padding-left: 0px;
+   
+    min-width:34px!important;
 
-    float: right;
+    float: left;
 
   }
 

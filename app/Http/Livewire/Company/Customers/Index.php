@@ -84,10 +84,11 @@ class Index extends Component
     }
 
 
+
     public function countFilters(){
-   
-      //  $this->cntFilters = ( $this->filters['keyword'] ? 1 : 0)+ ( $this->filters['place'] ? 1 : 0);
-    }
+        $this->cntFilters = ($this->filters['keyword'] ? 1 : 0) + ($this->filters['place'] ? 1 : 0)  ;
+      }
+    
 
 
     public function getRowsProperty()
@@ -128,6 +129,7 @@ public function clear()
     $this->place =NULL;;
     $this->emailaddress =NULL;
     $this->phonenumber =NULL;
+    $this->edit_id;
  
 }
 
@@ -210,6 +212,7 @@ $this->validate();
 
     public function delete($id){
         $item=Customer::find($id);
+        $this->clear();
         $item->delete();  
         $this->dispatch('close-crud-modal');
         pnotify()->addWarning('Gegevens verwijderd');

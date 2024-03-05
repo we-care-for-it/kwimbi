@@ -14,7 +14,7 @@ class Customer extends Model implements Auditable
 
 {
     // use HasFactory;
-    // use HasSlug;
+   use HasSlug;
 
     use \OwenIt\Auditing\Auditable;
 
@@ -23,18 +23,18 @@ class Customer extends Model implements Auditable
 
 
     
-    // public function getSlugOptions() : SlugOptions
-    // {
-    //     return SlugOptions::create()
-    //     ->generateSlugsFrom(['name', 'address'])
-    //         ->saveSlugsTo('slug');
-    // }
+   public function getSlugOptions() : SlugOptions
+      {
+         return SlugOptions::create()
+        ->generateSlugsFrom(['name', 'address'])
+           ->saveSlugsTo('slug');
+    }
 
 
 
 
     protected $fillable = [
-        'name','address','zipcode','phonenumber','emailaddress','place','phonenumber'
+        'name','address','zipcode','phonenumber','emailaddress','place','phonenumber','slug'
     ];
 
 

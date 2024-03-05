@@ -34,24 +34,14 @@
                 <span class="d-block fw-semibold  ">Projecten</span>
               Maak projecten aan en koppel alle relevante informatie van de projecten op 1 plek
               </li>
-
-              
               <li class="list-checked-item">
                 <span class="d-block fw-semibold mb-1">Liftbeheer</span>
             Registeer Onderhoudsbeurten, Storingen en lift eigenschappen
               </li>
-
             </ul>
-            <!-- End List Checked -->
 
-            <div class="row justify-content-between mt-5 gx-3">
-              
-              <!-- End Col -->
-            </div>
-            <!-- End Row -->
-          
-      
-      
+            <div class="row justify-content-between mt-5 gx-3">  
+            </div>  
  
       </div>
    </div>
@@ -60,7 +50,7 @@
          <div>
             <div class="mb-3">
                <div class="d-md-block d-lg-none pb-4">
-                  <center>  <img src="/assets/img/logo_gray.png" style="width: 300px;" /></center>
+                  <center>  <img src="/storage/tenant/logo.png"  style="width: 300px;" /></center>
                </div>
                
 

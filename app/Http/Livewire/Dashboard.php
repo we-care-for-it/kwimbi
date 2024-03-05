@@ -31,7 +31,7 @@ class Dashboard extends Component
     {
 
         $this->elevator_open_incidents = Incident::where('status_id', '!=', '99') ->where('status_id', '!=', '6')->orderby('report_date_time', 'desc')->get();
-        $this->elevator_standing_still = Incident::where('status_id', '!=', '99') ->where('status_id', '!=', '6')->where('stand_still', 1)->orderby('report_date_time', 'desc')->get();
+      //  $this->elevator_standing_still = Incident::where('status_id', '!=', '99') ->where('status_id', '!=', '6')->where('stand_still', 1)->orderby('report_date_time', 'desc')->get();
 
         $this->elevator_expired_inspections =
          Elevator::whereHas('inspections', function ($query) {
@@ -51,7 +51,7 @@ class Dashboard extends Component
 
         $this->elevators = Elevator::get();
         $this->cnt_all_elevators         =  Elevator::count();
-        $this->cnt_managment_elevators   =  Elevator::where('management_elevator', 1)->count();
+  
     }
 }
 

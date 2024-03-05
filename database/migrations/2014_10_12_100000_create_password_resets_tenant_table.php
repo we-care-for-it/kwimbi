@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::table('users', function ($table) {
-          $table->longText('azure_token')->nullable();
-      });
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
+        });
     }
 
     /**
@@ -21,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('password_resets');
     }
 };

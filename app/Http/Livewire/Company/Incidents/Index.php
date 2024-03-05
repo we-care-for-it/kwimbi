@@ -52,11 +52,20 @@ class Index extends Component
     }
 
 
-
+    public function countFilters(){
+        $this->cntFilters = ($this->filters['keyword'] ? 1 : 0) + ($this->filters['status_id'] ? 1 : 0)  ;
+      }
+    
+ 
     public function updatedFilters()
     {
-        Session()->put('incident_search_filters', json_encode($this->filters));
+    Session()->put('incident_search_filters', json_encode($this->filters));
+    $this->countFilters();
+
     }
+
+
+  
 
 
     public function updated()
@@ -80,6 +89,8 @@ class Index extends Component
         $this->reset('filters');
         session()->pull('incident_search_filters', '');
         $this->gotoPage(1);
+
+        $this->countFilters();
     }
 
     public function getRowsQueryProperty()
@@ -97,7 +108,7 @@ class Index extends Component
 
 
           ->when($this->filters['keyword'], function ($query) {
-              $query->whereHas('elevator.address', function ($query) {
+              $query->whereHas('elevator.location', function ($query) {
                   $query->where('address', 'like', '%' . $this->filters['keyword'] . '%')
                   ->orwhere('place', 'like', '%' . $this->filters['keyword'] . '%')
                   ->orwhere('name', 'like', '%' . $this->filters['keyword'] . '%')

@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('api_logs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('api')->nullable();
+            $table->string('module')->nullable();
+            $table->string('result')->nullable();
+            $table->string('error_description')->nullable();
+            
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('api_log');
     }
 };

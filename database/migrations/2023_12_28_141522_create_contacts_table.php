@@ -17,15 +17,14 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
-            $table->dateTime('last_edit_at')->nullable();
-            $table->integer('last_edit_by')->nullable();
 
             $table->integer('management_id')->nullable();
             $table->integer('supplier_id')->nullable();
             $table->integer('inspection_company_id')->nullable();
             $table->integer('maintency_company_id')->nullable();
+            $table->integer('customer_id')->nullable();
             $table->integer('address_id')->nullable();
- 
+
             $table->string('email')->nullable();
             $table->string('function')->nullable();
             $table->string('name')->nullable();
@@ -37,8 +36,8 @@ return new class extends Migration
             $table->string('social_linkedin')->nullable();
             $table->string('social_facebook')->nullable(); 
             $table->string('social_istagram')->nullable(); 
-            $table->integer('customer_id')->nullable();
-            
+
+       
 
 
         });

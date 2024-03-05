@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::table('users', function ($table) {
-          $table->dateTime('last_login_at')->nullable();
-          $table->integer('login_type')->nullable();
-      });
+        Schema::table('statuses', function (Blueprint $table) {
+            $table->string('status_color')->nullable();
+        });
     }
 
     /**
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('statuses', function (Blueprint $table) {
+            //
+        });
     }
 };
