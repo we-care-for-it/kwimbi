@@ -9,7 +9,7 @@
 --}}
 
 
-    <table class="table  table-hover table-striped">
+    <table class="table  table-hover table-striped table-responsive">
        <thead class= "bg-light">
             <tr style = "text-align: left">
                 {{ $head }}

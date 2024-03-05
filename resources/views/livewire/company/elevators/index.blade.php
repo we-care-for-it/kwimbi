@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-       Liften overzicht
+       Liften
          </div>
          <div class="col-auto">
             <button type="button"  data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" class="btn btn-primary btn-sm  btn-120" wire:click="clear()">
@@ -218,7 +218,7 @@
                      <i class="bi-three-dots-vertical"></i>
                      </button>
                      <div class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="settingsDropdown1">
-                     <a class="dropdown-item" href = "/objects/{{$elevator->id}}/edit" >
+                     <a class="dropdown-item" href = "/objects/show/{{$elevator->id}}/edit" >
                      <i class="bi-pencil-fill dropdown-item-icon"></i> Wijzigen
                      </a>
                      </div>
@@ -614,4 +614,10 @@
       </div>
    </div>
 </div>
- 
+<script>
+   document.addEventListener('livewire:init', () => {
+      Livewire.on('close-crud-modal', (event) => {
+         $('#crudModal').modal('hide');
+      });
+   });
+</script>

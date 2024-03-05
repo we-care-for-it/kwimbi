@@ -7,7 +7,7 @@
          <div class="col">
             <h1 class="page-header-title">
 
-               @if($object->fire_elevator)
+               @if($object?->fire_elevator)
                <div class="cnt_table_result">
 
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
@@ -19,7 +19,7 @@
                </div>
                @endif
 
-               @if($object->stretcher_elevator)
+               @if($object?->stretcher_elevator)
                <div class="cnt_table_result">
 
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brancard / Bedlift"
@@ -34,7 +34,7 @@
 
          @endif
 
-         @if($object->address_id)
+         @if($object?->address_id)
          {{$object->location?->address}} {{$object->location?->place}}
          @if($object->location?->name)
          ({{$object->location?->name}})
@@ -46,7 +46,8 @@
       </div>
       <div class="col-auto">
 
-         <button data-bs-toggle="modal" data-bs-target="#editModal" type="button"
+ 
+         <button data-bs-toggle="modal" wire:click = "edit({{$object->id}})" data-bs-target="#crudModal" type="button"
             class="btn btn btn-primary btn-sm  btn-120 ">
             Wijzig
          </button>
@@ -104,8 +105,7 @@
             <div class="row">
                <div class="col-md-3"><img src="/assets/img/documents.svg"></div>
                <div class="col-md-9">
-
-               <form wire:submit="uploadFile">
+ 
  
     <label for="fname">Bestandsnaam</label>
                      <div class="pt-2"></div>
@@ -116,24 +116,33 @@
                      <div class="pt-2"></div>
 
                      <select class="form-select  "  wire:model="file_collection"  />
-                     <option selected value="documenten">Documenten</option>
-                     <option value="afbeeldingen ">Afbeeldingen</option>
-                     <option value="algemeen ">Algemeen</option>
+                     <option selected value="documens">Documenten</option>
+                     <option value="image ">Afbeeldingen</option>
+                     <option value="3 ">Algemeen</option>
                      </select>
                      <div class="pt-3"></div>
                      <label>Bestand</label>
                      <div class="pt-2"></div>
-                    
-                     
-    <livewire:media-library wire:model="file_attachment" />
-
+             
+                 
+                     <form wire:submit="uploadFile">
+    <input type="file" wire:model="file_attachment">
+ 
+    @error('photo') <span class="error">{{ $message }}</span> @enderror
+ 
+    <button type="submit">Save photo</button>
+</form> 
              
                      <div class="pt-2"></div>
                      <div style="float: right;  ">
  
+
+
+
+                     
  
-    <button type="submit" class="btn btn-soft-success ">Upload</button></div>
-</form>
+    <button type="submit" class="btn btn-soft-success " wire:click = "uploadFile()">Upload</button></div>
+ 
 
 
                   
@@ -149,7 +158,7 @@
 
 <!-- Modal EDIT -->
 
-<div wire:ignore.self class="modal fade modal-xl" id="editModal" tabindex="-1" role="dialog" aria-labelledby="crudModal"
+<div wire:ignore.self class="modal fade modal-xl" id="crudModal" tabindex="-1" role="dialog" aria-labelledby="crudModal"
    aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -158,9 +167,278 @@
             <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Lifteigenschappen bewerken</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
-         <div class="modal-body">
-          EDIT
-         </div>
+          <div class="modal-body" wire:loading.class="loading-div" >
+            <div>
+               <div class="row">
+                  <div class="col-md-12 pb-3">
+                     <label for="ernergie_label" class="pb-2 pt-2">Naam</label>
+                     <input type="text" wire:model = "name" class="form-control">
+                  </div>
+               </div>
+
+               <div class="row">
+                  <div class="col-md-4">
+                 
+
+
+                   
+                    
+               <label class="pb-2 ">Relatie</label>
+                           <div class="tom-select-custom"  wire:ignore.self>
+                           <select   wire:change = "search_loctions_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select @error('name') is-invalid   @enderror "
+                           data-hs-tom-select-options='{
+"placeholder": "Selecteer een relatie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
+          
+                              <option selected value="">Selecteer een relatie</option>
+                                                            @foreach($customers as $customer)
+                              <option value="{{ $customer->id }}">
+                              {{ $customer->name }}
+                              </option>
+                              @endforeach
+                              </select>
+                           </div>
+                           
+                           @error('customer_id') <span class="invalid-feedback">Relatie is een verplicht veld </span> @enderror
+
+
+           
+                           <label for="address_id" class="pb-2 pt-2">Adres</label>
+                           <div class="tom-select-custom " wire:ignore.self  >
+                              <select wire:model = "location_id"  autocomplete="off" class="js-select form-select"
+                              data-hs-tom-select-options='{
+"placeholder": "Selecteer een locatie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
+                          
+            <option selected value="">Selecteer een locatie</option>
+                              @foreach($locations_relation as $relatedItem)
+                              <option value="{{ $relatedItem->id }}">
+                              {{ $relatedItem->name }}
+                              </option>
+                              @endforeach
+                              </select>
+                           </div>
+
+                  
+                         
+
+
+                  </div>
+
+                  <div class="col-md-4">
+                     
+
+                  <label for="address_id" class="pb-2">Keuringinstantie</label>
+                     <div class="tom-select-custom "   wire:ignore>
+                        <select wire:model = "inspection_company_id" style="height: 40px;" autocomplete="off" class="js-select form-select"
+                        data-hs-tom-select-options='{
+"placeholder": "Selecteer een instantie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
+                           <option value="">Selecteer een keuringsinstanties</option>
+                           @foreach($inspectionCompanys as $relatedItem)
+                           <option value="{{ $relatedItem->id }}">
+                              {{ $relatedItem->name }}
+                           </option>
+                           @endforeach
+                        </select>
+                     </div>
+
+
+                     @error('inspection_company_id')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                     @enderror
+                     <label for="address_id" class="pb-2 pt-2">Onderhoudspartij</label>
+                     <div class="tom-select-custom "   wire:ignore>
+                        <select wire:model = "maintenance_company_id" style="height: 40px;" autocomplete="off" class="js-select form-select"
+                        data-hs-tom-select-options='{
+"placeholder": "Selecteer een onderhoudspartij",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
+                           <option value="">Selecteer een keuringsinstanties</option>
+                           @foreach($maintenanceCompanys as $relatedItem)
+                           <option @if($relatedItem->id  == $maintenance_company_id) selected @endif value="{{ $relatedItem->id }}">
+                           {{ $relatedItem->name }}
+                           </option>
+                           @endforeach
+                        </select>
+                     </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    
+
+                  <div class="row">
+                        <div class="col-md-6">
+                           
+
+                        <label for="construction_year" class="pb-2">Bouwjaar</label>
+                           <input class="form-control @error('construction_year') is-invalid @enderror"
+                              wire:model="construction_year" type="text"
+                              >
+                           @error('construction_year')
+                           <div class="invalid-feedback">{{ $message }}</div>
+                           @enderror
+
+                        
+                           <label for="ernergie_label" class="pb-2 pt-2">Stopplaatsen</label>
+                           <input type="number" wire:model = "stopping_places" class="form-control">
+                 
+
+                  </div>
+
+                  <div class="col-md-6">
+                  <label for="ernergie_label" class="pb-2 ">Energielabel</label>
+                           <div class="tom-select-custom " wire:ignore>
+                              <select wire:model = "energy_label" style="height: 40px;" class="js-select form-select ">
+                                 <option value="A" > A </option>
+                                 <option value="B" > B </option>
+                                 <option value="C" > C </option>
+                                 <option value="D" > D </option>
+                                 <option value="E" > E </option>
+                                 <option value="F" > F </option>
+                                 <option value="G" > G </option>
+                              </select>
+                           </div>
+
+
+                           <label for="ernergie_label" class="pb-2 pt-2">Nobo nummer</label>
+                        <input type="text" wire:model = "nobo_no" class="form-control">
+                        <label for="ernergie_label" class="pb-2 pt-2">Unit nummer</label>
+                        <input type="text" wire:model = "unit_no" class="form-control">
+                  
+                  </div>
+
+                  </div>
+
+                  </div>
+               </div>
+
+               <div class="row pt-3">
+                  <hr>
+                 
+                  <div class= "row">
+
+                  <div class = "col-md-4">
+         
+         
+          
+ 
+               <label class="pb-2 ">Leverancier</label>
+                       
+                           <div class="tom-select-custom " wire:ignore.self  >
+                              <select wire:model = "supplier_id"  autocomplete="off" class="js-select form-select"
+                              data-hs-tom-select-options='{
+"placeholder": "Selecteer een leverancier",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
+            <option value="">Selecteer een leverancier</option>
+                              @foreach($suppliers as $supplier)
+                              <option value="{{ $supplier->id }}">
+                              {{ $supplier->name }}
+                              </option>
+                              @endforeach
+                              </select>
+                           </div>
+                           <label for="ernergie_label" class="pb-2 pt-2">Status</label>
+
+                          
+              <div class="tom-select-custom " wire:ignore>
+
+                           <select
+                                    class="js-select form-select"
+                                    wire:model="status_id"
+                                    data-hs-tom-select-options='{
+"placeholder": "Selecteer een status",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'
+                                    class="ts-wrapper js-select form-select form-select-sm tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items js-select_style"
+                                    id="locationLabel"
+                                >
+<option  value="1"   @if($status_id=='1') selected @endif  data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>' > </option>
+<option    value="2"  @if($status_id=='2') selected @endif  data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>'> </option>
+                                        </select>
+
+
+ 
+                           </div>
+
+
+
+                           <label for="ernergie_label" class="pb-2 pt-2">Type</label>
+                           <div class="tom-select-custom " wire:ignore>
+
+                           
+ 
+
+                              <select style="height: 40px;" wire:model = "object_type_id"
+                              class="js-select form-select"
+                              data-hs-tom-select-options='{
+"placeholder": "Selecteer een type",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'
+                                 @foreach(config('globalValues.object_types') as $key => $value)
+                                 <option 
+                                    value="{{ $key }}">
+                                    {{$value}}
+                                 </option>
+                                 @endforeach
+                              </select>
+                           </div>
+     </div>
+
+
+
+
+
+                     <div class = "col-md-4">
+                        <div class="form-check form-switch mb-4">
+                           <input  wire:model="stretcher_elevator"  value="1" type="checkbox" class="form-check-input" id="formSwitch2"  >
+                           <label class="form-check-label" for="formSwitch2">Brancardlift</label>
+                        </div>
+                        <div class="form-check form-switch mb-4">
+                           <input  value = "1" wire:model.live="fire_elevator" type="checkbox" class="form-check-input" id="formSwitch2"  >
+                           <label class="form-check-label" for="formSwitch2">Brandweerlift</label>
+                        </div>
+                        <div class="form-check form-switch mb-4">
+                           <input  value = "1" wire:model="speakconnection" type="checkbox" class="form-check-input" id="formSwitch2"  >
+                           <label class="form-check-label" for="formSwitch2">Spreek / luister</label>
+                        </div>
+                     </div>
+                     <div class = "col-md-4">
+                        <label for="ernergie_label" wire:model = "remark" class="pb-2  ">Opmerking</label>
+                        <textarea wire:model = "remark" class="form-control"></textarea>
+                        </div>
+                     <br>
+                     <div class = "float-end">
+                        <button class = "btn btn-primary btn-120 float-end mt-3" wire:click = "save()"> Opslaan
+                     </div>
+                  </div>
+               </div>     </div>
+            </div>
       </div>
    </div>
 </div>
@@ -298,7 +576,7 @@
 
             <div class="p-3 bg-light" style="height: 80px;">
 
-               @if($object->address->management)
+               @if($object?->address?->management)
                <ul class="list-unstyled mb-0">
                   <li class="pb-3">
                      <div class="d-flex align-items-center">
@@ -791,6 +1069,71 @@
 
 </div>
 
+
+@if(count($object->getMedia("*")))
+<div class="row pt-3">
+   <div class="col-md-12">
+      <div class="card">
+         <div class="card-header card-header-content-md-between bg-light">
+            Bijlages
+         </div>
+         <div class="card-body p-2">
+
+            <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
+               <thead class="bg-light">
+                  <tr>
+                     <th scope="col"> </th>
+                     <th scope="col">Omschrijving </th>
+                     <th scope="col">Categorie </th>
+                     <th scope="col"> </th>
+                     <th scope="col"> </th>
+                  </tr>
+               </thead>
+               <tbody>
+
+                  @foreach($object->getMedia("*") as $item)
+                  <tr style="cursor: pointer">
+                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle" style="width: 20px">
+                        <img style="height: 20px; padding-right: 3px;"
+                           src="\assets\img\extentions\{{substr($item->file_name, strrpos($item->file_name, '.') + 1)}}.svg">
+
+                     </td>
+                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
+                        {{ucfirst($item->getCustomProperty('description', "geen"))}}
+                     </td>
+
+                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
+                        {{ucfirst($item->file_name)}}
+                     </td>
+                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
+                        {{ucfirst($item->collection_name)}}
+                     </td>
+                     <td class="align-middle">
+                        <form action="/file.destroy" method="POST">
+                           <input type="hidden" name="hash" id="hash" value="{{$item->uuid}}">
+
+                           @csrf
+                           @method('POST')
+                           <button style="float: right"
+                              onclick="return confirm('Weet je zeker dat je dit deze bijlage wilt verwijderen?')"
+                              type="submit" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle">
+                              <i class="bi bi-trash"></i>
+                           </button>
+                        </form>
+
+                     </td>
+
+                  </tr>
+
+                  @endforeach </tbody>
+            </table>
+            </div>
+         </div>
+      </div>
+   </div>
+ 
+@endif
+
 <!--  -->
  
 
@@ -850,10 +1193,10 @@
                     
                            @if($object->status_id==1)
 
-                           <span class="badge bg-soft-success text-succes p-1">Operationeel</span>
+                           <span class="badge bg-soft-success text-succes p-2">Operationeel</span>
 
                            @else
-                           <span class="badge bg-soft-danger text-danger p-1">Buitedienst</span>
+                           <span class="badge bg-soft-danger text-danger p-2">Buitendienst</span>
 
                            @endif
 
@@ -923,70 +1266,23 @@
 
    </div>
 
-   @if(count($object->getMedia("*")))
-<div class="row pt-3">
-   <div class="col-md-12">
-      <div class="card">
-         <div class="card-header card-header-content-md-between bg-light">
-            Bijlages
-         </div>
-         <div class="card-body p-2">
 
-            <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
-               <thead class="bg-light">
-                  <tr>
-                     <th scope="col"> </th>
-                     <th scope="col">Omschrijving </th>
-                     <th scope="col">Categorie </th>
-                     <th scope="col"> </th>
-                     <th scope="col"> </th>
-                  </tr>
-               </thead>
-               <tbody>
 
-                  @foreach($object->getMedia("*") as $item)
-                  <tr style="cursor: pointer">
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle" style="width: 20px">
-                        <img style="height: 20px; padding-right: 3px;"
-                           src="\assets\img\extentions\{{substr($item->file_name, strrpos($item->file_name, '.') + 1)}}.svg">
+ 
 
-                     </td>
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->getCustomProperty('description', "geen"))}}
-                     </td>
-
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->file_name)}}
-                     </td>
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->collection_name)}}
-                     </td>
-                     <td class="align-middle">
-                        <form action="/file.destroy" method="POST">
-                           <input type="hidden" name="hash" id="hash" value="{{$item->uuid}}">
-
-                           @csrf
-                           @method('POST')
-                           <button style="float: right"
-                              onclick="return confirm('Weet je zeker dat je dit deze bijlage wilt verwijderen?')"
-                              type="submit" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle">
-                              <i class="bi bi-trash"></i>
-                           </button>
-                        </form>
-
-                     </td>
-
-                  </tr>
-
-                  @endforeach </tbody>
-            </table>
-
-         </div>
-      </div>
-   </div>
+ 
 </div>
-@endif
-</div>
-</div>
+
+
+
+
+
+</div><script>
+   document.addEventListener('livewire:init', () => {
+      Livewire.on('close-crud-modal', (event) => {
+         $('#crudModal').modal('hide');
+      });
+   });
+</script>
 
  

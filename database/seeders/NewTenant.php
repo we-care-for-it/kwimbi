@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\InspectionCompany;
+use App\Models\inspectionCompany;
 
 class NewTenant extends Seeder
 {
@@ -23,7 +23,7 @@ class NewTenant extends Seeder
             'password' => Hash::make('!Timmer2024@')
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "Aboma B.V.",
             'address' => 'Maxwellstraat 49a',
             'zipcode' => '6716 BX',
@@ -33,7 +33,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "info@aboma.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "Dekra Certifications B.V.",
             'address' => 'Meander 1051',
             'zipcode' => '6825 MJ',
@@ -43,7 +43,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "info@dekra.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "HCC/DRS Inspecties B.V.",
             'address' => 'Kokkel 4-A',
             'zipcode' => '1723 HX',
@@ -53,7 +53,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "info@hhcdrs.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "Liftinstituut B.V.",
             'address' => 'Buikslotermeerplein 381',
             'zipcode' => '1025 XE',
@@ -63,7 +63,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "info@liftinstituut.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "Stichting Keuringsbureau Hout",
             'address' => 'Nieuwe Kanaal 9F',
             'zipcode' => '6709 PA ',
@@ -73,7 +73,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "mail@skh.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "TÜV NORD Nederland",
             'address' => 'Ekkersrijt 4401',
             'zipcode' => '5692DL ',
@@ -83,7 +83,7 @@ class NewTenant extends Seeder
             'general_emailaddress' => "info@tuv.nl",
         ]);
 
-        InspectionCompany::create([
+        inspectionCompany::create([
             'name' => "Chex Liftkeuringen B.V.",
             'address' => 'Prins Mauritslaan 33',
             'zipcode' => '1171 LP',
