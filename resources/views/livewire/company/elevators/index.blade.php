@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-            Object overzicht
+       Liften overzicht
          </div>
          <div class="col-auto">
             <button type="button"  data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" class="btn btn-primary btn-sm  btn-120" wire:click="clear()">
@@ -135,7 +135,7 @@
                               </x-slot>
                               <x-slot name="body">
                                  @forelse ($elevators as $elevator)
-                                 <x-table.row onclick="window.location='/objects/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
+                                 <x-table.row onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
                                     <x-table.cell>
                                        
                            
@@ -201,7 +201,7 @@
                      </div>
                      </x-table.cell>
                      <x-table.cell> @if ($elevator->address) {{ $elevator->address?->customer?->name }} @else <span class="badge rounded-pill badge-outline-danger">Geen eigenaar  </span> @endif </x-table.cell>
-                     <x-table.cell> @if ($elevator?->address) @if ($elevator?->address?->management?->name) {{$elevator?->address?->management?->name}} @endif @endif </x-table.cell>
+                     <x-table.cell> @if ($elevator?->address) @if ($elevator?->address?->managementcompany?->name) {{$elevator?->address?->managementcompany?->name}} @endif @endif </x-table.cell>
                      <x-table.cell> @if ($elevator->inspection_company_id) {!! $elevator->inspectioncompany?->name !!} @endif </x-table.cell>
                      <x-table.cell> @if ($elevator->maintenancecompany) {{ $elevator->maintenancecompany->name }} @endif </x-table.cell>
                      <x-table.cell>
@@ -355,14 +355,17 @@
 
 
                    
+                    
                <label class="pb-2 ">Relatie</label>
                            <div class="tom-select-custom"  wire:ignore.self>
-                           <select  wire:change = "search_loctions_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select"
-          data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer een relatie</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+                           <select   wire:change = "search_loctions_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select @error('name') is-invalid   @enderror "
+                           data-hs-tom-select-options='{
+"placeholder": "Selecteer een relatie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
           
                               <option selected value="">Selecteer een relatie</option>
                                                             @foreach($customers as $customer)
@@ -372,17 +375,21 @@
                               @endforeach
                               </select>
                            </div>
+                           
+                           @error('customer_id') <span class="invalid-feedback">Relatie is een verplicht veld </span> @enderror
 
 
            
                            <label for="address_id" class="pb-2 pt-2">Adres</label>
                            <div class="tom-select-custom " wire:ignore.self  >
                               <select wire:model = "location_id"  autocomplete="off" class="js-select form-select"
-          data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer eerst een relatie</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+                              data-hs-tom-select-options='{
+"placeholder": "Selecteer een locatie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
                           
             <option selected value="">Selecteer een locatie</option>
                               @foreach($locations_relation as $relatedItem)
@@ -405,11 +412,13 @@
                   <label for="address_id" class="pb-2">Keuringinstantie</label>
                      <div class="tom-select-custom "   wire:ignore>
                         <select wire:model = "inspection_company_id" style="height: 40px;" autocomplete="off" class="js-select form-select"
-          data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer een keuringinstantie</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+                        data-hs-tom-select-options='{
+"placeholder": "Selecteer een instantie",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
                            <option value="">Selecteer een keuringsinstanties</option>
                            @foreach($inspectionCompanys as $relatedItem)
                            <option value="{{ $relatedItem->id }}">
@@ -426,11 +435,13 @@
                      <label for="address_id" class="pb-2 pt-2">Onderhoudspartij</label>
                      <div class="tom-select-custom "   wire:ignore>
                         <select wire:model = "maintenance_company_id" style="height: 40px;" autocomplete="off" class="js-select form-select"
-          data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer een onderhoudspartij</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+                        data-hs-tom-select-options='{
+"placeholder": "Selecteer een onderhoudspartij",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
                            <option value="">Selecteer een keuringsinstanties</option>
                            @foreach($maintenanceCompanys as $relatedItem)
                            <option @if($relatedItem->id  == $maintenance_company_id) selected @endif value="{{ $relatedItem->id }}">
@@ -504,11 +515,13 @@
                        
                            <div class="tom-select-custom " wire:ignore.self  >
                               <select wire:model = "supplier_id"  autocomplete="off" class="js-select form-select"
-          data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer een leveracnier</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+                              data-hs-tom-select-options='{
+"placeholder": "Selecteer een leverancier",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'>
             <option value="">Selecteer een leverancier</option>
                               @foreach($suppliers as $supplier)
                               <option value="{{ $supplier->id }}">
@@ -524,7 +537,7 @@
                                     class="js-select form-select"
                                     wire:model.live ="status_id"
                                     data-hs-tom-select-options='{
-"placeholder": "Select a cluster",
+"placeholder": "Selecteer een status",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
@@ -552,10 +565,12 @@
                               <select style="height: 40px;" wire:model = "object_type_id"
                               class="js-select form-select"
                               data-hs-tom-select-options='{
-              "placeholder": "<div><i class=\"bi-person me-2\"></i> Selecteer een relatie</div>",
-              "hideSearch": false,
-              "width": "20rem"
-            }'>
+"placeholder": "Selecteer een type",
+"hidePlaceholderOnSearch" : true,
+"hideSearch": false,
+"allowEmptyOption": true
+
+}'
                                  @foreach(config('globalValues.object_types') as $key => $value)
                                  <option 
                                     value="{{ $key }}">

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use OwenIt\Auditing\Contracts\Auditable;
 /**
  * Class ManagementCompany
@@ -26,11 +27,11 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
  
-class Elevator extends Model implements Auditable
+class Elevator extends Model implements Auditable,HasMedia
  
 {
     use SoftDeletes;
- 
+    use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
  
     // Validation rules for this model
@@ -94,7 +95,7 @@ class Elevator extends Model implements Auditable
     }
     public function maintenance()
     {
-        return $this->hasMany(Maintenance::class);
+        return $this->hasMany(Maintenances::class);
     }
 
     public function maintenance_contracts()
@@ -102,6 +103,8 @@ class Elevator extends Model implements Auditable
         return $this->hasMany(MaintenanceContract::class);
     }
 
+
+    
 
 
 

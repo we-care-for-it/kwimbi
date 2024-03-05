@@ -141,7 +141,7 @@ public function clear()
  
 public function save(){
    
-$this->validate();
+//$this->validate();
     $data = inspectionCompany::updateOrCreate(
         ['id' =>$this->edit_id],
         [

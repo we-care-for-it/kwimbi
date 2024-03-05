@@ -117,7 +117,6 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
    });
 
     Route::get('/contacts', \App\Http\Livewire\Company\Contacts\Index::class);
-
     Route::get('/elevators', \App\Http\Livewire\Company\Elevators\Index::class);
     Route::group(['prefix' => 'elevator', ],
         function ()

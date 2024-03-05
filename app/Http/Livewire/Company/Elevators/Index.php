@@ -8,9 +8,11 @@ use App\Models\Management;
 use App\Models\Supplier;
 use App\Models\Location;
 
+
+
 use App\Models\managementCompany;
 
-
+use Livewire\Attributes\Validate;
 
 use App\Models\Auth;
 use App\Models\inspectionCompany;
@@ -120,6 +122,12 @@ class index extends Component
 
         }
 
+
+        
+    protected $rules = [
+             'customer_id' => 'required',
+        'location_id' => 'required',
+    ];
 
     public function mount()
     {
@@ -337,7 +345,7 @@ class index extends Component
 
          public function save(){
 
-
+            $this->validate();
             $elevator = [
                 'name' => $this->name,
                 'stretcher_elevator' => $this->stretcher_elevator,
@@ -366,9 +374,12 @@ class index extends Component
     
             
     
-            return redirect('/objects/' . $insert_elevator->id );
+            return redirect('/elevator/show/' . $insert_elevator->id );
          }
      
+
+
+
 
         
 }
