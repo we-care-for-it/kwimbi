@@ -132,9 +132,9 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
             
         });
 
-        Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\edit::class);
-        Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\edit::class);
-       Route::get('/maintenance-contract/edit/{id}', \App\Http\Livewire\Company\MaintenanceContracts\edit::class);
+        Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\Edit::class);
+        Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\Edit::class);
+       Route::get('/maintenance-contract/edit/{id}', \App\Http\Livewire\Company\MaintenanceContracts\Edit::class);
 
     Route::get('/tickets', \App\Http\Livewire\Company\Tickets\Index::class);
     Route::group(['prefix' => 'ticket', ],
