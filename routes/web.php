@@ -127,8 +127,14 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 
             //INspecties
             Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\create::class);
+
+             //Onderhoudsbeurten
+             Route::get('/maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\create::class);
+            
         });
 
+        Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\edit::class);
+        Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\edit::class);
 
     Route::get('/tickets', \App\Http\Livewire\Company\Tickets\Index::class);
     Route::group(['prefix' => 'ticket', ],
@@ -151,7 +157,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
          });
 
 
-         Route::get('/inspections', \App\Http\Livewire\Company\Inspections\Index::class);
+     //    Route::get('/inspections', \App\Http\Livewire\Company\Inspections\Index::class);
         //  Route::group(['prefix' => 'managementcompanies', ],
         //  function ()
         //  {

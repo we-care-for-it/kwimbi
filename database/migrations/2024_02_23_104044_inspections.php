@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->date('begindate')->nullable();
-            $table->date('enddate')->nullable();
+            $table->date('executed_datetime')->nullable();
+            $table->date('end_date')->nullable();
             $table->integer('status_id')->nullable();
             $table->longtext('remark')->nullable();
+            $table->longtext('document')->nullable();
+            $table->longtext('certification')->nullable();
             $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
         });
     }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('status_id')->nullable();
             $table->date('execution_date')->nullable();
             $table->longtext('remark')->nullable();
+            $table->longtext('attachment')->nullable();
             $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
         });
     }

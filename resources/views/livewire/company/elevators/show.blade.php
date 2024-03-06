@@ -851,9 +851,11 @@
                   <tr>
                      <th scope="col">Status </th>
 
-                     <th scope="col">Begindatum </th>
-                     <th scope="col">Einddatum </th>
+                     <th scope="col">Plandatum </th>
+                     <th scope="col">Uitvoerdatum </th>
                      <th scope="col">Opmerking </th>
+                     <th scope="col">Document </th>
+                     <th scope="col"> </th>
 
                   </tr>
                </thead>
@@ -869,13 +871,17 @@
 
                      </td>
                      <td class="align-middle" style="width: 150px">
-                        @if($item->plan_date)
+                        @if($item->planned_at)
                         {{ \Carbon\Carbon::parse($item->plan_date)->format('d-m-Y')}}
+                        @else
+                        -
                         @endif
                      </td>
                      <td class="align-middle" style="width: 150px">
-                        @if($item->plan_date)
-                        {{ \Carbon\Carbon::parse($item->plan_date)->format('d-m-Y')}}
+                        @if($item->executed_datetime)
+                        {{ \Carbon\Carbon::parse($item->executed_datetime)->format('d-m-Y')}}
+                        @else
+                        -
                         @endif
 
                      </td>
@@ -887,6 +893,29 @@
                         -
                         @endif
                      </td>
+
+
+                     <td  class = "align-middle">
+                        @if($item->attachment)
+                        <button class="btn btn-soft-primary btn-sm" wire:click="downloadDocument('maintenance','{{$item->id}}')" >
+                        <i class="fa-solid fa-paperclip"></i> Download </button>
+                        @else
+                        -
+                        @endif
+                     </td>
+                     <td>
+
+                     <div style = "float:right">
+                     <a href = "/maintenance/edit/{{$item->id}}">
+                                    <button    type="button" data-bs-toggle="modal" class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-pencil"></i>  
+                                    </button>
+                                    </a>          
+                                 </div>
+
+ 
+                     </td>
+
 
                   </tr>
 
@@ -1010,7 +1039,9 @@
                      <th scope="col">Begindatum </th>
                      <th scope="col">Einddatum </th>
                      <th scope="col">Opmerking </th>
-
+                     <th scope="col"> </th>
+                     <th scope="col"> </th>
+                     <th scope="col"> </th>
                   </tr>
                </thead>
                <tbody>
@@ -1051,6 +1082,33 @@
                         {{$item->remark}}
                      </td>
 
+
+                     <td scope="row">
+      @if($item->document)
+      <button class="btn btn-soft-primary  btn-120" wire:click="downloadDocument('inspection','{{$item->id}}')" style="float: right; ">
+      <i class="fa-solid fa-paperclip"></i> Rapportage </button>
+      @endif
+      </td>
+      <td scope="row">
+      @if($item->certification)
+      <button class="btn btn-soft-primary btn-120 " wire:click="downloadDocument('certification','{{$item->id}}')" style="float: right;    ">
+      <i class="fa-solid fa-paperclip"></i> Certificaat </button> @endif
+      </td>
+
+
+      <td>
+
+<div style = "float:right">
+<a href = "/inspection/edit/{{$item->id}}">
+               <button    type="button"   class="btn btn-ghost-warning btn-icon btn-sm rounded-circle">
+               <i class="fa-solid fa-pencil"></i>  
+               </button>
+               </a>          
+            </div>
+
+
+</td>
+
                   </tr>
 
                   @endforeach
@@ -1069,71 +1127,7 @@
    </div>
 
 </div>
-
-
-@if(count($object->getMedia("*")))
-<div class="row pt-3">
-   <div class="col-md-12">
-      <div class="card">
-         <div class="card-header card-header-content-md-between bg-light">
-            Bijlages
-         </div>
-         <div class="card-body p-2">
-
-            <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
-               <thead class="bg-light">
-                  <tr>
-                     <th scope="col"> </th>
-                     <th scope="col">Omschrijving </th>
-                     <th scope="col">Categorie </th>
-                     <th scope="col"> </th>
-                     <th scope="col"> </th>
-                  </tr>
-               </thead>
-               <tbody>
-
-                  @foreach($object->getMedia("*") as $item)
-                  <tr style="cursor: pointer">
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle" style="width: 20px">
-                        <img style="height: 20px; padding-right: 3px;"
-                           src="\assets\img\extentions\{{substr($item->file_name, strrpos($item->file_name, '.') + 1)}}.svg">
-
-                     </td>
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->getCustomProperty('description', "geen"))}}
-                     </td>
-
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->file_name)}}
-                     </td>
-                     <td onclick="location = '/download/{{$item->uuid}}'" class="align-middle">
-                        {{ucfirst($item->collection_name)}}
-                     </td>
-                     <td class="align-middle">
-                        <form action="/file.destroy" method="POST">
-                           <input type="hidden" name="hash" id="hash" value="{{$item->uuid}}">
-
-                           @csrf
-                           @method('POST')
-                           <button style="float: right"
-                              onclick="return confirm('Weet je zeker dat je dit deze bijlage wilt verwijderen?')"
-                              type="submit" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle">
-                              <i class="bi bi-trash"></i>
-                           </button>
-                        </form>
-
-                     </td>
-
-                  </tr>
-
-                  @endforeach </tbody>
-            </table>
-            </div>
-         </div>
-      </div>
-   </div>
  
-@endif
 
 <!--  -->
  

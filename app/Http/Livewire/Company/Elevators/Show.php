@@ -15,10 +15,13 @@ use App\Models\Supplier;
 use App\Models\Location;
 use App\Models\managementCompany;
 use App\Models\inspectionCompany;
+use App\Models\inspection;
 
 use App\Models\maintenanceCompany;
 use Livewire\WithFileUploads;
- 
+use App\Models\Maintenances;
+
+use Storage;
 
  
 
@@ -178,6 +181,53 @@ Storage::disk('media')
 
  
     }
+
+
+
+    public function downloadDocument($type, $id)
+    {
+
+        switch ($type)
+        {
+            case "inspection" : 
+                $data = Inspection::where("id", $id)->first();
+
+            $filename = $data->document;
+
+            return Storage::disk('media')->download($filename);
+
+        break;
+
+        case "maintenance" : $data = Maintenances::where("id", $id)->first();
+        $filename = $data->attachment;
+    break;
+
+    case "maintenancycontract" : $data = MaintenancyContracts::where("id", $id)->first();
+    $filename = $data->document;
+ 
+break;
+
+case "certification":
+    $data = Inspection::where("id", $id)->first();
+
+    $filename = $data->certification;
+break;
+
+ 
+
+}
+
+if (Storage::disk('media')->exists($filename))
+{
+    return Storage::disk('media')->download($filename);
+}
+else
+{
+    flasher("Bestand is niet gevonden, Mogelijk is dit bestand verwijderd");
+}
+}
+
+
 
 }
 
