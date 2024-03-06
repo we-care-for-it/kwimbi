@@ -118,6 +118,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 
     Route::get('/contacts', \App\Http\Livewire\Company\Contacts\Index::class);
     Route::get('/elevators', \App\Http\Livewire\Company\Elevators\Index::class);
+
     Route::group(['prefix' => 'elevator', ],
         function ()
         {
@@ -125,12 +126,12 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
             
-            Route::get('maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\create::class);
-            Route::get('inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\create::class);
-            Route::get('maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\create::class);
-            
+          
         });
-
+        Route::get('maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\create::class);
+        Route::get('inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\create::class);
+        Route::get('maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\create::class);
+       
         Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\edit::class);
         Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\edit::class);
        Route::get('/maintenance-contract/edit/{id}', \App\Http\Livewire\Company\MaintenanceContracts\edit::class);
