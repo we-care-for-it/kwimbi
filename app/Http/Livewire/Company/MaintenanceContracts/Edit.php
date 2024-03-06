@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Company\MaintenanceContracts;
+namespace App\Http\Livewire\Company\maintenanceContracts;
 
 use Livewire\Component;
 
