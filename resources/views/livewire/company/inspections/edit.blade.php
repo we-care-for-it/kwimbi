@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-       Liften
+       Keuring toevoegen
          </div>
          <div class="col-auto">
 
@@ -11,7 +11,7 @@
                   <i class="fa-solid fa-trash"></i>
                </button>
 
-               
+
             <button type="button"     class="btn btn-primary btn-sm  btn-120" wire:click="save()">
             Opslaan
             </button>
