@@ -71,75 +71,7 @@
       <div class="row gy-3 mb-2 ">
 
  
-        <div class="col-md-4">
-          <div class="card">
-
-            <table class="table  table-sm">
-              <tr>
-                <td><b>Toegang & gebruikers</b></td>
-              <tr>
-              <tr>
-                <td><a href="#">Gebruikers</a></td>
-              <tr>
-              <tr>
-                <td><a href="#">Rechten</a></td>
-              <tr>
-              <tr>
-                <td><a href="#">Rollen</a></td>
-              <tr>
-              <tr>
-                <td><a href="/settings/departments">Afdelingen</a></td>
-              <tr>
-              <tr>
-                <td><a href="s">Functies</a></td>
-              <tr>
-            </table>
-          </div>
-
-          <!-- <div class = "card mt-3">
-    <div class = "card-body pt-1"> -->
-          <!-- <table class = "table  table-sm">
-        <tr>
-          <td><b>Werkbonnen</b></td>
-        <tr>
-        <tr>
-          <td><a href="/settings/workorders/statusses">Statussen</a></td>
-        <tr>
-        <tr>
-          <td><a href="/settings/workorders/worktypes/">Werktypes</a></td>
-        <tr>
-        <tr>
-          <td><a href="/settings/solutions">Oplossingen</a></td>
-        <tr>
-
-
-      </table> -->
-          <!-- </div>    </div>    -->
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-
-            <table class="table  table-sm">
-              <tr>
-                <td><b>Applicatie</b></td>
-              <tr>
-              <tr>
-                <td><a href="/connections">Bedrijfsgegevens</a></td>
-              <tr>
-              <tr>
-                <td><a href="/connections">Koppelingen</a></td>
-              <tr>
-              <tr>
-                <td><a href="s">Licentie</a></td>
-              <tr>
-              <tr>
-                <td><a href="s">E-mail instellingen</a></td>
-              <tr>
-
-            </table>
-          </div>
-        </div>
+         
 
       </div>
     </div>

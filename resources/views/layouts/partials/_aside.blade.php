@@ -66,7 +66,7 @@
           </div>
 
           <div class="nav-item ">
-            <a wire:navigate  class="nav-link @if(request()->is('projects/*') or  request()->is('projects'))  active @endif "
+            <a wire:navigate  class="nav-link @if(request()->is('projects/*') or request()->is('project/*') or  request()->is('projects'))  active @endif "
               href="/projects">
               <i class="bi-people nav-icon"></i>
               <span class="nav-link-title">Projecten</span>

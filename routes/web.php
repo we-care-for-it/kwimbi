@@ -66,6 +66,8 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
     {
         Route::get('edit/{$slug}', \App\Http\Livewire\Company\Projects\Edit::class);
         Route::get('show/{$slug}', \App\Http\Livewire\Company\Projects\Show::class);
+        Route::get('create', \App\Http\Livewire\Company\Projects\Create::class);
+
     });
 
     //Customers

@@ -7,7 +7,7 @@
          </div>
          <div class="col-auto">
 
-            <a href="/projects/create">
+            <a href="/project/create">
                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="clear()">
                   Toevoegen
                </button>
@@ -174,9 +174,7 @@
                                        Maak een project aan om de objecten, Taken, etc te organiseren in een project
                                        <div class="clear-fix pb-3"></div>
                                         
-                                          <button class="btn btn-soft-success mb-10  btn-sm">
-                                             Project aanmaken
-                                          </button> 
+                                    
                                     </div>
                                  </center>
                               </div>
