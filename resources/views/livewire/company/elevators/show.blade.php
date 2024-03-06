@@ -47,7 +47,7 @@
       <div class="col-auto">
 
  
-         <button data-bs-toggle="modal" wire:click = "edit({{$object->id}})" data-bs-target="#crudModal" type="button"
+         <button  wire:click = "edit({{$object->id}})" data-bs-target="#crudModal" type="button" data-bs-toggle="modal"
             class="btn btn btn-primary btn-sm  btn-120 ">
             Wijzig
          </button>
@@ -56,20 +56,20 @@
             id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
             Toevoegen
          </button>
-
+         
          <div class="dropdown-menu  navbar-dropdown-menu navbar-dropdown-menu-borderless"
             aria-labelledby="navbarNotificationsDropdownSettings">
 
-            <a class="dropdown-item" href="/maintenance-contracts/create?elevator_id={{$object->id}}">
+            <a class="dropdown-item" href="/elevator/ maintenance-contract/{{$object->id}}/create">
                <i class="bi-archive dropdown-item-icon"></i> Onderhoudscontract
             </a>
-            <a class="dropdown-item" href="/maintenances/create?elevator_id={{$object->id}}">
+            <a class="dropdown-item" href="/elevator/maintenance/{{$object->id}}/create">
                <i class="bi-check2-all dropdown-item-icon"></i> Onderhoudsbeurt
             </a>
-            <a class="dropdown-item" href="/incidents/create?elevator_id={{$object->id}}">
+            <a class="dropdown-item" href="/elevator/incident/{{$object->id}}/create}">
                <i class="bi-toggle-off dropdown-item-icon"></i> Incident
             </a>
-            <a class="dropdown-item" href="/inspections/create?elevator_id={{$object->id}}">
+            <a class="dropdown-item" href="/elevator/inspection/{{$object->id}}/create">
                <i class="bi-flag dropdown-item-icon"></i> Keuring
             </a>
 
@@ -91,7 +91,7 @@
 
 <!-- Modal -->
 
-<div wire:ignore.self class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
+<div wire:ignore class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
    aria-labelledby="crudModal" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered" role="document">
 
@@ -364,7 +364,7 @@
 
                            <select
                                     class="js-select form-select"
-                                    wire:model="status_id"
+                                    wire:model.live="status_id"
                                     data-hs-tom-select-options='{
 "placeholder": "Selecteer een status",
 "hidePlaceholderOnSearch" : true,
@@ -375,8 +375,8 @@
                                     class="ts-wrapper js-select form-select form-select-sm tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items js-select_style"
                                     id="locationLabel"
                                 >
-<option  value="1"   @if($status_id=='1') selected @endif  data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>' > </option>
-<option    value="2"  @if($status_id=='2') selected @endif  data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>'> </option>
+<option  value="1"    data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>' > </option>
+<option    value="2"   data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>'> </option>
                                         </select>
 
 
@@ -420,7 +420,8 @@
                            <label class="form-check-label" for="formSwitch2">Brancardlift</label>
                         </div>
                         <div class="form-check form-switch mb-4">
-                           <input  value = "1" wire:model.live="fire_elevator" type="checkbox" class="form-check-input" id="formSwitch2"  >
+                           
+                           <input selected  value = "1" wire:model.live="fire_elevator" type="checkbox" class="form-check-input" id="formSwitch2"  >
                            <label class="form-check-label" for="formSwitch2">Brandweerlift</label>
                         </div>
                         <div class="form-check form-switch mb-4">

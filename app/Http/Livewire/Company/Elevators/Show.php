@@ -107,8 +107,9 @@ class Show extends Component
         $item = Elevator::where('id', $id)->first();
         $this->name      = $item->name;
         $this->status_id      = $item->status_id;
+        $this->supplier_id      = $item->supplier_id;
         $this->nobo_no      = $item->nobo_no;
-        // $this->place        = $item->place;
+        $this->fire_elevator        = $item->fire_elevator;
         // $this->name         = $item->name;
         // $this->place        = $item->place;
         // $this->emailaddress = $item->emailaddress;
@@ -132,7 +133,9 @@ class Show extends Component
                 'status_id' => 2,
                 'name' => $this->name,
                 'nobo_no' => $this->nobo_no,
+                'supplier_id' => $this->supplier_id,
                 
+
 
                 
             ]

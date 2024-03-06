@@ -28,14 +28,7 @@
 <script>
 
 
-$(document).on('ready', function () {
-    // INITIALIZATION OF STICKY HEADER
-    // =======================================================
-    new HSTableStickyHeader('.js-sticky-header', {
-      offsetTop: "60px"
-    }).init();
-  })();
-
+ 
 
   
   (function() {

@@ -124,6 +124,9 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
             Route::get('/edit/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
+
+            //INspecties
+            Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\create::class);
         });
 
 
