@@ -60,14 +60,14 @@
          <div class="dropdown-menu  navbar-dropdown-menu navbar-dropdown-menu-borderless"
             aria-labelledby="navbarNotificationsDropdownSettings">
 
-            <a class="dropdown-item" href="/elevator/ maintenance-contract/{{$object->id}}/create">
+            <a class="dropdown-item" href="/elevator/maintenance-contract/{{$object->id}}/create">
                <i class="bi-archive dropdown-item-icon"></i> Onderhoudscontract
             </a>
             <a class="dropdown-item" href="/elevator/maintenance/{{$object->id}}/create">
                <i class="bi-check2-all dropdown-item-icon"></i> Onderhoudsbeurt
             </a>
             <a class="dropdown-item" href="/elevator/incident/{{$object->id}}/create}">
-               <i class="bi-toggle-off dropdown-item-icon"></i> Incident
+               <i class="bi-toggle-off dropdown-item-icon"></i> Storing
             </a>
             <a class="dropdown-item" href="/elevator/inspection/{{$object->id}}/create">
                <i class="bi-flag dropdown-item-icon"></i> Keuring
@@ -809,11 +809,32 @@
                      </td>
 
                      <td class="align-middle">
-                        @if($item->maintenancie_companie_id)
-                        {{ $item?->maintenancyCompany?->name}}
-                        @endif
+                     {{$object->maintenanceCompany->name}}
 
                      </td>
+
+                     <td  class = "align-middle">
+                        @if($item->attachment)
+                        <button class="btn btn-soft-primary btn-sm" wire:click="downloadDocument('maintenancycontract','{{$item->id}}')" >
+                        <i class="fa-solid fa-paperclip"></i> Contract </button>
+                        @else
+                        -
+                        @endif
+                     </td>
+                     <td>
+
+                     <div style = "float:right">
+                     <a href = "/maintenance-contract/edit/{{$item->id}}">
+                                    <button    type="button" data-bs-toggle="modal" class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-pencil"></i>  
+                                    </button>
+                                    </a>          
+                                 </div>
+
+ 
+                     </td>
+
+                     
 
                   </tr>
 

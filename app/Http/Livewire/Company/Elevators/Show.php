@@ -16,6 +16,7 @@ use App\Models\Location;
 use App\Models\managementCompany;
 use App\Models\inspectionCompany;
 use App\Models\inspection;
+use App\Models\maintenanceContract;
 
 use App\Models\maintenanceCompany;
 use Livewire\WithFileUploads;
@@ -194,23 +195,30 @@ Storage::disk('media')
 
             $filename = $data->document;
 
-            return Storage::disk('media')->download($filename);
+        
 
         break;
 
         case "maintenance" : $data = Maintenances::where("id", $id)->first();
         $filename = $data->attachment;
+         
     break;
 
-    case "maintenancycontract" : $data = MaintenancyContracts::where("id", $id)->first();
-    $filename = $data->document;
+    case "maintenancycontract" : 
+    
+        $data = maintenanceContract::where("id", $id)->first();
+    $filename = $data->attachment;
+
+ 
+ 
  
 break;
 
 case "certification":
     $data = Inspection::where("id", $id)->first();
-
     $filename = $data->certification;
+    
+
 break;
 
  
@@ -230,4 +238,3 @@ else
 
 
 }
-
