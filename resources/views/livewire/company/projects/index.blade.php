@@ -141,7 +141,7 @@
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
                                        <x-table.cell>
-                                       <a href="/projects/{{$item->slug}}"> 
+                                       <a href="/projects/show/{{$item->slug}}"> 
                                        <button style="float: right"
                                           class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
                                           <i class="bi bi-eye"></i>
@@ -150,7 +150,7 @@
 
 
 
-                                       <a href="/projects/{{$item->id}}/edit"> 
+                                       <a href="/projects/edit/{{$item->slug}}"> 
                                        <button style="float: right"
                                           class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
                                           <i class="bi bi-pencil"></i>

@@ -59,7 +59,7 @@ class Project extends Model implements Auditable
 
     public function customer()
     {
-        return $this->belongsTo(Debtor::class);
+        return $this->belongsTo(Customer::class);
     }
 
 

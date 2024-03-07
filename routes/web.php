@@ -58,17 +58,7 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 //Company routes
 
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
-  
-    //Projecten
-    Route::get('/projects', \App\Http\Livewire\Company\Projects\Index::class);
-    Route::group(['prefix' => 'project', ],
-    function ()
-    {
-        Route::get('edit/{$slug}', \App\Http\Livewire\Company\Projects\Edit::class);
-        Route::get('show/{$slug}', \App\Http\Livewire\Company\Projects\Show::class);
-        Route::get('create', \App\Http\Livewire\Company\Projects\Create::class);
-
-    });
+ 
 
     //Customers
     Route::get('/customers', \App\Http\Livewire\Company\Customers\Index::class);
@@ -101,11 +91,11 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
     
     //Addressess
     Route::get('/projects', \App\Http\Livewire\Company\Projects\Index::class);
-    Route::group(['prefix' => 'projects', ],
+    Route::group(['prefix' => 'project', ],
     function ()
     {
-        // Route::get('/edit/{slug}', \App\Http\Livewire\Company\Addresses\Edit::class);
-        // Route::get('/show/{slug}', \App\Http\Livewire\Company\Addresses\Show::class);
+         Route::get('/edit/{slug}', \App\Http\Livewire\Company\Projects\Edit::class);
+        Route::get('/show/{slug}', \App\Http\Livewire\Company\Projects\Show::class);
     });
 
 //ss

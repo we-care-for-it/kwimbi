@@ -8,6 +8,11 @@ body {
   overflow-y: scroll;
 }
 
+.required:after {
+  content:" *";color:red;
+}
+
+
 /* .btn-primary {
   background-color: #5C5EA7 !important;
   padding: 12px!important;

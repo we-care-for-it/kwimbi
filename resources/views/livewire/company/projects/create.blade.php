@@ -25,7 +25,7 @@
         <div class="card ">
             <div class="card-body ">
 
-                <label class="col-sm-3 pt-0  col-form-label">Naam</label>
+                <label class="col-sm-3 pt-0  col-form-label required">Naam</label>
                 <input class="form-control @error('name') is-invalid @enderror" wire:model="name" type="text"
                     value="{{ old('name',@$project->name) }}">
                 @error('name')
@@ -70,23 +70,17 @@
                     <tr>
                         <td class="align-middle">Status</td>
                         <td>
-
-                            <!-- Select -->
-
-                            <div class="tom-select-custom">
-
+                            <div class="tom-select-custom" wire:ignore>
                                 <select class="js-select form-select " wire:model="status_id" name="status_id">
-
-                                    @foreach($statuses as $status)
-                                    <option value="{{$status?->id}}" @if(isset($project->status_id) && $status->id
-                                        ==
-                                        $project->status_id) selected @endif value="{{ $status->id }}"
+                                   @foreach($statuses as $status)
+                                    <option value="{{$status?->id}}"
                                         data-option-template='<span class="d-flex align-items-center"><span
-                                                class="{{$status?->status_color}}">{{ $status->name }}</span>{{ $status->procent}}%</span>'>{{ $status->name}}
+                                                class="{{$status?->status_color}}">{{ $status->name }}</span> 
+                                                
+                                                
+                                                <small>{{ $status->procent}}%</small></span>'>{{ $status->name}}
                                     </option>
-
                                     @endforeach
-
                                 </select></div>
                         </td>
                     </tr>
@@ -99,12 +93,12 @@
             <div class="card">
                 <table class="table table-striped">
                     <tr>
-                        <td class="align-middle">Relatie</td>
+                        <td class="align-middle required">Relatie</td>
                         <td>
 
-                            <div class="tom-select-custom">
+                            <div class="tom-select-custom"  >
 
-                                <select class="js-select form-select " id="customer_id" name="customer_id"
+                                <select   class="js-select form-select " id="customer_id" wire:model="customer_id"
                                     name="customer_id" data-hs-tom-select-options='{
                                 "placeholder": "Selecteer een relatie..."
                                 }'>
@@ -112,8 +106,7 @@
                                     <option value="">Geen relatie</option>
                                     @foreach($debtors as $debtor)
 
-                                    <option @if(isset($project->customer_id) && $debtor->id ==
-                                        $project->customer_id) selected @endif
+                                    <option
                                         value="{{ $debtor->id }}">
                                         {{$debtor->name}}
                                     </option>

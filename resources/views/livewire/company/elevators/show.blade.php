@@ -47,6 +47,11 @@
       <div class="col-auto">
 
  
+      <a href="/elevators">
+                    <button type="button" class="btn   btn-link btn-sm  ">
+                        Alle liften
+                    </button></a>
+
          <button  wire:click = "edit({{$object->id}})" data-bs-target="#crudModal" type="button" data-bs-toggle="modal"
             class="btn btn btn-primary btn-sm  btn-120 ">
             Wijzig
@@ -467,7 +472,7 @@
             <tr>
 
                <td colspan="2"> <a
-                     href="{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
+                     href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
                </td>
             </tr>
             <tr>

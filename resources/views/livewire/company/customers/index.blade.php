@@ -99,7 +99,7 @@
                                  @foreach ($items as $item)
                                  <x-table.row  wire:key="row-{{ $item->id }}">
                                     <x-table.cell>
-                                       {{$item->name}} 
+                                    <a href="/customer/{{$item->slug}}">    {{$item->name}} </a>
                                     </x-table.cell>
                                     <x-table.cell>
                                        {{$item->address}}<br>
