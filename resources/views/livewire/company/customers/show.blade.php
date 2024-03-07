@@ -24,14 +24,12 @@
                 </button>
                 <div class="dropdown-menu  navbar-dropdown-menu navbar-dropdown-menu-borderless"
                     aria-labelledby="navbarNotificationsDropdownSettings">
-                    <a class="dropdown-item" href="/debtor/contact/{{$object->id}}/create">
+                    <a class="dropdown-item" href="/customer/contact/{{$object->id}}/create">
                         <i class="bi-archive dropdown-item-icon"></i>Contactpersoon
                     </a>
-                    <a class="dropdown-item" href="/debtor/location/{{$object->id}}/create">
+                    <a class="dropdown-item" href="/customer/location/{{$object->id}}/create">
                         <i class="bi-archive dropdown-item-icon"></i>Locatie
-                    </a>   <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#crudModalContact">
-                        <i class="bi-archive dropdown-item-icon"></i>Contactpersoon
-                    </a>
+                    </a>  
 
 
                     

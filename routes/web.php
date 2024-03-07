@@ -67,6 +67,12 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
     {
         Route::get('edit/{slug}', \App\Http\Livewire\Company\Customers\Edit::class);
         Route::get('{slug}', \App\Http\Livewire\Company\Customers\Show::class);
+
+        Route::get('/contact/{customer_id}/create', \App\Http\Livewire\Company\Customers\Contact\Create::class);
+        Route::get('/location/{customer_id}/create', \App\Http\Livewire\Company\Customers\Location\Create::class);
+              
+
+
     });
 
     //Suppliers
