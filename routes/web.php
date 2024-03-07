@@ -19,7 +19,7 @@ Route::get('/reset', function () {
    // Route::get('auth/azure/callback', 'callback')->name('auth.microsoft');
 }); 
 
-
+ 
 Route::get('/', function () {
     return view('auth.login');
 });//name('auth.azure');
@@ -56,7 +56,8 @@ function ()
 Route::get('/search', \App\Http\Livewire\Company\Search::class);
       
 //Company routes
-
+Route::get('/support', \App\Http\Livewire\Support::class);
+ 
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
  
 

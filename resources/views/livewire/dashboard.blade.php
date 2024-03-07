@@ -235,7 +235,7 @@ Afgekeurde liften
                      @foreach ($elevator_expired_inspections as $elevator)
 
                      @if($elevator->inspections[0]->status_id ==3)
-                     <tr style = "cursor: pointer; " onclick="window.location='/incident/show/{{ $incident->id }}';">
+                     <tr style = "cursor: pointer; " onclick="">
                         <td style = "width: 200px;">
                         @if($elevator->management_elevator)
 								  <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
