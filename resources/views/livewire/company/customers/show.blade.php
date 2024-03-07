@@ -29,7 +29,14 @@
                     </a>
                     <a class="dropdown-item" href="/debtor/location/{{$object->id}}/create">
                         <i class="bi-archive dropdown-item-icon"></i>Locatie
+                    </a>   <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#crudModalContact">
+                        <i class="bi-archive dropdown-item-icon"></i>Contactpersoon
                     </a>
+
+
+                    
+
+
                 
                 </div>
                 <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico ">
@@ -100,51 +107,46 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body pt-1">
-                <ul class="nav nav-tabs" id="debtorTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a data-toggle="tab" class="nav-link active" id="debtor-tab-0" data-bs-toggle="tab"
-                            href="#debtor-tabpanel-0" role="tab" aria-controls="debtor-tabpanel-0"
-                            aria-selected="true">Locaties</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a data-toggle="tab" class="nav-link" id="debtor-tab-1" data-bs-toggle="tab"
-                            href="#debtor-tabpanel-1" role="tab" aria-controls="debtor-tabpanel-1"
-                            aria-selected="false">Objecten</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('debtor-tab-2')" data-toggle="tab" class="nav-link" id="debtor-tab-2"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-2" role="tab" aria-controls="debtor-tabpanel-2"
-                            aria-selected="false">Contactpersonen</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('debtor-tab-3')" data-toggle="tab" class="nav-link" id="debtor-tab-3"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-3" role="tab" aria-controls="debtor-tabpanel-3"
-                            aria-selected="false">Storingen</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('4')" data-toggle="tab" class="nav-link" id="debtor-tab-4"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-4" role="tab" aria-controls="debtor-tabpanel-4"
-                            aria-selected="false">Facturen</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('5')" data-toggle="tab" class="nav-link" id="debtor-tab-5"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-5" role="tab" aria-controls="debtor-tabpanel-5"
-                            aria-selected="false">Projecten</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('6')" data-toggle="tab" class="nav-link" id="debtor-tab-6"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-6" role="tab" aria-controls="debtor-tabpanel-6"
-                            aria-selected="false">Werkbonnen</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a onclick="changeTab('7')" data-toggle="tab" class="nav-link" id="debtor-tab-7"
-                            data-bs-toggle="tab" href="#debtor-tabpanel-7" role="tab" aria-controls="debtor-tabpanel-7"
-                            aria-selected="false">Bestanden</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="debtor-tab-6" data-bs-toggle="tab" href="#debtor-tabpanel-6" role="tab"
-                            aria-controls="debtor-tabpanel-6" aria-selected="false">Tab 6</a>
-                    </li>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="disabled-tab-0" data-bs-toggle="tab" href="#customer_tab-0" role="tab" aria-controls="customer_tab-0" aria-selected="true">Contactpersonen</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-1" data-bs-toggle="tab" href="#customer_tab-1" role="tab" aria-controls="customer_tab-1" aria-selected="false">Locaties</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-2" role="tab" aria-controls="customer_tab-2" aria-selected="false">Objecten</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-3" role="tab" aria-controls="customer_tab-3" aria-selected="false">Bestanden</a>
+
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-4" role="tab" aria-controls="customer_tab-4" aria-selected="false">Facturen</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-5" role="tab" aria-controls="customer_tab-5" aria-selected="false">Werkbonnen</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-6" role="tab" aria-controls="customer_tab-6" aria-selected="false">Projecten</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="disabled-tab-2" data-bs-toggle="tab" href="#customer_tab-7" role="tab" aria-controls="customer_tab-7" aria-selected="false">Storingen</a>
+  </li>
+</ul>
+<div class="tab-content pt-5" id="tab-content">
+  <div class="tab-pane active" id="customer_tab-0" role="tabpanel" aria-labelledby="disabled-tab-0"> @livewire('company.customers.contacts', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-1" role="tabpanel" aria-labelledby="disabled-tab-1"> @livewire('company.customers.locations', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-2" role="tabpanel" aria-labelledby="disabled-tab-2">@livewire('company.customers.objects', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-3" role="tabpanel" aria-labelledby="disabled-tab-3">@livewire('company.customers.files', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-4" role="tabpanel" aria-labelledby="disabled-tab-4">@livewire('company.customers.invoices', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-5" role="tabpanel" aria-labelledby="disabled-tab-5">@livewire('company.customers.workorders', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-6" role="tabpanel" aria-labelledby="disabled-tab-6">@livewire('company.customers.projects', ['debtor_id' => $object->id])</div>
+  <div class="tab-pane" id="customer_tab-7" role="tabpanel" aria-labelledby="disabled-tab-7">@livewire('company.customers.incidents', ['debtor_id' => $object->id])</div>
+</div>
+
+ 
                     <div wire:ignore.self class="modal fade" id="uploadModal" tabindex="-1" role="dialog"
                         aria-labelledby="crudModal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -196,10 +198,95 @@
 
 
 
-
-
-
             
+
+                
+   <!-- CrudModal  -->
+   <div wire:ignore.self class="modal fade" id="crudModalContact" tabindex="-1" role="dialog" aria-labelledby="crudModalContact" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">Contactpersoon gegevens
+  
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" wire:loading.class="loading-div" >
+                
+
+ 
+
+
+
+<div class="row gy-3   ">
+
+
+
+ 
+
+<div class=" col-md-12">
+        <div class="card" ">
+            <table class="table table-striped" style=" width 100%">
+                <tr>
+                <td class="align-middle">Naam</td> 
+                   <td class="text-end"> <input class="form-control @error('contact_name') is-invalid @enderror" placeholder="" wire:model = "contact_name">
+         @error('contact_name')
+         <div class="invalid-feedback">{{ $message }}</div>
+         @enderror</td>
+                </tr>
+                <tr>
+                <td class="align-middle">Relatie</td> 
+
+<td>
+    
+ 
+</td>
+                <tr>  <tr class="align-middle">
+                    <td>E-mailadres</td> 
+                   <td class="text-end">     <input class="form-control @error('contact_emailaddress') is-invalid @enderror" wire:model = "contact_emailaddress">
+         @error('contact_emailaddress')
+         <div class="invalid-feedback">{{ $message }}</div>
+         @enderror</td>
+                </tr>
+                <tr>
+                    <td class="align-middle">Telefoonnummer</td>
+                    <td class="text-end">   <input class="form-control @error('contact_phonenumber') is-invalid @enderror" wire:model = "contact_phonenumber">
+         @error('contact_phonenumber')
+         <div class="invalid-feedback">{{ $message }}</div>
+         @enderror</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+ 
+
+
+ 
+ 
+
+
+ 
+            </div>
+            <div class="modal-footer">
+
+            @if($edit_id)
+            <button   wire:click="delete({{$edit_id}})"     wire:confirm.prompt="Weet je zeker dat je deze beheerder wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"    type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-trash"></i>  
+               </button> 
+               @endif
+
+
+
+               <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
+               <button class="btn btn-soft-success btn-120    " wire:click="saveContact()" type="button">
+                  <div wire:loading wire:target="save">
+                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </div>
+                  Opslaan
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
    <!-- CrudModal  -->
    <div wire:ignore.self class="modal fade" id="crudModal" tabindex="-1" role="dialog" aria-labelledby="crudModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -301,6 +388,12 @@
    document.addEventListener('livewire:init', () => {
       Livewire.on('close-crud-modal', (event) => {
          $('#crudModal').modal('hide');
+      });
+   });
+
+   document.addEventListener('livewire:init', () => {
+      Livewire.on('close-contact-crud-modal', (event) => {
+         $('#crudModalContact').modal('hide');
       });
    });
 </script>

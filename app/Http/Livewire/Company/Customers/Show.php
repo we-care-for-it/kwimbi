@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Company\Customers;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Contact;
  
 
 class Show extends Component
@@ -18,6 +19,13 @@ class Show extends Component
     public $edit_id;
     public $customer;
     public $object;
+
+    //Contacts
+    public $contact_name;
+    public $contact_emailaddress;
+    public $contact_phonenumber;
+    public $contact_edit_id;
+
     public function render()
     {
         return view('livewire.company.customers.show');
@@ -50,6 +58,31 @@ class Show extends Component
     protected $rules = [
         'name' => 'required|min:6',
     ];
+
+
+    public function saveContact(){
+
+        $data = Contact::updateOrCreate(
+            ['id' =>$this->contact_edit_id],
+            [
+                'name' => $this->contact_name,
+                'place' => $this->contact_emailaddress,
+                'phonenumber' => $this->contact_phonenumber,
+                'customer_id' =>  $this->object->id,
+               
+                
+            ]
+        );
+     
+        $this->dispatch('close-contact-crud-modal');
+    
+     
+            
+        pnotify()->addWarning('Gegevens opgeslagen');
+        return redirect(request()->header('Referer'));
+
+
+    }
 
 
     public function save(){
