@@ -9,7 +9,7 @@
   <script src="/assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
   <script src="/assets/vendor/hs-count-characters/dist/js/hs-count-characters.js"></script>
   <script src="/assets/js/vendor.min.js"></script>
-  <script src="./node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="/assets/js/hs.chartjs.js"></script>
  
 

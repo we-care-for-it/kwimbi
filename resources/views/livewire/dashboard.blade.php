@@ -24,34 +24,9 @@
       </div>
       <div class="col-xl-3 col-sm-5">
          <!-- Card -->
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex justify-content-between">
-                  <div>
-                     <h6 class="font-size-xs text-uppercase">Liften in beheer</h6>
-                     <h4 class="mt-4 font-weight-bold mb-2 d-flex align-items-center">
-                        {{$cnt_managment_elevators}}
-                     </h4>
-                  </div>
-               </div>
-            </div>
-         </div>
+         
       </div>
-      <div class="col-xl-3 col-sm-5">
-         <!-- Card -->
-         <div class="card">
-            <div class="card-body">
-               <div class="d-flex justify-content-between">
-                  <div>
-                     <h6 class="font-size-xs text-uppercase">Aantal advies</h6>
-                     <h4 class="mt-4 font-weight-bold mb-2 d-flex align-items-center">
-                        {{$cnt_all_elevators - $cnt_managment_elevators}}
-                     </h4>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+      
    </div>
    <div class="row pt-3">
       <div class="col-md-6">

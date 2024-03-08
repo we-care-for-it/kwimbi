@@ -101,7 +101,8 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     Route::group(['prefix' => 'project', ],
     function ()
     {
-         Route::get('/edit/{slug}', \App\Http\Livewire\Company\Projects\Edit::class);
+        Route::get('/edit/{slug}', \App\Http\Livewire\Company\Projects\Edit::class);
+        Route::get('/create', \App\Http\Livewire\Company\Projects\Create::class);
         Route::get('/show/{slug}', \App\Http\Livewire\Company\Projects\Show::class);
     });
 
