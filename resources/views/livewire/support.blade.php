@@ -26,7 +26,9 @@
 
             <div class = "row">
             <div class = "col-md-3">
+                <center>
             <img src = "/assets/img/LTS Software B.V.png" style = "height: 100px">
+</center>
 </div>
 
 <div class = "col-md-9">   <b>LTS Software B.V.</b><br>
