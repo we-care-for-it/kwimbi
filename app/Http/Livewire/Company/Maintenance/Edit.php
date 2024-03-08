@@ -53,8 +53,8 @@ class Edit extends Component
         'id' => $this->maintenance_id, ], 
         ['remark' => $this->maintenance_remark, 
         'status_id' => $this->maintenance_status_id, 
-        'executed_datetime' => $this->maintenance_executed_datetime, 
-        'planned_at' => $this->maintenance_planned_at,
+        'execution_date' => $this->maintenance_executed_datetime, 
+        'plan_date' => $this->maintenance_planned_at,
         'elevator_id' => $this->elevator->id
 
     ]);
