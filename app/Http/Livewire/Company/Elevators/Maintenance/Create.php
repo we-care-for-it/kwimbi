@@ -50,7 +50,7 @@ class Create extends Component
         ['remark' => $this->maintenance_remark, 
         'status_id' => $this->maintenance_status_id, 
         'execution_date' => $this->maintenance_executed_datetime, 
-        'planned_at' => $this->maintenance_planned_at,
+        'plan_date' => $this->maintenance_planned_at,
         'elevator_id' => $this->elevator->id
 
     ]);
