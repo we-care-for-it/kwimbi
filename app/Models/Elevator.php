@@ -99,7 +99,7 @@ class Elevator extends Model implements Auditable
 
     public function maintenance_contracts()
     {
-        return $this->hasMany(MaintenanceContract::class);
+        return $this->hasMany(maintenanceContract::class);
     }
 
 
