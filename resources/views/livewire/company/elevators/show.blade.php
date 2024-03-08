@@ -988,21 +988,56 @@
                   @foreach($object->incidents as $item)
 
                   <!--[if BLOCK]><![endif]-->
-                  <tr onclick="location='/incidents/{{$item->id}}'" style="cursor: pointer">
+                  <tr onclick="location='/incident/{{$item->id}}'" style="cursor: pointer">
                      <td class="align-middle" style="width: 120px">
 
                         @if($item->priority_id==1)
                         <span class="badge   bg-soft-danger text-danger  p-2"> Hoog </span>
                         @elseif($item->priority_id==2)
-                        <span class="badge   bg-soft-warning text-warning  p-2"> Hoog </span>
+                        <span class="badge   bg-soft-warning text-warning  p-2"> Gemiddeld </span>
                         @elseif($item->priority_id==3)
                         <span class="badge   bg-soft-success text-success  p-2"> Laag </span>
                         @endif
                      </td>
 
-                     <td class="align-middle">
+                     <td class="align-middle"  style="max-width: 140px">
 
-                        {{$item->status_id}}
+                     @if ($item->status_id == 0)
+                    <span class="text-warning py-1">Nieuw
+                    </span>
+                    @elseif($item->status_id == 2)
+                    <span class="text-info py-1">Doorgestuurd naar
+                      onderhoudsbedrijf
+                    </span>
+                    @elseif($item->status_id == 99)
+                    <span class="text-info py-1">Gereed
+                    </span>
+                    @elseif($item->status_id == 3)
+                    <span class="text-info py-1">Wacht op offerte
+                    </span>
+                    @elseif($item->status_id == 4)
+                    <span class=" text-info py-1">Offerte naar klant gestuurt
+                    </span>
+                    @elseif($item->status_id == 5)
+                    <span class=" text-info py-1">Niet gereed
+                    </span>
+                    @elseif($item->status_id == 6)
+                    <span class=" text-info py-1">Onjuist gemeld
+                    </span>
+                    @elseif($item->status_id == 7)
+                    <span class=" text-info py-1">Offerte in opdracht
+                    </span>
+                    @elseif($item->status_id == 8)
+                    <span class="text-info py-1"> Werkzaamheden gepland
+                    </span>
+
+                    @elseif($item->status_id==9)
+                                <span class=" text-info">  Wachten op uitvoerdatum
+                                </span>
+
+
+
+                    @endif
                      </td>
 
                      <td class="align-middle" style="width: 150px">

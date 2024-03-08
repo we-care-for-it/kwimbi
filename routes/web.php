@@ -112,7 +112,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
       Route::group(['prefix' => 'incident'],
           function ()
           {
-            Route::get('show/{id}', \App\Http\Livewire\Company\Incidents\Show::class);
+            Route::get('/{id}', \App\Http\Livewire\Company\Incidents\Show::class);
  //        Route::get('/{$slug}', \App\Http\Livewire\Company\Incidents\Show::class);
    });
 

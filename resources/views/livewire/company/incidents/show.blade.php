@@ -1,60 +1,64 @@
 <div class="container-fluid">
-<div class="page-header">
-   <div class="row align-items-center">
-      <div class="col">
-         <img src="/assets/img/ico/users.png" class = "pageico">
-         <h1 class="page-header-title">  #{{sprintf('%06d', $incident->id)}} | {{$incident->subject}}  
-         </h1>
-         <span class=" mb-2 text-muted"> 
+   <div class="page-header  my-3">
+      <div class="row align-items-center">
+         <div class="col">
+            <h1 class="page-header-title">
+            #{{sprintf('%06d', $incident->id)}} | {{$incident->subject}} 
+</h1>
+ 
+           
          Gemeld op:
          {{ \Carbon\Carbon::parse($incident->report_date_time)->format('d-m-Y')}} om
          {{ \Carbon\Carbon::parse($incident->report_date_time)->format('H:i')}}
+       
+       
+         </div>
+
+         <div class="col-auto">
+
          @if ($incident->status_id == 0)
-         <span class="badge bg-soft-primary text-primary">Nieuw
+         <span class="badge bg-soft-primary text-primary py-2">Nieuw
          </span>
          @elseif($incident->status_id == 2)
-         <span class="badge bg-soft-primary text-primary">Doorgestuurd naar
+         <span class="badge bg-soft-primary text-primary  py-2">Doorgestuurd naar
          onderhoudsbedrijf
          </span>
          @elseif($incident->status_id == 99)
-         <span class="badge bg-soft-primary text-primary">Gereed
+         <span class="badge bg-soft-primary text-primary py-2">Gereed
          </span>
          @elseif($incident->status_id == 3)
-         <span class="badge bg-soft-primary text-primary">Wacht op offerte
+         <span class="badge bg-soft-primary text-primary py-2">Wacht op offerte
          </span>
          @elseif($incident->status_id == 4)
-         <span class="badge bg-soft-primary text-primary">Offerte naar klant gestuurd
+         <span class="badge bg-soft-primary text-primary py-2">Offerte naar klant gestuurd
          </span>
          @elseif($incident->status_id == 5)
-         <span class="badge bg-soft-primary text-primary">Niet gereed
+         <span class="badge bg-soft-primary text-primary py-2">Niet gereed
          </span>
          @elseif($incident->status_id == 6)
-         <span class="badge bg-soft-primary text-primary">Onjuist gemeld
+         <span class="badge bg-soft-primary text-primary py-2">Onjuist gemeld
          </span>
          @elseif($incident->status_id == 7)
-         <span class="badge bg-soft-primary text-primary">Offerte in opdracht
+         <span class="badge bg-soft-primary text-primary py-2">Offerte in opdracht
          </span>
          @elseif($incident->status_id == 8)
-         <span class="badge bg-soft-primary text-primary"> Werkzaamheden gepland
+         <span class="badge bg-soft-primary text-primary py-2"> Werkzaamheden gepland
          </span>
          @elseif($incident->status_id == 9)
-         <span class="badge bg-soft-primary text-primary"> Wachten op uitvoerdatum
+         <span class="badge bg-soft-primary text-primary py-2"> Wachten op uitvoerdatum
          </span>
          @endif
-         </span>
-      </div>
-      <div class="col-auto">
-         <button type="button" onclick="history.back()" style=" width: 150px; " class="btn btn-soft-primary" >
-         Terug
-         </button>
-         <button data-bs-toggle="modal" data-bs-target="#uploadAttachment" class="btn btn-soft-success"
-            wire:click="show_upload()">
-         <i class="fa-solid fa-paperclip">
-         </i> Bijlage toevoegen
-         </button>
+
+            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
+               <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+         </div>
+
       </div>
    </div>
-</div>
+
+ 
 @if($incident->stand_still)
 <div class="row">
    <div class="col-md-12">
@@ -68,7 +72,7 @@
 @endif
 @if($incident->status_id==99 || $incident->status_id==6 )
 <div>
-   <div class="alert alert-soft-success mb-0" role="alert">
+<div class="alert alert-soft-warning" role="alert">
       <p class="mb-0"><b>Incident gesloten</b> Dit incident is gemakeerd als
          @if($incident->status_id==6)
          <b> onjuist gemeld</b>
@@ -80,7 +84,7 @@
       </p>
    </div>
 </div>
-<br>
+
 @endif
 <div class="row">
 <div class="col-md-3">
@@ -104,7 +108,7 @@
                   <div class="flex-grow-1">
                      <h5 class="mb-0 font-size-14">Liftadres
                      </h5>
-                     {{$incident->elevator?->address?->address}}
+                     {{$incident->elevator?->address?->name}}
                      <br>
                      <small>
                      {{$incident->elevator?->address?->zipcode}},
@@ -113,7 +117,7 @@
                      <br> <br>
                      <div
                         style="border-top: 1px solid #EFEFEF; float: right;  padding-top: 10px; width: 100%">
-                        <a href="/company/elevator/show/{{$incident->elevator_id}}">
+                        <a href="/elevator/show/{{$incident->elevator_id}}">
                         Toon lift gegevens
                         </a>
                      </div>
@@ -220,53 +224,8 @@
          </div>
          </div>
          <div class="card mt-3">
-            <div class="card-header card-header-content-md-between bg-light">
-               Bijlages ({{count($this->incident->uploads)}})
-            </div>
-            <div class="card-body">
-               @if(count($incident->uploads))
-               <table class="table table-striped">
-                  @foreach ($incident->uploads->groupby('type_id') as $key => $upload)
-                  <thead>
-                     <tr>
-                        <th style="padding-left: 0px; marging-left:0px" colspan="3">
-                        @if($upload[0]?->type_id)
-                           {{Config::get('global.upload_incident_types')[$upload[0]?->type_id]}}
-                        @endif
-                           ({{count($upload)}})
-                        </th>
-                     </tr>
-                  </thead>
-                  <body>
-                     @forelse ($upload as $item)
-                     <tr>
-                        <td>
-                           @if($item?->title)
-                           <b> {{$item?->title}}</b>
-                           <br>
-                           @else
-                           @endif
-                           <small> {{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}
-                           </small>
-                           <a href="#" wire:click="downloadUpload('{{$item->path}}/{{$item->filename}}')">
-                           <br>
-                           {{ \Illuminate\Support\Str::limit($item->filename, 34, $end='...') }}
-                           </a>
-                        </td>
-                        <td style="width: 20px;">
-                           <span wire:click = "deleteUpload({{$item->id}})"   style = "cursor: pointer" wire:confirm.prompt="Weet je zeker dat je het geselecteerde bestand wilt verwijderen ?\n\nType AKKOORD om te bevestigen|AKKOORD" class="text-danger">
-                           <i class="fa-solid fa-trash"></i>  
-                           </span>
-                        </td>
-                     </tr>
-                     @empty @endforelse
-                  </body>
-                  @endforeach
-               </table>
-               @else
-               Geen bijlages toegevoegd
-               @endif
-            </div>
+      
+             
          </div>
       </div>
       <div class="col-md-9">
@@ -289,7 +248,7 @@
                            src="{{  asset('assets/img/avatar.jpg') }}">
                         <div style="padding-top:10px;">
                            {{$incident?->reporter?->name}}
-                           @if (str_contains($incident?->reporter?->email, '@lvaliftadvies.nl'))
+                           @if (str_contains($incident?->reporter?->email, ''))
                            <div class="clear-fix pt-2">
                            </div>
                            <p class="m-0 badge rounded-pill bg-soft-primary text-primary  py-2 mt-2  ">Medewerker
@@ -479,6 +438,8 @@
       @endforeach
    </div>
 </div>
+
+
 <div wire:ignore class="modal fade" id="uploadAttachment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

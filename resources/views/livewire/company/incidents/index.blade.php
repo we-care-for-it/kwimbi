@@ -100,7 +100,7 @@
                               <x-slot name="body">
                                  @foreach ($items as $incident)
 
-                                 <x-table.row  wire:key="row-{{ $incident->id }}">
+                                 <x-table.row  wire:key="row-{{ $incident->id }}"  onclick="window.location='/incident/{{ $incident->id }}';" >
 
                                  <x-table.cell>
                       {{ sprintf('%06d', $incident->id) }}
@@ -152,42 +152,38 @@
                     {{ $incident->subject }}
                   </x-table.cell>
                   <x-table.cell>
-                    @if ($incident->status_id == 0)
-                    <span class="text-warning py-1">Nieuw
-                    </span>
-                    @elseif($incident->status_id == 2)
-                    <span class="text-info py-1">Doorgestuurd naar
-                      onderhoudsbedrijf
-                    </span>
-                    @elseif($incident->status_id == 99)
-                    <span class="text-info py-1">Gereed
-                    </span>
-                    @elseif($incident->status_id == 3)
-                    <span class="text-info py-1">Wacht op offerte
-                    </span>
-                    @elseif($incident->status_id == 4)
-                    <span class=" text-info py-1">Offerte naar klant gestuurt
-                    </span>
-                    @elseif($incident->status_id == 5)
-                    <span class=" text-info py-1">Niet gereed
-                    </span>
-                    @elseif($incident->status_id == 6)
-                    <span class=" text-info py-1">Onjuist gemeld
-                    </span>
-                    @elseif($incident->status_id == 7)
-                    <span class=" text-info py-1">Offerte in opdracht
-                    </span>
-                    @elseif($incident->status_id == 8)
-                    <span class="text-info py-1"> Werkzaamheden gepland
-                    </span>
-
-                    @elseif($incident->status_id==9)
-                                <span class=" text-info">  Wachten op uitvoerdatum
-                                </span>
-
-
-
-                    @endif
+                  @if ($incident->status_id == 0)
+         <span class="badge bg-soft-primary text-primary py-2">Nieuw
+         </span>
+         @elseif($incident->status_id == 2)
+         <span class="badge bg-soft-primary text-primary  py-2">Doorgestuurd naar
+         onderhoudsbedrijf
+         </span>
+         @elseif($incident->status_id == 99)
+         <span class="badge bg-soft-primary text-primary py-2">Gereed
+         </span>
+         @elseif($incident->status_id == 3)
+         <span class="badge bg-soft-primary text-primary py-2">Wacht op offerte
+         </span>
+         @elseif($incident->status_id == 4)
+         <span class="badge bg-soft-primary text-primary py-2">Offerte naar klant gestuurd
+         </span>
+         @elseif($incident->status_id == 5)
+         <span class="badge bg-soft-primary text-primary py-2">Niet gereed
+         </span>
+         @elseif($incident->status_id == 6)
+         <span class="badge bg-soft-primary text-primary py-2">Onjuist gemeld
+         </span>
+         @elseif($incident->status_id == 7)
+         <span class="badge bg-soft-primary text-primary py-2">Offerte in opdracht
+         </span>
+         @elseif($incident->status_id == 8)
+         <span class="badge bg-soft-primary text-primary py-2"> Werkzaamheden gepland
+         </span>
+         @elseif($incident->status_id == 9)
+         <span class="badge bg-soft-primary text-primary py-2"> Wachten op uitvoerdatum
+         </span>
+         @endif
 
 
                   </x-table.cell>
@@ -196,7 +192,7 @@
                   <x-table.cell>
 <div style = "float: right">
 <div class="dropdown">
-<button type="button" onclick="window.location='/company/incident/show/{{ $incident->id }}';"  class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+<button type="button" onclick="window.location='/incident/{{ $incident->id }}';"  class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
 <i class="bi-eye"></i>
 </button>
  

@@ -96,7 +96,7 @@ class Index extends Component
     public function getRowsQueryProperty()
     {
 
-        $query = Incident::where("status_id", "!=", 99)->orderby('report_date_time', 'DESC')
+        $query = Incident::orderby('report_date_time', 'DESC')
 
          ->when($this->filters['status_id'], function ($query) {
              $query->where('status_id', $this->filters['status_id']);

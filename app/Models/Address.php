@@ -31,7 +31,11 @@ class Address extends Model
         {
             return $this->hasOne(ManagementCompany::class, 'id', 'management_id');
         }
-
+        public function customer()
+        {
+            return $this->hasOne(Customer::class);
+        }
+    
 
 }
  
