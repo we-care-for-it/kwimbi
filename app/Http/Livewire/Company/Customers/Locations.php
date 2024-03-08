@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Company\Customers;
 use Livewire\Component;
  
 use App\Models\Location;
-use App\Models\ManagementCompany;
+use App\Models\managementCompany;
 
 //Datatable
 use App\Http\Livewire\DataTable\WithSorting;
@@ -48,7 +48,7 @@ class Locations extends Component
     {
  
         return view('livewire.company.customers.locations',
-    ['management_companies' => ManagementCompany::get(),
+    ['management_companies' => managementCompany::get(),
     'TEST' => "TEST"]);
     }
 

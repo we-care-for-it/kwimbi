@@ -24,11 +24,11 @@
 
 
  
-   <div class="row ">
+   <div class="row p-0 ">
       <div class="col-xl-12">
          <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               <div class="mb-2 mb-md-0">
+            <div class="card-header card-header-content-md-between  ">
+               <div>
                   <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
@@ -58,7 +58,7 @@
                   <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body">
+            <div class="card-body pt-0">
                <div class="row">
                   <div>
              

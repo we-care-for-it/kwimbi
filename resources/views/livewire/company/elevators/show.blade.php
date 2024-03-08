@@ -1214,7 +1214,7 @@
                     
                            @if($object->status_id==1)
 
-                           <span class="badge bg-soft-success text-succes p-2">Operationeel</span>
+                           <span class="badge bg-soft-success text-success p-2">Operationeel</span>
 
                            @else
                            <span class="badge bg-soft-danger text-danger p-2">Buitendienst</span>

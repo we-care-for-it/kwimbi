@@ -48,7 +48,7 @@
           </div>
 
        <div class="nav-item ">
-          <a wire:navigate  class="nav-link @if(request()->is('elevators/*') or  request()->is('elevators'))  active @endif "
+          <a wire:navigate  class="nav-link @if(request()->is('elevators/*') or  request()->is('elevator/*')  or request()->is('elevators'))  active @endif "
               href="/elevators">
               <i class="bi-people nav-icon"></i>
               <span class="nav-link-title">Liften</span>

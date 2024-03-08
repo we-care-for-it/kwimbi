@@ -17,6 +17,8 @@ return new class extends Migration
           $table->softDeletes();
           $table->date('begindate')->nullable();
           $table->date('enddate')->nullable();
+          $table->integer('type_id')->nullable();
+            $table->string('attachment')->nullable();
           $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
           $table->foreignId('maintenancie_companie_id')->references('id')->on('maintenancy_companies')->nullable();
       });

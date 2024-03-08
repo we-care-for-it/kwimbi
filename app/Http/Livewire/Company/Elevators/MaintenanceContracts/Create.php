@@ -61,8 +61,8 @@ public function save()
  
 
    
-    $maintenancie_contract = maintenanceContract::updateOrCreate(['id' => $this->maintenance_contract_id, ], ['enddate' => $this->maintenance_contract_enddate, 'begindate' => $this->maintenance_contract_begindate, 'type_id' => $this->maintenance_contract_type_id, 'elevator_id' => $this
-        ->elevator->id, 'maintenancy_companie_id' => $this->maintenance_contract_companie_id
+    $maintenancie_contract = maintenanceContract::updateOrCreate(['id' => $this->maintenance_contract_id, ], ['enddate' => $this->maintenance_contract_enddate, 'begindate' => $this->maintenance_contract_begindate, 'elevator_id' => $this
+        ->elevator->id
 
     ]);
     $filepath = "/uploads/".$this->elevator->id . "/maintenance_contracts/".$maintenancie_contract->id ."/";
