@@ -116,15 +116,15 @@
                                              <span class="fs-6 me-2" style="width: 40px ">{{$item->progress}}%</span>
                                              <div class="progress table-progress">
                                                 <div class="progress-bar
-                                             @if($item->progress == 100)
+                                             <!-- @if($item->progress==100)
                                              bg-success
-                                             @elseif($item->progress ==30)
+                                             @elseif($item->progress==30)
                                              bg-primary
                                              @elseif($item->progress==40)
                                              bg-warning
                                              else
                                              bg-primary
-                                             @endif
+                                             @endif -->
                                              " role="progressbar" style="width: {{$item->progress}}%" aria-valuenow="0"
                                                    aria-valuemin="0" aria-valuemax="100"></div>
                                              </div>
