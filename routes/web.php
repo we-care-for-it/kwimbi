@@ -60,7 +60,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
  
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
  
-
+    Route::get('/connections', \App\Http\Livewire\Connections::class);
     //Customers
     Route::get('/customers', \App\Http\Livewire\Company\Customers\Index::class);
     Route::group(['prefix' => 'customer', ],
