@@ -81,6 +81,20 @@
               <span class="nav-link-title">Relaties</span>
             </a>
 
+            <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
+              href="/customers">
+              <i class="bi-people nav-icon"></i>
+              <span class="nav-link-title">Werkopdrachten</span>
+            </a>
+
+
+            <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
+              href="/customers">
+              <i class="bi-people nav-icon"></i>
+              <span class="nav-link-title">Tijdregistratie</span>
+            </a>
+
+
           </div>
 
 
