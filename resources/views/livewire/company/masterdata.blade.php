@@ -63,6 +63,17 @@
       </div>
       
 
+      
+     <div class="col-lg-3  col-xl-3 col-md-6">
+        <div class="card  p-1 border card-button" onclick="location='/connections'">
+        <div class="p-2 ">
+            <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
+              src="/assets/img/ico/img2.jpg">
+            <h1>Externe verbindingen</h1>Koppel aan andere diensten
+          </div>
+        </div>
+      </div>
+
 
 
     </div>

@@ -59,8 +59,16 @@ Route::get('/search', \App\Http\Livewire\Company\Search::class);
 Route::get('/support', \App\Http\Livewire\Support::class);
  
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
- 
     Route::get('/connections', \App\Http\Livewire\Connections::class);
+ 
+<<<<<<< Updated upstream
+    Route::get('/connections', \App\Http\Livewire\Connections::class);
+=======
+    
+ 
+    
+
+>>>>>>> Stashed changes
     //Customers
     Route::get('/customers', \App\Http\Livewire\Company\Customers\Index::class);
     Route::group(['prefix' => 'customer', ],
