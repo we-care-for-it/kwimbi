@@ -71,13 +71,22 @@
                   @csrf 
                   <div class="row ">
                      <!-- Form --> 
-                     <div class="mb-4 "> <label class="form-label" >E-mailadres</label> <input name="email" id="email" tabindex = "1" type="email" placeholder="voorbeeld@domein.nl" required name="email" value="{{ old('email', request()->query('email')) }}" class = "form-control form-control-lg" autofocus/> <span class="invalid-feedback">Please enter a valid email address.</span> </div>
+                     <div class="mb-4 "> <label class="form-label" >E-mailadres</label> 
+                     
+                     <input name="email" id="email" tabindex = "1" type="email" placeholder="voorbeeld@domein.nl" required name="email" value="{{ old('email', request()->query('email')) }}" class = "form-control form-control-lg" autofocus/> <span class="invalid-feedback">Please enter a valid email address.</span> </div>
                      <!-- End Form --> <!-- Form --> 
                      <div class="mb-4">
-                        <label class="form-label w-100" tabindex="0"> <span class="d-flex justify-content-between align-items-center"> <span>Wachtwoord</span> <a class="form-label-link mb-0" href="./authentication-reset-password-cover.html">Wachtwoord vergeten?</a> </span> </label> 
+                        <label class="form-label w-100" tabindex="0"> <span class="d-flex justify-content-between align-items-center"> <span>Wachtwoord</span> <a class="form-label-link mb-0" href="{{ route('password.request') }}">Wachtwoord vergeten?</a> </span> </label> 
                         <div class="input-group input-group-merge" data-hs-validation-validate-class> <input type="password" tabindex = "2" class="form-control form-control-lg" name="password" id="signupSrPassword" placeholder="*******" required minlength="5" > </div>
                         <span class="invalid-feedback">Please enter a valid password.</span> 
                      </div>
+
+
+                     <label for="remember_me" class="flex items-center">
+                    <x-checkbox id="remember_me" name="remember" />
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>                     
+
                      <!-- End Form --> <!-- End Form Check --> 
                      <div class="d-grid"> <button type="submit" class="btn btn-primary btn-sm">Inloggen</button> </div>
                </form>
