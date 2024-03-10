@@ -85,6 +85,7 @@
        <div class="list-group">
          <a href="#" class="list-group-item list-group-item-action">Licentiebeheer</a>
          <a href="#" class="list-group-item list-group-item-action">Koppelingen</a>
+         <a href="#" class="list-group-item list-group-item-action">Help en contact</a>
         </div>
      </div>
 
