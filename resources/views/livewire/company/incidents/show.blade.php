@@ -223,10 +223,7 @@
          </ul>
          </div>
          </div>
-         <div class="card mt-3">
-      
-             
-         </div>
+    
       </div>
       <div class="col-md-9">
          <div>

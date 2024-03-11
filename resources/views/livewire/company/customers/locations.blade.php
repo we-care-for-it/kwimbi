@@ -6,11 +6,12 @@
          <h4>Geen locaties aangemaakt bij deze klant relatie</h4>
          Er zijn geen locaties gevonden voor deze klant relatie.
          <br><br>
-
-         <button wire:click="clear()" data-bs-toggle="modal" data-bs-target="#crudModal"
+         <a href="/customer/location/{{ $debtor_id }}/create">
+         <button  
             class="btn btn-soft-success   btn-sm">
             Locatie aanmaken
          </button>
+      </a>
 
       </div>
    </center>

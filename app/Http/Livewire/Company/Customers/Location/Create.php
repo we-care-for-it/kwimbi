@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Customer;
 use App\Models\Location;
 use Illuminate\Support\Facades\Http;
-
+use Livewire\WithFileUploads;
 class Create extends Component
 
 
@@ -22,10 +22,12 @@ class Create extends Component
     public $emailaddress;
     public $edit_id;
     public $customer;
+    public $image;
 
 
     public $customer_id;
 
+    use WithFileUploads;
 
     public function render()
     {

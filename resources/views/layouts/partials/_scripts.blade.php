@@ -5,12 +5,12 @@
   <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
   <script src="/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
   <script src="/assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
-  
+  <script src="/assets/js/theme.min.js"></script>
   <script src="/assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
   <script src="/assets/vendor/hs-count-characters/dist/js/hs-count-characters.js"></script>
  
-  {{-- <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
-  <script src="/assets/js/hs.chartjs.js"></script> --}}
+  <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="/assets/js/hs.chartjs.js"></script>
  
 
 <script>
