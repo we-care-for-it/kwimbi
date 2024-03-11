@@ -85,6 +85,14 @@ use WithFileUploads;
     
         $from_database = $update->first();
      
+
+              
+        $udpate_elevator = Elevator::where('id', $this->elevator->id)
+       ->update([
+           'inspection_state_id' => $inspection_status_id
+        ]);
+
+        
     
         if ($this->attachmentCertification)
         {

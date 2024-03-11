@@ -160,12 +160,24 @@ public function mount(Request $request){
     
         } 
     
+
+
+        
+        $udpate_elevator = Elevator::where('id', $this->elevator->id)
+       ->update([
+           'inspection_state_id' => $inspection_status_id
+        ]);
+
+
+
         $this->inspection_executed_datetime = null;
         $this->inspection_end_date = null;
         $this->inspection_status_id = null;
         $this->inspection_remark = null;
         $this->attachmentCertification = null;
         $this->attachmentDocument = null;
+
+        
     
         pnotify()->addSuccess('Keuring gewijzgd aan het systeem');
         return redirect('/elevator/show/' . $this->elevator->id );

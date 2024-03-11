@@ -1,19 +1,19 @@
 <div class="container-fluid">
    <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
          <div class="card">
             <div class="card-body">
                <div>
                   <h6 class="font-size-xs text-uppercase">Aantal liften</h6>
-                  <span class = "text-success"> {{count($elevators->where('status_id',1))}} ingebruik</span>  / 
-                  <span class = "text-danger  "> {{count($elevators->where('status_id',2))}} Buiten gebruik</span>
+                  <span class = "text-success"> {{count($elevators->where('status_id',1))}} actief</span>  / 
+                  <span class = "text-danger  "> {{count($elevators->where('status_id',2))}} niet actief</span>
                </div>
             </div>
          </div>
       </div>
 
 
-      <div class="col-md-3">
+      <div class="col-md-2">
          <div class="card">
             <div class="card-body">
                <div>
@@ -24,7 +24,7 @@
             </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-2">
          <div class="card">
             <div class="card-body">
                <div class="d-flex justify-content-between">
@@ -53,9 +53,47 @@
                      <tbody>
                         @foreach ($elevator_open_incidents as $incident)
                         <tr style = "cursor: pointer; " onclick="window.location='/incident/{{ $incident->id }}';">
-                           <td  >
+                     
+<td>
+                         
+
+   @if ($incident->status_id == 0)
+   <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Nieuw
+   </span>
+   @elseif($incident->status_id == 2)
+   <span  class="badge bg-soft-primary text-primary py-2">Doorgestuurd naar
+   onderhoudsbedrijf
+   </span>
+   @elseif($incident->status_id == 99)
+   <span  class="badge bg-soft-primary text-primary py-2">Gereed
+   </span>
+   @elseif($incident->status_id == 3)
+   <span  class="badge bg-soft-primary text-primary py-2">Wacht op offerte
+   </span>
+   @elseif($incident->status_id == 4)
+   <span  class="badge bg-soft-primary text-primary py-2">Offerte naar klant gestuurd
+   </span>
+   @elseif($incident->status_id == 5)
+   <span  class="badge bg-soft-primary text-primary py-2">Niet gereed
+   </span>
+   @elseif($incident->status_id == 6)
+   <span  class="badge bg-soft-primary text-primary py-2">Onjuist gemeld
+   </span>
+   @elseif($incident->status_id == 7)
+   <span  class="badge bg-soft-primary text-primary py-2">Offerte in opdracht
+   </span>
+   @elseif($incident->status_id == 8)
+   <span  class="badge bg-soft-primary text-primary py-2"> Werkzaamheden gepland
+   </span>
+   @endif
+ 
+</td>      <td  >
                               <small>
                               {{ Carbon\Carbon::parse($incident->created_at)->format('d-m-Y') }}
+                              <br>  
+                              
+                                 Geupdate op: {{ Carbon\Carbon::parse($incident->updated_at)->format('d-m-Y') }} om {{ Carbon\Carbon::parse($incident->updated_at)->format('H:m:s') }}
+                        
                               </small>
                            </td>
                            <td>
@@ -70,35 +108,7 @@
                               {{ $incident?->elevator?->address?->zipcode }},
                               {{$incident?->elevator?->address?->place }}
                               </small>
-                              @if ($incident->status_id == 0)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Nieuw
-                              </span>
-                              @elseif($incident->status_id == 2)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Doorgestuurd naar
-                              onderhoudsbedrijf
-                              </span>
-                              @elseif($incident->status_id == 99)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Gereed
-                              </span>
-                              @elseif($incident->status_id == 3)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Wacht op offerte
-                              </span>
-                              @elseif($incident->status_id == 4)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Offerte naar klant gestuurd
-                              </span>
-                              @elseif($incident->status_id == 5)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Niet gereed
-                              </span>
-                              @elseif($incident->status_id == 6)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Onjuist gemeld
-                              </span>
-                              @elseif($incident->status_id == 7)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Offerte in opdracht
-                              </span>
-                              @elseif($incident->status_id == 8)
-                              <span style = "float: right" class="badge bg-soft-primary text-primary py-2"> Werkzaamheden gepland
-                              </span>
-                              @endif
+
                            </td>
                </div>
                </tr>
@@ -147,6 +157,9 @@
             <td>
             <small>	{{$incident->description}}
             </small>
+
+       
+
             @if ($incident->status_id == 0)
             <span style = "float: right" class="badge bg-soft-primary text-primary py-2">Nieuw
             </span>
@@ -182,7 +195,7 @@
             </tbody>
             </table>
             @else
-            Geen storing gevonden
+            Er zijn geen liften die stilstaan door een storing
             @endif
          </div>
       </div>
@@ -197,11 +210,11 @@
       </div>
       <div class = "card-body">
          <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
-            @if(count($elevator_expired_inspections))
+            @if(count($elevator_rejected_inspections))
             <table class="table table-striped table-hover ">
                <tbody>
-                  @foreach ($elevator_expired_inspections as $elevator)
-                  @if($elevator->inspections[0]->status_id ==3)
+                  @foreach ($elevator_rejected_inspections as $elevator)
+                 
                   <tr style = "cursor: pointer; " onclick="location = '/elevator/show/{{$elevator->id}}'">
 
                      <td>
@@ -237,13 +250,20 @@
                         @endif
 
                      </td>
+                     <t>
+                  <td>
+                     @if($elevator?->object_type_id)
+                     <small>
+                     {{config('globalValues.object_types')[$elevator?->object_type_id]}}</small>
+                     @endif
+                  </td>
                      <td style = "width: 200px;">
                         @if($elevator->management_elevator)
                         <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
                         @endif
                         {{ Carbon\Carbon::parse($elevator->inspections[0]->executed_datetime)->format('d-m-Y') }}
                      </td>
-                     <td><span class="badge badge-soft-danger py-2 "> Afgekeurd </span>
+                     <td><span class="text-danger py-2 "> Afgekeurd </span>
                      </td>
 
                      
@@ -266,7 +286,7 @@
          </small>
          </td>
          </tr>
-         @endif
+       
          @endforeach
          </tbody>
          </table>
@@ -282,9 +302,57 @@
    <div class="card-header card-header-content-md-between bg-light">
       Verlopen keuringen
    </div>
-   <div class="card-body">
-      Er zijn op dit moment geen verlopen keuringen
+
+   <div class = "card-body">
+      <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
+         @if(count($elevator_expired_inspections))
+         <table class="table table-striped table-hover ">
+            <tbody>
+               @foreach ($elevator_expired_inspections as $inspection)
+              
+
+               <tr style = "cursor: pointer; " onclick="window.location='/elevator/show/{{ $inspection->elevator_id }}';">
+                     
+                      <td  >
+                                                <small>
+                                               
+                                                   Afgekeurd op: {{ Carbon\Carbon::parse($inspection->end_date)->format('d-m-Y') }} 
+                                                <br>  
+                                                
+                                               
+                                                {{ \Carbon\Carbon::parse($inspection->end_date)->diffForHumans() }}
+                                                </small>
+                                             </td>
+                                             <td>
+                                              
+                                                <small>
+                                                {{$inspection->elevator?->address?->name}}
+                                                {{$inspection?->elevator?->address?->address }},
+                                                {{$inspection?->elevator?->address?->housenumber}}
+                                                <br>
+                                                {{ $inspection?->elevator?->address?->zipcode }},
+                                                {{$inspection?->elevator?->address?->place }}
+                                                </small>
+                  
+                                             </td>
+                                 </div>
+                                 </tr>
+
+
+
+            
+ 
+      @endforeach
+      </tbody>
+      </table>
+      @else
+   Geen afgekeurde liften gevonden
+      @endif
    </div>
+
+
+
+  
 </div>
 </div>
 </div>

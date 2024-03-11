@@ -1136,7 +1136,7 @@
                      </td>
 
                      <td class="align-middle" style="width: 150px">
-                        {{ \Carbon\Carbon::parse($item->enddate)->format('d-m-Y')}}
+                        {{ \Carbon\Carbon::parse($item->end_date)->format('d-m-Y')}}
                      </td>
 
                      <td>
