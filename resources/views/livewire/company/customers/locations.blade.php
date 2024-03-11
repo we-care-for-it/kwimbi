@@ -18,11 +18,11 @@
    <x-table>
       <x-slot name="head">
          <x-table.heading>Functie</x-table.heading>
-
          <x-table.heading>Naam</x-table.heading>
          <x-table.heading>Adres</x-table.heading>
          <x-table.heading>Postcode</x-table.heading>
          <x-table.heading>Plaats</x-table.heading>
+         <x-table.heading> </x-table.heading>
 
       </x-slot>
       <x-slot name="body">
@@ -59,6 +59,20 @@
 
                {{$location->place}}
             </x-table.cell>
+
+            <x-table.cell>
+
+            
+      
+            <div style="float: right">
+               <a href="/location/edit/{{$location->id}}">
+                  <button style="float: right"
+                  class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
+                  <i class="bi bi-pencil"></i>
+                  </a>      </x-table.cell>
+
+            </div>
+
 
          </x-table.row>
          @endforeach

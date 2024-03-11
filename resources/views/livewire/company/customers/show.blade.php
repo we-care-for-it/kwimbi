@@ -14,10 +14,7 @@
                     </button></a>
  
 
-         <button wire:click = "edit({{$object->id}})" type="button" class="btn btn-primary btn-sm  btn-120" data-bs-toggle="modal" data-bs-target="#crudModal"   >
-                  Wijzigen
-               </button>
-         
+ 
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                     id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
                     Toevoegen

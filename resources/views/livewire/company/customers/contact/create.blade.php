@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
-                    Liften
+                    Contactpersoon toevoegen
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -48,7 +48,7 @@
                         <div class = "col-md-12">
                            <div class  = "pt-3">
                               <label class = "pb-2">Emailadres</label>
-                              <input wire:model = "emailaddress"  class  = "form-control">
+                              <input wire:model = "email"  class  = "form-control">
                            </div>
                            <div class  = "pt-3">
                               <label class = "pb-2">Telefoonnummer</label>

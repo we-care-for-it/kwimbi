@@ -4,6 +4,8 @@
 .btn-150{
   width: 150px!important;
 }
+
+
 body {
   overflow-y: scroll;
 }
@@ -44,8 +46,7 @@ body {
   border-radius: 4px!important;
  border: 0px!important;
 
- box-shadow: 0px 0px 0px 0px white!important;;
- box-shadow: 0!important;
+
 }
  
 .card_index{

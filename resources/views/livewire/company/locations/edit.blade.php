@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
-                Locatie tovoegen
+                    locatie wijzigen
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -16,20 +16,14 @@
         </div>
     </div>
     <div class="row">
+ 
 
-        <div class="col-md-3">
-          
-                    @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
-                
-        </div>
-
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-content-md-between  ">
 
                     Gegevens
                 </div>
-
                 <div class="card-body">
                     <div class = "row">
                         <div class = "col-md-12">
@@ -68,18 +62,7 @@
                      </div>
                      <hr>
                      <div class = "row">
-                        <div class = "col-md-6">
-                           <div >
-                              <label class = "pb-2">Emailadres</label>
-                              <input wire:model = "emailaddress"  class  = "form-control">
-                           </div>
-                        </div>
-                        <div class = "col-md-6">
-                           <div >
-                              <label class = "pb-2">Telefoonnummer</label>
-                              <input wire:model = "phonenumber"  class  = "form-control">
-                           </div>
-                        </div>
+                         
                 </div>
             </div>
         </div>

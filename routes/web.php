@@ -120,6 +120,27 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     Route::get('/contacts', \App\Http\Livewire\Company\Contacts\Index::class);
     Route::get('/elevators', \App\Http\Livewire\Company\Elevators\Index::class);
 
+
+    
+    //Nieuw
+    Route::group(['prefix' => 'contact', ],
+        function ()
+        {
+            Route::get('/edit/{id}', \App\Http\Livewire\Company\Contacts\Edit::class);
+          
+        });
+
+
+        Route::group(['prefix' => 'location', ],
+        function ()
+        {
+            Route::get('/edit/{id}', \App\Http\Livewire\Company\Locations\Edit::class);
+          
+        });
+
+
+
+
     Route::group(['prefix' => 'elevator', ],
         function ()
         {
