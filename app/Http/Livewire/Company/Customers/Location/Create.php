@@ -7,6 +7,8 @@ use App\Models\Customer;
 use App\Models\Location;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithFileUploads;
+use App\Models\managementCompany;
+
 class Create extends Component
 
 
@@ -23,6 +25,11 @@ class Create extends Component
     public $edit_id;
     public $customer;
     public $image;
+    public $building_type_id;
+    public $management_id;
+    public $remark;
+    public $complexnumber;
+
 
 
     public $customer_id;
@@ -31,8 +38,17 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.company.customers.location.create');
+        return view('livewire.company.customers.location.create',
+        [
+             'managementCompanies' => managementCompany::orderBy('name', 'asc')->get() ,
+             
+           ]);
         
+    }
+
+    public function clearImage()
+    {
+        $this->image = null;
     }
 
 
@@ -49,8 +65,22 @@ public function save(){
    
     $this->validate();
 
-    Location::create($this->all());
+   $location =  Location::create($this->all());
  
+
+    if ($this->image) {
+        $filename = $this->image->getClientOriginalName();
+        $directory = "uploads/locations/" . $location->id;
+
+        $this->image->storePubliclyAS($directory, $filename, "public");
+
+        Location::where("id", $location->id)->update([
+            "image" => $directory . "/" . $filename,
+        ]);
+    }
+
+
+
     pnotify()
         ->addWarning('Gegevens opgeslagen');
     return redirect('/customer/' . $this

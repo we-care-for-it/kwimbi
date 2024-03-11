@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
-                Locatie tovoegen
+                Locatie toevoegen
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -20,7 +20,8 @@
         <div class="col-md-3">
 
 
-          
+          <b>Relatie:</b><br><br>
+
                     @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
                 
                     <label>Afbeelding</label>
@@ -57,19 +58,49 @@
                       
                      <button type="button" wire:click="clearImage()" class="js-file-attach-reset-img btn btn-white">Verwijder</button>
                  </div>
-                 <label class = "pb-2 pt-3">Gebou type</label>
-                 <div class="tom-select-custom tom-select-custom-with-tags">
-                    <select class="js-select form-select" autocomplete="off"  
+                 <label class = "pb-2 pt-3">Gebouwtype</label>
+                 <div wire:ignore class="tom-select-custom tom-select-custom-with-tags">
+                    <select wire:model = "building_type_id" class="js-select form-select" autocomplete="off"  
                             data-hs-tom-select-options='{
-                              "placeholder": "Select a person..."
+                              "placeholder": "Selecteer een optie"
                             }'>
-                      <option value="">Select a person...</option>
-                      <option value="4">Thomas Edison</option>
-                      <option value="1">Nikola</option>
-                      <option value="3">Nikola Tesla</option>
-                      <option value="5">Arnold Schwarzenegger</option>
+
+                            <option value=""></option>
+                              @foreach(config('globalValues.building_types') as $key => $value)
+                      <option 
+                         value="{{ $key }}">
+                         {{$value}}
+                      </option>
+                      @endforeach
+
+                      
                     </select>
                   </div>
+
+
+
+                  <label class = "pb-2 pt-3">Beheerder</label>
+                  
+                  <div wire:ignore  class="tom-select-custom  ">
+     
+
+                              <select wire:model = "management_id" class="js-select form-select" autocomplete="off"  
+                                      data-hs-tom-select-options='{
+                                        "placeholder": "Selecteer een optie"
+                                      }'>
+                                      <option value=""></option>
+                                      @foreach($managementCompanies as $managementCompany)
+                                <option value="{{$managementCompany?->id}}">{{$managementCompany?->name}}</option>
+                                @endforeach
+                                 
+                              </select>
+                            </div>
+
+                            <label class = "pb-2 pt-3">Complexnummer</label>
+                              <input style = "width: 200px;" wire:model = "complexnumber"  class  = "form-control">
+                      
+
+
                  
         </div>
 
@@ -92,7 +123,7 @@
                      </div>
                      <div class = "row">
                         <div class = "col-md-6">
-                           <div class  = "pt-3">
+                           <div class  = "pt-3" style = "width :300px;">
                               <label class = "pb-2">Postcode</label>
                               <div class="input-group   ">
                                  <input class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif " wire:model.defer="zipcode" style = "width: 200px;">
@@ -117,53 +148,13 @@
                            </div>
 
 
-                           <div class  = "pt-3">
-                              <label class = "pb-2">Complexnummer</label>
-                              <input style = "width: 200px;" wire:model = "address"  class  = "form-control">
-                           </div>
+                         
                         </div>
 
 
                         
                      </div>
-           
-                     <div class = "row">
-                        <div class = "col-md-3">
-                           
-                        </div>
-                        <div class = "col-md-3">
-                           <label class = "pb-2 pt-3">Adres</label><div class="tom-select-custom tom-select-custom-with-tags">
-                              <select class="js-select form-select" autocomplete="off" multiple
-                                      data-hs-tom-select-options='{
-                                        "placeholder": "Select a person..."
-                                      }'>
-                                <option value="">Select a person...</option>
-                                <option value="4">Thomas Edison</option>
-                                <option value="1">Nikola</option>
-                                <option value="3">Nikola Tesla</option>
-                                <option value="5">Arnold Schwarzenegger</option>
-                              </select>
-                            </div>
-                        </div>
-
-                        <div class = "col-md-3">
-                           <label class = "pb-2 pt-3">Adres</label><div class="tom-select-custom tom-select-custom-with-tags">
-                              <select class="js-select form-select" autocomplete="off" multiple
-                                      data-hs-tom-select-options='{
-                                        "placeholder": "Select a person..."
-                                      }'>
-                                <option value="">Select a person...</option>
-                                <option value="4">Thomas Edison</option>
-                                <option value="1">Nikola</option>
-                                <option value="3">Nikola Tesla</option>
-                                <option value="5">Arnold Schwarzenegger</option>
-                              </select>
-                            </div>
-                        </div>
-
-
-                </div>
-
+      
                 <div class = "row">
                   <div class = "col-md-12">
         
@@ -172,7 +163,7 @@
     
                         <span id="maxLengthCountCharacters" class="text-muted mt-3"></span>
                     </div>
-                    <textarea class="js-count-characters form-control" wire:model="description" name="description" rows="4"
+                    <textarea wire:model = "remark" class="js-count-characters form-control" wire:model="description" name="description" rows="4"
                         maxlength="100" data-hs-count-characters-options='{
             "output": "#maxLengthCountCharacters"
           }'>{{ old('name',@$project->description) }}</textarea>
