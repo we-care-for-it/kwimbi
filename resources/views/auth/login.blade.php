@@ -82,10 +82,10 @@
                      </div>
 
 
-                     <label for="remember_me" class="flex items-center">
+                     <!-- <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />
                     <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>                     
+                </label>                      -->
 
                      <!-- End Form --> <!-- End Form Check --> 
                      <div class="d-grid"> <button type="submit" class="btn btn-primary btn-sm">Inloggen</button> </div>
