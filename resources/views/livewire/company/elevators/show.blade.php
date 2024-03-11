@@ -71,7 +71,7 @@
             <a class="dropdown-item" href="/elevator/maintenance/{{$object->id}}/create">
                <i class="bi-check2-all dropdown-item-icon"></i> Onderhoudsbeurt
             </a>
-            <a class="dropdown-item" href="/elevator/incident/{{$object->id}}/create}">
+            <a class="dropdown-item" href="/elevator/incident/{{$object->id}}/create">
                <i class="bi-toggle-off dropdown-item-icon"></i> Storing
             </a>
             <a class="dropdown-item" href="/elevator/inspection/{{$object->id}}/create">

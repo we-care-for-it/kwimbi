@@ -96,6 +96,24 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     });
 
 
+//Settings
+
+Route::group(['prefix' => 'settings', ],
+function ()
+{
+    Route::group(['prefix' => 'workorders', ],
+    function ()
+    {
+        Route::get('/statusses', \App\Http\Livewire\Settings\Workorders\Statusses::class);
+        Route::get('/solutions', \App\Http\Livewire\Settings\Workorders\Solutions::class);
+        Route::get('/errors', \App\Http\Livewire\Settings\Workorders\Errors::class);
+        Route::get('/worktypes', \App\Http\Livewire\Settings\Workorders\Worktypes::class);
+        Route::get('/regios', \App\Http\Livewire\Settings\Workorders\Regions::class);
+        Route::get('/paymethods', \App\Http\Livewire\Settings\Workorders\Paymethods::class);
+    });
+});
+
+
 
     //Addressess
     Route::get('/projects', \App\Http\Livewire\Company\Projects\Index::class);
@@ -147,10 +165,9 @@ Route::get('/support', \App\Http\Livewire\Support::class);
             Route::get('/edit/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
-
             Route::get('/maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\Create::class);
             Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
-            Route::get('/maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\Create::class);
+            Route::get('/incident/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Incidents\Create::class);
 
         });
 

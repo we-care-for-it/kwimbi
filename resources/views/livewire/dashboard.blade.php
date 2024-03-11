@@ -7,7 +7,7 @@
                <div>
                   <h6 class="font-size-xs text-uppercase">Aantal liften</h6>
                   <span class = "text-success"> {{count($elevators->where('status_id',1))}} actief</span>  / 
-                  <span class = "text-danger  "> {{count($elevators->where('status_id',2))}} niet actief</span>
+                  <span class = "text-danger  "> {{count($elevators->where('status_id',2))}} </span>
                </div>
             </div>
          </div>
