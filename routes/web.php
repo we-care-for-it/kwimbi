@@ -3,7 +3,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\azureController;
- 
+
 Route::controller(azureController::class)->group(function(){
     Route::get('auth/callback', 'callback')->name('auth.microsoft');
 });
@@ -17,9 +17,9 @@ Route::controller(azureController::class)->group(function(){
 Route::get('/reset', function () {
     session()->flush();
    // Route::get('auth/azure/callback', 'callback')->name('auth.microsoft');
-}); 
+});
 
- 
+
 Route::get('/', function () {
     return view('auth.login');
 });//name('auth.azure');
@@ -54,13 +54,13 @@ function ()
 });
 
 Route::get('/search', \App\Http\Livewire\Company\Search::class);
-      
+
 //Company routes
 Route::get('/support', \App\Http\Livewire\Support::class);
- 
+
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
     Route::get('/connections', \App\Http\Livewire\Connections::class);
- 
+
     Route::get('/connections', \App\Http\Livewire\Connections::class);
     //Customers
     Route::get('/customers', \App\Http\Livewire\Company\Customers\Index::class);
@@ -72,7 +72,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
         Route::get('/contact/{customer_id}/create', \App\Http\Livewire\Company\Customers\Contact\Create::class);
         Route::get('/location/{customer_id}/create', \App\Http\Livewire\Company\Customers\Location\Create::class);
-              
+
 
 
     });
@@ -96,7 +96,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     });
 
 
-    
+
     //Addressess
     Route::get('/projects', \App\Http\Livewire\Company\Projects\Index::class);
     Route::group(['prefix' => 'project', ],
@@ -104,7 +104,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     {
         Route::get('/edit/{slug}', \App\Http\Livewire\Company\Projects\Edit::class);
         Route::get('/create', \App\Http\Livewire\Company\Projects\Create::class);
-        Route::get('/show/{slug}', \App\Http\Livewire\Company\Projects\Show::class);
+        Route::get('/{slug}', \App\Http\Livewire\Company\Projects\Show::class);
     });
 
 //ss
@@ -119,18 +119,18 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
     Route::get('/contacts', \App\Http\Livewire\Company\Contacts\Index::class);
     Route::get('/elevators', \App\Http\Livewire\Company\Elevators\Index::class);
-    
+
     Route::group(['prefix' => 'elevator', ],
         function ()
         {
             Route::get('/edit/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
-            
+
             Route::get('/maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\Create::class);
             Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
             Route::get('/maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\Create::class);
-            
+
         });
 
         Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\Edit::class);
@@ -145,10 +145,10 @@ Route::get('/support', \App\Http\Livewire\Support::class);
              Route::get('show/{$slug}', \App\Http\Livewire\Company\Tickets\Show::class);
          });
 
-   
+
 
          //Management companies
-        
+
          Route::get('/management-companies', \App\Http\Livewire\Company\managementCompanies\Index::class);
          Route::group(['prefix' => 'managementcompanies', ],
          function ()
@@ -168,7 +168,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
 
 
-        
+
          Route::get('/maintenancy-companies', \App\Http\Livewire\Company\maintenanceCompanies\Index::class);
          Route::group(['prefix' => 'maintenancecompanies', ],
          function ()
@@ -185,8 +185,8 @@ Route::get('/support', \App\Http\Livewire\Support::class);
           //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
          });
 
- 
- 
+
+
 
 
 
@@ -205,14 +205,14 @@ function ()
     });
 
 });
- 
 
 
 
 
- 
+
+
         Route::get('/dashboard', \App\Http\Livewire\Dashboard::class);
- 
+
 });
 
 //Schermen
@@ -223,5 +223,3 @@ Route::group(
 
     }
 );
-
-     

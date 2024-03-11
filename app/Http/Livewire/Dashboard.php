@@ -8,6 +8,8 @@ use App\Models\Address;
 use App\Models\Document;
 use App\Models\Elevator;
 use App\Models\Customer;
+use App\Models\Project;
+ 
 use App\Models\Inspection;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Incident;
@@ -23,7 +25,7 @@ class Dashboard extends Component
     public $elevator_standing_still = [];
     public $elevator_expired_inspections = [];
     public $elevator_rejected_inspections = [];
-
+    public $cnt_all_projects = [];
     public $elevators = [];
 
 
@@ -41,7 +43,7 @@ class Dashboard extends Component
          })->get();
 
         $this->elevator_rejected_inspections = Incident::get();
-
+      
         return view('livewire.dashboard');
     }
 
@@ -51,7 +53,8 @@ class Dashboard extends Component
 
         $this->elevators = Elevator::get();
         $this->cnt_all_elevators         =  Elevator::count();
-  
+        $this->cnt_all_projects         =  Project::count();
+
     }
 }
 

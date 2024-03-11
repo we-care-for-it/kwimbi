@@ -99,11 +99,11 @@
                                     @foreach ($items as $item)
                                     <x-table.row wire:key="row-{{ $item->id }}">
                                        <x-table.cell>
-                                          <b><a href="/projects/{{ $item->slug }}">{{$item->name}}</a></b><br>
+                                          <b><a href="/project/{{ $item->slug }}">{{$item->name}}</a></b><br>
                                           {{$item->description}}
                                        </x-table.cell>
                                        <x-table.cell>
-                                          @if($item?->customer?->name) <a href="/debtors/{{$item?->customer?->slug}}">
+                                          @if($item?->customer?->name) <a href="/customer/{{$item?->customer?->slug}}">
                                              {{$item?->customer?->name}}</a> @else <span
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
@@ -141,7 +141,7 @@
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
                                        <x-table.cell>
-                                       <a href="/projects/show/{{$item->slug}}"> 
+                                       <a href="/project/{{$item->slug}}">
                                        <button style="float: right"
                                           class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
                                           <i class="bi bi-eye"></i>
@@ -150,7 +150,7 @@
 
 
 
-                                       <a href="/projects/edit/{{$item->slug}}"> 
+                                       <a href="/project/edit/{{$item->slug}}">
                                        <button style="float: right"
                                           class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
                                           <i class="bi bi-pencil"></i>
@@ -158,7 +158,7 @@
                      </a>
 
 
-                                        
+
                                        </x-table.cell>
                                     </x-table.row>
                                     @endforeach
@@ -173,8 +173,8 @@
                                        <h4>Geen projecten gevonden</h4>
                                        Maak een project aan om de objecten, Taken, etc te organiseren in een project
                                        <div class="clear-fix pb-3"></div>
-                                        
-                                    
+
+
                                     </div>
                                  </center>
                               </div>

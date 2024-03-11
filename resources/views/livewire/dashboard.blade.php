@@ -1,62 +1,67 @@
 <div class="container-fluid">
    <div class="row">
-      <div class="col-xl-3 col-sm-5">
-         <!-- Card -->
+      <div class="col-md-3">
+         <div class="card">
+            <div class="card-body">
+               <div>
+                  <h6 class="font-size-xs text-uppercase">Aantal liften</h6>
+                  <span class = "text-success"> {{count($elevators->where('status_id',1))}} ingebruik</span>  / 
+                  <span class = "text-danger  "> {{count($elevators->where('status_id',2))}} Buiten gebruik</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <div class="col-md-3">
+         <div class="card">
+            <div class="card-body">
+               <div>
+               <h6 class="font-size-xs text-uppercase">Aantal Storingen</h6>
+               <span class = "text-warning"> {{count($elevator_open_incidents)}} Actueel</span>
+               </div>
+            </div>
+            </div>
+      </div>
+
+      <div class="col-md-3">
          <div class="card">
             <div class="card-body">
                <div class="d-flex justify-content-between">
                   <div>
-                     <h6 class="font-size-xs text-uppercase">Aantal liften</h6>
-                     <h4 class="mt-4 font-weight-bold mb-2 d-flex align-items-center">
-                        {{$cnt_all_elevators}}
-                     </h4>
-                  </div>
-                  <div>
-                     <div>
-                        <div class="view">
-                           <a href="/company/elevators" class="btn btn-soft-secondary btn-sm">Bekijk alle <i class="mdi mdi-arrow-right ms-1"></i></a>
-                        </div>
-                     </div>
+                  <h6 class="font-size-xs text-uppercase">Lopende projecten</h6>
+                  {{$cnt_all_projects}}
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <div class="col-xl-3 col-sm-5">
-         <!-- Card -->
-         
-      </div>
-      
    </div>
+                 
+
    <div class="row pt-3">
       <div class="col-md-6">
          <div class="card" style = "height: 480px;">
-          
-         
-         <div class="card-header card-header-content-md-between bg-light">
-Actuele storingen
-   <span class="badge bg-primary rounded-pill ms-1">{{count($elevator_open_incidents)}}</span>
-        </div>
- 
+            <div class="card-header card-header-content-md-between bg-light">
+               Actuele storingen
+               <span class="badge bg-primary rounded-pill ms-1">{{count($elevator_open_incidents)}}</span>
+            </div>
             <div class = "card-body">
                <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
                   @if(count($elevator_open_incidents))
                   <table class="table table-striped">
                      <tbody>
                         @foreach ($elevator_open_incidents as $incident)
-                        <tr style = "cursor: pointer; " onclick="window.location='/company/incident/show/{{ $incident->id }}';">
-                           <td  >      
-                           <small>
-							 {{ Carbon\Carbon::parse($incident->created_at)->format('d-m-Y') }}
-</small>
+                        <tr style = "cursor: pointer; " onclick="window.location='/incident/{{ $incident->id }}';">
+                           <td  >
+                              <small>
+                              {{ Carbon\Carbon::parse($incident->created_at)->format('d-m-Y') }}
+                              </small>
                            </td>
                            <td>
-
-                           @if($incident->elevator->management_elevator)
-								  <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
-								  @endif
-
-
+                              @if($incident->elevator->management_elevator)
+                              <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
+                              @endif
                               <small>
                               {{$incident->elevator?->address?->name}}
                               {{$incident?->elevator?->address?->address }},
@@ -96,13 +101,12 @@ Actuele storingen
                               @endif
                            </td>
                </div>
-          
                </tr>
                @endforeach
                </tbody>
                </table>
                @else
-               Geen storing gevonden
+               Alle liften zijn operationeel
                @endif
             </div>
          </div>
@@ -110,15 +114,10 @@ Actuele storingen
    </div>
    <div class="col-md-6">
       <div class="card" style = "height: 480px;">
-
-
-      <div class="card-header card-header-content-md-between bg-light">
-   Stilstaande liften
-   <span class="badge bg-primary rounded-pill ms-1">{{count($elevator_standing_still)}}</span>
-        </div>
-
-
- 
+         <div class="card-header card-header-content-md-between bg-light">
+            Stilstaande liften
+            <span class="badge bg-primary rounded-pill ms-1">{{count($elevator_standing_still)}}</span>
+         </div>
          <div class = "card-body">
             <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
                @if(count($elevator_standing_still))
@@ -126,16 +125,15 @@ Actuele storingen
                   <tbody>
                      @foreach ($elevator_standing_still as $incident)
                      <tr style = "cursor: pointer; " onclick="window.location='/incident/show/{{ $incident->id }}';">
-                            <td>
-                           <small>    
-							 {{ Carbon\Carbon::parse($incident->created_at)->format('d-m-Y') }}
-                      </small>
+                        <td>
+                           <small>
+                           {{ Carbon\Carbon::parse($incident->created_at)->format('d-m-Y') }}
+                           </small>
                         </td>
                         <td>
-                        @if($incident->elevator->management_elevator)
-								  <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
-								  @endif
-
+                           @if($incident->elevator->management_elevator)
+                           <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
+                           @endif
                            <small>
                            <span >	<b>{{$incident->elevator?->address?->name}}</b></a>
                            {{$incident?->elevator?->address?->address }},
@@ -179,7 +177,6 @@ Actuele storingen
             </span>
             @endif
             </td>
-       
             </tr>
             @endforeach
             </tbody>
@@ -193,76 +190,104 @@ Actuele storingen
 </div>
 </div>
 <div class="row pt-3">
-   <div class="col-md-6">
-      <div class="card" style = "height: 360px;">
+<div class="col-md-6">
+   <div class="card" style = "height: 360px;">
       <div class="card-header card-header-content-md-between bg-light">
-Afgekeurde liften
- 
-        </div>
-         <div class = "card-body">
-            <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
+         Afgekeurde liften      
+      </div>
+      <div class = "card-body">
+         <div style = "overflow-x: auto; height: 380px; overflow-x: hidden">
+            @if(count($elevator_expired_inspections))
+            <table class="table table-striped table-hover ">
+               <tbody>
+                  @foreach ($elevator_expired_inspections as $elevator)
+                  @if($elevator->inspections[0]->status_id ==3)
+                  <tr style = "cursor: pointer; " onclick="location = '/elevator/show/{{$elevator->id}}'">
 
-      
+                     <td>
+                        
+                        @if($elevator->status_id=='2')
+                        <div class="cnt_table_result">
+                        <i class="fa-solid fa-building-circle-xmark text-danger" data-bs-toggle="tooltip" data-bs-placement="right" title="Lift buiten gebruik"></i>
+                        </div>
+                        @endif
+                        @if($elevator->status_id=='1')
+                        <div class="cnt_table_result">
+                        <i class="fa-solid fa-building-circle-check text-success" data-bs-toggle="tooltip" data-bs-placement="right" title="Operationeel"></i>
+                        </div>
+                        @endif
+                                       @if($elevator->fire_elevator)
+                                       <div class="cnt_table_result pl-0 ml-0">
+                                          <i  data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift" class = "text-danger bi bi-fire"></i>
+                                       </div>
+                                       @else
+                                       <div class="cnt_table_result">
+                                          <i  style = "color: #EFEFEF" class = " bi bi-fire"></i>
+                                       </div>
+                                       @endif
+                                       @if($elevator->stretcher_elevator)
+                                       <div class="cnt_table_result">
+                                          <i  data-bs-toggle="tooltip" data-bs-placement="top" title="Brancard / Bedlift" class = "text-primary fa-solid fa-bed"></i>     
+                                       </div>
+                        </div>
+                        @else
+                        <div class="cnt_table_result">
+                        <i  style = "color: #EFEFEF" class = " fa-solid fa-bed"></i>
+                        </div>
+                        @endif
 
-               @if(count($elevator_expired_inspections))
-               <table class="table table-striped ">
-                  <tbody>
-                     @foreach ($elevator_expired_inspections as $elevator)
-
-                     @if($elevator->inspections[0]->status_id ==3)
-                     <tr style = "cursor: pointer; " onclick="">
-                        <td style = "width: 200px;">
+                     </td>
+                     <td style = "width: 200px;">
                         @if($elevator->management_elevator)
-								  <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
-								  @endif
-							 
-                       
-                          
-                          {{ Carbon\Carbon::parse($elevator->inspections[0]->executed_datetime)->format('d-m-Y') }}
-                        </td>
-                        <td><span class="badge badge-soft-danger py-2 "> Afgekeurd </span>
-                        </td>
-                        <td>
-                           <small>
-                           <span >	
-                              
-                              
-                              <b>{{$elevator->address?->name}}</b></a>
-                           {{$elevator?->address?->address }},
-                           {{$elevator?->address?->housenumber}}
-                           <br>
-                           {{ $elevator?->address?->zipcode }},
-                           {{$elevator?->address?->place }}
-                           </small>
-                        <td>
-                           @if(!$elevator->remark) {{$elevator->remark}}  @endif
-                        </td>
-            </div>
-            <td>
-            <small>
-            </small>
-            </td>
-         
-            </tr>
+                        <span class = "text-primary"  > <i class="fa-solid fa-user-gear"> </i>   </span>
+                        @endif
+                        {{ Carbon\Carbon::parse($elevator->inspections[0]->executed_datetime)->format('d-m-Y') }}
+                     </td>
+                     <td><span class="badge badge-soft-danger py-2 "> Afgekeurd </span>
+                     </td>
 
-            @endif
-            @endforeach
-            </tbody>
-            </table>
-            @else
-            Geen storing gevonden
-            @endif
+                     
+                     <td>
+                        <small>
+                        <span >
+                        <b>{{$elevator->address?->name}}</b></a>
+                        {{$elevator?->address?->address }},
+                        {{$elevator?->address?->housenumber}}
+                        <br>
+                        {{ $elevator?->address?->zipcode }},
+                        {{$elevator?->address?->place }}
+                        </small>
+                     <td>
+                        @if(!$elevator->remark) {{$elevator->remark}}  @endif
+                     </td>
          </div>
+         <td>
+         <small>
+         </small>
+         </td>
+         </tr>
+         @endif
+         @endforeach
+         </tbody>
+         </table>
+         @else
+         Geen storing gevonden
+         @endif
       </div>
    </div>
 </div>
+</div>
 <div class="col-md-6">
-   <div class="card" style = "height: 360px;">
+<div class="card" style = "height: 360px;">
    <div class="card-header card-header-content-md-between bg-light">
-Verlopen keuringen
-        </div>
+      Verlopen keuringen
+   </div>
+   <div class="card-body">
+      Er zijn op dit moment geen verlopen keuringen
    </div>
 </div>
 </div>
 </div>
 </div>
+
+   </div>
