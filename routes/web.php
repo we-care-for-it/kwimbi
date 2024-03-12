@@ -141,6 +141,7 @@ function ()
 
     
     //Nieuw
+    
     Route::group(['prefix' => 'contact', ],
         function ()
         {
@@ -148,6 +149,8 @@ function ()
           
         });
 
+
+        Route::get('/locations', \App\Http\Livewire\Company\Locations\Index::class);
 
         Route::group(['prefix' => 'location', ],
         function ()

@@ -14,18 +14,25 @@ use App\Models\Incident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+
+
+
 class Index extends Component
 {
+
+    
+public $page_number = 0;
+public $cntFilters;
+public $sortField = 'id';
+public $sortDirection = 'desc';
+
+
     use WithPerPagePagination;
     use WithSorting;
     use WithBulkActions;
     use WithCachedRows;
 
 
-    public $page_number = 0;
-    public $cntFilters;
-    public $sortField = 'id';
-    public $sortDirection = 'desc';
 
     public $filters  =
     [
