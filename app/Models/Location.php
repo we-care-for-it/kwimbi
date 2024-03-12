@@ -65,7 +65,7 @@ class Location extends Model implements Auditable
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class,'id','location_id');
+        return $this->hasMany(Elevator::class,'address_id','id');
     }
 
  

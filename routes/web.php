@@ -156,6 +156,7 @@ function ()
         function ()
         {
             Route::get('/edit/{id}', \App\Http\Livewire\Company\Locations\Edit::class);
+            Route::get('/{slug}', \App\Http\Livewire\Company\Locations\Show::class);
           
         });
 

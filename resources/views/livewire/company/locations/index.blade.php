@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-               Storingen
+              Locaties
          </div>
          <div class="col-auto">
 
@@ -106,13 +106,13 @@
                
                       <!-- End Avatar -->
 
-                      <h3 class="mb-1  pt-3">
+                      <h3 class="mb-2  pt-3">
                         <a class="text-dark" href="/location/{{$location->slug}}"">
                             @if($location->name)
                             {{$location->name}} @else Geen naam @endif</a>
                       </h3>
 
-                      <div class="mb-3">
+                      <div class="mb-2">
                       @if($location->building_type_id)
                   <span
                      class=" badge bg-soft-primary text-primary ">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
@@ -126,7 +126,17 @@
                         </span>
                       <div class="pt-2 row justify-content-between align-items-center">
                         <div class="col-auto ">
-                          <a class="fs-6 text-body" href="#">{{count($location->objects)}} objectens</a>
+                          <a class="fs-6 text-body" href="#">
+                           
+                          {{count($location->objects)}}
+                          
+                          @if(count($location->objects) == 1)
+                          object
+                          @else
+                          objecten
+                          @endif
+                          
+                           </a>
                         </div>
 
                         <div class="col-auto py-1">
