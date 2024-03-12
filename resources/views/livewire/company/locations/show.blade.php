@@ -27,16 +27,18 @@
 
                   
       <center> 
-               
- 
+                
+                          </a>
                             
                     <span class="mb-2   " style = "width: 100%; ">
  
  @if($location->image)
-<img class="avatar-img   " style = "height: 220px; " src="/storage/{{$location->image}}"  >
-
+ <a class="text-body" >
+           
+<img class="avatar-img   " style = "max-height: 220px;  width: 100%; " src="/storage/{{$location->image}}"  >
+</a>
 @else
-<img class="avatar-img   "  style = "height: 220px" src="/assets/img/160x160/img2.jpg"  >
+<img class="avatar-img   "  style = "max-height: 220px; width: 100%;" src="/assets/img/160x160/img2.jpg"  >
 
 @endif
 </span>
@@ -81,7 +83,7 @@
 
 <tr>
     <td>Beheerder</td>
-    <td>@if($location->managementcompany) {{$location->managementcompany->name}}  @endif</td>
+    <td>@if($location->managementcompany) {{$location->managementcompany->name}}  @else <span class=" badge bg-soft-primary text-primary ">Geen</span>  @endif</td>
 </tr>
 
 <tr>

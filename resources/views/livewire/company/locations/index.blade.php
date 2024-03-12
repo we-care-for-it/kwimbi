@@ -77,15 +77,26 @@
                            @if($items->count())
                   
 
-                           <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                           <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 ">
                            @foreach ($items as $location)     <div class="col mb-3 mb-lg-5">
                   <!-- Card -->
                   <div class="card h-80">
                     <div class="card-pinned">
                       <div class="card-pinned-top-end">
-                        <!-- Dropdown -->
-                       
-                        <!-- End Dropdown -->
+                     
+                          <!-- Dropdown -->
+                          <div class="dropdown">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm card-dropdown-btn rounded-circle" id="projectsGridDropdown8" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi-three-dots-vertical"></i>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsGridDropdown8">
+                              <a class="dropdown-item" href="/location/edit/{{$location->id}}">Wijzigen </a>
+                   
+                      
+                          </div>
+                          <!-- End Dropdown -->
+                        </div>
                       </div>
                     </div>
 

@@ -31,9 +31,9 @@
                      <label class="avatar avatar-xxl   avatar-uploader   " for="editAvatarUploaderModal">
                             
                            @if ($image_db || $image )
-                         <img class="avatar-img" src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" width="250" height="300" />
+                         <img class="avatar-img"  style = "height: 220px"  src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}"  />
                          @else
-                         <img class="avatar-img" src="/assets/img/160x160/img2.jpg"   />
+                         <img class="avatar-img"  style = "height: 220px"  src="/assets/img/160x160/img2.jpg"   />
                          @endif
                   
                          <input
