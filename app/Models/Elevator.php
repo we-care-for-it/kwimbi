@@ -35,8 +35,7 @@ class Elevator extends Model implements Auditable
  
 {
     use SoftDeletes;
-    use InteractsWithMedia;
-
+ 
     use \OwenIt\Auditing\Auditable;
  
     // Validation rules for this model
