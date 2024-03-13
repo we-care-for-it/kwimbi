@@ -1,6 +1,6 @@
 <!-- ========== HEADER ========== -->
 
-<header style = "background-color: #7952B3 "  id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
+<header style = "background-color: #3C80FE "  id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
   >
   <div  class="navbar-nav-wrap">
       <div class="navbar-nav-wrap-content-start">

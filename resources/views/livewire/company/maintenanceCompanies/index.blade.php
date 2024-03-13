@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-              Onderhoudpartijen
+               Keuringsinstanties
          </div>
 
          <div class="col-auto">
@@ -22,9 +22,7 @@
       </div>
    </div>
    <div class="row p-0 ">
-      <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between  ">
+      <div class="col-xl-12"> <div class="card-header card-header-content-md-between  ">
                <div>
                   <form>
                      <!-- Search -->
@@ -50,7 +48,9 @@
                   <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body pt-0">
+         <div class="card">
+           
+            <div class="card-body pt-2">
                <div class="row">
                   <div>
                      <div class="row" wire:loading.class="loading-div">
@@ -116,11 +116,11 @@
                               <center>
                                  <div>
                                     <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-                                    <h4>Geen onderhoudpartijen gevonden</h4>
+                                    <h4>Geen Keuringsinstanties gevonden</h4>
                                     @if($this->cntFilters)
-                                    Er zijn geen onderhoudpartijen gevonden met de huidige filters
+                                    Er zijn geen Keuringsinstanties gevonden met de huidige filters
                                     @else
-                                    Er zijn nog onderhoudpartijen Keuringsinstanties gevonden in de database.
+                                    Er zijn nog geen Keuringsinstanties gevonden in de database.
                                     @endif
                                  </div>
                               </center>
@@ -131,21 +131,14 @@
                   </div>
                </div>
             </div>
-            <div class="card-footer">
-
-               <div class="clearfix  ">
-                  <div class="float-start">@if(count($items))
-                     <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
-                        </b>
-                     </p>
-                     @endif</div>
+           
+         </div>
+               <div class="clearfix pt-3  ">
+             
                   <div class="float-end"> @if($items->links())
                      {{ $items->links() }}
                      @endif</div>
                </div>
-
-            </div>
-         </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters"
             aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">

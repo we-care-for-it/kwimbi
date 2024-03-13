@@ -11,9 +11,7 @@ Route::controller(azureController::class)->group(function(){
     Route::get('auth/azure/callback', 'callback')->name('auth.microsoft');
 });
 
-
-Route::mediaLibrary();
-
+ 
 Route::get('/reset', function () {
     session()->flush();
    // Route::get('auth/azure/callback', 'callback')->name('auth.microsoft');

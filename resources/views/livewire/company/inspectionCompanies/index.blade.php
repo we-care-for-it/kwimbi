@@ -22,9 +22,7 @@
       </div>
    </div>
    <div class="row p-0 ">
-      <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between  ">
+      <div class="col-xl-12"> <div class="card-header card-header-content-md-between  ">
                <div>
                   <form>
                      <!-- Search -->
@@ -50,7 +48,9 @@
                   <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body pt-0">
+         <div class="card">
+           
+            <div class="card-body pt-2">
                <div class="row">
                   <div>
                      <div class="row" wire:loading.class="loading-div">
@@ -131,21 +131,14 @@
                   </div>
                </div>
             </div>
-            <div class="card-footer">
-
-               <div class="clearfix  ">
-                  <div class="float-start">@if(count($items))
-                     <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
-                        </b>
-                     </p>
-                     @endif</div>
+           
+         </div>
+               <div class="clearfix pt-3  ">
+             
                   <div class="float-end"> @if($items->links())
                      {{ $items->links() }}
                      @endif</div>
                </div>
-
-            </div>
-         </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters"
             aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">

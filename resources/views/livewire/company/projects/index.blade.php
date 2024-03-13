@@ -7,11 +7,7 @@
          </div>
          <div class="col-auto">
 
-            <a href="/project/create">
-               <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="clear()">
-                  Toevoegen
-               </button>
-            </a>
+       
 
             <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
                <i class="fa-solid fa-arrow-left"></i>
@@ -20,35 +16,36 @@
          </div>
       </div>
    </div>
-   <div class="row p-0 ">
-      <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between  ">
+
+
+   <div class="card-header card-header-content-md-between  ">
                <div>
                   <form>
                      <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                           placeholder="Zoeken op trefwoord..." data-hs-form-search-options='{
-                        "clearIcon": "#clearIcon2",
-                        "defaultIcon": "#defaultClearIconToggleEg"
-                        }'>
+                     <div style="width: 200px;" class="input-group input-group-merge">
+                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
+                           data-hs-form-search-options='{
+                           "clearIcon": "#clearIcon2",
+                           "defaultIcon": "#defaultClearIconToggleEg"
+                           }'>
                         <button type="button" class="input-group-append input-group-text">
-                           <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                           <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
                         </button>
                      </div>
                      <!-- End Search -->
                   </form>
                </div>
                <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay class="loading_indicator_small"></div>
-                  </div>
-
+                 
+                  
+                  <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body pt-0">
+
+         <div class="card">
+           
+            <div class="card-body pt-2">
                <div class="row">
                   <div>
                      <div class="row" wire:loading.class="loading-div">
@@ -167,9 +164,9 @@
                               @else
                               <div class="flex justify-center items-center">
                                  <center>
-                                    <div>
-                                       <img src='/assets/img/illu/1-1-740x592.png'
-                                          style="max-width: 500px; width: 100%;">
+                                    <div class = "p-10">
+                                       <img src='/assets/svg/illustrations/oc-browse.svg'
+                                          style="max-width: 300px; width: 100%;">
                                        <h4>Geen projecten gevonden</h4>
                                        Maak een project aan om de objecten, Taken, etc te organiseren in een project
                                        <div class="clear-fix pb-3"></div>
@@ -185,20 +182,15 @@
                </div>
             </div>
          </div>
-         <div class="card-footer">
-
-            <div class="clearfix  ">
+         
+      </div>     <div class="clearfix  ">
                <div class="float-start">@if(count($items))
-                  <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
-                     </b>
+               
                   </p>
                   @endif</div>
                <div class="float-end"> @if($items->links())
                   {{ $items->links() }}
                   @endif</div>
             </div>
-
-         </div>
-      </div>
    </div>
 </div>

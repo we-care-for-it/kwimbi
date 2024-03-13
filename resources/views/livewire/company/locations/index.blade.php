@@ -15,32 +15,32 @@
       </div>
    </div>
 
-   <div class="row ">
-      <div class="col-xl-12">
-      <div>
-               <div >
+
+   <div class="card-header card-header-content-md-between  ">
+               <div>
                   <form>
                      <!-- Search -->
-                     <div  style="width: 200px;"  class="mb-3 input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                           placeholder="Zoeken op trefwoord..." data-hs-form-search-options='{
+                     <div style="width: 200px;" class="input-group input-group-merge">
+                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
+                           data-hs-form-search-options='{
                            "clearIcon": "#clearIcon2",
                            "defaultIcon": "#defaultClearIconToggleEg"
                            }'>
                         <button type="button" class="input-group-append input-group-text">
-                           <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                           <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
                         </button>
                      </div>
                      <!-- End Search -->
                   </form>
                </div>
                <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-
+                 
+                  
+                  <!-- End Dropdown -->
                </div>
             </div>
-  
-               <div class="row">
+   
                   <div>
                      <div class="row">
                         <div class="loading" wire:loading>
@@ -210,6 +210,6 @@
  
        
 
-         </div>
+ 
 
       </div>

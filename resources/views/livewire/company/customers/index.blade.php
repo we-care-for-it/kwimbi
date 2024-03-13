@@ -60,7 +60,7 @@
             </div>
 
             <div class="card">
-            <div class="card-body   ">
+            <div class="card-body p-0  ">
                <div class="row">
                   <div>
              

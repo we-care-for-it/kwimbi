@@ -74,7 +74,7 @@ body {
 }
 .form-control {
 
-  border-radius: 0px!important;;
+  border-radius: 5px!important;;
   box-shadow: 0px 0px 0px 0px white!important;;
   box-shadow: 0!important;
   padding: 10px!important;;
@@ -96,7 +96,7 @@ body {
  .page-header{
   margin-bottom: 20px!important;
   padding-bottom: 0px!important;
-  height: 35px!important;;
+  height: 30px!important;;
   
   border: 0px!important;
  
@@ -125,7 +125,7 @@ h1{
 } 
 a:link{
   font-weight: normal!important;
-  color: rgb(81,85,170)!important;
+ 
 } 
 
 .btn-link{
@@ -169,6 +169,7 @@ a:link{
     border: 1px solid #EFEFEF!important;
     box-shadow: 0px 0px 0px 0px white!important;;
   box-shadow: 0!important;
+  border-radius: 0px!important;;
   }.card-header{
  background-color: white;
  border-bottom: 0px!important;

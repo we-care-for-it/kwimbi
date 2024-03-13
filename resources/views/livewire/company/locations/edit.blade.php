@@ -196,7 +196,7 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class="mt-3 card-header card-header-content-md-between  ">
+            <div class=" card-header card-header-content-md-between  ">
 
 Toegang
 </div>
@@ -249,7 +249,7 @@ Toegang
 
                 </div>
             </div>
-            <div class="card-header mt-3 card-header-content-md-between  ">
+            <div class="card-header  card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
