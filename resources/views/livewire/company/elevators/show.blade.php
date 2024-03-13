@@ -841,7 +841,7 @@
                                <th scope="col">Begindatum </th>
                                <th scope="col">Einddatum </th>
                                <th scope="col">  </th>
-
+                               <th scope="col">  </th>  <th scope="col">  </th>
                             </tr>
                          </thead>
                          <tbody>
