@@ -183,7 +183,7 @@ a:link{
  
     }.card-body{
 
-
+padding: 10px!important;
   } .cnt_table_result{
     border-left: 1px solid #EFEFEF;
     min-width:34px!important;

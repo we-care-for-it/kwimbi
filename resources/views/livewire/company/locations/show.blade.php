@@ -216,7 +216,7 @@
                 </div>
 
                 </div>       </div>
-                <div class="card-header mt-3 card-header-content-md-between  ">
+                <div class="card-header mt-3   ">
 
 Aanwezig objecten
 </div>
