@@ -421,6 +421,20 @@
     <div class="row ">
        <div class="col-3">
 
+
+       <table class="table">
+                <tr>
+
+                   <td colspan="2"> <a
+                         href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
+                   </td>
+                </tr>
+                <tr>
+                   <td colspan="2">{{$object?->location?->customer?->address}}
+                      {{$object?->location?->customer?->zipcode}} {{$object?->location?->customer?->place}} </td>
+                </tr>
+             </table>
+
           <table class="table " style="margin: 1px;">
 
              <tr>
@@ -545,7 +559,7 @@
                       @if($object?->latestInspection?->status_id==4)
                       <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
                       @endif
-                      @if($object?->latestInspection?->status_id==4)
+                      @if($object?->latestInspection?->status_id==5)
                       <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
                       @endif
 
@@ -1236,27 +1250,7 @@
        </div>
 
     </div>
-
-    <div class="row ">
-       <div class="col-md-4">
-          <div class="card " style="background-color: e8eafa">
-             <table class="table">
-                <tr>
-
-                   <td colspan="2"> <a
-                         href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
-                   </td>
-                </tr>
-                <tr>
-                   <td colspan="2">{{$object?->location?->customer?->address}}
-                      {{$object?->location?->customer?->zipcode}} {{$object?->location?->customer?->place}} </td>
-                </tr>
-             </table>
-          </div>
-       </div>
  
-    
-    </div>
  
 
  </div>
