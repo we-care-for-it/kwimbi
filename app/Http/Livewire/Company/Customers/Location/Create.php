@@ -16,6 +16,9 @@ class Create extends Component
 {
 
     
+ 
+    public $data;
+
     public $name;
     public $phonenumber;
     public $address;
@@ -29,6 +32,22 @@ class Create extends Component
     public $management_id;
     public $remark;
     public $complexnumber;
+    public $image_db;
+
+    public $building_access_type;
+    public $access_code;
+    public $gps_lat;
+    public $gps_lon;
+    public $construction_year;
+    public $levels;
+    public $surface;
+    public $access_contact;
+    public $location_key_lock;
+    public $province;
+    public $municipality;
+    public $housenumber;
+    public $building_type;
+    public $building_access_type_id;
 
 
 
@@ -102,21 +121,40 @@ public function save(){
      //Postcode check
      public function checkZipcode()
      {
+
+        $this->housenumber = str_replace(" ", "", $this->housenumber);
+        $this->zipcode = str_replace(" ", "", $this->zipcode);
          $this->zipcode = strtoupper(trim(preg_replace("/\s+/", "", $this->zipcode)));
          if (strlen($this->zipcode) == 6) {
-             $response = Http::get('https://api.pro6pp.nl/v1/autocomplete?auth_key=okw7jAaDun87tKnD&nl_sixpp=' . $this->zipcode);
+           
+
+             $response = Http::get('https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=' . $this->zipcode.'&streetNumberAndPremise=' . $this->housenumber.'');
+
+             //https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=
              $data = $response->json();
  
-             if ($data['results']) {
-                 $this->place = $data['results'][0]['city'];
-                 $this->address = $data['results'][0]['street'];
+
+ 
+
+             if (!isset($data['error_id'])) {
+                 $this->place = $data['settlement'];
+                 $this->address = $data['street'];
+                 $this->municipality = $data['municipality'];
+                 $this->gps_lon = $data['lng'];
+                 $this->gps_lat = $data['lat'];
+                 $this->province = $data['province'];
+                 $this->construction_year = $data['constructionYear'];
+                 $this->surface = $data['surfaceArea'];
+                 $this->building_type = ucfirst($data['purposes'][0]);
+
+          
+                 
              } else {
                  $this->place = "";
                  $this->address = "";
-                 pnotify()->addWarning('Geen gegevens gevonden met deze postcode');
+                 pnotify()->addWarning('Geen gegevens gevonden met deze postcode en huisnummer');
              }
-         }
-     }
+            }}
 
      
 

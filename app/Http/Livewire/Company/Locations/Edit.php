@@ -48,6 +48,8 @@ class Edit extends Component
     public $province;
     public $municipality;
     public $housenumber;
+    public $building_type;
+    public $building_access_type_id;
 
 
     use WithFileUploads;
@@ -69,8 +71,10 @@ class Edit extends Component
         $this->management_id  = $this->data->management_id;
         $this->remark  = $this->data->remark;
         $this->building_type_id  = $this->data->building_type_id;
-        $this->building_access_type  = $this->data->building_access_type;
+        $this->building_access_type_id  = $this->data->building_access_type_id;
+
         $this->access_code  = $this->data->access_code;
+
         $this->gps_lat  = $this->data->gps_lat;
         $this->gps_lon  = $this->data->gps_lon;
         $this->construction_year  = $this->data->construction_year;
@@ -81,6 +85,12 @@ class Edit extends Component
         $this->province  = $this->data->province;
         $this->municipality  = $this->data->municipality;
         $this->housenumber  = $this->data->housenumber;
+        $this->building_type  = $this->data->building_type;
+        
+
+        
+        
+
         
 
         
@@ -93,8 +103,17 @@ class Edit extends Component
 
         
         $this->validate();
+ 
+        try {
+            $this->data->update($this->all());
+        } catch (QueryException $e) {
+            dd('Ioe fout');
+        }
+        
 
-        $this->data->update($this->all());
+   
+
+      
 
         if ($this->image  != $this->data->image_db ){
     
@@ -178,7 +197,7 @@ class Edit extends Component
                  $this->province = $data['province'];
                  $this->construction_year = $data['constructionYear'];
                  $this->surface = $data['surfaceArea'];
-          
+                 $this->building_type = ucfirst($data['purposes'][0]);
 
           
                  

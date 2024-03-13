@@ -54,16 +54,16 @@
 
                       
                       
-         <span  > {{$location->address}}, 
+         <span  > {{$location->address}}  {{$location->housenumber}}, 
                       {{$location->zipcode}} {{$location->place}}
                         </span>
                 
                         <div class = "clearfix"></div>    
 
               
-@if($location->building_type_id)
+@if($location->building_type)
                   <span
-                     class="  mt-3  badge bg-soft-primary text-primary py-2 ">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
+                     class="  mt-3  badge bg-soft-primary text-primary py-2 ">{{$location->building_type}}</span>
                   @else
                   <span class="     mt-3  badge bg-soft-danger text-danger  py-2 ">Onbekend</span>
 
@@ -73,7 +73,18 @@
 
 </center>
 <hr>
+
+ 
 <table class= "table">
+
+<tr>
+<td colspan="2">
+    
+@if($location->remark) {{$location->remark}}  @endif</td>
+ 
+</tr>
+
+
 <tr>
     <td>Complexnummer</td>
     <td>@if($location->complexnumber) {{$location->complexnumber}} @else <span class=" badge bg-soft-primary text-primary ">Geen</span> @endif</td>
@@ -89,26 +100,124 @@
 
 <tr>
     <td>Beheerder</td>
-    <td>@if($location->managementcompany) {{$location->managementcompany->name}}  @else <span class=" badge bg-soft-primary text-primary ">Geen</span>  @endif</td>
+    <td>@if($location->managementcompany) {{$location->managementcompany->name}}  @else -  @endif</td>
+</tr>
+ 
+
+
+<tr>
+    <td>Type toegang</td>
+    <td> @if($location->building_access_type_id)  {{config('globalValues.building_access_types')[$location->building_access_type_id]}}  @endif</td>
 </tr>
 
 <tr>
-<td colspan="2">@if($location->remark) {{$location->remark}}  @endif</td>
- 
+    <td>Code</td>
+    <td>  @if($location->access_code) {{$location->access_code}}  @endif</td>
 </tr>
+
+<tr>
+    <td>Contactpersoon</td>
+    <td>  @if($location->access_contact) {{$location->access_contact}}  @endif</td>
+</tr>
+
+<tr>
+    <td>Locatie sleutelkleus</td>
+    <td> @if($location->location_key_lock) {{$location->location_key_lock}}  @endif</td>
+</tr>
+
 
 
 
 
 </table>
-
-                 
-
-                 
-        </div>
+ 
+</div>
+               
 
         <div class="col-md-9">
-            <div class="card">
+
+
+
+        @if($location->gps_lon) 
+
+        <div class="card  p-1 mb-3">
+
+        <div style="width: 100%"><iframe width="100%" height="206" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+            
+
+</div>
+
+@endif
+
+        <div class="card  p-1">
+ 
+
+
+        <div class="card-body p-2">
+                    <div class = "row">
+                    <div class="col-md-3">
+                            <label class="pb-2  ">GPS Longitude</label>
+                            <div class = "clear-fix"></div>
+                                @if($location->gps_lon) {{$location->gps_lon}} @else - @endif
+       
+
+           
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="pb-2  ">GPS latitude</label>
+                            <div class = "clear-fix"></div>
+                                @if($location->gps_lat) {{$location->gps_lat}} @else - @endif
+       
+
+                         
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="pb-2  ">Gemeente</label>
+                            <div class = "clear-fix"></div>
+                                @if($location->municipality) {{$location->municipality}} @else - @endif
+       
+ 
+                        </div>
+                    
+                    
+                    </div>       </div>       
+                </div>
+
+                <div class="card mt-3 p-1">
+ 
+
+
+                <div class="card-body p-2">
+                    <div class = "row">
+                    <div class="col-md-3">
+                                <label class="pb-2">Bouwjaar</label>
+                                <div class = "clear-fix"></div>
+                                @if($location->construction_year) {{$location->construction_year}} @else - @endif
+       
+                                        </div>
+
+                            <div class="col-md-3">
+                                <label class="pb-2">Verdiepingen</label>
+                                <div class = "clear-fix"></div>
+                                @if($location->levels) {{$location->levels}} @else - @endif
+       
+                 
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="pb-2">Oppervlakte</label>
+                                <div class = "clear-fix"></div>
+                                @if($location->surface) {{$location->surface}} @else - @endif
+       
+                       
+                            </div>
+                </div>
+
+                </div>       </div>
+
+                <div class="card mt-3">
                 <div class="card-header card-header-content-md-between  ">
 
                     Aanwezig objecten

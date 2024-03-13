@@ -53,26 +53,9 @@
                     class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
             </div>
             <label class="pb-2 pt-3">Gebouwtype</label>
-            <div wire:ignore class="tom-select-custom  ">
-                <select wire:model="building_type_id" class="js-select form-select" autocomplete="off"
-                    data-hs-tom-select-options='{
-                              "placeholder": "Selecteer een optie"
-                            }'>
-
-                    <option value=""></option>
-                    @foreach(config('globalValues.building_types') as $key => $value)
-                    <option value="{{ $key }}">
-                        {{$value}}
-                    </option>
-                    @endforeach
-
-                    @if($building_type_id)
-                    <option @if($building_type_id) selected @endif value="{{$building_type_id}}">
-                        {{config('globalValues.building_types')[$building_type_id]}}</option>
-                    @endif
-
-                </select>
-            </div>
+ 
+            <input   wire:model.live="building_type" class="form-control">
+            
 
             <label class="pb-2 pt-3">Beheerder</label>
 
@@ -216,7 +199,7 @@
                         <div class="col-md-3">
                             <label class="pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
-                                <select wire:model="building_access_type" class="js-select form-select"
+                                <select wire:model="building_acces_type_id" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
                               "placeholder": "Selecteer een optie"
                             }'>
@@ -228,10 +211,10 @@
                                     </option>
                                     @endforeach
 
-                                    @if($building_type_id)
-                                    <option @if($building_access_type) selected @endif
-                                        value="{{$building_access_type}}">
-                                        {{config('globalValues.building_types')[$building_type_id]}}</option>
+                                    @if($building_access_type_id)
+                                    <option @if($building_access_type_id) selected @endif
+                                        value="{{$building_access_type_id}}">
+                                        {{config('globalValues.building_types')[$building_access_type_id]}}</option>
                                     @endif
 
                                 </select>

@@ -48,10 +48,23 @@ class Location extends Model implements Auditable
     protected $perPage = 20;
 
     // Attributes that should be mass-assignable
-    protected $fillable = ['building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
+    protected $fillable = [ 'surface',
+    'levels',
+    'gps_lon',
+    'construction_year'
+    ,'access_code'
+    ,'gps_lat'
+    ,'location_id','customer_id'
+    ,'access_contact'
+    ,'location_key_lock'
+    ,'province'
+    ,'municipality'
+    ,'housenumber',
+ 
+    'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
 
     // Attributes that are searchable
-    static $searchable = ['name','zipcode','place','address','slug','complexnumber','management_id','customer_id','building_access_type_id'];
+    static $searchable = ['name','zipcode','place','address','slug','complexnumber','management_id','customer_id','access_type_id'];
 
     public function customer()
     {
