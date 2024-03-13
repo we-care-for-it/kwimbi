@@ -50,12 +50,10 @@
             <x-table.cell>
     
                <div style="width: 80px;">
-                  @if($location->building_type_id)
+                  @if($location->building_access_type_id)
                   <span
-                     class=" badge bg-soft-primary text-primary ">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
-                  @else
-                  <span class=" badge bg-soft-danger text-danger ">Onbekend</span>
-
+                     class=" badge bg-soft-primary text-primary ">{{$location->building_type}}</span>
+                    
                   @endif
                </div>
 

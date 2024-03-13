@@ -140,9 +140,9 @@
 
         @if($location->gps_lon) 
 
-        <div class="card  p-1 mb-3">
+        <div class="card  p-0 mb-3">
 
-        <div style="width: 100%"><iframe width="100%" height="206" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+ <iframe width="100%" height="219 " style = "border-radius: 10px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
             
 
 </div>
