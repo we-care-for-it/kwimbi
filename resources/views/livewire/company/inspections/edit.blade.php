@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-       Keuring toevoegen
+       Keuring wijzigen
          </div>
          <div class="col-auto">
 
@@ -28,14 +28,9 @@
 
    
    <div class="col-md-3">
-            <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               Liftgegevens
-
-            </div><div class = "card-body">
+       
             @livewire('company.elevators.partials.information', ['elevator' => $elevator])
-</div>
-                </div>
+ 
                 </div>
 
                 
@@ -43,7 +38,7 @@
             <div class="card">
                 <div class="card-header card-header-content-md-between  ">
 
-              Gegevens
+              Keuring gegevens
                 </div>
 
                 <div class = "card-body">

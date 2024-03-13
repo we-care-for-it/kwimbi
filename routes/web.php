@@ -12,7 +12,7 @@ Route::controller(azureController::class)->group(function(){
 });
 
 
-
+Route::mediaLibrary();
 
 Route::get('/reset', function () {
     session()->flush();
@@ -170,12 +170,14 @@ function ()
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
             Route::get('/maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\Create::class);
+            Route::get('/maintenance/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Maintenance\Create::class);
             Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
             Route::get('/incident/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Incidents\Create::class);
 
         });
 
         Route::get('/maintenance/edit/{id}', \App\Http\Livewire\Company\Maintenance\Edit::class);
+ 
         Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\Edit::class);
        Route::get('/maintenance-contract/edit/{id}', \App\Http\Livewire\Company\MaintenanceContracts\Edit::class);
 

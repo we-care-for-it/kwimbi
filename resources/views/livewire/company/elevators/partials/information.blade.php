@@ -1,9 +1,8 @@
 <div>
  
-<div class="card-boddy p-1">
-
  
-         <table class="table bg-light">
+ 
+         <table >
             <tr>
 
                <td colspan="2"> <a
@@ -35,7 +34,7 @@
                      <div
                         style="border-top: 1px solid #EFEFEF; float: right;  padding-top: 10px; width: 100%">
                         <a href="/elevator/show/{{$elevator->id}}">
-                        Terug naar lift gegeven
+                        Terug naar lift
                         </a>
                      </div>
                   </div>
@@ -69,17 +68,7 @@
             </div>
             </div>
             </li>
-            @if($elevator?->name)
-            <li class="py-3">
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1">
-            <h5 class="mb-0 font-size-14">Leverancier no
-            </h5>
-            {{$elevator?->manufacture}}
-            </div>
-            </div>
-            </li>
-            @endif
+            
             <li class="py-3">
             <div class="d-flex align-items-center">
             <div class="flex-grow-1">
@@ -121,7 +110,7 @@
             </div>
  
          </div>
-         </div>
+    
  
 
  

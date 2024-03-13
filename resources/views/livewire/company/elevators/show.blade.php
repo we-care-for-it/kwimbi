@@ -129,14 +129,7 @@
                      <label>Bestand</label>
                      <div class="pt-2"></div>
              
-                 
-                     <form wire:submit="uploadFile">
-    <input type="file" wire:model="file_attachment">
- 
-    @error('photo') <span class="error">{{ $message }}</span> @enderror
- 
-    <button type="submit">Save photo</button>
-</form> 
+                     <x-media-library-attachment name="media" />
              
                      <div class="pt-2"></div>
                      <div style="float: right;  ">

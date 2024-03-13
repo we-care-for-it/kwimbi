@@ -11,7 +11,7 @@
  
   <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="/assets/js/hs.chartjs.js"></script>
- 
+  @mediaLibraryStyles
 
 <script>
     (function() {

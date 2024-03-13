@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-       Liften
+       Keuring toevoegen
          </div>
          <div class="col-auto">
             <button type="button"     class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -22,22 +22,19 @@
 
    
    <div class="col-md-3">
-            <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               Liftgegevens
-
-            </div><div class = "card-body">
+   
+ 
             @livewire('company.elevators.partials.information', ['elevator' => $elevator])
 </div>
-                </div>
-                </div>
+         
+    
 
                 
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header card-header-content-md-between  ">
 
-              Gegevens
+              Keuring gegevens
                 </div>
 
                 <div class = "card-body">
@@ -76,7 +73,7 @@
       <label class = "mb-2"> Opmerking </label>
       <br>
       <textarea wire:model = "inspection_remark" class="form-control"></textarea>
-      <br><br>
+      <br> 
       </div>
       <div class="row   p-2" >
       <div class="col-md-6">

@@ -3,7 +3,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-       Liften
+       Onderhoudsbeurt wijzigen
          </div>
          <div class="col-auto">
 

@@ -7,6 +7,12 @@
                             {{$location->name}} @else Geen naam @endif
             </div>
             <div class="col-auto">
+                
+            <a href="/locations">
+                    <button type="button" class="btn   btn-link btn-sm  ">
+                        Alle locaties
+                    </button></a>
+                    
                 <a href = "/location/edit/{{$location->id}}">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
                     Wijzig
@@ -75,7 +81,7 @@
 
 <tr>
     <td>Relatie</td>
-    <td>    <a href = "/customer/{{$location->customer->slug}}">   {{$location->customer->name}}</a>
+    <td>    <a href = "/customer/{{$location?->customer?->slug}}">   {{$location?->customer?->name}}</a>
                        </td>
 </tr>
 

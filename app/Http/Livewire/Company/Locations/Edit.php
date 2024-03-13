@@ -10,6 +10,11 @@ use App\Models\Customer;
 use App\Models\managementCompany;
 use Livewire\WithFileUploads;
 use File;
+use Illuminate\Support\Facades\Http;
+
+use Illuminate\Http\Request;
+
+
 class Edit extends Component
 {
 
@@ -31,6 +36,20 @@ class Edit extends Component
     public $complexnumber;
     public $image_db;
 
+    public $building_access_type;
+    public $access_code;
+    public $gps_lat;
+    public $gps_lon;
+    public $construction_year;
+    public $levels;
+    public $surface;
+    public $access_contact;
+    public $location_key_lock;
+    public $province;
+    public $municipality;
+    public $housenumber;
+
+
     use WithFileUploads;
 
  
@@ -50,6 +69,21 @@ class Edit extends Component
         $this->management_id  = $this->data->management_id;
         $this->remark  = $this->data->remark;
         $this->building_type_id  = $this->data->building_type_id;
+        $this->building_access_type  = $this->data->building_access_type;
+        $this->access_code  = $this->data->access_code;
+        $this->gps_lat  = $this->data->gps_lat;
+        $this->gps_lon  = $this->data->gps_lon;
+        $this->construction_year  = $this->data->construction_year;
+        $this->levels  = $this->data->levels;
+        $this->surface  = $this->data->surface;
+        $this->access_contact  = $this->data->access_contact;
+        $this->location_key_lock  = $this->data->location_key_lock;
+        $this->province  = $this->data->province;
+        $this->municipality  = $this->data->municipality;
+        $this->housenumber  = $this->data->housenumber;
+        
+
+        
  
         
     }
@@ -119,5 +153,41 @@ class Edit extends Component
         
     }
 
+     //Postcode check
+     public function checkZipcode()
+     {
+         $this->zipcode = strtoupper(trim(preg_replace("/\s+/", "", $this->zipcode)));
+         if (strlen($this->zipcode) == 6) {
+           
+
+             $response = Http::get('https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=' . $this->zipcode.'&streetNumberAndPremise=' . $this->housenumber.'');
+
+             //https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=
+             $data = $response->json();
+ 
+
+
+ 
+
+             if (!isset($data['error_id'])) {
+                 $this->place = $data['settlement'];
+                 $this->address = $data['street'];
+                 $this->municipality = $data['municipality'];
+                 $this->gps_lon = $data['lng'];
+                 $this->gps_lat = $data['lat'];
+                 $this->province = $data['province'];
+                 $this->construction_year = $data['constructionYear'];
+                 $this->surface = $data['surfaceArea'];
+          
+
+          
+                 
+             } else {
+                 $this->place = "";
+                 $this->address = "";
+                 pnotify()->addWarning('Geen gegevens gevonden met deze postcode en huisnummer');
+             }
+         }
+     }
 
 }

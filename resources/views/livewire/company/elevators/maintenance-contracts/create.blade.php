@@ -4,7 +4,7 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-            Onderhoudsbeurt toevoegen
+            Onderhoudsbeurtcontract
          </div>
          <div class="col-auto">
             <button type="button"     class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -23,27 +23,20 @@
 
    
    <div class="col-md-3">
-            <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               Liftgegevens
-
-            </div>
-
-<div class = "card-body">
+        
+ 
             @livewire('company.elevators.partials.information', ['elevator' => $elevator])
 </div>
 
 
-
-                </div>
-                </div>
+ 
 
                 
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header card-header-content-md-between  ">
 
-              Gegevens
+              Contractgegevens
                 </div>
 
                 <div class = "card-body">

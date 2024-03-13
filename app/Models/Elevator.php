@@ -26,11 +26,18 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
  
-class Elevator extends Model implements Auditable
+
+ use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+ 
+
+
+class Elevator extends Model implements Auditable,HasMedia
  
 {
     use SoftDeletes;
-  
+    use InteractsWithMedia;
+
     use \OwenIt\Auditing\Auditable;
  
     // Validation rules for this model

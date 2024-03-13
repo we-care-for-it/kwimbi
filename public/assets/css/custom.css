@@ -1,3 +1,5 @@
+@import "media-library-pro-styles";
+
 .btn-120{
   width: 120px!important;
 }
@@ -43,7 +45,7 @@ body {
 }
 
 .card{
-  border-radius: 4px!important;
+  border-radius: 10px!important;
  border: 0px!important;
 
 

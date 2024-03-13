@@ -22,27 +22,20 @@
 
    
    <div class="col-md-3">
-            <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               Liftgegevens
-
-            </div>
-
-<div class = "card-body">
+ 
+ 
             @livewire('company.elevators.partials.information', ['elevator' => $elevator])
 </div>
 
 
-
-                </div>
-                </div>
+ 
 
                 
         <div class="col-md-9">
             <div class="card">
                 <div class="card-header card-header-content-md-between  ">
 
-              Gegevens
+              Onderhoudgegevens
                 </div>
 
                 <div class = "card-body">
