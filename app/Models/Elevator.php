@@ -27,12 +27,11 @@ use OwenIt\Auditing\Contracts\Auditable;
  */
  
 
- use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
+ 
  
 
 
-class Elevator extends Model implements Auditable,HasMedia
+class Elevator extends Model implements Auditable
  
 {
     use SoftDeletes;

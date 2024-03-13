@@ -124,8 +124,7 @@
                       <div class="pt-3"></div>
                       <label>Bestand</label>
                       <div class="pt-2"></div>
-
-                      <x-media-library-attachment name="media" />
+ 
 
                       <div class="pt-2"></div>
                       <div style="float: right;  ">
@@ -827,7 +826,7 @@
                                <th scope="col">Status </th>
                                <th scope="col">Begindatum </th>
                                <th scope="col">Einddatum </th>
-                               <th scope="col">Onderhoudsbedrijf </th>
+                               <th scope="col">  </th>
 
                             </tr>
                          </thead>
