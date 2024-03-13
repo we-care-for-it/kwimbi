@@ -24,14 +24,14 @@
 
 
  
-   <div class="row p-0 ">
+   <div class="row   ">
       <div class="col-xl-12">
-         <div class="card">
+       
             <div class="card-header card-header-content-md-between  ">
                <div>
                   <form>
                      <!-- Search -->
-                     <div class="input-group input-group-merge">
+                     <div style="width: 200px;" class="input-group input-group-merge">
                         <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
                            data-hs-form-search-options='{
                            "clearIcon": "#clearIcon2",
@@ -58,7 +58,9 @@
                   <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body pt-0">
+
+            <div class="card">
+            <div class="card-body  ">
                <div class="row">
                   <div>
              

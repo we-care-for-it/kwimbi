@@ -20,11 +20,16 @@
 
         <div class="col-md-3">
 
-            <label>Afbeelding</label>
-            <br> <br>
-            <div class="clear-fix"></div>
-            <span id="passwordHelpInline" class="form-text pt-4"> </span>
-            <div class="d-flex align-items-center">
+         
+        <div class="card-header   ">
+
+Locatie
+</div>
+            <div class="card">
+
+
+            <div class="card-body">
+                
                 <label class="avatar avatar-xl   avatar avatar-xl avatar-circle avatar-uploader me-5" for="editAvatarUploaderModal">
 
                     @if ($image )
@@ -50,8 +55,13 @@
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
                     class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
-            </div>
-            <label class="pb-2 pt-3">Gebouwtype</label>
+            </div>    </div>
+
+
+
+            <div class="card mt-3">
+            <div class="card-body">
+            <label class="pb-2 ">Gebouwtype</label>
  
             <input   wire:model.live="building_type" class="form-control">
             
@@ -77,17 +87,17 @@
 
             <label class="pb-2 pt-3">Complexnummer</label>
             <input style="width: 200px;" wire:model="complexnumber" class="form-control">
-
+            </div>   </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9">      <div class="card-header card-header-content-md-between  ">
+
+Locatie
+</div>
+
             <div class="card">
-                <div class="card-header card-header-content-md-between  ">
-
-                    Locatie
-                </div>
-
-                <div class="card-body pt-1">
+          
+                <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-12">
                             <div>
@@ -166,14 +176,14 @@
                     </div>
                 </div>
             </div>
+            <div class="card-header  mt-3 card-header-content-md-between  ">
 
-            <div class="card mt-3">
-                <div class="card-header card-header-content-md-between  ">
+Notitie
+</div>
 
-                    Notitie
-                </div>
+            <div class="card">      
 
-                <div class="card-body pt-0">
+                <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-12">
 
@@ -186,14 +196,14 @@
                     </div>
                 </div>
             </div>
+            <div class="card-header mt-3 card-header-content-md-between  ">
 
-            <div class="card mt-3">
-                <div class="card-header card-header-content-md-between  ">
+Toegang
+</div>
+            <div class="card ">
+            
 
-                    Toegang
-                </div>
-
-                <div class="card-body pt-1">
+                <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
                             <label class="pb-2">Type toegang</label>
@@ -239,14 +249,14 @@
 
                 </div>
             </div>
+            <div class="card-header  mt-3 card-header-content-md-between  ">
 
-            <div class="card mt-3">
-                <div class="card-header card-header-content-md-between  ">
+Bouwgegevens
+</div>
+            <div class="card ">
+              
 
-                    Bouwgegevens
-                </div>
-
-                <div class="card-body pt-1">
+                <div class="card-body ">
                     <div class="row">
 
                         <div class="row">

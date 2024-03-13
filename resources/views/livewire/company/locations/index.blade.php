@@ -17,12 +17,11 @@
 
    <div class="row ">
       <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               <div class="mb-2 mb-md-0">
+      <div>
+               <div >
                   <form>
                      <!-- Search -->
-                     <div class="input-group input-group-merge">
+                     <div  style="width: 200px;"  class="mb-3 input-group input-group-merge">
                         <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
                            placeholder="Zoeken op trefwoord..." data-hs-form-search-options='{
                            "clearIcon": "#clearIcon2",
@@ -40,7 +39,7 @@
 
                </div>
             </div>
-            <div class="card-body">
+  
                <div class="row">
                   <div>
                      <div class="row">
@@ -200,8 +199,7 @@
                      </div>
                   </div>
                </div>
-            </div>
-         </div>
+         
 
          <div class="card-footer">
             @if($items->links())

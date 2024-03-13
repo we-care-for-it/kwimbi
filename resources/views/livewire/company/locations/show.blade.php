@@ -29,12 +29,12 @@
     <div class="row">
 
         <div class="col-md-3">
- 
-
+        <div class="card">
+        <div class="card-body">
                   
       <center> 
                 
-                          </a>
+              
                             
                     <span class="mb-2   " style = "width: 100%; ">
  
@@ -72,18 +72,18 @@
 
 
 </center>
-<hr>
-
+</div></div>
  
+ <div class = "card mt-3">
 <table class= "table">
-
+@if($location->remark) 
 <tr>
 <td colspan="2">
     
-@if($location->remark) {{$location->remark}}  @endif</td>
+{{$location->remark}}  </td>
  
 </tr>
-
+@endif
 
 <tr>
     <td>Complexnummer</td>
@@ -130,7 +130,7 @@
 
 
 </table>
- 
+</div>
 </div>
                
 
@@ -142,7 +142,7 @@
 
         <div class="card  p-0 mb-3">
 
- <iframe width="100%" height="219 " style = "border-radius: 10px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+ <iframe width="100%" height="210 " style = "border-radius: 10px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
             
 
 </div>
@@ -216,14 +216,14 @@
                 </div>
 
                 </div>       </div>
+                <div class="card-header mt-3 card-header-content-md-between  ">
 
-                <div class="card mt-3">
-                <div class="card-header card-header-content-md-between  ">
+Aanwezig objecten
+</div>
+                <div class="card ">
+       
 
-                    Aanwezig objecten
-                </div>
-
-                <div class="card-body">
+                <div class="card-body     ">
                     <div class = "row">
                         <div class = "col-md-12">
                            <div>

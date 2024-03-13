@@ -421,7 +421,7 @@
     <div class="row ">
        <div class="col-3">
 
-
+       <div class="card">
        <table class="table">
                 <tr>
 
@@ -600,7 +600,7 @@
                 src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=nl&amp;q={{$object->address->address}},{{$object->address->place}},%20Netherlands+(Mijn%20bedrijfsnaam)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
           </div>
           @endif
-
+          </div>
        </div>
        <div class="col-9">
 
@@ -841,7 +841,8 @@
                                <th scope="col">Begindatum </th>
                                <th scope="col">Einddatum </th>
                                <th scope="col">  </th>
-                               <th scope="col">  </th>  <th scope="col">  </th>
+                               <th scope="col">  </th>  
+                               <th scope="col">  </th>
                             </tr>
                          </thead>
                          <tbody>
