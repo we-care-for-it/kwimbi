@@ -18,7 +18,7 @@
    </div>
 
 
-   <div class="card-header card-header-content-md-between  ">
+   <div class="card-header pt-0 card-header-form ">
                <div>
                   <form>
                      <!-- Search -->
@@ -45,7 +45,7 @@
 
          <div class="card">
            
-            <div class="card-body pt-2">
+            <div class="card-body  p-0">
                <div class="row">
                   <div>
                      <div class="row" wire:loading.class="loading-div">

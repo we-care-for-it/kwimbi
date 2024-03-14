@@ -17,24 +17,20 @@
     </div>
     <div class="row">
 
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header card-header-content-md-between bg-light">
-                    Relatie
-
-                </div>
-                <div class="card-body">
-                    @livewire('company.customers.partials.information', ['customer_id' => $customer->id])
-                </div>
-            </div>
+        <div class="col-md-3">         
+            
+        @livewire('company.customers.partials.information', ['customer_id' => $customer->id])
+           
         </div>
 
         <div class="col-md-9">
-            <div class="card">
-                <div class="card-header card-header-content-md-between  ">
+        <div class="card-header    ">
 
-                    Gegevens
-                </div>
+Gegevens
+</div>
+
+            <div class="card">
+         
 
                 <div class="card-body">
                 <div class = "row">
@@ -44,27 +40,32 @@
                         <input wire:model = "name"  class  = "form-control    @error('name') is-invalid   @enderror  " >
                         @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
                      </div>
+
+
                      <div class = "row">
                         <div class = "col-md-12">
                            <div class  = "pt-3">
                               <label class = "pb-2">Emailadres</label>
                               <input wire:model = "email"  class  = "form-control">
                            </div>
-                           <div class  = "pt-3">
-                              <label class = "pb-2">Telefoonnummer</label>
-                              <input wire:model = "phonenumber"  class  = "form-control">
-                           </div>
+                       
                         </div>
                      </div>
 
                      <div class = "row">
-                        <div class = "col-md-12">
+                        <div class = "col-md-3">
                            <div class  = "pt-3">
                               <label class = "pb-2">Functie</label>
                               <input wire:model = "function"  class  = "form-control">
                            </div>
                        
                         </div>
+                        <div class = "col-md-3">
+                        <div class  = "pt-3">
+                              <label class = "pb-2">Telefoonnummer</label>
+                              <input wire:model = "phonenumber"  class  = "form-control">
+                           </div>  </div>
+
                      </div>
 
 

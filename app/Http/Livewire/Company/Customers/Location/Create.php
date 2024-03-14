@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Http;
 use Livewire\WithFileUploads;
 use App\Models\managementCompany;
 
+
+
+
+
+use App\Models\Project;
+use App\Models\projectObject;
+ 
+use App\Models\Statuses;
+
 class Create extends Component
 
 

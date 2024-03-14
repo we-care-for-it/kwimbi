@@ -74,6 +74,30 @@
 </center>
 </div></div>
  
+
+<div class="row">
+
+<div class="col-md-12">
+
+ 
+<div class="card-header py-4  ">
+
+Relatie
+</div>
+
+<div class="card  bg-light">
+<div class="card-body">
+ 
+      <b>{{$location->customer?->name}}</b>
+      <br>
+      {{$location->customer?->address}} {{$location->customer?->place}}
+ 
+</div>
+</div>
+</div>
+</div>
+
+
  <div class = "card mt-3">
 <table class= "table">
 @if($location->remark) 
@@ -216,7 +240,7 @@
                 </div>
 
                 </div>       </div>
-                <div class="card-header   ">
+                <div class="card-header py-4   ">
 
 Aanwezig objecten
 </div>

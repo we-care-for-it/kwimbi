@@ -22,14 +22,19 @@
                 <div class="dropdown-menu  navbar-dropdown-menu navbar-dropdown-menu-borderless"
                     aria-labelledby="navbarNotificationsDropdownSettings">
                     <a class="dropdown-item" href="/customer/contact/{{$object->id}}/create">
-                        <i class="bi-archive dropdown-item-icon"></i>Contactpersoon
+                        <i class="bi bi-person-lines-fill dropdown-item-icon"></i>Contactpersoon
                     </a>
                     <a class="dropdown-item" href="/customer/location/{{$object->id}}/create">
-                        <i class="bi-archive dropdown-item-icon"></i>Locatie
+                        <i class="bi bi-map-fill  dropdown-item-icon"></i>Locatie
+                    </a> 
+                    <a class="dropdown-item" href="/customer/location/{{$object->id}}/create">
+                        <i class="bi bi-paperclip dropdown-item-icon"></i>Bestand
+                    </a>  
+                    <a class="dropdown-item" href="/customer/project/{{$object->id}}/create">
+                        <i class="bi bi-boxes dropdown-item-icon"></i>Project
                     </a>  
 
-
-                    
+                   
 
 
                 
@@ -41,8 +46,13 @@
         </div>
     </div>
 
-    <div class="row gy-3  ">
+    <div class="row  ">
         <div class="col-md-6 col-sm-6">
+        <div class="card-header   ">
+
+Relatie gegevens
+</div>
+
             <div class="card" style="height: 220px;">
                 <div class="card-body">
                     <table class="table table-sm">
@@ -89,6 +99,11 @@
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
+        <div class="card-header   ">
+
+Statusstieken
+</div>
+
             <div class="card" style="height: 220px;">
                 <div class="card-body" >
                 {{$object->remark}}

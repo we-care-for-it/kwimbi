@@ -27,7 +27,7 @@
    <div class="row   ">
       <div class="col-xl-12">
        
-            <div class="card-header card-header-content-md-between  ">
+            <div class="card-header pt-0 card-header-content-md-between  ">
                <div>
                   <form>
                      <!-- Search -->
@@ -168,25 +168,18 @@
            
                </div>
             </div>
+            </div>
+            </div>
+
+ 
 
 
-
-         <div class="card-footer">
-            <div class="clearfix  ">
-               <div class="float-start">@if(count($items))
-                  <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
-                     </b>
-                  </p>
-                  @endif</div>
+         </div> <div class="clearfix  ">
+              
                <div class="float-end"> @if($items->links())
                   {{ $items->links() }}
                   @endif</div>
             </div>
-         </div>
-
-
-
-         </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
                <h5 id="offcanvasRightLabel"><i class="bi-filter me-1"></i> Filters</h5>

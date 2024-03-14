@@ -2,8 +2,7 @@
 namespace App\Http\Livewire\Company\Customers\Contact;
 use Illuminate\Http\Request;
 
-use App\Livewire\Forms\ContatForm;
-
+ 
 
 use Livewire\Component;
 use App\Models\Customer;

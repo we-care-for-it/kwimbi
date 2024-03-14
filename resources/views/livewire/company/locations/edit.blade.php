@@ -17,11 +17,36 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row  ">
 
-        <div class="col-md-3">
+        <div class="col-md-3 ">
+ 
+ 
+<div class="row  ">
 
-        <div class="card-header card-header-content-md-between  ">
+<div class="col-md-12">
+
+ 
+<div class="card-header pt-0 py-4   ">
+
+Relatie
+</div>
+
+<div class="card  bg-light">
+<div class="card-body">
+ 
+<b>{{$data?->customer?->name}}</b>
+      <br>
+      {{$data?->customer?->address}} {{$data?->customer?->place}}
+ 
+ 
+</div>
+</div>
+</div>
+</div>
+     
+
+        <div class="card-header py-4  ">
 
 Afbeelding
 </div>
@@ -87,7 +112,7 @@ Afbeelding
         <div class="col-md-9">
 
 
-        <div class="card-header card-header-content-md-between  ">
+        <div class="card-header pt-0 py-4">
 
 Locatie
 </div>
@@ -176,7 +201,7 @@ Locatie
             </div>
 
 
-            <div class="card-header card-header-content-md-between  ">
+            <div class="card-header py-4  ">
 
 Notitie
 </div>
@@ -196,7 +221,7 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class=" card-header card-header-content-md-between  ">
+            <div class=" card-header py-4  ">
 
 Toegang
 </div>
@@ -249,7 +274,7 @@ Toegang
 
                 </div>
             </div>
-            <div class="card-header  card-header-content-md-between  ">
+            <div class="card-header py-4  ">
 
 Bouwgegevens
 </div>

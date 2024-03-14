@@ -17,6 +17,7 @@ class Information extends Component
 
     public function mount(Request $request)
     {
+ 
         $this->customer = Customer::where('id', $request->customer_id)->first();;
     }
 

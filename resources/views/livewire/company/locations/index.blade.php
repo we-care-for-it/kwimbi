@@ -15,8 +15,8 @@
       </div>
    </div>
 
-
-   <div class="card-header card-header-content-md-between  ">
+ 
+   <div class="card-header pt-0 card-header-form ">
                <div>
                   <form>
                      <!-- Search -->

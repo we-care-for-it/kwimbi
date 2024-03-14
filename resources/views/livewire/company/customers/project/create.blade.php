@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
-                  Wijzig project
+              Project aanmaken
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -15,15 +15,15 @@
             </div>
         </div>
     </div>
-    <div class="row pt-0">
+    <div class="row">
 
         <div class="col-md-3">         
             
-        <div class="card-header   pt-0    ">
-
-Gegevens
-</div>
-        <div class = "card  ">
+            
+        @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
+          
+        
+        <div class = "card mt-3">
         <div class = "card-body p2">
         <label class="pb-2  ">Begindatum</label>
         <input class="form-control @error('startdate') is-invalid @enderror" name="startdate" type="date"
@@ -52,9 +52,9 @@ Gegevens
         </div>
 
         <div class="col-md-9">
-        <div class="card-header   pt-2    ">
+        <div class="card-header    ">
 
- 
+Gegevens
 </div>
 
             <div class="card">
@@ -64,31 +64,21 @@ Gegevens
  
  
 
-            <label class="col-sm-3 pt-0  col-form-label">Naam</label>
+            <label class="col-sm-3 pt-0  col-form-label required">Naam</label>
             <input class="form-control @error('name') is-invalid @enderror" wire:model="name" type="text"
-                >
+                value="{{ old('name',@$project->name) }}">
             @error('name')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
 
             
+            <label class="col-sm-10 col-form-label">Omschrijving</label>
 
-            <!-- Form -->
-<!-- Form -->
-<div class="d-flex justify-content-between pt-3">
-  <label for="reviewLabelModalEg" class="form-label">Omschrijving</label>
-
-  <span id="maxLengthCountCharacters" class="text-muted"></span>
-</div>
-<textarea  wire:model = "description" class="js-count-characters form-control" id="reviewLabelModalEg" placeholder="Textarea field" rows="4" maxlength="100"
-          data-hs-count-characters-options='{
-            "output": "#maxLengthCountCharacters"
-          }'>As always, all Htmlstream products are excellent with a very good personalization.</textarea>
-<!-- End Form -->
-
-
-           
-            
+            <span id="maxLengthCountCharacters" class="text-muted mt-3"></span>
+            <textarea class="js-count-characters form-control" wire:model="description" name="description"
+                rows="4" maxlength="100" data-hs-count-characters-options='{
+"output": "#maxLengthCountCharacters"
+}'>{{ old('name',@$project->description) }}</textarea>
 
 
 <div class = "row">
@@ -106,7 +96,7 @@ Gegevens
 
 <div class = "col-md-2">
 <label class=" col-form-label">Uren</label>
-<input   wire:model = "budget_hours"     
+<input 
                             class=" form-control @error('budget_hours') is-invalid @enderror"
                             name="budget_hours" type="text"
                             value="{{ old('budget_hours',@$project->budget_hours) }}">
@@ -116,7 +106,7 @@ Gegevens
 </div>
 <div class = "col-md-2">
 <label class=" col-form-label">Kosten</label>
-<input                 wire:model = "budget_costs"                   class=" form-control @error('budget_costs') is-invalid @enderror"
+<input                                    class=" form-control @error('budget_costs') is-invalid @enderror"
                             name="budget_costs" type="text"
                             value="{{ old('budget_costs',@$project->budget_costs) }}">
                         @error('name')

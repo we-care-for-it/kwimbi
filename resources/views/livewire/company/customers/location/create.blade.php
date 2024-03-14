@@ -16,20 +16,31 @@
             </div>
         </div>
     </div>
+
+
+
     <div class="row">
 
         <div class="col-md-3">
+        @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
 
          
         <div class="card-header   ">
 
-Locatie
+Afbeelding
 </div>
+
+
+
             <div class="card">
 
 
+   
+ 
+
             <div class="card-body">
-                
+      
+         
                 <label class="avatar avatar-xl   avatar avatar-xl avatar-circle avatar-uploader me-5" for="editAvatarUploaderModal">
 
                     @if ($image )

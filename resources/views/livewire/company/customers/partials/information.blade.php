@@ -1,12 +1,22 @@
-<div>
-        <div class="casrd">
-        
-      <div class="card-body  ">
-     
-                  
+
+<div class="row">
+
+<div class="col-md-12">
+
+ 
+<div class="card-header   ">
+
+Relatie
+</div>
+
+<div class="card  bg-light">
+<div class="card-body">
+ 
       <b>{{$customer?->name}}</b>
       <br>
       {{$customer?->address}} {{$customer?->place}}
-     <hr>
-      </div>  </div>   
+ 
+</div>
+</div>
+</div>
 </div>

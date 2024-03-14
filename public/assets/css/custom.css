@@ -176,10 +176,21 @@ a:link{
  border: 0px solid #EFEFEF!important;
  margin-bottom: 4px!important;
  padding-bottom: 4px!important;
- font-weight: ;
+ height: 30px!important;
+ padding-top:0px!important;
+  
  
  
-  }.card-footer{
+  }
+  .card-header-form{
+ 
+    height: 50px!important;
+     
+    
+    
+     }
+     
+     .card-footer{
     border-top: 0px!important;
  
     }.card-body{
