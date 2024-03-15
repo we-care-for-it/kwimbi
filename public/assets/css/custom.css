@@ -118,14 +118,11 @@ a:link{
   font-weight: normal!important;
   color: rgb(81,85,170)!important;
 }
-
-
-.nav-item a{
+@media only screen and (min-width: 768px){ 
+  .nav-item a{
   color: white!important;
   width: 70px!important;
 }
-
-
 .js-navbar-vertical-aside{
   width: 70px!important;
 background-color: #6f42c1!important;
@@ -136,6 +133,10 @@ background-color: #6f42c1!important;
 background-color: #6f42c1!important;
  
 }
+}
+
+
+
 .loading {
 
 	text-align: center;
