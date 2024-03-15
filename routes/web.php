@@ -165,7 +165,7 @@ function ()
     Route::group(['prefix' => 'elevator', ],
         function ()
         {
-            Route::get('/edit/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
+            Route::get('/edit/{id}', \App\Http\Livewire\Company\Elevators\Edit::class);
             Route::get('/show/{id}', \App\Http\Livewire\Company\Elevators\Show::class);
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
             Route::get('/maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\Create::class);

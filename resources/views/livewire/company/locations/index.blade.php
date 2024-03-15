@@ -15,9 +15,13 @@
       </div>
    </div>
 
- 
-   <div class="card-header pt-0 card-header-form ">
-               <div>
+   <div class="row">
+      <div class="col-md-12"> 
+
+      
+  <div class="card-header card-header-content-md-between   pt-0 card-header-form ">
+     
+   <div class="mb-2 mb-md-0">
                   <form>
                      <!-- Search -->
                      <div style="width: 200px;" class="input-group input-group-merge">
@@ -199,7 +203,7 @@
                      </div>
                   </div>
                </div>
-         
+               </div>  </div>
 
          <div class="card-footer">
             @if($items->links())

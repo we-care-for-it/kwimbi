@@ -87,11 +87,11 @@
 
 @endif
 <div class="row">
-<div class="col-md-3">
-   <div class="card">
-      <div class="card-header card-header-content-md-between bg-light">
+<div class="col-md-3">    <div class="card-header card-header-content-md-between ">
          Informatie
       </div>
+   <div class="card">
+  
       <div class="card-body">
          <ul class="list-unstyled mb-0">
             <li class="pb-3">
@@ -116,7 +116,7 @@
                      </small>
                      <br> <br>
                      <div
-                        style="border-top: 1px solid #EFEFEF; float: right;  padding-top: 10px; width: 100%">
+                        style="  float: right;  padding-top: 10px; width: 100%">
                         <a href="/elevator/show/{{$incident->elevator_id}}">
                         Toon lift gegevens
                         </a>
@@ -184,7 +184,7 @@
             @if($incident->contactperson)
             Geen
             @else
-            {{$incident->contactperson}}
+           -
           
             @if($incident->contactperson_address) {{$incident->contactperson_address}}
             <br> @endif
@@ -193,30 +193,18 @@
             @endif
             </div>
             </li>
-            <li class="py-3">
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1">
-            <h5 class="mb-0 font-size-14">Onderhoudsbedrijf
-            </h5>
-            {{$incident?->elevator?->maintenancecompany?->name}}
-            </div>
-            </div>
-            </li>
-            <li class="py-3">
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1">
-            <h5 class="mb-0 font-size-14">Keuringsinstantie
-            </h5>
-            {{$incident?->elevator?->inspectionCompany?->name}}
-            </div>
-            </div>
-            </li>
+           
             <li class="py-3">
             <div class="d-flex align-items-center">
             <div class="flex-grow-1">
             <h5 class="mb-0 font-size-14">Beheerder
             </h5>
+
+            @if($incident?->elevator?->address?->management?->name)
             {{$incident?->elevator?->address?->management?->name}}
+            @else
+           -
+            @endif
             </div>
             </div>
             </li>
@@ -228,14 +216,17 @@
       <div class="col-md-9">
          <div>
          </div>
-         <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
+
+         <div class="card-header card-header-content-md-between t">
                {{$incident->subject}}     @if($editMode)
                <div>Bewerk modes</div>
                @else
                
                @endif
             </div>
+
+         <div class="card">
+        
             <div class="card-body">           
           
                <div class="row">

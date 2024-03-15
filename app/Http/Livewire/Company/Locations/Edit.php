@@ -86,7 +86,8 @@ class Edit extends Component
         $this->municipality  = $this->data->municipality;
         $this->housenumber  = $this->data->housenumber;
         $this->building_type  = $this->data->building_type;
-        
+      
+       
 
         
         

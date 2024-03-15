@@ -49,10 +49,11 @@
                    Alle liften
                 </button></a>
 
-             <button wire:click="edit({{$object->id}})" data-bs-target="#crudModal" type="button" data-bs-toggle="modal"
-                class="btn btn btn-primary btn-sm  btn-120 ">
-                Wijzig
-             </button>
+                <a href = "/elevator/edit/{{$object->id}}">
+                <button type="button" class="btn btn-primary btn-sm  btn-120" >
+                    Wijzig
+                </button>
+                </a>
 
              <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                 id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
@@ -91,6 +92,14 @@
     </div>
     <!-- End  Button trigger modal -->
 
+
+  @if($object->remark)
+
+  <div class="alert alert-soft-primary" role="alert">
+  {{$object->remark}}
+</div>
+
+@endif
     <!-- Modal -->
 
     <div wire:ignore class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
@@ -444,10 +453,7 @@
                          href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
                    </td>
                 </tr>
-                <tr>
-                   <td colspan="2">{{$object?->location?->customer?->address}}
-                      {{$object?->location?->customer?->zipcode}} {{$object?->location?->customer?->place}} </td>
-                </tr>
+               
              </table>
 
 
@@ -481,10 +487,9 @@
 
                       @if($object->status_id==1)
 
-                      <span class="badge bg-soft-success text-success p-2">Operationeel</span>
-
+                      <span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>
                       @else
-                      <span class="badge bg-soft-danger text-danger p-2">Buitendienst</span>
+                      <span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>
 
                       @endif
 
@@ -499,14 +504,7 @@
                 </td>
              </tr>
 
-             <tr>
-                <td>Opmerking </td>
-                <td>
-
-                   {{$object->remark}}
-
-                </td>
-             </tr>
+          
 
              <tr>
 
@@ -592,14 +590,24 @@
                       @endif </td>
                 </tr>
              </table>
-          <hr>
+  
+
+ 
+
+       </div>
+
+
+
+       <div class = "card  mt-3 mb-2" >
+               <div class = "card-body p-o">
+
           @if($object->address)
           <div style="width: 100%">
              <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=nl&amp;q={{$object->address->address}},{{$object->address->place}},%20Netherlands+(Mijn%20bedrijfsnaam)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
           </div>
           @endif
-          </div>
+          </div>  </div>
        </div>
        <div class="col-9">
 
@@ -634,14 +642,14 @@
 
           <div class="col-md-4">
           <div class="card p-3 bg-light" style="height: 86px;">
-             @if($object?->address?->management)
+             @if($object?->address?->managementcompany)
                    <ul class="list-unstyled mb-0">
                       <li class="pb-3">
                          <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
                                <p class="text-muted mb-1 font-size-13">Beheerder
                                </p>
-                               <span class="mb-0 font-size-14">{{$object?->address?->management?->name}}
+                               <span class="mb-0 font-size-14">{{$object?->address?->managementcompany?->name}}
                                </span>
                             </div>
                          </div>

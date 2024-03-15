@@ -47,7 +47,7 @@ class Elevator extends Model implements Auditable
     // Attributes that should be mass-assignable
     protected $fillable = [
        
-        'status_id',    'inspection_state_id','supplier_id','remark','address_id','inspection_company_id','maintenance_company_id','stopping_places','carrying_capacity','energy_label','stretcher_elevator','fire_elevator','object_type_id','construction_year','nobo_no','name','unit_no'];
+        'status_id',   'customer_id', 'inspection_state_id','supplier_id','remark','address_id','inspection_company_id','maintenance_company_id','stopping_places','carrying_capacity','energy_label','stretcher_elevator','fire_elevator','object_type_id','construction_year','nobo_no','name','unit_no'];
 
     // Attributes that are searchable
     static $searchable = ['name','address','general_emailaddress','phonenumber'];
@@ -71,6 +71,7 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
     }
+ 
 
     public function inspectioncompany()
     {

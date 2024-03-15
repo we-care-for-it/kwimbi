@@ -149,23 +149,7 @@
              <hr>
              <div class= "row">
                 <div class = "col-md-4">
-                   <label class="pb-2 ">Leverancier</label>
-                   <div class="tom-select-custom " wire:ignore.self  >
-                      <select wire:model = "supplier_id"  autocomplete="off" class="js-select form-select"
-                         data-hs-tom-select-options='{
-                         "placeholder": "Selecteer een leverancier",
-                         "hidePlaceholderOnSearch" : true,
-                         "hideSearch": false,
-                         "allowEmptyOption": true
-                         }'>
-                         <option value="">Selecteer een leverancier</option>
-                         @foreach($suppliers as $supplier)
-                         <option value="{{ $supplier->id }}">
-                            {{ $supplier->name }}
-                         </option>
-                         @endforeach
-                      </select>
-                   </div>
+                  
                    <label for="ernergie_label" class="pb-2 pt-2">Status</label>
                    <div class="tom-select-custom " wire:ignore>
                       <select
@@ -204,18 +188,7 @@
                    </div>
                 </div>
                 <div class = "col-md-4">
-                   <div class="form-check form-switch mb-4">
-                      <input  wire:model="stretcher_elevator"  value="1" type="checkbox" class="form-check-input" id="formSwitch2"  >
-                      <label class="form-check-label" for="formSwitch2">Brancardlift</label>
-                   </div>
-                   <div class="form-check form-switch mb-4">
-                      <input  value = "1" wire:model.live="fire_elevator" type="checkbox" class="form-check-input" id="formSwitch2"  >
-                      <label class="form-check-label" for="formSwitch2">Brandweerlift</label>
-                   </div>
-                   <div class="form-check form-switch mb-4">
-                      <input  value = "1" wire:model="speakconnection" type="checkbox" class="form-check-input" id="formSwitch2"  >
-                      <label class="form-check-label" for="formSwitch2">Spreek / luister</label>
-                   </div>
+                  
                 </div>
                 <div class = "col-md-4">
                    <label for="ernergie_label" wire:model = "remark" class="pb-2  ">Opmerking</label>
