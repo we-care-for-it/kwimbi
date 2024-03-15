@@ -22,7 +22,7 @@ body {
   padding: 12px!important;
   border-radius: 0px!important;;
   border:0px!important;
- 
+
 }*/
 
 #go_to_top_button {
@@ -31,10 +31,10 @@ body {
   bottom: 20px; /* Place the button at the bottom of the page */
   right: 30px; /* Place the button 30px from the right */
   z-index: 99; /* Make sure it does not overlap */
-  
+
   cursor: pointer; /* Add a mouse pointer on hover */
- 
- 
+
+
 }
 
 
@@ -45,33 +45,19 @@ body {
 }
 
 .card{
-  border-radius: 10px!important;
- border: 0px!important;
-
+ border-radius: 0px!important;;
+ border: 1px dotted #EFEFEF!important;
+  box-shadow: 0px 0px 0px 0px white!important;;
 
 }
- 
+
 .card_index{
- 
+
   border: 1px dotted #EFEFEF!important;
 
-  
-}
-.card_header{
-  margin-bottom:  0px!important;
- 
-}
- 
-.card-border-left-purple{
-
-  padding-left: 8px!important;;
-  border-top-left-radius:   0px!important;
-  border-bottom-left-radius:   0px!important;
-  
-  border: 1px dotted #EFEFEF!important;
-  border-left: 2px solid rgb(81,85,170)!important;;
 
 }
+
 .form-control {
 
   border-radius: 5px!important;;
@@ -97,14 +83,14 @@ body {
   margin-bottom: 20px!important;
   padding-bottom: 0px!important;
   height: 30px!important;;
-  
+
   border: 0px!important;
- 
+
 
  }
 
  .sticky-top { background-color: white;
-  top: 62px!important; 
+  top: 62px!important;
 
   margin-top:10px !important;
 
@@ -120,19 +106,19 @@ h1{
 
 .badge{
   font-weight:normal!important;
- 
- 
-} 
+
+
+}
 a:link{
   font-weight: normal!important;
- 
-} 
+
+}
 
 .btn-link{
   font-weight: normal!important;
   color: rgb(81,85,170)!important;
-} 
- 
+}
+
 
 
 
@@ -146,7 +132,7 @@ a:link{
 	display: block;
 }
 
- 
+
   .loading_indicator {
     border: 16px solid #CFCFFF; /* Light grey */
     border-top: 16px solid #CFCFFF; /* Blue */
@@ -164,38 +150,33 @@ a:link{
     height: 30px;
     text-align: center;
     animation: spin 2s linear infinite;
-  }.card{
-
-    border: 1px solid #EFEFEF!important;
-    box-shadow: 0px 0px 0px 0px white!important;;
-  box-shadow: 0!important;
-  border-radius: 0px!important;;
   }.card-header{
- background-color: white;
+ background-color: #F9FAFC!important;
  border-bottom: 0px!important;
  border: 0px solid #EFEFEF!important;
- margin-bottom: 4px!important;
- padding-bottom: 4px!important;
- height: 30px!important;
- padding-top:0px!important;
-  
- 
- 
+ padding-left: 10px!important;
+border-radius: 0px!important;;
+
+
+
+
+
   }
   .card-header-form{
- 
+
     height: 54px!important;
-     
-    
-    
+
+
+
      }
-     
+
      .card-footer{
     border-top: 0px!important;
- 
+
     }.card-body{
 
 padding: 10px!important;
+border-radius: 0px!important;;
   } .cnt_table_result{
     border-left: 1px solid #EFEFEF;
     min-width:34px!important;
@@ -205,14 +186,14 @@ padding: 10px!important;
   }.cnt_table_result_l{
    border: 0px;
    padding-left: 0px;
-   
+
     min-width:34px!important;
 
     float: left;
 
   }
 
-  
+
 
 
   /**
@@ -392,4 +373,3 @@ padding: 10px!important;
 .energy-class div.g:after {
   content: ' g ';
 }
- 

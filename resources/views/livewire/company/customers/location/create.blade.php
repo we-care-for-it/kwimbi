@@ -24,8 +24,8 @@
         <div class="col-md-3">
         @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
 
-         
-        <div class="card-header   ">
+
+        <div class="card-header  mt-3  ">
 
 Afbeelding
 </div>
@@ -35,12 +35,12 @@ Afbeelding
             <div class="card">
 
 
-   
- 
+
+
 
             <div class="card-body">
-      
-         
+
+
                 <label class="avatar avatar-xl   avatar avatar-xl avatar-circle avatar-uploader me-5" for="editAvatarUploaderModal">
 
                     @if ($image )
@@ -73,25 +73,26 @@ Afbeelding
             <div class="card mt-3">
             <div class="card-body">
             <label class="pb-2 ">Gebouwtype</label>
- 
+
             <input   wire:model.live="building_type" class="form-control">
-            
+
 
             <label class="pb-2 pt-3">Beheerder</label>
 
             <div class="tom-select-custom  ">
-                <select wire:model.live="management_id" class="js-select form-select" autocomplete="off"
+                <select wire:ignore.self wire:model.live="management_id" class="js-select form-select" autocomplete="off"
                     data-hs-tom-select-options='{
                                         "placeholder": "Selecteer een optie"
                                       }'>
+<option value=""></option>
 
                     @foreach($managementCompanies as $managementCompany).
 
-                    <option value="{{$managementCompany?->id}}">{{$managementCompany?->name}}</option>
+                    <option value="{{$managementCompany?->id}}" @if($management_id) selected @endif value="{{$management_id}}">{{$managementCompany?->name}}</option>
 
                     @endforeach
 
-                    <option @if($management_id) selected @endif value="{{$management_id}}"></option>
+
 
                 </select>
             </div>
@@ -107,7 +108,7 @@ Locatie
 </div>
 
             <div class="card">
-          
+
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-12">
@@ -123,28 +124,28 @@ Locatie
                         <div class="col-md-6">
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4 col-sm-2">
                                     <label class="pb-2 pt-3">Postcode</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="zipcode"  >
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-2">
                                     <label class="pb-2 pt-3">Huisnummer</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="housenumber" >
 
                                 </div>
-                                <div class="col-md-3 ">
+                                <div class="col-md-3 col-sm-2 ">
                                 <label class="pb-2 pt-3"> </label>
-                                <button class="btn btn-soft-primary btn-sm mt-7" 
+                                <button class="btn btn-soft-primary btn-sm mt-7"
                                         wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
                                         title="Zoek naar postcode" wire:keydown="checkZipcode" style="height: 40px;">
                                         <i class="bi-search"></i>
                                     </button>
-                                
+
                                 </div>
                             </div>
 
@@ -192,7 +193,7 @@ Locatie
 Notitie
 </div>
 
-            <div class="card">      
+            <div class="card">
 
                 <div class="card-body  ">
                     <div class="row">
@@ -207,17 +208,17 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class="card-header   card-header-content-md-between  ">
+            <div class="card-header mt-3  card-header-content-md-between  ">
 
 Toegang
 </div>
             <div class="card ">
-            
+
 
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2">Type toegang</label>
+                            <label class="pt-2 pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
                                 <select wire:model="access_type_id" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
@@ -241,11 +242,11 @@ Toegang
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="pb-2">Code</label>
+                            <label class="pb-2 pt-2">Code</label>
                             <input wire:model="access_code" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label class="pb-2">Contactpersoon</label>
+                            <label class="pb-2 pt-2">Contactpersoon</label>
                             <input wire:model="access_contact" class="form-control">
                         </div>
 
@@ -253,36 +254,36 @@ Toegang
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2 pt-3">Locatie sleutelkluis</label>
+                            <label class="pb-2 pt-2">Locatie sleutelkluis</label>
                             <input wire:model="location_key_lock" class="form-control">
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="card-header  card-header-content-md-between  ">
+            <div class="card-header mt-3 card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
-            <div class="card ">
-              
+            <div class="card mb-3">
+
 
                 <div class="card-body ">
                     <div class="row">
 
                         <div class="row">
                             <div class="col-md-3">
-                                <label class="pb-2">Bouwjaar</label>
+                                <label class="pt-2 pb-2">Bouwjaar</label>
                                 <input wire:model="construction_year" class="form-control">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2">Verdiepingen</label>
+                                <label class="pt-2 pb-2">Verdiepingen</label>
                                 <input wire:model="levels" class="form-control">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2">Oppervlakte</label>
+                                <label class="pt-2 pb-2">Oppervlakte</label>
                                 <input wire:model="surface" class="form-control">
                             </div>
 

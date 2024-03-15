@@ -20,38 +20,34 @@
     <div class="row  ">
 
         <div class="col-md-3 ">
- 
- 
+
+
 <div class="row  ">
 
 <div class="col-md-12">
 
- 
-<div class="card-header pt-0 py-4   ">
 
-Relatie
-</div>
 
 <div class="card  bg-light">
 <div class="card-body">
- 
+
 <b>{{$data?->customer?->name}}</b>
       <br>
       {{$data?->customer?->address}} {{$data?->customer?->place}}
- 
- 
-</div>
-</div>
-</div>
-</div>
-     
 
-        <div class="card-header py-4  ">
+
+</div>
+</div>
+</div>
+</div>
+
+
+        <div class="card-header mt-3  ">
 
 Afbeelding
 </div>
-      
-       
+
+
             <div class = "card">      <div class = "card-body">
             <label class="avatar avatar-xl   avatar avatar-xl avatar-circle avatar-uploader me-5" for="editAvatarUploaderModal">
         @if ($image_db || $image )
@@ -81,9 +77,9 @@ Afbeelding
 
             <div class = "card mt-3">      <div class = "card-body">
             <label class="pb-2  ">Gebouwtype</label>
- 
+
             <input   wire:model.live="building_type" class="form-control">
-            
+
 
             <label class="pb-2 pt-3">Beheerder</label>
 
@@ -112,13 +108,13 @@ Afbeelding
         <div class="col-md-9">
 
 
-        <div class="card-header pt-0 py-4">
+          <div class="card-header    ">
 
 Locatie
 </div>
 
             <div class="card">
-           
+
 
                 <div class="card-body ">
                     <div class="row">
@@ -151,12 +147,12 @@ Locatie
                                 </div>
                                 <div class="col-md-3 ">
                                 <label class="pb-2 pt-3"> </label>
-                                <button class="btn btn-soft-primary btn-sm mt-7" 
+                                <button class="btn btn-soft-primary btn-sm mt-7"
                                         wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
                                         title="Zoek naar postcode" wire:keydown="checkZipcode" style="height: 40px;">
                                         <i class="bi-search"></i>
                                     </button>
-                                
+
                                 </div>
                             </div>
 
@@ -201,12 +197,12 @@ Locatie
             </div>
 
 
-            <div class="card-header py-4  ">
+            <div class="card-header mt-3  ">
 
 Notitie
 </div>
             <div class="card  ">
-            
+
 
                 <div class="card-body ">
                     <div class="row">
@@ -221,17 +217,17 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class=" card-header py-4  ">
+            <div class=" card-header mt-3  ">
 
 Toegang
 </div>
             <div class="card ">
-           
+
 
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2">Type toegang</label>
+                            <label class="pb-2 pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
                                 <select wire:model="building_acces_type_id" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
@@ -255,11 +251,11 @@ Toegang
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="pb-2">Code</label>
+                            <label class="pb-2 pt-2">Code</label>
                             <input wire:model="access_code" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label class="pb-2">Contactpersoon</label>
+                            <label class="pb-2 pt-2">Contactpersoon</label>
                             <input wire:model="access_contact" class="form-control">
                         </div>
 
@@ -267,20 +263,20 @@ Toegang
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2 pt-3">Locatie sleutelkluis</label>
+                            <label class="pb-2 pt-2">Locatie sleutelkluis</label>
                             <input wire:model="location_key_lock" class="form-control">
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="card-header py-4  ">
+            <div class="card-header mt-3  ">
 
 Bouwgegevens
 </div>
 
             <div class="card ">
-        
+
                 <div class="card-body  ">
                     <div class="row">
 
@@ -291,12 +287,12 @@ Bouwgegevens
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2">Verdiepingen</label>
+                                <label class="pb-2 pt-2">Verdiepingen</label>
                                 <input wire:model="levels" class="form-control">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2">Oppervlakte</label>
+                                <label class="pb-2 pt-2">Oppervlakte</label>
                                 <input wire:model="surface" class="form-control">
                             </div>
 
