@@ -131,21 +131,21 @@ Locatie
                         <div class="col-md-6">
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-4 col-sm-2">
                                     <label class="pb-2 pt-3">Postcode</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="zipcode"  >
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-sm-2">
                                     <label class="pb-2 pt-3">Huisnummer</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="housenumber" >
 
                                 </div>
-                                <div class="col-md-3 ">
+                                <div class="col-md-4 col-sm-2">
                                 <label class="pb-2 pt-3"> </label>
                                 <button class="btn btn-soft-primary btn-sm mt-7"
                                         wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
