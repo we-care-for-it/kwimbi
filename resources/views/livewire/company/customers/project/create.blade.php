@@ -19,7 +19,6 @@
 
         <div class="col-md-3">         
             
-            
         @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
           
         

@@ -421,6 +421,21 @@
     <div class="row ">
        <div class="col-3">
 
+       <div class = "card  mb-2" >
+               <div class = "card-body bg-light">
+               @if($object?->address?->name)
+                   <b>{{$object?->address?->name}}</b>
+                   @endif @if($object?->address?->complexnumber)
+                   ({{$object?->address?->complexnumber}})
+                   @endif
+                   <br>
+
+                   {{$object?->address?->address}} <br>
+                   {{$object?->address?->zipcode}} {{$object?->address?->place}}
+
+       </div>
+       </div>
+
        <div class="card">
        <table class="table">
                 <tr>
@@ -435,25 +450,9 @@
                 </tr>
              </table>
 
+
           <table class="table " style="margin: 1px;">
-
-             <tr>
-
-                <td colspan=2>
-
-                   @if($object?->address?->naam)
-                   <b>{{$object?->address?->naam}}</b>
-                   @endif @if($object?->address?->complexnumber)
-                   ({{$object?->address?->complexnumber}})
-                   @endif
-                   <br>
-
-                   {{$object?->address?->address}} <br>
-                   {{$object?->address?->zipcode}} {{$object?->address?->place}}
-
-                </td>
-
-             </tr>
+ 
 
              <tr>
                 <td>Leverancier</td>
@@ -606,7 +605,7 @@
 
           <div class="row">
              <div class="col-md-4">
-             <div class="p-3 bg-light" style="height: 80px;">
+             <div class="card p-3 bg-light" style="height: 86px;">
                       @if($object->maintenance_company_id)
                       <ul class="list-unstyled mb-0">
                          <li ">
@@ -620,12 +619,12 @@
 
                    </ul>
                    @else
-                   <div class="alert alert-soft-warning border-0 d-flex align-items-center" role="alert">
-                      <i class="uil uil-exclamation-triangle font-size-16 text-warning me-2"></i>
-                      <div class="flex-grow-1 text-truncate">
+            
+                      
+                     <center class = "pt-3">
                          Geen onderhoudsbedrijf
-                      </div>
-                   </div>
+       </center>
+            
                    @endif
                    </div>
 
@@ -634,7 +633,7 @@
 
 
           <div class="col-md-4">
-             <div class="p-3 bg-light" style="height: 80px;">
+          <div class="card p-3 bg-light" style="height: 86px;">
              @if($object?->address?->management)
                    <ul class="list-unstyled mb-0">
                       <li class="pb-3">
@@ -653,20 +652,16 @@
                       <!-- end li -->
                    </ul>
                    @else
-                   <div class="alert alert-soft-warning border-0 d-flex align-items-center" role="alert">
-                      <i class="uil uil-exclamation-triangle font-size-16 text-warning me-2">
-                      </i>
-                      <div class="flex-grow-1 text-truncate">
-                         Geen beheerder
-                      </div>
-                   </div>
+                   <center class = "pt-3">
+                         Geen Beheerder
+       </center>
                    @endif
                    </div>
 
                    
           </div>
           <div class="col-md-4">
-             <div class="p-3 bg-light" style="height: 80px;">
+          <div class="card p-3 bg-light" style="height: 86px;">
              @if($object?->inspection_company_id)
                    <ul class="list-unstyled mb-0">
                       <li>
@@ -686,12 +681,9 @@
                       <!-- end li -->
                    </ul>
                    @else
-                   <div class="alert alert-soft-warning border-0 d-flex align-items-center" role="alert">
-                      <i class="uil uil-exclamation-triangle font-size-16 text-warning me-2"></i>
-                      <div class="flex-grow-1 text-truncate">
-                         Geen Keuringinstantie
-                      </div>
-                   </div>
+                   <center class = "pt-3">
+                         Geen keuringinstanties
+       </center>
                    @endif
                    </div>
 
@@ -705,12 +697,12 @@
           @if($object->AllElevatorOnThisAddress)
 
           <div class="row pt-3">
-             <div class="col-md-12">
-                <div class="card">
-                   <div class="card-header card-header-content-md-between bg-light">
+             <div class="col-md-12">       <div class="card-header card-header-content-md-between  ">
                       Liften op deze locatie
 
                    </div>
+                <div class="card">
+            
                    <div class="card-body">
                       <table class="table  table-sm  table-hover ">
                          <thead>
@@ -823,12 +815,12 @@
           @endif
 
           <div class="row  pt-3">
-             <div class="col-md-12">
-                <div class="card">
-                   <div class="card-header card-header-content-md-between bg-light">
+             <div class="col-md-12">    <div class="card-header card-header-content-md-between  ">
                       Onderhoudscontracten
 
                    </div>
+                <div class="card">
+               
 
                    <div class="card-body p-2">
 
@@ -918,13 +910,12 @@
              </div>
           </div>
           <div class="row pt-3">
-             <div class="col-md-12">
-                <div class="card">
-                   <div class="card-header card-header-content-md-between bg-light">
+             <div class="col-md-12">    <div class="card-header card-header-content-md-between ">
                       Onderhoudsbeurten
-
-                      </a>
+ 
                    </div>
+                <div class="card">
+               
 
                    <div class="card-body p-2">
 
@@ -1021,11 +1012,12 @@
           </div>
           <div class="row pt-3">
              <div class="col-md-12">
-                <div class="card">
-                   <div class="card-header card-header-content-md-between bg-light">
+             <div class="card-header card-header-content-md-between ">
                       Storingen
 
                    </div>
+                <div class="card">
+                
                    <div class="card-body p-2">
 
                       @if(count($object->incidents))
@@ -1140,12 +1132,12 @@
           </div>
 
           <div class="row pt-3">
-             <div class="col-md-12">
-                <div class="card">
-                   <div class="card-header card-header-content-md-between bg-light">
+             <div class="col-md-12">          <div class="card-header card-header-content-md-between  t">
                       Keuringen
 
                    </div>
+                <div class="card">
+         
                    <div class="card-body p-2">
 
                       @if(count($object->inspections))

@@ -17,9 +17,11 @@
       </div>
    </div>
    <div class="row">
-      <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between  ">
+      <div class="col-md-12"> 
+         
+     
+      
+      <div class="card-header card-header-content-md-between   pt-0 card-header-form ">
                <div class="mb-2 mb-md-0">
                   <form>
                      <!-- Search -->
@@ -84,6 +86,8 @@
                   <!-- End Dropdown -->
                </div>
             </div>
+         <div class="card">
+          
             <div class="card-body">
                <div class="row">
                   <div>

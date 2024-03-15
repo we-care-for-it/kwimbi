@@ -27,7 +27,8 @@
    <div class="row   ">
       <div class="col-xl-12">
        
-            <div class="card-header pt-0 card-header-content-md-between  ">
+        
+   <div class="card-header pt-0 card-header-form ">
                <div>
                   <form>
                      <!-- Search -->
@@ -46,19 +47,11 @@
                   </form>
                </div>
                <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay class="loading_indicator_small"></div>
-                  </div>
-                  <div class="dropdown">
-                     <button type="button" class="btn btn-white btn-sm w-100"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-dark rounded-circle ms-1">{{$cntFilters}}</span>
-                     </button>
-                  </div>
+                 
+                  
                   <!-- End Dropdown -->
                </div>
             </div>
-
             <div class="card">
             <div class="card-body p-0  ">
                <div class="row">
