@@ -22,69 +22,74 @@
 
           <span class="dropdown-header mt-2">Hoofdmenu</span>
 
-          <div class="nav-item ">
+          <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Dashboard">
             <a wire:navigate class="nav-link {{  Request::path() ==   'dashboard' ? 'active' : '' }} " href="/dashboard">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi-speedometer2 nav-icon"></i>
               <span class="nav-link-title">Overzicht</span>
             </a>
 
           </div>
 
-       <div class="nav-item ">
+       <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Liften">
           <a wire:navigate  class="nav-link @if(request()->is('elevators/*') or  request()->is('elevator/*')  or request()->is('elevators'))  active @endif "
               href="/elevators">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi-grid"></i>
               <span class="nav-link-title">Liften</span>
             </a>
 
           </div>
 
-          <div class="nav-item ">
+          <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Storingen">
           <a wire:navigate  class="nav-link @if(request()->is('incidents/*') or  request()->is('incidents'))  active @endif "
                 href="/incidents">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-exclamation-triangle  nav-icon"></i>
               <span class="nav-link-title">Storingen</span>
             </a>
 
           </div>
 
           
-          <div class="nav-item ">
+          <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Locaties">
           <a wire:navigate  class="nav-link @if(request()->is('location/*') or  request()->is('locations'))  active @endif "
                 href="/locations">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-geo-alt-fill  nav-icon"></i>
               <span class="nav-link-title">Locaties</span>
             </a>
 
           </div>
 
 
-          <div class="nav-item ">
+          <div class="nav-item "  data-bs-toggle="tooltip" data-bs-placement="right" title="Projecten">
             <a wire:navigate  class="nav-link @if(request()->is('projects/*') or request()->is('project/*') or  request()->is('projects'))  active @endif "
               href="/projects">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-box  nav-icon"></i>
               <span class="nav-link-title">Projecten</span>
             </a>
 
           </div>
 
-          <div class="nav-item ">
+          <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Relaties">
             <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
               href="/customers">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-person  nav-icon"></i>
               <span class="nav-link-title">Relaties</span>
             </a>
 
+            </div>
+            <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Werkopdrachten">
+
             <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
               href="/customers">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-body-text  nav-icon"></i>
               <span class="nav-link-title">Werkopdrachten</span>
             </a>
 
+            </div>
+            <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Tijdregistratie">
 
             <a wire:navigate  class="nav-link @if(request()->is('customers/*') or  request()->is('customers'))  active @endif "
               href="/customers">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-clock  nav-icon"></i>
               <span class="nav-link-title">Tijdregistratie</span>
             </a>
 
@@ -112,7 +117,7 @@
 
             active @endif   "
               href="/masterdata">
-              <i class="bi-people nav-icon"></i>
+              <i class="bi bi-gear nav-icon"></i>
               <span class="nav-link-title">Basisinstellingen</span>
             </a>
 

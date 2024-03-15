@@ -229,7 +229,7 @@ Toegang
                         <div class="col-md-3">
                             <label class="pb-2 pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
-                                <select wire:model="building_acces_type_id" class="js-select form-select"
+                                <select wire:model="building_access_type_id" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
                               "placeholder": "Selecteer een optie"
                             }'>
