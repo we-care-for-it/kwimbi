@@ -446,6 +446,7 @@
        </div>
 
        <div class="card">
+         <div class = "card-body  ">
        <table class="table">
                 <tr>
 
@@ -457,7 +458,7 @@
              </table>
 
 
-          <table class="table " style="margin: 1px;">
+          <table class="table table-striped " style="margin: 1px;">
  
 
              <tr>
@@ -506,37 +507,7 @@
 
           
 
-             <tr>
-
-                <td class="align-middle">Energielabel</td>
-                <td class="align-middle">
-
-                   <div class="energy-class">
-
-                      @if($object->energy_label=='A')
-
-                      <div class="a"></div>
-                      @elseif($object->energy_label=='B')
-                      <div class="b"></div>
-                      @elseif($object->energy_label=='C')
-                      <div class="c"></div>
-                      @elseif($object->energy_label=='D')
-                      <div class="d"></div>
-                      @elseif($object->energy_label=='E')
-                      <div class="e"></div>
-                      @elseif($object->energy_label=='F')
-                      <div class="f"></div>
-                      @elseif($object->energy_label=='G')
-                      <div class="g"></div>
-                      @else
-                      Onbekend
-                      @endif
-
-                   </div>
-
-                </td>
-
-             </tr>
+       
 
             
                 <tr>
@@ -589,9 +560,51 @@
                       <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
                       @endif </td>
                 </tr>
+
+                
+
+                
+
+                <tr>
+
+<td  colspan  = "2" class="align-middle">Energielabel 
+ 
+
+   <div class="energy-class">
+
+      @if($object->energy_label=='A')
+
+      <div class="a"></div>
+      @elseif($object->energy_label=='B')
+      <div class="b"></div>
+      @elseif($object->energy_label=='C')
+      <div class="c"></div>
+      @elseif($object->energy_label=='D')
+      <div class="d"></div>
+      @elseif($object->energy_label=='E')
+      <div class="e"></div>
+      @elseif($object->energy_label=='F')
+      <div class="f"></div>
+      @elseif($object->energy_label=='G')
+      <div class="g"></div>
+      @else
+      Onbekend
+      @endif
+
+   </div>
+
+</td>
+
+</tr>
+
+
+
+
              </table>
   
 
+             
+             </div>
  
 
        </div>

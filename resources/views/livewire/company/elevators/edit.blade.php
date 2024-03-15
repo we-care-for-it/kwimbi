@@ -132,7 +132,7 @@ Gegevens
              <div class="col-md-4">
                 <label class="pb-2 ">Relatie</label>
  
-                <div class="tom-select-custom"  >
+                <div class="tom-select-custom"   >
                    <select   wire:change = "search_locations_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select @error('customer_id') is-invalid   @enderror "
                       data-hs-tom-select-options='{
                       "placeholder": "Selecteer een relatie",
@@ -151,7 +151,7 @@ Gegevens
 
                 <label class="pb-2   pt-2">Locatie</label>
  
- <div class="tom-select-custom" wire:ignore.self>
+ <div class="tom-select-custom" w >
     <select   wire:model = "address_id" autocomplete="on" class="js-select form-select @error('address_id') is-invalid   @enderror "
        data-hs-tom-select-options='{
        "placeholder": "Selecteer een locatie",
