@@ -13,7 +13,7 @@
       @livewireStyles
    </head>
 
-   <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl">
+   <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-mini-mode">
       <script src="/assets/js/hs.theme-appearance.js"></script>
       @include('layouts.partials._header')
       <main id="content" role="main" class="main">

@@ -6,11 +6,6 @@
       <div class="navbar-vertical-content">
         <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
     
-            <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-            <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
-            <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-            <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
- 
           <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler" style="opacity: 1;">
           <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Collapse" data-bs-original-title="Menu verbergen "></i>
           <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Expand" data-bs-original-title="Menu tonen"></i>
@@ -20,20 +15,6 @@
           <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Expand" data-bs-original-title="Menu tonen"></i>
         </button>
 
- <form method = "post" action="/search">
- @csrf
-  <div class="input-group input-group-merge mt-3">
-    <input type="text" class="js-form-search form-control w-100"  id = "keyword" name = "keyword" placeholder="Zoek op trefwoord..."
-           data-hs-form-search-options='{
-             "clearIcon": "#clearIcon2",
-             "defaultIcon": "#defaultClearIconToggleEg"
-           }' value = "{{request()->get('keyword')}}">
-    <button type="button" class="input-group-append input-group-text">
-      <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-      <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
-    </button>
-  </div>
-          </form>
 
 <!-- End Form -->
 

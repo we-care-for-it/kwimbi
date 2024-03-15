@@ -19,7 +19,7 @@
       <div class="col-md-12"> 
 
       
-  <div class="card-header card-header-content-md-between   pt-0 card-header-form ">
+  <div class="card-header card-header-content-md-between ">
      
    <div class="mb-2 mb-md-0">
                   <form>

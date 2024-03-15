@@ -1,6 +1,6 @@
 <!-- ========== HEADER ========== -->
 
-<header style = "background-color: #6f42c1 "  id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
+<header   id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
   >
   <div  class="navbar-nav-wrap">
       <div class="navbar-nav-wrap-content-start">
@@ -13,6 +13,8 @@
           data-bs-toggle="tooltip" data-bs-placement="right" title="Menu"></i>
       </button>
 
+      <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
+            
   </div>
 
     <div class="navbar-nav-wrap-content-end">

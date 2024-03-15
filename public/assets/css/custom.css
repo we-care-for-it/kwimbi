@@ -120,8 +120,22 @@ a:link{
 }
 
 
+.nav-item a{
+  color: white!important;
+  width: 70px!important;
+}
 
 
+.js-navbar-vertical-aside{
+  width: 70px!important;
+background-color: #6f42c1!important;
+ 
+}
+.navbar-vertical-container{
+  width: 70px!important;
+background-color: #6f42c1!important;
+ 
+}
 .loading {
 
 	text-align: center;
@@ -156,6 +170,8 @@ a:link{
  border: 0px solid #EFEFEF!important;
  padding-left: 10px!important;
 border-radius: 0px!important;;
+border: 1px dotted #EFEFEF!important;
+border-bottom: 0px!important;
 
 
 
