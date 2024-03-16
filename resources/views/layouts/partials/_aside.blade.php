@@ -1,5 +1,12 @@
 <aside
-  class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+  class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-md navbar-bordered bg-white  
+  
+  data-hs-header-item-options='{
+  "breakpoint": "md"
+}'
+
+  
+  ">
   <div class="navbar-vertical-container">
     <div class="navbar-vertical-footer-offset">
 
@@ -33,7 +40,7 @@
        <div class="nav-item " data-bs-toggle="tooltip" data-bs-placement="right" title="Liften">
           <a wire:navigate  class="nav-link @if(request()->is('elevators/*') or  request()->is('elevator/*')  or request()->is('elevators'))  active @endif "
               href="/elevators">
-              <i class="bi-grid"></i>
+              <i class="bi-grid nav-icon"></i>
               <span class="nav-link-title">Liften</span>
             </a>
 

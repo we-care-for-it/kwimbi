@@ -3705,7 +3705,7 @@ textarea.form-control-lg {
     left: auto;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 892px) {
   .dropdown-menu-lg-start {
     --bs-position: start;
   }
