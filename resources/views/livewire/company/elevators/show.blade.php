@@ -30,18 +30,21 @@
           </div>
           <div class="col-auto">
 
-             <a href="/elevator/edit/{{$object->id}}">
+         
+          <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120   " style = "float: right"
+                id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
+                Toevoegen
+             </button>    <a href="/elevator/edit/{{$object->id}}">
                 <button type="button" class="btn   btn-link btn-sm ">
                    Wijzig
                 </button>
              </a>
 
-             <!-- <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
-                id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
-                Toevoegen
+             <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+              Terug
              </button>
 
-             <div class="dropdown-menu  navbar-dropdown-menu navbar-dropdown-menu-borderless"
+             <div class="dropdown-menu  navbar-dropdown-menu"
                 aria-labelledby="navbarNotificationsDropdownSettings">
 
                 <a class="dropdown-item" href="/elevator/maintenance-contract/{{$object->id}}/create">
@@ -62,12 +65,9 @@
                    <i class="bi-gift dropdown-item-icon"></i> Bijlage
                 </a>
 
-             </div> -->
+             </div> 
 
-             <button type="button" onclick="history.back()" class="btn btn-soft-secondary btn-sm  btn-ico">
-                <i class="fa-solid fa-arrow-left"></i>
-             </button>
-
+   
           </div>
        </div>
     </div>
