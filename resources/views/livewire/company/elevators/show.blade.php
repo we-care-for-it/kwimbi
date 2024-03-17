@@ -201,12 +201,8 @@
 
 </tr>
 
-<tr>
-   <td class="align-middle">Speek luister/verbinding </td>
-   <td>
-      <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
-   </td>
-</tr>
+ 
+ 
 
 <tr>
    <td>Keuringstatus</td>
@@ -250,7 +246,7 @@
                    </td>
                 </tr>
                 <tr>
-                   <td>Aantal Stopplaatsen</td>
+                   <td>Stopplaatsen</td>
                    <td> @if($object->stopping_places)
                       {{$object->stopping_places}}
                       @else
@@ -391,6 +387,7 @@
 </div>
 
 </div>
+
 @if($object->AllElevatorOnThisAddress)
 
 <div class="row pt-3">
@@ -515,8 +512,6 @@
 @endif
 
 </div>
-
-
 </div>
 
 
@@ -799,7 +794,8 @@
           </span>
        </div>
        <br> @endif
- 
+
+     
        <button onclick="topFunction()" id="go_to_top_button" class="btn-sm btn btn-primary btn-ico"><i
              class="fa-solid fa-arrow-up"></i></button>
     </div>
