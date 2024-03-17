@@ -17,20 +17,7 @@
                 </div>
                 @endif
 
-                @if($object?->stretcher_elevator)
-                <div class="cnt_table_result">
-
-                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brancard / Bedlift"
-                      class="text-primary fa-solid fa-bed"></i>
-                </div>
-
-                @else
-                <div class="cnt_table_result">
-
-                   <i style="color: #EFEFEF" class=" fa-solid fa-bed"></i>
-                </div>
-
-                @endif
+                
 
                 @if($object?->address_id)
                 {{$object->location?->address}} {{$object->location?->place}}
@@ -38,9 +25,10 @@
                 ({{$object->location?->name}})
                 @endif
                 @else
-                Geen relatie
-                @endif
-
+                
+                @endif  
+</h1>
+<small>{{$object->location->customer->name}}</small>
           </div>
           <div class="col-auto">
 
@@ -92,17 +80,10 @@
     </div>
     <!-- End  Button trigger modal -->
 
-    @if($object->remark)
-
-    <div class="alert alert-soft-primary" role="alert">
-       {{$object->remark}}
-    </div>
-
-    @endif
 
 
     
-    <div class="row pb-4">
+    <div class="row pb-4 pt-2">
                 <div class="col-md-4">
                    <div class="card p-3 bg-light" style="height: 86px;">
                       @if($object->maintenance_company_id)
@@ -207,7 +188,7 @@
              <div class="card p-0 border  " onclick="location='/connections/chex'">
                 <div class="   big-button">
                    <div class="text-center">
-                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-wrench fa-1x  "></i>
                       </span>
                       <p class="  mb-0">Onderhoudsbeurten</p>
                    </div>
@@ -219,7 +200,7 @@
              <div class="card p-0 border  " onclick="location='/connections/chex'">
                 <div class="   big-button">
                    <div class="text-center">
-                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-certificate fa-1x  "></i>
                       </span>
                       <p class="  mb-0">Keuringen</p>
                    </div>
@@ -232,7 +213,7 @@
              <div class="card p-0 border  " onclick="location='/connections/chex'">
                 <div class="   big-button">
                    <div class="text-center">
-                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-up-down fa-1x  "></i>
                       </span>
                       <p class="  mb-0">Rittenregistratie</p>
                    </div>
@@ -244,7 +225,7 @@
              <div class="card p-0 border  " onclick="location='/connections/chex'">
                 <div class="   big-button">
                    <div class="text-center">
-                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-file-contract fa-1x  "></i>
                       </span>
                       <p class="  mb-0">Onderhoudscontracten</p>
                    </div>
@@ -252,9 +233,44 @@
              </div>
           </div>
 
+          
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-paperclip fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Bijlages</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+         
 
 
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-tasks fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Werkopdrachten</p>
+                   </div>
+                </div>
+             </div>
+          </div>
 
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-circle-info fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Meer informatie</p>
+                   </div>
+                </div>
+             </div>
+          </div>
  
 
     
