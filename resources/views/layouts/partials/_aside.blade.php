@@ -1,9 +1,6 @@
-<aside
+<aside style = "backgrounc-color: white"
   class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-md navbar-bordered bg-white  
-  
-  data-hs-header-item-options='{
-  "breakpoint": "md"
-}'
+ 
 
   
   ">

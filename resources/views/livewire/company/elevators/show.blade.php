@@ -102,7 +102,7 @@
 
 
     
-    <div class="row pb-2">
+    <div class="row pb-4">
                 <div class="col-md-4">
                    <div class="card p-3 bg-light" style="height: 86px;">
                       @if($object->maintenance_company_id)
@@ -265,6 +265,182 @@
           
 
        </div>
+
+
+
+
+       
+    <div class="row pt-4">
+                <div class="col-md-6">
+                   <div class="card p-3 " >
+                   <table class="table table-striped " style="margin: 1px;">
+
+<tr>
+   <td>Leverancier</td>
+   <td>@if($object?->supplier?->name)
+      {{$object?->supplier?->name}}
+      @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
+   </td>
+</tr>
+<tr>
+   <td>Bouwjaar</td>
+   <td>
+
+      @if($object->construction_year)
+      {{$object->construction_year}}
+      @else
+      <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
+      @endif
+
+   </td>
+</tr>
+
+<tr>
+   <td class="align-middle">Status </td>
+   <td>
+      <span class="badge bg-soft-primary-light text-primary p-1">
+
+         @if($object->status_id==1)
+
+         <span class="d-flex align-items-center"> <span
+               class="legend-indicator bg-success"></span> <span
+               class="text-truncate">Operationeel</span></span>
+         @else
+         <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
+            <span class="text-truncate">Lift buiten gebruik</span></span>
+
+         @endif
+
+      </span></td>
+
+</tr>
+
+<tr>
+   <td class="align-middle">Speek luister/verbinding </td>
+   <td>
+      <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
+   </td>
+</tr>
+
+<tr>
+   <td>Keuringstatus</td>
+   <td> @if(count($object->inspections))
+
+      @if($object?->latestInspection?->status_id==1)
+      <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
+      @endif
+      @if($object?->latestInspection?->status_id==2)
+      <span class="badge bg-soft-primary text-primary ">
+         Goedgekeurd met acties </span>
+      @endif
+      @if($object?->latestInspection?->status_id==3)
+      <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
+      @endif
+      @if($object?->latestInspection?->status_id==4)
+      <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
+      @endif
+      @if($object?->latestInspection?->status_id==5)
+      <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
+      @endif
+
+      @else
+      Geen keuring uitgevoerd
+
+      @endif</td>
+
+</tr> 
+
+</table>
+                </div>
+
+             </div>
+
+             <div class="col-md-6">
+                   <div class="card p-3 " >
+                   <table class="table table-striped " style="margin: 1px;">
+
+<tr>
+   <td>Leverancier</td>
+   <td>@if($object?->supplier?->name)
+      {{$object?->supplier?->name}}
+      @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
+   </td>
+</tr>
+<tr>
+   <td>Bouwjaar</td>
+   <td>
+
+      @if($object->construction_year)
+      {{$object->construction_year}}
+      @else
+      <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
+      @endif
+
+   </td>
+</tr>
+
+<tr>
+   <td class="align-middle">Status </td>
+   <td>
+      <span class="badge bg-soft-primary-light text-primary p-1">
+
+         @if($object->status_id==1)
+
+         <span class="d-flex align-items-center"> <span
+               class="legend-indicator bg-success"></span> <span
+               class="text-truncate">Operationeel</span></span>
+         @else
+         <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
+            <span class="text-truncate">Lift buiten gebruik</span></span>
+
+         @endif
+
+      </span></td>
+
+</tr>
+
+<tr>
+   <td class="align-middle">Speek luister/verbinding </td>
+   <td>
+      <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
+   </td>
+</tr>
+
+<tr>
+   <td>Keuringstatus</td>
+   <td> @if(count($object->inspections))
+
+      @if($object?->latestInspection?->status_id==1)
+      <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
+      @endif
+      @if($object?->latestInspection?->status_id==2)
+      <span class="badge bg-soft-primary text-primary ">
+         Goedgekeurd met acties </span>
+      @endif
+      @if($object?->latestInspection?->status_id==3)
+      <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
+      @endif
+      @if($object?->latestInspection?->status_id==4)
+      <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
+      @endif
+      @if($object?->latestInspection?->status_id==5)
+      <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
+      @endif
+
+      @else
+      Geen keuring uitgevoerd
+
+      @endif</td>
+
+</tr>
+ 
+
+</table>
+                </div>
+
+                 
+          </div>
+
 
        <!-- Modal -->
 
@@ -595,185 +771,8 @@
        <br> @endif
 
        <div class="row ">
-          <div class="col-3">
-
-             <div class="card  mb-2">
-                <div class="card-body bg-light">
-                   @if($object?->address?->name)
-                   <b>{{$object?->address?->name}}</b>
-                   @endif @if($object?->address?->complexnumber)
-                   ({{$object?->address?->complexnumber}})
-                   @endif
-                   <br>
-
-                   {{$object?->address?->address}} <br>
-                   {{$object?->address?->zipcode}} {{$object?->address?->place}}
-
-                </div>
-             </div>
-
-             <div class="card">
-                <div class="card-body  ">
-                   <table class="table">
-                      <tr>
-
-                         <td colspan="2"> <a
-                               href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
-                         </td>
-                      </tr>
-
-                   </table>
-
-                   <table class="table table-striped " style="margin: 1px;">
-
-                      <tr>
-                         <td>Leverancier</td>
-                         <td>@if($object?->supplier?->name)
-                            {{$object?->supplier?->name}}
-                            @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
-                         </td>
-                      </tr>
-                      <tr>
-                         <td>Bouwjaar</td>
-                         <td>
-
-                            @if($object->construction_year)
-                            {{$object->construction_year}}
-                            @else
-                            <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
-                            @endif
-
-                         </td>
-                      </tr>
-
-                      <tr>
-                         <td class="align-middle">Status </td>
-                         <td>
-                            <span class="badge bg-soft-primary-light text-primary p-1">
-
-                               @if($object->status_id==1)
-
-                               <span class="d-flex align-items-center"> <span
-                                     class="legend-indicator bg-success"></span> <span
-                                     class="text-truncate">Operationeel</span></span>
-                               @else
-                               <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
-                                  <span class="text-truncate">Lift buiten gebruik</span></span>
-
-                               @endif
-
-                            </span></td>
-
-                      </tr>
-
-                      <tr>
-                         <td class="align-middle">Speek luister/verbinding </td>
-                         <td>
-                            <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
-                         </td>
-                      </tr>
-
-                      <tr>
-                         <td>Keuringstatus</td>
-                         <td> @if(count($object->inspections))
-
-                            @if($object?->latestInspection?->status_id==1)
-                            <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
-                            @endif
-                            @if($object?->latestInspection?->status_id==2)
-                            <span class="badge bg-soft-primary text-primary ">
-                               Goedgekeurd met acties </span>
-                            @endif
-                            @if($object?->latestInspection?->status_id==3)
-                            <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
-                            @endif
-                            @if($object?->latestInspection?->status_id==4)
-                            <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
-                            @endif
-                            @if($object?->latestInspection?->status_id==5)
-                            <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
-                            @endif
-
-                            @else
-                            Geen keuring uitgevoerd
-
-                            @endif</td>
-
-                      </tr>
-                      <tr>
-                         <td>Nobo nr.</td>
-                         <td>
-
-                            @if($object->nobo_no) {{$object->nobo_no}} @else <span
-                               class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
-                         </td>
-
-                      </tr>
-                      <tr>
-                         <td>UNitnr</td>
-                         <td>@if($object->unit_no) {{$object->unit_no}} @else <span
-                               class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
-                         </td>
-                      </tr>
-                      <tr>
-                         <td>Aantal Stopplaatsen</td>
-                         <td> @if($object->stopping_places)
-                            {{$object->stopping_places}}
-                            @else
-                            <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
-                            @endif </td>
-                      </tr>
-
-                      <tr>
-
-                         <td colspan="2" class="align-middle">Energielabel
-
-                            <div class="energy-class">
-
-                               @if($object->energy_label=='A')
-
-                               <div class="a"></div>
-                               @elseif($object->energy_label=='B')
-                               <div class="b"></div>
-                               @elseif($object->energy_label=='C')
-                               <div class="c"></div>
-                               @elseif($object->energy_label=='D')
-                               <div class="d"></div>
-                               @elseif($object->energy_label=='E')
-                               <div class="e"></div>
-                               @elseif($object->energy_label=='F')
-                               <div class="f"></div>
-                               @elseif($object->energy_label=='G')
-                               <div class="g"></div>
-                               @else
-                               Onbekend
-                               @endif
-
-                            </div>
-
-                         </td>
-
-                      </tr>
-
-                   </table>
-
-                </div>
-
-             </div>
-
-             <div class="card  mt-3 mb-2">
-                <div class="card-body p-o">
-
-                   @if($object->address)
-                   <div style="width: 100%">
-                      <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=nl&amp;q={{$object->address->address}},{{$object->address->place}},%20Netherlands+(Mijn%20bedrijfsnaam)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                   </div>
-                   @endif
-                </div>
-             </div>
-          </div>
-          <div class="col-9">
+      
+          <div class="col-12">
 
 
           @if($object->AllElevatorOnThisAddress)
