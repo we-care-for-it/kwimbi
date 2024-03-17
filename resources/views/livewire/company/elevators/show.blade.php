@@ -100,6 +100,93 @@
 
     @endif
 
+
+    
+    <div class="row pb-2">
+                <div class="col-md-4">
+                   <div class="card p-3 bg-light" style="height: 86px;">
+                      @if($object->maintenance_company_id)
+                      <ul class="list-unstyled mb-0">
+                         <li ">
+                           <div class=" d-flex align-items-center">
+                            <div class="flex-grow-1">
+                               <p class="text-muted mb-1 font-size-13">Onderhoudbedrijf</p>
+                               <span class="mb-0 font-size-14">{{$object->maintenanceCompany->name}}</span>
+                            </div>
+                   </div>
+                   </li>
+
+                   </ul>
+                   @else
+
+                   <center class="pt-3">
+                      Geen onderhoudsbedrijf
+                   </center>
+
+                   @endif
+                </div>
+
+             </div>
+
+             <div class="col-md-4">
+                <div class="card p-3 bg-light" style="height: 86px;">
+                   @if($object?->address?->managementcompany)
+                   <ul class="list-unstyled mb-0">
+                      <li class="pb-3">
+                         <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                               <p class="text-muted mb-1 font-size-13">Beheerder
+                               </p>
+                               <span class="mb-0 font-size-14">{{$object?->address?->managementcompany?->name}}
+                               </span>
+                            </div>
+                         </div>
+                      </li>
+                      <!-- end li -->
+                      <!-- end li -->
+                      <!-- end li -->
+                      <!-- end li -->
+                   </ul>
+                   @else
+                   <center class="pt-3">
+                      Geen Beheerder
+                   </center>
+                   @endif
+                </div>
+
+             </div>
+             <div class="col-md-4">
+                <div class="card p-3 bg-light" style="height: 86px;">
+                   @if($object?->inspection_company_id)
+                   <ul class="list-unstyled mb-0">
+                      <li>
+                         <div class="d-flex align-items-center">
+                            <div class="font-size-20 text-primary flex-shrink-0 me-3">
+                               <i class="uil uil-hospital"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                               <p class="text-muted mb-1 font-size-13">Keuringinstantie</p>
+                               <span class="mb-0  ">{{$object?->inspectioncompany?->name}}</span>
+                            </div>
+                         </div>
+                      </li>
+                      <!-- end li -->
+                      <!-- end li -->
+                      <!-- end li -->
+                      <!-- end li -->
+                   </ul>
+                   @else
+                   <center class="pt-3">
+                      Geen keuringinstanties
+                   </center>
+                   @endif
+                </div>
+
+             </div>
+          </div>
+
+
+
     <div class="  overflow-hidden  ">
        <div class="row   gy-4 ">
 
@@ -688,88 +775,6 @@
           </div>
           <div class="col-9">
 
-             <div class="row">
-                <div class="col-md-4">
-                   <div class="card p-3 bg-light" style="height: 86px;">
-                      @if($object->maintenance_company_id)
-                      <ul class="list-unstyled mb-0">
-                         <li ">
-                           <div class=" d-flex align-items-center">
-                            <div class="flex-grow-1">
-                               <p class="text-muted mb-1 font-size-13">Onderhoudbedrijf</p>
-                               <span class="mb-0 font-size-14">{{$object->maintenanceCompany->name}}</span>
-                            </div>
-                   </div>
-                   </li>
-
-                   </ul>
-                   @else
-
-                   <center class="pt-3">
-                      Geen onderhoudsbedrijf
-                   </center>
-
-                   @endif
-                </div>
-
-             </div>
-
-             <div class="col-md-4">
-                <div class="card p-3 bg-light" style="height: 86px;">
-                   @if($object?->address?->managementcompany)
-                   <ul class="list-unstyled mb-0">
-                      <li class="pb-3">
-                         <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                               <p class="text-muted mb-1 font-size-13">Beheerder
-                               </p>
-                               <span class="mb-0 font-size-14">{{$object?->address?->managementcompany?->name}}
-                               </span>
-                            </div>
-                         </div>
-                      </li>
-                      <!-- end li -->
-                      <!-- end li -->
-                      <!-- end li -->
-                      <!-- end li -->
-                   </ul>
-                   @else
-                   <center class="pt-3">
-                      Geen Beheerder
-                   </center>
-                   @endif
-                </div>
-
-             </div>
-             <div class="col-md-4">
-                <div class="card p-3 bg-light" style="height: 86px;">
-                   @if($object?->inspection_company_id)
-                   <ul class="list-unstyled mb-0">
-                      <li>
-                         <div class="d-flex align-items-center">
-                            <div class="font-size-20 text-primary flex-shrink-0 me-3">
-                               <i class="uil uil-hospital"></i>
-                            </div>
-                            <div class="flex-grow-1">
-                               <p class="text-muted mb-1 font-size-13">Keuringinstantie</p>
-                               <span class="mb-0  ">{{$object?->inspectioncompany?->name}}</span>
-                            </div>
-                         </div>
-                      </li>
-                      <!-- end li -->
-                      <!-- end li -->
-                      <!-- end li -->
-                      <!-- end li -->
-                   </ul>
-                   @else
-                   <center class="pt-3">
-                      Geen keuringinstanties
-                   </center>
-                   @endif
-                </div>
-
-             </div>
-          </div>
 
           @if($object->AllElevatorOnThisAddress)
 
