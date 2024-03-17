@@ -6,9 +6,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-  --bs-blue: #6f42c1;
+  --bs-blue: #7952B3;
   --bs-indigo: #6610f2;
-  --bs-purple: #6f42c1;
+  --bs-purple: #7952B3;
   --bs-pink: #d63384;
   --bs-red: #ed4c78;
   --bs-orange: #fd7e14;
@@ -3253,19 +3253,19 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #6f42c1;
-  --bs-btn-border-color: #6f42c1;
+  --bs-btn-bg: #7952B3;
+  --bs-btn-border-color: #7952B3;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #6f42c1;
+  --bs-btn-hover-bg: #7952B3;
   --bs-btn-hover-border-color: #2c64cc;
   --bs-btn-focus-shadow-rgb: 121,82,179;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #6f42c1;
-  --bs-btn-active-border-color: #6f42c1;
+  --bs-btn-active-bg: #7952B3;
+  --bs-btn-active-border-color: #7952B3;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #6f42c1;
-  --bs-btn-disabled-border-color: #6f42c1;
+  --bs-btn-disabled-bg: #7952B3;
+  --bs-btn-disabled-border-color: #7952B3;
 }
 
 .btn-secondary {
@@ -3705,7 +3705,7 @@ textarea.form-control-lg {
     left: auto;
   }
 }
-@media (min-width: 892px) {
+@media (min-width: 992px) {
   .dropdown-menu-lg-start {
     --bs-position: start;
   }

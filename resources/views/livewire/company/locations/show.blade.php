@@ -8,19 +8,86 @@
             </div>
             <div class="col-auto">
 
+            <nav class="navbar-nav-wrap-col collapse navbar-collapse" id="navbarNavMenuHeight">
+        <!-- Navbar -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+          </li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarHeightDropdownSubMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+
+            <div class="dropdown-menu" aria-labelledby="navbarHeightDropdownSubMenu" style="min-width: 230px;">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <!-- End Dropdown -->
+
+          <!-- Nav Item -->
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarHeightMegaMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mega menu</a>
+
+            <div class="dropdown-menu w-100" aria-labelledby="navbarHeightMegaMenu">
+              <div class="row">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header">One</span>
+
+                  <a class="dropdown-item" href="#">One</a>
+                  <a class="dropdown-item" href="#">Two</a>
+                  <a class="dropdown-item" href="#">Three</a>
+                </div>
+
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header">Two</span>
+
+                  <a class="dropdown-item" href="#">One</a>
+                  <a class="dropdown-item" href="#">Two</a>
+                  <a class="dropdown-item" href="#">Three</a>
+                </div>
+
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                  <span class="dropdown-header">Three</span>
+
+                  <a class="dropdown-item" href="#">One</a>
+                  <a class="dropdown-item" href="#">Two</a>
+                </div>
+
+                <div class="col-lg-3">
+                  <span class="dropdown-header">Four</span>
+
+                  <a class="dropdown-item" href="#">One</a>
+                  <a class="dropdown-item" href="#">Two</a>
+                  <a class="dropdown-item" href="#">Three</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- End Nav Item -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+        <!-- End Navbar -->
+      </nav>
             <a href="/locations">
                     <button type="button" class="btn   btn-link btn-sm  ">
                         Alle locaties
                     </button></a>
 
                 <a href = "/location/edit/{{$location->id}}">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+                <button type="button" class="btn   btn-link btn-sm " wire:click="save()">
                     Wijzig
                 </button>
                 </a>
 
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
+                <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+                 Terug
                 </button>
 
             </div>

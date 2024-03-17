@@ -1,5 +1,4 @@
-@import "media-library-pro-styles";
-
+ 
 .btn-120{
   width: 120px!important;
 }
@@ -43,9 +42,9 @@ body {
 
 
 .big-button {
- background-color: rgba(87, 48, 158, 0.65) ;
- color: white;
- border-radius: 10px;
+ border: 1px dotted #7c58b561 ;
+ color:  #6f39c5b0 ;
+ 
  height:100px;
  font-weight: normal;
  padding: 10px;
@@ -57,7 +56,7 @@ body {
  
 }
 .big-button:hover {
-  background-color: #8468b9 ;
+  background-color: #7c58b52c ;
   cursor: pointer;
  }
  
@@ -143,12 +142,12 @@ a:link{
 }
 .js-navbar-vertical-aside{
   width: 70px!important;
-background-color: #6f42c1!important;
+background-color: #7952B3!important;
  
 }
 .navbar-vertical-container{
   width: 70px!important;
-background-color: #6f42c1!important;
+background-color: #7952B3!important;
  
 }
 

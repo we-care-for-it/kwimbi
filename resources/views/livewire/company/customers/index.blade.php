@@ -28,27 +28,69 @@
       <div class="col-xl-12">
        
         
-   <div class="card-header pt-0 card-header-form ">
-               <div>
+
+
+      <div class="  card-header-content-md-between   pt-0 card-header-form ">
+               <div class="mb-2 mb-md-0">
                   <form>
                      <!-- Search -->
-                     <div style="width: 200px;" class="input-group input-group-merge">
-                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
-                           data-hs-form-search-options='{
-                           "clearIcon": "#clearIcon2",
-                           "defaultIcon": "#defaultClearIconToggleEg"
-                           }'>
+                     <div class="input-group input-group-merge">
+                        <input type="text" wire:model.live="filters.keyword"   class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                           }">
                         <button type="button" class="input-group-append input-group-text">
                         <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                         </button>
                      </div>
                      <!-- End Search -->
                   </form>
                </div>
                <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                 
-                  
+                  <div class="d-flex align-items-center justify-content-center">
+                     <div wire:loading.delay="" class="loading_indicator_small"></div>
+                  </div>
+                  <!-- Datatable Info -->
+                  <div id="datatableCounterInfo" style="display: none;">
+                     <div class="d-flex align-items-center">
+                        <span class="fs-5 me-3">
+                        <span id="datatableCounter">0</span>
+                        Selected
+                        </span>
+                        <a class="btn btn-outline-danger btn-sm" href="javascript:;">
+                        <i class="bi-trash"></i> Delete
+                        </a>
+                     </div>
+                  </div>
+                  <!-- End Datatable Info -->
+                  <!-- Dropdown -->
+                  <!-- <div class="dropdown">
+                     <button type="button" class="btn btn-white  dropdown-toggle w-100" id="usersExportDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-download me-2"></i> Exporteren</button>
+                     <div class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="usersExportDropdown" style="">
+                        <span class="dropdown-header">Opties</span>
+                        <a wire:click="export('xlsx')" id="export-excel" class="dropdown-item" href="javascript:;">
+                        Excel
+                        </a>
+                        <a id="export-csv" wire:click="export('csv')" class="dropdown-item" href="javascript:;">
+                        .CSV
+                        </a>
+                        <a id="export-pdf" wire:click="export('pdf')" class="dropdown-item" href="javascript:;">
+                        PDF
+                        </a>
+                        <a id="export-pdf" wire:click="export('html')" class="dropdown-item" href="javascript:;">
+                        HTML
+                        </a>
+                     </div>
+                     </div> -->
+                  <!-- End Dropdown -->
+                  <!-- Dropdown -->
+                  <div class="dropdown">
+                     <!-- <button type="button" class="btn btn-white btn-sm w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+                     <i class="bi-filter me-1"></i>   Filter
+                     <span class="badge bg-soft-dark text-dark rounded-circle ms-1"></span>
+                     </button> -->
+                  </div>
                   <!-- End Dropdown -->
                </div>
             </div>
