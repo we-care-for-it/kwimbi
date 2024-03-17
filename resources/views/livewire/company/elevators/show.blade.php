@@ -49,11 +49,11 @@
                    Alle liften
                 </button></a>
 
-                <a href = "/elevator/edit/{{$object->id}}">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" >
-                    Wijzig
+             <a href="/elevator/edit/{{$object->id}}">
+                <button type="button" class="btn btn-primary btn-sm  btn-120">
+                   Wijzig
                 </button>
-                </a>
+             </a>
 
              <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                 id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
@@ -92,93 +92,173 @@
     </div>
     <!-- End  Button trigger modal -->
 
+    @if($object->remark)
 
-  @if($object->remark)
+    <div class="alert alert-soft-primary" role="alert">
+       {{$object->remark}}
+    </div>
 
-  <div class="alert alert-soft-primary" role="alert">
-  {{$object->remark}}
-</div>
+    @endif
 
-@endif
-    <!-- Modal -->
+    <div class="  overflow-hidden  ">
+       <div class="row   gy-4 ">
 
-    <div wire:ignore class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
-       aria-labelledby="crudModal" aria-hidden="true">
-       <div class="modal-dialog modal-dialog-centered" role="document">
-
-          <div class="modal-content">
-             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Bestand toevoegen</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body">
-
-                <div class="row">
-                   <div class="col-md-3"><img src="/assets/img/documents.svg"></div>
-                   <div class="col-md-9">
-
-                      <label for="fname">Bestandsnaam</label>
-                      <div class="pt-2"></div>
-                      <input class="form-control" wire:model="file_description" name="description">
-
-                      <div class="pt-2"></div>
-                      <label for="fname">Categorie</label>
-                      <div class="pt-2"></div>
-
-                      <select class="form-select  " wire:model="file_collection" />
-                      <option selected value="documens">Documenten</option>
-                      <option value="image ">Afbeeldingen</option>
-                      <option value="3 ">Algemeen</option>
-                      </select>
-                      <div class="pt-3"></div>
-                      <label>Bestand</label>
-                      <div class="pt-2"></div>
- 
-
-                      <div class="pt-2"></div>
-                      <div style="float: right;  ">
-
-                         <button type="submit" class="btn btn-soft-success " wire:click="uploadFile()">Upload</button>
-                      </div>
-
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Storingen</p>
                    </div>
-
                 </div>
              </div>
+          </div>
 
+
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Onderhoudsbeurten</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Keuringen</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Rittenregistratie</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="col-lg-3 col-xl-2 col-md-3">
+             <div class="card p-0 border  " onclick="location='/connections/chex'">
+                <div class="   big-button">
+                   <div class="text-center">
+                      <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                      </span>
+                      <p class="  mb-0">Onderhoudscontracten</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+
+
+
+
+ 
+
+    
+
+
+
+   
+          
+
+       </div>
+
+       <!-- Modal -->
+
+       <div wire:ignore class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
+          aria-labelledby="crudModal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Bestand toevoegen</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                   <div class="row">
+                      <div class="col-md-3"><img src="/assets/img/documents.svg"></div>
+                      <div class="col-md-9">
+
+                         <label for="fname">Bestandsnaam</label>
+                         <div class="pt-2"></div>
+                         <input class="form-control" wire:model="file_description" name="description">
+
+                         <div class="pt-2"></div>
+                         <label for="fname">Categorie</label>
+                         <div class="pt-2"></div>
+
+                         <select class="form-select  " wire:model="file_collection" />
+                         <option selected value="documens">Documenten</option>
+                         <option value="image ">Afbeeldingen</option>
+                         <option value="3 ">Algemeen</option>
+                         </select>
+                         <div class="pt-3"></div>
+                         <label>Bestand</label>
+                         <div class="pt-2"></div>
+
+                         <div class="pt-2"></div>
+                         <div style="float: right;  ">
+
+                            <button type="submit" class="btn btn-soft-success "
+                               wire:click="uploadFile()">Upload</button>
+                         </div>
+
+                      </div>
+
+                   </div>
+                </div>
+
+             </div>
           </div>
        </div>
-    </div>
-    <!-- End Modal -->
+       <!-- End Modal -->
 
-    <!-- Modal EDIT -->
+       <!-- Modal EDIT -->
 
-    <div wire:ignore.self class="modal fade modal-xl" id="crudModal" tabindex="-1" role="dialog"
-       aria-labelledby="crudModal" aria-hidden="true">
-       <div class="modal-dialog modal-dialog-centered" role="document">
+       <div wire:ignore.self class="modal fade modal-xl" id="crudModal" tabindex="-1" role="dialog"
+          aria-labelledby="crudModal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
 
-          <div class="modal-content">
-             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Lifteigenschappen bewerken</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body" wire:loading.class="loading-div">
-                <div>
-                   <div class="row">
-                      <div class="col-md-12 pb-3">
-                         <label for="ernergie_label" class="pb-2 pt-2">Naam</label>
-                         <input type="text" wire:model="name" class="form-control">
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Lifteigenschappen bewerken</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" wire:loading.class="loading-div">
+                   <div>
+                      <div class="row">
+                         <div class="col-md-12 pb-3">
+                            <label for="ernergie_label" class="pb-2 pt-2">Naam</label>
+                            <input type="text" wire:model="name" class="form-control">
+                         </div>
                       </div>
-                   </div>
 
-                   <div class="row">
-                      <div class="col-md-4">
+                      <div class="row">
+                         <div class="col-md-4">
 
-                         <label class="pb-2 ">Relatie</label>
-                         <div class="tom-select-custom" wire:ignore.self>
-                            <select wire:change="search_loctions_by_relation()" wire:model.live="customer_id"
-                               autocomplete="off" class="js-select form-select @error('name') is-invalid   @enderror "
-                               data-hs-tom-select-options='{
+                            <label class="pb-2 ">Relatie</label>
+                            <div class="tom-select-custom" wire:ignore.self>
+                               <select wire:change="search_loctions_by_relation()" wire:model.live="customer_id"
+                                  autocomplete="off"
+                                  class="js-select form-select @error('name') is-invalid   @enderror "
+                                  data-hs-tom-select-options='{
 "placeholder": "Selecteer een relatie",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
@@ -186,22 +266,22 @@
 
 }'>
 
-                               <option selected value="">Selecteer een relatie</option>
-                               @foreach($customers as $customer)
-                               <option value="{{ $customer->id }}">
-                                  {{ $customer->name }}
-                               </option>
-                               @endforeach
-                            </select>
-                         </div>
+                                  <option selected value="">Selecteer een relatie</option>
+                                  @foreach($customers as $customer)
+                                  <option value="{{ $customer->id }}">
+                                     {{ $customer->name }}
+                                  </option>
+                                  @endforeach
+                               </select>
+                            </div>
 
-                         @error('customer_id') <span class="invalid-feedback">Relatie is een verplicht veld </span>
-                         @enderror
+                            @error('customer_id') <span class="invalid-feedback">Relatie is een verplicht veld </span>
+                            @enderror
 
-                         <label for="address_id" class="pb-2 pt-2">Adres</label>
-                         <div class="tom-select-custom " wire:ignore.self>
-                            <select wire:model="location_id" autocomplete="off" class="js-select form-select"
-                               data-hs-tom-select-options='{
+                            <label for="address_id" class="pb-2 pt-2">Adres</label>
+                            <div class="tom-select-custom " wire:ignore.self>
+                               <select wire:model="location_id" autocomplete="off" class="js-select form-select"
+                                  data-hs-tom-select-options='{
 "placeholder": "Selecteer een locatie",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
@@ -209,199 +289,200 @@
 
 }'>
 
-                               <option selected value="">Selecteer een locatie</option>
-                               @foreach($locations_relation as $relatedItem)
-                               <option value="{{ $relatedItem->id }}">
-                                  {{ $relatedItem->name }}
-                               </option>
-                               @endforeach
-                            </select>
+                                  <option selected value="">Selecteer een locatie</option>
+                                  @foreach($locations_relation as $relatedItem)
+                                  <option value="{{ $relatedItem->id }}">
+                                     {{ $relatedItem->name }}
+                                  </option>
+                                  @endforeach
+                               </select>
+                            </div>
+
                          </div>
 
-                      </div>
+                         <div class="col-md-4">
 
-                      <div class="col-md-4">
-
-                         <label for="address_id" class="pb-2">Keuringinstantie</label>
-                         <div class="tom-select-custom " wire:ignore>
-                            <select wire:model="inspection_company_id" style="height: 40px;" autocomplete="off"
-                               class="js-select form-select" data-hs-tom-select-options='{
+                            <label for="address_id" class="pb-2">Keuringinstantie</label>
+                            <div class="tom-select-custom " wire:ignore>
+                               <select wire:model="inspection_company_id" style="height: 40px;" autocomplete="off"
+                                  class="js-select form-select" data-hs-tom-select-options='{
 "placeholder": "Selecteer een instantie",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
 
 }'>
-                               <option value="">Selecteer een keuringsinstanties</option>
-                               @foreach($inspectionCompanys as $relatedItem)
-                               <option value="{{ $relatedItem->id }}">
-                                  {{ $relatedItem->name }}
-                               </option>
-                               @endforeach
-                            </select>
-                         </div>
+                                  <option value="">Selecteer een keuringsinstanties</option>
+                                  @foreach($inspectionCompanys as $relatedItem)
+                                  <option value="{{ $relatedItem->id }}">
+                                     {{ $relatedItem->name }}
+                                  </option>
+                                  @endforeach
+                               </select>
+                            </div>
 
-                         @error('inspection_company_id')
-                         <div class="invalid-feedback">{{ $message }}</div>
-                         @enderror
-                         <label for="address_id" class="pb-2 pt-2">Onderhoudspartij</label>
-                         <div class="tom-select-custom " wire:ignore>
-                            <select wire:model="maintenance_company_id" style="height: 40px;" autocomplete="off"
-                               class="js-select form-select" data-hs-tom-select-options='{
+                            @error('inspection_company_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <label for="address_id" class="pb-2 pt-2">Onderhoudspartij</label>
+                            <div class="tom-select-custom " wire:ignore>
+                               <select wire:model="maintenance_company_id" style="height: 40px;" autocomplete="off"
+                                  class="js-select form-select" data-hs-tom-select-options='{
 "placeholder": "Selecteer een onderhoudspartij",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
 
 }'>
-                               <option value="">Selecteer een keuringsinstanties</option>
-                               @foreach($maintenanceCompanys as $relatedItem)
-                               <option @if($relatedItem->id == $maintenance_company_id) selected @endif
-                                  value="{{ $relatedItem->id }}">
-                                  {{ $relatedItem->name }}
-                               </option>
-                               @endforeach
-                            </select>
-                         </div>
-                      </div>
-
-                      <div class="col-md-4">
-
-                         <div class="row">
-                            <div class="col-md-6">
-
-                               <label for="construction_year" class="pb-2">Bouwjaar</label>
-                               <input class="form-control @error('construction_year') is-invalid @enderror"
-                                  wire:model="construction_year" type="text">
-                               @error('construction_year')
-                               <div class="invalid-feedback">{{ $message }}</div>
-                               @enderror
-
-                               <label for="ernergie_label" class="pb-2 pt-2">Stopplaatsen</label>
-                               <input type="number" wire:model="stopping_places" class="form-control">
-
+                                  <option value="">Selecteer een keuringsinstanties</option>
+                                  @foreach($maintenanceCompanys as $relatedItem)
+                                  <option @if($relatedItem->id == $maintenance_company_id) selected @endif
+                                     value="{{ $relatedItem->id }}">
+                                     {{ $relatedItem->name }}
+                                  </option>
+                                  @endforeach
+                               </select>
                             </div>
-
-                            <div class="col-md-6">
-                               <label for="ernergie_label" class="pb-2 ">Energielabel</label>
-                               <div class="tom-select-custom " wire:ignore>
-                                  <select wire:model="energy_label" style="height: 40px;"
-                                     class="js-select form-select ">
-                                     <option value="A"> A </option>
-                                     <option value="B"> B </option>
-                                     <option value="C"> C </option>
-                                     <option value="D"> D </option>
-                                     <option value="E"> E </option>
-                                     <option value="F"> F </option>
-                                     <option value="G"> G </option>
-                                  </select>
-                               </div>
-
-                               <label for="ernergie_label" class="pb-2 pt-2">Nobo nummer</label>
-                               <input type="text" wire:model="nobo_no" class="form-control">
-                               <label for="ernergie_label" class="pb-2 pt-2">Unit nummer</label>
-                               <input type="text" wire:model="unit_no" class="form-control">
-
-                            </div>
-
                          </div>
-
-                      </div>
-                   </div>
-
-                   <div class="row pt-3">
-                      <hr>
-
-                      <div class="row">
 
                          <div class="col-md-4">
 
-                            <label class="pb-2 ">Leverancier</label>
+                            <div class="row">
+                               <div class="col-md-6">
 
-                            <div class="tom-select-custom " wire:ignore.self>
-                               <select wire:model="supplier_id" autocomplete="off" class="js-select form-select"
-                                  data-hs-tom-select-options='{
+                                  <label for="construction_year" class="pb-2">Bouwjaar</label>
+                                  <input class="form-control @error('construction_year') is-invalid @enderror"
+                                     wire:model="construction_year" type="text">
+                                  @error('construction_year')
+                                  <div class="invalid-feedback">{{ $message }}</div>
+                                  @enderror
+
+                                  <label for="ernergie_label" class="pb-2 pt-2">Stopplaatsen</label>
+                                  <input type="number" wire:model="stopping_places" class="form-control">
+
+                               </div>
+
+                               <div class="col-md-6">
+                                  <label for="ernergie_label" class="pb-2 ">Energielabel</label>
+                                  <div class="tom-select-custom " wire:ignore>
+                                     <select wire:model="energy_label" style="height: 40px;"
+                                        class="js-select form-select ">
+                                        <option value="A"> A </option>
+                                        <option value="B"> B </option>
+                                        <option value="C"> C </option>
+                                        <option value="D"> D </option>
+                                        <option value="E"> E </option>
+                                        <option value="F"> F </option>
+                                        <option value="G"> G </option>
+                                     </select>
+                                  </div>
+
+                                  <label for="ernergie_label" class="pb-2 pt-2">Nobo nummer</label>
+                                  <input type="text" wire:model="nobo_no" class="form-control">
+                                  <label for="ernergie_label" class="pb-2 pt-2">Unit nummer</label>
+                                  <input type="text" wire:model="unit_no" class="form-control">
+
+                               </div>
+
+                            </div>
+
+                         </div>
+                      </div>
+
+                      <div class="row pt-3">
+                         <hr>
+
+                         <div class="row">
+
+                            <div class="col-md-4">
+
+                               <label class="pb-2 ">Leverancier</label>
+
+                               <div class="tom-select-custom " wire:ignore.self>
+                                  <select wire:model="supplier_id" autocomplete="off" class="js-select form-select"
+                                     data-hs-tom-select-options='{
 "placeholder": "Selecteer een leverancier",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
 
 }'>
-                                  <option value="">Selecteer een leverancier</option>
-                                  @foreach($suppliers as $supplier)
-                                  <option value="{{ $supplier->id }}">
-                                     {{ $supplier->name }}
-                                  </option>
-                                  @endforeach
-                               </select>
-                            </div>
-                            <label for="ernergie_label" class="pb-2 pt-2">Status</label>
+                                     <option value="">Selecteer een leverancier</option>
+                                     @foreach($suppliers as $supplier)
+                                     <option value="{{ $supplier->id }}">
+                                        {{ $supplier->name }}
+                                     </option>
+                                     @endforeach
+                                  </select>
+                               </div>
+                               <label for="ernergie_label" class="pb-2 pt-2">Status</label>
 
-                            <div class="tom-select-custom " wire:ignore>
+                               <div class="tom-select-custom " wire:ignore>
 
-                               <select class="js-select form-select" wire:model.live="status_id"
-                                  data-hs-tom-select-options='{
+                                  <select class="js-select form-select" wire:model.live="status_id"
+                                     data-hs-tom-select-options='{
 "placeholder": "Selecteer een status",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
 
 }' class="ts-wrapper js-select form-select form-select-sm tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items js-select_style"
-                                  id="locationLabel">
-                                  <option value="1"
-                                     data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>'>
-                                  </option>
-                                  <option value="2"
-                                     data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>'>
-                                  </option>
-                               </select>
+                                     id="locationLabel">
+                                     <option value="1"
+                                        data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>'>
+                                     </option>
+                                     <option value="2"
+                                        data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>'>
+                                     </option>
+                                  </select>
 
-                            </div>
+                               </div>
 
-                            <label for="ernergie_label" class="pb-2 pt-2">Type</label>
-                            <div class="tom-select-custom " wire:ignore>
+                               <label for="ernergie_label" class="pb-2 pt-2">Type</label>
+                               <div class="tom-select-custom " wire:ignore>
 
-                               <select style="height: 40px;" wire:model="object_type_id" class="js-select form-select"
-                                  data-hs-tom-select-options='{
+                                  <select style="height: 40px;" wire:model="object_type_id"
+                                     class="js-select form-select" data-hs-tom-select-options='{
 "placeholder": "Selecteer een type",
 "hidePlaceholderOnSearch" : true,
 "hideSearch": false,
 "allowEmptyOption": true
 
 }' @foreach(config('globalValues.object_types') as $key=> $value)
-                                  <option value="{{ $key }}">
-                                     {{$value}}
-                                  </option>
-                                  @endforeach
-                               </select>
+                                     <option value="{{ $key }}">
+                                        {{$value}}
+                                     </option>
+                                     @endforeach
+                                  </select>
+                               </div>
                             </div>
-                         </div>
 
-                         <div class="col-md-4">
-                            <div class="form-check form-switch mb-4">
-                               <input wire:model="stretcher_elevator" value="1" type="checkbox" class="form-check-input"
-                                  id="formSwitch2">
-                               <label class="form-check-label" for="formSwitch2">Brancardlift</label>
-                            </div>
-                            <div class="form-check form-switch mb-4">
+                            <div class="col-md-4">
+                               <div class="form-check form-switch mb-4">
+                                  <input wire:model="stretcher_elevator" value="1" type="checkbox"
+                                     class="form-check-input" id="formSwitch2">
+                                  <label class="form-check-label" for="formSwitch2">Brancardlift</label>
+                               </div>
+                               <div class="form-check form-switch mb-4">
 
-                               <input selected value="1" wire:model.live="fire_elevator" type="checkbox"
-                                  class="form-check-input" id="formSwitch2">
-                               <label class="form-check-label" for="formSwitch2">Brandweerlift</label>
+                                  <input selected value="1" wire:model.live="fire_elevator" type="checkbox"
+                                     class="form-check-input" id="formSwitch2">
+                                  <label class="form-check-label" for="formSwitch2">Brandweerlift</label>
+                               </div>
+                               <div class="form-check form-switch mb-4">
+                                  <input value="1" wire:model="speakconnection" type="checkbox" class="form-check-input"
+                                     id="formSwitch2">
+                                  <label class="form-check-label" for="formSwitch2">Spreek / luister</label>
+                               </div>
                             </div>
-                            <div class="form-check form-switch mb-4">
-                               <input value="1" wire:model="speakconnection" type="checkbox" class="form-check-input"
-                                  id="formSwitch2">
-                               <label class="form-check-label" for="formSwitch2">Spreek / luister</label>
+                            <div class="col-md-4">
+                               <label for="ernergie_label" wire:model="remark" class="pb-2  ">Opmerking</label>
+                               <textarea wire:model="remark" class="form-control"></textarea>
                             </div>
-                         </div>
-                         <div class="col-md-4">
-                            <label for="ernergie_label" wire:model="remark" class="pb-2  ">Opmerking</label>
-                            <textarea wire:model="remark" class="form-control"></textarea>
-                         </div>
-                         <br>
-                         <div class="float-end">
-                            <button class="btn btn-primary btn-120 float-end mt-3" wire:click="save()"> Opslaan
+                            <br>
+                            <div class="float-end">
+                               <button class="btn btn-primary btn-120 float-end mt-3" wire:click="save()"> Opslaan
+                            </div>
                          </div>
                       </div>
                    </div>
@@ -409,30 +490,29 @@
              </div>
           </div>
        </div>
-    </div>
-    <!-- End Modal -->
+       <!-- End Modal -->
 
-    @if($object->countIncident)
-    <div class=" bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-       <strong class="font-bold">Melding! </strong>
-       <span class="block sm:inline">Er is een storing gemeld op deze lift, Kijk bij storingen voor meer informatie
-       </span>
-    </div>
-    <br> @endif @if($object->stand_still)
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-       <strong class="font-bold">Melding! </strong>
-       <span class="block sm:inline">Lift buitengebruik vanaf:
-          {{ Carbon\Carbon::parse($object->stand_still_date)->format('d-m-Y') }}
-       </span>
-    </div>
-    <br> @endif
+       @if($object->countIncident)
+       <div class=" bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Melding! </strong>
+          <span class="block sm:inline">Er is een storing gemeld op deze lift, Kijk bij storingen voor meer informatie
+          </span>
+       </div>
+       <br> @endif @if($object->stand_still)
+       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <strong class="font-bold">Melding! </strong>
+          <span class="block sm:inline">Lift buitengebruik vanaf:
+             {{ Carbon\Carbon::parse($object->stand_still_date)->format('d-m-Y') }}
+          </span>
+       </div>
+       <br> @endif
 
-    <div class="row ">
-       <div class="col-3">
+       <div class="row ">
+          <div class="col-3">
 
-       <div class = "card  mb-2" >
-               <div class = "card-body bg-light">
-               @if($object?->address?->name)
+             <div class="card  mb-2">
+                <div class="card-body bg-light">
+                   @if($object?->address?->name)
                    <b>{{$object?->address?->name}}</b>
                    @endif @if($object?->address?->complexnumber)
                    ({{$object?->address?->complexnumber}})
@@ -442,191 +522,175 @@
                    {{$object?->address?->address}} <br>
                    {{$object?->address?->zipcode}} {{$object?->address?->place}}
 
-       </div>
-       </div>
-
-       <div class="card">
-         <div class = "card-body  ">
-       <table class="table">
-                <tr>
-
-                   <td colspan="2"> <a
-                         href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
-                   </td>
-                </tr>
-               
-             </table>
-
-
-          <table class="table table-striped " style="margin: 1px;">
- 
-
-             <tr>
-                <td>Leverancier</td>
-                <td>@if($object?->supplier?->name)
-                   {{$object?->supplier?->name}}
-                   @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
-                </td>
-             </tr>
-             <tr>
-                <td>Bouwjaar</td>
-                <td>
-
-                   @if($object->construction_year)
-                   {{$object->construction_year}}
-                   @else
-                   <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
-                   @endif
-
-                </td>
-             </tr>
-
-             <tr>
-                <td class="align-middle">Status </td>
-                <td>
-                   <span class="badge bg-soft-primary-light text-primary p-1">
-
-                      @if($object->status_id==1)
-
-                      <span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>
-                      @else
-                      <span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>
-
-                      @endif
-
-                   </span></td>
-
-             </tr>
-
-             <tr>
-                <td class="align-middle">Speek luister/verbinding </td>
-                <td>
-                   <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
-                </td>
-             </tr>
-
-          
-
-       
-
-            
-                <tr>
-                   <td>Keuringstatus</td>
-                   <td> @if(count($object->inspections))
-
-                      @if($object?->latestInspection?->status_id==1)
-                      <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
-                      @endif
-                      @if($object?->latestInspection?->status_id==2)
-                      <span class="badge bg-soft-primary text-primary ">
-                         Goedgekeurd met acties </span>
-                      @endif
-                      @if($object?->latestInspection?->status_id==3)
-                      <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
-                      @endif
-                      @if($object?->latestInspection?->status_id==4)
-                      <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
-                      @endif
-                      @if($object?->latestInspection?->status_id==5)
-                      <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
-                      @endif
-
-                      @else
-                      Geen keuring uitgevoerd
-
-                      @endif</td>
-
-                </tr>
-                <tr>
-                   <td>Nobo nr.</td>
-                   <td>
-
-                      @if($object->nobo_no) {{$object->nobo_no}} @else <span
-                         class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
-                   </td>
-
-                </tr>
-                <tr>
-                   <td>UNitnr</td>
-                   <td>@if($object->unit_no) {{$object->unit_no}} @else <span
-                         class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
-                   </td>
-                </tr>
-                <tr>
-                   <td>Aantal Stopplaatsen</td>
-                   <td> @if($object->stopping_places)
-                      {{$object->stopping_places}}
-                      @else
-                      <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
-                      @endif </td>
-                </tr>
-
-                
-
-                
-
-                <tr>
-
-<td  colspan  = "2" class="align-middle">Energielabel 
- 
-
-   <div class="energy-class">
-
-      @if($object->energy_label=='A')
-
-      <div class="a"></div>
-      @elseif($object->energy_label=='B')
-      <div class="b"></div>
-      @elseif($object->energy_label=='C')
-      <div class="c"></div>
-      @elseif($object->energy_label=='D')
-      <div class="d"></div>
-      @elseif($object->energy_label=='E')
-      <div class="e"></div>
-      @elseif($object->energy_label=='F')
-      <div class="f"></div>
-      @elseif($object->energy_label=='G')
-      <div class="g"></div>
-      @else
-      Onbekend
-      @endif
-
-   </div>
-
-</td>
-
-</tr>
-
-
-
-
-             </table>
-  
-
-             
+                </div>
              </div>
- 
 
-       </div>
+             <div class="card">
+                <div class="card-body  ">
+                   <table class="table">
+                      <tr>
 
+                         <td colspan="2"> <a
+                               href="/customer/{{$object?->location?->customer?->slug}}">{{$object?->location?->customer?->name}}</a>
+                         </td>
+                      </tr>
 
+                   </table>
 
-       <div class = "card  mt-3 mb-2" >
-               <div class = "card-body p-o">
+                   <table class="table table-striped " style="margin: 1px;">
 
-          @if($object->address)
-          <div style="width: 100%">
-             <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=nl&amp;q={{$object->address->address}},{{$object->address->place}},%20Netherlands+(Mijn%20bedrijfsnaam)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                      <tr>
+                         <td>Leverancier</td>
+                         <td>@if($object?->supplier?->name)
+                            {{$object?->supplier?->name}}
+                            @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
+                         </td>
+                      </tr>
+                      <tr>
+                         <td>Bouwjaar</td>
+                         <td>
+
+                            @if($object->construction_year)
+                            {{$object->construction_year}}
+                            @else
+                            <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
+                            @endif
+
+                         </td>
+                      </tr>
+
+                      <tr>
+                         <td class="align-middle">Status </td>
+                         <td>
+                            <span class="badge bg-soft-primary-light text-primary p-1">
+
+                               @if($object->status_id==1)
+
+                               <span class="d-flex align-items-center"> <span
+                                     class="legend-indicator bg-success"></span> <span
+                                     class="text-truncate">Operationeel</span></span>
+                               @else
+                               <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
+                                  <span class="text-truncate">Lift buiten gebruik</span></span>
+
+                               @endif
+
+                            </span></td>
+
+                      </tr>
+
+                      <tr>
+                         <td class="align-middle">Speek luister/verbinding </td>
+                         <td>
+                            <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
+                         </td>
+                      </tr>
+
+                      <tr>
+                         <td>Keuringstatus</td>
+                         <td> @if(count($object->inspections))
+
+                            @if($object?->latestInspection?->status_id==1)
+                            <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
+                            @endif
+                            @if($object?->latestInspection?->status_id==2)
+                            <span class="badge bg-soft-primary text-primary ">
+                               Goedgekeurd met acties </span>
+                            @endif
+                            @if($object?->latestInspection?->status_id==3)
+                            <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
+                            @endif
+                            @if($object?->latestInspection?->status_id==4)
+                            <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
+                            @endif
+                            @if($object?->latestInspection?->status_id==5)
+                            <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
+                            @endif
+
+                            @else
+                            Geen keuring uitgevoerd
+
+                            @endif</td>
+
+                      </tr>
+                      <tr>
+                         <td>Nobo nr.</td>
+                         <td>
+
+                            @if($object->nobo_no) {{$object->nobo_no}} @else <span
+                               class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
+                         </td>
+
+                      </tr>
+                      <tr>
+                         <td>UNitnr</td>
+                         <td>@if($object->unit_no) {{$object->unit_no}} @else <span
+                               class="badge bg-soft-primary-light text-primary p-1">Geen</span>@endif
+                         </td>
+                      </tr>
+                      <tr>
+                         <td>Aantal Stopplaatsen</td>
+                         <td> @if($object->stopping_places)
+                            {{$object->stopping_places}}
+                            @else
+                            <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
+                            @endif </td>
+                      </tr>
+
+                      <tr>
+
+                         <td colspan="2" class="align-middle">Energielabel
+
+                            <div class="energy-class">
+
+                               @if($object->energy_label=='A')
+
+                               <div class="a"></div>
+                               @elseif($object->energy_label=='B')
+                               <div class="b"></div>
+                               @elseif($object->energy_label=='C')
+                               <div class="c"></div>
+                               @elseif($object->energy_label=='D')
+                               <div class="d"></div>
+                               @elseif($object->energy_label=='E')
+                               <div class="e"></div>
+                               @elseif($object->energy_label=='F')
+                               <div class="f"></div>
+                               @elseif($object->energy_label=='G')
+                               <div class="g"></div>
+                               @else
+                               Onbekend
+                               @endif
+
+                            </div>
+
+                         </td>
+
+                      </tr>
+
+                   </table>
+
+                </div>
+
+             </div>
+
+             <div class="card  mt-3 mb-2">
+                <div class="card-body p-o">
+
+                   @if($object->address)
+                   <div style="width: 100%">
+                      <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                         src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=nl&amp;q={{$object->address->address}},{{$object->address->place}},%20Netherlands+(Mijn%20bedrijfsnaam)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                   </div>
+                   @endif
+                </div>
+             </div>
           </div>
-          @endif
-          </div>  </div>
-       </div>
-       <div class="col-9">
+          <div class="col-9">
 
-          <div class="row">
-             <div class="col-md-4">
-             <div class="card p-3 bg-light" style="height: 86px;">
+             <div class="row">
+                <div class="col-md-4">
+                   <div class="card p-3 bg-light" style="height: 86px;">
                       @if($object->maintenance_company_id)
                       <ul class="list-unstyled mb-0">
                          <li ">
@@ -640,22 +704,19 @@
 
                    </ul>
                    @else
-            
-                      
-                     <center class = "pt-3">
-                         Geen onderhoudsbedrijf
-       </center>
-            
+
+                   <center class="pt-3">
+                      Geen onderhoudsbedrijf
+                   </center>
+
                    @endif
-                   </div>
+                </div>
 
+             </div>
 
-          </div>
-
-
-          <div class="col-md-4">
-          <div class="card p-3 bg-light" style="height: 86px;">
-             @if($object?->address?->managementcompany)
+             <div class="col-md-4">
+                <div class="card p-3 bg-light" style="height: 86px;">
+                   @if($object?->address?->managementcompany)
                    <ul class="list-unstyled mb-0">
                       <li class="pb-3">
                          <div class="d-flex align-items-center">
@@ -673,17 +734,16 @@
                       <!-- end li -->
                    </ul>
                    @else
-                   <center class = "pt-3">
-                         Geen Beheerder
-       </center>
+                   <center class="pt-3">
+                      Geen Beheerder
+                   </center>
                    @endif
-                   </div>
+                </div>
 
-                   
-          </div>
-          <div class="col-md-4">
-          <div class="card p-3 bg-light" style="height: 86px;">
-             @if($object?->inspection_company_id)
+             </div>
+             <div class="col-md-4">
+                <div class="card p-3 bg-light" style="height: 86px;">
+                   @if($object?->inspection_company_id)
                    <ul class="list-unstyled mb-0">
                       <li>
                          <div class="d-flex align-items-center">
@@ -702,28 +762,25 @@
                       <!-- end li -->
                    </ul>
                    @else
-                   <center class = "pt-3">
-                         Geen keuringinstanties
-       </center>
+                   <center class="pt-3">
+                      Geen keuringinstanties
+                   </center>
                    @endif
-                   </div>
+                </div>
 
-                   
+             </div>
           </div>
-       </div>
-
-
-
 
           @if($object->AllElevatorOnThisAddress)
 
           <div class="row pt-3">
-             <div class="col-md-12">       <div class="card-header card-header-content-md-between  ">
-                      Liften op deze locatie
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between  ">
+                   Liften op deze locatie
 
-                   </div>
+                </div>
                 <div class="card">
-            
+
                    <div class="card-body">
                       <table class="table  table-sm  table-hover ">
                          <thead>
@@ -836,12 +893,12 @@
           @endif
 
           <div class="row  pt-3">
-             <div class="col-md-12">    <div class="card-header card-header-content-md-between  ">
-                      Onderhoudscontracten
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between  ">
+                   Onderhoudscontracten
 
-                   </div>
+                </div>
                 <div class="card">
-               
 
                    <div class="card-body p-2">
 
@@ -853,9 +910,9 @@
                                <th scope="col">Status </th>
                                <th scope="col">Begindatum </th>
                                <th scope="col">Einddatum </th>
-                               <th scope="col">  </th>
-                               <th scope="col">  </th>  
-                               <th scope="col">  </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
                             </tr>
                          </thead>
                          <tbody>
@@ -931,12 +988,12 @@
              </div>
           </div>
           <div class="row pt-3">
-             <div class="col-md-12">    <div class="card-header card-header-content-md-between ">
-                      Onderhoudsbeurten
- 
-                   </div>
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between ">
+                   Onderhoudsbeurten
+
+                </div>
                 <div class="card">
-               
 
                    <div class="card-body p-2">
 
@@ -1033,12 +1090,12 @@
           </div>
           <div class="row pt-3">
              <div class="col-md-12">
-             <div class="card-header card-header-content-md-between ">
-                      Storingen
+                <div class="card-header card-header-content-md-between ">
+                   Storingen
 
-                   </div>
+                </div>
                 <div class="card">
-                
+
                    <div class="card-body p-2">
 
                       @if(count($object->incidents))
@@ -1153,12 +1210,13 @@
           </div>
 
           <div class="row pt-3">
-             <div class="col-md-12">          <div class="card-header card-header-content-md-between  t">
-                      Keuringen
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between  t">
+                   Keuringen
 
-                   </div>
+                </div>
                 <div class="card">
-         
+
                    <div class="card-body p-2">
 
                       @if(count($object->inspections))
@@ -1264,8 +1322,6 @@
        </div>
 
     </div>
- 
- 
 
  </div>
  <script>

@@ -39,10 +39,22 @@ body {
 
 
 
-.card-button:hover {
- background-color: #f8f6fb ;
+.big-button {
+ background-color: rgba(110, 66, 193, 0.65) ;
+ color: white;
+ height:100px;
+ font-weight: normal;
+ padding: 10px;
  cursor: pointer;
+ 
+ text-align: center;
+ 
 }
+.big-button:hover {
+  background-color: #8468b9 ;
+  cursor: pointer;
+ }
+ 
 
 .card{
  border-radius: 0px!important;;

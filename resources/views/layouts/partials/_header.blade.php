@@ -4,7 +4,9 @@
   >
   <div  class="navbar-nav-wrap">
       <div class="navbar-nav-wrap-content-start">
-      <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+
+      
+      <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler d-none d-sm-block d-md-none">
         <i class="bi-arrow-bar-left navbar-toggler-short-align"
           data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
           data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
