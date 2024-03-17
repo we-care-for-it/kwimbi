@@ -390,7 +390,8 @@
    </div>
 </div>
 
-</div>   @if($object->AllElevatorOnThisAddress)
+</div>
+@if($object->AllElevatorOnThisAddress)
 
 <div class="row pt-3">
    <div class="col-md-12">
@@ -407,7 +408,7 @@
                   <th scope="col">Unit No </th>
                   <th scope="col">Opmerking </th>
                   <th scope="col">Categorie </th>
-                  <!-- <th scope="col">Energielabel </th> -->
+                  <th scope="col">Energielabel </th>
                   <th scope="col">Nobo nr. </th>
                   <th scope="col"> </th>
                   </tr>
@@ -458,7 +459,30 @@
                         </small>
                         @endif
                      </td>
-                    
+                     <td class="align-middle">
+                        <div class="energy-class">
+
+                           @if($elevator_item->energy_label=='A')
+
+                           <div class="a"></div>
+                           @elseif($elevator_item->energy_label=='B')
+                           <div class="b"></div>
+                           @elseif($elevator_item->energy_label=='C')
+                           <div class="c"></div>
+                           @elseif($elevator_item->energy_label=='D')
+                           <div class="d"></div>
+                           @elseif($elevator_item->energy_label=='E')
+                           <div class="e"></div>
+                           @elseif($elevator_item->energy_label=='F')
+                           <div class="f"></div>
+                           @elseif($elevator_item->energy_label=='G')
+                           <div class="g"></div>
+                           @else
+                           Onbekend
+                           @endif
+
+                        </div>
+                     </td>
 
                      <td class="align-middle"> {{$elevator_item->nobo_no}}</td>
 
@@ -489,6 +513,7 @@
 </div>
 
 @endif
+
 </div>
 
 
@@ -774,8 +799,7 @@
           </span>
        </div>
        <br> @endif
-
-     
+ 
        <button onclick="topFunction()" id="go_to_top_button" class="btn-sm btn btn-primary btn-ico"><i
              class="fa-solid fa-arrow-up"></i></button>
     </div>
