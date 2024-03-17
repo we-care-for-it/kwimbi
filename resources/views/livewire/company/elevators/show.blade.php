@@ -156,11 +156,13 @@
     </div>
  </div>
 
- <div class="  overflow-hidden  ">
+ 
 
- <div class="row   gy-4 ">
+ <div class="row   ">
  <div class="col-md-3 ">
- <table class="table table-striped " style="margin: 1px;">
+
+ <div class= "card"> <div class= "card-body">
+ <table class="table table-striped "  >
 
 <tr>
    <td>Leverancier</td>
@@ -285,13 +287,15 @@
 
                 </tr>
 
-</table>
+</table>            </div> </div>
 </div>
 <div class="col-md-9 ">
-
+<div class="card ">
+<div class="card-body">
 <div class="row   gy-4 ">
+   
 
-<div class="col-lg-3 col-6 col-md-3 ">
+<div class="col-lg-3 col-6 col-md-4 ">
    <div class="card p-0 border  " onclick="location='/elevator/incidents/{{$object->id}}/index'">
       <div class="   big-button  pt-2">
          <div class="text-center">
@@ -303,7 +307,7 @@
    </div>
 </div>
 
-<div class="col-lg-3 col-6 col-md-3 ">
+<div class="col-lg-3 col-6 col-md-4 ">
    <div class="card   border  " onclick="location='/elevator/maintenance/{{$object->id}}/index'">
       <div class="   big-button  pt-2">
          <div class="text-center">
@@ -315,7 +319,7 @@
    </div>
 </div>
 
-<div class="col-lg-3 col-6 col-md-3 ">
+<div class="col-lg-3 col-6 col-md-4 ">
    <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/create'">
       <div class="   big-button  pt-2">
          <div class="text-center">
@@ -385,7 +389,7 @@
       </div>
    </div>
 </div>
-
+</div></div>
 </div>
 
 @if($object->AllElevatorOnThisAddress)
