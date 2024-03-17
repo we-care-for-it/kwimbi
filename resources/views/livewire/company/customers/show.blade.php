@@ -379,9 +379,7 @@ Statusstieken
       </div>
    </div>
             <!-- End Modal -->
-            <button onclick="topFunction()" id="go_to_top_button" class="btn btn-primary btn-ico"><i
-                    class="fa-solid fa-arrow-up"></i></button>
-
+    
 
 
 

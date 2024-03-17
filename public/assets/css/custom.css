@@ -25,12 +25,15 @@ body {
 
 }*/
 
+
+
 #go_to_top_button {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
   bottom: 20px; /* Place the button at the bottom of the page */
   right: 30px; /* Place the button 30px from the right */
   z-index: 99; /* Make sure it does not overlap */
+  width: 50px;
 
   cursor: pointer; /* Add a mouse pointer on hover */
 
@@ -45,6 +48,8 @@ body {
  height:100px;
  font-weight: normal;
  padding: 10px;
+ 
+ 
  cursor: pointer;
  
  text-align: center;
@@ -145,6 +150,11 @@ background-color: #6f42c1!important;
 background-color: #6f42c1!important;
  
 }
+
+
+ 
+
+
 }
 
 
