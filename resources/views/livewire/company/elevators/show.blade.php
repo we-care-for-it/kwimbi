@@ -156,83 +156,200 @@
     </div>
  </div>
 
+ <div class="  overflow-hidden  ">
  
 
- <div class="row   ">
- <div class="col-md-3 ">
 
- <div class= "card"> <div class= "card-body">
- <table class="table table-striped "  >
 
-<tr>
-   <td>Leverancier</td>
-   <td>@if($object?->supplier?->name)
-      {{$object?->supplier?->name}}
-      @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
-   </td>
-</tr>
-<tr>
-   <td>Bouwjaar</td>
-   <td>
+    <div class="row   gy-4 ">
 
-      @if($object->construction_year)
-      {{$object->construction_year}}
-      @else
-      <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
-      @endif
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card p-0 border  " onclick="location='/elevator/incidents/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Storingen ({{count($object->incidents)}})</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-   </td>
-</tr>
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card   border  " onclick="location='/elevator/maintenance/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-wrench fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Onderhoudsbeurten ({{count($object->incidents)}})</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-<tr>
-   <td class="align-middle">Status </td>
-   <td>
-      <span class="badge bg-soft-primary-light text-primary p-1">
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/create'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-certificate fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Keuringen ({{count($object->inspections)}})</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-         @if($object->status_id==1)
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card p-0 border  " onclick="location='/elevator/trip-registration/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-up-down fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Rittenregistratie ({{count($object->incidents)}})</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-         <span class="d-flex align-items-center"> <span class="legend-indicator bg-success"></span>
-            <span class="text-truncate">Operationeel</span></span>
-         @else
-         <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
-            <span class="text-truncate">Lift buiten gebruik</span></span>
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card p-0 border  " onclick="location='/elevator/contracts/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-file-contract fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Contracten ({{count($object->maintenance_contracts)}})</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-         @endif
+       <div class="col-lg-3 col-6 col-md-3 ">
+          <div class="card p-0 border  " onclick="location='/elevator/attechments/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-paperclip fa-1x  "></i>
+                   </span>
+                   <p class="  ">Bijlages </p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-      </span></td>
+       <div class="col-lg-2 col-6 col-md-3">
+          <div class="card p-0 border  " onclick="location='/elevator/workorders/{{$object->id}}/index''">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-tasks fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Werkopdrachten </p>
+                </div>
+             </div>
+          </div>
+       </div>
 
-</tr>
+       <div class="col-lg-2 col-6 col-md-3">
+          <div class="card p-0 border  " onclick="location='/elevator/moreinormation/{{$object->id}}/index''">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-circle-info fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Meer informatie</p>
+                </div>
+             </div>
+          </div>
+       </div>
 
- 
- 
+    </div>
 
-<tr>
-   <td>Keuringstatus</td>
-   <td> @if(count($object->inspections))
+    <div class="row pt-4">
+       <div class="col-md-6">
+          <div class="card p-0 ">
+             <table class="table table-striped " style="margin: 1px;">
 
-      @if($object?->latestInspection?->status_id==1)
-      <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
-      @endif
-      @if($object?->latestInspection?->status_id==2)
-      <span class="badge bg-soft-primary text-primary ">
-         Goedgekeurd met acties </span>
-      @endif
-      @if($object?->latestInspection?->status_id==3)
-      <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
-      @endif
-      @if($object?->latestInspection?->status_id==4)
-      <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
-      @endif
-      @if($object?->latestInspection?->status_id==5)
-      <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
-      @endif
+                <tr>
+                   <td>Leverancier</td>
+                   <td>@if($object?->supplier?->name)
+                      {{$object?->supplier?->name}}
+                      @else <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span> @endif
+                   </td>
+                </tr>
+                <tr>
+                   <td>Bouwjaar</td>
+                   <td>
 
-      @else
-      Geen keuring uitgevoerd
+                      @if($object->construction_year)
+                      {{$object->construction_year}}
+                      @else
+                      <span class="badge bg-soft-primary-light text-primary p-1">Geen</span>
+                      @endif
 
-      @endif</td>
+                   </td>
+                </tr>
 
-</tr>  <tr>
+                <tr>
+                   <td class="align-middle">Status </td>
+                   <td>
+                      <span class="badge bg-soft-primary-light text-primary p-1">
+
+                         @if($object->status_id==1)
+
+                         <span class="d-flex align-items-center"> <span class="legend-indicator bg-success"></span>
+                            <span class="text-truncate">Operationeel</span></span>
+                         @else
+                         <span class="d-flex align-items-center"> <span class="legend-indicator bg-danger"></span>
+                            <span class="text-truncate">Lift buiten gebruik</span></span>
+
+                         @endif
+
+                      </span></td>
+
+                </tr>
+
+                <tr>
+                   <td class="align-middle">Speek luister/verbinding </td>
+                   <td>
+                      <span class="badge bg-soft-primary-light text-primary p-1">Onbekend</span>
+                   </td>
+                </tr>
+
+                <tr>
+                   <td>Keuringstatus</td>
+                   <td> @if(count($object->inspections))
+
+                      @if($object?->latestInspection?->status_id==1)
+                      <span class="badge bg-soft-success text-success "> Goedgekeurd </span>
+                      @endif
+                      @if($object?->latestInspection?->status_id==2)
+                      <span class="badge bg-soft-primary text-primary ">
+                         Goedgekeurd met acties </span>
+                      @endif
+                      @if($object?->latestInspection?->status_id==3)
+                      <span class="badge bg-soft-danger text-danger  "> Afgekeurd </span>
+                      @endif
+                      @if($object?->latestInspection?->status_id==4)
+                      <span class="badge bg-soft-primary text-primary"> Onbeslist </span>
+                      @endif
+                      @if($object?->latestInspection?->status_id==5)
+                      <span class="badge bg-soft-warning text-warning "> Niet afgerond </span>
+                      @endif
+
+                      @else
+                      Geen keuring uitgevoerd
+
+                      @endif</td>
+
+                </tr>
+
+             </table>
+          </div>
+
+       </div>
+
+       <div class="col-md-6">
+          <div class="card p-0 ">
+             <table class="table table-striped " style="margin: 1px;">
+
+                <tr>
                    <td>Nobo nr.</td>
                    <td>
 
@@ -248,7 +365,7 @@
                    </td>
                 </tr>
                 <tr>
-                   <td>Stopplaatsen</td>
+                   <td>Aantal Stopplaatsen</td>
                    <td> @if($object->stopping_places)
                       {{$object->stopping_places}}
                       @else
@@ -287,240 +404,61 @@
 
                 </tr>
 
-</table>            </div> </div>
-</div>
-<div class="col-md-9 ">
-<div class="card ">
-<div class="card-body">
-<div class="row   gy-4 ">
-   
+             </table>
+          </div>
 
-<div class="col-lg-3 col-6 col-md-4 ">
-   <div class="card p-0 border  " onclick="location='/elevator/incidents/{{$object->id}}/index'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-triangle-exclamation fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Storingen ({{count($object->incidents)}})</p>
-         </div>
-      </div>
-   </div>
-</div>
+       </div>
 
-<div class="col-lg-3 col-6 col-md-4 ">
-   <div class="card   border  " onclick="location='/elevator/maintenance/{{$object->id}}/index'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-wrench fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Onderhoudsbeurten ({{count($object->incidents)}})</p>
-         </div>
-      </div>
-   </div>
-</div>
+       <!-- Modal -->
 
-<div class="col-lg-3 col-6 col-md-4 ">
-   <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/create'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-certificate fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Keuringen ({{count($object->inspections)}})</p>
-         </div>
-      </div>
-   </div>
-</div>
+       <div wire:ignore class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" role="dialog"
+          aria-labelledby="crudModal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
 
-<div class="col-lg-3 col-6 col-md-3 ">
-   <div class="card p-0 border  " onclick="location='/elevator/trip-registration/{{$object->id}}/index'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-up-down fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Rittenregistratie ({{count($object->incidents)}})</p>
-         </div>
-      </div>
-   </div>
-</div>
-<div class="col-lg-3 col-6 col-md-3 ">
-   <div class="card p-0 border  " onclick="location='/elevator/contracts/{{$object->id}}/index'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-file-contract fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Contracten ({{count($object->maintenance_contracts)}})</p>
-         </div>
-      </div>
-   </div>
-</div>
+             <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Bestand toevoegen</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
 
-<div class="col-lg-3 col-6 col-md-3 ">
-   <div class="card p-0 border  " onclick="location='/elevator/attechments/{{$object->id}}/index'">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-paperclip fa-1x  "></i>
-            </span>
-            <p class="  ">Bijlages </p>
-         </div>
-      </div>
-   </div>
-</div>
+                   <div class="row">
+                      <div class="col-md-3"><img src="/assets/img/documents.svg"></div>
+                      <div class="col-md-9">
 
-<div class="col-lg-3 col-6 col-md-3 ">
-   <div class="card p-0 border  " onclick="location='/elevator/workorders/{{$object->id}}/index''">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-tasks fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Werkopdrachten </p>
-         </div>
-      </div>
-   </div>
-</div>
+                         <label for="fname">Bestandsnaam</label>
+                         <div class="pt-2"></div>
+                         <input class="form-control" wire:model="file_description" name="description">
 
-<div class="col-lg-3 col-6 col-md-3 ">
-   <div class="card p-0 border  " onclick="location='/elevator/moreinormation/{{$object->id}}/index''">
-      <div class="   big-button  pt-2">
-         <div class="text-center">
-            <span class="display-3 fw-normal  "> <i class="fa-solid fa-circle-info fa-1x  "></i>
-            </span>
-            <p class="  mb-0">Meer informatie</p>
-         </div>
-      </div>
-   </div>
-</div>
-</div></div>
-</div>
+                         <div class="pt-2"></div>
+                         <label for="fname">Categorie</label>
+                         <div class="pt-2"></div>
 
-@if($object->AllElevatorOnThisAddress)
+                         <select class="form-select  " wire:model="file_collection" />
+                         <option selected value="documens">Documenten</option>
+                         <option value="image ">Afbeeldingen</option>
+                         <option value="3 ">Algemeen</option>
+                         </select>
+                         <div class="pt-3"></div>
+                         <label>Bestand</label>
+                         <div class="pt-2"></div>
 
-<div class="row pt-3">
-   <div class="col-md-12">
-      <div class="card-header card-header-content-md-between  ">
-         Liften op deze locatie
+                         <div class="pt-2"></div>
+                         <div style="float: right;  ">
 
-      </div>
-      <div class="card">
+                            <button type="submit" class="btn btn-soft-success "
+                               wire:click="uploadFile()">Upload</button>
+                         </div>
 
-         <div class="card-body">
-            <table class="table  table-sm  table-hover ">
-               <thead>
+                      </div>
 
-                  <th scope="col">Unit No </th>
-                  <th scope="col">Opmerking </th>
-                  <th scope="col">Categorie </th>
-                  <th scope="col">Energielabel </th>
-                  <th scope="col">Nobo nr. </th>
-                  <th scope="col"> </th>
-                  </tr>
-               </thead>
-               <tbody>
-                  @foreach($object->AllElevatorOnThisAddress as $elevator_item )
-                  <tr onclick="location: '/objects/show/{{$elevator_item->id}}' " style="cursor:pointer">
+                   </div>
+                </div>
 
-                     <td class="align-middle">
-                        @if($elevator_item->fire_elevator)
-                        <div class="cnt_table_result">
-
-                           <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
-                              class="text-danger bi bi-fire"></i>
-                        </div>
-                        @else
-                        <div class="cnt_table_result">
-                           <i style="color: #EFEFEF" class=" bi bi-fire"></i>
-                        </div>
-                        @endif
-
-                        @if($elevator_item->stretcher_elevator)
-                        <div class="cnt_table_result">
-
-                           <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brancard / Bedlift"
-                              class="text-primary fa-solid fa-bed"></i>
-                        </div>
-
-                        @else
-                        <div class="cnt_table_result">
-
-                           <i style="color: #EFEFEF" class=" fa-solid fa-bed"></i>
-                        </div>
-
-                        @endif
-
-                        {{$elevator_item->unit_no}}
-
-                     </td>
-                     <td class="align-middle">
-                        {{$elevator_item->remark}}
-                     </td>
-                     <td class="align-middle">
-
-                        @if($elevator_item?->object_type_id)
-                        <small>
-                           {{config('globalValues.object_types')[$elevator_item?->object_type_id]}}
-                        </small>
-                        @endif
-                     </td>
-                     <td class="align-middle">
-                        <div class="energy-class">
-
-                           @if($elevator_item->energy_label=='A')
-
-                           <div class="a"></div>
-                           @elseif($elevator_item->energy_label=='B')
-                           <div class="b"></div>
-                           @elseif($elevator_item->energy_label=='C')
-                           <div class="c"></div>
-                           @elseif($elevator_item->energy_label=='D')
-                           <div class="d"></div>
-                           @elseif($elevator_item->energy_label=='E')
-                           <div class="e"></div>
-                           @elseif($elevator_item->energy_label=='F')
-                           <div class="f"></div>
-                           @elseif($elevator_item->energy_label=='G')
-                           <div class="g"></div>
-                           @else
-                           Onbekend
-                           @endif
-
-                        </div>
-                     </td>
-
-                     <td class="align-middle"> {{$elevator_item->nobo_no}}</td>
-
-                     <td class="align-middle">
-
-                        @if($object->id == $elevator_item->id)
-                        <span style="float: right"
-                           class="badge bg-soft-primary-light text-primary p-1">Deze
-                           lift</span>
-                        @else
-                        <a style="float: right" href="/elevator/show/{{$elevator_item->id}}">
-                           <button type="button"
-                              class="btn btn-ghost-warning btn-icon btn-sm rounded-circle">
-                              <i class="bi-eye"></i>
-                           </button>
-                        </a>
-                        @endif
-
-                     </td>
-                  <tr>
-
-                     @endforeach
-               </tbody>
-            </table>
-         </div>
-      </div>
-   </div>
-</div>
-
-@endif
-
-</div>
-</div>
-
-
-
-  
+             </div>
+          </div>
+       </div>
+       <!-- End Modal -->
 
        <!-- Modal EDIT -->
 
@@ -799,7 +737,136 @@
        </div>
        <br> @endif
 
-     
+       <div class="row ">
+
+          <div class="col-12">
+
+             @if($object->AllElevatorOnThisAddress)
+
+             <div class="row pt-3">
+                <div class="col-md-12">
+                   <div class="card-header card-header-content-md-between  ">
+                      Liften op deze locatie
+
+                   </div>
+                   <div class="card">
+
+                      <div class="card-body">
+                         <table class="table  table-sm  table-hover ">
+                            <thead>
+
+                               <th scope="col">Unit No </th>
+                               <th scope="col">Opmerking </th>
+                               <th scope="col">Categorie </th>
+                               <th scope="col">Energielabel </th>
+                               <th scope="col">Nobo nr. </th>
+                               <th scope="col"> </th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                               @foreach($object->AllElevatorOnThisAddress as $elevator_item )
+                               <tr onclick="location: '/objects/show/{{$elevator_item->id}}' " style="cursor:pointer">
+
+                                  <td class="align-middle">
+                                     @if($elevator_item->fire_elevator)
+                                     <div class="cnt_table_result">
+
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
+                                           class="text-danger bi bi-fire"></i>
+                                     </div>
+                                     @else
+                                     <div class="cnt_table_result">
+                                        <i style="color: #EFEFEF" class=" bi bi-fire"></i>
+                                     </div>
+                                     @endif
+
+                                     @if($elevator_item->stretcher_elevator)
+                                     <div class="cnt_table_result">
+
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brancard / Bedlift"
+                                           class="text-primary fa-solid fa-bed"></i>
+                                     </div>
+
+                                     @else
+                                     <div class="cnt_table_result">
+
+                                        <i style="color: #EFEFEF" class=" fa-solid fa-bed"></i>
+                                     </div>
+
+                                     @endif
+
+                                     {{$elevator_item->unit_no}}
+
+                                  </td>
+                                  <td class="align-middle">
+                                     {{$elevator_item->remark}}
+                                  </td>
+                                  <td class="align-middle">
+
+                                     @if($elevator_item?->object_type_id)
+                                     <small>
+                                        {{config('globalValues.object_types')[$elevator_item?->object_type_id]}}
+                                     </small>
+                                     @endif
+                                  </td>
+                                  <td class="align-middle">
+                                     <div class="energy-class">
+
+                                        @if($elevator_item->energy_label=='A')
+
+                                        <div class="a"></div>
+                                        @elseif($elevator_item->energy_label=='B')
+                                        <div class="b"></div>
+                                        @elseif($elevator_item->energy_label=='C')
+                                        <div class="c"></div>
+                                        @elseif($elevator_item->energy_label=='D')
+                                        <div class="d"></div>
+                                        @elseif($elevator_item->energy_label=='E')
+                                        <div class="e"></div>
+                                        @elseif($elevator_item->energy_label=='F')
+                                        <div class="f"></div>
+                                        @elseif($elevator_item->energy_label=='G')
+                                        <div class="g"></div>
+                                        @else
+                                        Onbekend
+                                        @endif
+
+                                     </div>
+                                  </td>
+
+                                  <td class="align-middle"> {{$elevator_item->nobo_no}}</td>
+
+                                  <td class="align-middle">
+
+                                     @if($object->id == $elevator_item->id)
+                                     <span style="float: right"
+                                        class="badge bg-soft-primary-light text-primary p-1">Deze
+                                        lift</span>
+                                     @else
+                                     <a style="float: right" href="/elevator/show/{{$elevator_item->id}}">
+                                        <button type="button"
+                                           class="btn btn-ghost-warning btn-icon btn-sm rounded-circle">
+                                           <i class="bi-eye"></i>
+                                        </button>
+                                     </a>
+                                     @endif
+
+                                  </td>
+                               <tr>
+
+                                  @endforeach
+                            </tbody>
+                         </table>
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+             @endif
+
+          </div>
+
+       </div>
        <button onclick="topFunction()" id="go_to_top_button" class="btn-sm btn btn-primary btn-ico"><i
              class="fa-solid fa-arrow-up"></i></button>
     </div>
