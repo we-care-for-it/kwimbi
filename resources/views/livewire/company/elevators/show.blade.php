@@ -163,7 +163,7 @@
 
     <div class="row   gy-4 ">
 
-       <div class="col-lg-3 col-6 col-md-3 ">
+    <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
           <div class="card p-0 border  " onclick="location='/elevator/incidents/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
@@ -175,7 +175,7 @@
           </div>
        </div>
 
-       <div class="col-lg-3 col-6 col-md-3 ">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
           <div class="card   border  " onclick="location='/elevator/maintenance/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
@@ -187,8 +187,8 @@
           </div>
        </div>
 
-       <div class="col-lg-3 col-6 col-md-3 ">
-          <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/create'">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
+          <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
                    <span class="display-3 fw-normal  "> <i class="fa-solid fa-certificate fa-1x  "></i>
@@ -198,8 +198,7 @@
              </div>
           </div>
        </div>
-
-       <div class="col-lg-3 col-6 col-md-3 ">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
           <div class="card p-0 border  " onclick="location='/elevator/trip-registration/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
@@ -211,7 +210,7 @@
           </div>
        </div>
 
-       <div class="col-lg-3 col-6 col-md-3 ">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
           <div class="card p-0 border  " onclick="location='/elevator/contracts/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
@@ -223,8 +222,8 @@
           </div>
        </div>
 
-       <div class="col-lg-3 col-6 col-md-3 ">
-          <div class="card p-0 border  " onclick="location='/elevator/attechments/{{$object->id}}/index'">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
+          <div class="card p-0 border  " onclick="location='/elevator/attachments/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
                    <span class="display-3 fw-normal  "> <i class="fa-solid fa-paperclip fa-1x  "></i>
@@ -235,8 +234,8 @@
           </div>
        </div>
 
-       <div class="col-lg-2 col-6 col-md-3">
-          <div class="card p-0 border  " onclick="location='/elevator/workorders/{{$object->id}}/index''">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
+          <div class="card p-0 border  " onclick="location='/elevator/workorders/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
                 <div class="text-center">
                    <span class="display-3 fw-normal  "> <i class="fa-solid fa-tasks fa-1x  "></i>
@@ -247,8 +246,8 @@
           </div>
        </div>
 
-       <div class="col-lg-2 col-6 col-md-3">
-          <div class="card p-0 border  " onclick="location='/elevator/moreinormation/{{$object->id}}/index''">
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
+          <div class="card p-0 border  " onclick="location='/elevator/information/{{$object->id}}/index' ">
              <div class="   big-button  pt-2">
                 <div class="text-center">
                    <span class="display-3 fw-normal  "> <i class="fa-solid fa-circle-info fa-1x  "></i>

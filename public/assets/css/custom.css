@@ -43,8 +43,9 @@ body {
 
 
 .big-button {
- background-color: rgba(110, 66, 193, 0.65) ;
+ background-color: rgba(87, 48, 158, 0.65) ;
  color: white;
+ border-radius: 10px;
  height:100px;
  font-weight: normal;
  padding: 10px;
