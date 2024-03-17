@@ -5,15 +5,16 @@
   <div  class="navbar-nav-wrap">
       <div class="navbar-nav-wrap-content-start">
 
-      
-      <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler d-none d-sm-block d-md-none">
+      <div class = "d-block d-lg-none d-md-none">
+      <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler  ">
         <i class="bi-arrow-bar-left navbar-toggler-short-align"
-          data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+          data-bs-template='<div class="tooltip  " role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
           data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
         <i class="bi-arrow-bar-right navbar-toggler-full-align"
-          data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+          data-bs-template='<div class="tooltip  " role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
           data-bs-toggle="tooltip" data-bs-placement="right" title="Menu"></i>
       </button>
+</div>
 
       <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
             

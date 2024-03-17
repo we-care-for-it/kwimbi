@@ -32,18 +32,15 @@
           </div>
           <div class="col-auto">
 
-             <a href="/elevators">
-                <button type="button" class="btn   btn-link btn-sm  ">
-                   Alle liften
-                </button></a>
+        
 
              <a href="/elevator/edit/{{$object->id}}">
-                <button type="button" class="btn btn-primary btn-sm  btn-120">
+                <button type="button" class="btn   btn-link btn-sm ">
                    Wijzig
                 </button>
              </a>
 
-             <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
+             <!-- <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                 id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
                 Toevoegen
              </button>
@@ -69,7 +66,7 @@
                    <i class="bi-gift dropdown-item-icon"></i> Bijlage
                 </a>
 
-             </div>
+             </div> -->
 
              <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
                 <i class="fa-solid fa-arrow-left"></i>
@@ -82,8 +79,7 @@
 
 
 
-    
-    <div class="row pb-4 pt-2">
+    <div class="row   gy-4  pb-3">
                 <div class="col-md-4">
                    <div class="card p-3 bg-light" style="height: 86px;">
                       @if($object->maintenance_company_id)
@@ -1321,7 +1317,7 @@
        </div>
 
     </div>
-
+<div id = "go_to_top_button">IPERDER PR</div>
  </div>
  <script>
     document.addEventListener('livewire:init', () => {
