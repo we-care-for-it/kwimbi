@@ -198,6 +198,21 @@
              </div>
           </div>
        </div>
+
+
+       <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
+          <div class="card border  " onclick="location='/elevator/inspections/{{$object->id}}/index'">
+             <div class="   big-button  pt-2">
+                <div class="text-center">
+                   <span class="display-3 fw-normal  "> <i class="fa-solid fa-location-dot fa-1x  "></i>
+                   </span>
+                   <p class="  mb-0">Locatie</p>
+                </div>
+             </div>
+          </div>
+       </div>
+
+
        <div class="col-lg-3 col-6 col-md-3 col-xl-2 ">
           <div class="card p-0 border  " onclick="location='/elevator/trip-registration/{{$object->id}}/index'">
              <div class="   big-button  pt-2">
