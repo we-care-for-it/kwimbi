@@ -1,6 +1,9 @@
 <div>
  
- 
+<div class = "card">   <div class = "card-header">
+Liftgegevens
+</div>
+   <div class = "card-body">
  
          <table >
             <tr>
@@ -30,13 +33,8 @@
                      {{$elevator?->address?->zipcode}},
                      {{$elevator?->address?->place}}
                      </small>
-                     <br> <br>
-                     <div
-                        style="border-top: 1px solid #EFEFEF; float: right;  padding-top: 10px; width: 100%">
-                        <a href="/elevator/show/{{$elevator->id}}">
-                        Terug naar lift
-                        </a>
-                     </div>
+               
+                     
                   </div>
             </li>
             @if($elevator?->name)
@@ -114,4 +112,8 @@
  
 
  
+ 
+</div>
+ 
+ </div>
 </div>

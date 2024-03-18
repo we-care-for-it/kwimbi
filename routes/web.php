@@ -170,8 +170,8 @@ function ()
             Route::get('/create', \App\Http\Livewire\Company\Elevators\Create::class);
           
             //Contracten
-                Route::get('/contracts/{elevator_id}/index', \App\Http\Livewire\Company\Elevators\Contracts\Index::class);
-              //  Route::get('/contracts/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Contracts\Create::class);
+                Route::get('/maintenance-contracts/{elevator_id}/index', \App\Http\Livewire\Company\Elevators\Contracts\Index::class);
+              Route::get('/maintenance-contract/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\MaintenanceContracts\Create::class);
              //    Route::get('/contracts/edit/{id}', \App\Http\Livewire\Company\Contracts\Edit::class);
             
             //Onderhoudsbeurten
@@ -190,7 +190,7 @@ function ()
     
             //inspections
                 Route::get('/inspections/{elevator_id}/index', \App\Http\Livewire\Company\Elevators\Inspections\Index::class);
-                Route::get('/inspections/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
+                Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
                 Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\Edit::class);
                 
             //Incidenten

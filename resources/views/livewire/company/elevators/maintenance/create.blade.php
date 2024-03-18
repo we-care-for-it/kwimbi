@@ -6,13 +6,17 @@
             Onderhoudsbeurt toevoegen
          </div>
          <div class="col-auto">
-            <button type="button"     class="btn btn-primary btn-sm  btn-120" wire:click="save()">
-            Opslaan
-            </button>
-            <button type="button" onclick="history.back()"
-               class="btn btn-secondary btn-sm  ">
+
+         
+
+                        <button type="button" onclick="history.back()"
+               class="btn   btn-link btn-sm   ">
             <i class="fa-solid fa-arrow-left"></i>
             </button>
+            <button type="button"     class="btn btn-soft-success btn-sm  btn-120" style = "pull-right" wire:click="save()">
+            Opslaan
+            </button>
+       
          </div>
       </div>
    </div>
@@ -22,11 +26,12 @@
 
    
    <div class="col-md-3">
+
+
  
  
             @livewire('company.elevators.partials.information', ['elevator' => $elevator])
-</div>
-
+</div> 
 
  
 

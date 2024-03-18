@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
-                    Contactpersoon toevoegen
+                Lift Wijzigen
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
@@ -277,7 +277,7 @@ Gegevens
                 </div>
             </div>
 
-<div class="card-header py-4  ">
+<div class="card-header mt-3  ">
 
 Opmerking
 </div>

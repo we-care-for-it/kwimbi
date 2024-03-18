@@ -878,6 +878,435 @@
 
              @endif
 
+             <div class="row  pt-3">
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between  ">
+                   Onderhoudscontracten
+
+                </div>
+                <div class="card">
+
+                   <div class="card-body p-2">
+
+                      @if(count($object->maintenance_contracts))
+
+                      <table class="table  table-sm  table-hover " style="cursor: pointer">
+                         <thead class="bg-light">
+                            <tr>
+                               <th scope="col">Status </th>
+                               <th scope="col">Begindatum </th>
+                               <th scope="col">Einddatum </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
+                            </tr>
+                         </thead>
+                         <tbody>
+
+                            @foreach($object->maintenance_contracts as $item)
+
+                            <tr>
+                               <td class="align-middle" style="width: 120px">
+
+                                  @if(!$item->isValid)
+                                  <span class="badge   bg-soft-success text-success  p-2"> Geldig </span>
+                                  @else
+                                  <span class="badge   bg-soft-danger text-danger  p-2"> Verlopen </span>
+                                  @endif
+
+                               </td>
+                               <td class="align-middle" style="width: 120px">
+                                  @if($item->begindate)
+                                  {{ \Carbon\Carbon::parse($item->begindate)->format('d-m-Y')}}
+                                  @endif
+                               </td>
+                               <td class="align-middle" style="width: 120px">
+                                  @if($item->enddate)
+                                  {{ \Carbon\Carbon::parse($item->enddate)->format('d-m-Y')}}
+                                  @endif
+
+                               </td>
+
+                               <td class="align-middle">
+                                  {{$object->maintenanceCompany->name}}
+
+                               </td>
+
+                               <td class="align-middle">
+                                  @if($item->attachment)
+                                  <button class="btn btn-soft-primary btn-sm"
+                                     wire:click="downloadDocument('maintenancycontract','{{$item->id}}')">
+                                     <i class="fa-solid fa-paperclip"></i> Contract </button>
+                                  @else
+                                  -
+                                  @endif
+                               </td>
+                               <td>
+
+                                  <div style="float:right">
+                                     <a href="/maintenance-contract/edit/{{$item->id}}">
+                                        <button type="button" data-bs-toggle="modal"
+                                           class="btn btn-ghost-warning btn-icon btn-sm rounded-circle"
+                                           id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                           <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                     </a>
+                                  </div>
+
+                               </td>
+
+                            </tr>
+
+                            @endforeach
+
+                            <!--[if ENDBLOCK]><![endif]-->
+                         </tbody>
+                      </table>
+
+                      @else
+                      <div class="p-3">
+                         <center>Geen onderhoudscontracten geregisteerd</center>
+                      </div>
+                      @endif
+
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="row pt-3">
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between ">
+                   Onderhoudsbeurten
+
+                </div>
+                <div class="card">
+
+                   <div class="card-body p-2">
+
+                      @if(count($object->maintenance))
+
+                      <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
+                         <thead class="bg-light">
+                            <tr>
+                               <th scope="col">Status </th>
+
+                               <th scope="col">Plandatum </th>
+                               <th scope="col">Uitvoerdatum </th>
+                               <th scope="col">Opmerking </th>
+                               <th scope="col">Document </th>
+                               <th scope="col"> </th>
+
+                            </tr>
+                         </thead>
+                         <tbody>
+
+                            @foreach($object->maintenance as $item)
+
+                            <!--[if BLOCK]><![endif]-->
+                            <tr>
+                               <td class="align-middle" style="width: 120px">
+
+                                  <span class="badge   bg-soft-primary text-primary  p-2"> Uitgevoerd </span>
+
+                               </td>
+                               <td class="align-middle" style="width: 150px">
+                                  @if($item->planned_at)
+                                  {{ \Carbon\Carbon::parse($item->plan_date)->format('d-m-Y')}}
+                                  @else
+                                  -
+                                  @endif
+                               </td>
+                               <td class="align-middle" style="width: 150px">
+                                  @if($item->executed_datetime)
+                                  {{ \Carbon\Carbon::parse($item->executed_datetime)->format('d-m-Y')}}
+                                  @else
+                                  -
+                                  @endif
+
+                               </td>
+
+                               <td class="align-middle">
+                                  @if($item->remark)
+                                  <small>{{$item->remark}}</small>
+                                  @else
+                                  -
+                                  @endif
+                               </td>
+
+                               <td class="align-middle">
+                                  @if($item->attachment)
+                                  <button class="btn btn-soft-primary btn-sm"
+                                     wire:click="downloadDocument('maintenance','{{$item->id}}')">
+                                     <i class="fa-solid fa-paperclip"></i> Download </button>
+                                  @else
+                                  -
+                                  @endif
+                               </td>
+                               <td>
+
+                                  <div style="float:right">
+                                     <a href="/maintenance/edit/{{$item->id}}">
+                                        <button type="button" data-bs-toggle="modal"
+                                           class="btn btn-ghost-warning btn-icon btn-sm rounded-circle"
+                                           id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
+                                           <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                     </a>
+                                  </div>
+
+                               </td>
+
+                            </tr>
+
+                            @endforeach
+
+                            <!--[if ENDBLOCK]><![endif]-->
+                         </tbody>
+                      </table>
+
+                      @else
+                      <div class="p-3">
+                         <center>Geen onderhoudsbeurten geregisteerd</center>
+                      </div>
+                      @endif
+
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="row pt-3">
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between ">
+                   Storingen
+
+                </div>
+                <div class="card">
+
+                   <div class="card-body p-2">
+
+                      @if(count($object->incidents))
+
+                      <table class="table  table-sm  table-hover   ">
+                         <thead class="bg-light">
+                            <tr>
+                               <th scope="col">Prioriteit </th>
+                               <th scope="col">Status</th>
+                               <th scope="col">Datum / Tijd </th>
+                               <th scope="col">Onderwerp </th>
+
+                               <th scope="col"> </th>
+                            </tr>
+                         </thead>
+                         <tbody>
+
+                            @foreach($object->incidents as $item)
+
+                            <!--[if BLOCK]><![endif]-->
+                            <tr onclick="location='/incident/{{$item->id}}'" style="cursor: pointer">
+                               <td class="align-middle" style="width: 120px">
+
+                                  @if($item->priority_id==1)
+                                  <span class="badge   bg-soft-danger text-danger  p-2"> Hoog </span>
+                                  @elseif($item->priority_id==2)
+                                  <span class="badge   bg-soft-warning text-warning  p-2"> Gemiddeld </span>
+                                  @elseif($item->priority_id==3)
+                                  <span class="badge   bg-soft-success text-success  p-2"> Laag </span>
+                                  @endif
+                               </td>
+
+                               <td class="align-middle" style="max-width: 140px">
+
+                                  @if ($item->status_id == 0)
+                                  <span class="text-warning py-1">Nieuw
+                                  </span>
+                                  @elseif($item->status_id == 2)
+                                  <span class="text-info py-1">Doorgestuurd naar
+                                     onderhoudsbedrijf
+                                  </span>
+                                  @elseif($item->status_id == 99)
+                                  <span class="text-info py-1">Gereed
+                                  </span>
+                                  @elseif($item->status_id == 3)
+                                  <span class="text-info py-1">Wacht op offerte
+                                  </span>
+                                  @elseif($item->status_id == 4)
+                                  <span class=" text-info py-1">Offerte naar klant gestuurt
+                                  </span>
+                                  @elseif($item->status_id == 5)
+                                  <span class=" text-info py-1">Niet gereed
+                                  </span>
+                                  @elseif($item->status_id == 6)
+                                  <span class=" text-info py-1">Onjuist gemeld
+                                  </span>
+                                  @elseif($item->status_id == 7)
+                                  <span class=" text-info py-1">Offerte in opdracht
+                                  </span>
+                                  @elseif($item->status_id == 8)
+                                  <span class="text-info py-1"> Werkzaamheden gepland
+                                  </span>
+
+                                  @elseif($item->status_id==9)
+                                  <span class=" text-info"> Wachten op uitvoerdatum
+                                  </span>
+
+                                  @endif
+                               </td>
+
+                               <td class="align-middle" style="width: 150px">
+                                  {{ \Carbon\Carbon::parse($item->report_date_time)->format('d-m-Y H:m')}}
+                               </td>
+
+                               <td class="align-middle">
+
+                                  {{$item->subject}}
+                                  <br><small> {{$item->description}}</small>
+
+                               </td>
+
+                               <td class="align-middle">
+
+                                  <div style="float: right">
+
+                                     <button type="button"
+                                        class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle">
+                                        <i class="bi-eye"></i>
+                                     </button>
+
+                                  </div>
+
+                               </td>
+
+                            </tr>
+
+                            @endforeach
+
+                            <!--[if ENDBLOCK]><![endif]-->
+                         </tbody>
+                      </table>
+
+                      @else
+                      <div class="p-3">
+                         <center>Geen storingen geregisteerd</center>
+                      </div>
+                      @endif
+
+                   </div>
+                </div>
+             </div>
+          </div>
+
+          <div class="row pt-3">
+             <div class="col-md-12">
+                <div class="card-header card-header-content-md-between  t">
+                   Keuringen
+
+                </div>
+                <div class="card">
+
+                   <div class="card-body p-2">
+
+                      @if(count($object->inspections))
+
+                      <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
+                         <thead class="bg-light">
+                            <tr>
+                               <th scope="col">Status </th>
+                               <th scope="col">Begindatum </th>
+                               <th scope="col">Einddatum </th>
+                               <th scope="col">Opmerking </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
+                               <th scope="col"> </th>
+                            </tr>
+                         </thead>
+                         <tbody>
+
+                            @foreach($object->inspections as $item)
+
+                            <!--[if BLOCK]><![endif]-->
+                            <tr>
+                               <td class="align-middle" style="width: 120px">
+
+                                  @if($item->status_id==1)
+                                  <span class="badge   bg-soft-success text-success  p-2"> Goedgekeurd </span>
+
+                                  @elseif($item->status_id==2)
+                                  <span class="badge   bg-soft-warning text-warning  p-2"> Goedgekeurd met acties
+                                  </span>
+
+                                  @elseif($item->status_id==3)
+                                  <span class="badge   bg-soft-danger text-danger  p-2"> Afgekeurd </span>
+
+                                  @elseif($item->status_id==4)
+                                  <span class="badge   bg-soft-primary text-primary  p-2"> Onbeslist </span>
+
+                                  @elseif($item->status_id==5)
+                                  <span class="badge   bg-soft-info text-info  p-2"> Niet afgerond </span>
+
+                                  @endif
+                               </td>
+
+                               <td class="align-middle" style="width: 150px">
+                                  {{ \Carbon\Carbon::parse($item->begindate)->format('d-m-Y')}}
+                               </td>
+
+                               <td class="align-middle" style="width: 150px">
+                                  {{ \Carbon\Carbon::parse($item->end_date)->format('d-m-Y')}}
+                               </td>
+
+                               <td>
+                                  {{$item->remark}}
+                               </td>
+
+                               <td scope="row">
+                                  @if($item->document)
+                                  <button class="btn btn-soft-primary  btn-120"
+                                     wire:click="downloadDocument('inspection','{{$item->id}}')" style="float: right; ">
+                                     <i class="fa-solid fa-paperclip"></i> Rapportage </button>
+                                  @endif
+                               </td>
+                               <td scope="row">
+                                  @if($item->certification)
+                                  <button class="btn btn-soft-primary btn-120 "
+                                     wire:click="downloadDocument('certification','{{$item->id}}')"
+                                     style="float: right;    ">
+                                     <i class="fa-solid fa-paperclip"></i> Certificaat </button> @endif
+                               </td>
+
+                               <td>
+
+                                  <div style="float:right">
+                                     <a href="/inspection/edit/{{$item->id}}">
+                                        <button type="button"
+                                           class="btn btn-ghost-warning btn-icon btn-sm rounded-circle">
+                                           <i class="fa-solid fa-pencil"></i>
+                                        </button>
+                                     </a>
+                                  </div>
+
+                               </td>
+
+                            </tr>
+
+                            @endforeach
+
+                            <!--[if ENDBLOCK]><![endif]-->
+                         </tbody>
+                      </table>
+
+                      @else
+                      <div class="p-3">
+                         <center>Geen keuringen geregisteerd</center>
+                      </div>
+                      @endif
+                   </div>
+                </div>
+             </div>
+
+          </div>
+
+       </div>
+
           </div>
 
        </div>
