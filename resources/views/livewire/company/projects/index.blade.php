@@ -8,7 +8,7 @@
          <div class="col-auto">
        
          <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-               <i class="fa-solid fa-arrow-left"></i> Terug
+     Terug
             </button>
          </div>
       </div>

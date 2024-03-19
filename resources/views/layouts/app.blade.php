@@ -21,6 +21,9 @@
          <div class="content">
            {{$slot}}
          </div>
+
+         <button onclick="topFunction()" id="go_to_top_button" class="btn-sm btn btn-primary btn-ico"><i
+             class="fa-solid fa-arrow-up"></i></button>
       </main>
       @include('layouts.partials._scripts')
    </body>

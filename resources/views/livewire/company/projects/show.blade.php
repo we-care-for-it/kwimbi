@@ -18,7 +18,7 @@
                 </a>
                 
                 <button type="button" onclick="history.back()" class="btn   btn-link btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
+                 Terug
                 </button>
 
             </div>

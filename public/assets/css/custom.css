@@ -42,8 +42,8 @@ body {
 
 
 .big-button {
- border: 1px dashed #6BB52F ;
- color:  #6BB52F ;
+ border: 1px dashed #EFEFEF ;
+ color:  #b6b4b4 ;
  
  height:100px;
  font-weight: normal;
@@ -56,7 +56,7 @@ body {
  
 }
 .big-button:hover {
-  background-color: #c2cfb7 ;
+  background-color: rgb(222, 232, 243) ;
   cursor: pointer;
  }
  
@@ -174,8 +174,8 @@ background-color: #377DFF!important;
 
 
   .loading_indicator {
-    border: 16px solid #CFCFFF; /* Light grey */
-    border-top: 16px solid #CFCFFF; /* Blue */
+    border: 16px solid #377DFF; /* Light grey */
+    border-top: 16px solid #377DFF; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -183,8 +183,8 @@ background-color: #377DFF!important;
     animation: spin 2s linear infinite;
   }
   .loading_indicator_small {
-    border: 5px solid #CFCFFF; /* Light grey */
-    border-top: 5px solid #CFCFFF; /* Blue */
+    border: 5px solid #377DFF; /* Light grey */
+    border-top: 5px solid #377DFF; /* Blue */
     border-radius: 50%;
     width: 30px;
     height: 30px;

@@ -6,12 +6,12 @@
        Liften
          </div>
          <div class="col-auto">
-            <a href = "/elevator/create"><button type="button"   class="btn btn-primary btn-sm  btn-120" wire:click="clear()">
+            <a href = "/elevator/create"><button type="button"   class="btn   btn-link btn-sm" wire:click="clear()">
             Toevoegen
             </button></a>
             <button type="button" onclick="history.back()"
-               class="btn btn-secondary btn-sm  ">
-            <i class="fa-solid fa-arrow-left"></i>
+               class="btn   btn-link btn-sm ">
+           Terug
             </button>
          </div>
       </div>
@@ -21,7 +21,7 @@
          
      
       
-      <div class="card-header card-header-content-md-between   pt-0 card-header-form ">
+      <div class="  card-header-content-md-between   pt-0 card-header-form ">
                <div class="mb-2 mb-md-0">
                   <form>
                      <!-- Search -->
@@ -43,40 +43,7 @@
                   <div class="d-flex align-items-center justify-content-center">
                      <div wire:loading.delay class="loading_indicator_small"></div>
                   </div>
-                  <!-- Datatable Info -->
-                  <div id="datatableCounterInfo" style="display: none;">
-                     <div class="d-flex align-items-center">
-                        <span class="fs-5 me-3">
-                        <span id="datatableCounter">0</span>
-                        Selected
-                        </span>
-                        <a class="btn btn-outline-danger btn-sm" href="javascript:;">
-                        <i class="bi-trash"></i> Delete
-                        </a>
-                     </div>
-                  </div>
-                  <!-- End Datatable Info -->
-                  <!-- Dropdown -->
-                  <!-- <div class="dropdown">
-                     <button type="button" class="btn btn-white  dropdown-toggle w-100" id="usersExportDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-download me-2"></i> Exporteren</button>
-                     <div class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="usersExportDropdown" style="">
-                        <span class="dropdown-header">Opties</span>
-                        <a wire:click="export('xlsx')" id="export-excel" class="dropdown-item" href="javascript:;">
-                        Excel
-                        </a>
-                        <a id="export-csv" wire:click="export('csv')" class="dropdown-item" href="javascript:;">
-                        .CSV
-                        </a>
-                        <a id="export-pdf" wire:click="export('pdf')" class="dropdown-item" href="javascript:;">
-                        PDF
-                        </a>
-                        <a id="export-pdf" wire:click="export('html')" class="dropdown-item" href="javascript:;">
-                        HTML
-                        </a>
-                     </div>
-                     </div> -->
-                  <!-- End Dropdown -->
-                  <!-- Dropdown -->
+ 
                   <div class="dropdown">
                      <button type="button" class="btn btn-white btn-sm w-100"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
                      <i class="bi-filter me-1"></i>   Filter
@@ -252,7 +219,12 @@
                   </div>
                   @endif
                </div>
-               <div class = "card-footer">
+              
+            </div>
+         </div>
+      </div>
+   </div>
+</div> <div class = "card-footer pt-3">
                   <div class="float-start">
                      @if(count($elevators))
                      <p class="float-start"> Pagina <b> {{ $elevators->currentPage()}} </b> van <b> {{ $elevators->lastPage()}} </b>
@@ -264,11 +236,6 @@
                      @endif
                   </div>
                </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
 <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header">
       <h5 id="offcanvasRightLabel"><i class="bi-filter me-1"></i> Filter</h5>
