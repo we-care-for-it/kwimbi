@@ -6,9 +6,9 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-  --bs-blue: #7952B3;
+  --bs-blue: #555555;
   --bs-indigo: #6610f2;
-  --bs-purple: #7952B3;
+  --bs-purple: #555555;
   --bs-pink: #d63384;
   --bs-red: #ed4c78;
   --bs-orange: #fd7e14;
@@ -3253,19 +3253,19 @@ textarea.form-control-lg {
 
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #7952B3;
-  --bs-btn-border-color: #7952B3;
+  --bs-btn-bg: #555555;
+  --bs-btn-border-color: #555555;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #7952B3;
+  --bs-btn-hover-bg: #555555;
   --bs-btn-hover-border-color: #2c64cc;
   --bs-btn-focus-shadow-rgb: 121,82,179;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #7952B3;
-  --bs-btn-active-border-color: #7952B3;
+  --bs-btn-active-bg: #555555;
+  --bs-btn-active-border-color: #555555;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #7952B3;
-  --bs-btn-disabled-border-color: #7952B3;
+  --bs-btn-disabled-bg: #555555;
+  --bs-btn-disabled-border-color: #555555;
 }
 
 .btn-secondary {

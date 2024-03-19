@@ -6,11 +6,11 @@
                   Wijzig project
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+                <button type="button" class="btn   btn-link btn-sm wire:click="save()">
                     Opslaan
                 </button>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
+                <button type="button" onclick="history.back()" class=" btn   btn-link btn-sm" ">
+                    <i class="fa-solid fa-arrow-left"></i> Terug
                 </button>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
         <div class="col-md-3">         
             
-        <div class="card-header   pt-0    ">
+        <div class="card-header      ">
 
 Gegevens
 </div>
@@ -52,9 +52,9 @@ Gegevens
         </div>
 
         <div class="col-md-9">
-        <div class="card-header   pt-2    ">
+        <div class="card-header      ">
 
- 
+Gegevens
 </div>
 
             <div class="card">

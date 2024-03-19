@@ -3,18 +3,18 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-               Keuringsinstanties
+               Beheerders
          </div>
 
          <div class="col-auto">
 
-            <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="clear()" data-bs-toggle="modal"
+            <button type="button" class="btn   btn-link btn-sm" wire:click="clear()" data-bs-toggle="modal"
                data-bs-target="#crudModal" type="button">
                Toevoegen
             </button>
 
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+Terug
             </button>
 
          </div>
@@ -22,31 +22,23 @@
       </div>
    </div>
    <div class="row p-0 ">
-      <div class="col-xl-12"> <div class="card-header card-header-content-md-between  ">
-               <div>
+      <div class="col-xl-12">   <div class="  card-header-content-md-between   pt-0 card-header-form ">
+               <div class="mb-3 mb-md-0">
                   <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                           placeholder="Zoeken op trefwoord..." data-hs-form-search-options='{
-                           "clearIcon": "#clearIcon2",
-                           "defaultIcon": "#defaultClearIconToggleEg"
-                           }'>
+                        <input type="text" wire:model.live="filters.keyword"  class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                           }">
                         <button type="button" class="input-group-append input-group-text">
-                           <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                           <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                         </button>
                      </div>
                      <!-- End Search -->
                   </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay class="loading_indicator_small"></div>
-                  </div>
-
-                  <!-- End Dropdown -->
-               </div>
+               </div>      
             </div>
          <div class="card">
            

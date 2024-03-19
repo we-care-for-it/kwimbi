@@ -81,7 +81,7 @@
                     </button></a>
 
                 <a href = "/location/edit/{{$location->id}}">
-                <button type="button" class="btn   btn-link btn-sm " wire:click="save()">
+                <button type="button" class="btn   btn-link btn-sm "  >
                     Wijzig
                 </button>
                 </a>

@@ -1,4 +1,4 @@
-<aside style = "backgrounc-color: white"
+<aside style = "background-color: white"
   class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-md navbar-bordered bg-white  
  
 

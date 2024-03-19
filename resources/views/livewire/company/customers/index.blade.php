@@ -9,13 +9,13 @@
          <div class="col-auto">
 
   
-               <button type="button" class="btn btn-primary btn-sm  btn-120" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
+               <button type="button" class="btn   btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
                   Toevoegen
                </button>
  
 
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+           Terug
             </button>
 
          </div>

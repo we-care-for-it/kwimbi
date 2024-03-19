@@ -7,8 +7,8 @@
          </div>
          <div class="col-auto">
 
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+               <i class="fa-solid fa-arrow-left"></i> Terug
             </button>
 
          </div>
@@ -22,7 +22,7 @@
 
 
       <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-2 mb-md-0">
+               <div class="mb-3 mb-md-0">
                   <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
