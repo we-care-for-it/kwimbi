@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\Settings\Workorders;
+namespace App\Http\Livewire\Settings;
 
 use Livewire\Component;
-
-
 
 
 //Models
  
 use App\Models\maintenanceCompany;
-use App\Models\paymentMethod;
+use App\Models\department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -28,11 +26,9 @@ use Illuminate\Support\Facades\Http;
 
 
 
-
-
-
-class Paymethods extends Component
+class Departments extends Component
 {
+
 
     use WithPerPagePagination;
     use WithSorting;
@@ -50,12 +46,15 @@ class Paymethods extends Component
 
 
 
+
     public function render()
     {
-        return view('livewire.settings.workorders.paymethods',[
+        return view('livewire.settings.departments',[
             'items' => $this->rows,
             ]);
     }
+
+
     public $filters = [
         'keyword'   => '', 
  
@@ -70,7 +69,7 @@ class Paymethods extends Component
     
     public function getRowsQueryProperty()
     {
-        $query = paymentMethod::query()->when($this->filters['keyword'], function ($query) {
+        $query = department::query()->when($this->filters['keyword'], function ($query) {
             $query->where('name', 'like', '%' . $this->filters['keyword'] . '%')
                
  ;
@@ -125,7 +124,7 @@ public function save(){
     $this->validate();
 
     if(!$this->edit_id){
-        paymentMethod::create($this->all());
+        department::create($this->all());
     }else{
         $this->data->update($this->all());
     }
@@ -158,7 +157,7 @@ public function save(){
     {
     
         $this->edit_id = $id;
-        $this->data = $item = paymentMethod::where('id', $id)->first();
+        $this->data = $item = department::where('id', $id)->first();
          $this->name =  $this->data->name;
         
  
@@ -169,16 +168,10 @@ public function save(){
 
 
     public function delete($id){
-        $item= paymentMethod::find($id);
+        $item= department::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
         pnotify()->addWarning('Gegevens verwijderd');
     }
 
 }
-    
-
-
- 
-
- 

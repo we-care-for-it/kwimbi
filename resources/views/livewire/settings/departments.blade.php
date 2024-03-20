@@ -3,8 +3,8 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-               Standaard foutmeldingen</h1>
-               <p>Standaard foutmeldingen kunnen gebruikt worden bij het aanmaken een storing of een ticket</p>
+              Afdelingen</h1>
+               <p>Een stuk tekst die nog verzonnen moeten worden </p>
              
          </div>
 
@@ -35,7 +35,7 @@
                            &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
                            &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
                            }">
-                     <button type="button" class="input-group-append input-group-text ">
+                     <button type="button" class="input-group-append input-group-text">
                         <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
                         <i id="defaultClearIconToggleEg" class="bi-search"
                            style="display: block; opacity: 1.03666;"></i>
@@ -69,8 +69,9 @@
                            <table class="table">
                               <thead class="bg-light">
                                  <tr>
-                                    <th style="width: 120px;">Code</th>
-                                    <th>Oplossing</th>
+                           
+                                    <th >Naam</th>
+                            
                                     <th></th>
 
                                  </tr>
@@ -81,8 +82,9 @@
 
                                  <tr style = "cursor: pointer"  wire:click="edit({{$item->id}})"  data-bs-toggle="modal"
                                           data-bs-target="#crudModal">
-                                    <th class = "bg-light" scope="row"> {{$item->code}} </th>  
-                                    <td> {{$item->error}}</td>
+                                          
+                                    <td  scope="row"> {{$item->name}} </td>  
+                                    <td> {{$item->description}}</td>
                                     <td class="p-0 m-0"> <button style="float: right"
                                           class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
                                           wire:click="edit({{$item->id}})" data-bs-toggle="modal"
@@ -102,11 +104,11 @@
                               <center>
                                  <div>
                                     <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-                                    <h4>Geen standaard foutmelding gevonden</h4>
+                                    <h4>Geen afdelingen gevonden</h4>
                                     @if($this->cntFilters)
-                                    Er zijn geen standaard foutmelding gevonden met de huidige filters
+                                    Er zijn geen afdelingen gevonden met de huidige filters
                                     @else
-                                    Er zijn nog geen foutmelding gevonden in de database.
+                                    Er zijn nog geen afdelingen gevonden in de database.
                                     @endif
                                  </div>
                               </center>
@@ -140,23 +142,16 @@
                <div class="row">
                   <div class="col-md-12">
                      <div>
-                        <label class="pb-2">Code</label>
-                        <input wire:model="code" wire:change = "updateCode()" class="form-control    @error('code') is-invalid   @enderror  ">
+                        <label class="pb-2">Naam</label>
+                        <input wire:model="name"   class="form-control    @error('conamede') is-invalid   @enderror  ">
                         @error('code') <span class="invalid-feedback">{{ $message }}</span> @enderror
                      </div>
                   </div>
                </div>
 
-               <div class="row">
-                  <div class="col-md-12">
-                     <div>
-                        <label class="pt-2 pb-2">Omschrijving</label>
-                        <textarea wire:model="error"
-                           class="form-control    @error('error') is-invalid   @enderror  "></textarea>
-                        @error('error') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                     </div>
-                  </div>
-               </div>
+           
+
+
 
             </div>
             <div class="modal-footer">

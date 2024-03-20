@@ -100,9 +100,17 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 Route::group(['prefix' => 'settings', ],
 function ()
 {
+
+    Route::get('/departments', \App\Http\Livewire\Settings\Departments::class);
+    Route::get('/warehousings', \App\Http\Livewire\Settings\Warehousings::class);
+
+    
+
+
     Route::group(['prefix' => 'workorders', ],
     function ()
     {
+      
         Route::get('/statusses', \App\Http\Livewire\Settings\Workorders\Statusses::class);
         Route::get('/solutions', \App\Http\Livewire\Settings\Workorders\Solutions::class);
         Route::get('/errors', \App\Http\Livewire\Settings\Workorders\Errors::class);

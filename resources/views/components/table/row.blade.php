@@ -8,6 +8,6 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<tr  style ="cursor: pointer" class = "align-middle" {{ $attributes->merge(['class' => 'bg-white']) }}>
-    {{ $slot }}
+<tr style = "cursor: pointer"  wire:click="edit({{$item->id}})"  data-bs-toggle="modal">
+                                  {{ $slot }}
 </tr>

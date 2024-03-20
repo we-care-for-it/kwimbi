@@ -3,7 +3,9 @@
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
-               Standaard oplossingen
+               Standaard oplossingen</h1>
+               <p>Deze kunnen gebruikt worden bij het invullen van een werkopdracht nadat er een probleem opgelost is</p>
+             
          </div>
 
          <div class="col-auto">
@@ -21,10 +23,10 @@
 
       </div>
    </div>
-   <div class="row p-0 ">
+   <div class="row pt-5 ">
       <div class="col-xl-12">
          <div class="  card-header-content-md-between   pt-0 card-header-form ">
-            <div class="mb-3 mb-md-0">
+            <div class="mb-3 mb-md-0 pb-2">
                <form>
                   <!-- Search -->
                   <div class="input-group input-group-merge">
@@ -46,7 +48,7 @@
    
                          
          </div>
-         <div class="card p--0">
+         <div class="card ">
 
             <div class="">
                <div class="row">
@@ -64,52 +66,54 @@
 
                            @if($items->count())
 
-                           <table class="table">
-                              <thead class="bg-light">
-                                 <tr>
-                                    <th style="width: 120px;">Code</th>
-                                    <th>Oplossing</th>
-                                    <th></th>
+<table class="table">
+   <thead class="bg-light">
+      <tr>
+ 
+         <th style="width: 120px;">Code</th>
+         <th>Naam</th>
+         <th></th>
 
-                                 </tr>
-                              </thead>
-                              <tbody>
+      </tr>
+   </thead>
+   <tbody>
 
-                                 @foreach ($items as $item) 
+      @foreach ($items as $item) 
 
-                                 <tr style = "cursor: pointer" data-bs-toggle="modal"
-                                          data-bs-target="#crudModal">
-                                    <th class = "bg-light" scope="row"> {{$item->code}} </th>  
-                                    <td> {{$item->solution}}</td>
-                                    <td class="p-0 m-0"> <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"
-                                          wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                          data-bs-target="#crudModal">
-                                          <i class="bi bi-pencil"></i>
-                                       </button>
+      <tr style = "cursor: pointer"  wire:click="edit({{$item->id}})"  data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+         
+         <th class = "bg-light" scope="row"> {{$item->code}} </th>  
+         <td> {{$item->solution}}</td>
+         <td class="p-0 m-0"> <button style="float: right"
+               class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
+               wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+               <i class="bi bi-pencil"></i>
+            </button>
 
-                                    </td>
+         </td>
 
-                                 </tr>
-                                 @endforeach
-                              </tbody>
-                           </table>
+      </tr>
+      @endforeach
+   </tbody>
+</table>
 
-                           @else
-                           <div class="flex justify-center items-center space-x-2">
-                              <center>
-                                 <div>
-                                    <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-                                    <h4>Geen standaard oplossingen gevonden</h4>
-                                    @if($this->cntFilters)
-                                    Er zijn geen standaard oplossingen gevonden met de huidige filters
-                                    @else
-                                    Er zijn nog geen oplossingen gevonden in de database.
-                                    @endif
-                                 </div>
-                              </center>
-                           </div>
-                           @endif
+@else
+<div class="flex justify-center items-center space-x-2">
+   <center>
+      <div>
+         <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
+         <h4>Geen werktypes gevonden</h4>
+         @if($this->cntFilters)
+         Er zijn geen werktypes gevonden met de huidige filters
+         @else
+         Er zijn nog geen werktypes gevonden in de database.
+         @endif
+      </div>
+   </center>
+</div>
+@endif
                         </div>
                      </div>
                   </div>

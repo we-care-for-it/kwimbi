@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('solutions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->string('code')->nullable();
-            $table->longtext('solution')->nullable();
-        });
+        Schema::create('payment_methods', function (Blueprint $table) {
+      
+        $table->id();
+        $table->timestamps();
+        $table->softDeletes();
+        $table->string('name')->nullable();
+    });
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('solutions');
+        //
     }
 };

@@ -102,6 +102,7 @@
 
             or request()->is('management-companies')
             or request()->is('management-companies/*')
+            or request()->is('settings/*')
 
             or request()->is('inspection-companies')
             or request()->is('inspection-companies/*')
