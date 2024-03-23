@@ -4,9 +4,9 @@
          <div class="col">
             <h1 class="page-header-title ">
                Locaties</h1>
-               <p>Een overzicht van alle object locaties </p>
+ 
          </div>
-         <div class="col-md-3">
+         <div class="col-auto pt-2">
 
          <form>
                      <!-- Search -->

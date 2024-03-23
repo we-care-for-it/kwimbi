@@ -4,9 +4,9 @@
          <div class="col">
             <h1 class="page-header-title ">
                Keuringinstanties</h1>
-               <p>Keuringinstanties kunnen gekozen worden bij een object </p>
+       
          </div>
-         <div class="col-auto">
+         <div class="col-auto pt-2">
 
          <form>
                      <!-- Search -->
@@ -26,7 +26,7 @@
          </div>
 
 
-         <div class="col-auto">
+         <div class="col-auto pt-2">
          <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
          <i class="bi bi-plus"></i>
                </button>
