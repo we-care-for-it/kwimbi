@@ -6,7 +6,7 @@
                Locaties</h1>
                <p>Een overzicht van alle object locaties </p>
          </div>
-         <div class="col-auto">
+         <div class="col-md-3">
 
          <form>
                      <!-- Search -->
@@ -26,8 +26,7 @@
          </div>
       </div>
    </div>
-
-   <div class="row pt-6">
+   <div class="row pt-1">
       <div class="col-md-12"> 
 
          

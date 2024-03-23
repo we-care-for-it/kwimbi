@@ -62,7 +62,7 @@ body {
  
 
 .card{
- border-radius: 0px!important;;
+  border-radius: 10px!important;
  border: 1px dotted #EFEFEF!important;
   box-shadow: 0px 0px 0px 0px white!important;;
 
@@ -102,7 +102,8 @@ body {
   height: 70px!important;;
   border-radius: 10px!important;
   border: 0px!important;
-  background-color: #0ABF53!important;
+  background-color: #F8F9FA!important;
+  border: 1px dotted #EFEFEF!important;
 
 
 
@@ -149,12 +150,12 @@ a:link{
 }
 .js-navbar-vertical-aside{
   width: 70px!important;
-background-color: #0ABF53!important;
+background-color: rgb(124,124,124)!important;
  
 }
 .navbar-vertical-container{
   width: 70px!important;
-background-color: #0ABF53!important;
+background-color: rgb(124,124,124)!important;
  
 }
 
@@ -424,7 +425,7 @@ border-radius: 0px!important;;
 	background: linear-gradient(transparent 98%, #eaeaea 0);
 	background-repeat: repeat-y;
 	background-size: 100% 50px;
-	margin: 40px 0 10px;
+	margin: 10px 0 10px;
 	min-width: 400px;
 	position: relative;
 	width: 100%
@@ -482,4 +483,4 @@ border-radius: 0px!important;;
 	position: absolute;
 	top: -30px;
 	width: 30%
-}
+}.empty-state-illustration{margin:0 auto;padding:32px 0}

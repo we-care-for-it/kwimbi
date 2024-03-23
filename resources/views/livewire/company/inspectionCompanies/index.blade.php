@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="page-header  my-3 p-2 pt-0  bg-light " >
+<div class="page-header  my-3 p-2 pt-0   " >
       <div class="row align-items-center  px-2">
          <div class="col">
             <h1 class="page-header-title ">
@@ -11,7 +11,7 @@
          <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                        <input type="text" wire:model.live="filters.keyword"   class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
                            &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
                            &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
                            }">
@@ -24,6 +24,14 @@
                   </form>
 
          </div>
+
+
+         <div class="col-auto">
+         <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
+         <i class="bi bi-plus"></i>
+               </button>
+               </div>
+
       </div>
    </div>
 
@@ -37,7 +45,7 @@
                      <div class="row " wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($this->cntFilters)
-                           <div class="alert alert-soft-warning" role="alert">
+                           <div class="p-3" role="alert">
                               <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
                               <= 1) 1 filter @else {{$this->cntFilters}} filters @endif 
                               <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
@@ -98,10 +106,12 @@
                            <div  >
                       
                               <div class="empty-state-container">
-    <div class="arrow-es"></div>    <div class="empty-state-content">
+    <div class="empty-state-content">
         <div class="empty-state-content-background new">
 
-			<img class="empty-state-illustration" src="/assets/img/emptydocument.svg"><p class="empty-state-text"><span class="strong">U heeft nog geen inkoopfacturen</span><br><br>Maak uw eerste inkoopfactuur aan<br>met een van de 3 bovenstaande opties.</p>        </div>
+			<img class="empty-state-illustration" src="/assets/img/emptydocument.svg"><p class="empty-state-text"><span class="strong"><br>Geen keuringinstanties gevonden</span><br><br>Maak een keuringinstanties aan of pas je trefwoord aan  <br>  <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
+Toevoegen
+               </button></p>       </div>
         <!--empty-state-content-background-->
     </div>
     <!--empty-state-content-->
