@@ -69,6 +69,7 @@
                @enderror 
                <form method="POST" action="{{ route('login') }}">
                   @csrf 
+                  
                   <div class="row ">
                      <!-- Form --> 
                      <div class="mb-4 "> <label class="form-label" >E-mailadres</label> 

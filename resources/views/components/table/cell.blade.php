@@ -8,6 +8,6 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<td {{ $attributes->merge(['class' => '']) }}>
+<td class = "p-0 m-0 px-2 align-middle" {{ $attributes->merge(['class' => '']) }}>
     {{ $slot }}
 </td>

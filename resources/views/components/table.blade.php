@@ -8,7 +8,7 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<table class="table">
+<table class="table table-hover table-responsive">
                          <thead class= "bg-light">
             <tr>
                 {{ $head }}

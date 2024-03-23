@@ -99,9 +99,11 @@ body {
  .page-header{
   margin-bottom: 20px!important;
   padding-bottom: 0px!important;
-  height: 30px!important;;
-
+  height: 70px!important;;
+  border-radius: 10px!important;
   border: 0px!important;
+  background-color: #0ABF53!important;
+
 
 
  }
@@ -117,7 +119,9 @@ body {
 
 .page-header-title{
   padding-top: 10px;
-  font-weight: normal;
+
+  font-weight: normal;  color: gray!important;
+  font-weight: lighter!important;
 }
 h1{
   font-weight:normal!important;;
@@ -145,12 +149,12 @@ a:link{
 }
 .js-navbar-vertical-aside{
   width: 70px!important;
-background-color: #377DFF!important;
+background-color: #0ABF53!important;
  
 }
 .navbar-vertical-container{
   width: 70px!important;
-background-color: #377DFF!important;
+background-color: #0ABF53!important;
  
 }
 
@@ -174,8 +178,8 @@ background-color: #377DFF!important;
 
 
   .loading_indicator {
-    border: 16px solid #377DFF; /* Light grey */
-    border-top: 16px solid #377DFF; /* Blue */
+    border: 16px solid #A165AB; /* Light grey */
+    border-top: 16px solid #A165AB; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -183,8 +187,8 @@ background-color: #377DFF!important;
     animation: spin 2s linear infinite;
   }
   .loading_indicator_small {
-    border: 5px solid #377DFF; /* Light grey */
-    border-top: 5px solid #377DFF; /* Blue */
+    border: 5px solid #A165AB; /* Light grey */
+    border-top: 5px solid #A165AB; /* Blue */
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -414,4 +418,68 @@ border-radius: 0px!important;;
 }
 .energy-class div.g:after {
   content: ' g ';
+}
+.empty-state-container {
+	background-color: #eaeaea;
+	background: linear-gradient(transparent 98%, #eaeaea 0);
+	background-repeat: repeat-y;
+	background-size: 100% 50px;
+	margin: 40px 0 10px;
+	min-width: 400px;
+	position: relative;
+	width: 100%
+}
+
+.empty-state-content {
+	margin: 0 auto;
+	max-width: 355px;
+	padding: 100px 22px 22px;
+	text-align: center
+}
+
+.global_container .empty-state-content {
+	max-width: 540px;
+	padding-top: 30px
+}
+
+.empty-state-content-background {
+	background-color: #fff;
+	position: relative;
+	z-index: 7
+}
+
+.empty-state-content-background.new {
+	background-color: #fff
+}
+
+.global_container .empty-state-content-background {
+	padding: 0 50px
+}
+
+.empty-state-text.new {
+	line-height: inherit
+}
+
+.empty-state-text {
+	color: #bebebe;
+	font-size: 14px;
+	line-height: 18px;
+ 
+}
+
+.empty-state-text>a {
+	color: #4499dc
+}
+
+.empty-state-text>a:hover {
+	color: #367ab0
+}
+.arrow-es {
+	background-image: url(https://www.mijnwefact.nl/assets/va/images/emptystate-arrow.e20e6cf3.svg);
+	background-repeat: no-repeat;
+	height: 350px;
+	left: 35px;
+	position: absolute;
+	top: -30px;
+	width: 30%
 }

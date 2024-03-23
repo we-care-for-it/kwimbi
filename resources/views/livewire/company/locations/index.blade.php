@@ -1,29 +1,14 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header  my-3 p-2 pt-0  " >
+      <div class="row align-items-center bg-light px-2">
          <div class="col">
-            <h1 class="page-header-title">
-               Locaties
+            <h1 class="page-header-title ">
+               Locaties</h1>
+               <p>Een overzicht van alle object locaties </p>
          </div>
          <div class="col-auto">
 
-            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-      Terug
-            </button>
-
-         </div>
-      </div>
-   </div>
-
-   <div class="row">
-      <div class="col-md-12"> 
-
-        
-
-
-      <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-3 mb-md-0">
-                  <form>
+         <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
                         <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
@@ -37,55 +22,15 @@
                      </div>
                      <!-- End Search -->
                   </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay="" class="loading_indicator_small"></div>
-                  </div>
-                  <!-- Datatable Info -->
-                  <div id="datatableCounterInfo" style="display: none;">
-                     <div class="d-flex align-items-center">
-                        <span class="fs-5 me-3">
-                        <span id="datatableCounter">0</span>
-                        Selected
-                        </span>
-                        <a class="btn btn-outline-danger btn-sm" href="javascript:;">
-                        <i class="bi-trash"></i> Delete
-                        </a>
-                     </div>
-                  </div>
-                  <!-- End Datatable Info -->
-                  <!-- Dropdown -->
-                  <!-- <div class="dropdown">
-                     <button type="button" class="btn btn-white  dropdown-toggle w-100" id="usersExportDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-download me-2"></i> Exporteren</button>
-                     <div class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="usersExportDropdown" style="">
-                        <span class="dropdown-header">Opties</span>
-                        <a wire:click="export('xlsx')" id="export-excel" class="dropdown-item" href="javascript:;">
-                        Excel
-                        </a>
-                        <a id="export-csv" wire:click="export('csv')" class="dropdown-item" href="javascript:;">
-                        .CSV
-                        </a>
-                        <a id="export-pdf" wire:click="export('pdf')" class="dropdown-item" href="javascript:;">
-                        PDF
-                        </a>
-                        <a id="export-pdf" wire:click="export('html')" class="dropdown-item" href="javascript:;">
-                        HTML
-                        </a>
-                     </div>
-                     </div> -->
-                  <!-- End Dropdown -->
-                  <!-- Dropdown -->
-                  <div class="dropdown">
-                     <!-- <button type="button" class="btn btn-white btn-sm w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-dark rounded-circle ms-1"></span>
-                     </button> -->
-                  </div>
-                  <!-- End Dropdown -->
-               </div>
-            </div>
-   
+
+         </div>
+      </div>
+   </div>
+
+   <div class="row pt-6">
+      <div class="col-md-12"> 
+
+         
                   <div>
                      <div class="row">
                         <div class="loading" wire:loading>
@@ -245,8 +190,8 @@
                   </div>
                </div>
                </div>  </div>
-
-         <div class="card-footer">
+          
+         <div   wire:loading.remove class="card-footer">
             @if($items->links())
  
  {{ $items->links() }}

@@ -1,33 +1,17 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+<div class="page-header  my-3 p-2 pt-0  bg-light " >
+      <div class="row align-items-center  px-2">
          <div class="col">
-            <h1 class="page-header-title">
-               Keuringsinstanties
+            <h1 class="page-header-title ">
+               Keuringinstanties</h1>
+               <p>Keuringinstanties kunnen gekozen worden bij een object </p>
          </div>
-
          <div class="col-auto">
 
-            <button type="button" class="btn   btn-link btn-sm" wire:click="clear()" data-bs-toggle="modal"
-               data-bs-target="#crudModal" type="button">
-               Toevoegen
-            </button>
-
-            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-Terug
-            </button>
-
-         </div>
-
-      </div>
-   </div>
-   <div class="row p-0 ">
-      <div class="col-xl-12">   <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-3 mb-md-0">
-                  <form>
+         <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword"  class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                        <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
                            &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
                            &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
                            }">
@@ -38,14 +22,19 @@ Terug
                      </div>
                      <!-- End Search -->
                   </form>
-               </div>      
-            </div>
-         <div class="card">
+
+         </div>
+      </div>
+   </div>
+
+
+   <div class="row pt-1">
+      <div class="col-xl-12">   
+         <div class="card  p-0 m-0">
            
-            <div class="card-body pt-2">
-               <div class="row">
-                  <div>
-                     <div class="row" wire:loading.class="loading-div">
+            <div class="card-body  ">
+       
+                     <div class="row " wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($this->cntFilters)
                            <div class="alert alert-soft-warning" role="alert">
@@ -57,7 +46,7 @@ Terug
                            @endif
 
                            @if($items->count())
-                           <x-table>
+                           <x-table  >
                               <x-slot name="head">
                                  <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
                                  <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
@@ -73,7 +62,8 @@ Terug
                               <x-slot name="body">
 
                                  @foreach ($items as $item)
-                                 <x-table.row wire:key="row-{{ $item->id }}">
+                                 <x-table.row   wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                          data-bs-target="#crudModal"  wire:key="row-{{ $item->id }}">
                                     <x-table.cell>
                                        {{$item->name}}
                                     </x-table.cell>
@@ -89,14 +79,15 @@ Terug
                                     <x-table.cell>
                                        {{$item->address}}
                                     </x-table.cell>
-                                    <x-table.cell>
+                                    <x-table.cell >  
 
-                                       <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"
-                                          wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                          data-bs-target="#crudModal">
-                                          <i class="bi bi-pencil"></i>
-                                       </button>
+                               <button style="float: right" class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"    wire:click="edit({{$item->id}})" data-bs-toggle="modal" data-bs-target="#crudModal">
+               <i class="bi bi-pencil"></i>
+            </button>
+
+      
+
+                              
 
                                     </x-table.cell>
                                  </x-table.row>
@@ -104,22 +95,21 @@ Terug
                               </x-slot>
                            </x-table>
                            @else
-                           <div class="flex justify-center items-center space-x-2">
-                              <center>
-                                 <div>
-                                    <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-                                    <h4>Geen Keuringsinstanties gevonden</h4>
-                                    @if($this->cntFilters)
-                                    Er zijn geen Keuringsinstanties gevonden met de huidige filters
-                                    @else
-                                    Er zijn nog geen Keuringsinstanties gevonden in de database.
-                                    @endif
-                                 </div>
-                              </center>
+                           <div  >
+                      
+                              <div class="empty-state-container">
+    <div class="arrow-es"></div>    <div class="empty-state-content">
+        <div class="empty-state-content-background new">
+
+			<img class="empty-state-illustration" src="/assets/img/emptydocument.svg"><p class="empty-state-text"><span class="strong">U heeft nog geen inkoopfacturen</span><br><br>Maak uw eerste inkoopfactuur aan<br>met een van de 3 bovenstaande opties.</p>        </div>
+        <!--empty-state-content-background-->
+    </div>
+    <!--empty-state-content-->
+</div>
+                           
                            </div>
                            @endif
-                        </div>
-                     </div>
+                   
                   </div>
                </div>
             </div>
@@ -160,9 +150,7 @@ Terug
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
-            <div class="modal-header">Gegevens
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+ 
             <div class="modal-body" wire:loading.class="loading-div">
                <div class="row">
                   <div class="col-md-12">

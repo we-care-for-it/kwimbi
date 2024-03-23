@@ -86,9 +86,7 @@
                 </button>
                 </a>
 
-                <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-                 Terug
-                </button>
+  
 
             </div>
         </div>

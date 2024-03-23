@@ -8,6 +8,6 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<tr style = "cursor: pointer"  wire:click="edit({{$item->id}})"  data-bs-toggle="modal">
+<tr style = "cursor: pointer"  >
                                   {{ $slot }}
 </tr>
