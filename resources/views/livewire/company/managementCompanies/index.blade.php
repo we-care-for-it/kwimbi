@@ -1,136 +1,134 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header  my-3 p-2 pt-0   ">
+      <div class="row align-items-center  px-2">
          <div class="col">
-            <h1 class="page-header-title">
-               Beheerders
+            <h1 class="page-header-title ">
+              Beheerders
+            </h1>
          </div>
-
-         <div class="col-auto">
-
-            <button type="button" class="btn   btn-link btn-sm" wire:click="clear()" data-bs-toggle="modal"
-               data-bs-target="#crudModal" type="button">
-               Toevoegen
-            </button>
-
-            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-Terug
-            </button>
-
+         <div class="col-auto pt-2">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
          </div>
-
+         <div class="col-auto pt-2">
+            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
+               data-bs-target="#crudModal" wire:click="clear()">
+            <i class="bi bi-plus"></i>
+            </button>
+         </div>
       </div>
    </div>
-   <div class="row p-0 ">
-      <div class="col-xl-12">   <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-3 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword"  class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                        </button>
+   <div class="row pt-1">
+      <div class="col-xl-12">
+         <div class="card  p-0 m-0">
+            <div class="card-body  ">
+               <div class="row ">
+                  <div class="loading" wire:loading>
+                     <img style="height: 190px" src="/assets/img/loading_elevator.gif">
+                     <br>
+                     <span class="text-muted">Bezig met gegevens ophalen</span>
+                  </div>
+                  <div class="col-md-12 " wire:loading.remove>
+                     @if($this->cntFilters)
+                     <div class="p-3" role="alert">
+                        <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                        <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
+                           style="cursor: pointer" class="text-primary">Wis alle
+                        filters</span>
                      </div>
-                     <!-- End Search -->
-                  </form>
-               </div>      
-            </div>
-         <div class="card">
-           
-            <div class="card-body pt-2">
-               <div class="row">
-                  <div>
-                     <div class="row" wire:loading.class="loading-div">
-                        <div class="col-md-12">
-                           @if($this->cntFilters)
-                           <div class="alert alert-soft-warning" role="alert">
-                              <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
-                              <= 1) 1 filter @else {{$this->cntFilters}} filters @endif 
-                              <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
-                                 filters</span>
-                           </div>
-                           @endif
-
-                           @if($items->count())
-                           <x-table>
-                              <x-slot name="head">
-                                 <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
-                                 <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
-                                    Adres</x-table.heading>
-                                 <x-table.heading sortable wire:click="sortBy('zipcode')" :direction="$sortDirection">
-                                    Postcode</x-table.heading>
-                                 <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
-                                    Plaats
-                                 </x-table.heading>
-                                 <x-table.heading></x-table.heading>
-                                 <x-table.heading></x-table.heading>
-                              </x-slot>
-                              <x-slot name="body">
-
-                                 @foreach ($items as $item)
-                                 <x-table.row wire:key="row-{{ $item->id }}">
-                                    <x-table.cell>
-                                       {{$item->name}}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->address}}<br>
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->zipcode}}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->place}}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->address}}
-                                    </x-table.cell>
-                                    <x-table.cell>
-
-                                       <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"
-                                          wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                          data-bs-target="#crudModal">
-                                          <i class="bi bi-pencil"></i>
+                     @endif
+                     <div wire:loading.remove>
+                        @if($items->count())
+                        <x-table>
+                           <x-slot name="head">
+                              <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
+                                 Adres
+                              </x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('zipcode')" :direction="$sortDirection">
+                                 Postcode
+                              </x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
+                                 Plaats
+                              </x-table.heading>
+                              <x-table.heading></x-table.heading>
+                              <x-table.heading></x-table.heading>
+                           </x-slot>
+                           <x-slot name="body">
+                              @foreach ($items as $item)
+                              <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                 data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
+                                 <x-table.cell>
+                                    {{$item->name}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->address}}<br>
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->zipcode}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->place}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->address}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    <button style="float: right"
+                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
+                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                       data-bs-target="#crudModal">
+                                    <i class="bi bi-pencil"></i>
+                                    </button>
+                                 </x-table.cell>
+                              </x-table.row>
+                              @endforeach
+                           </x-slot>
+                        </x-table>
+                        @else
+                        <div>
+                           <div class="empty-state-container">
+                              <div class="empty-state-content">
+                                 <div class="empty-state-content-background new">
+                                    <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
+                                    <p class="empty-state-text"><span class="strong"><br>Geen beheerders
+                                       gevonden</span><br><br>Maak een beheerder aan of pas je trefwoord aan
+                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
+                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
+                                       Toevoegen
                                        </button>
-
-                                    </x-table.cell>
-                                 </x-table.row>
-                                 @endforeach
-                              </x-slot>
-                           </x-table>
-                           @else
-                           <div class="flex justify-center items-center space-x-2">
-                              <center>
-                                 <div>
-                                    <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-                                    <h4>Geen Keuringsinstanties gevonden</h4>
-                                    @if($this->cntFilters)
-                                    Er zijn geen Keuringsinstanties gevonden met de huidige filters
-                                    @else
-                                    Er zijn nog geen Keuringsinstanties gevonden in de database.
-                                    @endif
+                                    </p>
                                  </div>
-                              </center>
+                                 <!--empty-state-content-background-->
+                              </div>
+                              <!--empty-state-content-->
                            </div>
-                           @endif
                         </div>
+                        @endif
                      </div>
                   </div>
                </div>
             </div>
-           
          </div>
-               <div class="clearfix pt-3  ">
-             
-                  <div class="float-end"> @if($items->links())
-                     {{ $items->links() }}
-                     @endif</div>
-               </div>
+         <div class="clearfix pt-3  ">
+            <div class="float-end wire:loading.remove"> @if($items->links())
+               {{ $items->links() }}
+               @endif
+            </div>
+         </div>
          <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters"
             aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -144,7 +142,7 @@ Terug
                <small class="text-cap text-body pt-3">Plaats</small>
                <div class="row pt-4" style="">
                   <div class="col-md-6"><button class="btn btn-white btn-sm w-100 " wire:click="resetFilters()">Wis
-                        filters</button>
+                     filters</button>
                   </div>
                   <div class="col-md-6">
                      <button data-bs-dismiss="offcanvas" aria-label="Close"
@@ -160,9 +158,6 @@ Terug
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
-            <div class="modal-header">Gegevens
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
             <div class="modal-body" wire:loading.class="loading-div">
                <div class="row">
                   <div class="col-md-12">
@@ -184,7 +179,7 @@ Terug
                               <button class="btn btn-soft-primary" style="height: 43px" wire:click="checkZipcode"
                                  data-toggle="tooltip" data-placement="top" title="Zoek naar postcode"
                                  wire:keydown="checkZipcode" style="height: 40px;">
-                                 <i class="bi-search"></i>
+                              <i class="bi-search"></i>
                               </button>
                            </div>
                            @if ($errors->has('zipcode')) <span class="text-danger">Postcode formaat niet juist</span>
@@ -207,16 +202,14 @@ Terug
                <hr>
             </div>
             <div class="modal-footer">
-
-            @if($edit_id)
+               @if($edit_id)
                <button wire:click="delete({{$edit_id}})"
                   wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
                   type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3"
                   data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-trash"></i>
+               <i class="fa-solid fa-trash"></i>
                </button>
-@endif
-
+               @endif
                <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
                <button class="btn btn-soft-success btn-120    " wire:click="save()" type="button">
                   <div wire:loading wire:target="save">
