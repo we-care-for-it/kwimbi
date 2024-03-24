@@ -1,43 +1,40 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header  my-3 p-2 pt-0   ">
+      <div class="row align-items-center  px-2">
          <div class="col">
-            <h1 class="page-header-title">
+            <h1 class="page-header-title ">
                Projecten
+            </h1>
          </div>
-         <div class="col-auto">
-       
-         <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-     Terug
+         <div class="col-auto pt-2">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+         <div class="col-auto pt-2">
+            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
+               data-bs-target="#crudModal" wire:click="clear()">
+            <i class="bi bi-plus"></i>
             </button>
          </div>
       </div>
    </div>
-
-
-   <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-3 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-               </div>      
-            </div>
-         <div class="card">
-           
-            <div class="card-body  p-0">
-               <div class="row">
-                  <div>
+   <div class="row pt-1">
+      <div class="col-xl-12">
+         <div class="card  p-0 m-0">
+            <div class="card-body  ">
                      <div class="row" wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)

@@ -1,321 +1,215 @@
 <div class="container-fluid">
-
-<div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header  my-3 p-2 pt-0   ">
+      <div class="row align-items-center  px-2">
          <div class="col">
-            <h1 class="page-header-title">
-               Relaties
+            <h1 class="page-header-title ">
+             Relaties
+            </h1>
          </div>
-         <div class="col-auto">
-
-  
-               <button type="button" class="btn   btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#crudModal"   wire:click="clear()" >
-                  Toevoegen
-               </button>
- 
-
-            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-           Terug
+         <div class="col-auto pt-2">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+         <div class="col-auto pt-2">
+            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
+               data-bs-target="#crudModal" wire:click="clear()">
+            <i class="bi bi-plus"></i>
             </button>
-
          </div>
       </div>
    </div>
-
-
- 
-   <div class="row   ">
+   <div class="row pt-1">
       <div class="col-xl-12">
-       
-        
-
-
-      <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-2 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword"   class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay="" class="loading_indicator_small"></div>
+         <div class="card  p-0 m-0">
+            <div class="card-body  ">
+               <div class="row ">
+                  <div class="loading" wire:loading>
+                     <img style="height: 190px" src="/assets/img/loading_elevator.gif">
+                     <br>
+                     <span class="text-muted">Bezig met gegevens ophalen</span>
                   </div>
-                  <!-- Datatable Info -->
-                  <div id="datatableCounterInfo" style="display: none;">
-                     <div class="d-flex align-items-center">
-                        <span class="fs-5 me-3">
-                        <span id="datatableCounter">0</span>
-                        Selected
-                        </span>
-                        <a class="btn btn-outline-danger btn-sm" href="javascript:;">
-                        <i class="bi-trash"></i> Delete
-                        </a>
+                  <div class="col-md-12 " wire:loading.remove>
+                     @if($this->cntFilters)
+                     <div class="p-3" role="alert">
+                        <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                        <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
+                           style="cursor: pointer" class="text-primary">Wis alle
+                        filters</span>
                      </div>
-                  </div>
-                  <!-- End Datatable Info -->
-                  <!-- Dropdown -->
-                  <!-- <div class="dropdown">
-                     <button type="button" class="btn btn-white  dropdown-toggle w-100" id="usersExportDropdown" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi-download me-2"></i> Exporteren</button>
-                     <div class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="usersExportDropdown" style="">
-                        <span class="dropdown-header">Opties</span>
-                        <a wire:click="export('xlsx')" id="export-excel" class="dropdown-item" href="javascript:;">
-                        Excel
-                        </a>
-                        <a id="export-csv" wire:click="export('csv')" class="dropdown-item" href="javascript:;">
-                        .CSV
-                        </a>
-                        <a id="export-pdf" wire:click="export('pdf')" class="dropdown-item" href="javascript:;">
-                        PDF
-                        </a>
-                        <a id="export-pdf" wire:click="export('html')" class="dropdown-item" href="javascript:;">
-                        HTML
-                        </a>
-                     </div>
-                     </div> -->
-                  <!-- End Dropdown -->
-                  <!-- Dropdown -->
-                  <div class="dropdown">
-                     <!-- <button type="button" class="btn btn-white btn-sm w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-dark rounded-circle ms-1"></span>
-                     </button> -->
-                  </div>
-                  <!-- End Dropdown -->
-               </div>
-            </div>
-            <div class="card">
-            <div class="card-body p-0  ">
-               <div class="row">
-                  <div>
-             
-                     <div class="row" wire:loading.class="loading-div">
-                           
-                     <div class = "col-md-12" >
-           
-                      
-                           @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
-                           <div class = "pb-3">
-                              Er zijn <strong> {{$items->count()}}</strong> resultaten geselecteerd wil je alle <strong> {{$items->total()}}</strong> resultaten selecteren ?
-                              <span class="text-primary" style="cursor: pointer;" wire:click="selectAllFromDropdown">
-                              Selecteer alle resultaten
-                              </span>
-                           </div>
-                           @else
-                           <div class = "pb-3">
-                              {{$items->total()}} resultaten geselecteerd
-                           </div>
-                           @endif @else
-                           @endif
-                           @if($this->cntFilters)
-                           <div class="alert alert-soft-warning" role="alert">
-                              <i class="bi-filter me-1"></i>      Resultaten gefilterd met @if($this->cntFilters <= 1) 1 filter @else {{$this->cntFilters}} filters @endif</>
-                              <span wire:click = "resetFilters()" style = "cursor: pointer" class = "text-primary">Wis alle filters</span>
-                           </div>
-                           @endif
-                           @if($items->count())
-                           <x-table>
-                              <x-slot name="head">
-                                 <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
-                                 <x-table.heading  sortable wire:click="sortBy('address')" :direction="$sortDirection">Adres</x-table.heading>
-                                 <x-table.heading  sortable wire:click="sortBy('zipcode')" :direction="$sortDirection">Postcode</x-table.heading>
-                                 <x-table.heading  sortable wire:click="sortBy('place')" :direction="$sortDirection">Plaats</x-table.heading>
-                                    <x-table.heading></x-table.heading>
-                              </x-slot>
-                              <x-slot name="body">
-                                 @foreach ($items as $item)
-                                 <x-table.row  wire:key="row-{{ $item->id }}">
-                                    <x-table.cell>
-                                    <a href="/customer/{{$item->slug}}">    {{$item->name}} </a>
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->address}}<br>
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->zipcode}}
-                                    </x-table.cell>
-                                    <x-table.cell>
-                                       {{$item->place}}
-                                    </x-table.cell>
-            
-                                    <x-table.cell>
-                                       <div style = "float: right">
-
-                                       <a href="/customer/{{$item->slug}}"> 
-                                       <button style="float: right"
-                                          class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-eye"></i>
+                     @endif
+                     <div wire:loading.remove>
+                        @if($items->count())
+                        <x-table>
+                           <x-slot name="head">
+                              <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
+                                 Adres
+                              </x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('zipcode')" :direction="$sortDirection">
+                                 Postcode
+                              </x-table.heading>
+                              <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
+                                 Plaats
+                              </x-table.heading>
+                              <x-table.heading></x-table.heading>
+                              <x-table.heading></x-table.heading>
+                           </x-slot>
+                           <x-slot name="body">
+                              @foreach ($items as $item)
+                              <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                 data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
+                                 <x-table.cell>
+                                    {{$item->name}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->address}}<br>
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->zipcode}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->place}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    {{$item->address}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    <button style="float: right"
+                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
+                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                       data-bs-target="#crudModal">
+                                    <i class="bi bi-pencil"></i>
+                                    </button>
+                                 </x-table.cell>
+                              </x-table.row>
+                              @endforeach
+                           </x-slot>
+                        </x-table>
+                        @else
+                        <div>
+                           <div class="empty-state-container">
+                              <div class="empty-state-content">
+                                 <div class="empty-state-content-background new">
+                                    <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
+                                    <p class="empty-state-text"><span class="strong"><br>Geen gegevens
+                                       gevonden</span><br><br>Maak een leverancier aan of pas je trefwoord aan
+                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
+                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
+                                       Toevoegen
                                        </button>
-                                       </a>
-
-
-                                       <button type="button" wire:click = "edit({{$item->id}})" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" >
-                            <i class="fa-solid fa-pencil"></i>  
-                            </button>
-                                       </div>
-                                    </x-table.cell>
-                                 </x-table.row>
-                                 @endforeach 
-                              </x-slot>
-                           </x-table>
-                           @else
-                           <div class="flex justify-center items-center space-x-2">
-                                
-                           <center>
-                                    
-                                       <img src='/assets/img/illu/1-1-740x592.png'
-                                          style="max-width: 500px; width: 100%;">
-
-                                       <h4>Helaas......</h4>
-                                       @if($this->cntFilters)
-                                       Geen gegevens gevonden met de huidige filters...
-            
-                            
-                                       @else
-                                    Geen relaties gevonden in de database
-                                       @endif
- 
-                                       <div class = "clear-fix pt-3"></div>               
-               <button type="button" class="btn btn-primary btn-sm  btn-120" data-bs-toggle="modal" data-bs-target="#crudModal"  wire:click="clear()">
-                  Toevoegen
-               </button>
- 
-
-                                        
-                              
-                                 </center>
-
-
+                                    </p>
+                                 </div>
+                                 <!--empty-state-content-background-->
+                              </div>
+                              <!--empty-state-content-->
                            </div>
-                           @endif
-                 
+                        </div>
+                        @endif
                      </div>
-           
+                  </div>
                </div>
             </div>
+         </div>
+         <div class="clearfix pt-3  ">
+            <div class="float-end wire:loading.remove"> @if($items->links())
+               {{ $items->links() }}
+               @endif
             </div>
-            </div>
-
- 
-
-
-         </div> <div class="clearfix  ">
-              
-               <div class="float-end"> @if($items->links())
-                  {{ $items->links() }}
-                  @endif</div>
-            </div>
-         <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
+         </div>
+         <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters"
+            aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
                <h5 id="offcanvasRightLabel"><i class="bi-filter me-1"></i> Filters</h5>
                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                <small class="text-cap text-body pt-3">Trefwoord</small>
-               <input  type="search" wire:model.live="filters.keyword" class="form-control" placeholder="Zoek op trefwoord" aria-label="Zoek op trefwoord">
+               <input type="search" wire:model.live="filters.keyword" class="form-control"
+                  placeholder="Zoek op trefwoord" aria-label="Zoek op trefwoord">
                <small class="text-cap text-body pt-3">Plaats</small>
-               <div class="tom-select-custom " wire:ignore >
-                  <select style = "height: 40px;" class="js-select form-select " wire:model.live="filters.place" multiple data-hs-tom-select-options='{
-                     "placeholder": "Alle plaatsen"
-                     }'>
-                     @foreach($items as $address)
-                     <option value="{{$address->place}}">{{$address->place}}</option>
-                     @endforeach
-                  </select>
-               </div>
-               <div class = "row pt-4" style = "">
-                  <div class="col-md-6"><button class="btn btn-white btn-sm w-100 " wire:click ="resetFilters()" >Wis filters</button>
+               <div class="row pt-4" style="">
+                  <div class="col-md-6"><button class="btn btn-white btn-sm w-100 " wire:click="resetFilters()">Wis
+                     filters</button>
                   </div>
                   <div class="col-md-6">
-                     <button  data-bs-dismiss="offcanvas" aria-label="Close"  class="w-100 btn btn-primary btn-sm" >Sluiten</button>
+                     <button data-bs-dismiss="offcanvas" aria-label="Close"
+                        class="w-100 btn btn-primary btn-sm">Sluiten</button>
                   </div>
                </div>
             </div>
          </div>
       </div>
- 
-
-
+   </div>
    <!-- CrudModal  -->
-   <div wire:ignore.self class="modal fade" id="crudModal" tabindex="-1" role="dialog" aria-labelledby="crudModal" aria-hidden="true">
+   <div wire:ignore.self class="modal fade" id="crudModal" tabindex="-1" role="dialog" aria-labelledby="crudModal"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
-            <div class="modal-header">Relatie gegevens
-  
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" wire:loading.class="loading-div" >
-               <div class = "row">
-                  <div class = "col-md-12">
+            <div class="modal-body" wire:loading.class="loading-div">
+               <div class="row">
+                  <div class="col-md-12">
                      <div>
-                        <label class = "pb-2">Naam</label>
-                        <input wire:model = "name"  class  = "form-control    @error('name') is-invalid   @enderror  " >
+                        <label class="pb-2">Naam</label>
+                        <input wire:model="name" class="form-control    @error('name') is-invalid   @enderror  ">
                         @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
                      </div>
                   </div>
                </div>
-               <div class = "row">
-                  <div class = "col-md-6">
-                     <div class  = "pt-3">
-                        <label class = "pb-2">Postcode</label>
+               <div class="row pt-3">
+                  <div class="col-md-6">
+                     <div class="pt-3">
+                        <label class="pb-2">Postcode</label>
                         <div class="input-group  ">
-                           <input class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif " wire:model.defer="zipcode">
+                           <input class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
+                              wire:model.defer="zipcode">
                            <div class="input-group-append">
-                              <button class = "btn btn-soft-primary" style = "height: 43px" wire:click = "checkZipcode"  data-toggle="tooltip" data-placement="top" title="Zoek naar postcode" wire:keydown="checkZipcode" style = "height: 40px;">
+                              <button class="btn btn-soft-primary" style="height: 43px" wire:click="checkZipcode"
+                                 data-toggle="tooltip" data-placement="top" title="Zoek naar postcode"
+                                 wire:keydown="checkZipcode" style="height: 40px;">
                               <i class="bi-search"></i>
                               </button>
                            </div>
-                           @if ($errors->has('zipcode')) <span class="text-danger">Postcode formaat niet juist</span> @endif
+                           @if ($errors->has('zipcode')) <span class="text-danger">Postcode formaat niet juist</span>
+                           @endif
                         </div>
                      </div>
-                     <div class  = "pt-3">
-                        <label class = "pb-2">Plaats</label>
-                        <input wire:model = "place"  class  = "form-control">
+                     <div class="pt-3">
+                        <label class="pb-2">Plaats</label>
+                        <input wire:model="place" class="form-control">
                      </div>
                   </div>
-                  <div class = "col-md-6">
-                     <div class  = "pt-3">
-                        <label class = "pb-2">Adres</label>
-                        <input wire:model = "address"  class  = "form-control">
+                  <div class="col-md-6">
+                     <div class="pt-3">
+                        <label class="pb-2">Adres</label>
+                        <input wire:model="address" class="form-control    @error('address') is-invalid   @enderror  ">
+                        @error('address') <span class="invalid-feedback">{{ $message }}</span> @enderror
                      </div>
                   </div>
                </div>
                <hr>
-               <div class = "row">
-                  <div class = "col-md-6">
-                     <div >
-                        <label class = "pb-2">Emailadres</label>
-                        <input wire:model = "emailaddress"  class  = "form-control">
-                     </div>
-                  </div>
-                  <div class = "col-md-6">
-                     <div >
-                        <label class = "pb-2">Telefoonnummer</label>
-                        <input wire:model = "phonenumber"  class  = "form-control">
-                     </div>
-                  </div>
-               </div>
             </div>
             <div class="modal-footer">
-
-            @if($edit_id)
-            <button   wire:click="delete({{$edit_id}})"     wire:confirm.prompt="Weet je zeker dat je deze beheerder wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"    type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-trash"></i>  
-               </button> 
+               @if($edit_id)
+               <button wire:click="delete({{$edit_id}})"
+                  wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
+                  type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+               <i class="fa-solid fa-trash"></i>
+               </button>
                @endif
-
-
-
                <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
                <button class="btn btn-soft-success btn-120    " wire:click="save()" type="button">
                   <div wire:loading wire:target="save">

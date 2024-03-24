@@ -1,72 +1,56 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header  my-3 p-2 pt-0   ">
+      <div class="row align-items-center  px-2">
          <div class="col">
-            <h1 class="page-header-title">
-               Storingen
+            <h1 class="page-header-title ">
+             Storingen
+            </h1>
          </div>
-         <div class="col-auto">
-
-    
-
-            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
-      Terug
+         <div class="col-auto pt-2">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+         <div class="col-auto pt-2">
+            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
+               data-bs-target="#crudModal" wire:click="clear()">
+            <i class="bi bi-plus"></i>
             </button>
-
          </div>
       </div>
    </div>
- 
-
-   <div class="  card-header-content-md-between   pt-0 card-header-form ">
-               <div class="mb-3 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                        </button>
+   <div class="row pt-1">
+      <div class="col-xl-12">
+         <div class="card  p-0 m-0">
+            <div class="card-body  ">
+               <div class="row ">
+                  <div class="loading" wire:loading>
+                     <img style="height: 190px" src="/assets/img/loading_elevator.gif">
+                     <br>
+                     <span class="text-muted">Bezig met gegevens ophalen</span>
+                  </div>
+                  <div class="col-md-12 " wire:loading.remove>
+                     @if($this->cntFilters)
+                     <div class="p-3" role="alert">
+                        <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                        <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
+                           style="cursor: pointer" class="text-primary">Wis alle
+                        filters</span>
                      </div>
-                     <!-- End Search -->
-                  </form>
-               </div>      
-            </div>
-         <div class="card">
-     
-            <div class="card-body p-0">
-               <div class="row">
-                  <div>
-                     <div class="row">
-                        <div  class = "loading"   wire:loading  >
-                           <img style = "height: 190px" src="/assets/img/loading_elevator.gif">
-                           <br>
-                           <span class="text-muted">Bezig met gegevens ophalen</span>
-                        </div>
-                        <div wire:loading.remove>
-                           @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
-                           <div class = "pb-3">
-                              Er zijn <strong> {{$items->count()}}</strong> resultaten geselecteerd wil je alle <strong> {{$items->total()}}</strong> resultaten selecteren ?
-                              <span class="text-primary" style="cursor: pointer;" wire:click="selectAllFromDropdown">
-                              Selecteer alle resultaten
-                              </span>
-                           </div>
-                           @else
-                           <div class = "pb-3">
-                              {{$items->total()}} resultaten geselecteerd
-                           </div>
-                           @endif @else
-                           @endif
-                           @if($this->cntFilters)
-                           <div class="alert alert-soft-warning" role="alert">
-                              <i class="bi-filter me-1"></i>      Resultaten gefilterd met @if($this->cntFilters <= 1) 1 filter @else {{$this->cntFilters}} filters @endif</>
-                              <span wire:click = "resetFilters()" style = "cursor: pointer" class = "text-primary">Wis alle filters</span>
-                           </div>
-                           @endif
+                     @endif
+                     <div wire:loading.remove>
                            @if($items->count())
                            <x-table>
                               <x-slot name="head">
