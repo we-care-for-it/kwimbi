@@ -106,16 +106,14 @@
                         </x-table>
                         @else
                         <div>
-                           <div class="empty-state-container">
+                           <div class="empty-state-container ">
                               <div class="empty-state-content">
                                  <div class="empty-state-content-background new">
                                     <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen gegevens
-                                       gevonden</span><br><br>Maak een onderhoudspartij aan of pas je trefwoord aan
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
+                                    <p class="empty-state-text"><span class="strong">
+                                   <b> Geen gegevens gevonden</b>
+                                    <br>Voeg een Onderhoudspartij toe of pas het trefwoord aan.</span> 
+                                          
                                     </p>
                                  </div>
                                  <!--empty-state-content-background-->

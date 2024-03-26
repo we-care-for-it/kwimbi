@@ -428,11 +428,10 @@ border-radius: 0px!important;;
   content: ' g ';
 }
 .empty-state-container {
-	background-color: #eaeaea;
-	background: linear-gradient(transparent 98%, #eaeaea 0);
+ 
 	background-repeat: repeat-y;
 	background-size: 100% 50px;
-	margin: 10px 0 10px;
+	margin:  23;
 	min-width: 400px;
 	position: relative;
 	width: 100%
@@ -441,12 +440,12 @@ border-radius: 0px!important;;
 .empty-state-content {
 	margin: 0 auto;
 	max-width: 355px;
-	padding: 100px 22px 22px;
+	padding: 0px;
 	text-align: center
 }
 
 .global_container .empty-state-content {
-	max-width: 540px;
+	max-width: 340px;
 	padding-top: 30px
 }
 
@@ -461,17 +460,17 @@ border-radius: 0px!important;;
 }
 
 .global_container .empty-state-content-background {
-	padding: 0 50px
+	padding: 0 20px
 }
 
 .empty-state-text.new {
-	line-height: inherit
+	line-height: 20px;
 }
 
 .empty-state-text {
 	color: #bebebe;
 	font-size: 14px;
-	line-height: 18px;
+	line-height: 25px;
  
 }
 

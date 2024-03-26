@@ -1,12 +1,10 @@
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-             <h1 class="page-header-title">  Beheerders </h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span> 
-         </div>
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  Beheerders  </h1>
+             </div>
          <div class="col-auto pt-2">
             <form>
                <!-- Search -->
@@ -25,17 +23,18 @@
             </form>
          </div>
          <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
+            <a href = "/management-companie/create">
+            <button type="button" class="btn   btn-primary">
+            <i class="bi bi-plus"></i> Toevoegen
             </button>
+            </a>
          </div>
       </div>
    </div>
-   <div class="row  ">
+   <div class="row ">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
-            <div class="card-body  ">
+            <div class="card-body ">
                <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
@@ -101,16 +100,14 @@
                         </x-table>
                         @else
                         <div>
-                           <div class="empty-state-container">
+                           <div class="empty-state-container ">
                               <div class="empty-state-content">
                                  <div class="empty-state-content-background new">
                                     <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen beheerders
-                                       gevonden</span><br> 
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
+                                    <p class="empty-state-text"><span class="strong">
+                                   <b> Geen gegevens gevonden</b>
+                                    <br>Voeg een beheerder toe of pas het trefwoord aan.</span> 
+                                          
                                     </p>
                                  </div>
                                  <!--empty-state-content-background-->
@@ -223,10 +220,4 @@
       </div>
    </div>
 </div>
-<script>
-   document.addEventListener('livewire:init', () => {
-      Livewire.on('close-crud-modal', (event) => {
-         $('#crudModal').modal('hide');
-      });
-   });
-</script>
+ 

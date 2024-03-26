@@ -3,9 +3,8 @@
       <div class="row align-items-center ">
          <div class="col">
  
-            <h1 class="page-header-title">  Leveranciers  </h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
-         </div>
+         <h1 class="page-header-title pt-3">  Leveranciers  </h1>
+             </div>
          <div class="col-auto pt-2">
             <form>
                <!-- Search -->
@@ -24,9 +23,9 @@
             </form>
          </div>
          <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
+            <button type="button" class="btn   btn-primary btn-ico " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+            <i class="bi bi-plus"></i> Toevoegen
             </button>
          </div>
       </div>
@@ -100,16 +99,14 @@
                         </x-table>
                         @else
                         <div>
-                           <div class="empty-state-container">
+                           <div class="empty-state-container ">
                               <div class="empty-state-content">
                                  <div class="empty-state-content-background new">
                                     <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen gegevens
-                                       gevonden</span><br><br>Maak een leverancier aan of pas je trefwoord aan
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
+                                    <p class="empty-state-text"><span class="strong">
+                                   <b> Geen gegevens gevonden</b>
+                                    <br>Voeg een leverancier toe of pas het trefwoord aan.</span> 
+                                          
                                     </p>
                                  </div>
                                  <!--empty-state-content-background-->

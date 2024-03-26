@@ -5,8 +5,8 @@
     <div class="row align-items-center ">
     <div class="col">
 
-            <h1 class="page-header-title">  Locaties </h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
+            <h1 class="page-header-title pt-3">  Locaties </h1>
+ 
     
          </div>
          <div class="col-auto pt-2">
@@ -27,10 +27,10 @@
             </form>
          </div>
          <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
-            </button>
+            <a href = "/location/add">
+            <button type="button" class="btn   btn-primary  btn-sm" >
+            <i class="bi bi-plus"></i> Toevoegen
+            </button></a>
          </div>
       </div>
    </div>
@@ -178,16 +178,21 @@
                               <div>
                                  <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
 
-                                 <h4>Geen storingen gevonden......</h4>
+                                 <h4>Geen locaties gevonden......</h4>
                                  @if($this->cntFilters)
                                  Geen gegevens gevonden met de huidige filters...
                                  <hr>
 
                                  @else
-                                 Geen storingen gevonden in het systeem. Een storing aanmaken kan via het liften
+                                 Geen locaties gevonden in het systeem. Voeg een nieuwe locatie toe
                                  overzicht
                                  @endif
 
+                            <div class = "clear-fix"></div>
+                            <a href = "/location/add">
+                                 <button type="button" class="btn   btn-primary btn-sm mt-5"   >
+            <i class="bi bi-plus"></i> Toevoegen
+            </button></a>
                               </div>
                            </center>
 

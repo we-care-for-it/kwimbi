@@ -5,9 +5,8 @@
     <div class="row align-items-center ">
     <div class="col">
  
-            <h1 class="page-header-title">  Keuringinstanties </h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
-    
+            <h1 class="page-header-title pt-3">  Keuringinstanties </h1>
+           
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -48,7 +47,7 @@
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
                      @if($this->cntFilters)
-                     <div class="p-3" role="alert">
+                     <div class="alert alert-soft-warning p-3" role="alert">
                         <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
                         <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
                            style="cursor: pointer" class="text-primary">Wis alle
@@ -69,13 +68,11 @@
                               <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
                                  Plaats
                               </x-table.heading>
-                              <x-table.heading></x-table.heading>
-                              <x-table.heading></x-table.heading>
+            
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                 data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
+                              <x-table.row onclick="window.location='/elevator/show/{{ $item->slug }}'"  >
                                  <x-table.cell>
                                     {{$item->name}}
                                  </x-table.cell>
@@ -88,33 +85,22 @@
                                  <x-table.cell>
                                     {{$item->place}}
                                  </x-table.cell>
-                                 <x-table.cell>
-                                    {{$item->address}}
-                                 </x-table.cell>
-                                 <x-table.cell>
-                                    <button style="float: right"
-                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
-                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                       data-bs-target="#crudModal">
-                                    <i class="bi bi-pencil"></i>
-                                    </button>
-                                 </x-table.cell>
+                           
+                            
                               </x-table.row>
                               @endforeach
                            </x-slot>
                         </x-table>
                         @else
                         <div>
-                           <div class="empty-state-container">
+                           <div class="empty-state-container ">
                               <div class="empty-state-content">
                                  <div class="empty-state-content-background new">
                                     <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen keuringinstanties
-                                       gevonden</span><br><br>Maak een keuringinstanties aan of pas je trefwoord aan
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
+                                    <p class="empty-state-text"><span class="strong">
+                                   <b> Geen gegevens gevonden</b>
+                                    <br>Voeg een keuringinstantie toe of pas het trefwoord aan.</span> 
+                                          
                                     </p>
                                  </div>
                                  <!--empty-state-content-background-->
