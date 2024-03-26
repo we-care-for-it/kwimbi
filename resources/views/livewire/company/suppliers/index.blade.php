@@ -71,7 +71,7 @@
                               <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
                                  data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
                                  <x-table.cell>
-                                    {{$item->name}}
+                                 <a href = "/supplier/{{$item->id}}">   {{$item->name}}</a>
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>

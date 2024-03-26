@@ -78,12 +78,12 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
     //Suppliers
     Route::get('/suppliers', \App\Http\Livewire\Company\Suppliers\Index::class);
-    // Route::group(['prefix' => 'supplier', ],
-    // function ()
-    // {
-    //     Route::get('edit/{slug}', \App\Http\Livewire\Company\Suppliers\Edit::class);
-    //     Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
-    // });
+    Route::group(['prefix' => 'supplier', ],
+    function ()
+    {
+      //  Route::get('edit/{slug}', \App\Http\Livewire\Company\Suppliers\Edit::class);
+       Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
+     });
 
     //Addressess
     Route::get('/addresses', \App\Http\Livewire\Company\Addresses\Index::class);
