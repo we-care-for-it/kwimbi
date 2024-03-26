@@ -2,7 +2,7 @@
 
 
 
-<header id="header" style = "background-color:  "   class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-light ">
+<header id="header" style = "background-color:  rgb(240,243,251)"   class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered ">
     <div class="navbar-nav-wrap">
       <!-- Logo -->
  

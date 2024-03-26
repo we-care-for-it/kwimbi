@@ -4,9 +4,9 @@
   <div class="page-header     ">
     <div class="row align-items-center ">
     <div class="col">
-         <img src="/assets/img/icons/workflow.svg" class="pageico">
-            <h1 class="page-header-title">  Liften <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $elevators->currentPage()}} </b> van <b> {{ $elevators->lastPage()}} </b> met huidige filters <b> {{ $elevators->Total()}} </b> addressen gevonden</span>
+ 
+            <h1 class="page-header-title">  Storingen  </h1>
+            <span class=" mb-2 text-muted"> Een overzicht van alle storingen </span>
     
          </div>
          <div class="col-auto pt-2">
@@ -52,7 +52,7 @@
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
                      @if($this->cntFilters)
-                     <div class="p-3" role="alert">
+                     <div class="pt-3 alert alert-soft-warning" role="alert">
                         <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
                         <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
                            style="cursor: pointer" class="text-primary">Wis alle
@@ -83,7 +83,7 @@
 
                                  <x-table.row  wire:key="row-{{ $incident->id }}"  onclick="window.location='/incident/{{ $incident->id }}';" >
 
-                                 <x-table.cell>
+                                 <x-table.cell onclick="window.location='/incident/{{ $incident->id }}';">
                       {{ sprintf('%06d', $incident->id) }}
                       @if ($incident->stand_still)
                       <br>
@@ -96,10 +96,10 @@
                       </span>
                       @endif
                     </x-table.cell>
-                    <x-table.cell>
+                    <x-table.cell onclick="window.location='/incident/{{ $incident->id }}';">
                       {{ Carbon\Carbon::parse($incident->report_date_time)->format('d-m-Y') }} -      {{ Carbon\Carbon::parse($incident->report_date_time)->format('H:i') }}
                     </x-table.cell>
-                    <x-table.cell onclick="window.location='/company/incident/show/{{ $incident->id }}';" >
+                    <x-table.cell onclick="window.location='/incident/{{ $incident->id }}';" >
                       <a href="/company/elevator/show/{{ $incident?->elevator?->id }}';">
                         @if ($incident?->elevator?->address_id)
                         @if ($incident?->elevator?->address)
@@ -117,7 +117,7 @@
                         @endif
                       </small>
                     </x-table.cell>
-                    <x-table.cell onclick="window.location='/company/incident/show/{{ $incident->id }}';" >
+                    <x-table.cell onclick="window.location='/incident/{{ $incident->id }}';" >
                       {{ $incident?->elevator?->unit_no }}
                       @if ($incident?->elevator?->disapprovedState != null)
                       <br>
@@ -217,10 +217,12 @@
                </div>
             </div>
          
-            <div class="card-footer">
+            <div class="card-footer pt-3">
 
 <div class="clearfix  ">
-   <div class="float-start">@if(count($items))
+   <div class="float-start">
+      
+   @if($items->links())
       <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
          </b>
       </p>
