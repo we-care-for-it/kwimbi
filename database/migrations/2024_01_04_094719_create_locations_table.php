@@ -23,9 +23,7 @@ return new class extends Migration
             $table->string('complexnumber')->nullable();
             $table->integer('management_id')->nullable();
             $table->integer('customer_id')->nullable();
-            $table->integer('building_type_id')->nullable();
-            $table->longtext('image')->nullable();
-           
+            $table->integer('building_type_id')->nullable();  
             $table->integer('building_acces_type_id')->nullable();      
             $table->integer('access_type_id')->nullable();
             $table->longtext('remark')->nullable();
