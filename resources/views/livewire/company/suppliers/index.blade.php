@@ -1,19 +1,10 @@
-
-
-
-
-
-
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-    <img src="/assets/img/icons/users.png" class="pageico">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+            <img src="/assets/img/icons/users.png" class="pageico">
             <h1 class="page-header-title">  Leveranciers <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
             <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
-    
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -40,11 +31,10 @@
          </div>
       </div>
    </div>
- 
    <div class="row ">
       <div class="col-xl-12">
-      <div class="card  p-0 m-0">
-            <div class="card-body  ">
+         <div class="card  p-0 m-0">
+            <div class="card-body p-0 ">
                <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">

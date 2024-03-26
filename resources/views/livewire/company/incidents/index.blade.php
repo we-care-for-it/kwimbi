@@ -35,21 +35,8 @@
                <!-- End Search -->
             </form>
          </div>
-
-         <div class="col-auto pt-2">
-         <button type="button" class="btn btn-primary btn-sm  filter_btn"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-light rounded-circle ms-1">{{$cntFilters}}</span>
-                     </button>
-
-                     </div>
-
-         <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
-            </button>
-         </div>
+ 
+ 
       </div>
    </div>
    
