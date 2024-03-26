@@ -1,10 +1,16 @@
 <div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0   ">
-      <div class="row align-items-center  px-2">
-         <div class="col">
-            <h1 class="page-header-title ">
-             Relaties
-            </h1>
+
+
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+    <img src="/assets/img/icons/users.png" class="pageico">
+            <h1 class="page-header-title">  Liften <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
+            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $elevators->currentPage()}} </b> van <b> {{ $elevators->lastPage()}} </b> met huidige filters <b> {{ $elevators->Total()}} </b> addressen gevonden</span>
+    
+         </div>
+         <div class="col-auto pt-2">
+          
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -46,6 +52,12 @@
          </div>
       </div>
    </div>
+   
+   
+   
+   
+ 
+ 
    <div class="row pt-1">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">

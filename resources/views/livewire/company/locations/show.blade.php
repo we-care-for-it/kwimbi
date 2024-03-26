@@ -5,7 +5,7 @@
   <div class="page-header     ">
     <div class="row align-items-center ">
     <div class="col">
-         <img src="/assets/img/icons/organization.svg" class="pageico">
+ 
             <h1 class="page-header-title">    @if($location->name)
                             {{$location->name}} @else Geen naam @endif</h1>
             <span class=" mb-2 text-muted">    {{$location->address}}  {{$location->housenumber}},

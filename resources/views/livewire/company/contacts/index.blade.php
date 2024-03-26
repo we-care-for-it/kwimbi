@@ -2,26 +2,20 @@
    <div class="page-header">
       <div class="row align-items-center">
          <div class="col">
-            <img src="/assets/img/ico/users.png" class = "pageico">
+         <img src="/assets/img/icons/users.png" class="pageico">
             <h1 class="page-header-title">  Contactpersonen(s) <span class="text-muted   ms-2"> ({{ $items->Total()}})</h1>
             <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> relaties gevonden</span>
          </div>
          <div class="col-auto">
-            <button type="button" onclick="history.back()" style=" width: 150px; " class="btn btn-soft-primary" >
-            Terug
-            </button>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success" >
+     
+            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-sm btn-150 btn-soft-success" >
             Toevoegen
             </button>
          </div>
-      </div>
-   </div>
-   <div class="row ">
-      <div class="col-xl-12">
-         <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
-               <div class="mb-2 mb-md-0">
-                  <form>
+
+
+         <div class="col-auto">
+         <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
                         <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
@@ -36,20 +30,25 @@
                      </div>
                      <!-- End Search -->
                   </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay class="loading_indicator_small"></div>
-                  </div>
-                  <div class="dropdown">
+         </div>
+
+         <div class="col-auto">
+ 
+         <div class="dropdown">
                      <button type="button" class="btn btn-white btn-sm w-100"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
                      <i class="bi-filter me-1"></i>   Filter
                      <span class="badge bg-soft-dark text-dark rounded-circle ms-1">{{$cntFilters}}</span>
                      </button>
                   </div>
-                  <!-- End Dropdown -->
-               </div>
-            </div>
+         </div>
+
+
+      </div>
+   </div>
+   <div class="row ">
+      <div class="col-xl-12">
+         <div class="card">
+            
             <div class="card-body">
                <div class="row">
                   <div>

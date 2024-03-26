@@ -15,15 +15,7 @@ body {
   content:" *";color:red;
 }
 
-
-/* .btn-primary {
-  background-color: #5C5EA7 !important;
-  padding: 12px!important;
-  border-radius: 0px!important;;
-  border:0px!important;
-
-}*/
-
+ 
 
 
 #go_to_top_button {
@@ -130,6 +122,8 @@ body {
 .page-header{
   height: 65px;
   border-bottom: 1px solid #EFEFEF!important;
+  padding-bottom: 0px!important;
+  margin-bottom: 10px!important
 
 }
 

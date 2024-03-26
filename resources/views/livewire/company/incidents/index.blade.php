@@ -1,10 +1,16 @@
 <div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0   ">
-      <div class="row align-items-center  px-2">
-         <div class="col">
-            <h1 class="page-header-title ">
-             Storingen
-            </h1>
+
+
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+         <img src="/assets/img/icons/workflow.svg" class="pageico">
+            <h1 class="page-header-title">  Liften <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
+            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $elevators->currentPage()}} </b> van <b> {{ $elevators->lastPage()}} </b> met huidige filters <b> {{ $elevators->Total()}} </b> addressen gevonden</span>
+    
+         </div>
+         <div class="col-auto pt-2">
+          
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -19,10 +25,25 @@
                   <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
                   <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                   </button>
+
+                  
                </div>
+
+
+
+               
                <!-- End Search -->
             </form>
          </div>
+
+         <div class="col-auto pt-2">
+         <button type="button" class="btn btn-primary btn-sm  filter_btn"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+                     <i class="bi-filter me-1"></i>   Filter
+                     <span class="badge bg-soft-dark text-light rounded-circle ms-1">{{$cntFilters}}</span>
+                     </button>
+
+                     </div>
+
          <div class="col-auto pt-2">
             <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
                data-bs-target="#crudModal" wire:click="clear()">
@@ -31,7 +52,8 @@
          </div>
       </div>
    </div>
-   <div class="row pt-1">
+   
+   <div class="row ">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
             <div class="card-body  ">

@@ -45,7 +45,7 @@
  
 
                 <div class="nav-item ">
-                  <a class="nav-link {{  Request::path() ==   'company/elevators' ? 'active' : '' }} " href="/company/elevators" >
+                  <a class="nav-link nav-link @if(request()->is('elevators/*') or  request()->is('elevators'))  active @endif" href="/elevators" >
                     <i class="bi-people nav-icon"></i>
                     <span class="nav-link-title">Liften</span>
                   </a>
@@ -60,8 +60,7 @@
           
 
                 <div class="nav-item ">
-                <a class="nav-link {{  Request::path() ==   'company/incidents' ? 'active' : ''  }} " href="/company/incidents" >
-                    <i class="bi-people nav-icon"></i>
+                <a class="nav-link nav-link @if(request()->is('incidents/*') or  request()->is('incidents'))  active @endif" href="/incidents" >           <i class="bi-people nav-icon"></i>
                     <span class="nav-link-title">Storingen</span>
                   </a>
  
