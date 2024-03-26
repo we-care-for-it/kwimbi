@@ -45,7 +45,7 @@ body {
  border: 1px dashed #EFEFEF ;
  color:  #b6b4b4 ;
  
- height:100px;
+ height:80px;
  font-weight: normal;
  padding: 10px;
  
@@ -60,6 +60,30 @@ body {
   cursor: pointer;
  }
  
+
+ .card-button {
+  border: 1px dashed #EFEFEF ;
+  color:  #b6b4b4 ;
+  
+  height:100px;
+  font-weight: normal;
+  padding: 10px;
+  
+  
+  cursor: pointer;
+  
+ 
+  
+ }
+ .card-button:hover {
+  border: 1px dashed #4499DC!important;
+
+
+
+  background-color: #439ce000!important;
+   cursor: pointer;
+  }
+
 
 .card{
   border-radius: 10px!important;
@@ -95,19 +119,7 @@ body {
   margin-right: 10px;
   float: left;
   border-right: 1px solid #EFEFEF;
-}
- .page-header{
-  margin-bottom: 20px!important;
-  padding-bottom: 0px!important;
-  height: 61px!important;;
-  border-radius: 10px!important;
-  border: 0px!important;
-  background-color: #F8F9FA!important;
-  border: 1px dotted #EFEFEF!important;
-
-
-
- }
+} 
 
  .sticky-top { background-color: white;
   top: 62px!important;
@@ -115,15 +127,19 @@ body {
   margin-top:10px !important;
 
 }
+.page-header{
+  height: 65px;
+  border-bottom: 1px solid #EFEFEF!important;
 
+}
 
-
+/* 
 .page-header-title{
   padding-top: 20px;
 
   font-weight: normal;  color: gray!important;
   font-weight: lighter!important;
-}
+} */
 h1{
   font-weight:normal!important;;
   font-size: 16px!important;;
@@ -143,28 +159,25 @@ a:link{
   font-weight: normal!important;
   color: rgb(81,85,170)!important;
 }
-@media only screen and (min-width: 768px){ 
+/* @media only screen and (min-width: 768px){ 
   .nav-item a{
   color: white!important;
   width: 70px!important;
 }
 .js-navbar-vertical-aside{
   width: 70px!important;
-background-color: #4499DC!important;
+background-color: #d4d8cf!important;
  
 }
 .navbar-vertical-container{
   width: 70px!important;
-background-color:  #4499DC!important;
+background-color:  #377DFF!important;
  
-}
+} */
 
 
  
-
-
-}
-
+ 
 
 
 .loading {

@@ -1,6 +1,6 @@
 <!-- ========== HEADER ========== -->
 
-<header   id="header" class=" bg-white   navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
+<header  style = "background-color: #4499DC"   id="header" class="  navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered  "
   >
   <div  class="navbar-nav-wrap">
       <div class="navbar-nav-wrap-content-start">
@@ -16,11 +16,10 @@
       </button>
 </div>
 
-      <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-            
+             
   </div>
 
-    <div class="navbar-nav-wrap-content-end">
+    <div class="navbar-nav-wrap-content-end"  >
 
 
       <ul class="navbar-nav">

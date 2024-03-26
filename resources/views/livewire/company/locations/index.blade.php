@@ -1,28 +1,36 @@
 <div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0  " >
-      <div class="row align-items-center bg-light px-2">
-         <div class="col">
-            <h1 class="page-header-title ">
-               Locaties</h1>
- 
+
+
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+         <img src="/assets/img/icons/organization.svg" class="pageico">
+            <h1 class="page-header-title">  Locaties <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
+            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
+    
          </div>
          <div class="col-auto pt-2">
-
-         <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.search" wire:change="resetPageAfterSearch()" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+         <div class="col-auto pt-2">
+            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
+               data-bs-target="#crudModal" wire:click="clear()">
+            <i class="bi bi-plus"></i>
+            </button>
          </div>
       </div>
    </div>

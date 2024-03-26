@@ -1,96 +1,49 @@
+
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                @if($location->name)
-                            {{$location->name}} @else Geen naam @endif
-            </div>
-            <div class="col-auto">
 
-            <nav class="navbar-nav-wrap-col collapse navbar-collapse" id="navbarNavMenuHeight">
-        <!-- Navbar -->
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
 
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarHeightDropdownSubMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-
-            <div class="dropdown-menu" aria-labelledby="navbarHeightDropdownSubMenu" style="min-width: 230px;">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <!-- End Dropdown -->
-
-          <!-- Nav Item -->
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarHeightMegaMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mega menu</a>
-
-            <div class="dropdown-menu w-100" aria-labelledby="navbarHeightMegaMenu">
-              <div class="row">
-                <div class="col-lg-3 mb-3 mb-lg-0">
-                  <span class="dropdown-header">One</span>
-
-                  <a class="dropdown-item" href="#">One</a>
-                  <a class="dropdown-item" href="#">Two</a>
-                  <a class="dropdown-item" href="#">Three</a>
-                </div>
-
-                <div class="col-lg-3 mb-3 mb-lg-0">
-                  <span class="dropdown-header">Two</span>
-
-                  <a class="dropdown-item" href="#">One</a>
-                  <a class="dropdown-item" href="#">Two</a>
-                  <a class="dropdown-item" href="#">Three</a>
-                </div>
-
-                <div class="col-lg-3 mb-3 mb-lg-0">
-                  <span class="dropdown-header">Three</span>
-
-                  <a class="dropdown-item" href="#">One</a>
-                  <a class="dropdown-item" href="#">Two</a>
-                </div>
-
-                <div class="col-lg-3">
-                  <span class="dropdown-header">Four</span>
-
-                  <a class="dropdown-item" href="#">One</a>
-                  <a class="dropdown-item" href="#">Two</a>
-                  <a class="dropdown-item" href="#">Three</a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- End Nav Item -->
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-        <!-- End Navbar -->
-      </nav>
-            <a href="/locations">
-                    <button type="button" class="btn   btn-link btn-sm  ">
-                        Alle locaties
-                    </button></a>
-
-                <a href = "/location/edit/{{$location->id}}">
-                <button type="button" class="btn   btn-link btn-sm "  >
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+         <img src="/assets/img/icons/organization.svg" class="pageico">
+            <h1 class="page-header-title">    @if($location->name)
+                            {{$location->name}} @else Geen naam @endif</h1>
+            <span class=" mb-2 text-muted">    {{$location->address}}  {{$location->housenumber}},
+                      {{$location->zipcode}} {{$location->place}}</span>
+    
+         </div>
+       
+         <div class="col-auto pt-2">
+              
+         <a href = "/location/edit/{{$location->id}}">
+                <button type="button" class="btn   btn-primary btn-ico btn-sm btn-120"  >
                     Wijzig
                 </button>
                 </a>
 
-  
+         </div>
+      </div>
+   </div>
+   
+   
+   
+   
 
-            </div>
-        </div>
-    </div>
+
+   
+   <div class="row">
+      <div class="col-md-12"> 
+        
+      
+      
+      
+      
+      
+      
+      
+      
+
+ 
     <div class="row">
 
         <div class="col-md-3">
@@ -315,9 +268,9 @@
 
                            @if(count($location->objects))
 
-                           <table class="table tabel-striped table-hover">
+                           <table class="table tabel-striped table-hover   ">
   <thead>
-    <tr>
+    <tr class = "bg-light">
 
       <th scope="col">Adres</th>
       <th scope="col">Nobonummer</th>
@@ -332,7 +285,7 @@
 
                            @forelse ($location->objects  as $elevator)
                            <tr>
-      <tr onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
+      <tr style = "cursor:pointer" onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
 
       <td> @if ($elevator->address) @if ($elevator->address->name) <b>{{ $elevator->address->name }}</b>
                         <br> @endif <small>

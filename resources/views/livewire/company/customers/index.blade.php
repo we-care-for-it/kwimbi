@@ -1,10 +1,10 @@
 <div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0   ">
-      <div class="row align-items-center  px-2">
+    <div class="page-header   pt-0  ">
+        <div class="row align-items-center  ">
          <div class="col">
             <h1 class="page-header-title ">
              Relaties
-            </h1>
+            </h1>Hier nog een stukje tekst
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -42,14 +42,14 @@
                      <span class="text-muted">Bezig met gegevens ophalen</span>
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
-                     @if($this->cntFilters)
-                     <div class="p-3" role="alert">
-                        <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
-                        <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
-                           style="cursor: pointer" class="text-primary">Wis alle
-                        filters</span>
-                     </div>
-                     @endif
+                  @if($this->cntFilters)
+                              <div class="alert alert-soft-warning" role="alert">
+                                 <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                                 <= 1) 1 filter @else {{$this->cntFilters}} filters @endif< />
+                                 <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
+                                    filters</span>
+                              </div>
+                              @endif
                      <div wire:loading.remove>
                         @if($items->count())
                         <x-table>

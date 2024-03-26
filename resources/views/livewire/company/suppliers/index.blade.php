@@ -1,10 +1,19 @@
+
+
+
+
+
+
 <div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0   ">
-      <div class="row align-items-center  px-2">
-         <div class="col">
-            <h1 class="page-header-title ">
-               Leveranciers
-            </h1>
+
+
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+         <img src="/assets/img/icons/deployment.svg" class="pageico">
+            <h1 class="page-header-title">  Leveranciers <span class="text-muted   ms-2 " style="font-weight: normal"> (35)</span></h1>
+            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> addressen gevonden</span>
+    
          </div>
          <div class="col-auto pt-2">
             <form>
@@ -31,9 +40,10 @@
          </div>
       </div>
    </div>
-   <div class="row pt-1">
+ 
+   <div class="row ">
       <div class="col-xl-12">
-         <div class="card  p-0 m-0">
+      <div class="card  p-0 m-0">
             <div class="card-body  ">
                <div class="row ">
                   <div class="loading" wire:loading>
@@ -43,7 +53,7 @@
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
                      @if($this->cntFilters)
-                     <div class="p-3" role="alert">
+                     <div class="p-3 alert alert-soft-warning" role="alert">
                         <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
                         <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span wire:click="resetFilters()"
                            style="cursor: pointer" class="text-primary">Wis alle
