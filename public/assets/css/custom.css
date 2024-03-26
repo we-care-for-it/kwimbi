@@ -68,7 +68,7 @@ body {
   
  }
  .card-button:hover {
-  border: 1px dashed #4499DC!important;
+  border: 1px dashed #A165AB!important;
 
 
 
@@ -476,7 +476,7 @@ border-radius: 0px!important;;
 }
 
 .empty-state-text>a {
-	color: #4499dc
+	color: #A165AB
 }
 
 .empty-state-text>a:hover {

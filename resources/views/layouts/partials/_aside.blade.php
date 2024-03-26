@@ -5,38 +5,26 @@
    <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white navbar-vertical-aside-initialized">
     <div class="navbar-vertical-container">
       <div class="navbar-vertical-footer-offset">
-        <!-- Logo -->
-
-        <a class="navbar-brand d-block mb-4 mt-3 " href="./index.html" aria-label="Logo">
-        <center>
-          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
-          <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
-          </center>
-        </a>
-    
-
-        <!-- End Logo -->
-
-        <!-- Navbar Vertical Toggle -->
+     
         <button type="button" class="d-none d-md-block  js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler" style="opacity: 1;">
           <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Collapse" data-bs-original-title="Collapse"></i>
           <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Expand" data-bs-original-title="Expand"></i>
         </button>
-
-        <!-- End Navbar Vertical Toggle -->
-
-        <!-- Content -->
         <div class="navbar-vertical-content">
 
 
-
-   <div class="navbar-vertical-content">
+ 
    <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
 
  
-      <div class="nav-item pt-3">
+    <center>
+          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
+          <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo-mini" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
+</center>
+    
+      <div class="nav-item pt-3  ">
          <a class="nav-link dropdown-toggle collapsed" href="#navbarVerticalMenuPagesDefaultMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesDefaultMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesEcommerceMenu">
          <i class="bi-basket nav-icon"></i>
          <span class="nav-link-title">Hoofdmenu</span>
