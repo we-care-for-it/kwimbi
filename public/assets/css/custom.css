@@ -144,9 +144,13 @@ h1{
 
 
 }
-a:link{
+/* a:link{
   font-weight: normal!important;
+  color:red!important;
+} */
 
+.table a {   
+  color: #46B97C!important;;
 }
 
 .btn-link{

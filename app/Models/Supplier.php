@@ -15,7 +15,7 @@ class Supplier extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     
     protected $fillable = [
-        'name','address','zipcode','phonenumber','email','place','active'
+        'name','address','zipcode','phonenumber','emailaddress','place','active'
     ];
     // protected $fillable = [
    //     'last_action_at',
