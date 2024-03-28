@@ -34,7 +34,7 @@ class Index extends Component
     use WithBulkActions;
     use WithCachedRows;
 
-    public $sortField = 'id';
+    public $sortField = 'name';
     public $sortDirection = 'desc';
     public $keyword;
     public $cntFilters;

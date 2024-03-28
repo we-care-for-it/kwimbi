@@ -1,29 +1,35 @@
-
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
  
-            <h1 class="page-header-title">    @if($location->name)
-                            {{$location->name}} @else Geen naam @endif</h1>
-            <span class=" mb-2 text-muted">    {{$location->address}}  {{$location->housenumber}},
-                      {{$location->zipcode}} {{$location->place}}</span>
-    
-         </div>
-       
-         <div class="col-auto pt-2">
-              
-         <a href = "/location/edit/{{$location->id}}">
+         <h1 class="page-header-title pt-3">    @if($location->name)
+                            {{$location->name}} @else Geen naam @endif </h1>
+             </div>
+
+         <div class="col-auto">
+         <a href="/locations">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                        Alle locaties
+                    </button>
+                </a>
+ 
+                <a href = "/location/edit/{{$location->id}}">
                 <button type="button" class="btn   btn-primary btn-ico btn-sm btn-120"  >
                     Wijzig
                 </button>
                 </a>
+                   
 
+
+                
+                </div>
+    
          </div>
       </div>
-   </div>
+ 
+
+ 
    
    
    
@@ -99,7 +105,7 @@
 
 
 
-<div class="card  bg-light">
+<div class="card  ">
 <div class="card-body">
 
       <b>{{$location->customer?->name}}</b>

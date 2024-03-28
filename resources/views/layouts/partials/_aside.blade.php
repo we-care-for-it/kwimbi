@@ -35,7 +35,7 @@
             <a wire:navigate class="nav-link nav-link @if(request()->is('incidents/*') or  request()->is('incidents'))  active @endif" href="/incidents" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Storingen</span></a>
             <a wire:navigate class="nav-link {{  Request::path() ==   'contacts' ? 'active' : '' }} " href="/contacts" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Contactpersonen</span>     </a>
             <a wire:navigate class="nav-link @if(request()->is('location/*') or  request()->is('locations'))  active @endif" href="/locations"> <i class="bi-people nav-icon"></i> Locaties</a>
-            <a wire:navigate class="nav-link {{  Request::path() ==   'customers' ? 'active' : '' }} " href="/customers" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Relaties</span></a>
+            <a wire:navigate class="nav-link @if(request()->is('customers') or  request()->is('customer/*'))  active @endif" href="/customers" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Relaties</span></a>
             <a wire:navigate class="nav-link @if(request()->is('projects/*') or  request()->is('projects'))  active @endif" href="/projects"> <i class="bi-people nav-icon"></i> Projecten</a>
          </div>
       </div>

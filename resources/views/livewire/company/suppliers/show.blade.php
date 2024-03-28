@@ -44,14 +44,16 @@
 
             </div>
         </div>
-    </div>
-
-
-
-
-
  
-    @livewire('company.suppliers.crudmodal', ['object' => $object])
+
+        @livewire('company.suppliers.crudmodal', ['object' => $object])
+
+<div class = "card">
+
+<div class = "card-header">Gekoppelde objecten</div>
+<div class = "card-body p-2">asdasd</div>
+
+</div>
 </div>
 
 

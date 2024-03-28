@@ -1,45 +1,36 @@
 <div class="container-fluid">
-    <div class="page-header   pt-0  ">
-        <div class="row align-items-center ">
-            <div class="col">
-                <h1 class="page-header-title ">
-                {{$data?->name}}</h1>
-                <b>{{$data->customer?->name}} - </b>
-                                   
-                                    {{$data->customer?->address}} {{$data->customer?->place}}
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
+             </div>
 
-            </div>
-            <div class="col-auto pt-2">
-
-                <form>
-                    <!-- Search -->
-                    <div class="input-group input-group-merge">
-                     
-                        <button type="button" class="input-group-append input-group-text">
-                            <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                            <i id="defaultClearIconToggleEg" class="bi-search"
-                                style="display: block; opacity: 1.03666;"></i>
-                        </button>
-                    </div>
-                    <!-- End Search -->
-                </form>
-
-            </div>
-
-            <div class="col-auto pt-2">
-
-
-                    <button type="button" class="btn   btn-120 btn-soft-success  btn-sm"  wire:click = "save()" > 
+         <div class="col-auto">
+         <a href="/locations">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                   Alle locaties
+                    </button>
+                </a>
+ 
+                <button type="button" class="btn   btn-120 btn-soft-success btn-150 btn-sm"  wire:click = "save()" > 
                         Opslaan
                     </button>
 
+                   
 
-            </div>
 
-        </div>
-    </div>
+                
+                </div>
     
-    
+         </div>
+      </div>
+ 
+
+ 
+   
+   
+ 
  
 
 
@@ -93,6 +84,20 @@ Afbeelding
                     class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
                     </div>       </div>
 
+
+                    <div class="card mt-3 bg-light">
+<div class="card-body">
+
+      <b>{{$data->customer?->name}}</b>
+      <br>
+      {{$data->customer?->address}} {{$data->customer?->place}}
+
+</div>
+</div>
+ 
+
+
+
             <div class = "card mt-3">      <div class = "card-body">
             <label class="pb-2  ">Gebouwtype</label>
  
@@ -130,6 +135,10 @@ Afbeelding
 
 Locatie
 </div>
+
+
+
+
 
             <div class="card">
            

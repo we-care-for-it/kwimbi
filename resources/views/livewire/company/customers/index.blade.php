@@ -1,12 +1,11 @@
 <div class="container-fluid">
-    <div class="page-header   pt-0  ">
-        <div class="row align-items-center  ">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
          <div class="col">
-            <h1 class="page-header-title ">
-             Relaties
-            </h1>Hier nog een stukje tekst
-         </div>
-         <div class="col-auto pt-2">
+ 
+         <h1 class="page-header-title pt-3">  Relaties  </h1>
+             </div>
+         <div class="col-auto">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -23,18 +22,21 @@
                <!-- End Search -->
             </form>
          </div>
-         <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
+         <div class="col-auto">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
             </button>
          </div>
       </div>
    </div>
+
+
+
    <div class="row">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
-            <div class="card-body p-0  ">
+            <div class="card-body   ">
                <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
@@ -64,15 +66,15 @@
                               <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
                                  Plaats
                               </x-table.heading>
-                              <x-table.heading></x-table.heading>
-                              <x-table.heading></x-table.heading>
+                         
+                      
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
                               <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
                                  data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
                                  <x-table.cell>
-                                    {{$item->name}}
+                                 <a href = "/customer/{{$item->slug}}">   {{$item->name}}
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>
@@ -83,17 +85,8 @@
                                  <x-table.cell>
                                     {{$item->place}}
                                  </x-table.cell>
-                                 <x-table.cell>
-                                    {{$item->address}}
-                                 </x-table.cell>
-                                 <x-table.cell>
-                                    <button style="float: right"
-                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
-                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                       data-bs-target="#crudModal">
-                                    <i class="bi bi-pencil"></i>
-                                    </button>
-                                 </x-table.cell>
+                          
+                           
                               </x-table.row>
                               @endforeach
                            </x-slot>

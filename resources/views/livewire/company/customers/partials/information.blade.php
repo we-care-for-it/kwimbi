@@ -6,7 +6,7 @@
 
  
 
-<div class="card  bg-light">
+<div class="card  ">
 <div class="card-body">
 
       <b>{{$customer?->name}}</b>
