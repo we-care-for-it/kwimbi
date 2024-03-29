@@ -1,15 +1,11 @@
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-
-            <h1 class="page-header-title pt-3">  Locaties </h1>
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
  
-    
-         </div>
-         <div class="col-auto pt-2">
+         <h1 class="page-header-title pt-3">  Locaties  </h1>
+             </div>
+         <div class="col-auto">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -26,11 +22,11 @@
                <!-- End Search -->
             </form>
          </div>
-         <div class="col-auto pt-2">
-            <a href = "/location/add">
-            <button type="button" class="btn   btn-primary  btn-sm" >
-            <i class="bi bi-plus"></i> Toevoegen
-            </button></a>
+         <div class="col-auto">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
+            </button>
          </div>
       </div>
    </div>

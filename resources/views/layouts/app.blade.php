@@ -13,7 +13,7 @@
  
    </head>
 
-   <body class="bg-light has-navbar-vertical-aside navbar-vertical-aside-show-xl">     <script src="/assets/js/hs.theme-appearance.js"></script>
+   <body class=" has-navbar-vertical-aside navbar-vertical-aside-show-xl">     <script src="/assets/js/hs.theme-appearance.js"></script>
       @include('layouts.partials._header')
       <main id="content" role="main" class="main">
          @include('layouts.partials._aside')
