@@ -1,18 +1,11 @@
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
  
-            <h1 class="page-header-title">  Storingen  </h1>
-            <span class=" mb-2 text-muted"> Een overzicht van alle storingen </span>
-    
-         </div>
-         <div class="col-auto pt-2">
-          
-         </div>
-         <div class="col-auto pt-2">
+         <h1 class="page-header-title pt-3">  Storingen  </h1>
+             </div>
+         <div class="col-auto">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -25,21 +18,285 @@
                   <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
                   <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                   </button>
-
-                  
                </div>
-
-
-
-               
                <!-- End Search -->
             </form>
          </div>
- 
- 
+         <div class="col-auto">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
+            </button>
+         </div>
       </div>
    </div>
    
+
+  
+   <div class="row">
+        <div class="col-sm-6 col-lg-3  mb-lg-3">
+          <!-- Card -->
+          <div class = "card  h-100" >
+            <div class="card-body">
+              <h6 class="card-subtitle">Total Users</h6>
+
+              <div class="row align-items-center gx-2 mb-1">
+                <div class="col-6">
+                  <h2 class="card-title text-inherit">72,540</h2>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-6">
+                  <!-- Chart -->
+                  <div class="chartjs-custom" style="height: 3rem;">
+                    <canvas class="js-chart" data-hs-chartjs-options="{
+                              &quot;type&quot;: &quot;line&quot;,
+                              &quot;data&quot;: {
+                                 &quot;labels&quot;: [&quot;1 May&quot;,&quot;2 May&quot;,&quot;3 May&quot;,&quot;4 May&quot;,&quot;5 May&quot;,&quot;6 May&quot;,&quot;7 May&quot;,&quot;8 May&quot;,&quot;9 May&quot;,&quot;10 May&quot;,&quot;11 May&quot;,&quot;12 May&quot;,&quot;13 May&quot;,&quot;14 May&quot;,&quot;15 May&quot;,&quot;16 May&quot;,&quot;17 May&quot;,&quot;18 May&quot;,&quot;19 May&quot;,&quot;20 May&quot;,&quot;21 May&quot;,&quot;22 May&quot;,&quot;23 May&quot;,&quot;24 May&quot;,&quot;25 May&quot;,&quot;26 May&quot;,&quot;27 May&quot;,&quot;28 May&quot;,&quot;29 May&quot;,&quot;30 May&quot;,&quot;31 May&quot;],
+                                 &quot;datasets&quot;: [{
+                                  &quot;data&quot;: [21,20,24,20,18,17,15,17,18,30,31,30,30,35,25,35,35,40,60,90,90,90,85,70,75,70,30,30,30,50,72],
+                                  &quot;backgroundColor&quot;: [&quot;rgba(55, 125, 255, 0)&quot;, &quot;rgba(255, 255, 255, 0)&quot;],
+                                  &quot;borderColor&quot;: &quot;#377dff&quot;,
+                                  &quot;borderWidth&quot;: 2,
+                                  &quot;pointRadius&quot;: 0,
+                                  &quot;pointHoverRadius&quot;: 0
+                                }]
+                              },
+                              &quot;options&quot;: {
+                                 &quot;scales&quot;: {
+                                   &quot;y&quot;: {
+                                     &quot;display&quot;: false
+                                   },
+                                   &quot;x&quot;: {
+                                     &quot;display&quot;: false
+                                   }
+                                 },
+                                &quot;hover&quot;: {
+                                  &quot;mode&quot;: &quot;nearest&quot;,
+                                  &quot;intersect&quot;: false
+                                },
+                                &quot;plugins&quot;: {
+                                  &quot;tooltip&quot;: {
+                                    &quot;postfix&quot;: &quot;k&quot;,
+                                    &quot;hasIndicator&quot;: true,
+                                    &quot;intersect&quot;: false
+                                  }
+                                }
+                              }
+                            }" width="70" height="43" style="display: block; box-sizing: border-box; height: 47.7778px; width: 77.7778px;">
+                    </canvas>
+                  </div>
+                  <!-- End Chart -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+
+              <span class="badge bg-soft-success text-success">
+                <i class="bi-graph-up"></i> 12.5%
+              </span>
+              <span class="text-body fs-6 ms-1">from 70,104</span>
+            </div>
+                           </div>
+          <!-- End Card -->
+        </div>
+        <div class="col-sm-6 col-lg-3  mb-lg-3">
+          <!-- Card -->
+          <div class = "card  h-100" >    <div class="card-body">
+              <h6 class="card-subtitle">Sessions</h6>
+
+              <div class="row align-items-center gx-2 mb-1">
+                <div class="col-6">
+                  <h2 class="card-title text-inherit">29.4%</h2>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-6">
+                  <!-- Chart -->
+                  <div class="chartjs-custom" style="height: 3rem;">
+                    <canvas class="js-chart" data-hs-chartjs-options="{
+                              &quot;type&quot;: &quot;line&quot;,
+                              &quot;data&quot;: {
+                                 &quot;labels&quot;: [&quot;1 May&quot;,&quot;2 May&quot;,&quot;3 May&quot;,&quot;4 May&quot;,&quot;5 May&quot;,&quot;6 May&quot;,&quot;7 May&quot;,&quot;8 May&quot;,&quot;9 May&quot;,&quot;10 May&quot;,&quot;11 May&quot;,&quot;12 May&quot;,&quot;13 May&quot;,&quot;14 May&quot;,&quot;15 May&quot;,&quot;16 May&quot;,&quot;17 May&quot;,&quot;18 May&quot;,&quot;19 May&quot;,&quot;20 May&quot;,&quot;21 May&quot;,&quot;22 May&quot;,&quot;23 May&quot;,&quot;24 May&quot;,&quot;25 May&quot;,&quot;26 May&quot;,&quot;27 May&quot;,&quot;28 May&quot;,&quot;29 May&quot;,&quot;30 May&quot;,&quot;31 May&quot;],
+                                 &quot;datasets&quot;: [{
+                                  &quot;data&quot;: [21,20,24,20,18,17,15,17,30,30,35,25,18,30,31,35,35,90,90,90,85,100,120,120,120,100,90,75,75,75,90],
+                                  &quot;backgroundColor&quot;: [&quot;rgba(55, 125, 255, 0)&quot;, &quot;rgba(255, 255, 255, 0)&quot;],
+                                  &quot;borderColor&quot;: &quot;#377dff&quot;,
+                                  &quot;borderWidth&quot;: 2,
+                                  &quot;pointRadius&quot;: 0,
+                                  &quot;pointHoverRadius&quot;: 0
+                                }]
+                              },
+                              &quot;options&quot;: {
+                                 &quot;scales&quot;: {
+                                   &quot;y&quot;: {
+                                     &quot;display&quot;: false
+                                   },
+                                   &quot;x&quot;: {
+                                     &quot;display&quot;: false
+                                   }
+                                 },
+                                &quot;hover&quot;: {
+                                  &quot;mode&quot;: &quot;nearest&quot;,
+                                  &quot;intersect&quot;: false
+                                },
+                                &quot;plugins&quot;: {
+                                  &quot;tooltip&quot;: {
+                                    &quot;postfix&quot;: &quot;k&quot;,
+                                    &quot;hasIndicator&quot;: true,
+                                    &quot;intersect&quot;: false
+                                  }
+                                }
+                              }
+                            }" width="70" height="43" style="display: block; box-sizing: border-box; height: 47.7778px; width: 77.7778px;">
+                    </canvas>
+                  </div>
+                  <!-- End Chart -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+
+              <span class="badge bg-soft-success text-success">
+                <i class="bi-graph-up"></i> 1.7%
+              </span>
+              <span class="text-body fs-6 ms-1">from 29.1%</span>
+            </div>
+                           </div>
+          <!-- End Card -->
+        </div>
+
+        <div class="col-sm-6 col-lg-3  mb-lg-3">
+          <!-- Card -->
+          <div class = "card  h-100" >   <div class="card-body">
+              <h6 class="card-subtitle">Avg. Click Rate</h6>
+
+              <div class="row align-items-center gx-2 mb-1">
+                <div class="col-6">
+                  <h2 class="card-title text-inherit">56.8%</h2>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-6">
+                  <!-- Chart -->
+                  <div class="chartjs-custom" style="height: 3rem;">
+                    <canvas class="js-chart" data-hs-chartjs-options="{
+                              &quot;type&quot;: &quot;line&quot;,
+                              &quot;data&quot;: {
+                                 &quot;labels&quot;: [&quot;1 May&quot;,&quot;2 May&quot;,&quot;3 May&quot;,&quot;4 May&quot;,&quot;5 May&quot;,&quot;6 May&quot;,&quot;7 May&quot;,&quot;8 May&quot;,&quot;9 May&quot;,&quot;10 May&quot;,&quot;11 May&quot;,&quot;12 May&quot;,&quot;13 May&quot;,&quot;14 May&quot;,&quot;15 May&quot;,&quot;16 May&quot;,&quot;17 May&quot;,&quot;18 May&quot;,&quot;19 May&quot;,&quot;20 May&quot;,&quot;21 May&quot;,&quot;22 May&quot;,&quot;23 May&quot;,&quot;24 May&quot;,&quot;25 May&quot;,&quot;26 May&quot;,&quot;27 May&quot;,&quot;28 May&quot;,&quot;29 May&quot;,&quot;30 May&quot;,&quot;31 May&quot;],
+                                 &quot;datasets&quot;: [{
+                                  &quot;data&quot;: [25,18,30,31,35,35,60,60,60,75,21,20,24,20,18,17,15,17,30,120,120,120,100,90,75,90,90,90,75,70,60],
+                                  &quot;backgroundColor&quot;: [&quot;rgba(55, 125, 255, 0)&quot;, &quot;rgba(255, 255, 255, 0)&quot;],
+                                  &quot;borderColor&quot;: &quot;#377dff&quot;,
+                                  &quot;borderWidth&quot;: 2,
+                                  &quot;pointRadius&quot;: 0,
+                                  &quot;pointHoverRadius&quot;: 0
+                                }]
+                              },
+                              &quot;options&quot;: {
+                                 &quot;scales&quot;: {
+                                   &quot;y&quot;: {
+                                     &quot;display&quot;: false
+                                   },
+                                   &quot;x&quot;: {
+                                     &quot;display&quot;: false
+                                   }
+                                 },
+                                &quot;hover&quot;: {
+                                  &quot;mode&quot;: &quot;nearest&quot;,
+                                  &quot;intersect&quot;: false
+                                },
+                                &quot;plugins&quot;: {
+                                  &quot;tooltip&quot;: {
+                                    &quot;postfix&quot;: &quot;k&quot;,
+                                    &quot;hasIndicator&quot;: true,
+                                    &quot;intersect&quot;: false
+                                  }
+                                }
+                              }
+                            }" width="70" height="43" style="display: block; box-sizing: border-box; height: 47.7778px; width: 77.7778px;">
+                    </canvas>
+                  </div>
+                  <!-- End Chart -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+
+              <span class="badge bg-soft-danger text-danger">
+                <i class="bi-graph-down"></i> 4.4%
+              </span>
+              <span class="text-body fs-6 ms-1">from 61.2%</span>
+            </div>
+                           </div>
+          <!-- End Card -->
+        </div>
+
+        <div class="col-sm-6 col-lg-3  mb-lg-3">
+          <!-- Card -->
+          <div class = "card  h-100" >   <div class="card-body">
+              <h6 class="card-subtitle">Pageviews</h6>
+
+              <div class="row align-items-center gx-2 mb-1">
+                <div class="col-6">
+                  <h2 class="card-title text-inherit">92,913</h2>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-6">
+                  <!-- Chart -->
+                  <div class="chartjs-custom" style="height: 3rem;">
+                    <canvas class="js-chart" data-hs-chartjs-options="{
+                              &quot;type&quot;: &quot;line&quot;,
+                              &quot;data&quot;: {
+                                 &quot;labels&quot;: [&quot;1 May&quot;,&quot;2 May&quot;,&quot;3 May&quot;,&quot;4 May&quot;,&quot;5 May&quot;,&quot;6 May&quot;,&quot;7 May&quot;,&quot;8 May&quot;,&quot;9 May&quot;,&quot;10 May&quot;,&quot;11 May&quot;,&quot;12 May&quot;,&quot;13 May&quot;,&quot;14 May&quot;,&quot;15 May&quot;,&quot;16 May&quot;,&quot;17 May&quot;,&quot;18 May&quot;,&quot;19 May&quot;,&quot;20 May&quot;,&quot;21 May&quot;,&quot;22 May&quot;,&quot;23 May&quot;,&quot;24 May&quot;,&quot;25 May&quot;,&quot;26 May&quot;,&quot;27 May&quot;,&quot;28 May&quot;,&quot;29 May&quot;,&quot;30 May&quot;,&quot;31 May&quot;],
+                                 &quot;datasets&quot;: [{
+                                  &quot;data&quot;: [21,20,24,15,17,30,30,35,35,35,40,60,12,90,90,85,70,75,43,75,90,22,120,120,90,85,100,92,92,92,92],
+                                  &quot;backgroundColor&quot;: [&quot;rgba(55, 125, 255, 0)&quot;, &quot;rgba(255, 255, 255, 0)&quot;],
+                                  &quot;borderColor&quot;: &quot;#377dff&quot;,
+                                  &quot;borderWidth&quot;: 2,
+                                  &quot;pointRadius&quot;: 0,
+                                  &quot;pointHoverRadius&quot;: 0
+                                }]
+                              },
+                              &quot;options&quot;: {
+                                 &quot;scales&quot;: {
+                                   &quot;y&quot;: {
+                                     &quot;display&quot;: false
+                                   },
+                                   &quot;x&quot;: {
+                                     &quot;display&quot;: false
+                                   }
+                                 },
+                                &quot;hover&quot;: {
+                                  &quot;mode&quot;: &quot;nearest&quot;,
+                                  &quot;intersect&quot;: false
+                                },
+                                &quot;plugins&quot;: {
+                                  &quot;tooltip&quot;: {
+                                    &quot;postfix&quot;: &quot;k&quot;,
+                                    &quot;hasIndicator&quot;: true,
+                                    &quot;intersect&quot;: false
+                                  }
+                                }
+                              }
+                            }" width="70" height="43" style="display: block; box-sizing: border-box; height: 47.7778px; width: 77.7778px;">
+                    </canvas>
+                  </div>
+                  <!-- End Chart -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+
+              <span class="badge bg-soft-secondary text-body">0.0%</span>
+              <span class="text-body fs-6 ms-1">from 2,913</span>
+            </div>
+                           </div>
+          <!-- End Card -->
+        </div>
+      </div>
+
    <div class="row ">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
