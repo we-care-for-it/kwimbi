@@ -13,7 +13,7 @@
                     </button>
                 </a>
  
-                <button type="button" class="btn   btn-120 btn-soft-success btn-150 btn-sm"  wire:click = "save()" > 
+                <button type="button" class="btn   btn-120 btn-primary btn-12 btn-sm"  wire:click = "save()" > 
                         Opslaan
                     </button>
 
@@ -46,12 +46,12 @@
 
         
       
-        
-            <div class = "card">     
-            <div class="card-header card-header-content-md-between    ">
+        <div class="card-header card-header-content-md-between    ">
 
 Afbeelding
 </div>
+            <div class = "card">     
+
             <div class = "card-body">
           
 </div>
@@ -235,8 +235,8 @@ Notitie
                     <div class="row">
                         <div class="col-md-12">
 
-                            <textarea wire:model="remark" class="js-count-characters form-control"
-                                wire:model="description" name="description" rows="4" maxlength="100"
+                            <textarea wire:model="remark"  class="js-count-characters form-control"
+                                wire:model="description" name="description" class="form-control" rows="5" maxlength="100"
                                 data-hs-count-characters-options='{
             "output": "#maxLengthCountCharacters"
           }'>{{ old('name',@$project->description) }}</textarea>

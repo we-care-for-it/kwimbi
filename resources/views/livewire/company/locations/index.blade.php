@@ -22,12 +22,12 @@
                <!-- End Search -->
             </form>
          </div>
-         <div class="col-auto">
+         <!-- <div class="col-auto">
             <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
                data-bs-target="#crudModal">
        Toevoegen
             </button>
-         </div>
+         </div> -->
       </div>
    </div>
    <div class="row pt-1">
@@ -176,19 +176,16 @@
 
                                  <h4>Geen locaties gevonden......</h4>
                                  @if($this->cntFilters)
-                                 Geen gegevens gevonden met de huidige filters...
+                                 Geen locaties gevonden met de huidige filters. Een nieuwe locatie toevoegen kan via het <a href = "/customers">relatie</a> overicht
+                      
                                  <hr>
 
                                  @else
-                                 Geen locaties gevonden in het systeem. Voeg een nieuwe locatie toe
-                                 overzicht
+                       Geen locaties gevonden in het systeem. Een nieuwe locatie toevoegen kan via het <a href = "/customers">relatie</a> overicht
                                  @endif
 
-                            <div class = "clear-fix"></div>
-                            <a href = "/location/add">
-                                 <button type="button" class="btn   btn-primary btn-sm mt-5"   >
-            <i class="bi bi-plus"></i> Toevoegen
-            </button></a>
+                    
+                           
                               </div>
                            </center>
 

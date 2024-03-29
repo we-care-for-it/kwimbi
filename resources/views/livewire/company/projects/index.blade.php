@@ -77,15 +77,16 @@
                                     <x-table.heading>
                                        Einddatum
                                     </x-table.heading>
-                                    <x-table.heading>
-                                    </x-table.heading>
+                                    
                                  </x-slot>
                                  <x-slot name="body">
                                     @foreach ($items as $item)
                                     <x-table.row wire:key="row-{{ $item->id }}">
                                        <x-table.cell>
-                                          <b><a href="/project/{{ $item->slug }}">{{$item->name}}</a></b><br>
-                                          {{$item->description}}
+                                        <a href="/project/{{ $item->slug }}">{{$item->name}}</a> <br>
+                                        {{ \Illuminate\Support\Str::limit($item->description, 150, $end='...') }}
+
+                                     
                                        </x-table.cell>
                                        <x-table.cell>
                                           @if($item?->customer?->name) <a href="/customer/{{$item?->customer?->slug}}">
@@ -125,26 +126,7 @@
                                           {{ \Carbon\Carbon::parse($item->enddate)->format('d-m-Y')}} @else <span
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
-                                       <x-table.cell>
-                                       <a href="/project/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-eye"></i>
-                                       </button>
-                                       </a>
-
-
-
-                                       <a href="/project/edit/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-pencil"></i>
-                                       </button>
-                     </a>
-
-
-
-                                       </x-table.cell>
+                             
                                     </x-table.row>
                                     @endforeach
                                  </x-slot>

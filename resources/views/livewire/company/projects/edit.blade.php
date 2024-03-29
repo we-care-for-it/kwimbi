@@ -1,27 +1,48 @@
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                  Wijzig project
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-soft-success btn-sm" wire:click="save()">
-                    Opslaan
-                </button>
-                <button type="button" onclick="history.back()" class=" btn   btn-link btn-sm" ">
-            Afbreken
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="row pt-0">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
+             </div>
+
+         <div class="col-auto">
+         <a href="/projects">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                  Alle projecten
+                    </button>
+                </a>
+ 
+                <button type="button" class="btn   btn-120 btn-primary btn-12 btn-sm"  wire:click = "save()" > 
+                        Opslaan
+                    </button>
+
+                   
+
+
+                
+                </div>
+    
+         </div>
+      </div>
+ 
+
+ 
+   
+   
+ 
+ 
+
+
+
+
+    <div class="row ">
 
         <div class="col-md-3">         
             
         <div class="card-header      ">
 
-Gegevens
+Algemeen
 </div>
         <div class = "card  ">
         <div class = "card-body p2">
@@ -54,7 +75,7 @@ Gegevens
         <div class="col-md-9">
         <div class="card-header      ">
 
-Gegevens
+Project gegevens
 </div>
 
             <div class="card">
@@ -80,12 +101,10 @@ Gegevens
 
   <span id="maxLengthCountCharacters" class="text-muted"></span>
 </div>
-<textarea  wire:model = "description" class="js-count-characters form-control" id="reviewLabelModalEg" placeholder="Textarea field" rows="4" maxlength="100"
+<textarea  wire:model = "description" class="js-count-characters form-control"   rows="10" maxlength="400"
           data-hs-count-characters-options='{
             "output": "#maxLengthCountCharacters"
-          }'>As always, all Htmlstream products are excellent with a very good personalization.</textarea>
-<!-- End Form -->
-
+          }'></textarea>
 
            
             
@@ -116,6 +135,8 @@ Gegevens
 </div>
 <div class = "col-md-2">
 <label class=" col-form-label">Kosten</label>
+
+
 <input                 wire:model = "budget_costs"                   class=" form-control @error('budget_costs') is-invalid @enderror"
                             name="budget_costs" type="text"
                             value="{{ old('budget_costs',@$project->budget_costs) }}">

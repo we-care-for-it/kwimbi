@@ -111,7 +111,7 @@ body {
   box-shadow: 0!important;
   padding: 10px!important;;
  
-  height: 37px!important;;
+
 }
 /* .btn-primary:hover {
   background-color:  #45488B!important;
@@ -136,10 +136,11 @@ body {
 }
 .page-header{
   height: 50px!important;
-  border-bottom: 1px solid #EFEFEF!important;
+  border-bottom: 0px solid #EFEFEF!important;
   padding-bottom: 0px!important;
-  margin-bottom: 10px!important
+  margin-bottom: 10px!important;
 
+   
 }
 
 /* 
@@ -230,7 +231,8 @@ background-color:  #377DFF!important;
    border-radius: 0px!important;;
    border: 0px dotted #EFEFEF!important;
    border-bottom: 0px!important;
-   font-weight:lighter!important;
+   font-weight:500!important;
+   color: #46B97C!important;;
    
    
 
@@ -239,12 +241,8 @@ background-color:  #377DFF!important;
 
   }
   .card-header-form{
-
     height: 54px!important;
-
-
-
-     }
+  }
 
      .card-footer{
     border-top: 0px!important;

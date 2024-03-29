@@ -9,13 +9,13 @@
 
          <div class="col-auto">
          <a href="/locations">
-                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                    <button type="button" class="btn  btn-120 btn-link btn-sm  ">
                         Alle locaties
                     </button>
                 </a>
  
                 <a href = "/location/edit/{{$location->id}}">
-                <button type="button" class="btn   btn-primary btn-ico btn-sm btn-120"  >
+                <button type="button" class="btn   btn-primary   btn-sm btn-120 "  >
                     Wijzig
                 </button>
                 </a>
@@ -261,11 +261,11 @@
 
                 </div>       </div>
 
-                <div class="card  mt-3 ">
-                  <div class="card-header ">
+                                <div class="card-header ">
 
   Aanwezig objecten
   </div>
+  <div class="card">
 
                 <div class="card-body    p-2 ">
                     <div class = "row gx-2">
