@@ -19,9 +19,10 @@
 
    <div class="row gy-3 mb-2 ">
       <div class="col-lg-3  col-xl-3 col-md-6">
+      <div class = "card-header" style = "color: black!important">Gekoppelde objecten</div>
+       
          <div class = "card">
-            <div class = "card-header" style = "color: black!important">Gekoppelde objecten</div>
-            <div class = "card-body p-2">
+             <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">
                   <tr>
                      <td><a href = "/inspection-companies">Keuringsinstanties</a></td>
@@ -41,9 +42,9 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
+      <div class = "card-header" style = "color: black!important">Modules</div>
          <div class = "card">
-            <div class = "card-header" style = "color: black!important">Modules</div>
-            <div class = "card-body p-2">
+             <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">
                   <tr>
                      <td><a href = "/vehicles">Wagenparkbeheer</a></td>
