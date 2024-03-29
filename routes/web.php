@@ -76,6 +76,20 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
     });
 
+
+    
+    //Voortuigen
+    Route::get('/vehicles', \App\Http\Livewire\Company\Vehicles\Index::class);
+    Route::group(['prefix' => 'vehicle', ],
+    function ()
+    {
+       Route::get('{slug}', \App\Http\Livewire\Company\Vehicles\Show::class);
+     });
+
+
+            
+
+
     //Suppliers
     Route::get('/suppliers', \App\Http\Livewire\Company\Suppliers\Index::class);
     Route::group(['prefix' => 'supplier', ],
