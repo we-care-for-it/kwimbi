@@ -1,327 +1,181 @@
-<!-- ========== HEADER ========== -->
+<header id="header" class="navbar navbar-expand-lg navbar-bordered bg-white  ">
+    <div class="container-fluid">
+      <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
+        <!-- Logo -->
 
+        <a class="navbar-brand" href="./index.html" aria-label="Front">
+          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
+        </a>
 
+        <!-- End Logo -->
 
-<header id="header" style = "background-color: #46B97C"   class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered ">
-    <div class="navbar-nav-wrap">
-      <!-- Logo -->
- 
-      <!-- End Logo -->
+        <!-- Secondary Content -->
+        <div class="navbar-nav-wrap-secondary-content" >
+          <!-- Navbar -->
+          <ul class="navbar-nav" >
+  
+            <li class="nav-item">
+              <!-- Style Switcher -->
+              <div class="dropdown ">
+                <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation=""><i class="bi-brightness-high"></i></button>
 
-      <div class="navbar-nav-wrap-content-start">
-        <!-- Navbar Vertical Toggle -->
-        <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler" style="opacity: 1;">
-          <i class="bi-arrow-bar-left navbar-toggler-short-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Collapse" data-bs-original-title="Collapse"></i>
-          <i class="bi-arrow-bar-right navbar-toggler-full-align" data-bs-template="<div class=&quot;tooltip d-none d-md-block&quot; role=&quot;tooltip&quot;><div class=&quot;arrow&quot;></div><div class=&quot;tooltip-inner&quot;></div></div>" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Expand" data-bs-original-title="Expand"></i>
-        </button>
-
-        <!-- End Navbar Vertical Toggle -->
-
-        <!-- Search Form -->
-        <div class="dropdown ms-2">
-          <!-- Input Group -->
-          <div class="d-none d-lg-block">
-          <form>
-               <!-- Search -->
-               <div class="input-group input-group-merge">
-                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                     }">
-                  <button type="button" class="input-group-append input-group-text">
-                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                  </button>
-               </div>
-               <!-- End Search -->
-            </form>
-          </div>
- 
-          <!-- End Input Group -->
-
-          <!-- Card Search Content -->
-          <div id="searchDropdownMenu" class="hs-form-search-menu-content dropdown-menu dropdown-menu-form-search navbar-dropdown-menu-borderless animated hs-form-search-menu-hidden hs-form-search-menu-initialized">
-            <div class="card">
-              <!-- Body -->
-              <div class="card-body-height">
-                <div class="d-lg-none">
-                  <div class="input-group input-group-merge navbar-input-group mb-5">
-                    <div class="input-group-prepend input-group-text">
-                      <i class="bi-search"></i>
-                    </div>
-
-                    <input type="search" class="form-control" placeholder="Search in front" aria-label="Search in front">
-                    <a class="input-group-append input-group-text" href="javascript:;">
-                      <i class="bi-x-lg"></i>
-                    </a>
-                  </div>
-                </div>
-
-                <span class="dropdown-header">Recent searches</span>
-
-                <div class="dropdown-item bg-transparent text-wrap">
-                  <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
-                    Gulp <i class="bi-search ms-1"></i>
+                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
+                  <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                    <i class="bi-moon-stars me-2"></i>
+                    <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
                   </a>
-                  <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
-                    Notification panel <i class="bi-search ms-1"></i>
+                  <a class="dropdown-item active" href="#" data-icon="bi-brightness-high" data-value="default">
+                    <i class="bi-brightness-high me-2"></i>
+                    <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
+                  </a>
+                  <a class="dropdown-item" href="#" data-icon="bi-moon" data-value="dark">
+                    <i class="bi-moon me-2"></i>
+                    <span class="text-truncate" title="Dark">Dark</span>
                   </a>
                 </div>
+              </div>
 
-                <div class="dropdown-divider"></div>
+              <!-- End Style Switcher -->
+            </li>
 
-                <span class="dropdown-header">Tutorials</span>
-
-                <a class="dropdown-item" href="./index.html">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                      <span class="icon icon-soft-dark icon-xs icon-circle">
-                        <i class="bi-sliders"></i>
-                      </span>
-                    </div>
-
-                    <div class="flex-grow-1 text-truncate ms-2">
-                      <span>How to set up Gulp?</span>
-                    </div>
+            <li class="nav-item">
+              <!-- Account -->
+              <div class="dropdown">
+                <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation="">
+                  <div class="avatar avatar-sm avatar-circle">
+                    <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                    <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                   </div>
                 </a>
 
-                <a class="dropdown-item" href="./index.html">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                      <span class="icon icon-soft-dark icon-xs icon-circle">
-                        <i class="bi-paint-bucket"></i>
-                      </span>
-                    </div>
-
-                    <div class="flex-grow-1 text-truncate ms-2">
-                      <span>How to change theme color?</span>
-                    </div>
-                  </div>
-                </a>
-
-                <div class="dropdown-divider"></div>
-
-                <span class="dropdown-header">Members</span>
-
-                <a class="dropdown-item" href="./index.html">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                      <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img10.jpg" alt="Image Description">
-                    </div>
-                    <div class="flex-grow-1 text-truncate ms-2">
-                      <span>Amanda Harvey <i class="tio-verified text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></span>
-                    </div>
-                  </div>
-                </a>
-
-                <a class="dropdown-item" href="./index.html">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                      <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img3.jpg" alt="Image Description">
-                    </div>
-                    <div class="flex-grow-1 text-truncate ms-2">
-                      <span>David Harrison</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a class="dropdown-item" href="./index.html">
-                  <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0">
-                      <div class="avatar avatar-xs avatar-soft-info avatar-circle">
-                        <span class="avatar-initials">A</span>
+                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-account" aria-labelledby="accountNavbarDropdown" style="width: 16rem;">
+                  <div class="dropdown-item-text">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-sm avatar-circle">
+                        <img class="avatar-img" src="/assets/img/160x160/img6.jpg" alt="Image Description">
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <h5 class="mb-0">{{ Auth::user()->name}}</h5>
+                        <p class="card-text text-body">{{ Auth::user()->email}}</p>
                       </div>
                     </div>
-                    <div class="flex-grow-1 text-truncate ms-2">
-                      <span>Anne Richard</span>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <!-- Dropdown -->
+                  <div class="dropdown">
+                    <a class="navbar-dropdown-submenu-item dropdown-item dropdown-toggle" href="javascript:;" id="navSubmenuPagesAccountDropdown1" data-bs-toggle="dropdown" aria-expanded="false">Set status</a>
+
+                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="navSubmenuPagesAccountDropdown1">
+                      <a class="dropdown-item" href="#">
+                        <span class="legend-indicator bg-success me-1"></span> Available
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <span class="legend-indicator bg-danger me-1"></span> Busy
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        <span class="legend-indicator bg-warning me-1"></span> Away
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#"> Reset status
+                      </a>
                     </div>
                   </div>
-                </a>
-              </div>
-              <!-- End Body -->
+                  <!-- End Dropdown -->
 
-              <!-- Footer -->
-              <a class="card-footer text-center" href="./index.html">
-                See all results <i class="bi-chevron-right small"></i>
-              </a>
-              <!-- End Footer -->
-            </div>
-          </div>
-          <!-- End Card Search Content -->
+                  <a class="dropdown-item" href="#">Profile &amp; account</a>
+                  <a class="dropdown-item" href="#">Settings</a>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="#">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-shrink-0">
+                        <div class="avatar avatar-sm avatar-dark avatar-circle">
+                          <span class="avatar-initials">HS</span>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1 ms-2">
+                        <h5 class="mb-0">Htmlstream <span class="badge bg-primary rounded-pill text-uppercase ms-1">PRO</span></h5>
+                        <span class="card-text">hs.example.com</span>
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="dropdown-divider"></div>
+
+                  <!-- Dropdown -->
+                  <div class="dropdown">
+                    <a class="navbar-dropdown-submenu-item dropdown-item dropdown-toggle" href="javascript:;" id="navSubmenuPagesAccountDropdown2" data-bs-toggle="dropdown" aria-expanded="false">Customization</a>
+
+                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="navSubmenuPagesAccountDropdown2">
+                      <a class="dropdown-item" href="#">
+                        Invite people
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        Analytics
+                        <i class="bi-box-arrow-in-up-right"></i>
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        Customize Front
+                        <i class="bi-box-arrow-in-up-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- End Dropdown -->
+
+                  <a class="dropdown-item" href="#">Manage team</a>
+
+                  <div class="dropdown-divider"></div>
+
+                  <a class="dropdown-item" href="#">Sign out</a>
+                </div>
+              </div>
+              <!-- End Account -->
+            </li>
+          </ul>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Secondary Content -->
+
+        <!-- Toggler -->
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContainerNavDropdown" aria-controls="navbarContainerNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-default">
+            <i class="bi-list"></i>
+          </span>
+          <span class="navbar-toggler-toggled">
+            <i class="bi-x"></i>
+          </span>
+        </button>
+        <!-- End Toggler -->
+
+        <!-- Collapse -->
+        <div class="navbar-collapse collapse" id="navbarContainerNavDropdown"   >
+          <ul class="navbar-nav" >
+            <!-- Dashboards -->
+            <li class="hs-has-sub-menu nav-item "   >
+              <a id="dashboardsMegaMenu" class="hs-mega-menu-invoker nav-link  " href="#" role="button"><i class="bi-house-door dropdown-item-icon"></i> Dashboards</a>
+ 
+              <!-- End Mega Menu -->
+            </li>
+            <!-- End Dashboards -->
+
+            <!-- Pages -->
+            <li class="hs-has-sub-menu nav-item">
+              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="#" role="button"><i class="bi-files-alt dropdown-item-icon"></i> Locaties</a>
+
+            
+            </li>
+            <!-- End Pages -->
+
+             
+ 
+          </ul>
 
         </div>
-
-        <!-- End Search Form -->
-      </div>
-
-      <div class="navbar-nav-wrap-content-end">
-        <!-- Navbar -->
-        <ul class="navbar-nav">
-        <li class="nav-item d-none d-sm-inline-block">
-            <!-- Apps -->
-            <div class="dropdown">
-              <button style = "color: white"type="button" class="btn btn-icon btn-ghost-secondary rounded-circle" id="navbarAppsDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation="">
-                <i class="bi-gear"></i>
-              </button>
-
-              <div class="dropdown-menu dropdown-menu-end dropdown-card navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="navbarAppsDropdown" style="width: 25rem;">
-                <div class="card">
-                  <!-- Header -->
-                  <div class="card-header">
-                    <h4 class="card-title">Web apps &amp; services</h4>
-                  </div>
-                  <!-- End Header -->
-
-                  <!-- Body -->
-                  <div class="card-body card-body-height">
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/atlassian-icon.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">Atlassian</h5>
-                          <p class="card-text text-body">Security and control across Cloud</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/slack-icon.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">Slack <span class="badge bg-primary rounded-pill text-uppercase ms-1">Try</span></h5>
-                          <p class="card-text text-body">Email collaboration software</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/google-webdev-icon.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">Google webdev</h5>
-                          <p class="card-text text-body">Work involved in developing a website</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/frontapp-icon.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">Frontapp</h5>
-                          <p class="card-text text-body">The inbox for teams</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/illustrations/review-rating-shield.svg" alt="Image Description">
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">HS Support</h5>
-                          <p class="card-text text-body">Customer service and support</p>
-                        </div>
-                      </div>
-                    </a>
-
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                          <div class="avatar avatar-sm avatar-soft-dark">
-                            <span class="avatar-initials"><i class="bi-grid"></i></span>
-                          </div>
-                        </div>
-                        <div class="flex-grow-1 text-truncate ms-3">
-                          <h5 class="mb-0">More Front products</h5>
-                          <p class="card-text text-body">Check out more HS products</p>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <!-- End Body -->
-
-                  <!-- Footer -->
-                  <a class="card-footer text-center" href="#">
-                    View all apps <i class="bi-chevron-right"></i>
-                  </a>
-                  <!-- End Footer -->
-                </div>
-              </div>
-            </div>
-            <!-- End Apps -->
-          </li>
-          <li class="nav-item">
-          <div class="dropdown">
-            <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown"
-              data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
-              <div class="avatar avatar-sm avatar-circle">
-                <img class="avatar-img" src="/assets/img/160x160/img1.jpg" alt="Image Description">
-                <span class="avatar-status avatar-sm-status avatar-status-success"></span>
-              </div>
-            </a>
-
-            <div
-              class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-account"
-              aria-labelledby="accountNavbarDropdown" style="width: 16rem;">
-              <div class="dropdown-item-text">
-                <div class="d-flex align-items-center">
-                  <div class="avatar avatar-sm avatar-circle">
-                    <img class="avatar-img" src="/assets/img.160x160/img1.jpg" alt="Image Description">
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <h5 class="mb-0">{{ Auth::user()->name}}</h5>
-                    <p class="card-text text-body">{{ Auth::user()->email}}</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- End Dropdown -->
-
-              <a class="dropdown-item" href="">Mijn profiel </a>
- 
-
-              <div class="dropdown-divider"></div>
-
-              <div class="nav-item">
-
-              
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                  Loguit
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                  {{ csrf_field() }}
-                </form>
-
-              </div>
-
-            </div>
-          </div>
-          <!-- End Account -->
-        </li>
-          
-              </div>
-            </div>
-            <!-- End Account -->
-          </li>
-        </ul>
-        <!-- End Navbar -->
-      </div>
+        <!-- End Collapse -->
+      </nav>
     </div>
   </header>
-
-
- 
-  

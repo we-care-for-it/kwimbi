@@ -81,7 +81,7 @@ body {
   
  }
  .card-button:hover {
-  border: 1px dashed #A165AB!important;
+  border: 1px dashed #6ABD45!important;
 
 
 
@@ -166,7 +166,7 @@ h1{
 } */
 
 .table a {   
-  color: #46B97C!important;;
+  color: #6ABD45!important;;
 }
 
 .btn-link{
@@ -185,7 +185,7 @@ background-color: #d4d8cf!important;
 }
 .navbar-vertical-container{
   width: 70px!important;
-background-color:  #377DFF!important;
+background-color:  #6ABD45!important;
  
 } */
 
@@ -206,8 +206,8 @@ background-color:  #377DFF!important;
 
 
   .loading_indicator {
-    border: 16px solid #A165AB; /* Light grey */
-    border-top: 16px solid #A165AB; /* Blue */
+    border: 16px solid #6ABD45; /* Light grey */
+    border-top: 16px solid #6ABD45; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -215,8 +215,8 @@ background-color:  #377DFF!important;
     animation: spin 2s linear infinite;
   }
   .loading_indicator_small {
-    border: 5px solid #A165AB; /* Light grey */
-    border-top: 5px solid #A165AB; /* Blue */
+    border: 5px solid #6ABD45; /* Light grey */
+    border-top: 5px solid #6ABD45; /* Blue */
     border-radius: 50%;
     width: 30px;
     height: 30px;
@@ -232,7 +232,7 @@ background-color:  #377DFF!important;
    border: 0px dotted #EFEFEF!important;
    border-bottom: 0px!important;
    font-weight:500!important;
-   color: #46B97C!important;;
+   color: #6ABD45!important;;
    
    
 
@@ -496,7 +496,7 @@ padding: 10px!important;;
 }
 
 .empty-state-text>a {
-	color: #A165AB
+	color: #6ABD45
 }
 
 .empty-state-text>a:hover {

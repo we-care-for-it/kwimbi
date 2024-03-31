@@ -42,7 +42,7 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-      <div class = "card-header" style = "color: black!important">Modules</div>
+      <div class = "card-header" style = "color: black!important">Moduels</div>
          <div class = "card">
              <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">

@@ -11,6 +11,11 @@
    <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="/assets/js/hs.chartjs.js"></script>
  
+
+   
+
+
+
 <script>
     (function() {
 
@@ -23,6 +28,18 @@
       new HSFormSearch('.js-form-search');
       new HSCountCharacters('.js-count-characters')
 
+
+
+      window.onload = function () {
+        // INITIALIZATION OF MEGA MENU
+        // =======================================================
+        new HSMegaMenu('.js-mega-menu', {
+          desktop: {
+            position: 'left'
+          }
+        })
+
+        
     })()
   </script>
 <script>
