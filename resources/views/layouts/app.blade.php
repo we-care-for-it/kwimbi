@@ -94,7 +94,7 @@
  
    </head>
 
-   <body>     <script src="/assets/js/hs.theme-appearance.js"></script>
+   <body calss =>     <script src="/assets/js/hs.theme-appearance.js"></script>
       @include('layouts.partials._header')
       <main id="content" role="main" class="main">
 

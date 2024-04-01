@@ -164,7 +164,7 @@
 
             <!-- Pages -->
             <li class="hs-has-sub-menu nav-item">
-              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="#" role="button"><i class="bi-files-alt dropdown-item-icon"></i> Locaties</a>
+              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="/locations" role="button"><i class="bi-files-alt dropdown-item-icon"></i> Locaties</a>
 
             
             </li>
