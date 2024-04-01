@@ -1,11 +1,11 @@
 <div class="container-fluid">
    <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
+      <div class="row   ">
+      <div class="col-md-6 ">
  
          <h1 class="page-header-title pt-3">  Locaties  </h1>
              </div>
-         <div class="col-auto">
+         <div class="col-md-3 col-sm-6  col-md-auto">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -30,7 +30,7 @@
          </div> -->
       </div>
    </div>
-   <div class="row pt-1">
+   <div class="row ">
       <div class="col-md-12"> 
 
          
