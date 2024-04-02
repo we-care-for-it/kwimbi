@@ -98,8 +98,11 @@
       @include('layouts.partials._header')
       <main id="content" role="main" class="main">
 
-         <div class="content animate__animated animate__fadeIn">
+         <div class="pt-0 mt-0 content animate__animated animate__fadeIn">
  
+
+        
+            <!-- End Search Form -->
            {{$slot}}
  
          </div>

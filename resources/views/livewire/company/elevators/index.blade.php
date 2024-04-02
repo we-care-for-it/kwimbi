@@ -49,7 +49,11 @@
  
    <div class="row pt-1">
       <div class="col-xl-12">
-         <div class="card  p-0 m-0">
+         <div class="card  ">
+
+         <div class="card-header  ">asdasda</div>
+
+
             <div class="card-body  ">
                <div class="row ">
                   <div class="loading" wire:loading>
@@ -78,9 +82,7 @@
                      
                       
       
-      
-         <div class="card">
-          
+ 
    
                <div class="row">
                   <div>
@@ -250,7 +252,11 @@
          </div>
       </div>
    </div>
-</div> <div class = "card-footer pt-3">
+</div>
+
+<div>
+
+<div class = "card-footer pt-3">
                   <div class="float-start">
                      @if(count($elevators))
                      <p class="float-start"> Pagina <b> {{ $elevators->currentPage()}} </b> van <b> {{ $elevators->lastPage()}} </b>
@@ -262,6 +268,7 @@
                      @endif
                   </div>
                </div>
+               
 <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasRightLabel">
    <div class="offcanvas-header">
       <h5 id="offcanvasRightLabel"><i class="bi-filter me-1"></i> Filter</h5>

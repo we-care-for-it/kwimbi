@@ -1,20 +1,83 @@
-<header id="header" class="navbar navbar-expand-lg navbar-bordered bg-white  ">
-    <div class="container-fluid">
-      <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
-        <!-- Logo -->
+<header id="header" class="navbar navbar-expand-lg navbar-bordered navbar-spacer-y-0 flex-lg-column">
+    <div class="navbar-dark w-100 bg-dark py-2">
+      <div class="container-fluid">
+        <div class="navbar-nav-wrap">
+          <!-- Logo -->
+         
+          <!-- End Logo -->
 
-        <a class="navbar-brand" href="./index.html" aria-label="Front">
-          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
-          <img class="navbar-brand-logo" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
-        </a>
+          <!-- Content Start -->
+          <div >
+            <!-- Search Form -->
 
-        <!-- End Logo -->
+            <div class = "d-block d-sm-none">
+              <!-- Form -->
+<div class="  w-md-50">
+  <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group ">
+  <input type="search" class="js-form-search form-control" placeholder="Zoek naar objecten, relaties en locaties" aria-label="" data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearSearchResultsIcon&quot;,
+                           &quot;dropMenuElement&quot;: &quot;#searchDropdownMenu&quot;,
+                           &quot;dropMenuOffset&quot;: 20,
+                           &quot;toggleIconOnFocus&quot;: true,
+                           &quot;activeClass&quot;: &quot;focus&quot;
+                         }">
+                    <a class="input-group-append input-group-text" href="javascript:;">
+                      <i id="clearSearchResultsIcon" class="bi-x-lg" style="display: none;"></i>
+                    </a>
+  </div>
+</div>
+<!-- End Form -->
+</div>
+            <div class="d-none d-lg-block">
+              <div class="dropdown ms-2">
+                <!-- Input Group -->
+                <div class="d-none d-lg-block">
+                  <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group">
+                    <div class="input-group-prepend input-group-text">
+                      <i class="bi-search"></i>
+                    </div>
 
-        <!-- Secondary Content -->
-        <div class="navbar-nav-wrap-secondary-content" >
-          <!-- Navbar -->
-          <ul class="navbar-nav" >
-  
+                    <input type="search" class="js-form-search form-control" placeholder="Zoek naar objecten, relaties en locaties" aria-label="" data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearSearchResultsIcon&quot;,
+                           &quot;dropMenuElement&quot;: &quot;#searchDropdownMenu&quot;,
+                           &quot;dropMenuOffset&quot;: 20,
+                           &quot;toggleIconOnFocus&quot;: true,
+                           &quot;activeClass&quot;: &quot;focus&quot;
+                         }">
+                    <a class="input-group-append input-group-text" href="javascript:;">
+                      <i id="clearSearchResultsIcon" class="bi-x-lg" style="display: none;"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <button class="js-form-search js-form-search-mobile-toggle btn btn-ghost-secondary btn-icon rounded-circle d-lg-none" type="button" data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearSearchResultsIcon&quot;,
+                           &quot;dropMenuElement&quot;: &quot;#searchDropdownMenu&quot;,
+                           &quot;dropMenuOffset&quot;: 20,
+                           &quot;toggleIconOnFocus&quot;: true,
+                           &quot;activeClass&quot;: &quot;focus&quot;
+                         }">
+                  <i class="bi-search"></i>
+                </button>
+                <!-- End Input Group -->
+ 
+
+              </div>
+
+            </div>
+            <!-- End Search Form -->
+          </div>
+          <!-- End Content Start -->
+
+          <!-- Content End -->
+          <div class="navbar-nav-wrap-content-end">
+            <!-- Navbar -->
+            <ul class="navbar-nav">
+             
+            
+
+             
+            
             <li class="nav-item">
               <!-- Style Switcher -->
               <div class="dropdown ">
@@ -135,43 +198,60 @@
               </div>
               <!-- End Account -->
             </li>
-          </ul>
-          <!-- End Navbar -->
+
+              <li class="nav-item">
+                <!-- Toggler -->
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDoubleLineContainerNavDropdown" aria-controls="navbarDoubleLineContainerNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-default">
+                    <i class="bi-list"></i>
+                  </span>
+                  <span class="navbar-toggler-toggled">
+                    <i class="bi-x"></i>
+                  </span>
+                </button>
+                <!-- End Toggler -->
+              </li>
+            </ul>
+            <!-- End Navbar -->
+          </div>
+          <!-- End Content End -->
         </div>
-        <!-- End Secondary Content -->
+      </div>
+    </div>
 
-        <!-- Toggler -->
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContainerNavDropdown" aria-controls="navbarContainerNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-default">
-            <i class="bi-list"></i>
-          </span>
-          <span class="navbar-toggler-toggled">
-            <i class="bi-x"></i>
-          </span>
-        </button>
-        <!-- End Toggler -->
+    <div class="container-fluid">
 
-        <!-- Collapse -->
-        <div class="navbar-collapse collapse" id="navbarContainerNavDropdown"   >
-          <ul class="navbar-nav" >
-            <!-- Dashboards -->
-            <li class="hs-has-sub-menu nav-item "   >
-              <a id="dashboardsMegaMenu" class="hs-mega-menu-invoker nav-link  " href="#" role="button"><i class="bi-house-door dropdown-item-icon"></i> Dashboards</a>
  
-              <!-- End Mega Menu -->
-            </li>
-            <!-- End Dashboards -->
+    <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
+ 
 
-            <!-- Pages -->
-            <li class="hs-has-sub-menu nav-item">
+        <a class="navbar-brand" href="./index.html" aria-label="Front">
+          <img class="navbar-brand-logo  d-none d-sm-block" src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo  d-none d-sm-block " src="/storage/tenant/logo.png" alt="Logo" data-hs-theme-appearance="dark">
+        </a>
+
+        <!-- End Logo -->
+
+        <div class="navbar-collapse collapse" id="navbarDoubleLineContainerNavDropdown" style="">
+          <ul class="navbar-nav">
+            <!-- Dashboards -->
+            <li class="nav-item">
+              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="/elevators" role="button"><i class="bi-files-alt dropdown-item-icon"></i> Objecten</a>
+
+            
+                        </li>
+     
+            <li class="nav-item">
               <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="/locations" role="button"><i class="bi-files-alt dropdown-item-icon"></i> Locaties</a>
 
             
-            </li>
-            <!-- End Pages -->
+            </li> 
 
-             
- 
+            <li class="nav-item">
+              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="/masterdata" role="button"><i class="bi-gear dropdown-item-icon"></i> Instellingen</a>
+
+            
+            </li>
           </ul>
 
         </div>
@@ -179,3 +259,5 @@
       </nav>
     </div>
   </header>
+  
+  

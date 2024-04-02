@@ -45,13 +45,13 @@
 
 
         
+
+            <div class = "card">     
       
-        <div class="card-header card-header-content-md-between    ">
+            <div class="card-header card-header-content-md-between    ">
 
 Afbeelding
 </div>
-            <div class = "card">     
-
             <div class = "card-body">
           
 </div>
@@ -131,17 +131,17 @@ Afbeelding
         <div class="col-md-9">
 
 
-        <div class="card-header card-header-content-md-between  ">
-
-Locatie
-</div>
-
+ 
 
 
 
 
             <div class="card">
-           
+            <div class="card-header card-header-content-md-between  ">
+
+Locatie
+</div>
+  
 
                 <div class="card-body ">
                     <div class="row">
@@ -224,13 +224,13 @@ Locatie
             </div>
 
 
-            <div class="card-header card-header-content-md-between mt-3  ">
+
+            <div class="card  mt-3  ">
+            
+            <div class="card-header card-header-content-md-between  ">
 
 Notitie
 </div>
-            <div class="card  ">
-            
-
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-md-12">
@@ -244,13 +244,13 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class="mt-3 card-header card-header-content-md-between  ">
+
+            <div class="card mt-3  ">
+           
+            <div class="card-header card-header-content-md-between  ">
 
 Toegang
 </div>
-            <div class="card ">
-           
-
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
@@ -297,13 +297,13 @@ Toegang
 
                 </div>
             </div>
-            <div class="card-header mt-3 card-header-content-md-between  ">
+
+            <div class="card mt-3 ">
+            <div class="card-header  card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
-
-            <div class="card ">
-        
+  
                 <div class="card-body  ">
                     <div class="row">
 

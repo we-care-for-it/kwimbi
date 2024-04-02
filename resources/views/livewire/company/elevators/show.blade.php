@@ -26,7 +26,7 @@
 
                 @endif
              </h1>
-             <small>{{$object->location->customer->name}}</small>
+             <small>{{$object?->location?->customer?->name}}</small>
           </div>
           <div class="col-auto">
 
@@ -73,6 +73,17 @@
     </div>
     <!-- End  Button trigger modal -->
 
+
+    @if($object?->remark)
+ 
+    <blockquote class="blockquote blockquote-sm">
+    <p>{{$object?->remark}}</p>
+  </blockquote>
+
+ 
+
+@endif
+
     <div class="row   gy-4  pb-3 pt-3">
        <div class="col-md-4">
           <div class="card p-3 bg-light" style="height: 86px;">
@@ -82,7 +93,7 @@
                            <div class=" d-flex align-items-center">
                    <div class="flex-grow-1">
                       <p class="text-muted mb-1 font-size-13">Onderhoudbedrijf</p>
-                      <span class="mb-0 font-size-14">{{$object->maintenanceCompany->name}}</span>
+                      <span class="mb-0 font-size-14">{{$object?->maintenanceCompany?->name}}</span>
                    </div>
           </div>
           </li>
@@ -276,11 +287,10 @@
     </div>
 
     <div class="row pt-4">
-       <div class="col-md-6">
-          <div class="card p-0 ">
+    <div class="col-md-6">
+          <div class="card p-0 " style = "height: 240px;">
              <table class="table table-striped " style="margin: 1px;">
-
-                <tr>
+           <tr>
                    <td>Leverancier</td>
                    <td>@if($object?->supplier?->name)
                       {{$object?->supplier?->name}}
@@ -360,7 +370,7 @@
        </div>
 
        <div class="col-md-6">
-          <div class="card p-0 ">
+          <div class="card p-0 " style = "height: 240px;">
              <table class="table table-striped " style="margin: 1px;">
 
                 <tr>
@@ -389,32 +399,34 @@
 
                 <tr>
 
-                   <td colspan="2" class="align-middle">Energielabel
+                   <td class="align-middle">Energielabel
 
-                      <div class="energy-class">
-
-                         @if($object->energy_label=='A')
-
-                         <div class="a"></div>
-                         @elseif($object->energy_label=='B')
-                         <div class="b"></div>
-                         @elseif($object->energy_label=='C')
-                         <div class="c"></div>
-                         @elseif($object->energy_label=='D')
-                         <div class="d"></div>
-                         @elseif($object->energy_label=='E')
-                         <div class="e"></div>
-                         @elseif($object->energy_label=='F')
-                         <div class="f"></div>
-                         @elseif($object->energy_label=='G')
-                         <div class="g"></div>
-                         @else
-                         Onbekend
-                         @endif
-
-                      </div>
+                   
 
                    </td>
+
+                   <td>   <div class="energy-class">
+
+@if($object->energy_label=='A')
+
+<div class="a"></div>
+@elseif($object->energy_label=='B')
+<div class="b"></div>
+@elseif($object->energy_label=='C')
+<div class="c"></div>
+@elseif($object->energy_label=='D')
+<div class="d"></div>
+@elseif($object->energy_label=='E')
+<div class="e"></div>
+@elseif($object->energy_label=='F')
+<div class="f"></div>
+@elseif($object->energy_label=='G')
+<div class="g"></div>
+@else
+Onbekend
+@endif
+
+</div></td>
 
                 </tr>
 
@@ -759,12 +771,12 @@
 
              <div class="row pt-3">
                 <div class="col-md-12">
+              
+                   <div class="card">
                    <div class="card-header card-header-content-md-between  ">
                       Liften op deze locatie
 
                    </div>
-                   <div class="card">
-
                       <div class="card-body">
                          <table class="table  table-sm  table-hover ">
                             <thead>
@@ -880,12 +892,12 @@
 
              <div class="row  pt-3">
              <div class="col-md-12">
-                <div class="card-header card-header-content-md-between  ">
+        
+                <div class="card">
+        <div class="card-header card-header-content-md-between  ">
                    Onderhoudscontracten
 
                 </div>
-                <div class="card">
-
                    <div class="card-body p-2">
 
                       @if(count($object->maintenance_contracts))
@@ -928,7 +940,7 @@
                                </td>
 
                                <td class="align-middle">
-                                  {{$object->maintenanceCompany->name}}
+                                  {{$object?->maintenanceCompany?->name}}
 
                                </td>
 
@@ -975,12 +987,12 @@
           </div>
           <div class="row pt-3">
              <div class="col-md-12">
+             
+                <div class="card">
                 <div class="card-header card-header-content-md-between ">
                    Onderhoudsbeurten
 
                 </div>
-                <div class="card">
-
                    <div class="card-body p-2">
 
                       @if(count($object->maintenance))
@@ -1076,12 +1088,12 @@
           </div>
           <div class="row pt-3">
              <div class="col-md-12">
-                <div class="card-header card-header-content-md-between ">
+         
+                <div class="card">
+       <div class="card-header card-header-content-md-between ">
                    Storingen
 
                 </div>
-                <div class="card">
-
                    <div class="card-body p-2">
 
                       @if(count($object->incidents))
@@ -1197,12 +1209,12 @@
 
           <div class="row pt-3">
              <div class="col-md-12">
-                <div class="card-header card-header-content-md-between  t">
+          
+                <div class="card">
+      <div class="card-header card-header-content-md-between  t">
                    Keuringen
 
                 </div>
-                <div class="card">
-
                    <div class="card-body p-2">
 
                       @if(count($object->inspections))

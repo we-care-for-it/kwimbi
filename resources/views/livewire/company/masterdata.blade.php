@@ -19,9 +19,9 @@
 
    <div class="row gy-3 mb-2 ">
       <div class="col-lg-3  col-xl-3 col-md-6">
-      <div class = "card-header" style = "color: black!important">Gekoppelde objecten</div>
+ 
        
-         <div class = "card">
+         <div class = "card">     <div class = "card-header" style = "color: black!important">Gekoppelde objecten</div>
              <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">
                   <tr>
@@ -42,8 +42,8 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-      <div class = "card-header" style = "color: black!important">Moduels</div>
-         <div class = "card">
+
+         <div class = "card">      <div class = "card-header" style = "color: black!important">Moduels</div>
              <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">
                   <tr>
@@ -58,21 +58,21 @@
 
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-         <div class = "card">
-            <div class = "card-header" style = "color: black!important">Koppelingen</div>
+         <div class = "card">            <div class = "card-header" style = "color: black!important">Koppelingen</div>
+
             <div class = "card-body p-2">
                <table class = "table table-striped tabel-striped">
                   <tr>
-                     <td><a href = "/inspection-companies">Liftinstituut</a></td>
+                     <td><a href = "/connections/liftinstituut">Liftinstituut</a></td>
                   </tr>
            
                   <tr>
-                     <td><a href = "/inspection-companies">Tuv</a></td>
+                     <td><a href = "/connections/tuv">Tuv</a></td>
                   </tr>
            
 
                   <tr>
-                     <td><a href = "/inspection-companies">E-Boekhouden</a></td>
+                     <td><a href = "/connections/eboekhouden">E-Boekhouden</a></td>
                   </tr>
            
 

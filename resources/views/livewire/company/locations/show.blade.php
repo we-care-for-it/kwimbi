@@ -1,14 +1,16 @@
 <div class="container-fluid">
    <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
- 
-         <h1 class="page-header-title pt-3">    @if($location->name)
-                            {{$location->name}} @else Geen naam @endif </h1>
-             </div>
 
-         <div class="col-auto">
-         <a href="/locations">
+
+   <div class="row"> 
+            <div class="col-md-6  
+                      "> 
+                        <h1 class="page-header-title pt-3">    @if($location->name)
+                            {{$location->name}} @else Geen naam @endif </h1>
+            </div> 
+            <div class="col-md-6 text-end  
+                        "> 
+                        <a href="/locations">
                     <button type="button" class="btn  btn-120 btn-link btn-sm  ">
                         Alle locaties
                     </button>
@@ -19,13 +21,13 @@
                     Wijzig
                 </button>
                 </a>
-                   
+            </div> 
+        </div>
+
+  
 
 
-                
-                </div>
-    
-         </div>
+ 
       </div>
  
 
@@ -261,13 +263,13 @@
 
                 </div>       </div>
 
-                                <div class="card-header ">
+                               
+  <div class="card mt-3">
+  <div class="card-header card-header-content-md-between bg-light ">
 
-  Aanwezig objecten
-  </div>
-  <div class="card">
-
-                <div class="card-body    p-2 ">
+Aanwezig objecten
+</div>
+                <div class="card-body    ">
                     <div class = "row gx-2">
                         <div class = "col-md-12">
                            <div>

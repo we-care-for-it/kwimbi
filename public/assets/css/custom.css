@@ -50,7 +50,7 @@ body {
  border: 1px dashed #EFEFEF ;
  color:  #b6b4b4 ;
  
- height:80px;
+ height:100px;
  font-weight: normal;
  padding: 10px;
  
@@ -89,13 +89,13 @@ body {
    cursor: pointer;
   }
 
-/* 
+ 
 .card{
-  border-radius: 10px!important;
+  border-radius: 0px!important;
  border: 1px dotted #EFEFEF!important;
   box-shadow: 0px 0px 0px 0px white!important;;
  
-} */
+}  
 
 .card_index{
 
@@ -237,12 +237,8 @@ h1{
      .card-footer{
     border-top: 0px!important;
 
-    }
-    /* .card-body{
  
-border-radius: 0px!important;;
-border: 0px!important;;
-padding: 10px!important;;
+   
   } .cnt_table_result{
     border-left: 1px solid #EFEFEF;
     min-width:34px!important;
@@ -259,6 +255,12 @@ padding: 10px!important;;
     float: left;
 
   }
+  .card-body{
+padding: 10px;
+  }  .card-header{
+   background-color: #F8F9FA!important;;
+      }
+    
 
 
 

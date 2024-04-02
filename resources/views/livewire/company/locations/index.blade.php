@@ -1,14 +1,18 @@
 <div class="container-fluid">
    <div class="page-header     ">
-      <div class="row   ">
-      <div class="col-md-6 ">
- 
-         <h1 class="page-header-title pt-3">  Locaties  </h1>
-             </div>
-         <div class="col-md-3 col-sm-6  col-md-auto">
-            <form>
+
+   <div class="row"> 
+            <div class="col-md-6  
+                        text-light"> 
+                        <h1 class="page-header-title pt-3">  Locaties  </h1>
+            </div> 
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-end  
+                        "> 
+                        <form >
                <!-- Search -->
-               <div class="input-group input-group-merge">
+    
+               <div class="input-group input-group-merge" > 
                   <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
                      placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
                      &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
@@ -18,9 +22,22 @@
                   <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
                   <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                   </button>
-               </div>
+               </div>         
                <!-- End Search -->
             </form>
+            </div> 
+        </div> 
+
+
+      <div class="row   ">
+      <div class="col-md-6 ">
+ 
+
+             </div>
+         <div class="col-md-6 col-sm-6  ">
+            
+ <div class = "float-right">
+             </div>    
          </div>
          <!-- <div class="col-auto">
             <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"

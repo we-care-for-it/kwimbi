@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+ 
     <div class="row">
 
         <div class="col-md-3">         
@@ -23,6 +24,11 @@
 
 <div class="col-md-12">
 
+
+
+
+<div class="card  ">
+         
  
 <div class="card-header   ">
 
@@ -32,17 +38,12 @@ Relatie
 
 
 
-
-
-<div class="card  ">
-         
-
          <div class="card-body">
 
 
  
 
-         <label for="ernergie_label" class="pb-2 pt-2">Status</label>
+         <label for="ernergie_label" class="pb-2 ">Status</label>
                    <div class="tom-select-custom " wire:ignore>
                       <select
                          class="js-select form-select"
@@ -56,8 +57,8 @@ Relatie
                          class="ts-wrapper js-select form-select form-select-sm tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items js-select_style"
                          id="locationLabel"
                          >
-                         <option value="1" data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-success"></span> <span class="text-truncate">Operationeel</span></span>' @if($status_id==1) selected @endif> </option>
-                         <option  value="2" data-option-template='<span class="d-flex align-items-center">  <span class="legend-indicator bg-danger"></span> <span class="text-truncate">Lift buiten gebruik</span></span>' @if($status_id==2) selected @endif> </option>
+                         <option value="1">Operationeel</option>
+                         <option  value="2">Buiten gebruik</option>
                       </select>
                    </div>
 
@@ -116,14 +117,14 @@ Relatie
         </div>
 
         <div class="col-md-9">
+
+
+            <div class="card">
+         
         <div class="card-header    ">
 
 Gegevens
 </div>
-
-            <div class="card">
-         
-
                 <div class="card-body">
                 <div class = "row">
                   <div class = "col-md-12">
@@ -277,12 +278,12 @@ Gegevens
                 </div>
             </div>
 
-<div class="card-header mt-3  ">
+
+<div class="card  mt-3  ">
+<div class="card-header   ">
 
 Opmerking
 </div>
-<div class="card  ">
- 
     <div class="card-body ">
         <div class="row">
             <div class="col-md-12">

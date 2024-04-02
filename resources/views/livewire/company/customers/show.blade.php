@@ -13,7 +13,6 @@
                     </button>
                 </a>
  
-
  
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                     id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
@@ -50,12 +49,16 @@
 
     <div class="row  ">
         <div class="col-md-6 col-sm-6">
-        <div class="card-header   ">
+
+
+            <div class="card" style="height: 220px;">
+
+            <div class="card-header   ">
 
 Relatie gegevens
 </div>
 
-            <div class="card" style="height: 220px;">
+
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr>
@@ -101,12 +104,12 @@ Relatie gegevens
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
-        <div class="card-header   ">
+     
+
+            <div class="card" style="height: 220px;">   <div class="card-header   ">
 
 Statusstieken
 </div>
-
-            <div class="card" style="height: 220px;">
                 <div class="card-body" >
                 {{$object->remark}}
                 </div>

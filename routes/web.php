@@ -52,6 +52,23 @@ function ()
 });
 
 Route::get('/search', \App\Http\Livewire\Company\Search::class);
+ 
+Route::group(
+    ['prefix' => 'connections'],
+    function () {
+
+        Route::get('/liftinstituut', \App\Http\Livewire\Connections\Liftinstituut::class);
+        Route::get('/tuv', \App\Http\Livewire\Connections\Tuv::class);
+      //  Route::get('/liftinstituut', function () { return view('livewire.connection.liftinstituut')        ->layout('layouts.app');  });
+        // Route::get('/tuv', function () { return view('/connection/tuv');  });
+        // Route::get('/outsmart', function () { return view('/connection/outsmart');  });
+        // Route::get('/chex', function () { return view('/connection/chex');  });
+        // Route::get('/eboekhouden', function () { return view('/connection/eboekhouden');  });
+
+    }
+);
+
+
 
 //Company routes
 Route::get('/support', \App\Http\Livewire\Support::class);
