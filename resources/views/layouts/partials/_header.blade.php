@@ -12,18 +12,16 @@
 
             <div class = "d-block d-sm-none">
               <!-- Form -->
-<div class="  w-md-50">
-  <div class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group ">
-  <input type="search" class="js-form-search form-control" placeholder="Zoek naar objecten, relaties en locaties" aria-label="" data-hs-form-search-options="{
+<div class="  ">
+  <div class="input-group   input-group-merge input-group-borderless input-group-hover-light navbar-input-group " style = "width: 50%; left0px; top: 10px; position:absolute; float: left">
+  <input type="search" class="js-form-search form-control" placeholder="Zoeken" aria-label="" data-hs-form-search-options="{
                            &quot;clearIcon&quot;: &quot;#clearSearchResultsIcon&quot;,
                            &quot;dropMenuElement&quot;: &quot;#searchDropdownMenu&quot;,
                            &quot;dropMenuOffset&quot;: 20,
                            &quot;toggleIconOnFocus&quot;: true,
                            &quot;activeClass&quot;: &quot;focus&quot;
                          }">
-                    <a class="input-group-append input-group-text" href="javascript:;">
-                      <i id="clearSearchResultsIcon" class="bi-x-lg" style="display: none;"></i>
-                    </a>
+              
   </div>
 </div>
 <!-- End Form -->
