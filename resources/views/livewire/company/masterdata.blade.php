@@ -36,6 +36,9 @@
                   <tr>
                      <td><a href = "/suppliers">Leveranciers</a></td>
                   </tr>
+                  <tr>
+                     <td><a href = "/projects">Projecten</a></td>
+                  </tr>
                </table>
             </div>
          </div>

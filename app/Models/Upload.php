@@ -18,7 +18,8 @@ class Upload extends Model  implements Auditable
         'add_by_user_id',
         'incident_id',
         'relation_id',
-        'type_id',
+        'type_id',        
+        'directory',
         'path',
         'group_id',
         'title'

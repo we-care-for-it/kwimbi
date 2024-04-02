@@ -51,7 +51,7 @@
       <div class="col-xl-12">
          <div class="card  ">
 
-         <div class="card-header  ">asdasda</div>
+ 
 
 
             <div class="card-body  ">
@@ -134,8 +134,8 @@
                               </x-slot>
                               <x-slot name="body">
                                  @forelse ($elevators as $elevator)
-                                 <x-table.row onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
-                                    <x-table.cell >
+                                 <x-table.row   >
+                                    <x-table.cell onclick="window.location='/elevator/show/{{ $elevator->id }}'" >
                                        
                            
                                     @if($elevator->status_id=='2')
