@@ -44,7 +44,7 @@
 
     </main>
 
- 
+
       @include('layouts.partials._scripts')
 
     <!-- endinject-->
