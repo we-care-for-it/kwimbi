@@ -8,10 +8,9 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-
-    <table class="table  table-hover table-striped table-responsive">
-       <thead class= "bg-light">
-            <tr style = "text-align: left">
+<table class="table table-hover table-responsive">
+                         <thead class= "bg-light">
+            <tr>
                 {{ $head }}
             </tr>
         </thead>

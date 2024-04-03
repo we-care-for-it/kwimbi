@@ -1,53 +1,41 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
          <div class="col">
-            <h1 class="page-header-title">
-               Projecten
+ 
+         <h1 class="page-header-title pt-3">  Projecten  </h1>
+             </div>
+         <div class="col-auto">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
          </div>
          <div class="col-auto">
-
-       
-
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
             </button>
-
          </div>
       </div>
    </div>
-
-
-   <div class="card-header pt-0 card-header-form ">
-               <div>
-                  <form>
-                     <!-- Search -->
-                     <div style="width: 200px;" class="input-group input-group-merge">
-                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
-                           data-hs-form-search-options='{
-                           "clearIcon": "#clearIcon2",
-                           "defaultIcon": "#defaultClearIconToggleEg"
-                           }'>
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                 
-                  
-                  <!-- End Dropdown -->
-               </div>
-            </div>
-
-         <div class="card">
-           
-            <div class="card-body  p-0">
-               <div class="row">
-                  <div>
+   
+   
+   <div class="row pt-1">
+      <div class="col-xl-12">
+         <div class="card  p-0 m-0">
+            <div class="card-body p-2 ">
                      <div class="row" wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
@@ -89,15 +77,16 @@
                                     <x-table.heading>
                                        Einddatum
                                     </x-table.heading>
-                                    <x-table.heading>
-                                    </x-table.heading>
+                                    
                                  </x-slot>
                                  <x-slot name="body">
                                     @foreach ($items as $item)
                                     <x-table.row wire:key="row-{{ $item->id }}">
                                        <x-table.cell>
-                                          <b><a href="/project/{{ $item->slug }}">{{$item->name}}</a></b><br>
-                                          {{$item->description}}
+                                        <a href="/project/{{ $item->slug }}">{{$item->name}}</a> <br>
+                                        {{ \Illuminate\Support\Str::limit($item->description, 150, $end='...') }}
+
+                                     
                                        </x-table.cell>
                                        <x-table.cell>
                                           @if($item?->customer?->name) <a href="/customer/{{$item?->customer?->slug}}">
@@ -137,26 +126,7 @@
                                           {{ \Carbon\Carbon::parse($item->enddate)->format('d-m-Y')}} @else <span
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
-                                       <x-table.cell>
-                                       <a href="/project/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-eye"></i>
-                                       </button>
-                                       </a>
-
-
-
-                                       <a href="/project/edit/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-pencil"></i>
-                                       </button>
-                     </a>
-
-
-
-                                       </x-table.cell>
+                             
                                     </x-table.row>
                                     @endforeach
                                  </x-slot>

@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes();
-            $table->string('code')->nullable();
-            $table->longtext('name')->nullable();
+            $table->softDeletes(); 
+            $table->string('name')->nullable();
+            $table->string('zipcode')->nullable();     
+            $table->string('place')->nullable();
             $table->string('slug')->nullable();
-            $table->integer('type_id')->nullable()->default(1);         
+            $table->string('address')->nullable();
         });
     }
 

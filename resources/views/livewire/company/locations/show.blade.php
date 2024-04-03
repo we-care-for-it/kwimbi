@@ -1,31 +1,57 @@
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                @if($location->name)
-                            {{$location->name}} @else Geen naam @endif
-            </div>
-            <div class="col-auto">
+   <div class="page-header     ">
 
-            <a href="/locations">
-                    <button type="button" class="btn   btn-link btn-sm  ">
+
+   <div class="row"> 
+            <div class="col-md-6  
+                      "> 
+                        <h1 class="page-header-title pt-3">    @if($location->name)
+                            {{$location->name}} @else Geen naam @endif </h1>
+            </div> 
+            <div class="col-md-6 text-end  
+                        "> 
+                        <a href="/locations">
+                    <button type="button" class="btn  btn-120 btn-link btn-sm  ">
                         Alle locaties
-                    </button></a>
-
+                    </button>
+                </a>
+ 
                 <a href = "/location/edit/{{$location->id}}">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+                <button type="button" class="btn   btn-primary   btn-sm btn-120 "  >
                     Wijzig
                 </button>
                 </a>
-
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-            </div>
+            </div> 
         </div>
-    </div>
+
+  
+
+
+ 
+      </div>
+ 
+
+ 
+   
+   
+   
+   
+
+
+   
+   <div class="row">
+      <div class="col-md-12"> 
+        
+      
+      
+      
+      
+      
+      
+      
+      
+
+ 
     <div class="row">
 
         <div class="col-md-3">
@@ -81,7 +107,7 @@
 
 
 
-<div class="card  bg-light">
+<div class="card  ">
 <div class="card-body">
 
       <b>{{$location->customer?->name}}</b>
@@ -237,22 +263,22 @@
 
                 </div>       </div>
 
-                <div class="card  mt-3 ">
-                  <div class="card-header ">
+                               
+  <div class="card mt-3">
+  <div class="card-header card-header-content-md-between bg-light ">
 
-  Aanwezig objecten
-  </div>
-
-                <div class="card-body    p-2 ">
+Aanwezig objecten
+</div>
+                <div class="card-body    ">
                     <div class = "row gx-2">
                         <div class = "col-md-12">
                            <div>
 
                            @if(count($location->objects))
 
-                           <table class="table tabel-striped table-hover">
+                           <table class="table tabel-striped table-hover   ">
   <thead>
-    <tr>
+    <tr class = "bg-light">
 
       <th scope="col">Adres</th>
       <th scope="col">Nobonummer</th>
@@ -267,7 +293,7 @@
 
                            @forelse ($location->objects  as $elevator)
                            <tr>
-      <tr onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
+      <tr style = "cursor:pointer" onclick="window.location='/elevator/show/{{ $elevator->id }}'"  wire:key="row-{{ $elevator->id }}">
 
       <td> @if ($elevator->address) @if ($elevator->address->name) <b>{{ $elevator->address->name }}</b>
                         <br> @endif <small>

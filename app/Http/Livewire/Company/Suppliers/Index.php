@@ -34,7 +34,7 @@ class Index extends Component
     use WithBulkActions;
     use WithCachedRows;
 
-    public $sortField = 'id';
+    public $sortField = 'name';
     public $sortDirection = 'desc';
     public $keyword;
     public $cntFilters;
@@ -48,6 +48,11 @@ class Index extends Component
     public $editId;
     public $Supplier;
     public $edit_id;
+
+ 
+ 
+    public $data = [];
+
 
     public $filters = [
         'keyword'   => '', 
@@ -66,7 +71,7 @@ class Index extends Component
 
 
     protected $rules = [
-        'name' => 'required|min:6',
+        'data.name' => 'required|min:6',
     ];
 
     
@@ -113,73 +118,18 @@ class Index extends Component
     }
 
 
-public function sortBy($field)
-{
-    if ($this->sortField === $field) {
-        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-        $this->sortDirection = 'asc';
-    }
-
-    $this->sortField = $field;
-}
-
-public function clear()
-{
-    $this->name =NULL;
-    $this->address =NULL;
-    $this->zipcode =NULL;
-    $this->place =NULL;;
-    $this->emailaddress =NULL;
-    $this->phonenumber =NULL;
- 
-}
-
- 
-public function save(){
-   
-$this->validate();
-    $data = Supplier::updateOrCreate(
-        ['id' =>$this->edit_id],
-        [
-            'name' => $this->name,
-            'place' => $this->place,
-            'zipcode' => $this->zipcode,
-            'name' => $this->name,
-            'address' => $this->address,
-            'emailaddress' => $this->emailaddress,
-            'phonenumber' => $this->phonenumber,
-            
-        ]
-    );
- 
-
-    $this->clear();
- 
-    $this->dispatch('close-crud-modal');
-    pnotify()->addWarning('Gegevens opgeslagen');
-
-}
-
-    //Postcode check
-    public function checkZipcode()
+    public function sortBy($field)
     {
-        $this->zipcode = strtoupper(trim(preg_replace("/\s+/", "", $this->zipcode)));
-        if (strlen($this->zipcode) == 6) {
-            $response = Http::get('https://api.pro6pp.nl/v1/autocomplete?auth_key=okw7jAaDun87tKnD&nl_sixpp=' . $this->zipcode);
-            $data = $response->json();
-
-            if ($data['results']) {
-                $this->place = $data['results'][0]['city'];
-                $this->address = $data['results'][0]['street'];
-            } else {
-                $this->place = "";
-                $this->address = "";
-                pnotify()->addWarning('Geen gegevens gevonden met deze postcode');
-            }
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
         }
+
+        $this->sortField = $field;
     }
 
+ 
     public function updatedFilters()
     {
         Session()->put('address_filter5', json_encode($this->filters));
@@ -195,21 +145,7 @@ $this->validate();
         return redirect(request()->header('Referer'));
 
     }
-
-    public function edit($id)
-    {
-        $this->edit_id = $id;
-
-        $item = Supplier::where('id', $id)->first();
-        $this->address      = $item->address;
-        $this->zipcode      = $item->zipcode;
-        $this->place        = $item->place;
-        $this->name         = $item->name;
-        $this->place        = $item->place;
-        $this->emailaddress = $item->emailaddress;
-        $this->phonenumber  = $item->phonenumber;
-        $this->function  = $item->function;
-    }
+ 
 
 
     public function delete($id){

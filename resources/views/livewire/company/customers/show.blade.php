@@ -1,19 +1,18 @@
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                    {{$object?->name}}
-                </h1>
-         
-            </div>
-            <div class="col-auto">
-                <a href="/customers">
-                    <button type="button" class="btn   btn-link btn-sm  ">
-                        Alle relaties
-                    </button></a>
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
  
+         <h1 class="page-header-title pt-3">    {{$object?->name}}  </h1>
+             </div>
 
+         <div class="col-auto">
+         <a href="/customers">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                        Alle relaties
+                    </button>
+                </a>
+ 
  
                 <button type="button" class="btn btn-primary btn-sm dropdown-toggle btn-120  "
                     id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,21 +38,27 @@
 
                 
                 </div>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    
+         </div>
+      </div>
+   </div>
+
+
+
+
 
     <div class="row  ">
         <div class="col-md-6 col-sm-6">
-        <div class="card-header   ">
+
+
+            <div class="card" style="height: 220px;">
+
+            <div class="card-header   ">
 
 Relatie gegevens
 </div>
 
-            <div class="card" style="height: 220px;">
+
                 <div class="card-body">
                     <table class="table table-sm">
                         <tr>
@@ -99,12 +104,12 @@ Relatie gegevens
             </div>
         </div>
         <div class="col-md-6 col-sm-6">
-        <div class="card-header   ">
+     
+
+            <div class="card" style="height: 220px;">   <div class="card-header   ">
 
 Statusstieken
 </div>
-
-            <div class="card" style="height: 220px;">
                 <div class="card-body" >
                 {{$object->remark}}
                 </div>
@@ -379,9 +384,7 @@ Statusstieken
       </div>
    </div>
             <!-- End Modal -->
-            <button onclick="topFunction()" id="go_to_top_button" class="btn btn-primary btn-ico"><i
-                    class="fa-solid fa-arrow-up"></i></button>
-
+    
 
 
 

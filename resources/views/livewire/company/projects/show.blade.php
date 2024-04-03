@@ -1,43 +1,29 @@
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                {{$project->name}}
-            </div>
-            <div class="col-auto">
-            <a href="/projects">
-                    <button type="button" class="btn   btn-link btn-sm  ">
-                        Alle Projecten
-                    </button></a>
-                    
-                <a href = "/project/edit/{{$project->id}}">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
-                    Wijzig
-                </button>
-                </a>
-                
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-            </div>
-        </div>
-    </div>
-
-
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  {{$project->name}}  </h1>
+             </div>
+          
+         <div class="col-auto">
+         <a href = "/project/edit/{{$project->id}}">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " >
+Wijzigen
+            </button></a>
+         </div>
+      </div>
+   </div>
+   
+    
 
     <div class="row ">
 
         <div class="col-md-3">         
-            
-   
-<div class="card-header pt-0   ">
+        <div class="card-header      ">
 
 Relatie
 </div>
-
-
 <div class="card  bg-light">
 <div class="card-body">
  
@@ -120,17 +106,18 @@ Relatie
 
 </tr>
 <tr>
-<td collspan = "2"> 
- Contactpersoon 
-                            <div class = "clear-fix"></div>
-                            @if($project->contact_person_name) {{$project->contact_person_name}} @else <span class=" badge bg-soft-primary text-primary ">Geen</span> @endif
-                            
-                            
- 
 
-                            </td>
+<tr>
+<td>Contactpersoon
+</td>
+
+<td>  @if($project->contact_person_name) {{$project->contact_person_name}} @else <span class=" badge bg-soft-primary text-primary ">Geen</span> @endif
+
+ 
+</td>
 
 </tr>
+
 
 
 
@@ -147,26 +134,25 @@ Relatie
         </div>
 
         <div class="col-md-9">
-        <div class="card-header   pt-0    ">
+        <div class="card-header      ">
 
-Gegevens
+Projectgegevens
 </div>
 
             <div class="card">
          
 
-                <div class="card-body">
+                <div class="card-body p-2">
  
  
- 
-                            <div class = "clear-fix"></div>
-                          
-
-                            <label class="pb-2  ">Omschrijving</label>
-                            <div class = "clear-fix"></div>
-                            {{$project->description}}
-
- 
+  
+              
+                     
+@if($project->description)
+                            {!! nl2br(e($project->description)) !!}
+                            @else
+Geen omschrijving opgegeven
+                            @endif
              
 
      

@@ -1,56 +1,65 @@
 <div class="container-fluid">
-    <div class="page-header  my-3">
-        <div class="row align-items-center">
-            <div class="col">
-                <h1 class="page-header-title">
-                    @if($name)
-                    {{$name}} @else Geen naam @endif</h1>
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
+             </div>
 
-            </div>
-            <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
-                    Opslaan
-                </button>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+         <div class="col-auto">
+         <a href="/locations">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                   Alle locaties
+                    </button>
+                </a>
+ 
+                <button type="button" class="btn   btn-120 btn-primary btn-12 btn-sm"  wire:click = "save()" > 
+                        Opslaan
+                    </button>
+
+                   
+
+
+                
+                </div>
+    
+         </div>
+      </div>
+ 
+
+ 
+   
+   
+ 
+ 
+
+
+
+
     <div class="row  ">
 
         <div class="col-md-3 ">
 
 
-<div class="row  ">
-
-<div class="col-md-12">
 
 
 
-<div class="card  bg-light">
-<div class="card-body">
+        
 
-<b>{{$data?->customer?->name}}</b>
-      <br>
-      {{$data?->customer?->address}} {{$data?->customer?->place}}
-
-
-</div>
-</div>
-</div>
-</div>
-
-
-        <div class="card-header mt-3  ">
+            <div class = "card">     
+      
+            <div class="card-header card-header-content-md-between    ">
 
 Afbeelding
 </div>
+            <div class = "card-body">
+          
+</div>
 
+<div class = "card-body">
+                <label class="avatar avatar-xxl   me-5" for="editAvatarUploaderModal">
 
-            <div class = "card">      <div class = "card-body">
-            <label class="avatar avatar-xl   avatar avatar-xl avatar-circle avatar-uploader me-5" for="editAvatarUploaderModal">
-        @if ($image_db || $image )
+                    @if ($image_db || $image )
                     <img class="avatar-img"
                         src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
                     @else
@@ -73,13 +82,27 @@ Afbeelding
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
                     class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
-            </div>    </div>
+                    </div>       </div>
+
+
+                    <div class="card mt-3 bg-light">
+<div class="card-body">
+
+      <b>{{$data->customer?->name}}</b>
+      <br>
+      {{$data->customer?->address}} {{$data->customer?->place}}
+
+</div>
+</div>
+ 
+
+
 
             <div class = "card mt-3">      <div class = "card-body">
             <label class="pb-2  ">Gebouwtype</label>
-
+ 
             <input   wire:model.live="building_type" class="form-control">
-
+            
 
             <label class="pb-2 pt-3">Beheerder</label>
 
@@ -108,13 +131,17 @@ Afbeelding
         <div class="col-md-9">
 
 
-          <div class="card-header    ">
+ 
+
+
+
+
+            <div class="card">
+            <div class="card-header card-header-content-md-between  ">
 
 Locatie
 </div>
-
-            <div class="card">
-
+  
 
                 <div class="card-body ">
                     <div class="row">
@@ -147,12 +174,12 @@ Locatie
                                 </div>
                                 <div class="col-md-4 col-sm-2">
                                 <label class="pb-2 pt-3"> </label>
-                                <button class="btn btn-soft-primary btn-sm mt-7"
+                                <button class="btn btn-soft-primary btn-sm mt-7" 
                                         wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
                                         title="Zoek naar postcode" wire:keydown="checkZipcode" style="height: 40px;">
                                         <i class="bi-search"></i>
                                     </button>
-
+                                
                                 </div>
                             </div>
 
@@ -197,19 +224,19 @@ Locatie
             </div>
 
 
-            <div class="card-header mt-3  ">
+
+            <div class="card  mt-3  ">
+            
+            <div class="card-header card-header-content-md-between  ">
 
 Notitie
 </div>
-            <div class="card  ">
-
-
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-md-12">
 
-                            <textarea wire:model="remark" class="js-count-characters form-control"
-                                wire:model="description" name="description" rows="4" maxlength="100"
+                            <textarea wire:model="remark"  class="js-count-characters form-control"
+                                wire:model="description" name="description" class="form-control" rows="5" maxlength="100"
                                 data-hs-count-characters-options='{
             "output": "#maxLengthCountCharacters"
           }'>{{ old('name',@$project->description) }}</textarea>
@@ -217,17 +244,17 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class=" card-header mt-3  ">
+
+            <div class="card mt-3  ">
+           
+            <div class="card-header card-header-content-md-between  ">
 
 Toegang
 </div>
-            <div class="card ">
-
-
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2 pb-2">Type toegang</label>
+                            <label class="pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
                                 <select wire:model="building_acces_type_id" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
@@ -251,11 +278,11 @@ Toegang
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="pb-2 pt-2">Code</label>
+                            <label class="pb-2">Code</label>
                             <input wire:model="access_code" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <label class="pb-2 pt-2">Contactpersoon</label>
+                            <label class="pb-2">Contactpersoon</label>
                             <input wire:model="access_contact" class="form-control">
                         </div>
 
@@ -263,20 +290,20 @@ Toegang
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label class="pb-2 pt-2">Locatie sleutelkluis</label>
+                            <label class="pb-2 pt-3">Locatie sleutelkluis</label>
                             <input wire:model="location_key_lock" class="form-control">
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="card-header mt-3  ">
+
+            <div class="card mt-3 ">
+            <div class="card-header  card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
-
-            <div class="card ">
-
+  
                 <div class="card-body  ">
                     <div class="row">
 
@@ -287,12 +314,12 @@ Bouwgegevens
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2 pt-2">Verdiepingen</label>
+                                <label class="pb-2">Verdiepingen</label>
                                 <input wire:model="levels" class="form-control">
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2 pt-2">Oppervlakte</label>
+                                <label class="pb-2">Oppervlakte</label>
                                 <input wire:model="surface" class="form-control">
                             </div>
 

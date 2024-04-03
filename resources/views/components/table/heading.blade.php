@@ -7,10 +7,10 @@
 ])
 
 <th 
-    {{ $attributes->merge(['class' => ' '])->only('class') }}
+    {{ $attributes->merge(['class' => '  py-3 bg-light'])->only('class') }}
 >
     @unless ($sortable)
-        <span class="table mb-0 table-borderless table-rounded "  >{{ $slot }}</span>
+        <span class=" text-xs leading-4 font-medium text-cool-gray-500 uppercase  "  >{{ $slot }}</span>
     @else
         <span  {{ $attributes->except('class') }} style="cursor:hand " >
             <span>{{ $slot }}</span>

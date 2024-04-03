@@ -1,50 +1,56 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
-         <div class="col">
-            <h1 class="page-header-title">
-               Locaties
-         </div>
-         <div class="col-auto">
+   <div class="page-header     ">
 
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+   <div class="row"> 
+            <div class="col-md-6  
+                        text-light"> 
+                        <h1 class="page-header-title pt-3">  Locaties  </h1>
+            </div> 
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-end  
+                        "> 
+                        <form >
+               <!-- Search -->
+    
+               <div class="input-group input-group-merge" > 
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>         
+               <!-- End Search -->
+            </form>
+            </div> 
+        </div> 
+
+
+      <div class="row   ">
+      <div class="col-md-6 ">
+ 
+
+             </div>
+         <div class="col-md-6 col-sm-6  ">
+            
+ <div class = "float-right">
+             </div>    
+         </div>
+         <!-- <div class="col-auto">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
             </button>
-
-         </div>
+         </div> -->
       </div>
    </div>
-
-   <div class="row">
+   <div class="row ">
       <div class="col-md-12"> 
 
-      
-  <div class="card-header card-header-content-md-between   pt-0 card-header-form ">
-     
-   <div class="mb-2 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div style="width: 200px;" class="input-group input-group-merge">
-                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
-                           data-hs-form-search-options='{
-                           "clearIcon": "#clearIcon2",
-                           "defaultIcon": "#defaultClearIconToggleEg"
-                           }'>
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                 
-                  
-                  <!-- End Dropdown -->
-               </div>
-            </div>
-   
+         
                   <div>
                      <div class="row">
                         <div class="loading" wire:loading>
@@ -185,16 +191,18 @@
                               <div>
                                  <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
 
-                                 <h4>Geen storingen gevonden......</h4>
+                                 <h4>Geen locaties gevonden......</h4>
                                  @if($this->cntFilters)
-                                 Geen gegevens gevonden met de huidige filters...
+                                 Geen locaties gevonden met de huidige filters. Een nieuwe locatie toevoegen kan via het <a href = "/customers">relatie</a> overicht
+                      
                                  <hr>
 
                                  @else
-                                 Geen storingen gevonden in het systeem. Een storing aanmaken kan via het liften
-                                 overzicht
+                       Geen locaties gevonden in het systeem. Een nieuwe locatie toevoegen kan via het <a href = "/customers">relatie</a> overicht
                                  @endif
 
+                    
+                           
                               </div>
                            </center>
 
@@ -204,8 +212,8 @@
                   </div>
                </div>
                </div>  </div>
-
-         <div class="card-footer">
+          
+         <div   wire:loading.remove class="card-footer">
             @if($items->links())
  
  {{ $items->links() }}

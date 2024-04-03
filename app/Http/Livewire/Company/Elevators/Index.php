@@ -7,18 +7,12 @@ use App\Models\Customer;
 use App\Models\Management;
 use App\Models\Supplier;
 use App\Models\Location;
-
-
-
 use App\Models\managementCompany;
-
-use Livewire\Attributes\Validate;
-
 use App\Models\Auth;
 use App\Models\inspectionCompany;
-
 use App\Models\maintenanceCompany;
 
+use Livewire\Attributes\Validate;
 
 
 

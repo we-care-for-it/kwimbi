@@ -1,5 +1,5 @@
 <div class="container-fluid">
-   <div class="page-header  my-3">
+   <div class="page-header  ">
       <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">
@@ -48,9 +48,15 @@
          <span class="badge bg-soft-primary text-primary py-2"> Wachten op uitvoerdatum
          </span>
          @endif
+<a href = "/incidents">
+         <button type="button"  class="btn   btn-link btn-sm">
+               Alle storingen
+            </button>
+</a>
 
-            <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  btn-ico">
-               <i class="fa-solid fa-arrow-left"></i>
+
+            <button type="button" onclick="history.back()" class="btn   btn-link btn-sm">
+               Terug
             </button>
 
          </div>
@@ -72,7 +78,7 @@
 @endif
 @if($incident->status_id==99 || $incident->status_id==6 )
 <div>
-<div class="alert alert-soft-warning mt-4 mb-2" role="alert">
+<div class="alert alert-soft-warning   mb-2  " role="alert">
       <p class="mb-0"><b>Incident gesloten</b> Dit incident is gemakeerd als
          @if($incident->status_id==6)
          <b> onjuist gemeld</b>
