@@ -245,7 +245,7 @@
 
       <!-- End Logo -->
 
-      <!-- <div class="navbar-collapse collapse" id="navbarDoubleLineContainerNavDropdown" style="">
+      <div class="navbar-collapse collapse" id="navbarDoubleLineContainerNavDropdown" style="">
         <ul class="navbar-nav">
 
           <li class="nav-item">
@@ -254,7 +254,7 @@
 
           </li>
 
-       
+          <!-- Dashboards -->
           <li class="nav-item">
             <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link " href="/elevators" role="button"><i
                 class="  dropdown-item-icon"></i> Objecten</a>
@@ -281,7 +281,7 @@
           </li>
         </ul>
 
-      </div> -->
+      </div>
       <!-- End Collapse -->
     </nav>
   </div>
