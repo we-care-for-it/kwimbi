@@ -1,8 +1,8 @@
 /*
 Template Name: Striking Dash
-Template URI: 
+Template URI:
 Author: Aazztech
-Author URI: 
+Author URI:
 Version: 1.1.0
 NB: this file contains the list of components/scss partial along with the style.scss contents order.
 */
@@ -106,7 +106,14 @@ NB: this file contains the list of components/scss partial along with the style.
 
   05. RESPONSIVE CSS
 ***************************/
-.m-top-0 {
+
+
+
+.w-120{
+  width: 120px!important;
+}
+
+  }.m-top-0 {
   margin-top: 0px;
 }
 

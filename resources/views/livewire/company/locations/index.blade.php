@@ -9,27 +9,27 @@
                                       <span class="sub-title ml-sm-25 pl-sm-25">{{count($items)}} locaties</span>
                                   </div>
 
-                                  <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                                      <input wire:model.live="filters.keyword" class="form-control mr-sm-2 border-0 box-shadow-none" type="search" placeholder="Zoek naar gegevens" aria-label="Search">
-                                  </form>
 
                               </div>
-                              <div class="action-btn">
-                                  <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
-                                      <i class="las la-plus fs-16"></i>Toevoegen</a>
+<div class="breadcrumb-action justify-content-center flex-wrap">
 
+  <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input wire:model.live="filters.keyword" class="form-control mr-sm-2 border-0 box-shadow-none" type="search" placeholder="Zoek naar gegevens" aria-label="Search">
+  </form>
 
-
-
-                              </div>
+</div>
                           </div>
+
 
                       </div>
                   </div>
 
 
                   <div class="row">
+
+@if(count($items))
+
 
                      @foreach ($items as $location)
 
@@ -83,9 +83,9 @@
                                                           <div class="po-details">
                                                             @if($location->building_type_id)
                                                     <span
-                                                       class=" badge bg-soft-primary text-primary py-1">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
+                                                       class="  text-primary "><small>{{config('globalValues.building_types')[$location->building_type_id]}}</small></span>
                                                     @else
-                                                    <span class=" badge bg-soft-danger text-danger py-1 ">Onbekend</span>
+                                                    <span class="  text-danger "><small>Onbekend</small></span>
 
                                                     @endif
                                                           </div>
@@ -97,6 +97,11 @@
                                           <!-- Profile Acoount End -->
                                       </div>
                                    @endforeach
+                                   @else
+      @include('layouts.partials._empty')
+
+
+                                   @endif
 
                                   </div>
 
