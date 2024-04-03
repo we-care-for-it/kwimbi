@@ -1,14 +1,35 @@
+<link rel="stylesheet" href="/assets/vendor_assets/css/bootstrap/bootstrap.css">
 
-  <meta content='width=device-width, initial-scale=1' name='viewport' />
-  <meta name="csrf-token" content="{{ csrf_token() }}" />
-  <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css" />
-  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css" />
-  <link rel="stylesheet" rel="preload" href="/assets/css/theme.css" data-hs-appearance="default" as="style">
-  <link rel="stylesheet" rel="preload" href="/assets/css/theme-dark.css" data-hs-appearance="dark" as="style">
-  <link rel="stylesheet" href="/assets/css/custom.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
-   <!-- CSS Implementing Plugins -->
-   <link rel="stylesheet" href="/assets/css/vendor.min.css">
- 
-  </html>
+<link rel="stylesheet" href="/assets/vendor_assets/css/daterangepicker.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/fontawesome.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/footable.standalone.min.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/fullcalendar@5.2.0.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/jquery-jvectormap-2.0.5.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/jquery.mCustomScrollbar.min.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/leaflet.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/line-awesome.min.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/MarkerCluster.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/MarkerCluster.Default.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/select2.min.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/slick.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/star-rating-svg.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/trumbowyg.min.css">
+
+<link rel="stylesheet" href="/assets/vendor_assets/css/wickedpicker.min.css">
+
+<link rel="stylesheet" href="/assets/theme_assets/style.css">

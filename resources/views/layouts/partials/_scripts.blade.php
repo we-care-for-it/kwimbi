@@ -1,97 +1,45 @@
- 
-  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script> 
-  <script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
-  <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script>
-  <script src="/assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
-  <script src="/assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
-  <script src="/assets/js/theme.min.js"></script>
-  <script src="/assets/vendor/dropzone/dist/min/dropzone.min.js"></script>
-  <script src="/assets/vendor/hs-count-characters/dist/js/hs-count-characters.js"></script>
-   <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
-  <script src="/assets/js/hs.chartjs.js"></script>
- 
-<script>
-    (function() {
-
-
-      
-      new HSSideNav('.js-navbar-vertical-aside').init()
-      HSBsDropdown.init();
-
-      HSCore.components.HSTomSelect.init(".js-select");
-      new HSFormSearch('.js-form-search');
-      new HSCountCharacters('.js-count-characters')
-
-    })()
-  </script>
-<script>
-
-
- 
-
-  
-  (function() {
-    document.querySelectorAll('.js-chart').forEach(item => {
-      HSCore.components.HSChartJS.init(item)
-    })
-  })();
-
-      (function () {
-        // STYLE SWITCHER
-        // =======================================================
-        const $dropdownBtn = document.getElementById('selectThemeDropdown') // Dropdowon trigger
-        const $variants = document.querySelectorAll(`[aria-labelledby="selectThemeDropdown"] [data-icon]`) // All items of the dropdown
-
-        // Function to set active style in the dorpdown menu and set icon for dropdown trigger
-        const setActiveStyle = function () {
-          $variants.forEach($item => {
-            if ($item.getAttribute('data-value') === HSThemeAppearance.getOriginalAppearance()) {
-              $dropdownBtn.innerHTML = `<i class="${$item.getAttribute('data-icon')}" />`
-              return $item.classList.add('active')
-            }
-
-            $item.classList.remove('active')
-          })
-        }
-
-        // Add a click event to all items of the dropdown to set the style
-        $variants.forEach(function ($item) {
-          $item.addEventListener('click', function () {
-            HSThemeAppearance.setAppearance($item.getAttribute('data-value'))
-          })
-        })
-
-        // Call the setActiveStyle on load page
-        setActiveStyle()
-
-        // Add event listener on change style to call the setActiveStyle function
-        window.addEventListener('on-hs-appearance-change', function () {
-          setActiveStyle()
-        })
-      })()
-
-
-      // Get the button:
-let mybutton = document.getElementById("go_to_top_button");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
-
-      
-    </script>
- 
+<script src="/assets/vendor_assets/js/jquery/jquery-3.5.1.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery/jquery-ui.js"></script>
+<script src="/assets/vendor_assets/js/bootstrap/popper.js"></script>
+<script src="/assets/vendor_assets/js/bootstrap/bootstrap.min.js"></script>
+<script src="/assets/vendor_assets/js/moment/moment.min.js"></script>
+<script src="/assets/vendor_assets/js/accordion.js"></script>
+<script src="/assets/vendor_assets/js/autoComplete.js"></script>
+<script src="/assets/vendor_assets/js/Chart.min.js"></script>
+<script src="/assets/vendor_assets/js/charts.js"></script>
+<script src="/assets/vendor_assets/js/daterangepicker.js"></script>
+<script src="/assets/vendor_assets/js/drawer.js"></script>
+<script src="/assets/vendor_assets/js/dynamicBadge.js"></script>
+<script src="/assets/vendor_assets/js/dynamicCheckbox.js"></script>
+<script src="/assets/vendor_assets/js/feather.min.js"></script>
+<script src="/assets/vendor_assets/js/footable.min.js"></script>
+<script src="/assets/vendor_assets/js/fullcalendar@5.2.0.js"></script>
+<script src="/assets/vendor_assets/js/google-chart.js"></script>
+<script src="/assets/vendor_assets/js/jquery-jvectormap-2.0.5.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/assets/vendor_assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery.filterizr.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery.mCustomScrollbar.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery.peity.min.js"></script>
+<script src="/assets/vendor_assets/js/jquery.star-rating-svg.min.js"></script>
+<script src="/assets/vendor_assets/js/leaflet.js"></script>
+<script src="/assets/vendor_assets/js/leaflet.markercluster.js"></script>
+<script src="/assets/vendor_assets/js/loader.js"></script>
+<script src="/assets/vendor_assets/js/message.js"></script>
+<script src="/assets/vendor_assets/js/moment.js"></script>
+<script src="/assets/vendor_assets/js/muuri.min.js"></script>
+<script src="/assets/vendor_assets/js/notification.js"></script>
+<script src="/assets/vendor_assets/js/popover.js"></script>
+<script src="/assets/vendor_assets/js/select2.full.min.js"></script>
+<script src="/assets/vendor_assets/js/slick.min.js"></script>
+<script src="/assets/vendor_assets/js/trumbowyg.min.js"></script>
+<script src="/assets/vendor_assets/js/wickedpicker.min.js"></script>
+<script src="/assets/theme_assets/js/drag-drop.js"></script>
+<script src="/assets/theme_assets/js/footable.js"></script>
+<script src="/assets/theme_assets/js/full-calendar.js"></script>
+<script src="/assets/theme_assets/js/googlemap-init.js"></script>
+<script src="/assets/theme_assets/js/icon-loader.js"></script>
+<script src="/assets/theme_assets/js/jvectormap-init.js"></script>
+<script src="/assets/theme_assets/js/leaflet-init.js"></script>
+<script src="/assets/theme_assets/js/main.js"></script>
