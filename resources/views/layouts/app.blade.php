@@ -44,8 +44,7 @@
 
     </main>
 
-    <div class="overlay-dark-sidebar"></div>
-
+ 
       @include('layouts.partials._scripts')
 
     <!-- endinject-->

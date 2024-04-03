@@ -20,7 +20,7 @@
 <script src="/assets/vendor_assets/js/jquery.countdown.min.js"></script>
 <script src="/assets/vendor_assets/js/jquery.filterizr.min.js"></script>
 <script src="/assets/vendor_assets/js/jquery.magnific-popup.min.js"></script>
-<script src="/assets/vendor_assets/js/jquery.mCustomScrollbar.min.js"></script>
+
 <script src="/assets/vendor_assets/js/jquery.peity.min.js"></script>
 <script src="/assets/vendor_assets/js/jquery.star-rating-svg.min.js"></script>
 <script src="/assets/vendor_assets/js/leaflet.js"></script>

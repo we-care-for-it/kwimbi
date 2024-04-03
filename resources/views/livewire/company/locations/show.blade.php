@@ -4,7 +4,7 @@
 
                           <div class="breadcrumb-main user-member justify-content-sm-between ">
                               <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
-                                  <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
+                                  <div class="d-flex align-items-center ">
                                       <h4 class="text-capitalize fw-500 breadcrumb-title"> @if($location->name)
                             {{$location->name}} @else Geen naam @endif </h4>
                                       <span class="sub-title ml-sm-25 pl-sm-25"> </span>
@@ -20,9 +20,7 @@
                      </button>
                  </a>
 
-                 <button  onclick="history.back()"  class="btn btn-link btn-default btn-squared  ">
-                  Terug
-                 </button>
+
 <a href="/location/edit/{{$location->id}}" class="btn   btn-primary w-120" >
                                    </i>Wijzigen</a>
 
@@ -265,7 +263,7 @@
 
               Aanwezig objecten
               </div>
-                              <div class="card-body   p-1 ">
+                              <div class="card-body   p-0 ">
                                   <div class = "row gx-2">
                                       <div class = "col-md-12">
                                          <div>
@@ -275,7 +273,7 @@
                                                                     <div class="table-responsive">
 
 
-                                           <table class="table mb-0">
+                                           <table class="table table-bordered">
                                          <thead>
                                              <tr class="userDatatable-header">
 

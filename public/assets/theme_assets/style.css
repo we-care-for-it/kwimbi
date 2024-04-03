@@ -107,7 +107,8 @@ NB: this file contains the list of components/scss partial along with the style.
   05. RESPONSIVE CSS
 ***************************/
 
-
+html { overflow-y: scroll; }
+body { position: absolute; }
 
 .w-120{
   width: 120px!important;
