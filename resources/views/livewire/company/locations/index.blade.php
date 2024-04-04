@@ -33,9 +33,9 @@
 
                      @foreach ($items as $location)
 
-                                      <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
+                                      <div class="col-xxl-3 col-lg-4 col-md-6 mb-25" onclick = "location = '/location/{{$location->slug}}'"> 
                                           <!-- Profile Acoount -->
-                                          <div class="card">
+                                          <div class="card card-hover">
                                               <div class="card-body text-center pt-30 px-25 pb-0">
 
                                                   <div class="account-profile-cards  ">
@@ -80,13 +80,11 @@
                                                               <span class="po-details__sTitle">Objecten</span>
                                                           </div>
 
-                                                          <div class="po-details">
+                                                          <div class="po-details mt-1 pt-1">
                                                             @if($location->building_type_id)
                                                     <span
-                                                       class="  text-primary "><small>{{config('globalValues.building_types')[$location->building_type_id]}}</small></span>
-                                                    @else
-                                                    <span class="  text-danger "><small>Onbekend</small></span>
-
+                                                       class="  text-primary  "><small>{{config('globalValues.building_types')[$location->building_type_id]}}</small></span>
+                                                  
                                                     @endif
                                                           </div>
                                                       </div>

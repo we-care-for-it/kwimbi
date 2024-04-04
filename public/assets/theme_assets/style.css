@@ -106,15 +106,18 @@ NB: this file contains the list of components/scss partial along with the style.
 
   05. RESPONSIVE CSS
 ***************************/
-
+.card-hover:hover{
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+ 
 html { overflow-y: scroll; }
 body { position: absolute; }
 
 .w-120{
   width: 120px!important;
 }
-
-  }.m-top-0 {
+ .m-top-0 {
   margin-top: 0px;
 }
 

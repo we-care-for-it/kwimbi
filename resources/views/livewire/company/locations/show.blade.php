@@ -19,6 +19,11 @@
                          Alle locaties
                      </button>
                  </a>
+             
+                     <button  onclick="history.back()"  type="button" class="btn btn-link btn-default btn-squared  ">
+                       Terug
+                     </button>
+         
 
 
 <a href="/location/edit/{{$location->id}}" class="btn   btn-primary w-120" >
@@ -180,7 +185,7 @@
 
                       @if($location->gps_lon)
 
-                      <div class="card p-1 mb-3">
+                      <div class="card p-1 mb-3 ">
 
                <iframe class = "p-1" width="100%" height="219 " style = "border-radius: 10px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=200&amp;hl=en&amp;q={{$location->gps_lat}},{{$location->gps_lon}}+(My%20Business%20Name)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
 
@@ -333,7 +338,25 @@
 
 
               @else
-              Geen objecten gevonden op deze locatie
+              <div class="card card-default card-md mb-4">               
+<div class="card-body">
+
+
+<div class="atbd-empty text-center">
+<div class="atbd-empty__image">
+
+<img src="/img/folders/1.svg">
+                                        </div>
+                                        <div class="atbd-empty__text">
+
+                                            <p class="">Geen objecten</p>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
               @endif
 
 

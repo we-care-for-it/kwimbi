@@ -1,35 +1,58 @@
 <div class="container-fluid">
-   <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
+  <div class="row">
+                      <div class="col-lg-12">
+
+                          <div class="breadcrumb-main user-member justify-content-sm-between ">
+                              <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
+                                  <div class="d-flex align-items-center ">
+                                      <h4 class="text-capitalize fw-500 breadcrumb-title"> Wijzig locatie </h4>
+                                      <span class="sub-title ml-sm-25 pl-sm-25"> </span>
+                                  </div>
+
+
+                              </div>
+<div class="breadcrumb-action justify-content-center flex-wrap">
+
+  <a href="/locations">
+                     <button type="button" class="btn btn-link btn-default btn-squared  ">
+                    Afbreken
+                     </button>
+                 </a>
+             
+
+                 <button type="button" wire:click = "save()" class="btn   btn-primary w-120 ">
+                    Opslaan
+                     </button>
+                 
+                 
+              
  
-         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
-             </div>
-
-         <div class="col-auto">
-         <a href="/locations">
-                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
-                   Alle locaties
-                    </button>
-                </a>
- 
-                <button type="button" class="btn   btn-120 btn-primary btn-12 btn-sm"  wire:click = "save()" > 
-                        Opslaan
-                    </button>
-
-                   
 
 
-                
-                </div>
-    
-         </div>
-      </div>
- 
 
- 
-   
-   
+
+
+</div>
+                          </div>
+
+
+                      </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  
 
@@ -52,40 +75,33 @@
 
 Afbeelding
 </div>
-            <div class = "card-body">
-          
-</div>
+ 
 
 <div class = "card-body">
-                <label class="avatar avatar-xxl   me-5" for="editAvatarUploaderModal">
-
+             <center>
                     @if ($image_db || $image )
-                    <img class="avatar-img"
+                    <img class="avatar-img  " style = "max-height: 100px;"
                         src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
                     @else
-                    <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
+                    <img class=" avatar-img " src="/img/no-image-placeholder.png" style = "height: 100px;" />
                     @endif
+</center>
+                    <input type="file" class="form-control  mt-3 mb-3  "  
+                        wire:model.live="image" />
 
-                    <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
-                        data-hs-file-attach-options='{
-                                 "textTarget": "#editAvatarImgModal",
-                                 "mode": "image",
-                                 "targetAttr": "src",
-                                 "allowTypes": [".png", ".jpeg", ".jpg"]
-                              }' wire:model.live="image" />
-
-                    <span class="avatar-uploader-trigger">
-                        <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
-                    </span>
-                </label>
+                        <center>        
 
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
-                    class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
-                    </div>       </div>
+                    class="btn   btn-primary w-120 btn-sm mt-3 ">Verwijder</button>
+
+</center>
+                    </div>  
+                
+                </div>
 
 
-                    <div class="card mt-3 bg-light">
+                    <div class="card mt-3  ">
 <div class="card-body">
 
       <b>{{$data->customer?->name}}</b>

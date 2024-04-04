@@ -33,7 +33,7 @@
   @include('layouts.partials._aside')
 
 
-        <div class="contents  ">
+        <div class="contents   mt-3 ">
 
             <div class="container-fluid">
                 {{$slot}}

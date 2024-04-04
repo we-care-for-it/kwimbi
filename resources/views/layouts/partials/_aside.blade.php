@@ -10,7 +10,7 @@
                 <li>
                     <a href="/locations" class=" @if(request()->is('dashboard/*') or  request()->is('dashboard'))  active @endif">
                         <span data-feather="home" class="nav-icon"></span>
-                        <span class="menu-text">Locaties</span>
+                        <span class="menu-text">Overzicht</span>
 
                     </a>
                 </li>
@@ -20,7 +20,7 @@
 
                 <li>
                     <a href="/locations" class=" @if(request()->is('location/*') or  request()->is('locations'))  active @endif">
-                        <span data-feather="activity" class="nav-icon"></span>
+                        <span data-feather="home" class="nav-icon"></span>
                         <span class="menu-text">Locaties</span>
 
                     </a>
@@ -54,7 +54,7 @@
                                 <li>
                                     <a href="/locations" class=" @if(request()->is('customer/*') or  request()->is('customer'))  active @endif">
                                         <span data-feather="activity" class="nav-icon"></span>
-                                        <span class="menu-text">relaties</span>
+                                        <span class="menu-text">Relaties</span>
 
                                     </a>
                                 </li>
