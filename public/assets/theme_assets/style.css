@@ -110,6 +110,40 @@ NB: this file contains the list of components/scss partial along with the style.
   background-color: #f8f8f8;
   cursor: pointer;
 }
+
+.back {
+  background: white;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.div-center {
+  width: 500px;
+  height: 400px;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 1em 2em;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+ 
+  display: table;
+}
+
+div.content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
  
 html { overflow-y: scroll; }
 body { position: absolute; }

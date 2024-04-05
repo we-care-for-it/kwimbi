@@ -13,33 +13,16 @@
 </head>
 
 <body class = "bg-white">
-    <main class="main-content">
+ 
 
-        <div class="signUP-admin">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-5 col-md-5 p-0">
-                        <div class="signUP-admin-left signIn-admin-left  d-none d-lg-flex" style = " background-image: url('/storage/tenant/elevators.jpg') ";  >
- S
-                            </div><!-- End: .signUP-admin-left__content  -->
-                            <div class="signUP-admin-left__img   d-md-block d-lg-none">
-                             
-                                
-                            
-                        </div><!-- End: .signUP-admin-left  -->
-                    </div><!-- End: .col-xl-4  -->
-                    <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
-                        <div class="signUp-admin-ris p-md-40 p-10">
-                          
-                            <div class="row justify-content-center">
-                                <div class="col-xl-7 col-lg-8 col-md-12">
-                                    <div class=" ">
-                                        <div class="card border-0">
-                                        
-                                            <div class="card-body">
-                                                
-          <div class=" pb-4">
-                  <center>  <img src="/storage/tenant/logo.png"  style="max-height: 200px;" /></center>
+
+<div class="div-center ">
+
+
+  <div class="content">
+ 
+  <div class=" pb-4">
+                  <center>  <img src="/storage/tenant/logo.png"  style="max-width: 200px;" /></center>
                </div>
                                                 @error('email') 
            
@@ -88,30 +71,27 @@
                                                             <div class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></div>
                                                         </div>
                                                     </div>
-                                                    <div class="signUp-condition signIn-condition">
-                                                   
-                                                        <a href="forget-password.html">Wachtwoord vergeten</a>
-                                                    </div>
-                                                    <div class="button-group d-flex pt-1 justify-content-md-start justify-content-center">
-                                                        <button type = "submit" class="btn btn-primary btn-default btn-squared mr-15 text-capitalize lh-normal px-50 py-15 signIn-createBtn ">
+
+                                                    <div class="d-flex">
+      <div class = "pt-3">
+      <a class = " " href="forget-password.html">Wachtwoord vergeten</a>
+      </div>
+      <div class="ml-auto">
+      <button type = "submit" class="btn btn-primary btn-default btn-squared text-capitalize lh-normal px-50 py-15 signIn-createBtn ">
                                                           Inloggen
                                                         </button>
-                                                    </div>
-</form>
-                           
-                                                </div>
-                                            </div><!-- End: .card-body -->
-                                        </div><!-- End: .card -->
-                                    </div><!-- End: .edit-profile -->
-                                </div><!-- End: .col-xl-5 -->
-                            </div>
-                        </div><!-- End: .signUp-admin-right  -->
-                    </div><!-- End: .col-xl-8  -->
-                </div>
-  
-        </div><!-- End: .signUP-admin  -->
+      </div>
+ </div>
 
-    </main>
+
+                                             
+                                              
+</form>
+ 
+
+
+  </span>
+</div>
     <div id="overlayer">
         <span class="loader-overlay">
             <div class="atbd-spin-dots spin-lg">
