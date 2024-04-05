@@ -18,17 +18,17 @@
 
 <div class="div-center ">
 
-
-  <div class="content">
  
-  <div class=" pb-4">
-                  <center>  <img src="/storage/tenant/logo.png"  style="max-width: 200px;" /></center>
-               </div>
+<div class="text-center "  style = "height: 170px">
+	   <img style = "height: 100%" src="/storage/tenant/logo.png" alt="image" class="img-fluid">
+	</div> 
+<br>
+
                                                 @error('email') 
            
 
 
- 
+ <hr>
 
           
 
@@ -51,7 +51,7 @@
 </div>
                @enderror 
       
-               
+          
              <form method="POST" action="{{ route('login') }}">
                   @csrf 
 
@@ -81,7 +81,7 @@
                                                           Inloggen
                                                         </button>
       </div>
- </div>
+ 
 
 
                                              
