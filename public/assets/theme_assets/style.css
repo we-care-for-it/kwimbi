@@ -9259,7 +9259,8 @@ table.table-basic tr td.card .card-body,
 .signUP-admin-left {
   background-color: #f9eff8;
   height: 100vh;
-  border-radius: 0px 70px 70px 0px;
+  justify-content: center;
+  text-align: center;
   padding: 147px 75px;
 }
 @media only screen and (max-width: 767px) {
@@ -9308,7 +9309,7 @@ table.table-basic tr td.card .card-body,
   }
 }
 .signUP-admin-left__img {
-  top: 64%;
+  top: 50%;
   left: 42%;
   transform: translate(-50%, -50%);
   position: absolute;

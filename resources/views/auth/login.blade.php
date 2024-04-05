@@ -5,80 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>StrikingDash</title>
-
+    <title> {{env('APP_NAME')}} |  Liftindex</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- inject:css-->
     @include('layouts.partials._styles')
-
-
-    <!-- endinject -->
-
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
+<title> {{env('APP_NAME')}} |  Liftindex</title>
 </head>
 
-<body>
+<body class = "bg-white">
     <main class="main-content">
 
         <div class="signUP-admin">
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-xl-4 col-lg-5 col-md-5 p-0">
-                        <div class="signUP-admin-left signIn-admin-left position-relative">
-                            <div class="signUP-overlay">
- 
-                            </div><!-- End: .signUP-overlay  -->
-                            <div class="signUP-admin-left__content">
-                                <div class="text-capitalize mb-md-30 mb-15 d-flex align-items-center justify-content-md-start justify-content-center">
-                                    <a class="wh-36 bg-primary text-white radius-md mr-10 content-center" href="index.html">a</a>
-                                    <span class="text-dark">admin</span>
-                                </div>
-                                <h1>Bootstrap 4 React Web Application</h1>
+                        <div class="signUP-admin-left signIn-admin-left  d-none d-lg-flex" style = " background-image: url('/storage/tenant/elevators.jpg') ";  >
+ S
                             </div><!-- End: .signUP-admin-left__content  -->
-                            <div class="signUP-admin-left__img">
-                                <img class="img-fluid svg" src="/storage/tenant/logo.png" alt="img" />
-
-
+                            <div class="signUP-admin-left__img   d-md-block d-lg-none">
+                             
                                 
-                            </div><!-- End: .signUP-admin-left__img  -->
+                            
                         </div><!-- End: .signUP-admin-left  -->
                     </div><!-- End: .col-xl-4  -->
                     <div class="col-xl-8 col-lg-7 col-md-7 col-sm-8">
-                        <div class="signUp-admin-right signIn-admin-right  p-md-40 p-10">
-                            <div class="signUp-topbar d-flex align-items-center justify-content-md-end justify-content-center mt-md-0 mb-md-0 mt-20 mb-1">
-                                
-                            </div><!-- End: .signUp-topbar  -->
+                        <div class="signUp-admin-ris p-md-40 p-10">
+                          
                             <div class="row justify-content-center">
                                 <div class="col-xl-7 col-lg-8 col-md-12">
-                                    <div class="edit-profile mt-md-25 mt-0">
+                                    <div class=" ">
                                         <div class="card border-0">
-                                            <div class="card-header border-0  pb-md-15 pb-10 pt-md-20 pt-10 ">
-                                                <div class="edit-profile__title">
-                                                
-                                                </div>
-                                            </div>
+                                        
                                             <div class="card-body">
-                                                <div class="edit-profile__body">
-
-                                                @error('email') 
-               <div style = "height: 50px" class = "mt-3 mb-3">
-                  <div class="alert alert-soft-warning" role="alert"> De ingevoerde gebruikersnaam / wachtwoord is onjuist </div>
+                                                
+          <div class=" pb-4">
+                  <center>  <img src="/storage/tenant/logo.png"  style="max-height: 200px;" /></center>
                </div>
+                                                @error('email') 
+           
+
+
+ 
+
+          
+
+                                                <div class="alert-icon-area alert alert-warning " role="alert">
+
+
+<div class="alert-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+</div>
+
+<div class="alert-content">
+
+
+    <p>De ingevoerde gebruikersnaam / wachtwoord is onjuist </p>
+
+
+ 
+</div>
+
+</div>
                @enderror 
+      
                
-                                                <form method="POST" action="{{ route('login') }}">
+             <form method="POST" action="{{ route('login') }}">
                   @csrf 
 
 
                                                     <div class="form-group mb-20">
                                                         <label for="username">Gebruikersnaam</label>
-                                                        <input type="text" class="form-control" id="username" placeholder="Username">
+                                                      
+                                                        <input name="email" id="email" tabindex = "1" type="email" placeholder="voorbeeld@domein.nl" required name="email" value="{{ old('email', request()->query('email')) }}" class = "form-control form-control-lg" autofocus/> 
+
+
+
                                                     </div>
                                                     <div class="form-group mb-15">
                                                         <label for="password-field">Wachtwoord</label>
                                                         <div class="position-relative">
-                                                            <input id="password-field" type="password" class="form-control" name="password" value="secret">
+                                                            <input id="password-field" type="password" class="form-control"  name="password" id="signupSrPassword" placeholder="*******" required minlength="5">
                                                             <div class="fa fa-fw fa-eye-slash text-light fs-16 field-icon toggle-password2"></div>
                                                         </div>
                                                     </div>
@@ -92,21 +98,7 @@
                                                         </button>
                                                     </div>
 </form>
-                                                    <p class="social-connector text-center mb-sm-25 mb-15  mt-sm-30 mt-20"><span>Or</span></p>
-                                                    <!-- <div class="button-group d-flex align-items-center justify-content-md-start justify-content-center">
-                                                        <ul class="signUp-socialBtn">
-                                                            <li>
-                                                                <button class="btn text-dark px-30"><img class="svg" src="img/svg/google.svg" alt="img" /> Sign up with
-                                                                    Google</button>
-                                                            </li>
-                                                            <li>
-                                                                <button class=" radius-md wh-48 content-center"><img class="svg" src="img/svg/facebook.svg" alt="img" /></button>
-                                                            </li>
-                                                            <li>
-                                                                <button class="radius-md wh-48 content-center"><img class="svg" src="img/svg/twitter.svg" alt="img" /></button>
-                                                            </li>
-                                                        </ul>
-                                                    </div> -->
+                           
                                                 </div>
                                             </div><!-- End: .card-body -->
                                         </div><!-- End: .card -->
@@ -116,7 +108,7 @@
                         </div><!-- End: .signUp-admin-right  -->
                     </div><!-- End: .col-xl-8  -->
                 </div>
-            </div>
+  
         </div><!-- End: .signUP-admin  -->
 
     </main>
