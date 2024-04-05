@@ -110,7 +110,9 @@ NB: this file contains the list of components/scss partial along with the style.
   background-color: #f8f8f8;
   cursor: pointer;
 }
+.card{
 
+}
 .back {
   background: white;
   width: 100%;
@@ -120,8 +122,8 @@ NB: this file contains the list of components/scss partial along with the style.
 }
 
 .div-center {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 400px;
   background-color: #fff;
   position: absolute;
   left: 0;
@@ -129,12 +131,13 @@ NB: this file contains the list of components/scss partial along with the style.
   top: 0;
   bottom: 0;
   margin: auto;
- 
+  max-width: 100%;
+  max-height: 100%;
   overflow: auto;
   padding: 1em 2em;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
  
+ 
+  display: table;
 }
 
 div.content {

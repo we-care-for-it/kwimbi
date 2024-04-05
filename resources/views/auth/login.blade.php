@@ -16,11 +16,12 @@
  
 
 
-<div class="div-center ">
+<div class="div-center  " style = "  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px!important;">
 
- 
-<div class="text-center "  style = "height: 170px">
-	   <img style = "height: 100%" src="/storage/tenant/logo.png" alt="image" class="img-fluid">
+ <div class = "ddd ">
+ <div class = " ">
+<div class="text-center ">
+	 <center>  <img style = "height: 100%" src="/storage/tenant/logo.png" alt="image"  ></center>
 	</div> 
 <br>
 
@@ -88,10 +89,8 @@
                                               
 </form>
  
-
-
-  </span>
-</div>
+  
+</div></div></div>
     <div id="overlayer">
         <span class="loader-overlay">
             <div class="atbd-spin-dots spin-lg">
