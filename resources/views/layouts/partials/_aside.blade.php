@@ -5,7 +5,7 @@
         <div class="sidebar__menu-group">
 
             <ul class="sidebar_nav">
-                <center><img style="max-height: 110px" src="/storage/tenant/logo.png" alt="img"></center>
+                <center><img style="max-height: 80px" src="/storage/tenant/logo.png" alt="img"></center>
 
                 <br><br>
                 <li class="menu-title">
@@ -78,6 +78,14 @@
                         <span data-feather="activity" class="nav-icon"></span>
                         <span class="menu-text">Changelog</span>
                         <span class="badge badge-primary menuItem">2.1.6</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/masterdata" class="">
+                        <span data-feather="activity" class="nav-icon"></span>
+                        <span class="menu-text">Instellingen</span>
+                      
                     </a>
                 </li>
 

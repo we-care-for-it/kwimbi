@@ -8,6 +8,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
       @include('layouts.partials._styles')
       <title> {{env('APP_NAME')}} |  Liftindex</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
    </head>
    <body class = "bg-white w-100 h-100">
       <div class="div-center  " style = "  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px!important;">
