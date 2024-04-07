@@ -1,18 +1,11 @@
 <div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-    <img src="/assets/img/icons/users.png" class="pageico">
-            <h1 class="page-header-title">  Projecten <span class="text-muted   ms-2 " style="font-weight: normal">  </span></h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> projecten gevonden</span>
-    
-         </div>
-         <div class="col-auto pt-2">
-          
-         </div>
-         <div class="col-auto pt-2">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  Projecten  </h1>
+             </div>
+         <div class="col-auto">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -25,29 +18,24 @@
                   <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
                   <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                   </button>
-
-                  
                </div>
-
-
-
-               
                <!-- End Search -->
             </form>
          </div>
-
-        
-        
+         <div class="col-auto">
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
+            </button>
+         </div>
       </div>
    </div>
-   
-   
    
    
    <div class="row pt-1">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
-            <div class="card-body p-0 ">
+            <div class="card-body p-2 ">
                      <div class="row" wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
@@ -89,15 +77,16 @@
                                     <x-table.heading>
                                        Einddatum
                                     </x-table.heading>
-                                    <x-table.heading>
-                                    </x-table.heading>
+                                    
                                  </x-slot>
                                  <x-slot name="body">
                                     @foreach ($items as $item)
                                     <x-table.row wire:key="row-{{ $item->id }}">
                                        <x-table.cell>
-                                          <b><a href="/project/{{ $item->slug }}">{{$item->name}}</a></b><br>
-                                          {{$item->description}}
+                                        <a href="/project/{{ $item->slug }}">{{$item->name}}</a> <br>
+                                        {{ \Illuminate\Support\Str::limit($item->description, 150, $end='...') }}
+
+                                     
                                        </x-table.cell>
                                        <x-table.cell>
                                           @if($item?->customer?->name) <a href="/customer/{{$item?->customer?->slug}}">
@@ -137,26 +126,7 @@
                                           {{ \Carbon\Carbon::parse($item->enddate)->format('d-m-Y')}} @else <span
                                              class="badge bg-soft-primary-light text-primary p-1">Geen</span> @endif
                                        </x-table.cell>
-                                       <x-table.cell>
-                                       <a href="/project/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-success text-success btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-eye"></i>
-                                       </button>
-                                       </a>
-
-
-
-                                       <a href="/project/edit/{{$item->slug}}">
-                                       <button style="float: right"
-                                          class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle"                                  >
-                                          <i class="bi bi-pencil"></i>
-                                       </button>
-                     </a>
-
-
-
-                                       </x-table.cell>
+                             
                                     </x-table.row>
                                     @endforeach
                                  </x-slot>

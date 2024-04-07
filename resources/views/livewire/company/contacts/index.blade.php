@@ -1,48 +1,33 @@
 <div class="container-fluid">
-   <div class="page-header">
-      <div class="row align-items-center">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
          <div class="col">
-         <img src="/assets/img/icons/users.png" class="pageico">
-            <h1 class="page-header-title">  Contactpersonen(s) <span class="text-muted   ms-2"> ({{ $items->Total()}})</h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> relaties gevonden</span>
+ 
+         <h1 class="page-header-title pt-3">  Contactpersonen  </h1>
+             </div>
+         <div class="col-auto">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
          </div>
          <div class="col-auto">
-     
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-sm btn-150 btn-soft-success" >
-            Toevoegen
+            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+               data-bs-target="#crudModal">
+       Toevoegen
             </button>
          </div>
-
-
-         <div class="col-auto">
-         <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text"  wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
-                           data-hs-form-search-options='{
-                           "clearIcon": "#clearIcon2",
-                           "defaultIcon": "#defaultClearIconToggleEg"
-                           }'>
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-         </div>
-
-         <div class="col-auto">
- 
-         <div class="dropdown">
-                     <button type="button" class="btn btn-white btn-sm w-100"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-dark rounded-circle ms-1">{{$cntFilters}}</span>
-                     </button>
-                  </div>
-         </div>
-
-
       </div>
    </div>
    <div class="row ">

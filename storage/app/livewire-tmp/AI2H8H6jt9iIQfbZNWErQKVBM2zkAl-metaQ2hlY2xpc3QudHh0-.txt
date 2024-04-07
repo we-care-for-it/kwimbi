@@ -1,0 +1,17 @@
+ 
+
+Knop +
+
+Knoppen
+Terug icon <-
+Bij edit of create rond pijl icon ongedaand maken
+
+Tooltips bij knoppen
+Broadcums 
+Sorteren uit tabel
+
+Tabel footer white
+Pagination links
+
+Niks gevonden PT-3
+

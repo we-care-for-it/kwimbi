@@ -96,6 +96,10 @@ class Create extends Component
 public function delete_temp_attachment(){
     $this->maintenance_attachment = NULL;
 }
+
+
+
+
 }
 
 
