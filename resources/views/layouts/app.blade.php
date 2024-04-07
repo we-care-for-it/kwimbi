@@ -18,9 +18,9 @@
       <main id="content" role="main" class="main">
          @include('layouts.partials._aside')
          <div class="content animate__animated animate__fadeIn">
- 
+         <div class="container-fluid">
            {{$slot}}
- 
+           </div>
          </div>
 
          <button onclick="topFunction()" id="go_to_top_button" class="btn-sm btn btn-primary btn-ico"><i

@@ -1,40 +1,27 @@
-<div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-
-            <h1 class="page-header-title pt-3">  Locaties </h1>
+<div>
  
-    
+   <div class="page-header  my-3">
+      <div class="row align-items-center">
+         <div class="col">
+            <h1 class="page-header-title">
+            Keuring
          </div>
-         <div class="col-auto pt-2">
-            <form>
-               <!-- Search -->
-               <div class="input-group input-group-merge">
-                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                     }">
-                  <button type="button" class="input-group-append input-group-text">
-                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                  </button>
-               </div>
-               <!-- End Search -->
-            </form>
-         </div>
-         <div class="col-auto pt-2">
-            <a href = "/location/add">
-            <button type="button" class="btn   btn-primary  btn-sm" >
-            <i class="bi bi-plus"></i> Toevoegen
-            </button></a>
+         <div class="col-auto">
+            <button type="button"     class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+            Opslaan
+            </button>
+            <button type="button" onclick="history.back()"
+               class="btn btn-secondary btn-sm  ">
+            <i class="fa-solid fa-arrow-left"></i>
+            </button>
          </div>
       </div>
    </div>
-   <div class="row pt-1">
+   
+   
+
+ 
+   <div class="row" >
       <div class="col-md-12"> 
 
          
