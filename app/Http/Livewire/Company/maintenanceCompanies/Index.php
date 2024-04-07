@@ -8,7 +8,8 @@ use Livewire\Component;
 
 
 //Models
-use App\Models\managementCompany;
+ 
+use App\Models\maintenanceCompany;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class Index extends Component
     use WithBulkActions;
     use WithCachedRows;
 
-    public $sortField = 'name';
+    public $sortField = 'id';
     public $sortDirection = 'desc';
     public $keyword;
     public $cntFilters;
@@ -45,49 +46,48 @@ class Index extends Component
     public $zipcode;
     public $place;
     public $emailaddress;
-    public $editId;
-    public $managementcompany;
     public $edit_id;
+    public $customer;
 
  
- 
-    public $data = [];
-
 
     public $filters = [
         'keyword'   => '', 
-        'place'     => '', 
+        'place'     =>'', 
+        'customer_id' => '',
+        'management_id' => ''
+        
     ];
 
  
 
-
+  
     public function render()
     {
-        return view('livewire.company.managementCompanies.index',[
-            'items' => $this->rows
+        return view('livewire.company.maintenanceCompanies.index',[
+            'items' => $this->rows,
             ]);
     }
 
 
     protected $rules = [
-        'data.name' => 'required|min:6',
+        'address' => 'required',
     ];
 
     
     public function getRowsQueryProperty()
     {
-        $query = managementCompany::query()->when($this->filters['keyword'], function ($query) {
+        $query = maintenanceCompany::query()->when($this->filters['keyword'], function ($query) {
             $query->where('name', 'like', '%' . $this->filters['keyword'] . '%')
                 ->Orwhere('address', 'like', '%' . $this->filters['keyword'] . '%')
-                ->Orwhere('place', 'like', '%' . $this->filters['keyword'] . '%');
-                 
+                ->Orwhere('place', 'like', '%' . $this->filters['keyword'] . '%')
+                ->Orwhere('zipcode', 'like', '%' . $this->filters['keyword'] . '%');
         })
         ->when($this->filters['place'], function ($query) {
             $query->whereIn('place', $this->filters['place']);
                 
         });
-        Session()->put('managementCompany_filters', json_encode($this->filters));
+        Session()->put('address_filter', json_encode($this->filters));
 
         return $query->orderBy($this->sortField, $this->sortDirection);
     }
@@ -108,31 +108,83 @@ class Index extends Component
 
     public function mount(Request $request)
     {
-    //     if (session()->get('Supplier_filters')) {
-    //         $this->filters = json_decode(session()->get('Supplier_filters'), true);
+    //     if (session()->get('address_filter')) {
+    //         $this->filters = json_decode(session()->get('customer_filters'), true);
     //     }else{
-    //         Session()->put('Supplier_filters', json_encode($this->filters));
+    //         Session()->put('address_filter', json_encode($this->filters));
             
     // }
     $this->countFilters();
     }
 
 
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-        } else {
-            $this->sortDirection = 'asc';
-        }
-
-        $this->sortField = $field;
+public function sortBy($field)
+{
+    if ($this->sortField === $field) {
+        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+        $this->sortDirection = 'asc';
     }
 
+    $this->sortField = $field;
+}
+
+public function clear()
+{
+    $this->name =NULL;
+    $this->address =NULL;
+    $this->zipcode =NULL;
+    $this->place =NULL;;
  
+}
+
+ 
+public function save(){
+   
+$this->validate();
+    $data = maintenanceCompany::updateOrCreate(
+        ['id' =>$this->edit_id],
+        [
+            'name' => $this->name,
+            'place' => $this->place,
+            'zipcode' => $this->zipcode,
+            'name' => $this->name,
+            'address' => $this->address,
+
+
+        ]
+    );
+ 
+
+    $this->clear();
+ 
+    $this->dispatch('close-crud-modal');
+    pnotify()->addWarning('Gegevens opgeslagen');
+
+}
+
+    //Postcode check
+    public function checkZipcode()
+    {
+        $this->zipcode = strtoupper(trim(preg_replace("/\s+/", "", $this->zipcode)));
+        if (strlen($this->zipcode) == 6) {
+            $response = Http::get('https://api.pro6pp.nl/v1/autocomplete?auth_key=okw7jAaDun87tKnD&nl_sixpp=' . $this->zipcode);
+            $data = $response->json();
+
+            if ($data['results']) {
+                $this->place = $data['results'][0]['city'];
+                $this->address = $data['results'][0]['street'];
+            } else {
+                $this->place = "";
+                $this->address = "";
+                pnotify()->addWarning('Geen gegevens gevonden met deze postcode');
+            }
+        }
+    }
+
     public function updatedFilters()
     {
-        Session()->put('address_filter5', json_encode($this->filters));
+        Session()->put('address_filter', json_encode($this->filters));
         $this->countFilters();
     
     }
@@ -140,20 +192,36 @@ class Index extends Component
     public function resetFilters()
     {
         $this->reset('filters');
-        session()->pull('Supplier_filters', '');
+        session()->pull('address_filter', '');
         $this->gotoPage(1);
         return redirect(request()->header('Referer'));
 
     }
+
+    public function edit($id)
+    {
+    
+
+        $item = maintenanceCompany::where('id', $id)->first();
+        $this->address      = $item->address;
+        $this->zipcode      = $item->zipcode;
+        $this->place        = $item->place;
+        $this->name         = $item->name;
+        $this->place        = $item->place;
+        $this->edit_id      = $item->id;
  
 
 
+
+    }
+
+
     public function delete($id){
-        $item=managementCompany::find($id);
+        $item=maintenanceCompany::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
         pnotify()->addWarning('Gegevens verwijderd');
     }
+    }
 
-
-}
+ 

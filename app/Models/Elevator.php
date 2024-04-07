@@ -71,11 +71,7 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
     }
-    public function uploads()
-    {
-        return $this->hasMany(Upload::class, "elevator_id", "id");
-    }
-
+ 
 
     public function inspectioncompany()
     {

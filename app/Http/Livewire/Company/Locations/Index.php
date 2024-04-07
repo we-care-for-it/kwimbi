@@ -11,7 +11,7 @@ use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 
-
+ 
 
 
 
@@ -19,7 +19,7 @@ use App\Http\Livewire\DataTable\WithPerPagePagination;
 class Index extends Component
 {
 
-
+    
     public $filters  =
     [
         'status_id'                    => '',
@@ -68,7 +68,7 @@ use WithCachedRows;
 
 
 
-
+ 
 
 
         return $query;
@@ -79,12 +79,6 @@ use WithCachedRows;
         return $this->cache(function () {
             return $this->applyPagination($this->rowsQuery);
         });
-    }
-
-    public function clearFilters()
-    {
-        $this->filters['keyword'] = NULL;
-          noty()  ->layout('bottomRight')->addInfo('Filters zijn verwijderd');
     }
 
 }

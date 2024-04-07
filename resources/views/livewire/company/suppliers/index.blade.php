@@ -32,9 +32,9 @@
    </div>
    <div class="row ">
       <div class="col-xl-12">
-         <div class="card">
+         <div class="card  p-0 m-0">
             <div class="card-body ">
-   
+               <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
                      <br>
@@ -106,7 +106,7 @@
                         @endif
                      </div>
                   </div>
-    
+               </div>
             </div>
          </div>
          <div class="clearfix pt-3  ">

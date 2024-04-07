@@ -1,108 +1,217 @@
 <div class="container-fluid">
-  <div class="row">
-                      <div class="col-lg-12">
-
-                          <div class="breadcrumb-main user-member justify-content-sm-between ">
-                              <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
-                                  <div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
-                                      <h4 class="text-capitalize fw-500 breadcrumb-title">Locaties</h4>
-                                      <span class="sub-title ml-sm-25 pl-sm-25">{{count($items)}} locaties</span>
-                                  </div>
 
 
+  <div class="page-header     ">
+    <div class="row align-items-center ">
+    <div class="col">
+
+            <h1 class="page-header-title pt-3">  Locaties </h1>
+ 
+    
+         </div>
+         <div class="col-auto pt-2">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+         <div class="col-auto pt-2">
+            <a href = "/location/add">
+            <button type="button" class="btn   btn-primary  btn-sm" >
+            <i class="bi bi-plus"></i> Toevoegen
+            </button></a>
+         </div>
+      </div>
+   </div>
+   <div class="row pt-1">
+      <div class="col-md-12"> 
+
+         
+                  <div>
+                     <div class="row">
+                        <div class="loading" wire:loading>
+                           <img style="height: 190px" src="/assets/img/loading_elevator.gif">
+                           <br>
+                           <span class="text-muted">Bezig met gegevens ophalen</span>
+                        </div>
+                        <div wire:loading.remove>
+                           @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
+                              <div class="pb-3">
+                                 Er zijn <strong> {{$items->count()}}</strong> resultaten geselecteerd wil je alle
+                                 <strong> {{$items->total()}}</strong> resultaten selecteren ?
+                                 <span class="text-primary" style="cursor: pointer;" wire:click="selectAllFromDropdown">
+                                    Selecteer alle resultaten
+                                 </span>
                               </div>
-<div class="breadcrumb-action justify-content-center flex-wrap">
+                              @else
+                              <div class="pb-3">
+                                 {{$items->total()}} resultaten geselecteerd
+                              </div>
+                              @endif @else
+                              @endif
+                              @if($this->cntFilters)
+                              <div class="alert alert-soft-warning" role="alert">
+                                 <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                                 <= 1) 1 filter @else {{$this->cntFilters}} filters @endif< />
+                                 <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
+                                    filters</span>
+                              </div>
+                              @endif
+                              @if($items->count())
 
-  <form action="/" class="d-flex align-items-center user-member__form my-sm-0 my-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input wire:model.live="filters.keyword" class="form-control mr-sm-2 border-0 box-shadow-none" type="search" placeholder="Zoek naar gegevens" aria-label="Search">
-  </form>
+                              <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 ">
+                                 @foreach ($items as $location) <div class="col mb-3 mb-lg-5">
+                                    <!-- Card -->
+                                    <div class="card h-80">
+                                       <div class="card-pinned">
+                                          <div class="card-pinned-top-end">
 
-</div>
-                          </div>
+                                             <!-- Dropdown -->
+                                             <div class="dropdown">
+                                                <button type="button"
+                                                   class="btn btn-ghost-secondary btn-icon btn-sm card-dropdown-btn rounded-circle"
+                                                   id="projectsGridDropdown8" data-bs-toggle="dropdown"
+                                                   aria-expanded="false">
+                                                   <i class="bi-three-dots-vertical"></i>
+                                                </button>
 
+                                                <div class="dropdown-menu dropdown-menu-end"
+                                                   aria-labelledby="projectsGridDropdown8">
+                                                   <a class="dropdown-item"
+                                                      href="/location/edit/{{$location->id}}">Wijzigen </a>
 
-                      </div>
-                  </div>
-
-
-                  <div class="row">
-
-@if(count($items))
-
-
-                     @foreach ($items as $location)
-
-                                      <div class="col-xxl-3 col-lg-4 col-md-6 mb-25" onclick = "location = '/location/{{$location->slug}}'"> 
-                                          <!-- Profile Acoount -->
-                                          <div class="card card-hover">
-                                              <div class="card-body text-center pt-30 px-25 pb-0">
-
-                                                  <div class="account-profile-cards  ">
-                                                      <div class="ap-img d-flex justify-content-center">
-                                                          <!-- Profile picture image-->
-
-                                                          @if($location->image)
-                                           <img class="ap-img__main bg-opacity-primary  wh-120 rounded-circle mb-3 "
-                                              src="/storage/{{$location->image}}">
-
-                                           @else
-                                           <img class="ap-img__main bg-opacity-primary  wh-120 rounded-circle mb-3 "
-                                              src="/img/building.jpg">
-
-                                           @endif
-
-
-
-
-                                                      </div>
-                                                      <div class="ap-nameAddress">
-                                                          <h6 class="ap-nameAddress__title">  <a class="text-dark" href="/location/{{$location->slug}}">
-                            @if($location->name)
-                            {{$location->name}} @else Geen naam @endif</a></h6>
-                                                          <p class="ap-nameAddress__subTitle  fs-14 pt-1 m-0 ">{{$location->address}},
-                                          {{$location->zipcode}} {{$location->place}}
-</p>
-                                                      </div>
-                                                      <div class="ap-button account-profile-cards__button button-group d-flex justify-content-center flex-wrap pt-20">
-                                                        <a href="/customer/{{$location?->customer?->slug}}">
-                                                {{$location?->customer?->name}}</a>
-                                                      </div>
-                                                  </div>
-
-                                                  <div class="card-footer mt-20 pt-20 pb-20 px-0">
-
-                                                      <div class="profile-overview d-flex justify-content-between flex-wrap">
-                                                          <div class="po-details">
-                                                              <h6 class="po-details__title"> {{count($location->objects)}}
-
-
-                                                              <span class="po-details__sTitle">Objecten</span>
-                                                          </div>
-
-                                                          <div class="po-details mt-1 pt-1">
-                                                            @if($location->building_type_id)
-                                                    <span
-                                                       class="  text-primary  "><small>{{config('globalValues.building_types')[$location->building_type_id]}}</small></span>
-                                                  
-                                                    @endif
-                                                          </div>
-                                                      </div>
-
-                                                  </div>
-                                              </div>
+                                                </div>
+                                                <!-- End Dropdown -->
+                                             </div>
                                           </div>
-                                          <!-- Profile Acoount End -->
-                                      </div>
-                                   @endforeach
-                                   @else
-      @include('layouts.partials._empty')
+                                       </div>
 
+                                       <!-- Body -->
+                                       <div class="card-body text-center">
+                                          <!-- Avatar -->
+                                          <span class="avatar avatar-xxl avatar-4x3">
 
-                                   @endif
+                                             @if($location->image)
+                                             <img class="avatar-img " style="max-height: 90px"
+                                                src="/storage/{{$location->image}}">
 
-                                  </div>
+                                             @else
+                                             <img class="avatar-img  " style="max-height: 90px"
+                                                src="/assets/img/160x160/img2.jpg">
 
+                                             @endif
+                                          </span>
 
+                                          <!-- End Avatar -->
+
+                                          <h3 class="mb-2  pt-3">
+                                             <a class="text-dark" href="/location/{{$location->slug}}"">
+                            @if($location->name)
+                            {{$location->name}} @else Geen naam @endif</a>
+                            
+                      </h3>
+                      
+                      
+                      
+                      <div class=" d-flex justify-content-between pb-3">
+                                                <div class=" badge bg-soft-secondary text-secondary py-1">
+                                                   {{count($location->objects)}}
+
+                                                   @if(count($location->objects) == 1)
+                                                   object
+                                                   @else
+                                                   objecten
+                                                   @endif
+                                                </div>
+                                                <div>
+                                                   @if($location->building_type_id)
+                                                   <span
+                                                      class=" badge bg-soft-primary text-primary py-1">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
+                                                   @else
+                                                   <span class=" badge bg-soft-danger text-danger py-1 ">Onbekend</span>
+
+                                                   @endif
+                                                </div>
+                                       </div>
+
+                                       <span> {{$location->address}},
+                                          {{$location->zipcode}} {{$location->place}}
+                                       </span>
+                                       <div class="pt-2 row justify-content-between align-items-center">
+
+                                          <div class="col-auto  ">
+                                             <!-- Form Check -->
+                                             <div class="clearfix"></div>
+                                             <a href="/customer/{{$location?->customer?->slug}}">
+                                                {{$location?->customer?->name}}</a>
+
+                                             <!-- End Form Check -->
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <!-- End Body -->
+
+                                 </div>
+                                 <!-- End Card -->
+                              </div>
+                              <!-- End Col -->
+
+                              @endforeach
+
+                        </div>
+
+                        @else
+                        <div class="flex justify-center items-center space-x-2">
+
+                           <center>
+                              <div>
+                                 <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
+
+                                 <h4>Geen locaties gevonden......</h4>
+                                 @if($this->cntFilters)
+                                 Geen gegevens gevonden met de huidige filters...
+                                 <hr>
+
+                                 @else
+                                 Geen locaties gevonden in het systeem. Voeg een nieuwe locatie toe
+                                 overzicht
+                                 @endif
+
+                            <div class = "clear-fix"></div>
+                            <a href = "/location/add">
+                                 <button type="button" class="btn   btn-primary btn-sm mt-5"   >
+            <i class="bi bi-plus"></i> Toevoegen
+            </button></a>
+                              </div>
+                           </center>
+
+                        </div>
+                        @endif
+                     </div>
+                  </div>
+               </div>
+               </div>  </div>
+          
+         <div   wire:loading.remove class="card-footer">
+            @if($items->links())
+ 
+ {{ $items->links() }}
+   @endif
+</div>
+ 
+       
+
+ 
 
       </div>

@@ -1,11 +1,16 @@
+
+
 <div class="container-fluid">
+
+
+
    <div class="page-header     ">
       <div class="row align-items-center ">
          <div class="col">
  
          <h1 class="page-header-title pt-3">  Beheerders  </h1>
              </div>
-         <div class="col-auto">
+         <div class="col-auto pt-2">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -22,11 +27,12 @@
                <!-- End Search -->
             </form>
          </div>
-         <div class="col-auto">
-            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
-               data-bs-target="#crudModal">
-       Toevoegen
+         <div class="col-auto pt-2">
+            <a href = "/management-companie/create">
+            <button type="button" class="btn   btn-primary">
+            <i class="bi bi-plus"></i> Toevoegen
             </button>
+            </a>
          </div>
       </div>
    </div>
@@ -51,7 +57,7 @@
                      @endif
                      <div wire:loading.remove>
                         @if($items->count())
-                        <x-table >
+                        <x-table>
                            <x-slot name="head">
                               <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
                               <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
@@ -63,13 +69,15 @@
                               <x-table.heading sortable wire:click="sortBy('place')" :direction="$sortDirection">
                                  Plaats
                               </x-table.heading>
-                        
+                              <x-table.heading></x-table.heading>
+                              <x-table.heading></x-table.heading>
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row onclick="location='/management-companie/{{$item->id}}'" wire:key="row-{{ $item->id }}">
-                                 <x-table.cell >
-                                 <a href = "/management-companie/{{$item->id}}">   {{$item->name}}</a>
+                              <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                 data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
+                                 <x-table.cell>
+                                    {{$item->name}}
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>
@@ -80,8 +88,17 @@
                                  <x-table.cell>
                                     {{$item->place}}
                                  </x-table.cell>
-                           
-                        
+                                 <x-table.cell>
+                                    {{$item->address}}
+                                 </x-table.cell>
+                                 <x-table.cell>
+                                    <button style="float: right"
+                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
+                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
+                                       data-bs-target="#crudModal">
+                                    <i class="bi bi-pencil"></i>
+                                    </button>
+                                 </x-table.cell>
                               </x-table.row>
                               @endforeach
                            </x-slot>
@@ -94,7 +111,7 @@
                                     <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
                                     <p class="empty-state-text"><span class="strong">
                                    <b> Geen gegevens gevonden</b>
-                                    <br>Voeg een leverancier toe of pas het trefwoord aan.</span> 
+                                    <br>Voeg een beheerder toe of pas het trefwoord aan.</span> 
                                           
                                     </p>
                                  </div>
@@ -139,8 +156,6 @@
          </div>
       </div>
    </div>
-
-   @livewire('company.managementCompanies.crudmodal',['object' => ''] )
-    
+   
 </div>
  

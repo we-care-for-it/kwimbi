@@ -1,58 +1,35 @@
 <div class="container-fluid">
-  <div class="row">
-                      <div class="col-lg-12">
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
+             </div>
 
-                          <div class="breadcrumb-main user-member justify-content-sm-between ">
-                              <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
-                                  <div class="d-flex align-items-center ">
-                                      <h4 class="text-capitalize fw-500 breadcrumb-title"> Wijzig locatie </h4>
-                                      <span class="sub-title ml-sm-25 pl-sm-25"> </span>
-                                  </div>
+         <div class="col-auto">
+         <a href="/locations">
+                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
+                   Alle locaties
+                    </button>
+                </a>
+ 
+                <button type="button" class="btn   btn-120 btn-soft-success btn-150 btn-sm"  wire:click = "save()" > 
+                        Opslaan
+                    </button>
+
+                   
 
 
-                              </div>
-<div class="breadcrumb-action justify-content-center flex-wrap">
-
-  <a href="/locations">
-                     <button type="button" class="btn btn-link btn-default btn-squared  ">
-                    Afbreken
-                     </button>
-                 </a>
-             
-
-                 <button type="button" wire:click = "save()" class="btn   btn-primary w-120 ">
-                    Opslaan
-                     </button>
-                 
-                 
-              
+                
+                </div>
+    
+         </div>
+      </div>
  
 
-
-
-
-
-</div>
-                          </div>
-
-
-                      </div>
-                  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+   
+   
  
  
 
@@ -68,40 +45,47 @@
 
 
         
-
-            <div class = "card">     
       
+        
+            <div class = "card">     
             <div class="card-header card-header-content-md-between    ">
 
 Afbeelding
 </div>
- 
+            <div class = "card-body">
+          
+</div>
 
 <div class = "card-body">
-             <center>
+                <label class="avatar avatar-xxl   me-5" for="editAvatarUploaderModal">
+
                     @if ($image_db || $image )
-                    <img class="avatar-img  " style = "max-height: 100px;"
+                    <img class="avatar-img"
                         src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
                     @else
-                    <img class=" avatar-img " src="/img/no-image-placeholder.png" style = "height: 100px;" />
+                    <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
                     @endif
-</center>
-                    <input type="file" class="form-control  mt-3 mb-3  "  
-                        wire:model.live="image" />
 
-                        <center>        
+                    <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
+                        data-hs-file-attach-options='{
+                                 "textTarget": "#editAvatarImgModal",
+                                 "mode": "image",
+                                 "targetAttr": "src",
+                                 "allowTypes": [".png", ".jpeg", ".jpg"]
+                              }' wire:model.live="image" />
+
+                    <span class="avatar-uploader-trigger">
+                        <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
+                    </span>
+                </label>
 
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
-                    class="btn   btn-primary w-120 btn-sm mt-3 ">Verwijder</button>
-
-</center>
-                    </div>  
-                
-                </div>
+                    class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
+                    </div>       </div>
 
 
-                    <div class="card mt-3  ">
+                    <div class="card mt-3 bg-light">
 <div class="card-body">
 
       <b>{{$data->customer?->name}}</b>
@@ -147,17 +131,17 @@ Afbeelding
         <div class="col-md-9">
 
 
- 
+        <div class="card-header card-header-content-md-between  ">
+
+Locatie
+</div>
+
 
 
 
 
             <div class="card">
-            <div class="card-header card-header-content-md-between  ">
-
-Locatie
-</div>
-  
+           
 
                 <div class="card-body ">
                     <div class="row">
@@ -174,21 +158,21 @@ Locatie
                         <div class="col-md-6">
 
                             <div class="row">
-                                <div class="col-md-4 col-sm-2">
+                                <div class="col-md-3">
                                     <label class="pb-2 pt-3">Postcode</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="zipcode"  >
 
                                 </div>
-                                <div class="col-md-4 col-sm-2">
+                                <div class="col-md-4">
                                     <label class="pb-2 pt-3">Huisnummer</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
                                         wire:model.defer="housenumber" >
 
                                 </div>
-                                <div class="col-md-4 col-sm-2">
+                                <div class="col-md-3 ">
                                 <label class="pb-2 pt-3"> </label>
                                 <button class="btn btn-soft-primary btn-sm mt-7" 
                                         wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
@@ -240,19 +224,19 @@ Locatie
             </div>
 
 
-
-            <div class="card  mt-3  ">
-            
-            <div class="card-header card-header-content-md-between  ">
+            <div class="card-header card-header-content-md-between mt-3  ">
 
 Notitie
 </div>
+            <div class="card  ">
+            
+
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-md-12">
 
-                            <textarea wire:model="remark"  class="js-count-characters form-control"
-                                wire:model="description" name="description" class="form-control" rows="5" maxlength="100"
+                            <textarea wire:model="remark" class="js-count-characters form-control"
+                                wire:model="description" name="description" rows="4" maxlength="100"
                                 data-hs-count-characters-options='{
             "output": "#maxLengthCountCharacters"
           }'>{{ old('name',@$project->description) }}</textarea>
@@ -260,13 +244,13 @@ Notitie
                     </div>
                 </div>
             </div>
-
-            <div class="card mt-3  ">
-           
-            <div class="card-header card-header-content-md-between  ">
+            <div class="mt-3 card-header card-header-content-md-between  ">
 
 Toegang
 </div>
+            <div class="card ">
+           
+
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-3">
@@ -313,13 +297,13 @@ Toegang
 
                 </div>
             </div>
-
-            <div class="card mt-3 ">
-            <div class="card-header  card-header-content-md-between  ">
+            <div class="card-header mt-3 card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
-  
+
+            <div class="card ">
+        
                 <div class="card-body  ">
                     <div class="row">
 
