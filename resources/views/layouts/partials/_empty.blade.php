@@ -13,8 +13,8 @@
                                          </div>
                                      </div>
 
-                                     <div class="notice-listBlock bg-light mt-30 p-2">
-                                         <h4>Wat kan je hier aan doen ?</h4>
+                                     <div class="notice-listBlock bg-light mt-30 p-4">
+                                         <h3>Wat kan je hier aan doen ?</h3>
                                          <ul >
                                              <li>
                                                  Pas het trefwoord en andere filters aan</a></span>

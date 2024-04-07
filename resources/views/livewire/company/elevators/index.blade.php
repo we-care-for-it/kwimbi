@@ -1,12 +1,53 @@
  
-   <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
+   <div>
+    <div class="page-header  my-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title pt-2"> Liften</h1>
+            </div>
+
+            <div class="col-md-3  float-end text-end">
+
+     
+                  </div>
+
+            <div class="col-sm-3  float-end text-end">
+                    <a href = "/elevator/create">
+            <button type="button" class="btn   btn-primary btn-ico btn-120 btn-sm" >
+           Toevoegen
+            </button></a>
+
+            <button type="button" class="btn btn-primary btn-sm  filter_btn"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+                     <i class="bi-filter me-1"></i>   Filter
+                     <span class="badge bg-soft-dark text-light rounded-circle ms-1">{{$cntFilters}}</span>
+                     </button>
+
+                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm    ">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
  
-         <h1 class="page-header-title pt-3">  Liften  </h1>
-             </div>
-         <div class="col-auto">
-            <form>
+
+
+
+ 
+ 
+ 
+   <div class="row pt-1 ">
+      <div class="col-xl-12">
+         <div class="card  ">
+
+
+
+
+
+            <div class="card-body  "> 
+<div class = "row pb-3">
+   <div class = "col-md-3">
+   <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
                   <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
@@ -21,40 +62,9 @@
                </div>
                <!-- End Search -->
             </form>
-         </div>
-        
+                  </div>
 
-         <div class="col-auto ">
-         <button type="button" class="btn btn-primary btn-sm  filter_btn"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-light rounded-circle ms-1">{{$cntFilters}}</span>
-                     </button>
-
-                     </div>
-
-         <div class="col-auto  ">
-            <a href = "/elevator/create">
-            <button type="button" class="btn   btn-primary btn-ico btn-120 btn-sm" >
-           Toevoegen
-            </button></a>
-         </div>
-      </div>
-   </div>
-
-
-
-
- 
- 
- 
-   <div class="row pt-1">
-      <div class="col-xl-12">
-         <div class="card  ">
-
- 
-
-
-            <div class="card-body  ">
+                  </div>
                <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
@@ -83,9 +93,7 @@
                       
       
  
-   
-               <div class="row">
-                  <div>
+    
                      <div class="row">
                         <div  class = "loading"   wire:loading>
                            <center>
@@ -249,8 +257,8 @@
                </div>
               
       
-         </div>
-      </div>
+      
+   
    </div>
 </div>
 

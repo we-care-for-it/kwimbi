@@ -1,38 +1,36 @@
-<div class="container-fluid">
-   <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
- 
-         <h1 class="page-header-title pt-3">  {{$data->name}} -     {{$data->address}} {{$data->place}} </h1>
-             </div>
+<div>
+    <div class="page-header  my-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title pt-2"> {{$data->name}} -     {{$data->address}} {{$data->place}}</h1>
+            </div>
 
-         <div class="col-auto">
-         <a href="/locations">
-                    <button type="button" class="btn  btn-150  btn-link btn-sm  ">
-                   Alle locaties
+            <div class="col-sm-6  float-end text-end">
+
+                <a href="/locations">
+                    <button type="button" class="btn btn-link btn-default btn-squared  btn ">
+                        Alle locaties
                     </button>
                 </a>
- 
-                <button type="button" class="btn   btn-120 btn-soft-success btn-150 btn-sm"  wire:click = "save()" > 
-                        Opslaan
-                    </button>
-
-                   
 
 
-                
-                </div>
-    
-         </div>
+                <button    wire:click = "save()"    wire:loading.attr="disabled"  class="btn   btn-primary btn-sm btn-120"    " 
+         wire:click="addUpload()" type="button">
+      <div wire:loading >
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       </div>
- 
+      Opslaan
+      </button>
 
- 
-   
-   
- 
- 
 
+            
+            </div>
+        </div>
+    </div>
+    
+    
+    
+ 
 
 
 
@@ -52,15 +50,13 @@
 
 Afbeelding
 </div>
-            <div class = "card-body">
-          
-</div>
+ 
 
 <div class = "card-body">
                 <label class="avatar avatar-xxl   me-5" for="editAvatarUploaderModal">
 
                     @if ($image_db || $image )
-                    <img class="avatar-img"
+                    <img class="avatar-img border p-4"
                         src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
                     @else
                     <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
@@ -75,13 +71,13 @@ Afbeelding
                               }' wire:model.live="image" />
 
                     <span class="avatar-uploader-trigger">
-                        <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
+                        <i class="bi-pencil-fill avatar-uploader-icon shadow-sm  "></i>
                     </span>
                 </label>
 
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
-                    class="js-file-attach-reset-img btn btn-white  m-4">Verwijder</button>
+                    class=" btn btn-soft-primary  m-4">Verwijder</button>
                     </div>       </div>
 
 
@@ -131,17 +127,17 @@ Afbeelding
         <div class="col-md-9">
 
 
-        <div class="card-header card-header-content-md-between  ">
-
-Locatie
-</div>
-
 
 
 
 
             <div class="card">
            
+
+            <div class="card-header   ">
+
+Locatie
+</div>
 
                 <div class="card-body ">
                     <div class="row">
@@ -224,13 +220,13 @@ Locatie
             </div>
 
 
-            <div class="card-header card-header-content-md-between mt-3  ">
+            <div class="card   mt-3  ">
+            
+
+            <div class="card-header   ">
 
 Notitie
 </div>
-            <div class="card  ">
-            
-
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-md-12">
@@ -244,11 +240,16 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class="mt-3 card-header card-header-content-md-between  ">
 
-Toegang
-</div>
-            <div class="card ">
+            
+            <div class="card   mt-3  ">
+            
+
+            <div class="card-header   ">
+
+            Toegang</div>
+
+ 
            
 
                 <div class="card-body  ">
@@ -297,12 +298,13 @@ Toegang
 
                 </div>
             </div>
-            <div class="card-header mt-3 card-header-content-md-between  ">
+     
+            <div class="card   mt-3  ">
+            
 
-Bouwgegevens
-</div>
+            <div class="card-header   ">
 
-            <div class="card ">
+            Bouwgegevens</div>
         
                 <div class="card-body  ">
                     <div class="row">

@@ -1,11 +1,8 @@
-<div class="container-fluid">
-
-
-<div class="page-header  my-3">
-      <div class="row align-items-center">
-         <div class="col">
-            <h1 class="page-header-title">
-            @if($object?->fire_elevator)
+<div>
+    <div class="page-header  my-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title pt-2"> @    @if($object?->fire_elevator)
                <div class="cnt_table_result">
 
                   <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
@@ -24,15 +21,22 @@
                @endif
                @else
 
-               @endif
-         </div>
-         <div class="col-auto">
-         <a href="/elevator/edit/{{$object->id}}">
-               <button type="button" class="btn   btn-link btn-sm ">
+               @endif </h1>
+            </div>
+
+            <div class="col-sm-6  float-end text-end">
+
+                <a href="/elevators">
+                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  ">
+                        Alle liften
+                    </button>
+                </a>
+
+                <a href="/elevator/edit/{{$object->id}}">
+               <button type="button" class="btn   btn-link btn-sm  btn-120">
                   Wijzig
                </button>
-        </a>
-               <button type="button" data-bs-toggle="modal" data-bs-target="#add_incident_modal"   "
+        </a>  <button type="button" data-bs-toggle="modal" data-bs-target="#add_incident_modal"   "
                class="btn  btn btn-secondary btn-sm   ">
                <i class="uil uil-exclamation-triangle me-2"></i> Storing aanmelden </button>
 
@@ -64,12 +68,16 @@
 
             </div>
 
+                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm    ">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
 
-         </div>
-      </div>
-   </div>
-    
+
+ 
 
 
    @if($object?->remark)

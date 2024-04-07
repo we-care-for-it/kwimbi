@@ -64,18 +64,27 @@ body {
 
 .card {
  
-  box-shadow: 0!important;
-  
+  box-shadow: none!important;
+  border-radius:4px!important;
+  border: 1px solid #edeef0!important;
 } .card-body {
  
-  box-shadow: 0!important;
-  
+  box-shadow: none!important;
+
 } 
 
 .page-header{
   border-radius: 0px!important;
+  padding-top: 0px!important; 
+  margin-top: 0px!important;
+  height: 20px;
+  border: 0px!important;;
 }
-
+.card-hover:hover {
+  background-color: rgb(251, 251, 251) ;
+  cursor: pointer;
+ }
+ 
 .big-button:hover {
   background-color: rgb(222, 232, 243) ;
   cursor: pointer;
@@ -83,9 +92,24 @@ body {
  
  .card-header {
   background-color:#F8F9FA!important;
- 
   
 }
+
+
+.filter_bar{
+ 
+  background-color:#F8F9FA!important;
+ 
+ height: 65px;
+ border-radius: 5px;
+ border: 1px solid #edeef0 ;
+ padding: 10px; 
+ margin-bottom: 10px; 
+
+ 
+} 
+
+
 
  .card-button {
   border: 1px dashed #EFEFEF ;
@@ -182,7 +206,7 @@ h1{
 }
  @media only screen and (min-width: 768px){ 
   .page-header{
-    height: 50px!important;
+    height:40px!important;
     border-bottom: 0px solid #EFEFEF!important;
     padding-bottom: 0px!important;
     margin-bottom: 10px!important;
@@ -200,7 +224,7 @@ h1{
 
 	text-align: center;
 	margin: auto;
-	width: 640px;
+	width: 100%;
 	padding: 30px;
 	margin: auto;
 	display: block;

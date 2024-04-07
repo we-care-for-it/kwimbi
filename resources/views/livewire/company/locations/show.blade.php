@@ -1,47 +1,28 @@
-
-
 <div>
- 
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
-         <div class="col">
-            <h1 class="page-header-title pt-2">
-            @if($location->name)
-                            {{$location->name}} @else Geen naam @endif 
-         </div>   
-         <div class="col-auto">
-         
-           
-  <a href="/locations">
-                     <button type="button" class="btn btn-link btn-default btn-squared  ">
-                         Alle locaties
-                     </button>
-                 </a>
-             
-             
-         
-
-
-<a href="/location/edit/{{$location->id}}" class="btn   btn-primary btn-sm w-120" >
-                                   </i>Wijzigen</a>
-
-                                       
-         <button type="button" onclick="history.back()"
-               class="btn btn-secondary btn-sm  ">
-            <i class="fa-solid fa-arrow-left"></i>
-            </button>
-         </div>
- 
-
+    <div class="page-header  my-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title pt-2"> @if($location->name)
+                    {{$location->name}} @else Geen naam @endif </h1>
             </div>
-   </div>
-   
-   
-   
- 
 
+            <div class="col-sm-6  float-end text-end">
 
+                <a href="/locations">
+                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  ">
+                        Alle locaties
+                    </button>
+                </a>
 
+                <a href="/location/edit/{{$location->id}}" class="btn   btn-primary btn-sm btn-120 ">
+                    </i>Wijzigen</a>
+
+                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm    ">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -265,18 +246,18 @@
 
               Aanwezig objecten
               </div>
-                              <div class="card-body   p-0 ">
+                              <div class="card-body   p-2 ">
                                   <div class = "row gx-2">
                                       <div class = "col-md-12">
                                          <div>
 
                                          @if(count($location->objects))
-                                         <div class="table4  p-25 bg-white mb-30">
+                                         <div class="table   p-25 bg-white mb-30">
                                                                     <div class="table-responsive">
 
 
-                                           <table class="table table-bordered">
-                                         <thead>
+                                           <table class="table table-hover">
+                                         <thead class = "thead-light">
                                              <tr class="userDatatable-header">
 
                                                  <th>
@@ -335,24 +316,20 @@
 
 
               @else
-              <div class="card card-default card-md mb-4">               
-<div class="card-body">
+ 
 
 
-<div class="atbd-empty text-center">
-<div class="atbd-empty__image">
+<div class="  text-center p-5">
+ 
 
-<img src="/img/folders/1.svg">
-                                        </div>
-                                        <div class="atbd-empty__text">
+<img src="/assets/img/folders/1.svg">
+                                 
+                                        
 
                                             <p class="">Geen objecten</p>
 
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                                   
+                                
                             </div>
               @endif
 
