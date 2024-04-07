@@ -1,49 +1,44 @@
 
 
-<div class="container-fluid">
-  <div class="row">
-                      <div class="col-lg-12">
-
-                          <div class="breadcrumb-main user-member justify-content-sm-between ">
-                              <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
-                                  <div class="d-flex align-items-center ">
-                                      <h4 class="text-capitalize fw-500 breadcrumb-title"> @if($location->name)
-                            {{$location->name}} @else Geen naam @endif </h4>
-                                      <span class="sub-title ml-sm-25 pl-sm-25"> </span>
-                                  </div>
-
-
-                              </div>
-<div class="breadcrumb-action justify-content-center flex-wrap">
-
+<div>
+ 
+   <div class="page-header  my-3">
+      <div class="row align-items-center">
+         <div class="col">
+            <h1 class="page-header-title pt-2">
+            @if($location->name)
+                            {{$location->name}} @else Geen naam @endif 
+         </div>   
+         <div class="col-auto">
+         
+           
   <a href="/locations">
                      <button type="button" class="btn btn-link btn-default btn-squared  ">
                          Alle locaties
                      </button>
                  </a>
              
-                     <button  onclick="history.back()"  type="button" class="btn btn-link btn-default btn-squared  ">
-                       Terug
-                     </button>
+             
          
 
 
-<a href="/location/edit/{{$location->id}}" class="btn   btn-primary w-120" >
+<a href="/location/edit/{{$location->id}}" class="btn   btn-primary btn-sm w-120" >
                                    </i>Wijzigen</a>
 
+                                       
+         <button type="button" onclick="history.back()"
+               class="btn btn-secondary btn-sm  ">
+            <i class="fa-solid fa-arrow-left"></i>
+            </button>
+         </div>
+ 
 
-
-
-
-
-</div>
-                          </div>
-
-
-                      </div>
-                  </div>
-
-
+            </div>
+   </div>
+   
+   
+   
+ 
 
 
 

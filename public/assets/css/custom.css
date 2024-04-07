@@ -64,7 +64,11 @@ body {
 
 .card {
  
+  box-shadow: 0!important;
+  
+} .card-body {
  
+  box-shadow: 0!important;
   
 } 
 
@@ -481,4 +485,6 @@ h1{
 
 
 
- 
+.atbd-notice__content .notice-listBlock {
+  padding: 24px;
+}
