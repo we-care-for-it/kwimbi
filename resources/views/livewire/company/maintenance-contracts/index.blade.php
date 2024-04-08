@@ -3,7 +3,7 @@
       <div class="row align-items-center ">
          <div class="col">
  
-         <h1 class="page-header-title pt-3">  Leveranciers  </h1>
+         <h1 class="page-header-title pt-3">  Beheerders  </h1>
              </div>
          <div class="col-auto">
              
@@ -38,11 +38,6 @@
                   <div class="d-flex align-items-center justify-content-center">
                      <div wire:loading.delay="" class="loading_indicator_small"></div>
                   </div>
-
-
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success" >
-            Toevoegen
-            </button>
                 
                   <!-- End Dropdown -->
                </div>
@@ -83,9 +78,9 @@
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row onclick="location='/supplier/{{$item->id}}'" wire:key="row-{{ $item->id }}">
+                              <x-table.row onclick="location='/management-companie/{{$item->id}}'" wire:key="row-{{ $item->id }}">
                                  <x-table.cell >
-                                 <a href = "/supplier/{{$item->id}}">   {{$item->name}}</a>
+                                 <a href = "/management-companie/{{$item->id}}">   {{$item->name}}</a>
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>

@@ -34,7 +34,8 @@
    @if($items->count())
 
    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 " wire:loading.remove>
-      @foreach ($items as $location) <div class="col mb-3 mb-lg-5">
+      @foreach ($items as $location)
+      <div class="col mb-3 mb-lg-5" onclick = "location='/location/{{$location->slug}}'">
          <div class="card h-80 card-hover">
             <div class="card-pinned">
                <div class="card-pinned-top-end">

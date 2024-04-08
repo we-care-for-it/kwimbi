@@ -28,7 +28,7 @@
 
 
                                      <div class="pt-5 d-flex justify-content-center">
-                                         <button wire:click = "clearFilters()" class="btn btn-sm btn-primary">Wis filters</button>
+                                         <button wire:click = "resetFilters()" class="btn btn-sm btn-primary">Wis filters</button>
 
                                      </div>
 

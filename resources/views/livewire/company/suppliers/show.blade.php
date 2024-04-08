@@ -48,10 +48,10 @@
 
         @livewire('company.suppliers.crudmodal', ['object' => $object])
 
-<div class = "card">
+<div class = "card mt-3">
 
 <div class = "card-header">Gekoppelde objecten</div>
-<div class = "card-body p-2">asdasd</div>
+<div class = "card-body p-2">Functie nog niet beschikbaar</div>
 
 </div>
 </div>

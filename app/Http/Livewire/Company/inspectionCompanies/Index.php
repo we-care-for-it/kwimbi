@@ -8,8 +8,9 @@ use Livewire\Component;
 
 
 //Models
- 
+use App\Models\Address;
 use App\Models\inspectionCompany;
+use App\Models\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +47,8 @@ class Index extends Component
     public $zipcode;
     public $place;
     public $emailaddress;
-    public $customer;
     public $edit_id;
+    public $customer;
 
  
 
@@ -141,19 +142,22 @@ public function clear()
  
 public function save(){
    
-//$this->validate();
-    $data = inspectionCompany::updateOrCreate(
+$this->validate();
+    $data = managementCompany::updateOrCreate(
         ['id' =>$this->edit_id],
         [
-            'name'  => $this->name,
+            'name' => $this->name,
             'place' => $this->place,
             'zipcode' => $this->zipcode,
             'name' => $this->name,
             'address' => $this->address,
+
+
         ]
     );
+ 
 
-    $this->clear(); 
+    $this->clear();
     $this->dispatch('close-crud-modal');
     pnotify()->addWarning('Gegevens opgeslagen');
 
@@ -196,18 +200,24 @@ public function save(){
 
     public function edit($id)
     {
-        $item = inspectionCompany::where('id', $id)->first();
+        $this->edit_id = $id;
+
+        $item = managementCompany::where('id', $id)->first();
         $this->address      = $item->address;
         $this->zipcode      = $item->zipcode;
         $this->place        = $item->place;
         $this->name         = $item->name;
         $this->place        = $item->place;
-        $this->edit_id      = $id;
+ 
+ 
+
+
+
     }
 
 
     public function delete($id){
-        $item=inspectionCompany::find($id);
+        $item=managementCompany::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
         pnotify()->addWarning('Gegevens verwijderd');

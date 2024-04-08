@@ -224,11 +224,13 @@ function ()
          //Management companies
 
          Route::get('/management-companies', \App\Http\Livewire\Company\managementCompanies\Index::class);
-         Route::group(['prefix' => 'managementcompanies', ],
+         Route::group(['prefix' => 'management-companie', ],
          function ()
          {
-         //    Route::get('edit/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Edit::class);
-          //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
+      
+ 
+           Route::get('{id}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
+
          });
 
 
@@ -244,17 +246,23 @@ function ()
 
 
          Route::get('/maintenancy-companies', \App\Http\Livewire\Company\maintenanceCompanies\Index::class);
-         Route::group(['prefix' => 'maintenancecompanies', ],
+         Route::group(['prefix' => 'maintenancy-companie', ],
          function ()
          {
-         //    Route::get('edit/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Edit::class);
-          //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
+      
+ 
+           Route::get('{id}', \App\Http\Livewire\Company\maintenanceCompanies\Show::class);
+
          });
 
+
          Route::get('/inspection-companies', \App\Http\Livewire\Company\inspectionCompanies\Index::class);
-         Route::group(['prefix' => 'inspectioncompanies', ],
+         Route::group(['prefix' => 'inspection-companie', ],
          function ()
          {
+
+            Route::get('{id}', \App\Http\Livewire\Company\inspectionCompanies\Show::class);
+
          //    Route::get('edit/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Edit::class);
           //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
          });

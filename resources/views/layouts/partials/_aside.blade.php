@@ -44,11 +44,11 @@
          <i class="bi-basket nav-icon"></i>
          <span class="nav-link-title">Basisinstellingen</span>
          </a>
-         <div id="navbarVerticalMenuPagesEcommerceMenu" class="nav-collapse  @if(request()->is('suppliers*') or request()->is('supplier/*') or  request()->is('management-companies*') or  request()->is('inspection-companies*') or  request()->is('maintenancy-companies*') )   @else collapse  @endif  " data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu">
+         <div id="navbarVerticalMenuPagesEcommerceMenu" class="nav-collapse  @if(request()->is('suppliers*') or request()->is('supplier/*') or  request()->is('maintenancy-companie*') or  request()->is('inspection-companie*') or  request()->is('management-companies*') or  request()->is('management-companie*') or   request()->is('inspection-companies*') or  request()->is('maintenancy-companies*') )   @else collapse  @endif  " data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu">
             <a wire:navigate class="nav-link @if(request()->is('suppliers*') or request()->is('supplier/*') )   active  @endif  " href="/suppliers"> <i class="bi-people nav-icon"></i> Leveranciers</a>
-            <a wire:navigate class="nav-link @if(request()->is('management-companies/*') or  request()->is('management-companies'))  active @endif " href="/management-companies"> <i class="bi-people nav-icon"></i> Beheerders</a>    
-            <a wire:navigate class="nav-link @if(request()->is('maintenancy-companies/*') or  request()->is('maintenancy-companies'))  active @endif" href="/maintenancy-companies"> <i class="bi-people nav-icon"></i> Onderhoudspartijen</a>
-            <a wire:navigate class="nav-link @if(request()->is('inspection-companies/*') or  request()->is('inspection-companies'))  active @endif" href="/inspection-companies"> <i class="bi-people nav-icon"></i> Keuringinstanties</a>  
+            <a wire:navigate class="nav-link @if(request()->is('management-companies/*') or  request()->is('management-companies') or  request()->is('management-companie*')) )  active @endif " href="/management-companies"> <i class="bi-people nav-icon"></i> Beheerders</a>    
+            <a wire:navigate class="nav-link @if(request()->is('maintenancy-companies/*') or  request()->is('maintenancy-companies')  or  request()->is('maintenancy-companie*') )  active @endif" href="/maintenancy-companies"> <i class="bi-people nav-icon"></i> Onderhoudspartijen</a>
+            <a wire:navigate class="nav-link @if( request()->is('inspection-companie*') or request()->is('inspection-companies/*') or  request()->is('inspection-companies'))  active @endif" href="/inspection-companies"> <i class="bi-people nav-icon"></i> Keuringinstanties</a>  
          </div>
       </div>
 
