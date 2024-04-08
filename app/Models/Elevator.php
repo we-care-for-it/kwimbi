@@ -95,6 +95,12 @@ class Elevator extends Model implements Auditable
         return $this->hasMany(Inspection::class);
     }
 
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
+
+
     public function incidents()
     {
         return $this->hasMany(Incident::class);

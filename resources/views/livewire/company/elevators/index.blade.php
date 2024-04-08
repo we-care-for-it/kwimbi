@@ -142,7 +142,7 @@
                               </x-slot>
                               <x-slot name="body">
                                  @forelse ($elevators as $elevator)
-                                 <x-table.row   >
+                                 <x-table.row   onclick="window.location='/elevator/show/{{ $elevator->id }}'" >
                                     <x-table.cell onclick="window.location='/elevator/show/{{ $elevator->id }}'" >
                                        
                            

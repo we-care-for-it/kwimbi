@@ -11,6 +11,7 @@ use App\Models\Elevator;
  
 use App\Models\Customer;
 use App\Models\Management;
+use App\Models\Upload;
 use App\Models\Supplier;
 use App\Models\Location;
 use App\Models\managementCompany;
@@ -49,6 +50,9 @@ class Show extends Component
     public $remark;
     public $showAddModal;
     public $edit_id;
+    public $upload_type;
+    public $title;
+
 
   
     public $supplier_id;
@@ -65,6 +69,8 @@ class Show extends Component
     public $object_type_id;
     public $status_id;
     public $location_id;
+    public $upload_filename;
+
 
 
     public $locations_relation = [];
@@ -161,22 +167,47 @@ class Show extends Component
 
 
 
-    public function uploadFile(){
+    public function addUpload(){
 
         
+
+        $filepath = "/uploads/".$this->object->id . "/attachments/";
+
+        $filename = preg_replace('/\s+/', '_', $this
+        ->upload_filename
+        ->getClientOriginalName());
+
+
+        $this
+        ->upload_filename
+        ->storePubliclyAs($filepath, $this
+        ->upload_filename
+        ->getClientOriginalName());
         
-    $filename = $this
-    ->file_attachment
-    ->getClientOriginalName();
-    $filename = str_replace(" ", "_", $filename);
+ 
+        pnotify()->addWarning('Bijlage toegevoegd');
 
-$directory = "/uploads/elevators/" . $this
-    ->elevator->id . "/attachments/" . $this->file_collection;
+        //   $upload_filename = $this->upload_filename->storePubliclyAS(
+        //      $directory,
+        //      $filename,
+        //     "sftp"
+        //   );
+        //
+        $data = Upload::updateOrCreate([
+            "type_id" => $this->upload_type,
+            "filename" => $filename,
+            "title" => $this->title,
+            "path" => $filepath,
+            "group_id"  => 3,
+        //    "add_by_user_id" => Auth::id(),
+            "elevator_id" => $this->object->id,
+ 
+        ]);
 
-Storage::disk('media')
-    ->putFileAs($directory, $uploadedFile, $filename);
 
-    
+        pnotify()->addSuccess('Bijlage toegeveoegd');
+        return redirect('/elevator/show/' . $this->onject->id );
+       
  
        
 
@@ -184,6 +215,19 @@ Storage::disk('media')
     }
 
 
+    public function downloadUpload($path_to_file)
+    {
+        if (Storage::disk('sftp')->exists($path_to_file))
+        {
+    
+            return Storage::disk('sftp')->response($path_to_file);
+    
+        }
+        else
+        {
+            pnotify()->addWarning("Bestand is niet gevonden, Mogelijk is dit bestand verwijderd");
+        }
+    }
 
     public function downloadDocument($type, $id)
     {

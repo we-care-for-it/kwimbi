@@ -86,7 +86,7 @@ class Index extends Component
 
 
     public function countFilters(){
-        $this->cntFilters = ($this->filters['keyword'] ? 1 : 0) + ($this->filters['place'] ? 1 : 0)  ;
+        $this->cntFilters = ($this->filters['keyword'] ? 1 : 0) ;
       }
     
 

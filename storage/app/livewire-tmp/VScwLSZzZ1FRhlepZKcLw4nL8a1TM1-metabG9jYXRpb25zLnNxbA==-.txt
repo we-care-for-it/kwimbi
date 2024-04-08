@@ -1,0 +1,78 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Gegenereerd op: 08 apr 2024 om 14:19
+-- Serverversie: 8.0.31
+-- PHP-versie: 8.0.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `liftindexv20`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE IF NOT EXISTS `locations` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zipcode` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `complexnumber` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `management_id` int DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `building_type_id` int DEFAULT NULL,
+  `building_acces_type_id` int DEFAULT NULL,
+  `access_type_id` int DEFAULT NULL,
+  `remark` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `access_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gps_lat` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gps_lon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `levels` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `surface` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_contact` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location_key_lock` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `province` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `municipality` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `building_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `housenumber` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `building_access_type_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `construction_year` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `locations`
+--
+
+INSERT INTO `locations` (`id`, `created_at`, `updated_at`, `deleted_at`, `name`, `zipcode`, `place`, `address`, `slug`, `complexnumber`, `management_id`, `customer_id`, `building_type_id`, `building_acces_type_id`, `access_type_id`, `remark`, `access_code`, `gps_lat`, `gps_lon`, `levels`, `surface`, `access_contact`, `location_key_lock`, `province`, `municipality`, `building_type`, `housenumber`, `building_access_type_id`, `construction_year`, `image`) VALUES
+(1, NULL, '2024-04-03 11:43:14', NULL, 'Hotel West ', '2636DE', 'Schipluiden', 'Boeier', 'boeier-2636de-schipluiden-1', NULL, 1, 1, 1, NULL, NULL, NULL, NULL, '51.97816', '4.31389', NULL, '133', NULL, NULL, 'Zuid-Holland', 'Midden-Delfland', 'Woonfunctie', '14', NULL, '1980', 'uploads/locations/1/images.jpeg'),
+(2, NULL, NULL, NULL, 'Hotel Oost ', '1254DD', 'Den Haag', 'Huppiestraat 23', 'fffff', 'E12346', 1, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, '2024-03-11 13:35:15', '2024-03-11 13:35:15', NULL, 'dddddddddddd', NULL, NULL, NULL, 'fffgvvv', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, '2024-03-11 13:35:49', '2024-04-03 11:34:22', NULL, 'Jan jansen B.V.', '2636DE', 'Schipluiden', 'Boeier', 'boeier-2636de-schipluiden', NULL, 2, 2, NULL, NULL, NULL, NULL, NULL, '51.97816', '4.31389', NULL, '133', NULL, NULL, 'Zuid-Holland', 'Midden-Delfland', 'Woonfunctie', '14', NULL, '1980', 'uploads/locations/4/LTS Software B.V_17_1.jpg');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

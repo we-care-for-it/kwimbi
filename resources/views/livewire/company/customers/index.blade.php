@@ -71,8 +71,7 @@
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                 data-bs-target="#crudModal" wire:key="row-{{ $item->id }}">
+                              <x-table.row wire:click="edit({{$item->id}})"  wire:key="row-{{ $item->id }}">
                                  <x-table.cell>
                                  <a href = "/customer/{{$item->slug}}">   {{$item->name}}
                                  </x-table.cell>
