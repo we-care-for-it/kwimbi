@@ -2,7 +2,8 @@
 <div class="card-body">
                                  <div class="pt-2">
                                      <div class="  text-center">
-                                  <img style = "height: 200px;"  src="/assets/img/folders/1.svg"  >
+                                        <center>
+                                  <img style = "height: 200px;"  src="/assets/img/folders/1.svg"  ></center>
                                          <div class=" ">
 
                                              <h4>Geen gegevens gevonden</h4>
