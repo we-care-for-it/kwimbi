@@ -1,53 +1,51 @@
-<div class="container-fluid">
-
-
-  <div class="page-header     ">
-    <div class="row align-items-center ">
-    <div class="col">
-    <img src="/assets/img/icons/users.png" class="pageico">
-            <h1 class="page-header-title">  Projecten <span class="text-muted   ms-2 " style="font-weight: normal">  </span></h1>
-            <span class=" mb-2 text-muted"> Toon pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}} </b> met huidige filters <b> {{ $items->Total()}} </b> projecten gevonden</span>
-    
+<div>
+   <div class="page-header     ">
+      <div class="row align-items-center ">
+         <div class="col">
+ 
+         <h1 class="page-header-title pt-3">  Projecten  </h1>
+             </div>
+         <div class="col-auto">
+             
          </div>
-         <div class="col-auto pt-2">
-          
+         <div class="col-auto">
+         <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-soft-success btn-120" >
+            Toevoegen
+            </button>
          </div>
-         <div class="col-auto pt-2">
-            <form>
-               <!-- Search -->
-               <div class="input-group input-group-merge">
-                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                     }">
-                  <button type="button" class="input-group-append input-group-text">
-                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                  </button>
-
-                  
-               </div>
-
-
-
-               
-               <!-- End Search -->
-            </form>
-         </div>
-
-        
-        
       </div>
-   </div>
-   
-   
-   
-   
-   <div class="row pt-1">
+   </div><div class="row ">
       <div class="col-xl-12">
          <div class="card  p-0 m-0">
-            <div class="card-body p-0 ">
+
+         <div class="card-header card-header-content-md-between bg-light">
+               <div class="mb-2 mb-md-0">
+                  <form>
+                     <!-- Search -->
+                     <div class="input-group input-group-merge">
+                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                           }">
+                        <button type="button" class="input-group-append input-group-text">
+                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03667;"></i>
+                        </button>
+                     </div>
+                     <!-- End Search -->
+                  </form>
+               </div>
+               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
+                  <div class="d-flex align-items-center justify-content-center">
+                     <div wire:loading.delay="" class="loading_indicator_small"></div>
+                  </div>
+            
+                  <!-- End Dropdown -->
+               </div>
+            </div>
+
+
+            <div class="card-body  ">
                      <div class="row" wire:loading.class="loading-div">
                         <div class="col-md-12">
                            @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
@@ -97,7 +95,9 @@
                                     <x-table.row wire:key="row-{{ $item->id }}">
                                        <x-table.cell>
                                           <b><a href="/project/{{ $item->slug }}">{{$item->name}}</a></b><br>
-                                          {{$item->description}}
+                                         
+                                          {{ \Illuminate\Support\Str::limit($item->description, 150, $end='...') }}
+
                                        </x-table.cell>
                                        <x-table.cell>
                                           @if($item?->customer?->name) <a href="/customer/{{$item?->customer?->slug}}">

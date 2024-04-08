@@ -15,7 +15,7 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.company.managementCompanies.show');
+        return view('livewire.company.maintenanceCompanies.show');
     }
 
     public function mount(Request $request)

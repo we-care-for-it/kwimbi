@@ -1,15 +1,15 @@
-<div class="container-fluid">
+<div >
    <div class="page-header     ">
       <div class="row align-items-center ">
          <div class="col">
  
          <h1 class="page-header-title pt-3">  Onderhoudspartijen  </h1>
              </div>
+  
          <div class="col-auto">
-             
-         </div>
-         <div class="col-auto">
-       
+         <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"  class="btn btn-soft-success btn-120" >
+            Toevoegen
+            </button>
          </div>
       </div>
    </div>
@@ -38,9 +38,7 @@
                   <div class="d-flex align-items-center justify-content-center">
                      <div wire:loading.delay="" class="loading_indicator_small"></div>
                   </div>
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success" >
-            Toevoegen
-            </button>
+        
                   <!-- End Dropdown -->
                </div>
             </div>

@@ -12,13 +12,13 @@
                     </button></a>
                     
                 <a href = "/project/edit/{{$project->id}}">
-                <button type="button" class="btn   btn-link btn-sm"  >
+                <button type="button" class="btn   btn-soft-primary   btn-120 "  >
                     Wijzig
                 </button>
                 </a>
                 
-                <button type="button" onclick="history.back()" class="btn   btn-link btn-sm  ">
-                 Terug
+                <button type="button" onclick="history.back()" class="btn btn-soft-secondary     btn-icon    ">
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
 
             </div>
@@ -113,7 +113,7 @@
 
 </tr>
 <tr>
-<td collspan = "2"> 
+<td  > 
  Contactpersoon 
                             <div class = "clear-fix"></div>
                             @if($project->contact_person_name) {{$project->contact_person_name}} @else <span class=" badge bg-soft-primary text-primary ">Geen</span> @endif
@@ -140,13 +140,13 @@
         </div>
 
         <div class="col-md-9">
+
+            <div class="card">
+         
         <div class="card-header      ">
 
 Gegevens
 </div>
-
-            <div class="card">
-         
 
                 <div class="card-body">
  

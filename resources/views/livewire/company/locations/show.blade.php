@@ -14,10 +14,10 @@
                     </button>
                 </a>
 
-                <a href="/location/edit/{{$location->id}}" class="btn   btn-primary btn-sm btn-120 ">
+                <a href="/location/edit/{{$location->id}}" class="btn   btn-soft-primary   btn-120 ">
                     </i>Wijzigen</a>
 
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm    ">
+                <button type="button" onclick="history.back()" class="btn btn-soft-secondary    btn-icon    ">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
             </div>

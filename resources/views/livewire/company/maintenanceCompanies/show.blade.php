@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div >
     <div class="page-header     ">
         <div class="row align-items-center ">
             <div class="col">

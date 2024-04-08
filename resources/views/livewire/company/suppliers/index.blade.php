@@ -1,21 +1,25 @@
-<div class="container-fluid">
-   <div class="page-header     ">
+<div  >
+<div class="page-header  ">
       <div class="row align-items-center ">
          <div class="col">
  
-         <h1 class="page-header-title pt-3">  Leveranciers  </h1>
+         <h1 class="page-header-title pt-2">  Leveranciers  </h1>
              </div>
+ 
          <div class="col-auto">
-             
+         <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" class="btn btn-soft-success btn-120 " >
+            Toevoegen
+            </button>
          </div>
-         <div class="col-auto">
-       
-         </div>
+          
+                
       </div>
    </div>
+
+
    <div class="row ">
       <div class="col-xl-12">
-         <div class="card  p-0 m-0">
+         <div class="card  ">
 
          <div class="card-header card-header-content-md-between bg-light">
                <div class="mb-2 mb-md-0">
@@ -40,10 +44,6 @@
                   </div>
 
 
-                  <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success" >
-            Toevoegen
-            </button>
-                
                   <!-- End Dropdown -->
                </div>
             </div>

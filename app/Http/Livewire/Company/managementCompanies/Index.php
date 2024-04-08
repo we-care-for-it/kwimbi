@@ -208,11 +208,6 @@ $this->validate();
         $this->place        = $item->place;
         $this->name         = $item->name;
         $this->place        = $item->place;
- 
- 
-
-
-
     }
 
 

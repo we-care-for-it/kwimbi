@@ -6,12 +6,12 @@
                   Wijzig project
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-soft-success btn-sm" wire:click="save()">
+                      <button type="button" onclick="history.back()" class=" btn   btn-link btn-120" ">
+            Afbreken
+                </button>   <button type="button" class="btn btn-soft-success btn-120" wire:click="save()">
                     Opslaan
                 </button>
-                <button type="button" onclick="history.back()" class=" btn   btn-link btn-sm" ">
-            Afbreken
-                </button>
+       
             </div>
         </div>
     </div>
@@ -19,11 +19,11 @@
 
         <div class="col-md-3">         
             
-        <div class="card-header      ">
+
+        <div class = "card  ">        <div class="card-header      ">
 
 Gegevens
 </div>
-        <div class = "card  ">
         <div class = "card-body p2">
         <label class="pb-2  ">Begindatum</label>
         <input class="form-control @error('startdate') is-invalid @enderror" name="startdate" type="date"
@@ -52,13 +52,13 @@ Gegevens
         </div>
 
         <div class="col-md-9">
-        <div class="card-header      ">
+
+
+            <div class="card">
+                 <div class="card-header      ">
 
 Gegevens
 </div>
-
-            <div class="card">
-         
 
                 <div class="card-body">
  

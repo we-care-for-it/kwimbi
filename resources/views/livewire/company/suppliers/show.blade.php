@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div>
     <div class="page-header     ">
         <div class="row align-items-center ">
             <div class="col">
@@ -11,7 +11,7 @@
 
  
 
-                <button wire:loading.attr="disabled" type="button" class="btn   btn-primary btn btn-sm btn-120" data-bs-toggle="modal"
+                <button wire:loading.attr="disabled" type="button" class="btn   btn-soft-success  btn-120" data-bs-toggle="modal"
                     data-bs-target="#crudModal">
             Wijzig
                 </button>
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="card  p-0 m-0">
+    <div class="card  ">
         <div class="card-body ">
 
             <div class="row ">
