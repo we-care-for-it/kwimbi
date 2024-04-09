@@ -1,50 +1,62 @@
-<div >
-   <div class="page-header     ">
-      <div class="row align-items-center ">
-         <div class="col">
+<div>
+   <div class="page-header  my-3">
+
+
+   <div class="row">
+        <div class="col-sm-6">
+            <h1 class=" float-start page-header-title pt-2">Leveranciers</h1>
+        </div>
+        <div class="col-sm-6 ">
+            <div class = " float-end">    <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success   btn-120" data-bs-toggle="modal"
+                data-bs-target="#crudModal">
+                Toevoegen
+                </button> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
+                <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
  
-         <h1 class="page-header-title pt-3">  Beheerders  </h1>
-             </div>
-         <div class="col-auto">
-         <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal" style=" width: 150px; " class="btn btn-soft-success btn-120" >
-            Toevoegen
-            </button>  
-         </div>
-     
-      </div>
    </div>
+  
+
+
+ 
+
    <div class="row ">
       <div class="col-xl-12">
-         <div class="card  p-0 m-0">
-
-         <div class="card-header card-header-content-md-between bg-light">
-               <div class="mb-2 mb-md-0">
-                  <form>
-                     <!-- Search -->
-                     <div class="input-group input-group-merge">
-                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control" placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                           &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                           &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                           }">
-                        <button type="button" class="input-group-append input-group-text">
-                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03667;"></i>
-                        </button>
-                     </div>
-                     <!-- End Search -->
-                  </form>
-               </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay="" class="loading_indicator_small"></div>
-                  </div>
-         
-                  <!-- End Dropdown -->
-               </div>
-            </div>
-
-
+         <div class="card  ">
+ 
             <div class="card-body ">
+
+            <div class = "filter_bar ">
+
+<div class="row">
+<div class="col">
+
+    <form class = "float-start">
+            <div class="input-group input-group-merge ">
+               <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                  placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+               <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+               </button>
+            </div>
+         </form> 
+      </div>  
+
+</div>
+
+
+
+ 
+</div>
+
                <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
@@ -78,9 +90,9 @@
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row onclick="location='/management-companie/{{$item->id}}'" wire:key="row-{{ $item->id }}">
+                              <x-table.row onclick="location='/supplier/{{$item->id}}'" wire:key="row-{{ $item->id }}">
                                  <x-table.cell >
-                                 <a href = "/management-companie/{{$item->id}}">   {{$item->name}}</a>
+                                 <a href = "/supplier/{{$item->id}}">   {{$item->name}}</a>
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>
@@ -136,7 +148,7 @@
       </div>
    </div>
 
-   @livewire('company.managementCompanies.crudmodal',['object' => ''])
+   @livewire('company.suppliers.crudmodal',['object' => ''])
     
 </div>
  
