@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class=" ">
     <div class="page-header  my-3">
         <div class="row align-items-center">
             <div class="col">
@@ -6,10 +6,10 @@
                 Lift Wijzigen
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+                <button type="button" class="btn btn-soft-primary   btn-120" wire:click="save()">
                     Opslaan
                 </button>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
+                <button type="button" onclick="history.back()" class="btn btn-soft-secondary    ">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
             </div>

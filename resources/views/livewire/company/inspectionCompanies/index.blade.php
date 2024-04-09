@@ -4,12 +4,13 @@
 
    <div class="row">
         <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">Leveranciers</h1>
+            <h1 class=" float-start page-header-title pt-2">Tovoegen</h1>
         </div>
         <div class="col-sm-6 ">
-            <div class = " float-end">    <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success   btn-120" data-bs-toggle="modal"
+            <div class = " float-end">  
+            <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success  bnt-ico btn-120" data-bs-toggle="modal"
                 data-bs-target="#crudModal">
-                Toevoegen
+               Toevoegen
                 </button> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
                 <i class="fa-solid fa-arrow-left"></i>
                 </button>
@@ -27,15 +28,9 @@
    <div class="row ">
       <div class="col-xl-12">
          <div class="card  ">
- 
-            <div class="card-body ">
+         <div class="card-header  ">
 
-            <div class = "filter_bar ">
-
-<div class="row">
-<div class="col">
-
-    <form class = "float-start">
+         <form class = "float-start">
             <div class="input-group input-group-merge ">
                <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
                   placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
@@ -48,14 +43,11 @@
                </button>
             </div>
          </form> 
-      </div>  
 
 </div>
-
-
+            <div class="card-body ">
 
  
-</div>
 
                <div class="row ">
                   <div class="loading" wire:loading>

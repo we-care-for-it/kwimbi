@@ -1,27 +1,31 @@
 <div>
-    <div class="container-fluid">
-        <div class="page-header  my-3">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h1 class="page-header-title">
-                        Project aanmaken
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
-                        Opslaan
-                    </button>
-                    <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </button>
-                </div>
+   <div class="page-header  my-3">
+      <div class="row">
+         <div class="col-sm-6">
+            <h1 class=" float-start page-header-title pt-2">  Project aanmaken</h1>
+         </div>
+         <div class="col-sm-6 ">
+            <div class = " float-end">  
+               <a href  = "/project/create">
+               <button wire:loading.attr="disabled" wire:click="save()" type="button" class="btn    btn-soft-success  bnt-ico btn-120"">
+               Opslaan
+               </button></a> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
+               <i class="fa-solid fa-arrow-left"></i>
+               </button>
             </div>
-        </div>
-
+         </div>
+      </div>
+   </div>
+   
+   
+   <div>
+    
         <div class="row">
 
             <div class="col-md-3">
 
-        
+            <div class="card ">
+                    <div class="card-body ">
 
                     <label class="pb-2">Begin datum</label>
                     <input class="form-control @error('startdate') is-invalid @enderror" name="startdate" type="date"
@@ -70,7 +74,7 @@
  
 
 
-
+</div>           </div>
 
 
 

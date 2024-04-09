@@ -2,7 +2,7 @@
 
 
 
-<header id="header"   class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered ">
+<header id="header" style = "background: #F8F9FA"   class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered ">
     <div class="navbar-nav-wrap">
       <!-- Logo -->
  
