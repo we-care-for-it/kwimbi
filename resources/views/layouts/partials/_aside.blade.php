@@ -37,6 +37,7 @@
             <a wire:navigate class="nav-link @if(request()->is('location/*') or  request()->is('locations'))  active @endif" href="/locations"> <i class="bi-people nav-icon"></i> Locaties</a>
             <a wire:navigate class="nav-link @if(request()->is('customers') or  request()->is('customer/*'))  active @endif" href="/customers" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Relaties</span></a>
             <a wire:navigate class="nav-link @if(request()->is('projects/*') or  request()->is('projects'))  active @endif" href="/projects"> <i class="bi-people nav-icon"></i> Projecten</a>
+            <a wire:navigate class="nav-link @if(request()->is('knowledgebase/*') or  request()->is('knowledgebase'))  active @endif" href="/knowledgebase"> <i class="bi-people nav-icon"></i> Kennisdatabase</a>
          </div>
       </div>
       <div class="nav-item">

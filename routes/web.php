@@ -167,6 +167,15 @@ function ()
           
         });
 
+        Route::get('/knowledgebase', \App\Http\Livewire\Knowledgebase\Index::class);
+
+        // Route::group(['prefix' => 'location', ],
+        // function ()
+        // {
+        //     Route::get('/edit/{id}', \App\Http\Livewire\Company\Locations\Edit::class);
+        //     Route::get('/{slug}', \App\Http\Livewire\Company\Locations\Show::class);
+          
+        // });
 
 
 
