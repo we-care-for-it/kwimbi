@@ -2,7 +2,7 @@
    <div class="page-header  my-3">
        <div class="row">
            <div class="col-sm-6">
-               <h1 class="page-header-title pt-2"> @    @if($object?->fire_elevator)
+               <h1 class="page-header-title  "> @if($object?->fire_elevator)
               <div class="cnt_table_result">
 
                  <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
@@ -112,7 +112,7 @@
   <div class="card-body">
   <div class="row">
 
-     <div class="col-md-3 p-2 ">
+     <div class="col-md-3   ">
 
         <span class=" ">
 

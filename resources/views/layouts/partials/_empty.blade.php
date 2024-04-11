@@ -1,5 +1,4 @@
-<div class="card w-100">
-<div class="card-body">
+ 
                                  <div class="pt-2">
                                      <div class="  text-center">
                                         <center>
@@ -34,5 +33,4 @@
 
 
                                  </div>
-                             </div>
-</div>
+ 

@@ -238,7 +238,7 @@ function ()
          {
       
  
-           Route::get('{id}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
+           Route::get('{id}', \App\Http\Livewire\Company\managementCompanies\Show::class);
 
          });
 

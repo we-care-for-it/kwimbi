@@ -12,7 +12,7 @@
                     </button></a>
                     
                 <a href = "/project/edit/{{$project->id}}">
-                <button type="button" class="btn   btn-soft-primary   btn-120 "  >
+                <button type="button" class="btn   btn-soft-success   btn-120 "  >
                     Wijzig
                 </button>
                 </a>

@@ -1,25 +1,28 @@
-<div class="container-fluid">
-    <div class="page-header     ">
-        <div class="row align-items-center ">
-            <div class="col">
-
-                <h1 class="page-header-title pt-3"> {{$object->name}} </h1>
-            </div>
- 
-
-            <div class="col-auto  ">
-
- 
-
-                <button wire:loading.attr="disabled" type="button" class="btn   btn-primary btn btn-sm btn-120" data-bs-toggle="modal"
-                    data-bs-target="#crudModal">
-            Wijzig
+<div>
+    <div class="page-header  my-3">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1 class=" float-start page-header-title pt-2">{{$object?->name}}</h1>
+        </div>
+        <div class="col-sm-6 ">
+            <div class = " float-end"> <button wire:loading.attr="disabled" type="button" class="btn    btn-link     " data-bs-toggle="modal"
+                data-bs-target="#crudModal">
+                Wijzig
+                </button>
+                <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
+                <i class="fa-solid fa-arrow-left"></i>
                 </button>
             </div>
         </div>
     </div>
+    </div>
+ 
 
-    <div class="card  p-0 m-0">
+
+
+
+
+    <div class="card  ">
         <div class="card-body ">
 
             <div class="row ">
@@ -57,3 +60,5 @@
 </div>
 
 
+ 
+  
