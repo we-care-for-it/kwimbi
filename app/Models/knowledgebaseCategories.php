@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class knowledgebaseCategories extends Model
+
+class knowledgebaseCategories extends  Model implements Auditable
 {
 
     use HasFactory;
     use HasSlug;
+    use \OwenIt\Auditing\Auditable;
+
 
     public function getSlugOptions() : SlugOptions
     {
