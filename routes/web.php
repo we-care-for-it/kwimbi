@@ -173,8 +173,9 @@ function ()
        function ()
          {
           Route::get('/article/{slug}', \App\Http\Livewire\Knowledgebase\Articles\Show::class);
-        //     Route::get('/{slug}', \App\Http\Livewire\Company\Locations\Show::class);
-
+          Route::get('/categories', \App\Http\Livewire\Knowledgebase\Categories\Index::class);
+          Route::get('/categorie/{slug}', \App\Http\Livewire\Knowledgebase\Categories\Show::class);
+     
      });
 
 

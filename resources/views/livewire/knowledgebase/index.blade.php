@@ -1,13 +1,43 @@
 <div>
-<div class="page-header  my-3">
-   <div class="row">
-      <div class="col-sm-6">
-         <h1 class="page-header-title pt-2">Kennisdatabase</h1>
-      </div>
-   </div>
-</div>
+   <div class="page-header  my-3">
+
+
+   <div class="row ">
+        <div class="col-sm-6">
+            <h1 class=" float-start page-header-title pt-2">Kennisdatabase categories</h1>
+        </div>
+        <div class="col-sm-6 ">
+            <div class = " float-end">
+            <a href = "/knowledgebase/categories">
+            <button type="button"  class="  btn btn-link     ">
+                Alle categorieën 
+                </button></a>
+
+
+                <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success   btn-120" data-bs-toggle="modal"
+                data-bs-target="#crudModal">
+                Toevoegen
+                </button> 
+                
+          
+                
+                
+                
+                <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
+
+
+
+                <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+ 
+   
 @include('livewire.knowledgebase.articles.search')
-<div class="loading" wire:loading>
+<div class="loading" wire:loading pt-0>
    @include('layouts.partials._loading')
 </div>
 @if(count($categories))
@@ -31,7 +61,7 @@
 
 
          <div class = "p-2 text-end">
-                <a href = "/knowledgebase/article/category/{{$categorie->slug}}">Meer {{$categorie->name}}....</a>
+                <a href = "/knowledgebase/categorie/{{$categorie->slug}}">Meer {{$categorie->name}}....</a>
                 </a>
 
              </div>
