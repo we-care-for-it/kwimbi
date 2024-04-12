@@ -30,15 +30,21 @@
          <div class="card h-80 card-hover">
             <div class = "card-header">{{ $letter }}</div>
      
- <div class  = "card-body"><ul>
+ <div class  = "card-body p-2"><ul>
     @foreach($group as $category)
 
 
-    <li class="list-inline-item d-inline-flex align-items-center">
-                  <span class="legend-indicator bg-secondary"></span>
-                  <a href = "/knowledgebase/categorie/{{$category->id}}">{{ $category['name'] }}</a>
-               </li>
 
+    <div class = "p-2 clear-fix border-bottom">
+               <li class="list-inline-item d-inline-flex align-items-center">
+                  <span class="legend-indicator bg-secondary"></span>
+                  <a href = "/knowledgebase/categorie/{{$category->slug}}">  {{ $category['name'] }}
+                  </a>
+               </li>
+            </div>
+
+
+ 
 
    
 
