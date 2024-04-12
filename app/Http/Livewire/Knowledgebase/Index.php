@@ -13,7 +13,7 @@ class Index extends Component
     {
         return view('livewire.knowledgebase.index',
     [
-        'categories' => knowledgebaseCategories::get()
+        'categories' => knowledgebaseCategories::where('is_active',1 )->get()
     ]);
     }
 }

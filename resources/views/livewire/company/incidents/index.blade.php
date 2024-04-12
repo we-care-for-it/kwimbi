@@ -7,7 +7,7 @@
             <h1 class=" float-start page-header-title pt-2">Stoeringen</h1>
         </div>
         <div class="col-sm-6 ">
-            <div class = " float-end">  
+            <div class = " float-end">
             <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
                 <i class="fa-solid fa-arrow-left"></i>
                 </button>
@@ -15,7 +15,7 @@
         </div>
     </div>
 
- 
+
    </div>
 
 
@@ -25,7 +25,7 @@
          <div class="card  p-0 m-0">
             <div class="card-body  ">
 
-            
+
             <div class = "filter_bar ">
 
 <div class="row">
@@ -43,14 +43,14 @@
                   <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
                </button>
             </div>
-         </form> 
-      </div>  
+         </form>
+      </div>
 
 </div>
 
 
 
- 
+
 </div>
 
                <div class="row ">
@@ -85,7 +85,7 @@
                   <x-table.heading>Status
                   </x-table.heading>
                   <x-table.heading>
-                  </x-table.heading> 
+                  </x-table.heading>
                               </x-slot>
                               <x-slot name="body">
                                  @foreach ($items as $incident)
@@ -116,8 +116,8 @@
                         <br>
                         @endif
                       </a>
-                    
-                  
+
+
 
                         @if($incident?->elevator?->address?->zipcode)
                         {{ $incident?->elevator?->address?->zipcode }},
@@ -179,25 +179,15 @@
                   </x-table.cell>
 
 
-                  <x-table.cell>
-<div style = "float: right">
-<div class="dropdown">
-<button type="button" onclick="window.location='/incident/{{ $incident->id }}';"  class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="connectionsDropdown3" data-bs-toggle="dropdown" aria-expanded="false">
-<i class="bi-eye"></i>
-</button>
- 
-                                          </div>
-                                       </div>
-                                    </x-table.cell>
 
 
                                     </x-table.row>
-                                 @endforeach 
+                                 @endforeach
                               </x-slot>
                            </x-table>
                            @else
                            <div class="flex justify-center items-center space-x-2">
-                                
+
                                  <center>
                                     <div>
                                        <img src='/assets/img/illu/1-1-740x592.png'
@@ -207,17 +197,17 @@
                                        @if($this->cntFilters)
                                        Geen gegevens gevonden met de huidige filters...
                                        <hr>
-                              
+
                                        @else
                                        Geen storingen gevonden in het systeem. Een storing aanmaken kan via het liften overzicht
                                        @endif
 
-                                        
+
                                     </div>
                                  </center>
 
 
-                     
+
                            </div>
                            @endif
                         </div>
@@ -225,12 +215,12 @@
                   </div>
                </div>
             </div>
-         
+
             <div class="card-footer pt-3">
 
 <div class="clearfix  ">
    <div class="float-start">
-      
+
    @if($items->links())
       <p class="float-start"> Pagina <b> {{ $items->currentPage()}} </b> van <b> {{ $items->lastPage()}}
          </b>
@@ -253,13 +243,13 @@
             <div class="offcanvas-body">
                <small class="text-cap text-body pt-3">Trefwoord</small>
                <input  type="search" wire:model.live="filters.keyword" class="form-control" placeholder="Zoek op trefwoord" aria-label="Zoek op trefwoord">
-               
+
                <small class="text-cap text-body pt-3">Status</small>
                <div class="tom-select-custom " wire:ignore >
                   <select style = "height: 40px;" class="js-select form-select " wire:model.live="filters.status_id" multiple data-hs-tom-select-options='{
                      "placeholder": "Alle statussen"
                      }'>
-         
+
 
 
           <option value="0">Nieuw
@@ -300,6 +290,5 @@
    </div>
 
 
-    
-</div>
 
+</div>

@@ -19,16 +19,11 @@ class knowledgebaseCategories extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
-    
+
     public function articles()
     {
-      return $this->hasMany(knowledgebaseArticles::class, 'category_id', 'id')->orderby('id', 'desc');
+      return $this->hasMany(knowledgebaseArticles::class, 'category_id', 'id')->where('is_active',1 )->orderby('id', 'desc');
     }
 
 
 }
- 
-
-
-
- 
