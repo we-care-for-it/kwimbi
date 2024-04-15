@@ -4,7 +4,7 @@
 
    <div class="row">
         <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">Tovoegen</h1>
+            <h1 class=" float-start page-header-title ">Keuringinstanties</h1>
         </div>
         <div class="col-sm-6 ">
             <div class = " float-end">  

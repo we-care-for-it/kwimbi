@@ -79,9 +79,11 @@ body {
   padding-top: 0px!important; 
   margin-top: 0px!important;
   height: 30px;
-
+  margin-top: 0px!important; 
  
   border: 0px!important;;
+  border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7)!important;;
+
 }
 .card-hover:hover {
   background-color: rgb(251, 251, 251) ;
@@ -177,14 +179,20 @@ body {
 
 }
 
+ 
 
-/* 
+.navbar-nav{
+
+  margin: 10px; 
+}
+
+ 
 .page-header-title{
-  padding-top: 20px;
+  padding-top: 15px;
 
   font-weight: normal;  color: gray!important;
   font-weight: lighter!important;
-} */
+}  
 h1{
   font-weight:normal!important;;
   font-size: 16px!important;;
@@ -210,11 +218,11 @@ h1{
 }
  @media only screen and (min-width: 768px){ 
   .page-header{
-    height:40px!important;
+    height:60px!important;
     border-bottom: 0px solid #EFEFEF!important;
     padding-bottom: 0px!important;
     margin-bottom: 10px!important;
-
+    border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7)!important;;
   
      
   }

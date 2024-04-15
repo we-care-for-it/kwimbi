@@ -2,7 +2,7 @@
     <div class="page-header  my-3">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="page-header-title pt-2"> @if($location->name)
+                <h1 class="page-header-title  "> @if($location->name)
                     {{$location->name}} @else Geen naam @endif </h1>
             </div>
 
@@ -14,12 +14,10 @@
                     </button>
                 </a>
 
-                <a href="/location/edit/{{$location->id}}" class="btn   btn-soft-primary   btn-120 ">
+                <a href="/location/edit/{{$location->id}}" class="btn    btn-link    btn-120 ">
                     </i>Wijzigen</a>
 
-                <button type="button" onclick="history.back()" class="btn btn-soft-secondary    btn-icon    ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
+
             </div>
         </div>
     </div>

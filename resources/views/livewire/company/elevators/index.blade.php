@@ -47,33 +47,7 @@
 
 
             <div class="card-body  "> 
-            <div class = "filter_bar ">
-
-<div class="row">
-<div class="col">
-
-    <form class = "float-start">
-            <div class="input-group input-group-merge ">
-               <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                  placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                     }">
-               <button type="button" class="input-group-append input-group-text">
-                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-               </button>
-            </div>
-         </form> 
-      </div>  
-
-</div>
-
-
-
- 
-</div>
-               <div class="row ">
+              <div class="row ">
                   <div class="loading" wire:loading>
                      <img style="height: 190px" src="/assets/img/loading_elevator.gif">
                      <br>

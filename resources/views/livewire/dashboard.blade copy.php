@@ -41,7 +41,33 @@
                  
 
 
-   
+    
+  
+   <div class = "bg-light border  p-5  "  >
+        <div class = "row"  >
+
+     
+          <form  >
+
+          
+                <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                      placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                        &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                        &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                        }">
+                  <button type="button" class="input-group-append input-group-text">
+                      <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                      <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+                </div>
+          </form> 
+ 
+  </div> 
+
+ 
+
+
    <div class="row pt-3">
       <div class="col-md-6">
          <div class="card" style = "height: 480px;">

@@ -14,7 +14,7 @@
     <div class="row gy-3 mb-2 ">
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/management-companies'">
+        <div class="card  p-1 border card-button" onclick="location='/settings/management-companies'">
           <div class="p-2 ">
             <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
               src="/assets/img/icons/voice_presentation.svg">
@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/maintenancy-companies'">
+        <div class="card  p-1 border card-button" onclick="location='/settings/maintenancy-companies'">
           <div class="p-2 ">
             <img class="border-right" style="max-height:40px; width: 40px; float: left; padding-right: 20px"
               src="/assets/img/icons/support.svg">
@@ -34,7 +34,7 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/suppliers'">
+        <div class="card  p-1 border card-button" onclick="location='/settings/suppliers'">
           <div class="p-2 ">
             <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
               src="/assets/img/icons/paid.svg">
@@ -44,7 +44,7 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/management-companies'">
+        <div class="card  p-1 border card-button" onclick="location='/settings/management-companies'">
           <div class="p-2 ">
             <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
               src="/assets/img/icons/department.svg">
@@ -54,7 +54,7 @@
       </div>
 
       <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card   n p-1 border card-button" onclick="location='/inspection-companies'">
+        <div class="card   n p-1 border card-button" onclick="location='/settings/inspection-companies'">
           <div class="p-2 ">
             <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
               src="/assets/img/icons/diploma_1.svg">

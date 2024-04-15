@@ -2,16 +2,14 @@
     <div class="page-header  my-3">
     <div class="row">
         <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">{{$object?->name}}</h1>
+            <h1 class=" float-start page-header-title  ">{{$object?->name}}</h1>
         </div>
         <div class="col-sm-6 ">
-            <div class = " float-end"> <button wire:loading.attr="disabled" type="button" class="btn    btn-link     " data-bs-toggle="modal"
+            <div class = " float-end"> <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-warning     " data-bs-toggle="modal"
                 data-bs-target="#crudModal">
                 Wijzig
                 </button>
-                <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
+          
             </div>
         </div>
     </div>

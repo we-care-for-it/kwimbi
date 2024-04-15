@@ -76,15 +76,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
 
     });
 
-    //Suppliers
-    Route::get('/suppliers', \App\Http\Livewire\Company\Suppliers\Index::class);
-    Route::group(['prefix' => 'supplier', ],
-    function ()
-    {
-      //  Route::get('edit/{slug}', \App\Http\Livewire\Company\Suppliers\Edit::class);
-       Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
-     });
-
+ 
     //Addressess
     Route::get('/addresses', \App\Http\Livewire\Company\Addresses\Index::class);
     Route::group(['prefix' => 'address', ],
@@ -101,6 +93,20 @@ Route::group(['prefix' => 'settings', ],
 function ()
 {
 
+
+
+
+       //Suppliers
+       Route::get('/suppliers', \App\Http\Livewire\Company\Suppliers\Index::class);
+       Route::group(['prefix' => 'supplier', ],
+       function ()
+       {
+         //  Route::get('edit/{slug}', \App\Http\Livewire\Company\Suppliers\Edit::class);
+          Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
+        });
+
+        
+        
     Route::get('/departments', \App\Http\Livewire\Settings\Departments::class);
     Route::get('/warehousings', \App\Http\Livewire\Settings\Warehousings::class);
 
@@ -231,7 +237,8 @@ function ()
 
 
          //Management companies
-
+         Route::group(['prefix' => 'settings', ],   function ()
+         {
          Route::get('/management-companies', \App\Http\Livewire\Company\managementCompanies\Index::class);
          Route::group(['prefix' => 'management-companie', ],
          function ()
@@ -265,7 +272,7 @@ function ()
          });
 
 
-         Route::get('/inspection-companies', \App\Http\Livewire\Company\inspectionCompanies\Index::class);
+         Route::get('inspection-companies', \App\Http\Livewire\Company\inspectionCompanies\Index::class);
          Route::group(['prefix' => 'inspection-companie', ],
          function ()
          {
@@ -276,7 +283,7 @@ function ()
           //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
          });
 
-
+        });
 
 
 

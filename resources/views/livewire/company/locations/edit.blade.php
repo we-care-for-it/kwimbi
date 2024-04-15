@@ -2,7 +2,7 @@
     <div class="page-header  my-3">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="page-header-title pt-2"> {{$data->name}} -     {{$data->address}} {{$data->place}}</h1>
+                <h1 class="page-header-title "> {{$data->name}} -     {{$data->address}} {{$data->place}}</h1>
             </div>
 
             <div class="col-sm-6  float-end text-end">

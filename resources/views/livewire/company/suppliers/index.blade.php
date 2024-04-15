@@ -4,16 +4,16 @@
 
    <div class="row">
         <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">Tovoegen</h1>
+            <h1 class=" page-header-title pt-2">Leveranciers</h1> 
+    
+      
         </div>
         <div class="col-sm-6 ">
             <div class = " float-end">  
-            <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success  bnt-ico btn-120" data-bs-toggle="modal"
+            <button  type="button" class="btn    btn-soft-success  bnt-ico btn-120" data-bs-toggle="modal"
                 data-bs-target="#crudModal">
                Toevoegen
-                </button> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
+                </button> 
             </div>
         </div>
     </div>
@@ -82,9 +82,9 @@
                            </x-slot>
                            <x-slot name="body">
                               @foreach ($items as $item)
-                              <x-table.row onclick="location='/supplier/{{$item->id}}'" wire:key="row-{{ $item->id }}">
+                              <x-table.row onclick="location='/settings/supplier/{{$item->id}}'" wire:key="row-{{ $item->id }}">
                                  <x-table.cell >
-                                 <a href = "/supplier/{{$item->id}}">   {{$item->name}}</a>
+                                 <a href = "/settings/supplier/{{$item->id}}">   {{$item->name}}</a>
                                  </x-table.cell>
                                  <x-table.cell>
                                     {{$item->address}}<br>

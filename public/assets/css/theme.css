@@ -25847,9 +25847,10 @@ label.form-control,
   Page Header
 ------------------------------------*/
 .page-header {
-  border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7);
+
   padding-bottom: 2rem;
   margin-bottom: 2.25rem;
+ 
 }
 .page-header .breadcrumb {
   margin-bottom: 0.25rem;
