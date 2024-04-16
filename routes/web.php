@@ -101,7 +101,7 @@ function ()
        Route::group(['prefix' => 'supplier', ],
        function ()
        {
-         //  Route::get('edit/{slug}', \App\Http\Livewire\Company\Suppliers\Edit::class);
+     //   Route::get('add', \App\Http\Livewire\Company\Suppliers\Add::class);
           Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
         });
 

@@ -13,7 +13,7 @@
                      <div>
                         <label class="pb-2">Naam</label>
                         <input wire:model="data.name" class="form-control    @error('name') is-invalid   @enderror  ">
-                        @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        @error('data.name') <span class="invalid-feedback">ssssssss</span> @enderror
                      </div>
                   </div>
                </div>

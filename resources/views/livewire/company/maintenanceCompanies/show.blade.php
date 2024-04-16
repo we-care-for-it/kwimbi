@@ -1,26 +1,32 @@
-<div>
-    <div class="page-header  my-3">
-    <div class="row">
-        <div class="col-sm-6">
-            <h1 class=" float-start page-header-title  ">{{$object?->name}}</h1>
-        </div>
-        <div class="col-sm-6 ">
-            <div class = " float-end"> <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-warning     " data-bs-toggle="modal"
-                data-bs-target="#crudModal">
-                Wijzig
+<div class="container-flsuid">
+    <div class="page-header     ">
+        <div class="row align-items-center ">
+            <div class="col">
+
+                <h1 class="page-header-title  "> {{$object->name}} </h1>
+            </div>
+ 
+
+            <div class="col-auto  ">
+
+ 
+
+                <button wire:loading.attr="disabled" type="button" class="btn   btn-soft-success btn btn-sm btn-120" data-bs-toggle="modal"
+                    data-bs-target="#crudModal">
+            Wijzig
                 </button>
-          
+
+
+                <button type="button" onclick="history.back()" class="  btn btn-soft-secondary   btn-sm  btn-icon    ">
+                <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+
             </div>
         </div>
     </div>
-    </div>
- 
 
-
-
-
-
-    <div class="card  ">
+    <div class="card  p-0 m-0">
         <div class="card-body ">
 
             <div class="row ">
@@ -47,16 +53,27 @@
         </div>
  
 
-        @livewire('company.suppliers.crudmodal', ['object' => $object])
+        @livewire('company.managementCompanies.crudmodal', ['object' => $object])
 
 <div class = "card mt-3">
 
 <div class = "card-header">Gekoppelde objecten</div>
-<div class = "card-body p-2">Functie nog niet beschikbaar</div>
+<div class = "card-body p-2"> 
 
-</div>
-</div>
-
-
+<div class="  text-center p-5">
  
-  
+
+<img src="/assets/img/folders/1.svg">
+                                 
+                                        
+
+                                            <p class="">Geen objecten</p>
+
+                                   
+                                
+                            </div></div>
+
+</div>
+</div>
+
+
