@@ -10,14 +10,15 @@
   <script src="/assets/vendor/hs-count-characters/dist/js/hs-count-characters.js"></script>
    <script src="/node_modules/chart.js/dist/Chart.min.js"></script>
   <script src="/assets/js/hs.chartjs.js"></script>
- 
+  <script src="/assets/vendor/quill/dist/quill.min.js"></script>
+  <script src="/assets/js/hs.quill.js"></script>
 <script>
     (function() {
 
 
         
       HSBsDropdown.init();
-
+      HSCore.components.HSQuill.init('.js-quill');
       HSCore.components.HSTomSelect.init(".js-select");
       new HSFormSearch('.js-form-search');
       new HSCountCharacters('.js-count-characters')
