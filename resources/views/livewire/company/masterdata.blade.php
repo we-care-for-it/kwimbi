@@ -1,111 +1,161 @@
 <div ">
-  <div class="page-header">
-    <div class="row align-items-center  ">
-      <div class="col">
-        <h1 class="page-header-title ">
-          Instellingen</h1>
-        Hier nog een stukje tekst over deze pagina
-      </div>
+  <div class=" page-header">
+  <div class="row align-items-center  ">
+    <div class="col">
+      <h1 class="page-header-title ">Instellingen</h1>
 
+    </div>
+
+  </div>
+</div>
+
+<div class="row gx-5">
+
+  <div class="col-lg-3 col-xl-3 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Basigegevens
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group ">
+          <a href="/settings/maintenancy-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Onderhoudspartijen</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/inspection-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Keuringsinstanties</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Beheerders</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/suppliers"
+            class="list-group-item list-group-item-action border-0 border-bottom">Leveranciers</a>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <div class="container overflow-hidden">
-  <div class="row gx-5">
+  <div class="col-lg-3 col-xl-3 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Werkbonnen
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group ">
+          <a href="/settings/workorders/statusses"
+            class="list-group-item list-group-item-action border-0 border-bottom">Statussen</a>
+        </div>
 
-      <div class="col-lg-3 col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/settings/management-companies'">
-          <div class="p-2 ">
-            <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
-              src="/assets/img/icons/factory.svg">
-            <h1>Beheerders</h1>
-          </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Oplossingen</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Uursoorten</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Werktypes</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Foutmeldingen</a>
         </div>
       </div>
-
-      <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/settings/maintenancy-companies'">
-          <div class="p-2 ">
-            <img class="border-right" style="max-height:40px; width: 40px; float: left; padding-right: 20px"
-              src="/assets/img/icons/factory.svg">
-            <h1>Onderhoudspartijen</h1>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/settings/suppliers'">
-          <div class="p-2 ">
-            <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
-              src="/assets/img/icons/factory.svg">
-            <h1>Leveranciers</h1>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card  p-1 border card-button" onclick="location='/settings/management-companies'">
-          <div class="p-2 ">
-            <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
-              src="/assets/img/icons/factory.svg">
-            <h1>Beheerders</h1>Objecten leveranciers
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3  col-xl-3 col-md-6">
-        <div class="card   n p-1 border card-button" onclick="location='/settings/inspection-companies'">
-          <div class="p-2 ">
-            <img class="border-right" style="max-height: 70px; width: 70px; float: left; padding-right: 20px"
-              src="/assets/img/icons/factory.svg">
-            <h1>Keuringsinstanties</h1> Objecten keuringsinstanties
-          </div>
-        </div>
-      </div>
-
- 
- 
-      <div class="col-lg-3  col-xl-3 col-md-6">
-
-        <div class="card">
-          <div class="card-header">
-            Projecten
-          </div>
-          <div class="card-body p-2">
-            <div class="list-group ">
-              <a href="/settings/workorders/statusses"
-                class="list-group-item list-group-item-action border-0 border-bottom">Statusses</a>
-            </div>
-          </div>
-        </div>
-
- 
-
-      <!-- <div class="col-lg-3  col-xl-3 col-md-6">
-      <div class="card">
-          <div class="card-header">
-            Werkbonnen
-          </div>
-          <div class="card-body p-2">
-            <div class="list-group ">
-              <a href="/settings/workorders/statusses"
-                class="list-group-item list-group-item-action border-0 border-bottom">Statusses</a>
-              <a href="/settings/workorders/solutions"
-                class="list-group-item list-group-item-action border-0 border-bottom">Oplossingen</a>
-              <a href="/settings/workorders/errors"
-                class="list-group-item list-group-item-action border-0 border-bottom">Foutmeldingen</a>
-              <a href="/settings/workorders/worktypes"
-                class="list-group-item list-group-item-action border-0 border-bottom">Werktypes</a>
-              <a href="/settings/workorders/paymethods"
-                class="list-group-item list-group-item-action border-0 border-bottom">Betaalmethodes</a>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-
       
-      <!-- <div class="col-lg-3  col-xl-3 col-md-6">
+    </div>
+  </div>
+
+
+  <div class="col-lg-3 col-xl-3 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Gebruikers
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group ">
+          <a href="/settings/workorders/statusses"
+            class="list-group-item list-group-item-action border-0 border-bottom">Medewerkers</a>
+        </div>
+
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Afdelingen</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Rollen</a>
+        </div>
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Rechten</a>
+        </div>
+
+     
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+  <div class="col-lg-3 col-xl-3 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Artikelen
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group ">
+          <a href="/settings/workorders/statusses"
+            class="list-group-item list-group-item-action border-0 border-bottom">Magazijnen</a>
+        </div>
+
+
+        <div class="list-group ">
+          <a href="/settings/management-companies"
+            class="list-group-item list-group-item-action border-0 border-bottom">Categorieen</a>
+        </div>
+ 
+
+     
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+  <div class="col-lg-3  col-xl-3 col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        Projecten
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group ">
+          <a href="/settings/workorders/statusses"
+            class="list-group-item list-group-item-action border-0 border-bottom">Statusses</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-lg-3  col-xl-3 col-md-6">
       <div class="card">
           <div class="card-header">
             Werkbonnen
@@ -127,7 +177,26 @@
         </div>
       </div> -->
 
- 
+    <!-- <div class="col-lg-3  col-xl-3 col-md-6">
+      <div class="card">
+          <div class="card-header">
+            Werkbonnen
+          </div>
+          <div class="card-body p-2">
+            <div class="list-group ">
+              <a href="/settings/workorders/statusses"
+                class="list-group-item list-group-item-action border-0 border-bottom">Statusses</a>
+              <a href="/settings/workorders/solutions"
+                class="list-group-item list-group-item-action border-0 border-bottom">Oplossingen</a>
+              <a href="/settings/workorders/errors"
+                class="list-group-item list-group-item-action border-0 border-bottom">Foutmeldingen</a>
+              <a href="/settings/workorders/worktypes"
+                class="list-group-item list-group-item-action border-0 border-bottom">Werktypes</a>
+              <a href="/settings/workorders/paymethods"
+                class="list-group-item list-group-item-action border-0 border-bottom">Betaalmethodes</a>
+            </div>
+          </div>
+        </div>
+      </div> -->
 
-       
-    </div>
+  </div>
