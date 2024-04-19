@@ -8,14 +8,12 @@
             </div>
          <div class="col-auto">
          
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-soft-success btn-120" >
+               
+         <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-link   btn-120" >
             Toevoegen
             </button>
 
-
-            <button type="button" onclick="history.back()" class="  btn btn-soft-secondary btn-sm  btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
+ 
 
          </div>
       </div>
@@ -23,7 +21,7 @@
    <div class="row ">
       <div class="col-xl-12">
          <div class="card">
-            <div class="card-header card-header-content-md-between bg-light">
+            <div class="card-header card-header-content-md-between ">
                <div class="mb-2 mb-md-0">
                   <form>
                      <!-- Search -->
@@ -49,7 +47,7 @@
                   <!-- End Dropdown -->
                </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-2">
                <div class="row">
                   <div>
 

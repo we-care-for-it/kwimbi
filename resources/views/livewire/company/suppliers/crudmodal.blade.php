@@ -78,7 +78,7 @@
                </button>
                @endif
                <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
-               <button class="btn btn-soft-success btn-120    " wire:click="save()" type="button">
+               <button class="btn btn-primary btn-120    " wire:click="save()" type="button">
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>

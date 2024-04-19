@@ -1,20 +1,25 @@
 <div>
-    <div class="page-header  my-3">
+    <div class="page-header ">
         <div class="row">
             <div class="col-sm-6">
                 <h1 class="page-header-title  "> @if($location->name)
-                    {{$location->name}} @else Geen naam @endif </h1>
+                    {{$location->name}} @else Geen naam @endif
+                    </h1>
+             
+
             </div>
 
             <div class="col-sm-6  float-end text-end">
 
                 <a href="/locations">
-                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  ">
+                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  btn-sm ">
                         Alle locaties
                     </button>
                 </a>
+            
+        
 
-                <a href="/location/edit/{{$location->id}}" class="btn    btn-link    btn-120 ">
+                <a href="/location/edit/{{$location->id}}" class="btn  btn-link btn-default   btn-120 ">
                     </i>Wijzigen</a>
 
 

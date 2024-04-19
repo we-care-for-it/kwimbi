@@ -1,13 +1,21 @@
-<div ">
-  <div class=" page-header">
-  <div class="row align-items-center  ">
-    <div class="col">
-      <h1 class="page-header-title ">Instellingen</h1>
+<div>
+<div class="page-header">
+      <div class="row align-items-center">
 
-    </div>
+         <div class="col">
 
-  </div>
-</div>
+            <h1 class="page-header-title"> Basisgegevens</h1>
+         </div>
+         <div class="col-auto">
+
+     
+
+            
+
+         </div>
+      </div>
+   </div>
+
 
 <div class="row gx-5">
 

@@ -10,21 +10,22 @@
         <div class="col-sm-6 ">
             <div class = " float-end">  
 
-            <a href = "/elevator/create">
-            <button type="button" class="btn   btn-primary btn-ico btn-120 " >
+     
+
+   
+ 
+
+            <button type="button" onclick="history.back()" class="  btn  btn-soft-secondary    btn-icon    ">
+                <i class="fa-solid fa-arrow-left"></i>
+                </button>
+
+
+                <a href = "/elevator/create">
+            <button type="button" class="btn btn-primary  btn-120 " >
            Toevoegen
             </button></a>
 
-            <button type="button" class="btn btn-soft-primary    filter_btn"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-                     <i class="bi-filter me-1"></i>   Filter
-                     <span class="badge bg-soft-dark text-light rounded-circle ms-1">{{$cntFilters}}</span>
-                     </button>
 
- 
-
-            <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
             </div>
         </div>
     </div>

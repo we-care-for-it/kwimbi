@@ -8,14 +8,12 @@
             </div>
          <div class="col-auto">
          
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-soft-success btn-120" >
+            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-link   btn-120" >
             Toevoegen
             </button>
 
 
-            <button type="button" onclick="history.back()" class="  btn btn-soft-secondary btn-sm  btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
+        
 
          </div>
       </div>
@@ -101,7 +99,7 @@
                                     <x-table.cell>
                                        <div style = "float: right">
                                        <a href = "/settings/supplier/{{$item->id}}">
-                                       <button type="button"  class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" >
+                                       <button type="button"  class="btn btn-ghost-warning btn-icon  rounded-circle p-0 m-0" >
                             <i class="fa-solid fa-eye"></i>  
                             </button></a>
                                        </div>

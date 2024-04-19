@@ -13,7 +13,7 @@
                      <div>
                         <label class="pb-2">Naam</label>
                         <input wire:model="data.name" class="form-control    @error('name') is-invalid   @enderror  ">
-                        @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        @error('data.name') <span class="invalid-feedback">ssssssss</span> @enderror
                      </div>
                   </div>
                </div>
@@ -78,7 +78,7 @@
                </button>
                @endif
                <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
-               <button class="btn btn-soft-success btn-120    " wire:click="save()" type="button">
+               <button class="btn btn-primary btn-120    " wire:click="save()" type="button">
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>

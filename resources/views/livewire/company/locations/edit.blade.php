@@ -1,143 +1,117 @@
 <div>
-    <div class="page-header  my-3">
+    <div class="page-header   ">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="page-header-title "> {{$data->name}} -     {{$data->address}} {{$data->place}}</h1>
+                <h1 class="page-header-title "> {{$data->name}} - {{$data->address}} {{$data->place}}</h1>
             </div>
 
-            <div class="col-sm-6  float-end text-end">
+            <div class="col-sm-6   text-end">
+                <button type="button" onclick="history.back()"
+                    class="text-danger btn btn-link btn-default btn-squared   btn-sm ">
+                    <i class="fa-solid fa-rotate-left"></i> Afbreken
+                </button>
 
-                <a href="/locations">
-                    <button type="button" class="btn btn-link btn-default btn-squared  btn ">
-                        Alle locaties
-                    </button>
-                </a>
+                <button wire:click="save()" wire:loading.attr="disabled" class="btn   btn-primary b  btn-120" " 
+         wire:click=" addUpload()" type="button">
+                    <div wire:loading>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </div>
+                    Opslaan
+                </button>
 
-
-                <button    wire:click = "save()"    wire:loading.attr="disabled"  class="btn   btn-soft-success btn-sm btn-120"    " 
-         wire:click="addUpload()" type="button">
-      <div wire:loading >
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      </div>
-      Opslaan
-      </button>
-
-
-            
             </div>
         </div>
     </div>
-    
-    
-    
- 
-
-
 
     <div class="row  ">
 
         <div class="col-md-3 ">
 
+            <div class="card">
+                <div class="card-header card-header-content-md-between    ">
 
+                    Afbeelding
+                </div>
 
+                <div class="card-body text-center">
+                    <label class="avatar avatar-xxl">
 
+                        @if ($image_db || $image )
+                        <img class="avatar-img border p-1 pb-0 mb-0" style="height: 100%px;"
+                            src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
+                        @else
+                        <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
+                        @endif
 
-        
-      
-        
-            <div class = "card">     
-            <div class="card-header card-header-content-md-between    ">
-
-Afbeelding
-</div>
- 
-
-<div class = "card-body">
-                <label class="avatar avatar-xxl   me-5" for="editAvatarUploaderModal">
-
-                    @if ($image_db || $image )
-                    <img class="avatar-img border p-4"
-                        src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
-                    @else
-                    <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
-                    @endif
-
-                    <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
-                        data-hs-file-attach-options='{
+                        <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
+                            data-hs-file-attach-options='{
                                  "textTarget": "#editAvatarImgModal",
                                  "mode": "image",
                                  "targetAttr": "src",
                                  "allowTypes": [".png", ".jpeg", ".jpg"]
                               }' wire:model.live="image" />
 
-                    <span class="avatar-uploader-trigger">
-                        <i class="bi-pencil-fill avatar-uploader-icon shadow-sm  "></i>
-                    </span>
-                </label>
+                        <span class="avatar-uploader-trigger ">
+                            <i class="bi-pencil-fill avatar-uploader-icon shadow-sm mr-4 mb-2 "></i>
+                        </span>
+                    </label>
+
+                </div>
 
                 <button type="button" wire:click="clearImage"
                     wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
-                    class=" btn btn-soft-primary  m-4">Verwijder</button>
-                    </div>       </div>
+                    class=" btn btn-link  ">Verwijder afbeelding</button>
+            </div>
 
+            <div class="card mt-3 bg-light">
+                <div class="card-body">
 
-                    <div class="card mt-3 bg-light">
-<div class="card-body">
+                    <b>{{$data->customer?->name}}</b>
+                    <br>
+                    {{$data->customer?->address}} {{$data->customer?->place}}
 
-      <b>{{$data->customer?->name}}</b>
-      <br>
-      {{$data->customer?->address}} {{$data->customer?->place}}
+                </div>
+            </div>
 
-</div>
-</div>
- 
+            <div class="card mt-3">
+                <div class="card-body">
+                    <label class="pb-2  ">Gebouwtype</label>
 
+                    <input wire:model.live="building_type" class="form-control">
 
+                    <label class="pb-2 pt-3">Beheerder</label>
 
-            <div class = "card mt-3">      <div class = "card-body">
-            <label class="pb-2  ">Gebouwtype</label>
- 
-            <input   wire:model.live="building_type" class="form-control">
-            
-
-            <label class="pb-2 pt-3">Beheerder</label>
-
-            <div class="tom-select-custom  ">
-                <select wire:model.live="management_id" class="js-select form-select" autocomplete="off"
-                    data-hs-tom-select-options='{
+                    <div class="tom-select-custom  ">
+                        <select wire:model.live="management_id" class="js-select form-select" autocomplete="off"
+                            data-hs-tom-select-options='{
                                         "placeholder": "Selecteer een optie"
                                       }'>
 
-                    @foreach($managementCompanies as $managementCompany).
+                            @foreach($managementCompanies as $managementCompany).
 
-                    <option value="{{$managementCompany?->id}}">{{$managementCompany?->name}}</option>
+                            <option value="{{$managementCompany?->id}}">{{$managementCompany?->name}}</option>
 
-                    @endforeach
+                            @endforeach
 
-                    <option @if($management_id) selected @endif value="{{$management_id}}"></option>
+                            <option @if($management_id) selected @endif value="{{$management_id}}"></option>
 
-                </select>
+                        </select>
+                    </div>
+
+                    <label class="pb-2 pt-3">Complexnummer</label>
+                    <input style="width: 200px;" wire:model="complexnumber" class="form-control">
+                </div>
             </div>
-
-            <label class="pb-2 pt-3">Complexnummer</label>
-            <input style="width: 200px;" wire:model="complexnumber" class="form-control">
-            </div>         </div>
         </div>
 
         <div class="col-md-9">
 
-
-
-
-
-
             <div class="card">
-           
 
-            <div class="card-header   ">
+                <div class="card-header   ">
 
-Locatie
-</div>
+                    Locatie
+                </div>
 
                 <div class="card-body ">
                     <div class="row">
@@ -158,24 +132,24 @@ Locatie
                                     <label class="pb-2 pt-3">Postcode</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
-                                        wire:model.defer="zipcode"  >
+                                        wire:model.defer="zipcode">
 
                                 </div>
                                 <div class="col-md-4">
                                     <label class="pb-2 pt-3">Huisnummer</label>
                                     <input
                                         class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
-                                        wire:model.defer="housenumber" >
+                                        wire:model.defer="housenumber">
 
                                 </div>
                                 <div class="col-md-3 ">
-                                <label class="pb-2 pt-3"> </label>
-                                <button class="btn btn-soft-primary btn-sm mt-7" 
-                                        wire:click="checkZipcode" data-toggle="tooltip" data-placement="top"
-                                        title="Zoek naar postcode" wire:keydown="checkZipcode" style="height: 40px;">
+                                    <label class="pb-2 pt-3"> </label>
+                                    <button class="btn btn-soft-primary btn-sm mt-7" wire:click="checkZipcode"
+                                        data-toggle="tooltip" data-placement="top" title="Zoek naar postcode"
+                                        wire:keydown="checkZipcode" style="height: 40px;">
                                         <i class="bi-search"></i>
                                     </button>
-                                
+
                                 </div>
                             </div>
 
@@ -219,14 +193,12 @@ Locatie
                 </div>
             </div>
 
-
             <div class="card   mt-3  ">
-            
 
-            <div class="card-header   ">
+                <div class="card-header   ">
 
-Notitie
-</div>
+                    Notitie
+                </div>
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-md-12">
@@ -241,16 +213,11 @@ Notitie
                 </div>
             </div>
 
-            
             <div class="card   mt-3  ">
-            
 
-            <div class="card-header   ">
+                <div class="card-header   ">
 
-            Toegang</div>
-
- 
-           
+                    Toegang</div>
 
                 <div class="card-body  ">
                     <div class="row">
@@ -298,14 +265,13 @@ Notitie
 
                 </div>
             </div>
-     
+
             <div class="card   mt-3  ">
-            
 
-            <div class="card-header   ">
+                <div class="card-header   ">
 
-            Bouwgegevens</div>
-        
+                    Bouwgegevens</div>
+
                 <div class="card-body  ">
                     <div class="row">
 

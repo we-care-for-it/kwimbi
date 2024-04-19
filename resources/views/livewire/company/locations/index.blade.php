@@ -1,23 +1,28 @@
 <div>
-   <div class="page-header  my-3">
+    <div class="page-header   ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title "> Locaties</h1>
+            </div>
+
+            <div class="col-sm-6   text-end">
+ 
+         
+             
 
 
-   <div class="row">
-        <div class="col-sm-6">
-            <h1 class=" float-start page-header-title  ">Locaties</h1>
-        </div>
-        <div class="col-sm-6 ">
-            <div class = " float-end">    <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success   btn-120" data-bs-toggle="modal"
-                data-bs-target="#crudModal">
-                Toevoegen
-                </button> 
+                <button      wire:loading.attr="disabled"  class="btn   btn-link  btn-120"    " 
+       type="button">
+ 
+      Toevoegen
+      </button>
+
+
+            
             </div>
         </div>
     </div>
-
- 
-   </div>
-  
+    
 
 
    <div class="row ">

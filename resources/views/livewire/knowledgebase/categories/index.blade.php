@@ -1,5 +1,5 @@
 <div>
-   <div class="page-header  my-3">
+   <div class="page-header ">
 
 
    <div class="row ">
@@ -8,12 +8,10 @@
         </div>
         <div class="col-sm-6 ">
             <div class = " float-end">
-                <button wire:loading.attr="disabled" type="button" class="btn    btn-soft-success   btn-120" data-bs-toggle="modal"
+                <button wire:loading.attr="disabled" type="button" class="btn    btn-link btn-sm   btn-120" data-bs-toggle="modal"
                 data-bs-target="#crudModal">
                 Toevoegen
-                </button> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
+                </button> 
             </div>
         </div>
     </div>
