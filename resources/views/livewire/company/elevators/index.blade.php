@@ -1,41 +1,28 @@
  
-  <div>
-   <div class="page-header  my-3">
+    <div>
+      <div class="page-header   ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title "> Liften overzicht</h1>
+            </div>
 
-
-   <div class="row">
-        <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">Liften</h1>
-        </div>
-        <div class="col-sm-6 ">
-            <div class = " float-end">  
-
-     
-
-   
+            <div class="col-sm-6   text-end">
  
+         
+             
 
-            <button type="button" onclick="history.back()" class="  btn  btn-soft-secondary    btn-icon    ">
-                <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-
-                <a href = "/elevator/create">
+            <a href = "/elevator/create">
             <button type="button" class="btn btn-primary  btn-120 " >
            Toevoegen
             </button></a>
 
 
+            
             </div>
         </div>
     </div>
 
- 
-   </div>
-   
-   <div>
- 
-
+  
  
  
  

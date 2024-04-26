@@ -1,8 +1,9 @@
-<div>
-   <div class="page-header  my-3">
-       <div class="row">
-           <div class="col-sm-6">
-               <h1 class="page-header-title  "> @if($object?->fire_elevator)
+
+
+<div class="page-header   ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title "> @if($object?->fire_elevator)
               <div class="cnt_table_result">
 
                  <i data-bs-toggle="tooltip" data-bs-placement="top" title="Brandweerlift"
@@ -21,13 +22,15 @@
               @endif
               @else
 
-              @endif </h1>
-           </div>
+              @endif</h1>
+            </div>
 
-           <div class="col-sm-6  float-end text-end">
+            <div class="col-sm-6   text-end">
+ 
+         
 
-               <a href="/elevators">
-                   <button type="button" class="btn btn-link btn-default btn-squared btn-120  ">
+                <a href="/elevators">
+                <button type="button" class="btn btn-link btn-default btn-squared btn-120  btn-sm ">
                        Alle liften
                    </button>
                </a>
@@ -43,7 +46,7 @@
 
    
 
-              <button type="button" class="btn btn-soft-primary  dropdown-toggle btn-120 pl-10  "  
+              <button type="button" class="btn btn-primary  dropdown-toggle btn-120 pl-10  "  
               id="navbarNotificationsDropdownSettings" data-bs-toggle="dropdown" aria-expanded="false">
               Toevoegen
            </button>
@@ -67,22 +70,19 @@
               </a>
 
            </div>
-
-               <button type="button" onclick="history.back()" class="btn btn-soft-secondary      ">
-                   <i class="fa-solid fa-arrow-left"></i>
-               </button>
+ 
            </div>
        </div>
-   </div>
 
+ 
 
-
+ 
 
 
 
   @if($object?->remark)
 
-  <blockquote class="blockquote blockquote-sm mb-4 mt-2">
+  <blockquote class="blockquote blockquote-sm mb-4 mt-2 pt-3">
      <p>{{$object?->remark}}</p>
   </blockquote>
   @endif
@@ -103,7 +103,7 @@
      </span>
   </div>
   <br> @endif
-  <div class="row">
+  <div class="row pt-3">
 
   <div class="col-md-3 col-xs-12">
 

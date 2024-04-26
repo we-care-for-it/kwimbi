@@ -19,7 +19,7 @@
             
         
 
-                <a href="/location/edit/{{$location->id}}" class="btn  btn-link btn-default   btn-120 ">
+                <a href="/location/edit/{{$location->id}}" class="btn    btn-primary   btn-120 ">
                     </i>Wijzigen</a>
 
 

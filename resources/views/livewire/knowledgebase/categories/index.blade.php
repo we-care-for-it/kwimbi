@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-6 ">
             <div class = " float-end">
-                <button wire:loading.attr="disabled" type="button" class="btn    btn-link btn-sm   btn-120" data-bs-toggle="modal"
+                <button wire:loading.attr="disabled" type="button" class="btn    btn-primary btn-120" data-bs-toggle="modal"
                 data-bs-target="#crudModal">
                 Toevoegen
                 </button> 
@@ -25,10 +25,10 @@
   
         @foreach($groups as $letter => $group)
         <div class="col mb-3 mb-lg-5">
-         <div class="card h-80 card-hover">
+         <div class="card h-80 p-0 m-0">
             <div class = "card-header">{{ $letter }}</div>
      
- <div class  = "card-body p-2"><ul>
+ <div class  = "card-body p-0"><ul>
     @foreach($group as $category)
 
 

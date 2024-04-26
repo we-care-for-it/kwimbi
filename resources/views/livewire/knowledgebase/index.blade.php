@@ -14,7 +14,7 @@
                 </button></a>
 
 
-                <button wire:loading.attr="disabled" type="button" class="btn    btn-link btn-sm    btn-120" data-bs-toggle="modal"
+                <button wire:loading.attr="disabled" type="button" class="btn    btn-primary    btn-120" data-bs-toggle="modal"
                 data-bs-target="#crudModal">
                 Toevoegen
                 </button> 
