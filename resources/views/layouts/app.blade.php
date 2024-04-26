@@ -57,16 +57,23 @@
       <script src="/assets/js/hs.theme-appearance.js"></script>
       @include('layouts.partials._header')
       <main id="content" role="main" class="main pt-0  ">
-         <div style="height: 70px; background-color: #555559; " class="w-100 mt-0 pt-0 ">
-            <div class="container content  pt-3 mt-0  ">
-               <div class=" p-3 pt-0 mt-0    mb-0 "
-                  style="background-color: white; border-radius: 10px; height: 80px;  border: 1px solid #EFF2FB   ">
-                  @include('layouts.partials._search') </div>
+      <div style="height: 72px;  border-radius: 10px"  class=" m-2 bg-light border">    
+   
+      <div class="container container-fluid  pt-3  ">  
+      @include('layouts.partials._search')
+
+   </div>
+
+      </div>
+            <div class="container container-fluid  ">  
+               
+
+     
                <div>
-                  <div class="  pt-0 mt-0  " style="background-color: white;  border-radius: 10px;  ">
+                  <div class="  pt-2 mt-0  " style="background-color: white;  border-radius: 10px;  ">
                      {{$slot}}
                   </div>
-               </div>
+             
       </main>
       @include('layouts.partials._scripts')
    </body>

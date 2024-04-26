@@ -1,19 +1,12 @@
 <form >
                   <center>
 
-                     <div class="row pt-3">
+                     <div class="row  ">
 
-                        <div class="col-md-2">
+                    
+                        <div class="col-md-12">
 
-                           <select class="form-select">
-                              <option value="Alles">Zoek in alles</option>
-                              <option value="Alles">Locaties</option>
-                              <option value="Alles">Objecten</option>
-                           </select>
-                        </div>
-                        <div class="col-md-10">
-
-                           <div class="input-group input-group-merge w-100">
+                           <div class="input-group input-group-merge" style = " width:70%;">
                               <input wire:model.live="filters.keyword" type="text" wire:model.live="filters.keyword"
                                  class="js-form-search form-control" placeholder="Zoeken op trefwoord..."
                                  data-hs-form-search-options="{

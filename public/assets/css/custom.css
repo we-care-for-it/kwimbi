@@ -77,7 +77,6 @@ body {
   border: 1px solid #edeef0!important;
 } .card-body {
  
-  box-shadow: none!important;
  
 
 } 
@@ -104,8 +103,8 @@ body {
  }
  
  .card-header {
-  background-color:#F8F9FA!important;
-  padding:12px!important;
+  /* background-color:#F8F9FA!important;
+  padding:12px!important; */
 }
 
 
@@ -140,7 +139,7 @@ body {
   
  }
  .card-button:hover {
-  border: 1px dashed #5155AA!important;
+  border: 1px dashed #6ABD45!important;
 
 
 
@@ -216,7 +215,7 @@ h1{
 }  
 
 /* .table a {   
-  color: #5155AA!important;;
+  color: #6ABD45!important;;
 } */
 
 .btn-link{
@@ -253,8 +252,8 @@ h1{
 
 
   .loading_indicator {
-    border: 16px solid #5155AA; /* Light grey */
-    border-top: 16px solid #5155AA; /* Blue */
+    border: 16px solid #6ABD45; /* Light grey */
+    border-top: 16px solid #6ABD45; /* Blue */
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -262,8 +261,8 @@ h1{
     animation: spin 2s linear infinite;
   }
   .loading_indicator_small {
-    border: 5px solid #5155AA; /* Light grey */
-    border-top: 5px solid #5155AA; /* Blue */
+    border: 5px solid #6ABD45; /* Light grey */
+    border-top: 5px solid #6ABD45; /* Blue */
     border-radius: 50%;
     width: 30px;
     height: 30px;

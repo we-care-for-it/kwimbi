@@ -8,8 +8,12 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<table class="table table-hover table-responsive table-striped">
-                         <thead class= "bg-light">
+
+
+<div class="table table-responsive   table-hover">
+          <div id="datatable_wrapper" class="dataTables_wrapper no-footer"> 
+<table class="table   table-thead-bordered card-table dataTable no-footer">
+<thead class="thead-light">
             <tr>
                 {{ $head }}
             </tr>
@@ -19,3 +23,4 @@
             {{ $body }}
         </tbody>
     </table>
+</div></div>
