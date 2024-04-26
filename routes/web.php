@@ -67,13 +67,9 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     {
         Route::get('edit/{slug}', \App\Http\Livewire\Company\Customers\Edit::class);
         Route::get('{slug}', \App\Http\Livewire\Company\Customers\Show::class);
-
         Route::get('/contact/{customer_id}/create', \App\Http\Livewire\Company\Customers\Contact\Create::class);
         Route::get('/location/{customer_id}/create', \App\Http\Livewire\Company\Customers\Location\Create::class);
         Route::get('/project/{customer_id}/create', \App\Http\Livewire\Company\Customers\Project\Create::class);
-
-
-
     });
 
  
@@ -103,20 +99,13 @@ function ()
        {
      //   Route::get('add', \App\Http\Livewire\Company\Suppliers\Add::class);
           Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
-        });
-
-        
-        
+    });       
+    
     Route::get('/departments', \App\Http\Livewire\Settings\Departments::class);
     Route::get('/warehousings', \App\Http\Livewire\Settings\Warehousings::class);
-
-
-
-
     Route::group(['prefix' => 'workorders', ],
     function ()
     {
-
         Route::get('/statusses', \App\Http\Livewire\Settings\Workorders\Statusses::class);
         Route::get('/solutions', \App\Http\Livewire\Settings\Workorders\Solutions::class);
         Route::get('/errors', \App\Http\Livewire\Settings\Workorders\Errors::class);
@@ -126,9 +115,6 @@ function ()
     });
 });
 
-
-
-    //Addressess
     Route::get('/projects', \App\Http\Livewire\Company\Projects\Index::class);
     Route::group(['prefix' => 'project', ],
     function ()
@@ -137,8 +123,6 @@ function ()
         Route::get('/create', \App\Http\Livewire\Company\Projects\Create::class);
         Route::get('/{slug}', \App\Http\Livewire\Company\Projects\Show::class);
     });
-
-//ss
 
      Route::get('/incidents', \App\Http\Livewire\Company\Incidents\Index::class);
       Route::group(['prefix' => 'incident'],
@@ -151,10 +135,7 @@ function ()
     Route::get('/contacts', \App\Http\Livewire\Company\Contacts\Index::class);
     Route::get('/elevators', \App\Http\Livewire\Company\Elevators\Index::class);
 
-
-
     //Nieuw
-
     Route::group(['prefix' => 'contact', ],
         function ()
         {

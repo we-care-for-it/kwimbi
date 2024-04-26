@@ -11,7 +11,7 @@
                     <i class="fa-solid fa-rotate-left"></i> Afbreken
                 </button>
 
-                <button wire:click="save()" wire:loading.attr="disabled" class="btn   btn-primary b  btn-120" " 
+                <button wire:click="save()" wire:loading.attr="disabled" class="btn   btn-primary btn-sm  btn-120" " 
          wire:click=" addUpload()" type="button">
                     <div wire:loading>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

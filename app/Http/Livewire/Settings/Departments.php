@@ -114,9 +114,10 @@ public function clear()
 {
     $this->name =NULL;
  
-  
+    $this->edit_id =NULL;
  
 }
+
 
  
 public function save(){

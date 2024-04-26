@@ -1,5 +1,5 @@
  <!-- ========== HEADER ========== -->
- <header id="header" style="background-color: #EFEFEF" class="navbar navbar-expand-lg bg-white   ">
+ <header id="header" style="background-color: #555559" class="navbar navbar-expand-lg bg-white   ">
       <div class="container">
          <nav class="js-mega-menu navbar-nav-wrap">
             <!-- Logo -->

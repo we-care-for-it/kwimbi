@@ -14,7 +14,7 @@ class workType extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     
-    protected $fillable = ['description','is_active','error'];
+    protected $fillable = ['name','description','is_active','error'];
     // protected $fillable = [
    //     'last_action_at',
     // /    'code',

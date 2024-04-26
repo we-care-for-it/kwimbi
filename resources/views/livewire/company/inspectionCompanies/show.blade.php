@@ -5,14 +5,15 @@
             <h1 class="page-header-title  "> {{$object->name}} </h1>
          </div>
          <div class="col-auto  ">
-            <button wire:loading.attr="disabled" type="button" class="btn   btn-link btn btn-sm btn-120"
-               data-bs-toggle="modal" data-bs-target="#crudModal">
-               Wijzig
-            </button>
-            <a href="/settings/inspection-companies">
+         <a href="/settings/inspection-companies">
                <button type="button" class="btn   btn-link btn btn-sm btn-120">
                   Overzicht
                </button></a>
+            <button wire:loading.attr="disabled" type="button" class="btn  btn btn-primary btn-120"
+               data-bs-toggle="modal" data-bs-target="#crudModal">
+               Wijzig
+            </button>
+         
          </div>
       </div>
    </div>

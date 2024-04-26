@@ -11,7 +11,7 @@
              
 
 
-                <button      wire:loading.attr="disabled"  class="btn   btn-primary  btn-120"    " 
+                <button      wire:loading.attr="disabled"  class="btn   btn-primary btn-sm  btn-120"    " 
        type="button">
  
       Toevoegen

@@ -1,45 +1,50 @@
-<div class="container-fluid">
-   <div class="page-header  my-3 p-2 pt-0   ">
-      <div class="row align-items-center  px-2">
+<div>
+<div class="page-header">
+      <div class="row align-items-center">
          <div class="col">
-            <h1 class="page-header-title ">
-               Magazijnen
-            </h1>
+            <h1 class="page-header-title">Magazijnen</h1>
          </div>
-         <div class="col-auto pt-2">
-            <form>
-               <!-- Search -->
-               <div class="input-group input-group-merge">
-                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
-                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
-                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
-                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
-                     }">
-                  <button type="button" class="input-group-append input-group-text">
-                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
-                  </button>
-               </div>
-               <!-- End Search -->
-            </form>
-         </div>
-         <div class="col-auto pt-2">
-            <button type="button" class="btn   btn-primary btn-ico btn-sm" data-bs-toggle="modal"
-               data-bs-target="#crudModal" wire:click="clear()">
-            <i class="bi bi-plus"></i>
+         <div class="col-auto">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"    wire:click = "clear()" class="btn btn-sm btn-primary btn-120" >
+            Toevoegen
             </button>
          </div>
       </div>
    </div>
-   <div class="row pt-1">
+   
+   
+   <div class="row ">
       <div class="col-xl-12">
-         <div class="card  p-0 m-0">
+         <div class="card   ">
+
+         <div class="card-header card-header-content-md-between bg-light">
+               <div class="mb-2 mb-md-0">
+                  <form>
+                     <!-- Search -->
+                     <div class="input-group input-group-merge">
+                        <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                           placeholder="Zoeken op trefwoord..." data-hs-form-search-options='{
+                           "clearIcon": "#clearIcon2",
+                           "defaultIcon": "#defaultClearIconToggleEg"
+                           }'>
+                        <button type="button" class="input-group-append input-group-text">
+                           <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                           <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        </button>
+                     </div>
+                  </form>
+               </div>
+               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
+                  <div class="d-flex align-items-center justify-content-center">
+                     <div wire:loading.delay class="loading_indicator_small"></div>
+                  </div>
+               </div>
+            </div>
+
             <div class="card-body  ">
                <div class="row ">
                   <div class="loading" wire:loading>
-                     <img style="height: 190px" src="/assets/img/loading_elevator.gif">
-                     <br>
-                     <span class="text-muted">Bezig met gegevens ophalen</span>
+                  @include('layouts.partials._loading')
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
                      @if($this->cntFilters)
@@ -99,24 +104,7 @@
                            </x-slot>
                         </x-table>
                         @else
-                        <div>
-                           <div class="empty-state-container">
-                              <div class="empty-state-content">
-                                 <div class="empty-state-content-background new">
-                                    <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen gegevens
-                                       gevonden</span><br><br>Maak een magazijn aan of pas je trefwoord aan
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
-                                    </p>
-                                 </div>
-                                 <!--empty-state-content-background-->
-                              </div>
-                              <!--empty-state-content-->
-                           </div>
-                        </div>
+                        @include('layouts.partials._empty')
                         @endif
                      </div>
                   </div>
@@ -129,28 +117,7 @@
                @endif
             </div>
          </div>
-         <div class="offcanvas offcanvas-end" wire:ignore tabindex="-1" id="offcanvasFilters"
-            aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-               <h5 id="offcanvasRightLabel"><i class="bi-filter me-1"></i> Filters</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-               <small class="text-cap text-body pt-3">Trefwoord</small>
-               <input type="search" wire:model.live="filters.keyword" class="form-control"
-                  placeholder="Zoek op trefwoord" aria-label="Zoek op trefwoord">
-               <small class="text-cap text-body pt-3">Plaats</small>
-               <div class="row pt-4" style="">
-                  <div class="col-md-6"><button class="btn btn-white btn-sm w-100 " wire:click="resetFilters()">Wis
-                     filters</button>
-                  </div>
-                  <div class="col-md-6">
-                     <button data-bs-dismiss="offcanvas" aria-label="Close"
-                        class="w-100 btn btn-primary btn-sm">Sluiten</button>
-                  </div>
-               </div>
-            </div>
-         </div>
+       
       </div>
    </div>
    <!-- CrudModal  -->
@@ -205,13 +172,13 @@
                @if($edit_id)
                <button wire:click="delete({{$edit_id}})"
                   wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
-                  type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3"
+                  type="button" class="btn btn-link  btn-sm  " id="connectionsDropdown3"
                   data-bs-toggle="dropdown" aria-expanded="false">
                <i class="fa-solid fa-trash"></i>
                </button>
                @endif
-               <button type="button" class="btn btn-white btn-120" data-bs-dismiss="modal">Sluiten</button>
-               <button class="btn btn-soft-success btn-120    " wire:click="save()" type="button">
+               <button type="button" class="btn btn-link btn-120" data-bs-dismiss="modal">Sluiten</button>
+               <button class="btn btn-primary btn-120    " wire:click="save()" type="button">
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>

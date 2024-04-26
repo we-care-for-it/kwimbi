@@ -11,10 +11,6 @@
 
  
 
-            <button wire:loading.attr="disabled" type="button" class="btn   btn-link btn btn-sm btn-120" data-bs-toggle="modal"
-                    data-bs-target="#crudModal">
-            Wijzig
-                </button>
 
  
                 <a href = "/settings/management-companies">
@@ -23,6 +19,10 @@
            Overzicht
                 </button></a>
 
+            <button wire:loading.attr="disabled" type="button" class="btn   btn-primary btn btn-sm btn-120" data-bs-toggle="modal"
+                    data-bs-target="#crudModal">
+            Wijzig
+                </button>
 
             </div>
         </div>

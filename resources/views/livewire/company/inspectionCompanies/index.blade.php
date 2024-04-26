@@ -6,7 +6,7 @@
          </div>
          <div class="col-auto">
             <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"
-               class="btn btn-sm btn-link   btn-120">
+               class="btn btn-sm btn-primary   btn-120">
                Toevoegen
             </button>
          </div>

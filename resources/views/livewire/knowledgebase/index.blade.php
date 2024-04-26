@@ -57,29 +57,15 @@
              </div>
       </div>
     </div>
-      @endif
+ 
+ 
+@endif
+
+
       @endforeach
    </div>
    @else
-   <div class="pt-2">
-      <div class="  text-center">
-         <center>
-            <img style = "height: 200px;"  src="/assets/img/folders/1.svg"  >
-         </center>
-         <div class=" ">
-            <h4>Geen gegevens gevonden</h4>
-            <p>Er zijn geen categorieën gevonden met artikelen</p>
-         </div>
-      </div>
-      <div class="notice-listBlock bg-light mt-30 p-4">
-         <h3>Wat kan je hier aan doen ?</h3>
-         <ul >
-            <li>
-               Voeg gegevens toe
-            </li>
-         </ul>
-      </div>
-   </div>
+   @include('layouts.partials._empty')
    @endif
    <style>
       .row.equal-cols {

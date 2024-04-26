@@ -4,11 +4,11 @@
  
          <div class="col">
         
-            <h1 class="page-header-title">  Onderhoudspartijen</h1>
+            <h1 class="page-header-title">Onderhoudspartijen</h1>
             </div>
          <div class="col-auto">
          
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-link btn-120" >
+            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"   class="btn btn-sm btn-primary btn-120" >
             Toevoegen
             </button>
 
