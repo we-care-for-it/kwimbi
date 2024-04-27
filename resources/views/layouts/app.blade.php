@@ -57,7 +57,7 @@
       <script src="/assets/js/hs.theme-appearance.js"></script>
       @include('layouts.partials._header')
       <main id="content" role="main" class="main pt-0  ">
-      <div style="height: 72px;  border-radius: 10px"  class=" m-2 bg-light border">    
+      <div style="height: 72px;  border-radius: 10px; background-color: #4F5294"  class=" m-3 mt-0 mb-0">    
    
       <div class="container container-fluid  pt-3  ">  
       @include('layouts.partials._search')

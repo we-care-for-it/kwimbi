@@ -182,36 +182,38 @@
             <!-- Collapse -->
 
       
-            <div class="collapse navbar-collapse center-block""  id="navbarContainerNavDropdown">
+            <div class="collapse navbar-collapse center-block d-flex justify-content-center align-items-center "  id="navbarContainerNavDropdown">
                <div class = "text-center center-block">
                <ul class="navbar-nav center-block"">
                   <!-- Dashboards -->
 
+
+                  
                   <li class="nav-item">
                      <a class="nav-link " href="/dashboard" data-placement="left">
-                        Overzicht
+                     <i class="bi-house-door dropdown-item-icon"></i>      Overzicht
                      </a>
                   </li>
 
                   <li class="nav-item">
                      <a class="nav-link " href="/elevators" data-placement="left">
-                        Objecten
+                     <i class="bi-house-door dropdown-item-icon"></i>    Objecten
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link " href="/masterdata" data-placement="left">
-                        Basisgegevenss
+                     <i class="bi-house-door dropdown-item-icon"></i>    Basisgegevens
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link " href="/locations" data-placement="left">
-                        Locaties
+                      <a class="nav-link " href="/locations" data-placement="left">
+                     <i class="bi-house-door dropdown-item-icon"></i>     Locaties
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link " href="/knowledgebase" data-placement="left">
-                        Kennisdatabase
-                     </a>
+                     <i class="bi-house-door dropdown-item-icon"></i>     Kennisdatabase
+                     </a>  
                   </li>
 
                </ul>
