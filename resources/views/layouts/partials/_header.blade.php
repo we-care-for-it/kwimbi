@@ -46,6 +46,15 @@
                      <!-- End Style Switcher -->
                   </li>
 
+
+                  <li class="nav-item">
+
+               <a href = "/masterdata">
+<button type="button" class="btn btn-soft-secondary    btn-icon    ">
+   <i class="fa-solid fa-cog"></i>
+</button></a>
+</li>
+
                   <li class="nav-item">
 
                      <button type="button" onclick="history.back()" class="btn btn-soft-secondary    btn-icon    ">
@@ -81,51 +90,11 @@
 
                         <div class="dropdown-divider"></div>
 
-                        <!-- Dropdown -->
-                        <div class="dropdown">
-                           <a class="navbar-dropdown-submenu-item dropdown-item dropdown-toggle" href="javascript:;"
-                              id="navSubmenuPagesAccountDropdown1" data-bs-toggle="dropdown" aria-expanded="false">Set
-                              status</a>
-
-                           <div
-                              class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu"
-                              aria-labelledby="navSubmenuPagesAccountDropdown1">
-                              <a class="dropdown-item" href="#">
-                                 <span class="legend-indicator bg-success me-1"></span> Available
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                 <span class="legend-indicator bg-danger me-1"></span> Busy
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                 <span class="legend-indicator bg-warning me-1"></span> Away
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#"> Reset status
-                              </a>
-                           </div>
-                        </div>
-                        <!-- End Dropdown -->
-
-                        <a class="dropdown-item" href="#">Profile &amp; account</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-
+                       
+                     
                         <div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item" href="#">
-                           <div class="d-flex align-items-center">
-                              <div class="flex-shrink-0">
-                                 <div class="avatar avatar-sm avatar-dark avatar-circle">
-                                    <span class="avatar-initials">HS</span>
-                                 </div>
-                              </div>
-                              <div class="flex-grow-1 ms-2">
-                                 <h5 class="mb-0">Htmlstream <span
-                                       class="badge bg-primary rounded-pill text-uppercase ms-1">PRO</span></h5>
-                                 <span class="card-text">hs.example.com</span>
-                              </div>
-                           </div>
-                        </a>
-
+                      
                         <div class="dropdown-divider"></div>
 
                         <!-- Dropdown -->
@@ -182,7 +151,7 @@
             <!-- Collapse -->
 
       
-            <div class="collapse navbar-collapse center-block d-flex justify-content-center align-items-center "  id="navbarContainerNavDropdown">
+            <div class="collapse navbar-collapse center-block justify-content-center align-items-center "  id="navbarContainerNavDropdown">
                <div class = "text-center center-block">
                <ul class="navbar-nav center-block"">
                   <!-- Dashboards -->

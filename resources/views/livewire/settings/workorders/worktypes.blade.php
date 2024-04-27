@@ -5,6 +5,8 @@
    <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">Werktypes</h1>
+
+            <p>Werktypes kunnen gebruiken om verschillende uursoorten te onderscheiden </p>
          </div>
          <div class="col-auto">
          
@@ -80,8 +82,8 @@
                                        <div style = "float: right">
         
                                        <div class="dropdown">
-                    <button type="button" class="btn btn-white btn-sm" id="apiKeyDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Meer <i class="bi-chevron-down ms-1"></i>
+                    <button type="button" class="btn btn-soft-success btn-sm" id="apiKeyDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                      Opties <i class="bi-chevron-down ms-1"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="apiKeyDropdown1">
                       <a class="dropdown-item" href="#"  data-bs-toggle="modal" wire:click="edit({{$item->id}})"    data-bs-target="#crudModal" >Wijzig</a>

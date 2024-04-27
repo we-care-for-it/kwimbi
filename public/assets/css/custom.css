@@ -89,8 +89,7 @@ body {
   margin-top: 0px!important; 
  
   border: 0px!important;;
-  border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7)!important;;
-
+  
 }
 .card-hover:hover {
   background-color: rgb(251, 251, 251) ;
@@ -224,13 +223,12 @@ h1{
 }
  @media only screen and (min-width: 768px){ 
   .page-header{
-    height:60px!important;
-    border-bottom: 0px solid #EFEFEF!important;
+    height:70px!important;
+ 
     padding-bottom: 0px!important;
     padding-top: 8px!important;
     margin-bottom: 10px!important;
-    border-bottom: 0.0625rem solid rgba(231, 234, 243, 0.7)!important;;
-  
+   
      
   }
 } 
