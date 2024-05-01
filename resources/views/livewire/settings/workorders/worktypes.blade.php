@@ -71,10 +71,10 @@
                            </x-table.cell>
 
                            <x-table.cell>
-                              <div style="float: right">
+                              <div style="float: right;  p-0 m-0">
 
                                  <div class="dropdown">
-                                    <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="apiKeyDropdown1"
+                                    <button type="button" class="btn btn-ghost-secondary  btn-sm rounded-circle p-0 m-0" id="apiKeyDropdown1"
                                        data-bs-toggle="dropdown" aria-expanded="false">
                                        <i class="bi-three-dots-vertical"></i>
                                     </button>
