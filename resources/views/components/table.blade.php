@@ -10,7 +10,7 @@
 
 
 
-<div class="table table-responsive   table-hover">
+<div class="table   table-hover">
           <div id="datatable_wrapper" class="dataTables_wrapper no-footer"> 
 <table class="table   table-thead-bordered card-table dataTable no-footer">
 <thead class="thead-light">

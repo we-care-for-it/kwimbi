@@ -138,7 +138,10 @@ public function save(){
  
     $this->reset();
     $this->dispatch('close-crud-modal');
-    pnotify()->addWarning('Gegevens opgeslagen');
+    noty()
+    ->theme('mint')
+    ->layout('bottomRight')
+    ->addInfo('Gegevens succesvol opgeslagen');
 
 }
  
