@@ -1,0 +1,1 @@
+ @livewire('tenant.incidentGraph', ['debtor_id' => $debtor->id])

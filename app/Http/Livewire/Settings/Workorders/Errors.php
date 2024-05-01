@@ -40,7 +40,11 @@ class Errors extends Component
     public $cntFilters;
 
     public $code;
+
+    #[Validate('required', message: 'Vul minimaal een foutmelding')]
     public $error;
+
+    
     public $edit_id;
 public $data;
 
@@ -112,19 +116,18 @@ public function sortBy($field)
     $this->sortField = $field;
 }
 
-public function clear()
-{
-    $this->name =NULL;
-    $this->description =NULL;
+public function clear(){
+$this->name =NULL;
+$this->error =NULL;
+
   
  
 }
 
  
 public function save(){
-   
-    $this->validate();
-
+    $validated = $this->validate();
+ 
     if(!$this->edit_id){
         Error::create($this->all());
     }else{

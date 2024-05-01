@@ -39,8 +39,9 @@ class worktypes extends Component
     public $keyword;
     public $cntFilters;
 
- 
+    #[Validate('required', message: 'Vul minimaal een naam in')]
     public $name;
+
     public $is_active;
     public $description;
     public $edit_id;
@@ -125,7 +126,8 @@ public function clear()
  
 public function save(){
    
-    $this->validate();
+   $validated = $this->validate();
+ 
 
     if(!$this->edit_id){
         workType::create($this->all());
