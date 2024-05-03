@@ -40,7 +40,10 @@ class worktypes extends Component
     public $cntFilters;
 
  
+    #[Validate('required', message: 'Vul minimaal een naam in')]
     public $name;
+
+    
     public $is_active;
     public $description;
     public $edit_id;
@@ -137,10 +140,8 @@ public function save(){
     $this->reset();
     $this->dispatch('close-crud-modal');
     noty()
-    ->theme('mint')
     ->layout('bottomRight')
-    ->addInfo('Gegevens succesvol opgeslagen');
-
+    ->addInfo('Gegevens opgeslagen');
 }
  
 
@@ -179,7 +180,9 @@ public function save(){
         $item= workType::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
-        pnotify()->addWarning('Gegevens verwijderd');
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Gegevens verwijderd');
     }
 
   

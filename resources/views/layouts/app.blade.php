@@ -70,7 +70,7 @@
    </div>
      
                <div>
-                  <div>
+                  <div class = "pt-3">
                      {{$slot}}
                   </div>
              

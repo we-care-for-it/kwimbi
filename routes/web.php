@@ -101,6 +101,8 @@ function ()
           Route::get('{slug}', \App\Http\Livewire\Company\Suppliers\Show::class);
     });       
     
+    Route::get('/employees', \App\Http\Livewire\Settings\Employees::class);
+   
     Route::get('/departments', \App\Http\Livewire\Settings\Departments::class);
     Route::get('/warehousings', \App\Http\Livewire\Settings\Warehousings::class);
     Route::group(['prefix' => 'workorders', ],

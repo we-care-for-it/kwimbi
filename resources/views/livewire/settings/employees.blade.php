@@ -2,7 +2,7 @@
    <div class="page-header">
       <div class="row align-items-center">
          <div class="col">
-            <h1 class="page-header-title">Foutmeldingen</h1>
+            <h1 class="page-header-title">Medewerkers</h1>
          </div>
          <div class="col-auto">
             <button type="button" wire:click = "clear()" data-bs-toggle="modal" data-bs-target="#crudModal"     class="btn btn-sm btn-primary btn-120" >
@@ -52,19 +52,16 @@
                   @if($items->count())
                   <x-table>
                      <x-slot name="head">
-                        <x-table.heading sortable wire:click="sortBy('code')">Code</x-table.heading>
-                        <x-table.heading sortable wire:click="sortBy('error')">Foutmelding</x-table.heading>
-                        <x-table.heading></x-table.heading>
+                        <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
+                          <x-table.heading></x-table.heading>
                      </x-slot>
                      <x-slot name="body">
                         @foreach ($items as $item)
                         <x-table.row  wire:key="row-{{ $item->id }}">
                            <x-table.cell>
-                              {{$item->code}} 
+                              {{$item->name}} 
                            </x-table.cell>
-                           <x-table.cell>
-                              {{$item->error}}<br>
-                           </x-table.cell>
+                      
                         
                            <x-table.cell>
                               <div style = "float: right">
@@ -110,22 +107,14 @@
    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
          <div class="modal-body" wire:loading.class="loading-div">
+          
             <div class="row">
                <div class="col-md-12">
                   <div>
-                     <label class="pb-2">Code</label>
-                     <input wire:model="code" wire:change = "updateCode()" class="form-control    @error('code') is-invalid   @enderror  ">
-                     @error('code') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div>
-                     <label class="pt-2 pb-2">Omschrijving</label>
-                     <textarea  rows = "15" wire:model="error"
-                        class="form-control    @error('error') is-invalid   @enderror  "></textarea>
-                     @error('error') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                     <label class="pt-2 pb-2">Naam</label>
+                     <input  rows = "15" wire:model="name"
+                        class="form-control    @error('name') is-invalid   @enderror  "> 
+                     @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
                   </div>
                </div>
             </div>

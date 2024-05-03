@@ -39,7 +39,10 @@ class Solutions extends Component
     public $keyword;
     public $cntFilters;
 
+    #[Validate('required', message: 'Vul minimaal een code in')]
     public $code;
+
+    #[Validate('required', message: 'Vul minimaal een oplossing in')]
     public $solution;
     public $edit_id;
 public $data;
@@ -114,8 +117,7 @@ public function sortBy($field)
 
 public function clear()
 {
-    $this->name =NULL;
-    $this->description =NULL;
+    $this->reset();
   
  
 }
@@ -134,7 +136,9 @@ public function save(){
  
     $this->reset();
     $this->dispatch('close-crud-modal');
-    pnotify()->addWarning('Gegevens opgeslagen');
+    noty()
+    ->layout('bottomRight')
+    ->addInfo('Gegevens opgeslagen');
 
 }
  
@@ -173,7 +177,9 @@ public function save(){
         $item= Solution::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
-        pnotify()->addWarning('Gegevens verwijderd');
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Gegevens verwijderd');
     }
 
     public function updateCode() {

@@ -7,8 +7,8 @@ use Livewire\Component;
 
 //Models
  
-use App\Models\maintenanceCompany;
-use App\Models\department;
+ 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -26,9 +26,8 @@ use Illuminate\Support\Facades\Http;
 
 
 
-class Departments extends Component
+class Employees extends Component
 {
-
 
     use WithPerPagePagination;
     use WithSorting;
@@ -46,15 +45,17 @@ class Departments extends Component
 
 
 
-
     public function render()
     {
-        return view('livewire.settings.departments',[
+
+        return view('livewire.settings.employees',[
             'items' => $this->rows,
             ]);
+ 
     }
 
 
+    
     public $filters = [
         'keyword'   => '', 
  
@@ -69,7 +70,7 @@ class Departments extends Component
     
     public function getRowsQueryProperty()
     {
-        $query = department::query()->when($this->filters['keyword'], function ($query) {
+        $query = User::query()->when($this->filters['keyword'], function ($query) {
             $query->where('name', 'like', '%' . $this->filters['keyword'] . '%')
                
  ;
@@ -125,7 +126,7 @@ public function save(){
     $this->validate();
 
     if(!$this->edit_id){
-        department::create($this->all());
+        User::create($this->all());
     }else{
         $this->data->update($this->all());
     }
@@ -159,7 +160,7 @@ public function save(){
     {
     
         $this->edit_id = $id;
-        $this->data = $item = department::where('id', $id)->first();
+        $this->data = $item = User::where('id', $id)->first();
          $this->name =  $this->data->name;
         
  
@@ -170,12 +171,14 @@ public function save(){
 
 
     public function delete($id){
-        $item= department::find($id);
+        $item= User::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
         noty()
         ->layout('bottomRight')
         ->addInfo('Gegevens verwijderd');
     }
+
+ 
 
 }

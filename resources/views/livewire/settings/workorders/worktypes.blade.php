@@ -1,32 +1,22 @@
 <div>
    <div class="page-header">
-
-
-   <div class="row align-items-center">
+      <div class="row align-items-center">
          <div class="col">
             <h1 class="page-header-title">Werktypes</h1>
-
-            <p>Werktypes kunnen gebruiken om verschillende uursoorten te onderscheiden </p>
          </div>
          <div class="col-auto">
-         
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"    wire:click = "clear()" class="btn btn-sm btn-primary btn-120" >
+            <button type="button" wire:click = "clear()" data-bs-toggle="modal" data-bs-target="#crudModal"     class="btn btn-sm btn-primary btn-120" >
             Toevoegen
             </button>
          </div>
       </div>
-
-
-      
    </div>
    <div class="row ">
       <div class="col-xl-12">
-        
          <div class="card ">
-         <div class="card-header card-header-content-md-between">
-          <div class="mb-2 mb-md-0">
-    
-          <form>
+            <div class="card-header card-header-content-md-between bg-light">
+               <div class="mb-2 mb-md-0">
+                  <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
                         <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
@@ -35,34 +25,30 @@
                            "defaultIcon": "#defaultClearIconToggleEg"
                            }'>
                         <button type="button" class="input-group-append input-group-text">
-                           <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
-                           <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
+                        <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                        <i id="defaultClearIconToggleEg" class="bi-search" style="display: none;"></i>
                         </button>
                      </div>
                   </form>
-          </div>
-          <!-- End Col -->
+               </div>
+               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
+                  <div class="d-flex align-items-center justify-content-center">
+                     <div wire:loading.delay class="loading_indicator_small"></div>
+                  </div>
 
-       <div>
-
-       @if($this->cntFilters)
+                  @if($this->cntFilters)
                            <div role="alert">
                               <i class="bi-filter me-1"></i>      Resultaten gefilterd met @if($this->cntFilters <= 1) 1 filter @else {{$this->cntFilters}} filters @endif</>
                               <span wire:click = "resetFilters()" style = "cursor: pointer" class = "text-primary">Wis alle filters</span>
                            </div>
                            @endif
 
-                        </div>
 
-        </div>
-
-
-        
-            <div class="card-bodyv">
-            <div class="col-md-12" >
-                           
-                 
-                      
+               </div>
+            </div>
+            <div class="card-body">
+               <div class="col-md-12">
+              
 
                            @if($items->count())
                            <x-table>
@@ -80,17 +66,19 @@
                                   
                                     <x-table.cell>
                                        <div style = "float: right">
-        
+         
+
+
                                        <div class="dropdown">
-                    <button type="button" class="btn btn-soft-success btn-sm" id="apiKeyDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Opties <i class="bi-chevron-down ms-1"></i>
+                    <button type="button" class="btn btn-icon btn-sm  " id="apiKeyDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi-three-dots-vertical"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="apiKeyDropdown1">
                       <a class="dropdown-item" href="#"  data-bs-toggle="modal" wire:click="edit({{$item->id}})"    data-bs-target="#crudModal" >Wijzig</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item text-danger" href="#" wire:click="delete({{$item->id}})"
-                  wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
-             >Verwijderd</a>
+                  wire:confirm.prompt="Weet je zeker dat je de deze rij wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
+             >Verwijderen</a>
                     </div>
                   </div>
 
@@ -130,7 +118,7 @@
                      <div>
                         <label class="pb-2">Naam</label>
                         <input wire:model="name"   class="form-control    @error('name') is-invalid   @enderror  ">
-                        @error('code') <span class="invalid-feedback">{{ $message }}</span> @enderror
+                        @error('name') <span class="invalid-feedback">{{ $message }}</span> @enderror
                      </div>
                   </div>
                </div>

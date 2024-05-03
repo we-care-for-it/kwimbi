@@ -5,7 +5,7 @@
             <h1 class="page-header-title">Oplossingen</h1>
          </div>
          <div class="col-auto">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#crudModal"    wire:click = "clear()" class="btn btn-sm btn-primary btn-120" >
+            <button type="button" wire:click = "clear()" data-bs-toggle="modal" data-bs-target="#crudModal"     class="btn btn-sm btn-primary btn-120" >
             Toevoegen
             </button>
          </div>
@@ -35,22 +35,24 @@
                   <div class="d-flex align-items-center justify-content-center">
                      <div wire:loading.delay class="loading_indicator_small"></div>
                   </div>
+
+                  @if($this->cntFilters)
+                           <div role="alert">
+                              <i class="bi-filter me-1"></i>      Resultaten gefilterd met @if($this->cntFilters <= 1) 1 filter @else {{$this->cntFilters}} filters @endif</>
+                              <span wire:click = "resetFilters()" style = "cursor: pointer" class = "text-primary">Wis alle filters</span>
+                           </div>
+                           @endif
+
+
                </div>
             </div>
             <div class="card-body">
                <div class="col-md-12">
-                  @if($this->cntFilters)
-                  <div class="alert alert-soft-warning" role="alert">
-                     <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
-                     <= 1) 1 filter @else {{$this->cntFilters}} filters @endif <span
-                        wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
-                     filters</span>
-                  </div>
-                  @endif
+              
                   @if($items->count())
                   <x-table>
                      <x-slot name="head">
-                        <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
+                        <x-table.heading sortable wire:click="sortBy('code')">Code</x-table.heading>
                         <x-table.heading sortable wire:click="sortBy('solution')">Oplossing</x-table.heading>
                         <x-table.heading></x-table.heading>
                      </x-slot>
@@ -66,10 +68,19 @@
                         
                            <x-table.cell>
                               <div style = "float: right">
-                                 <button type="button"   wire:click="edit({{$item->id}})"  data-bs-toggle="modal"
-                                    data-bs-target="#crudModal" class="btn btn-ghost-warning btn-icon btn-sm rounded-circle" id="connectionsDropdown3" >
-                                 <i class="fa-solid fa-eye"></i>  
-                                 </button> 
+                            
+                              <div class="dropdown">
+                    <button type="button" class="btn btn-icon btn-sm  " id="apiKeyDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi-three-dots-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="apiKeyDropdown1">
+                      <a class="dropdown-item" href="#"  data-bs-toggle="modal" wire:click="edit({{$item->id}})"    data-bs-target="#crudModal" >Wijzig</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-danger" href="#" wire:click="delete({{$item->id}})"
+                  wire:confirm.prompt="Weet je zeker dat deze rij wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
+             >Verwijderen</a>
+                    </div>
+                  </div>
                               </div>
                            </x-table.cell>
                         </x-table.row>
@@ -120,14 +131,7 @@
             </div>
          </div>
          <div class="modal-footer">
-            @if($edit_id)
-            <button wire:click="delete({{$edit_id}})"
-               wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
-               type="button" class="btn btn-ghost-danger btn-icon btn-sm rounded-circle" id="connectionsDropdown3"
-               data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-trash"></i>
-            </button>
-            @endif
+            
             <button type="button" class="btn btn-link btn-120" data-bs-dismiss="modal">Sluiten</button>
             <button class="btn btn-primary btn-120    " wire:click="save()" type="button">
                <div wire:loading wire:target="save">

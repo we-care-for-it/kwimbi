@@ -73,8 +73,8 @@
         </div>
 
         <div class="list-group ">
-          <a href="/settings/management-companies"
-            class="list-group-item list-group-item-action border-0 border-bottom text-danger ">Foutmeldingen</a>
+          <a href="/settings/workorders/errors"
+            class="list-group-item list-group-item-action border-0 border-bottom  ">Foutmeldingen</a>
         </div>
 
         <div class="list-group ">
