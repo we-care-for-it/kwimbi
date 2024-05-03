@@ -80,6 +80,8 @@ class Edit extends Component
         $this->edit_id      = $id;
         $this->status_id      = $this->data->status_id;
         $this->object_type_id      = $this->data->object_type_id;
+ 
+       $this->supplier_id      = $this->data->supplier_id;
 
         $this->stretcher_elevator      = $this->data->stretcher_elevator;
         $this->speakconnection      = $this->data->speakconnection;

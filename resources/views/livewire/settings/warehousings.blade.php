@@ -12,13 +12,13 @@
       </div>
    </div>
    
-   
    <div class="row ">
       <div class="col-xl-12">
-         <div class="card   ">
 
-         <div class="card-header card-header-content-md-between bg-light">
+         <div class="card ">
+            <div class="card-header card-header-content-md-between">
                <div class="mb-2 mb-md-0">
+
                   <form>
                      <!-- Search -->
                      <div class="input-group input-group-merge">
@@ -34,14 +34,23 @@
                      </div>
                   </form>
                </div>
-               <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
-                  <div class="d-flex align-items-center justify-content-center">
-                     <div wire:loading.delay class="loading_indicator_small"></div>
-                  </div>
-               </div>
-            </div>
+               <!-- End Col -->
 
-            <div class="card-body  ">
+               <div>
+
+                  @if($this->cntFilters)
+                  <div role="alert">
+                     <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
+                     <= 1) 1 filter @else {{$this->cntFilters}} filters @endif 
+                     <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
+                        filters</span>
+                  </div>
+                  @endif
+
+               </div>
+
+            </div>
+            <div class="card-bodys  ">
                <div class="row ">
                   <div class="loading" wire:loading>
                   @include('layouts.partials._loading')
@@ -92,13 +101,24 @@
                                     {{$item->address}}
                                  </x-table.cell>
                                  <x-table.cell>
-                                    <button style="float: right"
-                                       class="btn btn-ghost-warning text-warning btn-icon btn-sm rounded-circle m-1"
-                                       wire:click="edit({{$item->id}})" data-bs-toggle="modal"
-                                       data-bs-target="#crudModal">
-                                    <i class="bi bi-pencil"></i>
+                              <div style="float: right">
+
+                                 <div class="dropdown">
+                                    <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm rounded-circle" id="apiKeyDropdown1"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                       <i class="bi-three-dots-vertical"></i>
                                     </button>
-                                 </x-table.cell>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="apiKeyDropdown1">
+                                       <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                          wire:click="edit({{$item->id}})" data-bs-target="#crudModal">Wijzig</a>
+                                       <div class="dropdown-divider"></div>
+                                       <a class="dropdown-item text-danger" href="#" wire:click="delete({{$item->id}})"
+                                          wire:confirm.prompt="Weet je zeker dat je de deze regel verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD">Verwijderen</a>
+                                    </div>
+                                 </div>
+
+                              </div>
+                           </x-table.cell>
                               </x-table.row>
                               @endforeach
                            </x-slot>
@@ -169,21 +189,15 @@
                <hr>
             </div>
             <div class="modal-footer">
-               @if($edit_id)
-               <button wire:click="delete({{$edit_id}})"
-                  wire:confirm.prompt="Weet je zeker dat je de dit adres wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD"
-                  type="button" class="btn btn-link  btn-sm  " id="connectionsDropdown3"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-               <i class="fa-solid fa-trash"></i>
-               </button>
-               @endif
-               <button type="button" class="btn btn-link btn-120" data-bs-dismiss="modal">Sluiten</button>
-               <button class="btn btn-primary btn-120    " wire:click="save()" type="button">
+           
+        
+               <button type="button" class="btn btn-sm btn-link btn-120" data-bs-dismiss="modal">Sluiten</button>
+               <button class="btn btn-primary btn-sm btn-120    disabled" wire:click="save()" type="button"
+                  wire:dirty.remove.class="disabled">
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>
                   Opslaan
-               </button>
             </div>
          </div>
       </div>
