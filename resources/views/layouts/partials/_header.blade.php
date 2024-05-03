@@ -169,11 +169,7 @@
                      <i class="bi-house-door dropdown-item-icon"></i>    Objecten
                      </a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="/masterdata" data-placement="left">
-                     <i class="bi-house-door dropdown-item-icon"></i>    Basisgegevens
-                     </a>
-                  </li>
+
                   <li class="nav-item">
                       <a class="nav-link " href="/locations" data-placement="left">
                      <i class="bi-house-door dropdown-item-icon"></i>     Locaties

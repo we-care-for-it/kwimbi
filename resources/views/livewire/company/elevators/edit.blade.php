@@ -195,7 +195,7 @@ Gegevens
        <option selected value="">Selecteer een locatie</option>
        @foreach($suppliers as $supplier)
 
-       <option value="{{ $supplier->id }}"  @if($supplier==$supplier_id) selected  @endif >
+       <option value="{{ $supplier->id }}"  @if($supplier->id==$supplier_id) selected  @endif >
                          {{ $supplier->name }}
                       </option>
  
