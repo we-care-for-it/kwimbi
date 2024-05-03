@@ -51,6 +51,17 @@ function ()
 
 });
 
+
+Route::get('vehicles', \App\Http\Livewire\Vehicle\Index::class);
+Route::group(['prefix' => 'vehicle', ],
+function ()
+{
+ 
+   Route::get('/add', \App\Http\Livewire\Vehicle\Add::class);
+ //  Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
+});
+
+
 Route::get('/search', \App\Http\Livewire\Company\Search::class);
 
 //Company routes
@@ -241,6 +252,7 @@ function ()
          //    Route::get('edit/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Edit::class);
           //   Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
         //  });
+
 
 
 

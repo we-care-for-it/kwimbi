@@ -527,3 +527,97 @@ h1{
 .atbd-notice__content .notice-listBlock {
   padding: 24px;
 }
+
+ 
+::placeholder {
+  color: rgba(0,0,0,.15);
+}
+ 
+.kenteken {
+  position: relative;
+  background: #f3bd00;
+  width: 310px;
+  height: 70px;
+  padding: 3px;
+  border-radius: 5px;
+ 
+}
+.kenteken2 {
+  position: relative;
+  background: #f3bd00;
+  width: 210px;
+  height: 42px;
+  padding: 2px;
+  border-radius: 5px;
+ 
+}
+.inset {
+  border: 1px solid #333;
+  border-radius: 4px;
+  width: auto;
+  height: 58px;
+  position: relative;
+  display: flex;
+}
+.inset2 {
+  border: 1px solid #333;
+  border-radius: 4px;
+  width: auto;
+  height: 38px;
+  position: relative;
+  display: flex;
+}
+.kenteken .inset .blue {
+  width: 34px;
+  height: 58px;
+  background: #003399;
+  border-right: 1px solid #333;
+  background-image: url('https://i.ibb.co/r7SZP4h/NLD1-01.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.kenteken2 .inset2 .blue2 {
+  width: 24px;
+  height: 38px;
+  background: #003399;
+  border-right: 1px solid #333;
+  background-image: url('https://i.ibb.co/r7SZP4h/NLD1-01.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.kenteken .inset input {
+  text-transform: uppercase;
+  background: 0;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: calc(100% - 35px);
+  font-size: 38px;
+  letter-spacing: 3px;
+  line-height: 38px;
+  font-family: 'Kenteken', sans-serif;
+  background-image: url('https://svgshare.com/i/VU4.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.kenteken2 .inset2 input {
+  text-transform: uppercase;
+  background: 0;
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: calc(100% - 25px);
+  font-size: 23.5px;
+  letter-spacing: 3px;
+  line-height: 38px;
+  font-family: 'Kenteken', sans-serif;
+  background-image: url('https://svgshare.com/i/VU4.svg');
+  background-repeat: no-repeat;
+  background-size: auto;
+}
