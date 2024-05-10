@@ -41,7 +41,7 @@
                         @if($this->cntFilters)
                         <div role="alert">
                             <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
-                            <= 1) 1 filter @else {{$this->cntFilters}} filters @endif< />
+                            <= 1) 1 filter @else {{$this->cntFilters}} filters @endif
                             <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
                                 filters</span>
                         </div>
@@ -77,7 +77,7 @@
 
 
                                     <x-table.cell>
-                                        {{$item->kenteken}}
+                                        {{formatLicensePlate($item->kenteken)}}
                                     </x-table.cell>
 
                                     <x-table.cell>
