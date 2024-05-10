@@ -158,7 +158,7 @@ $this->validate();
 
     $this->clear();
  
-    $this->dispatch('close-crud-modal');
+   // $this->dispatch('close-crud-modal');
     pnotify()->addWarning('Gegevens opgeslagen');
 
 }

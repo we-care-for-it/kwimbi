@@ -3,19 +3,10 @@ namespace App\Http\Livewire\Settings\Workorders;
 
 use Livewire\Component;
 
-
-
-
-//Models
- 
+//Models 
 use App\Models\maintenanceCompany;
 use App\Models\Solution;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Hash;
 
 //Datatable
 use App\Http\Livewire\DataTable\WithSorting;
@@ -23,12 +14,16 @@ use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 class Solutions extends Component
 {
-
-
     use WithPerPagePagination;
     use WithSorting;
     use WithBulkActions;
@@ -45,20 +40,13 @@ class Solutions extends Component
     #[Validate('required', message: 'Vul minimaal een oplossing in')]
     public $solution;
     public $edit_id;
-public $data;
-
- 
+    public $data;
 
     public $filters = [
-        'keyword'   => '', 
- 
-        
+        'keyword'   => '',   
     ];
 
- 
-
-  
-    public function render()
+   public function render()
     {
         return view('livewire.settings.workorders.solutions',[
             'items' => $this->rows,
@@ -71,7 +59,6 @@ public $data;
         'solution' => 'required',
     ];
 
-    
     public function getRowsQueryProperty()
     {
         $query = Solution::query()->when($this->filters['keyword'], function ($query) {
@@ -104,43 +91,41 @@ public $data;
     }
 
 
-public function sortBy($field)
-{
-    if ($this->sortField === $field) {
-        $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-        $this->sortDirection = 'asc';
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
     }
 
-    $this->sortField = $field;
-}
-
-public function clear()
-{
-    $this->reset();
-  
- 
-}
-
- 
-public function save(){
-   
-    $this->validate();
-
-    if(!$this->edit_id){
-    Solution::create($this->all());
-    }else{
-        $this->data->update($this->all());
+    public function clear()
+    {
+        $this->reset();    
     }
+
+ 
+    public function save(){
     
- 
-    $this->reset();
-    $this->dispatch('close-crud-modal');
-    noty()
-    ->layout('bottomRight')
-    ->addInfo('Gegevens opgeslagen');
+        $this->validate();
 
-}
+        if(!$this->edit_id){
+        Solution::create($this->all());
+        }else{
+            $this->data->update($this->all());
+        }
+        
+    
+        $this->reset();
+        $this->dispatch('close-crud-modal');
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Gegevens opgeslagen');
+
+    }
  
 
     public function updatedFilters()
@@ -161,15 +146,10 @@ public function save(){
 
     public function edit($id)
     {
-    
         $this->edit_id = $id;
         $this->data = $item = Solution::where('id', $id)->first();
          $this->code =  strtoupper($this->data->code);
         $this->solution =  $this->data->solution;
- 
-
-
-
     }
 
 
@@ -183,14 +163,8 @@ public function save(){
     }
 
     public function updateCode() {
-     
         $this->code  = str_replace(" ","",strtoupper($this->code));
     }
-
-    
-
-
-
-    }
+}
 
  

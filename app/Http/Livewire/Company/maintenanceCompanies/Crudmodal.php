@@ -36,6 +36,8 @@ class Crudmodal extends Component
 
     $this->validate();
 
+
+    dd($this->data);
     if (array_key_exists('id', $this->data)) {
         try {
             $this->object->update($this->data);
@@ -53,7 +55,7 @@ class Crudmodal extends Component
    
  
 
-    $this->dispatch('close-crud-modal');
+  //  $this->dispatch('close-crud-modal');
     return redirect(request()->header('Referer'));
  
 

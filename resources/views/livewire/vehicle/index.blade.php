@@ -49,12 +49,13 @@
 
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0 mt-3">
                     <div class="col-md-12">
 
                         @if($items->count())
                         <x-table>
                             <x-slot name="head">
+                                <x-table.heading> </x-table.heading>
                                 <x-table.heading sortable wire:click="sortBy('kenteken')">kenteken</x-table.heading>
                                 <x-table.heading sortable wire:click="sortBy('voortuigsoort')">Voortuigsoort</x-table.heading>
                                 <x-table.heading sortable wire:click="sortBy('merk')">Merk</x-table.heading>
@@ -65,6 +66,16 @@
                             <x-slot name="body">
                                 @foreach ($items as $item)
                                 <x-table.row wire:key="row-{{ $item->id }}">
+                                <x-table.cell>
+                                @if($item->image)
+                     <img class="avatar-img " style="max-height: 40px; max-width: 40px"" src="/storage/{{$item->image}}">
+                  @else
+                     <img class="avatar-img  " style="max-height:40px; max-width: 40px"" src="/assets/img/160x160/img2.jpg">
+                  @endif
+                                    </x-table.cell>
+
+
+
                                     <x-table.cell>
                                         {{$item->kenteken}}
                                     </x-table.cell>

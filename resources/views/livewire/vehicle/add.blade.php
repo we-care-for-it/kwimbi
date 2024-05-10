@@ -10,8 +10,8 @@
                     <i class="fa-solid fa-rotate-left"></i> Afbreken
                 </button>
             
-                <button class="btn btn-primary btn-sm btn-120    disabled" wire:click="save()" type="button"
-                  wire:dirty.remove.class="disabled">
+                <button class="btn btn-primary btn-sm btn-120     " wire:click="save()" type="button"
+                   >
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>
@@ -31,13 +31,12 @@
   <div class="inset2">
     <div class="blue2"></div>
     <input class = "@error('kenteken') is-invalid   @enderror" wire:model="kenteken"  type="text" placeholder="XP-004-T" value="" /> 
-    @error('kenteken') <span class="invalid-feedback">{{ $message }}</span> @enderror
-                 
-
   </div>
 </div>
+
 </center>         
-                   
+
+               
 <center> 
 <button class="btn btn-sm btn-primary mt-5    " wire:click="getDataFromRDW()" type="button"
                   >
@@ -51,6 +50,47 @@
  
  
             </div>
+
+             
+            <div class="card mt-3">
+                <div class="card-header card-header-content-md-between    ">
+
+                    Afbeelding
+                </div>
+
+                <div class="card-body text-center">
+                    <label class="avatar avatar-xxl">
+
+                        @if ($image_db || $image )
+                        <img class="avatar-img border p-1 pb-0 mb-0" style="height: 100%px;"
+                            src="{{ $image ? $image->temporaryUrl() :  url('/storage/'.$image_db)  }}" />
+                        @else
+                        <img class=" avatar-img" src="/assets/img/160x160/img2.jpg" />
+                        @endif
+
+                        <input type="file" class="js-file-attach avatar-uploader-input" id="editAvatarUploaderModal"
+                            data-hs-file-attach-options='{
+                                 "textTarget": "#editAvatarImgModal",
+                                 "mode": "image",
+                                 "targetAttr": "src",
+                                 "allowTypes": [".png", ".jpeg", ".jpg"]
+                              }' wire:model.live="image" />
+
+                        <span class="avatar-uploader-trigger ">
+                            <i class="bi-pencil-fill avatar-uploader-icon shadow-sm mr-4 mb-2 "></i>
+                        </span>
+                    </label>
+
+                </div>
+
+                @if($image)
+                <button type="button" wire:click="clearImage"
+                    wire:confirm.prompt="Hiermee verwijder je de afbeelding van deze locatie. Weet je zeker dat je deze actie wilt uitvoeren?\n\nType AKKOORD om te bevestigen|AKKOORD"
+                    class=" btn btn-link  ">Verwijder afbeelding</button>
+
+                    @endif
+            </div>
+
 
         </div>
         <div class="col-md-9">
@@ -156,21 +196,87 @@
                 </div>
             </div>
 
+    
             <div class="card mt-3 ">
                 <div class="card-header">
-                    Vervaldata en historie
+                    Datums
                 </div>
-                <div class="card-body">
 
-                </div>
-            </div>
+
+
+                <div class="card-body">
+                <div class="row">
+                        <div class="col-md-3">
+
+                        <label class="pb-2   ">Vervaldatum APK</label>
+                            <input class="form-control    "  type = "date" wire:model.defer="vervaldatum_apk_dt">
+
+
+
+</div>
+
+<div class="col-md-4">
+
+<label class="pb-2   ">Eerste toelating</label>
+    <input class="form-control     "  type = "date" wire:model.defer="datum_eerste_toelating_dt">
+
+    
+
+</div>
+
+
+<div class="col-md-4">
+
+<label class="pb-2   ">Tenaamstelling</label>
+    <input class="form-control     "  type = "date" wire:model.defer="datum_tenaamstelling_dt">
+
+    
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+                <//div>
+
+
 
             <div class="card mt-3 ">
                 <div class="card-header">
                     Gewichten
                 </div>
                 <div class="card-body">
+                <div class="row">
+                        <div class="col-md-3">
 
+                            <label class="pb-2   ">Massa ledig voortuig</label>
+                            <input class="form-control required   " wire:model.defer="massa_ledig_voortuig">
+
+                            <label class="pb-2   pt-3  ">Technische max massa voertuig</label>
+<input class="form-control required   " wire:model.defer="technische_max_massa_voertuig">
+ 
+                        </div>
+
+
+                        <div class="col-md-3">
+
+<label class="pb-2   ">Maximum massa trekken ongeremd</label>
+<input class="form-control required   " wire:model.defer="maximum_massa_trekken_ongeremd">
+
+<label class="pb-2  pt-3 ">Maximum massa trekken geremd</label>
+<input class="form-control required   " wire:model.defer="maximum_massa_trekken_geremd">
+
+</div>
+
+ 
+
+
+
+
+
+</div>
                 </div>
             </div>
 

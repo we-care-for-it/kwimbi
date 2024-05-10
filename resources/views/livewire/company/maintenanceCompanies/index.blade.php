@@ -108,11 +108,22 @@
                                     <x-table.cell>
                                        <div style = "float: right">
  
-                                   
-                                           <a class="dropdown-item" href="/settings/supplier/{{$item->id}}"  >
-                                           <i class="bi-eye"></i></a>
-                                                              
-                             
+                                       <div class="dropdown">
+                                                <button type="button" class="btn btn-icon btn-sm  " id="apiKeyDropdown1"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi-three-dots-vertical"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="apiKeyDropdown1">
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        wire:click="edit({{$item->id}})"
+                                                        data-bs-target="#crudModal">Wijzig</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#"
+                                                        wire:click="delete({{$item->id}})"
+                                                        wire:confirm.prompt="Weet je zeker dat je de deze rij wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD">Verwijderen</a>
+                                                </div>
+                                            </div>
 
 
  
@@ -130,11 +141,11 @@
                </div>
             </div>
             @if($items->links())
-            <div wire:loading.remove class="card-footer  ">
-               <div class = "float-end ">
+         
+           
                {{ $items->links() }}
-                        </div>
-            </div>
+           
+            
             @endif
          </div>
          

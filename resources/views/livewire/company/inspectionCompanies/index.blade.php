@@ -130,11 +130,11 @@
                </div>
             </div>
             @if($items->links())
-            <div wire:loading.remove class="card-footer  ">
+          
                <div class = "float-end ">
                {{ $items->links() }}
                         </div>
-            </div>
+         
             @endif
          </div>
          

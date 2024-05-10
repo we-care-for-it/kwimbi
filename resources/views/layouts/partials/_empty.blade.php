@@ -1,9 +1,9 @@
  
-                                 <div class="pt-2">
-                                     <div class="  text-center">
-                                        <center>
-                                  <img style = "height: 200px;"  src="/assets/img/folders/1.svg"  ></center>
-                                         <div class=" ">
+<div class="pt-2 p-3">
+<div class="  text-center">
+<center>
+<img style = "height: 200px;"  src="/assets/img/folders/1.svg"  ></center>
+<div class=" ">
 
                                              <h4>Geen gegevens gevonden</h4>
 
