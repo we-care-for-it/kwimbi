@@ -231,6 +231,7 @@ function ()
                 Route::get('/inspections/{elevator_id}/index', \App\Http\Livewire\Company\Elevators\Inspections\Index::class);
                 Route::get('/inspection/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Inspections\Create::class);
                 Route::get('/inspection/edit/{id}', \App\Http\Livewire\Company\Inspections\Edit::class);
+                Route::get('/inspection/show/{id}', \App\Http\Livewire\Company\Inspections\Show::class);
 
             //Incidenten
                 Route::get('/incident/{elevator_id}/create', \App\Http\Livewire\Company\Elevators\Incidents\Create::class);

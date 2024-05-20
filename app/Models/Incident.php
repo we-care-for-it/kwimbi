@@ -59,7 +59,7 @@ class Incident extends Model  implements Auditable
 
 
 
-
+   
     public function replys()
     {
         return $this->hasMany(IncidentReplies::class)->orderby('id', 'desc');

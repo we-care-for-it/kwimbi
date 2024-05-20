@@ -25,6 +25,14 @@ return array(
         2 => "Eerste keuring na ingebruikname", 
         3 => "Periodiekekeuring" 
     ],
+
+
+    'check_statussen' => [ 
+        1 => "Opleveringskeuring", 
+        2 => "Eerste keuring na ingebruikname", 
+        3 => "Periodiekekeuring" 
+    ],
+   
    
     'incident_types' => [ 
         1 => "Extern", 

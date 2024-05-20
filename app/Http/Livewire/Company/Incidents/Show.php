@@ -43,7 +43,7 @@ class Show extends Component
     public $description;
     public $report_date_time;
     public $showReplyConfirmDelete = false;
-
+ 
 
 
 

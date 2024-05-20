@@ -795,7 +795,7 @@
               <div class="card-header card-header-content-md-between ">
               <a name="inspections">Keuringen</a>
               </div>
-              <div class="card-body">
+              <div class="card-body p-0 pt-3">
 
               <div class="table-responsive">
                  <table class="table  table-sm  table-hover   " onclick="location " style="cursor: pointer">
@@ -805,8 +805,8 @@
                           <th scope="col">Begindatum </th>
                           <th scope="col">Einddatum </th>
                           <th scope="col">Opmerking </th>
-                          <th scope="col"> </th>
-                       
+                          <th scope="col">  </th>
+                          <th scope="col">  </th>
                        </tr>
                     </thead>
                     <tbody>
@@ -851,20 +851,22 @@
                          
                           <td scope="row">
                           @if($item->document)
-                             <button class="btn  btn-ghost-primary btn-sm btn-120" 
+                             <button class="btn  btn-link btn-sm btn-120" 
                                 wire:click="downloadDocument('inspection','{{$item->id}}')" style="float: right; ">
                                 <i class="fa-solid fa-paperclip"></i> Rapportage </button>
                              @endif
 
                              @if($item->certification)
-                             <button class="btn  btn-ghost-primary  btn-sm btn-120 "
+                             <button class="btn btn-link btn-sm btn-ico  btn-sm btn-120 "
                                 wire:click="downloadDocument('certification','{{$item->id}}')"
-                                style="float: right;    ">
+                                style="float: right;    "> 
                                 <i class="fa-solid fa-paperclip"></i> Certificaat </button> @endif
                           </td>
 
                          
-
+<td><a href = "/elevator/inspection/show/{{$item->id}}"
+ 
+><button class = "btn btn-primary btn-sm btn-ico"><i class="fas fa-edit"></i></button></a></td>
                        </tr>
 
                        @endforeach
