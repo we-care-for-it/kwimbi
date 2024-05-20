@@ -56,10 +56,16 @@ Route::get('vehicles', \App\Http\Livewire\Vehicle\Index::class);
 Route::group(['prefix' => 'vehicle', ],
 function ()
 {
+    Route::get('/add', \App\Http\Livewire\Vehicle\Add::class);
+    Route::get('/edit/{id}', \App\Http\Livewire\Vehicle\Edit::class);
+    Route::get('/{slug}', \App\Http\Livewire\Vehicle\Show::class);
  
-   Route::get('/add', \App\Http\Livewire\Vehicle\Add::class);
  //  Route::get('show/{$slug}', \App\Http\Livewire\Company\ManagementCompanies\Show::class);
 });
+
+
+
+ 
 
 
 Route::get('/search', \App\Http\Livewire\Company\Search::class);
