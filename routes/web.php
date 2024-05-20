@@ -70,7 +70,28 @@ Route::get('/support', \App\Http\Livewire\Support::class);
     Route::get('/masterdata', \App\Http\Livewire\Company\Masterdata::class);
     Route::get('/connections', \App\Http\Livewire\Connections::class);
 
-    Route::get('/connections', \App\Http\Livewire\Connections::class);
+
+    Route::group(
+        ['prefix' => 'connections'],
+        function () {
+            Route::get('/liftinstituut', function () { return view('connection.liftinstituut');  });
+
+            Route::get('/tuv', \App\Http\Livewire\Connection\Tuv::class);
+
+ 
+
+
+        //    Route::get('/tuv', function () { return view('livewire.connection.tuv') ->layout('layouts.app');  });
+            Route::get('/outsmart', function () { return view('/livewire/connection/outsmart');  });
+            Route::get('/chex', function () { return view('/livewire/connection/chex');  });
+            Route::get('/eboekhouden', function () { return view('/livewire/connection/eboekhouden');  });
+
+        }
+    );
+
+
+
+
     //Customers
     Route::get('/customers', \App\Http\Livewire\Company\Customers\Index::class);
     Route::group(['prefix' => 'customer', ],

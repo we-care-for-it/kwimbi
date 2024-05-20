@@ -13,10 +13,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
- $this->call([
-       NewTenant::class
- 
-    ]);
+   \App\Models\User::create([
+            'name' => 'sysadmin',
+            'email' => 'sysadmin@desknow.nl',
+            'password' => Hash::make('!Timmer2024@')
+        ]);
 
 
         // \App\Models\User::factory(10)->create();

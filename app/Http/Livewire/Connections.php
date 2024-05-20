@@ -15,7 +15,7 @@ class Connections extends Component
     {
  
 
-        return view('connections');
+        return view('livewire.connections');
     }
 
 

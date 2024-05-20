@@ -40,7 +40,10 @@
           <a href="/vehicles"
             class="list-group-item list-group-item-action border-0 border-bottom">Voortuigen</a>
         </div>
-
+        <div class="list-group ">
+          <a href="/connections"
+            class="list-group-item list-group-item-action border-0 border-bottom">Verbindingen</a>
+        </div>
       </div>
     </div>
   </div>
