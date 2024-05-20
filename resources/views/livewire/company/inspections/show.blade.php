@@ -154,31 +154,18 @@
                         <div class="row">
   <div class="col-sm-6"> 
     
+
+ 
   
   <select class="form-select" wire:model.defer="replyStatus">
-                                 <option value="{{$inspection->status_id}}" selected>Status...
-                                 </option>
-                                 <option value="2">Doorgestuurd naar onderhoudsbedrijf
-                                 </option>
-                                 <option value="3">Wacht op offerte
-                                 </option>
-                                 <option value="4">Offerte naar klant
-                                 </option>
-                                 <option value="5">Niet gereed
-                                 </option>
-                                 <option value="6">Onjuist gemeld
-                                 </option>
-                                 <option value="7"> Offerte in opdracht
-                                 </option>
-                                 <option value="8"> Werkzaamheden gepland
-                                 </option>
-                                 <option value="9"> Wachten op uitvoerdatum
-                                 </option>
-                                 <option value="99">Gereed
-                                 </option>
-                     
-                                
 
+  <option value="{{$inspection?->replys[0]?->status_id}}">Niet aanpassen
+                                 </option>
+
+  @foreach(config('globalValues.check_replies_statussen') as $key => $item)
+                                 <option value="{{$key}}">{{$item[0]}}
+                                 </option>
+                                @endforeach
 
                               </select> </div>  
   <div class="col-sm-6">

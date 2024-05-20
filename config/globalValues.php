@@ -20,10 +20,10 @@ return array(
         11 => "Gevellift", 
      ],
 
-     'check_types' => [ 
-        1 => "Opleveringskeuring", 
-        2 => "Eerste keuring na ingebruikname", 
-        3 => "Periodiekekeuring" 
+     'check_replies_statussen' => [ 
+        1 => array("Status 1","badge badge-secondary"),
+        2 => array("Status 2","badge badge-danger"),
+        3 => array("Status 3","badge badge-warning")
     ],
 
 
