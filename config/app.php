@@ -163,7 +163,7 @@ return [
         /*
          * Application Service Providers...
          */
-       
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -187,7 +187,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
+           // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
 ];

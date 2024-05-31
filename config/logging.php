@@ -54,10 +54,16 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'slack'],
-            'ignore_exceptions' => false,
+            // Add bugsnag to the stack:
+            'channels' => ['single', 'bugsnag'],
         ],
 
+        // ...
+
+        // Create a bugsnag logging channel:
+        'bugsnag' => [
+            'driver' => 'bugsnag',
+        ],
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
