@@ -1,69 +1,57 @@
- <!-- ========== HEADER ========== -->
- <header id="header"  class="navbar navbar-expand-lg bg-white   ">
-      <div class="container">
-         <nav class="js-mega-menu navbar-nav-wrap">
-            <!-- Logo -->
-            <a class="navbar-brand" href="./index.html" aria-label="Logo">
-               <img class="navbar-brand-logo" src="/storage/tenant/logo.png" data-hs-theme-appearance="default">
-               <img class="navbar-brand-logo" src="/storage/tenant/logo.png" data-hs-theme-appearance="dark">
+<!-- ========== HEADER ========== -->
+
+<header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered   " style = "background-color: #7F7EFF"
+  style="background-color: #377DFF">
+  <div class="navbar-nav-wrap">
+      <div class="navbar-nav-wrap-content-start">
+      <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
+        <i class="bi-arrow-bar-left navbar-toggler-short-align"
+          data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+          data-bs-toggle="tooltip" data-bs-placement="right" title="Collapse"></i>
+        <i class="bi-arrow-bar-right navbar-toggler-full-align"
+          data-bs-template='<div class="tooltip d-none d-md-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
+          data-bs-toggle="tooltip" data-bs-placement="right" title="Menu"></i>
+      </button>
+      <div class="dropdown ms-2">
+        <div class="d-none d-lg-block" style="color: white">
+
+        </div>
+
+      </div>
+  </div>
+
+    <div class="navbar-nav-wrap-content-end">
+
+
+      <ul class="navbar-nav">
+
+
+        <!-- <li class="nav-item">
+          <div class="dropdown">
+            <a style="color: white!important" class="navbar-dropdown-account-wrapper" href="javascript:;"
+              id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
+              data-bs-dropdown-animation>
+              <i class="fa-solid fa-plus"></i> Toevoegen
             </a>
+            <div
+              class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-account"
+              aria-labelledby="accountNavbarDropdown" style="width: 16rem;">
 
-            <!-- End Logo -->
+              <a class="dropdown-item" href="/management-companies/create">Beheerder</a>
+              <a class="dropdown-item" href="/inspection-companies/create">Keuringinstantie</a>
+              <a class="dropdown-item" href="/customers/add">Relatie</a>
+              <a class="dropdown-item" href="/suppliers/create">Leverancier</a>
+              <a class="dropdown-item" href="/location/create">Locatie</a>
+              <a class="dropdown-item" href="/maintenancy-companies">Onderhoudspartij</a>
+              <a class="dropdown-item" href="/contacts/create">Contactpersoon</a>
 
-            <!-- Secondary Content -->
-            <div class="navbar-nav-wrap-secondary-content">
-               <!-- Navbar -->
-               <ul class="navbar-nav">
+            </div>
+          </div>
+        </li> -->
 
-                  <li class="nav-item">
-
-                     <!-- Style Switcher -->
-                     <div class="dropdown ">
-                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
-                           id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
-                           data-bs-dropdown-animation>
-
-                        </button>
-
-                        <div
-                           class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
-                           aria-labelledby="selectThemeDropdown">
-                           <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                              <i class="bi-moon-stars me-2"></i>
-                              <span class="text-truncate" title="Auto (system default)">Systeem standaard</span>
-                           </a>
-                           <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                              <i class="bi-brightness-high me-2"></i>
-                              <span class="text-truncate" title="Default (light mode)">Standaard (licht)</span>
-                           </a>
-                           <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                              <i class="bi-moon me-2"></i>
-                              <span class="text-truncate" title="Dark">Donker</span>
-                           </a>
-                        </div>
-                     </div>
-
-                     <!-- End Style Switcher -->
-                  </li>
-
-
-                  <li class="nav-item">
-
-               <a href = "/masterdata">
-<button type="button" class="btn btn-soft-secondary    btn-icon    ">
-   <i class="fa-solid fa-cog"></i>
-</button></a>
-</li>
-
-                  <li class="nav-item">
-
-                     <button type="button" onclick="history.back()" class="btn btn-soft-secondary    btn-icon    ">
-                        <i class="fa-solid fa-arrow-left"></i>
-                     </button>
-                  </li>
-
-                  <!-- Account -->
-                  <div class="dropdown">
+        <li class="nav-item">
+  <!-- Account -->
+  <div class="dropdown">
                      <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
                         data-bs-dropdown-animation>
@@ -88,14 +76,7 @@
                            </div>
                         </div>
 
-                        <div class="dropdown-divider"></div>
-
-                       
-                     
-                        <div class="dropdown-divider"></div>
-
-                      
-                        <div class="dropdown-divider"></div>
+         
 
                         <!-- Dropdown -->
                         <div class="dropdown">
@@ -129,62 +110,9 @@
                      </div>
                   </div>
                   <!-- End Account -->
-                  </li>
-               </ul>
-               <!-- End Navbar -->
-            </div>
-            <!-- End Secondary Content -->
-
-            <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-               data-bs-target="#navbarContainerNavDropdown" aria-controls="navbarContainerNavDropdown"
-               aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-default">
-                  <i class="bi-list"></i>
-               </span>
-               <span class="navbar-toggler-toggled">
-                  <i class="bi-x"></i>
-               </span>
-            </button>
-            <!-- End Toggler -->
-
-            <!-- Collapse -->
-
-      
-            <div class="collapse navbar-collapse center-block justify-content-center align-items-center "  id="navbarContainerNavDropdown">
-               <div class = "text-center center-block">
-               <ul class="navbar-nav center-block"">
-                  <!-- Dashboards -->
-
-
-                  
-                  <li class="nav-item">
-                     <a class="nav-link " href="/dashboard" data-placement="left">
-                     <i class="bi-house-door dropdown-item-icon"></i>      Overzicht
-                     </a>
-                  </li>
-
-                  <li class="nav-item">
-                     <a class="nav-link " href="/elevators" data-placement="left">
-                     <i class="bi-house-door dropdown-item-icon"></i>    Objecten
-                     </a>
-                  </li>
-           
-                  <li class="nav-item">
-                      <a class="nav-link " href="/locations" data-placement="left">
-                     <i class="bi-house-door dropdown-item-icon"></i>     Locaties
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link " href="/knowledgebase" data-placement="left">
-                     <i class="bi-house-door dropdown-item-icon"></i>     Kennisdatabase
-                     </a>  
-                  </li>
-
-               </ul>
-
-            </div> 
-         </nav>
-         </div>
-      </div>
-   </header>
+        </li>
+      </ul>
+      <!-- End Navbar -->
+    </div>
+  </div>
+</header>
