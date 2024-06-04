@@ -3,11 +3,15 @@
 namespace App\Http\Livewire\Company\Projects;
 
 use Livewire\Component;
-use App\Models\Project;
-use App\Models\projectObject;
-use App\Models\Customer;
-use App\Models\Statuses;
 
+//Inlcude models
+    use App\Models\Project;
+    use App\Models\projectObject;
+    use App\Models\Customer;
+    use App\Models\Statuses;
+
+
+use Illuminate\Http\Request;
 
 class Create extends Component
 {
@@ -30,8 +34,8 @@ class Create extends Component
         return view('livewire.company.projects.create',
     
         [
-            'statuses' => Statuses::where('module_id',1)->get(),
-            'debtors' => Customer::get(),
+            'statuses'  => Statuses::where('module_id',1)->get(),
+            'debtors'   => Customer::get(),
         ]
     
     );
@@ -41,37 +45,21 @@ class Create extends Component
         $validatedData = $this->validate(
             [
                 "name" => "required", 
-            "customer_id.*" => "required",
+           
     ], [
         "name.required" => "Naam is een verplicht veld", 
-    "customer_id.required" => "Einddatum is verplicht." ]
+    ]
 );
 
 
 
-    $data = Project::create([
-       
-            'name' => $this->name,
-            'description' => $this->description,
-            'startdate' => $this->startdate,
-            'progress' => $this->progress,
-            
-            'enddate' => $this->enddate,
-            'status_id' => $this->status_id,
-            'customer_id' => $this->customer_id,
-            'contact_person_name' => $this->contact_person_name,
-            'budget_hours' => $this->budget_hours,
-            'budget_costs' => $this->budget_costs,
-            
-        ]
-    );
+    $data = Project::create($this->all());
  
+    noty()
+    ->layout('bottomRight')
+    ->addInfo('Project'. $Request->input('name') . ' toegevoegd');
 
-  
- 
     return redirect('/projects');
- 
-    pnotify()->addWarning('Gegevens opgeslagen');
+}
 
-    }
 }

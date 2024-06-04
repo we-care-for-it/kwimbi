@@ -1,5 +1,5 @@
 
-  <meta content='width=device-width, initial-scale=1' name='viewport' />
+<meta content='width=device-width, initial-scale=1' name='viewport' />
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css" />
   <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css" />

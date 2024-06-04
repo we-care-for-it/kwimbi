@@ -1,21 +1,26 @@
+ 
 <div>
-   <div class="page-header  my-3">
-      <div class="row">
-         <div class="col-sm-6">
-            <h1 class=" float-start page-header-title pt-2">  Project aanmaken</h1>
-         </div>
-         <div class="col-sm-6 ">
-            <div class = " float-end">  
-               <a href  = "/project/create">
-               <button wire:loading.attr="disabled" wire:click="save()" type="button" class="btn    btn-soft-success  bnt-ico btn-120"">
-               Opslaan
-               </button></a> <button type="button" onclick="history.back()" class="  btn btn-soft-secondary    btn-icon    ">
-               <i class="fa-solid fa-arrow-left"></i>
-               </button>
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1 class="page-header-title">Project toevoegen</h1>
             </div>
-         </div>
-      </div>
-   </div>
+            <div class="col-auto">
+            <button type="button" onclick="history.back()"
+                    class="text-danger btn btn-link btn-default btn-squared   btn-sm ">
+                    <i class="fa-solid fa-rotate-left"></i> Afbreken
+                </button>
+            
+                <button class="btn btn-primary btn-sm btn-120     " wire:click="save()" type="button"
+                   >
+                  <div wire:loading wire:target="save">
+                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </div>
+                  Opslaan</button>
+
+            </div>
+        </div>
+    </div>
    
    
    <div>
