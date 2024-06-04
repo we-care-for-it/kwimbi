@@ -1,11 +1,12 @@
-<div class="container-fluid">
+
+<div>
    <div class="page-header     ">
       <div class="row align-items-center ">
          <div class="col">
  
-         <h1 class="page-header-title pt-3">  Relaties  </h1>
+         <h1 class="page-header-title ">  Relaties  </h1>
              </div>
-         <div class="col-auto">
+         <div class="col">
             <form>
                <!-- Search -->
                <div class="input-group input-group-merge">
@@ -23,7 +24,7 @@
             </form>
          </div>
          <div class="col-auto">
-            <button type="button" class="btn   btn-primary btn btn-sm btn-120 " data-bs-toggle="modal"
+            <button type="button" class="btn   btn-primary btn   btn-120 " data-bs-toggle="modal"
                data-bs-target="#crudModal">
        Toevoegen
             </button>
@@ -39,15 +40,13 @@
             <div class="card-body   ">
                <div class="row ">
                   <div class="loading" wire:loading>
-                     <img style="height: 190px" src="/assets/img/loading_elevator.gif">
-                     <br>
-                     <span class="text-muted">Bezig met gegevens ophalen</span>
+                  @include('layouts.partials._loading')
                   </div>
                   <div class="col-md-12 " wire:loading.remove>
                   @if($this->cntFilters)
                               <div class="alert alert-soft-warning" role="alert">
                                  <i class="bi-filter me-1"></i> Resultaten gefilterd met @if($this->cntFilters
-                                 <= 1) 1 filter @else {{$this->cntFilters}} filters @endif< />
+                                 <= 1) 1 filter @else {{$this->cntFilters}} filters @endif 
                                  <span wire:click="resetFilters()" style="cursor: pointer" class="text-primary">Wis alle
                                     filters</span>
                               </div>
@@ -91,24 +90,7 @@
                            </x-slot>
                         </x-table>
                         @else
-                        <div>
-                           <div class="empty-state-container">
-                              <div class="empty-state-content">
-                                 <div class="empty-state-content-background new">
-                                    <img class="empty-state-illustration" src="/assets/img/emptydocument.svg">
-                                    <p class="empty-state-text"><span class="strong"><br>Geen gegevens
-                                       gevonden</span><br><br>Maak een leverancier aan of pas je trefwoord aan
-                                       <br> <button type="button" class="btn   btn-primary btn-ico btn-sm mt-3"
-                                          data-bs-toggle="modal" data-bs-target="#crudModal" wire:click="clear()">
-                                       Toevoegen
-                                       </button>
-                                    </p>
-                                 </div>
-                                 <!--empty-state-content-background-->
-                              </div>
-                              <!--empty-state-content-->
-                           </div>
-                        </div>
+                        @include('layouts.partials._empty')
                         @endif
                      </div>
                   </div>
