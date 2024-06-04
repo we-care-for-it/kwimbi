@@ -23,8 +23,11 @@
                <!-- End Search -->
             </form>
          </div>
+       
          <div class="col-auto">
-            <button type="button" class="btn   btn-primary btn   btn-120 " data-bs-toggle="modal"
+
+         
+            <button type="button" class="btn   btn-primary btn  btn-120 " data-bs-toggle="modal"
                data-bs-target="#crudModal">
        Toevoegen
             </button>
@@ -55,6 +58,7 @@
                         @if($items->count())
                         <x-table>
                            <x-slot name="head">
+                           <x-table.heading ></x-table.heading>
                               <x-table.heading sortable wire:click="sortBy('name')">Naam</x-table.heading>
                               <x-table.heading sortable wire:click="sortBy('address')" :direction="$sortDirection">
                                  Adres

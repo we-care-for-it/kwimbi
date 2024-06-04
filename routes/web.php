@@ -106,7 +106,7 @@ Route::get('/support', \App\Http\Livewire\Support::class);
         Route::get('edit/{slug}', \App\Http\Livewire\Company\Customers\Edit::class);
         Route::get('{slug}', \App\Http\Livewire\Company\Customers\Show::class);
         Route::get('/contact/{customer_id}/create', \App\Http\Livewire\Company\Customers\Contact\Create::class);
-        Route::get('/location/{customer_id}/create', \App\Http\Livewire\Company\Customers\Location\Create::class);
+       // Route::get('/location/{customer_id}/create', \App\Http\Livewire\Company\Customers\Location\Create::class);
         Route::get('/project/{customer_id}/create', \App\Http\Livewire\Company\Customers\Project\Create::class);
     });
 
@@ -189,6 +189,7 @@ function ()
         Route::group(['prefix' => 'location', ],
         function ()
         {
+            Route::get('/create', \App\Http\Livewire\Company\Locations\Create::class);
             Route::get('/edit/{id}', \App\Http\Livewire\Company\Locations\Edit::class);
             Route::get('/{slug}', \App\Http\Livewire\Company\Locations\Show::class);
 

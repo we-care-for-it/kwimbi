@@ -12,14 +12,14 @@
             <div class="col-sm-6  float-end text-end">
 
                 <a href="/locations">
-                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  btn-sm ">
+                    <button type="button" class="btn btn-link btn-default btn-squared btn-120  ">
                         Alle locaties
                     </button>
                 </a>
             
         
 
-                <a href="/location/edit/{{$location->id}}" class="btn    btn-primary  btn-sm  btn-120 ">
+                <a href="/location/edit/{{$location->id}}" class="btn    btn-primary   btn-120 ">
                     </i>Wijzigen</a>
 
 
@@ -126,7 +126,7 @@
 
               <tr>
                   <td>Beheerder</td>
-                  <td>@if($location->managementcompany) {{$location->managementcompany->name}}  @else -  @endif</td>
+                  <td>@if($location?->management_id) {{$location?->managementcompany?->name}}  @else -  @endif</td>
               </tr>
 
 
@@ -147,7 +147,7 @@
               </tr>
 
               <tr>
-                  <td>Locatie sleutelkleus</td>
+                  <td>Locatie sleutelkluis</td>
                   <td> @if($location->location_key_lock) {{$location->location_key_lock}}  @endif</td>
               </tr>
 

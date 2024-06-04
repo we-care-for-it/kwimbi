@@ -2,16 +2,17 @@
     <div class="page-header   ">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="page-header-title "> {{$data->name}} - {{$data->address}} {{$data->place}}</h1>
-            </div>
+            <h1 class="page-header-title  "> @if($name)
+                    {{$name}} @else Geen naam @endif
+                    </h1>         </div>
 
             <div class="col-sm-6   text-end">
                 <button type="button" onclick="history.back()"
-                    class="text-danger btn btn-link btn-default btn-squared   btn-sm ">
+                    class="text-danger btn btn-link btn-default btn-squared   ">
                     <i class="fa-solid fa-rotate-left"></i> Afbreken
                 </button>
 
-                <button wire:click="save()" wire:loading.attr="disabled" class="btn   btn-primary btn-sm  btn-120" " 
+                <button wire:click="save()" wire:loading.attr="disabled" class="btn   btn-primary   btn-120" " 
          wire:click=" addUpload()" type="button">
                     <div wire:loading>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -65,11 +66,24 @@
 
             <div class="card mt-3 bg-light">
                 <div class="card-body">
+                <label class = "required pb-2">Relatie</label>
+                <div class="tom-select-custom  ">
+                <select wire:ignore.self wire:model="customer_id" class="js-select form-select required" autocomplete="off"
+                    data-hs-tom-select-options='{
+                                        "placeholder": "Selecteer een relatie"
+                                      }'>
 
-                    <b>{{$data->customer?->name}}</b>
-                    <br>
-                    {{$data->customer?->address}} {{$data->customer?->place}}
 
+                    <option selected value=""></option>
+                    @foreach($customers as $customer)
+
+                    <option value="{{$customer?->id}}"  @if($customer?->id == $customer_id) selected @endif >{{$customer?->name}}</option>
+
+                    @endforeach
+
+
+                </select>
+            </div>
                 </div>
             </div>
 
@@ -82,11 +96,12 @@
                     <label class="pb-2 pt-3">Beheerder</label>
 
                     <div class="tom-select-custom  ">
-                        <select wire:model.live="management_id" class="js-select form-select" autocomplete="off"
+                        <select wire:model="management_id" class="js-select form-select" autocomplete="off"
                             data-hs-tom-select-options='{
                                         "placeholder": "Selecteer een optie"
                                       }'>
 
+                                      <option value = ""></option>
                             @foreach($managementCompanies as $managementCompany).
 
                             <option value="{{$managementCompany?->id}}">{{$managementCompany?->name}}</option>

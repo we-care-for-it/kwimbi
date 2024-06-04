@@ -9,7 +9,7 @@
       <div class="col-sm-6   text-end">
 
       <a href="/project/create" wire:navigate>
-<button class="btn   btn-primary  btn-sm  btn-120" >
+<button class="btn   btn-primary   btn-120" >
     
 
         Toevoegen
@@ -26,7 +26,11 @@
         <div class="  ">
           <div class="row">
             <div>
-              <div class="row" wire:loading.class="loading-div">
+            <div  wire:loading>
+            @include('layouts.partials._loading')
+</div>
+
+              <div class="row" wire:loading.remove >
                 <div class="col-md-12">
                   @if($selectPage && $items->count() <> $items->total() ) @unless($selectAll)
                     <div class="pb-3">
@@ -128,22 +132,8 @@
                           <x-table.cell>
                                         <div style="float: right">
 
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-icon btn-sm  " id="apiKeyDropdown1"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi-three-dots-vertical"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="apiKeyDropdown1">
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        wire:click="edit({{$item->id}})"
-                                                        data-bs-target="#crudModal">Wijzig</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#"
-                                                        wire:click="delete({{$item->id}})"
-                                                        wire:confirm.prompt="Weet je zeker dat je de deze rij wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD">Verwijderen</a>
-                                                </div>
-                                            </div>
+                                          <a href="/project/{{$item->slug}}">
+                                            open</a>
 
                                         </div>
                                     </x-table.cell>
@@ -153,23 +143,7 @@
                       </x-slot>
                     </x-table>
                     @else
-                    <div class="flex justify-center items-center">
-                      <center>
-                        <div>
-                          <img src='/assets/img/illu/1-1-740x592.png' style="max-width: 500px; width: 100%;">
-
-                          <h4>Geen projecten gevonden</h4>
-                          Maak een project aan om de objecten, Taken, etc te organiseren in een project
-                          <div class="clear-fix pb-3"></div>
-                          <a href="{{ route('projects.create') }}">
-                            <button class="btn btn-soft-success mb-10  btn-sm">
-                              Project aanmaken
-                            </button></a>
-
-                        </div>
-                      </center>
-                    </div>
-                </div>
+                    @include('layouts.partials._empty')
                 @endif
               </div>
             </div>

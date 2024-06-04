@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Company\Customers\Location;
+namespace App\Http\Livewire\Company\Locations;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use App\Models\Customer;
@@ -66,10 +66,11 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.company.customers.location.create',
+        return view('livewire.company.locations.create',
         [
              'managementCompanies' => managementCompany::orderBy('name', 'asc')->get() ,
-             
+             'customers' => Customer::orderBy('name', 'asc')->get() ,
+            
            ]);
         
     }
@@ -80,13 +81,8 @@ class Create extends Component
     }
 
 
-    public function mount(Request $request)
-    {
-        $this->customer = Customer::where('id', $request->customer_id)
-            ->first();;
-    }
 
-    protected $rules = ['zipcode' => 'required', ];
+    protected $rules = ['zipcode' => 'required','customer_id' => 'required' ];
 
     
 public function save(){
@@ -108,21 +104,19 @@ public function save(){
     }
 
 
-
-    pnotify()
-        ->addWarning('Gegevens opgeslagen');
-    return redirect('/customer/' . $this
-        ->customer
-        ->slug);
+ 
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Locatie toegevoegd');
+    
+        return redirect('/locations');
     $this->reset();
 
        
-     
-        $this->dispatch('close-crud-modal');
+
         $this->clear();
      
-            
-        pnotify()->addWarning('Gegevens opgeslagen');
+          
     
     }
 

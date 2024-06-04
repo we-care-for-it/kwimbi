@@ -50,14 +50,14 @@ class Edit extends Component
     public $housenumber;
     public $building_type;
     public $building_access_type_id;
-
+public $customer_id;
 
     use WithFileUploads;
 
  
 
-    protected $rules = ['name' => 'required', ];
-    
+    protected $rules = ['zipcode' => 'required','customer_id' => 'required' ];
+
     public function mount($id)
     {
         $this->data = Location::findOrFail($id);
@@ -105,16 +105,7 @@ class Edit extends Component
         
         $this->validate();
  
-        try {
-            $this->data->update($this->all());
-        } catch (QueryException $e) {
-            dd('Ioe fout');
-        }
-        
-
    
-
-      
 
         if ($this->image  != $this->data->image_db ){
     
@@ -128,13 +119,19 @@ class Edit extends Component
         }
     
 
-        pnotify()->addWarning('Gegevens opgeslagen');
+        try {
+            $this->data->update($this->all());
+            noty()
+            ->layout('bottomRight')
+            ->addInfo('Locatie gewijzigd');
+        
+            return redirect('/location/' . $this->data->slug);
+        } catch (QueryException $e) {
+           // dd('Ioe fout');
+        }
 
-        //image
       
-      
- 
-         return redirect('/location/' .  $this->data->slug);
+       
         
     }
 
@@ -143,6 +140,8 @@ class Edit extends Component
         return view('livewire.company.locations.edit',
         [
              'managementCompanies' => managementCompany::orderBy('name', 'asc')->get() ,
+             'customers' => Customer::orderBy('name', 'asc')->get() ,
+         
              
            ]);
     }

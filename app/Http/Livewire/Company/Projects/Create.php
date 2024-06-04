@@ -57,7 +57,7 @@ class Create extends Component
  
     noty()
     ->layout('bottomRight')
-    ->addInfo('Project'. $Request->input('name') . ' toegevoegd');
+    ->addInfo('Project toegevoegd');
 
     return redirect('/projects');
 }

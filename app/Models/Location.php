@@ -63,9 +63,7 @@ class Location extends Model implements Auditable
  
     'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
 
-    // Attributes that are searchable
-    static $searchable = ['name','zipcode','place','address','slug','complexnumber','management_id','customer_id','access_type_id'];
-
+  
     public function customer()
     {
         return $this->belongsTo(Customer::class);

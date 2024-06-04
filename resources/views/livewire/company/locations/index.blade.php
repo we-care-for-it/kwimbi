@@ -5,13 +5,34 @@
                 <h1 class="page-header-title "> Locaties</h1>
             </div>
 
-            <div class="col-sm-6   text-end">
+
+            <div class="col">
+            <form>
+               <!-- Search -->
+               <div class="input-group input-group-merge">
+                  <input type="text" wire:model.live="filters.keyword" class="js-form-search form-control"
+                     placeholder="Zoeken op trefwoord..." data-hs-form-search-options="{
+                     &quot;clearIcon&quot;: &quot;#clearIcon2&quot;,
+                     &quot;defaultIcon&quot;: &quot;#defaultClearIconToggleEg&quot;
+                     }">
+                  <button type="button" class="input-group-append input-group-text">
+                  <i id="clearIcon2" class="bi-x-lg" style="display: none;"></i>
+                  <i id="defaultClearIconToggleEg" class="bi-search" style="display: block; opacity: 1.03666;"></i>
+                  </button>
+               </div>
+               <!-- End Search -->
+            </form>
+         </div>
+       
+
+
+            <div class="col-auto">
  
          
              
-<a href = "/location/add">
+<a href = "/location/create">
 
-                <button      wire:loading.attr="disabled"  class="btn   btn-primary btn-sm  btn-120"    " 
+                <button      wire:loading.attr="disabled"  class="btn   btn-primary    btn-120"    " 
        type="button">
  
       Toevoegen
@@ -30,34 +51,22 @@
        
 
  
+@if($items->count())
 
    <div class="loading" wire:loading>
       @include('layouts.partials._loading')
    </div>
+   @endif
 
    @if($items->count())
 
    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 " wire:loading.remove>
       @foreach ($items as $location)
-      <div class="col mb-3 mb-lg-5" onclick = "location='/location/{{$location->slug}}'">
+      <div class="col mb-3 mb-lg-5" >
          <div class="card h-80 card-hover">
-            <div class="card-pinned">
-               <div class="card-pinned-top-end">
-                  <div class="dropdown">
-                     <button type="button"
-                        class="btn btn-ghost-secondary btn-icon btn-sm card-dropdown-btn rounded-circle"
-                        id="projectsGridDropdown8" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi-three-dots-vertical"></i>
-                     </button>
-                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="projectsGridDropdown8">
-                        <a class="dropdown-item" href="/location/edit/{{$location->id}}">Wijzigen </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
+          
 
-
-            <div class="card-body text-center">
+            <div class="card-body text-center" onclick = "location='/location/{{$location->slug}}'">
                <span class="avatar avatar-xxl avatar-4x3"  style="height: 100px">
                   @if($location->image)
                      <img class="avatar-img " style="max-height: 100px" src="/storage/{{$location->image}}">

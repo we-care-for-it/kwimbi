@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <div class="page-header  my-3">
+<div >
+    <div class="page-header  ">
         <div class="row align-items-center">
             <div class="col">
                 <h1 class="page-header-title">
@@ -7,12 +7,10 @@
 
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-sm  btn-120" wire:click="save()">
+                <button type="button" class="btn btn-primary btn-120" wire:click="save()">
                     Opslaan
                 </button>
-                <button type="button" onclick="history.back()" class="btn btn-secondary btn-sm  ">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
+ 
             </div>
         </div>
     </div>
@@ -22,18 +20,36 @@
     <div class="row">
 
         <div class="col-md-3">
-        @livewire('company.customers.partials.information', ['customer_id' => $customer_id])
+        <div class="card  ">
+              <div class="card-body bg-light">
+<label class = "required pb-2">Relatie</label>
+        <div class="tom-select-custom  ">
+                <select wire:ignore.self wire:model="customer_id" class="js-select form-select " autocomplete="off"
+                    data-hs-tom-select-options='{
+                                        "placeholder": "Selecteer een relatie"
+                                      }'>
 
 
-        <div class="card-header  mt-3  ">
+                    <option selected value=""></option>
+                    @foreach($customers as $customer)
+
+                    <option value="{{$customer?->id}}" >{{$customer?->name}}</option>
+
+                    @endforeach
+
+
+                </select>
+            </div>
+
+            </div>  </div>
+
+            <div class="card  mt-3">
+
+
+        <div class="card-header   ">
 
 Afbeelding
 </div>
-
-
-
-            <div class="card">
-
 
 
 
@@ -102,13 +118,13 @@ Afbeelding
             </div>   </div>
         </div>
 
-        <div class="col-md-9">      <div class="card-header card-header-content-md-between  ">
+        <div class="col-md-9">     
+
+            <div class="card">
+ <div class="card-header card-header-content-md-between  ">
 
 Locatie
 </div>
-
-            <div class="card">
-
                 <div class="card-body  ">
                     <div class="row">
                         <div class="col-md-12">
@@ -125,9 +141,9 @@ Locatie
 
                             <div class="row">
                                 <div class="col-md-4 col-sm-2">
-                                    <label class="pb-2 pt-3">Postcode</label>
+                                    <label class="pb-2 pt-3 required">Postcode</label>
                                     <input
-                                        class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif "
+                                        class="form-control required  @if ($errors->has('zipcode'))  is-invalid @endif required "
                                         wire:model.defer="zipcode"  >
 
                                 </div>
@@ -188,12 +204,12 @@ Locatie
                     </div>
                 </div>
             </div>
-            <div class="card-header  mt-3 card-header-content-md-between  ">
+
+            <div class="card mt-3 ">
+            <div class="card-header  card-header-content-md-between  ">
 
 Notitie
 </div>
-
-            <div class="card">
 
                 <div class="card-body  ">
                     <div class="row">
@@ -208,12 +224,12 @@ Notitie
                     </div>
                 </div>
             </div>
-            <div class="card-header mt-3  card-header-content-md-between  ">
+  
+            <div class="card mt-3  ">
+          <div class="card-header card-header-content-md-between  ">
 
 Toegang
 </div>
-            <div class="card ">
-
 
                 <div class="card-body  ">
                     <div class="row">
@@ -261,13 +277,13 @@ Toegang
 
                 </div>
             </div>
-            <div class="card-header mt-3 card-header-content-md-between  ">
+     
+            <div class="card mt-3">
+
+       <div class="card-header  card-header-content-md-between  ">
 
 Bouwgegevens
 </div>
-            <div class="card mb-3">
-
-
                 <div class="card-body ">
                     <div class="row">
 
