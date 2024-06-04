@@ -9,14 +9,14 @@
  
          
              
-
+<a href = "/location/add">
 
                 <button      wire:loading.attr="disabled"  class="btn   btn-primary btn-sm  btn-120"    " 
        type="button">
  
       Toevoegen
       </button>
-
+</a>
 
             
             </div>

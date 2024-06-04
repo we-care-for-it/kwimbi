@@ -23,6 +23,7 @@
                <a wire:navigate class="nav-link @if(request()->is('location/*') or  request()->is('locations'))  active @endif" href="/locations"> <i class="bi-people nav-icon"></i> Locaties</a>
                <a wire:navigate class="nav-link @if(request()->is('customers') or  request()->is('customer/*'))  active @endif" href="/customers" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Relaties</span></a>
                <a wire:navigate class="nav-link @if(request()->is('projects/*') or  request()->is('projects'))  active @endif" href="/projects"> <i class="bi-people nav-icon"></i> Projecten</a>
+               <a wire:navigate class="nav-link @if(request()->is('tickets/*') or  request()->is('tickets'))  active @endif" href="/tickets"> <i class="bi-people nav-icon"></i> Tickets</a>
                <a wire:navigate class="nav-link @if(request()->is('knowledgebase/*') or  request()->is('knowledgebase'))  active @endif" href="/knowledgebase"> <i class="bi-people nav-icon"></i> Kennisdatabase</a>
                <a wire:navigate class="nav-link @if(request()->is('masterdata/*') or request()->is('settings/*') or  request()->is('masterdata'))  active @endif" href="/masterdata"> <i class="bi-people nav-icon"></i> Basisinstellingen</a>
             </div>
