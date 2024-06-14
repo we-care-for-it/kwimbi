@@ -261,10 +261,7 @@ Toegang
                             <label class="pb-2 pt-2">Code</label>
                             <input wire:model="access_code" class="form-control">
                         </div>
-                        <div class="col-md-6">
-                            <label class="pb-2 pt-2">Contactpersoon</label>
-                            <input wire:model="access_contact" class="form-control">
-                        </div>
+    
 
                     </div>
 
@@ -299,7 +296,7 @@ Bouwgegevens
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pt-2 pb-2">Oppervlakte</label>
+                                <label class="pt-2 pb-2">Oppervlakte (m²)</label>
                                 <input wire:model="surface" class="form-control">
                             </div>
 

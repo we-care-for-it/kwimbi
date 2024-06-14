@@ -141,10 +141,7 @@
                   <td>  @if($location->access_code) {{$location->access_code}}  @endif</td>
               </tr>
 
-              <tr>
-                  <td>Contactpersoon</td>
-                  <td>  @if($location->access_contact) {{$location->access_contact}}  @endif</td>
-              </tr>
+ 
 
               <tr>
                   <td>Locatie sleutelkluis</td>
@@ -233,7 +230,7 @@
                                           </div>
 
                                           <div class="col-md-3">
-                                              <label class="pb-2">Oppervlakte</label>
+                                              <label class="pb-2">Oppervlakte (m²)</label>
                                               <div class = "clear-fix"></div>
                                               @if($location->surface) {{$location->surface}} @else - @endif
 
@@ -242,6 +239,123 @@
                               </div>
 
                               </div>       </div>
+
+
+                              <div class="card mt-3">
+                <div class="card-header  ">
+
+             Contactpersonen
+              </div>
+
+              <div class="card-body    ">
+              <div class = "row ">
+               
+
+              @if(!$location->contacts)
+<div class="  text-center p-5">
+ 
+
+ <img src="/assets/img/folders/1.svg">
+                                  
+                                         
+ 
+                                             <p class="">Geen contactpersonen toegevoegd aan deze locatie</p>
+ 
+                                    
+                                 
+                             </div>
+
+                             @else
+
+                             <table class="table  table-sm  table-hover " style="cursor: pointer">
+                     <thead class="bg-light">
+                        <tr>
+                           <th scope="col">Naam </th>
+                           <th scope="col">Telefoonnummer </th>
+                           <th scope="col">Mobiel</th> 
+                           <th scope="col">Emailadres </th>
+                            <th scope="col">Functie</th>
+ 
+
+                           
+
+
+                           <th scope="col"> </th>       
+                       
+                        </tr>
+                     </thead>
+                     <tbody>
+
+                        @foreach($location->contacts as $item)
+
+                        <tr>
+                           <td class="align-middle" style="width: 120px">
+
+                            {{$item?->name}}
+
+                           </td>
+                           <td class="align-middle" style="width: 120px">
+                           {{$item?->phonenumber}}
+                           </td>
+                           <td class="align-middle" style="width: 120px">
+                           {{$item?->mobile_phonenumber}}
+
+                           </td>
+
+                           <td class="align-middle">
+                           {{$item?->email}}
+
+                           </td>
+                           <td class="align-middle">
+                           {{$item?->function}}
+
+                           </td>
+
+                 
+          
+
+                           <td>     <div style="float: right">
+                           <div class="dropdown">
+                                                <button type="button" class="btn btn-icon btn-sm  " id="apiKeyDropdown1"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bi-three-dots-vertical"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end"
+                                                    aria-labelledby="apiKeyDropdown1">
+
+                                                    <a class="dropdown-item"  href="#" 
+                                                        data-bs-target="#crudModal">Openen</a>
+
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        wire:click="edit({{$item->id}})"
+                                                        data-bs-target="#crudModal">Wijzig</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" href="#"
+                                                        wire:click="delete({{$item->id}})"
+                                                        wire:confirm.prompt="Weet je zeker dat je de deze rij wilt verwijderen?\n\nType AKKOORD voor bevestiging |AKKOORD">Verwijderen</a>
+                                                </div>
+                                            </div> </div>
+                           </td>
+
+                        </tr>
+
+                        @endforeach
+
+                        <!--[if ENDBLOCK]><![endif]-->
+                     </tbody>
+                  </table>
+
+
+
+ 
+
+               @endif
+            
+            </div>
+               </div>
+
+               </div>
+
 
 
                 <div class="card mt-3">

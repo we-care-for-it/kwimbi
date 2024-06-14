@@ -169,7 +169,7 @@ class Show extends Component
 
     public function addUpload(){
 
-        
+        $this->
 
         $filepath = "/uploads/".$this->object->id . "/attachments/";
 
@@ -277,6 +277,37 @@ else
 {
     flasher("Bestand is niet gevonden, Mogelijk is dit bestand verwijderd");
 }
+}
+
+
+
+    //Functies verwijderen
+    public function deleteMaintenance($id) {
+ 
+ 
+        $item= Maintenances::find($id);
+        $item->delete();  
+        
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Onderhoudsbeurt verwijderd');
+ 
+
+}
+
+
+    //Functies verwijderen
+    public function deletemaintenanceContract($id) {
+ 
+ 
+        $item=maintenanceContract::find($id);
+        $item->delete();  
+        
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Onderhoudscontract verwijderd');
+ 
+
 }
 
 

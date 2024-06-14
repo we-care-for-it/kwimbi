@@ -1,22 +1,30 @@
 <div>
  
-   <div class="page-header  my-3">
-      <div class="row align-items-center">
-         <div class="col">
-            <h1 class="page-header-title">
-            Keuring
-         </div>
-         <div class="col-auto">
-            <button type="button"     class="btn btn-soft-success  m  btn-120" wire:click="save()">
-            Opslaan
-            </button>
+
+
+<div class="page-header   ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="page-header-title ">Keuring tovoegen</h1>
+            </div>
+
+            <div class="col-sm-6   text-end">
+ 
+         
             <button type="button" onclick="history.back()"
-               class="btn btn-soft-secondary  ">
-            <i class="fa-solid fa-arrow-left"></i>
-            </button>
-         </div>
-      </div>
-   </div>
+                    class="text-danger btn btn-link btn-default btn-squared   btn-sm ">
+                    <i class="fa-solid fa-rotate-left"></i> Afbreken
+                </button>
+
+
+            <button type="button" class="btn btn-primary   btn-120" wire:click="save()">
+                    Opslaan
+                </button>
+
+            
+            </div>
+        </div>
+    </div>
    <div class="row">
 
 

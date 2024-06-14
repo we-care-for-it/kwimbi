@@ -17,8 +17,9 @@
       
             <div id="navbarVerticalMenuPagesDefaultMenu" class="nav-collapse  " data-bs-parent="#navbarVerticalMenuPagesMenu" hs-parent-area="#navbarVerticalMenu" style="">
                <a wire:navigate class="nav-link {{  Request::path() ==   'dashboard' ? 'active' : '' }} " href="/dashboard" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Overzicht</span></a>
-               <a wire:navigate class="nav-link nav-link @if(request()->is('elevators/*') or  request()->is('elevators'))  active @endif" href="/elevators" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Storingen</span></a>
-
+               <a wire:navigate class="nav-link nav-link @if(request()->is('elevators/*') or  request()->is('elevators'))  active @endif" href="/elevators" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Alle liften</span></a>
+               <a wire:navigate class="nav-link nav-link @if(request()->is('elevators/*') or  request()->is('incidents'))  active @endif" href="/incidents" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Storingen</span></a>
+               
                <a wire:navigate class="nav-link {{  Request::path() ==   'contacts' ? 'active' : '' }} " href="/contacts" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Contactpersonen</span>     </a>
                <a wire:navigate class="nav-link @if(request()->is('location/*') or  request()->is('locations'))  active @endif" href="/locations"> <i class="bi-people nav-icon"></i> Locaties</a>
                <a wire:navigate class="nav-link @if(request()->is('customers') or  request()->is('customer/*'))  active @endif" href="/customers" ><i class="bi-people nav-icon"></i><span class="nav-link-title">Relaties</span></a>

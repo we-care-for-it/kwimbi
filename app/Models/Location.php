@@ -79,7 +79,10 @@ class Location extends Model implements Auditable
         return $this->hasMany(Elevator::class,'address_id','id');
     }
 
- 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class,'location_id','id');
+    }
 
 
 

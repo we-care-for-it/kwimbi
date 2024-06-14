@@ -11,7 +11,7 @@
                     <i class="fa-solid fa-rotate-left"></i> Afbreken
                 </button>
             
-                <button class="btn btn-primary btn-sm btn-120     " wire:click="save()" type="button"
+                <button class="btn btn-primary   btn-120     " wire:click="save()" type="button"
                    >
                   <div wire:loading wire:target="save">
                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

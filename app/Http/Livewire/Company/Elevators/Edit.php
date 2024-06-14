@@ -108,15 +108,18 @@ class Edit extends Component
         try {
             $this->data->update($this->all());
         } catch (QueryException $e) {
-            dd('Ioe fout');
+            
         }
-        pnotify()->addWarning('Gegevens opgeslagen');
+        $this->data->update($this->all());
+        noty()
+        ->layout('bottomRight')
+        ->addInfo('Liftgegevens opgeslagen');
+    
 
         return redirect('/elevator/show/' .  $this->data->id);
 
     }
-
-     
+ 
 
     
     public function search_locations_by_relation() {

@@ -53,7 +53,6 @@ Relatie
 
 
  
-
          <label for="ernergie_label" class="pb-2 ">Status</label>
                    <div class="tom-select-custom " wire:ignore>
                       <select
@@ -68,8 +67,8 @@ Relatie
                          class="ts-wrapper js-select form-select form-select-sm tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items js-select_style"
                          id="locationLabel"
                          >
-                         <option value="1">Operationeel</option>
-                         <option  value="2">Buiten gebruik</option>
+                         <option @if($status_id ==1) selected @endif value="1">Operationeel</option>
+                         <option  @if($status_id ==2) selected @endif value="2">Buiten gebruik</option>
                       </select>
                    </div>
 
@@ -144,8 +143,8 @@ Gegevens
              <div class="col-md-4">
                 <label class="pb-2 ">Relatie</label>
  
-                <div class="tom-select-custom"   >
-                   <select   wire:change = "search_locations_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select @error('customer_id') is-invalid   @enderror "
+                <div class="tom-select-custom"  wire:ignore.self >
+                   <select   wire:change.live = "search_locations_by_relation()" wire:model.live = "customer_id" autocomplete="off" class="js-select form-select @error('customer_id') is-invalid   @enderror "
                       data-hs-tom-select-options='{
                       "placeholder": "Selecteer een relatie",
                       "hidePlaceholderOnSearch" : true,
@@ -154,7 +153,7 @@ Gegevens
                       }'>
                       <option selected value="">Selecteer een relatie</option>
                       @foreach($customers as $customer)
-                      <option value="{{ $customer->id }}"  @if($customer_id==$customer->id) selected  @endif >
+                      <option @if($customer_id == $customer_id) selected @endif value="{{ $customer->id }}"  @if($customer_id==$customer->id) selected  @endif >
                          {{ $customer->name }}
                       </option>
                       @endforeach
@@ -163,8 +162,8 @@ Gegevens
 
                 <label class="pb-2   pt-2">Locatie</label>
  
- <div class="tom-select-custom" w >
-    <select   wire:model = "address_id" autocomplete="on" class="js-select form-select @error('address_id') is-invalid   @enderror "
+ <div class="tom-select-custom" wire:ignore.self >
+    <select   wire:model/live = "address_id" autocomplete="on" class="js-select form-select @error('address_id') is-invalid   @enderror "
        data-hs-tom-select-options='{
        "placeholder": "Selecteer een locatie",
        "hidePlaceholderOnSearch" : true,

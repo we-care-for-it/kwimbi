@@ -239,7 +239,7 @@
                         <div class="col-md-3">
                             <label class="pb-2">Type toegang</label>
                             <div wire:ignore class="tom-select-custom ">
-                                <select wire:model="building_acces_type_id" class="js-select form-select"
+                                <select wire:model="building_access_type" class="js-select form-select"
                                     autocomplete="off" data-hs-tom-select-options='{
                               "placeholder": "Selecteer een optie"
                             }'>
@@ -264,11 +264,7 @@
                             <label class="pb-2">Code</label>
                             <input wire:model="access_code" class="form-control">
                         </div>
-                        <div class="col-md-6">
-                            <label class="pb-2">Contactpersoon</label>
-                            <input wire:model="access_contact" class="form-control">
-                        </div>
-
+                   
                     </div>
 
                     <div class="row">
@@ -302,7 +298,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label class="pb-2">Oppervlakte</label>
+                                <label class="pb-2">Oppervlakte (m²)</label>
                                 <input wire:model="surface" class="form-control">
                             </div>
 

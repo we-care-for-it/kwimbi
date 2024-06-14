@@ -27,6 +27,15 @@ class Create extends Component
     public $elevator;
 
     use WithFileUploads;
+
+    
+protected $rules = [
+    'maintenance_planned_at' => 'required|date',
+     
+];
+
+
+
     public function render()
     {
 
@@ -40,6 +49,9 @@ class Create extends Component
     public function save()
     {
 
+
+        
+    $this->validate();
     if (!$this->maintenance_status_id)
     {
         $this->maintenance_status_id = 2;
@@ -87,7 +99,7 @@ class Create extends Component
 
   }
 
-  pnotify()->addSuccess('Onderhoudbeurt toegeveoegd');
+  pnotify()->addSuccess('Onderhoudbeurt toegevoegd');
   return redirect('/elevator/show/' . $this->elevator->id );
  
 

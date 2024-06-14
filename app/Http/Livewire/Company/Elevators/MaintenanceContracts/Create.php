@@ -38,6 +38,17 @@ class Create extends Component
     use WithFileUploads;
     
 public $edit_id;
+
+
+protected $rules = [
+    'maintenance_contract_begindate' => 'required|date',
+    'maintenance_contract_enddate' => 'required|date',
+
+];
+
+
+
+
     public function render()
     {
         return view('livewire.company.elevators.maintenance-contracts.create',[
@@ -55,6 +66,9 @@ public $edit_id;
     
 public function save()
 {
+
+
+    $this->validate();
  
  
         $this->maintenance_contract_companie_id = $this->elevator->maintenance_company_id;
@@ -91,7 +105,10 @@ public function save()
       ]);
 
   }
-  pnotify()->addSuccess('Onderhoudscontract toegeveoegd');
+
+  noty()
+  ->layout('bottomRight')
+  ->addInfo('Onderhoudscontract toegevoegd');
   return redirect('/elevator/show/' . $this->elevator->id );
  
  

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->integer('access_type_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('image')->nullable();
-            
+            $table->integer('location_id')->nullable();
 
         });
     }

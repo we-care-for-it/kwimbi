@@ -50,7 +50,7 @@ class Edit extends Component
     public $housenumber;
     public $building_type;
     public $building_access_type_id;
-public $customer_id;
+    public $customer_id;
 
     use WithFileUploads;
 
@@ -102,11 +102,9 @@ public $customer_id;
     public function save()
     {
 
-        
+      
         $this->validate();
- 
-   
-
+  
         if ($this->image  != $this->data->image_db ){
     
             $filename = $this->image->getClientOriginalName();
@@ -127,7 +125,7 @@ public $customer_id;
         
             return redirect('/location/' . $this->data->slug);
         } catch (QueryException $e) {
-           // dd('Ioe fout');
+ 
         }
 
       
