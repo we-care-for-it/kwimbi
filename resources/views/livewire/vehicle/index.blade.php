@@ -6,7 +6,7 @@
             </div>
             <div class="col-auto">
                 <a href="/vehicle/add">
-                    <button type="button" class="btn btn-sm btn-primary btn-120">
+                    <button type="button" class="btn btn-primary btn-120">
                         Toevoegen
                     </button>
                 </a>
@@ -106,9 +106,8 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end"
                                                     aria-labelledby="apiKeyDropdown1">
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        wire:click="edit({{$item->id}})"
-                                                        data-bs-target="#crudModal">Wijzig</a>
+                                                    <a class="dropdown-item" href="/vehicle/edit/({{$item->id}})"
+                                                     >Wijzig</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item text-danger" href="#"
                                                         wire:click="delete({{$item->id}})"

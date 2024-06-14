@@ -23,4 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
   Route::get('object', \App\Http\Controllers\ApiObject::class)->middleware(['ensureTokenIsValid','apilogger']);
 
 Route::middleware('apilogger')->post('endpoints/tuv', [App\Http\Controllers\Api\Endpoints\TuvController::class, 'handleWebhook']);
+Route::middleware('apilogger')->get('endpoints/chex', [App\Http\Controllers\Api\Endpoints\ChexController::class, 'handleWebhook']);
 
