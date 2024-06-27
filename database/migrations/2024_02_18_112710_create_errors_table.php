@@ -17,6 +17,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('code')->nullable();
             $table->longtext('error')->nullable();
+            $table->integer('is_active')->nullable();   
         });
     }
 

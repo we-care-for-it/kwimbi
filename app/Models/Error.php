@@ -14,7 +14,7 @@ class Error extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     
-    protected $fillable = ['code','error'];
+    protected $fillable = ['code','error','is_active'];
     // protected $fillable = [
    //     'last_action_at',
     // /    'code',

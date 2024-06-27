@@ -1,7 +1,5 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@import 'tippy.js/dist/tippy.css';
 
-[x-cloak] {
-    display: none;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

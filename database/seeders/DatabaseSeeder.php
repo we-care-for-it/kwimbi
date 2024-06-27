@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
+use App\Models\User;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,19 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-   \App\Models\User::create([
-            'name' => 'sysadmin',
-            'email' => 'sysadmin@desknow.nl',
-            'password' => Hash::make('!Timmer2024@')
+        $user = User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.test',
+            'password' => Hash::make('admin'),
         ]);
 
+        Post::factory()
+            ->count(25)
+            ->create();
 
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Notification::make()
+            ->title('Welcome to Filament')
+            ->body('You are ready to start building your application.')
+            ->success()
+            ->sendToDatabase($user);
     }
 }

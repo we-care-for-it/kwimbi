@@ -1,18 +1,31 @@
 <?php
 
 namespace App\Providers;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
 
+use Filament\Support\Facades\FilamentView;
+use Illuminate\Support\ServiceProvider;
+use  Illuminate\Support\Facades\Schema;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+ 
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register any appli
+     * 
+     * 
+     * cation services.
      */
+
+     
     public function register(): void
     {
-        $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
-$this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+
+
+        
+        FilamentView::registerRenderHook(
+            'panels::head.start',
+            fn (): string => '<meta name="robots" content="noindex,nofollow">'
+        );
     }
 
     /**
@@ -20,6 +33,7 @@ $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
      */
     public function boot(): void
     {
-         Schema::defaultStringLength(191);
+      Schema::defaultStringLength(191);
+     
     }
 }

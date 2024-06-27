@@ -14,7 +14,7 @@ class Solution extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     
-    protected $fillable = ['code','solution'];
+    protected $fillable = ['code','solution','is_active'];
     // protected $fillable = [
    //     'last_action_at',
     // /    'code',

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->softDeletes();
         $table->longtext('name')->nullable();
         $table->integer('default_minutes')->nullable();
+
         $table->longtext('description')->nullable();
         $table->boolean('is_active')->nullable();
 
