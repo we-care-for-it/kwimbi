@@ -8,7 +8,7 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use OwenIt\Auditing\Contracts\Auditable;
 /**
- * Class Location
+ * Class location
  *
  * @property $id
  * @property $created_at
