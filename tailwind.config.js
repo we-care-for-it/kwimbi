@@ -12,9 +12,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue,
-      },
+        primary: colors.indigo,
+        secondary: colors.yellow,
+        neutral: colors.gray,
+      }
     },
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }
+
+ 

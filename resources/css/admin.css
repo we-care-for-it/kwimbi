@@ -20,9 +20,14 @@
 .fi-wi-stats-overview-stat-icon,
 .fi-section-header-icon,
 .fi-ta-text-item-icon {
-  @apply !text-primary-500;
+  background-color: red!important;
 }
 
 .filament-peek-modal-title {
   @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
+}
+ 
+#fi-topbar {
+
+    position: relative;
 }

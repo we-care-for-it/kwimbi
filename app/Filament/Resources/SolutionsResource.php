@@ -18,6 +18,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
+//Clusters
+use App\Filament\Clusters\WorkorderSettings;
+
 class SolutionsResource extends Resource
 {
     protected static ? string $model = Solution::class;
@@ -25,6 +28,7 @@ class SolutionsResource extends Resource
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ? string $navigationLabel = 'Oplossingen';
+    protected static ?string $cluster = WorkorderSettings::class;
 
     public static function form(Form $form) : Form
     {
@@ -47,7 +51,8 @@ class SolutionsResource extends Resource
 
     public static function table(Table $table) : Table
     {
-        return $table->columns([ToggleColumn::make('is_active')
+        return $table->columns([
+            ToggleColumn::make('is_active')
             ->label('Zichbaar')
             ->searchable()
             ->width(100) , TextColumn::make('code')

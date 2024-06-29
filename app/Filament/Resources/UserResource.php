@@ -25,10 +25,14 @@ class UserResource extends Resource
      */
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+        
+    protected static ? string $navigationGroup = 'Beheer';
+    protected static ? string $navigationLabel = 'Gebruikers';
+
     /**
      * The settings navigation group.
      */
-    protected static ?string $navigationGroup = 'Collections';
+ 
 
     /**
      * The settings navigation sort order.

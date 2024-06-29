@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'navigation.group' => 'Systeembeheer',
+    'navigation.group' => 'Logboeken',
 
     'navigation.authentication-log.label' => 'Authentication Log',
     'navigation.authentication-log.plural-label' => 'Authentication Logs',

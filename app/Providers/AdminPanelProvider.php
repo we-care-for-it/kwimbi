@@ -10,7 +10,7 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 
-
+use Filament\Navigation\NavigationGroup;
 use Awcodes\FilamentGravatar\GravatarPlugin;
 use Awcodes\FilamentGravatar\GravatarProvider;
 use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
@@ -36,6 +36,11 @@ use Filament\Support\Enums\MaxWidth;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Kenepa\TranslationManager\TranslationManagerPlugin;
 
+use lockscreen\FilamentLockscreen\Lockscreen;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
+ 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -50,8 +55,11 @@ class AdminPanelProvider extends PanelProvider
             ->spa()
             ->databaseNotifications()
             ->maxContentWidth(MaxWidth::Full)
-            
+            ->plugin(new Lockscreen())  // <- Add this
+
+            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugin(
+                \Hasnayeen\Themes\ThemesPlugin::make(),
                 //FilamentTimesheetsPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make(),
             //    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'nl']),
@@ -87,27 +95,38 @@ class AdminPanelProvider extends PanelProvider
                  FilamentExceptionsPlugin::make(),
              
                 FilamentJobsMonitorPlugin::make()
-                 ->navigationCountBadge()
-                   ->navigationGroup('Systeembeheer'),
+                 ->navigationCountBadge(),
+       
             //    FilamentPeekPlugin::make()
              //       ->disablePluginStyles(),
+
+             
                 GravatarPlugin::make(),
             ])
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
             ->navigationGroups([
-                'Instellingen',
-                'Systeembeheer',
-                'Settings',
+                NavigationGroup::make()
+                     ->label('Shop')
+                     ->icon('heroicon-o-shopping-cart'),
+                NavigationGroup::make()
+                    ->label('Blog')
+                    ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label("Systeembeheer")
+           
+                    ->collapsed()
             ])
+        
             ->colors([
                 'primary' => Color::Blue,
             ])
             ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
+             ->pages([
                 Pages\Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
@@ -124,9 +143,12 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                  \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ])
             ->authMiddleware([
                 Authenticate::class,
+                Locker::class, // <- Add this
+              // <- Add this
             ]);
     }
 

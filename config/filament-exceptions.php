@@ -10,3 +10,4 @@ return [
         'queries' => 'heroicon-s-circle-stack',
     ],
 ];
+ 

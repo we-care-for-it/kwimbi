@@ -7,6 +7,10 @@ use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
  
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
+ 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -33,6 +37,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        FilamentAsset::register([
+            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/custom.css'),
+        ]);
+        
+        
+        
       Schema::defaultStringLength(191);
      
     }

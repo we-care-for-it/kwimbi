@@ -1,8 +1,15 @@
 <?php
 
 use App\Livewire\Home;
-use App\Livewire\Post\Show as PostShow;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Redirect;
+
+
 Route::get('/', Home::class)->name('home');
-Route::get('/article/{post:slug}', PostShow::class)->name('post.show');
+ 
+
+
+
+return Redirect::to('http://heera.it');
+

@@ -20,6 +20,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
+//Clusters
+use App\Filament\Clusters\WorkorderSettings;
+
 
 class ErrorsResource extends Resource
 {
@@ -28,6 +31,7 @@ class ErrorsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ? string $navigationLabel = 'Foutmeldingen';
+    protected static ?string $cluster = WorkorderSettings::class;
 
     public static function form(Form $form) : Form
     {

@@ -43,7 +43,6 @@ return [
 
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
 
- 
     /*
     |--------------------------------------------------------------------------
     | Assets Path
@@ -86,12 +85,5 @@ return [
     */
 
     'livewire_loading_delay' => 'default',
-
-
-    'database' => [
-    'enabled' => true,
-    // ...
-],
-
 
 ];
