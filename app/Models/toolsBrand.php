@@ -9,17 +9,23 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
  
-class Solution extends Model implements Auditable
+class toolsBrand extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     
-    protected $fillable = ['code','solution','is_active'];
     // protected $fillable = [
-   //     'last_action_at',
-    // /    'code',
-   //     'location_id',
+    //     'name','is_active'
     // ];
+     protected $fillable = [
+    'name',
+     'is_active',
+         'image'
+     ];
 
     ///protected $appends = ['location_name'];
 }
+
+
+
+  

@@ -66,12 +66,13 @@ class ToolsInspectionMethodsResource extends Resource
 
         ])
         ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
+            Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+            Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+   
             ]),
         ])      
          ->emptyState(view('partials.empty-state')) ;

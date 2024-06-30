@@ -8,12 +8,14 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsInspectionMethods extends ManageRecords
 {
+    protected static ?string $title = 'Gereedschap - Keuringsmethodes';
+
     protected static string $resource = ToolsInspectionMethodsResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Toevoegen'),
         ];
     }
 }

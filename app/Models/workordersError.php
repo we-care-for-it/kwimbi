@@ -9,11 +9,11 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
  
-class Error extends Model implements Auditable
+class workordersError extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    
+    public $table = "errors";
     protected $fillable = ['code','error','is_active'];
     // protected $fillable = [
    //     'last_action_at',

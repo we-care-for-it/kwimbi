@@ -94,7 +94,7 @@ class ToolsInspectionCompaniesResource extends Resource
                         ->searchable()
            
                         ->weight('medium')
-                        ->alignLeft(),
+                        ->alignLeft()        ->label('Bedrijfsnaam'),
 
                     Tables\Columns\TextColumn::make('emailaddress')
                         ->label('Email address')
@@ -139,12 +139,14 @@ class ToolsInspectionCompaniesResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+     
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+           
                 ]),
             ]) ->emptyState(view('partials.empty-state')) ;
     }

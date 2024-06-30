@@ -10,6 +10,9 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsCategories extends ManageRecords
 {
+
+    protected static ?string $title = 'Gereedschap - Categorieën';
+
     protected static string $resource = ToolsCategoriesResource::class;
 
     protected function getHeaderActions(): array

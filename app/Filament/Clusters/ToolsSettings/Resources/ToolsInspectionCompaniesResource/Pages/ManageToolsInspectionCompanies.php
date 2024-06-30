@@ -8,12 +8,14 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsInspectionCompanies extends ManageRecords
 {
+    protected static ?string $title = 'Gereedschap - Inspectiebedrijven';
+
     protected static string $resource = ToolsInspectionCompaniesResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
         ];
     }
 }

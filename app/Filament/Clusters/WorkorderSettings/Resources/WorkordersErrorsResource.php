@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Clusters\WorkorderSettings\Resources;
 
-use App\Filament\Resources\ErrorsResource\Pages;
-use App\Filament\Resources\ErrorsResource\RelationManagers;
-use App\Models\Error;
+use App\Filament\Clusters\WorkorderSettings;
+use App\Filament\Clusters\WorkorderSettings\Resources\WorkordersErrorsResource\Pages;
+use App\Filament\Clusters\WorkorderSettings\Resources\WorkordersErrorsResource\RelationManagers;
+use App\Models\workordersError;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,26 +15,25 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
+
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-
-//Clusters
-use App\Filament\Clusters\WorkorderSettings;
+ 
 
 
-class ErrorsResource extends Resource
+class WorkordersErrorsResource extends Resource
 {
-    protected static ?string $model = Error::class;
+    protected static ?string $model = workordersError::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ? string $navigationLabel = 'Foutmeldingen';
     protected static ?string $cluster = WorkorderSettings::class;
 
-    public static function form(Form $form) : Form
+    public static function form(Form $form): Form
     {
         return $form
         ->schema([
@@ -52,7 +52,8 @@ class ErrorsResource extends Resource
 
     }
 
-    public static function table(Table $table) : Table
+
+    public static function table(Table $table): Table
     {
         return $table->columns([
             ToggleColumn::make('is_active')
@@ -67,17 +68,26 @@ class ErrorsResource extends Resource
         ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(), 
-         ])
-            ->actions([Tables\Actions\EditAction::make()
-            ->modalHeading('Wijzig foutmelding') , Tables\Actions\DeleteAction::make()
-            ->modalHeading('foutmelding verwijderen?') , ])
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make() , ]) , ])
-            ->emptyState(view('partials.empty-state'));;
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+     
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+           
+                ]),
+            ]) ->emptyState(view('partials.empty-state')) ;
     }
+
+ 
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageErrors::route('/'),
+            'index' => Pages\ManageWorkordersErrors::route('/'),
         ];
     }
 }

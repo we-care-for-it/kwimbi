@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ManageRecords;
 class ManageWorkorderTypes extends ManageRecords
 {
     protected static string $resource = WorkorderTypesResource::class;
+    protected static ?string $title = 'Werkopdrachten - Werkomschrijvingen';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Toevoegen'),
         ];
     }
 }

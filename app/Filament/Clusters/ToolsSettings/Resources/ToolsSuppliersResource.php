@@ -14,6 +14,14 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+ 
+
 class ToolsSuppliersResource extends Resource
 {
     protected static ?string $model = toolsSupplier::class;
@@ -139,12 +147,12 @@ class ToolsSuppliersResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
                 ]),
             ])   ->emptyState(view('partials.empty-state')) ;
             ;;

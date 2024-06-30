@@ -8,12 +8,14 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsSuppliers extends ManageRecords
 {
+    protected static ?string $title = 'Gereedschap - Leveranciers';
+
     protected static string $resource = ToolsSuppliersResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
         ];
     }
 }
