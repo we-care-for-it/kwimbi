@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ToolsSettings\Resources;
 use App\Filament\Clusters\ToolsSettings;
 use App\Filament\Clusters\ToolsSettings\Resources\ToolsBrandsResource\Pages;
 use App\Filament\Clusters\ToolsSettings\Resources\ToolsBrandsResource\RelationManagers;
-use App\Models\ToolsBrand;
+use App\Models\toolsBrand;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,7 +28,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 class ToolsBrandsResource extends Resource
 {
-    protected static ?string $model = ToolsBrand::class;
+    protected static ?string $model = toolsBrand::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
