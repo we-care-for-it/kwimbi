@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('object_inpection_zincodes', function (Blueprint $table) {
+        Schema::create('object_building_types', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
-            $table->string('code')->nullable();
-            $table->longText('description')->nullable();
+            $table->string('name')->nullable();
+            $table->boolean('is_active')->default('1');;
         });
     }
 

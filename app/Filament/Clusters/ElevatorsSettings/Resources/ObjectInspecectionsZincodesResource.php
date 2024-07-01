@@ -21,6 +21,8 @@ use Filament\Forms\Components\Textarea;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+ 
+
 
 class ObjectInspecectionsZincodesResource extends Resource
 {
@@ -32,7 +34,7 @@ class ObjectInspecectionsZincodesResource extends Resource
  
     protected static ?string $title = 'Objecten - Zincodes';
 
-    protected static ? string $navigationGroup = 'Basisgegevens';
+    protected static ? string $navigationGroup = 'Vaste gegevens';
     protected static ? string $navigationLabel = 'Zin codes';
 
 
@@ -42,18 +44,18 @@ class ObjectInspecectionsZincodesResource extends Resource
         return $form
         ->schema([
 
-            Forms\Components\TextInput::make('name')
-            ->label('Oplossing')
-            ->columnSpan('full') ,
             Forms\Components\TextInput::make('code')
-            ->required()
-            ->maxLength(255)
-            ->live(onBlur : true) ,
+            ->label('Code')
+            ->columnSpan('full') ,
 
-          
+            Forms\Components\Textarea::make('description')
+            ->label('Omschrijving')
+            ->columnSpan('full') 
 
-            
         ]);
+      
+
+   
 }
    
 
@@ -61,28 +63,37 @@ class ObjectInspecectionsZincodesResource extends Resource
     {
         return $table
         ->columns([
-    TextColumn::make('code')
-            ->label('Code')
+ 
+                             
+
+
+
+    TextColumn::make('code')->searchable()
+       
             ->width(100) ,  
 
-            TextColumn::make('name')
-            ->label('name')
-            ->width(100) ,  
+            TextColumn::make('description')->searchable()
+            ->label('Omschrijving')   ->wrap()
+          
+      
         ])
         ->filters([
             Tables\Filters\TrashedFilter::make(), 
+
         ])
         ->actions([
-            Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
-            Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+           // Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+           Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-            ]),
-        ])   ->emptyState(view('partials.empty-state')) ;
-        ;;
-}
+           Tables\Actions\BulkActionGroup::make([
+              Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+   
+          ]),
+        ])      
+         ->emptyState(view('partials.empty-state')) ;
+        ;
+    }
 
     public static function getPages(): array
     {

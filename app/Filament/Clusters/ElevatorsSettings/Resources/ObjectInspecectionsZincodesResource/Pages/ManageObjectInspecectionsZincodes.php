@@ -9,11 +9,14 @@ use Filament\Resources\Pages\ManageRecords;
 class ManageObjectInspecectionsZincodes extends ManageRecords
 {
     protected static string $resource = ObjectInspecectionsZincodesResource::class;
+    protected static ?string $title = 'Objecten - ZIN Codes';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
+            Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
         ];
     }
 }

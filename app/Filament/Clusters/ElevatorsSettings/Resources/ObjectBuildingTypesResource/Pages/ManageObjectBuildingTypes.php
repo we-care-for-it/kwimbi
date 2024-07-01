@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\Pages;
+namespace App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypesResource\Pages;
 
-use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource;
+use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
-class ManageElevatorsTypes extends ManageRecords
+class ManageObjectBuildingTypes extends ManageRecords
 {
-    protected static string $resource = ElevatorsTypesResource::class;
-    protected static ?string $title = 'Objecten - Types';
+    protected static string $resource = ObjectBuildingTypesResource::class;
+    protected static ?string $title = 'Locaties - Gebouwtypes';
+
+ 
 
     protected function getHeaderActions(): array
     {
@@ -18,6 +20,7 @@ class ManageElevatorsTypes extends ManageRecords
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     
             Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
+
         ];
     }
 }

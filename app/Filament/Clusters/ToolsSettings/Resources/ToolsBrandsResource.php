@@ -33,10 +33,6 @@ class ToolsBrandsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $cluster = ToolsSettings::class;
-
-
-  
- 
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ? string $navigationLabel = 'Merken';
  

@@ -9,12 +9,12 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
  
-class objectInspectionZincode extends Model implements Auditable
+class objectBuildingType extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    public $table = "object_inpection_zincodes";
-    protected $fillable = ['code','description'];
+    public $table = "object_building_types";
+    protected $fillable = ['name','is_active'];
  
  
 }
