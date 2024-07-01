@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class InspectionsResource extends Resource
 {
+
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $model = Inspection::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

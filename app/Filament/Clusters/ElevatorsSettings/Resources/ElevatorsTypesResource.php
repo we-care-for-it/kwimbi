@@ -42,6 +42,10 @@ class ElevatorsTypesResource extends Resource
                 Forms\Components\TextInput::make('name')
                 ->label('Omschrijving')
                 ->columnSpan('full') ,
+
+                Forms\Components\Toggle::make('is_active')
+                ->label('Zichtbaar  ')
+                ->default(true)
             ]);
     }
 
@@ -50,10 +54,13 @@ class ElevatorsTypesResource extends Resource
         return $table
         ->columns([
   
-
+            ToggleColumn::make('is_active')
+            ->label('Zichbaar')
+      
+            ->width(50),
             TextColumn::make('name')->searchable()
             ->label('Omschrijving')
-            ->width(100) ,  
+         
       
         ])
         ->filters([

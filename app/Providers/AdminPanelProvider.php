@@ -108,11 +108,12 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('components.logo'))
             ->navigationGroups([
                 NavigationGroup::make()
-                     ->label('Shop')
-                     ->icon('heroicon-o-shopping-cart'),
+                     ->label('Beheer')
+                     ->collapsed(),
                 NavigationGroup::make()
-                    ->label('Blog')
-                    ->icon('heroicon-o-pencil'),
+                    ->label('Instellingen')
+                  ->collapsed(),
+
                 NavigationGroup::make()
                     ->label("Systeembeheer")
            

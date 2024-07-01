@@ -12,6 +12,7 @@ use App\Filament\Clusters\AdminPanel;
 class ActivityResource extends BaseResource
 {
 
+    protected static bool $shouldRegisterNavigation = false;
     protected static ? string $navigationGroup = 'Logboeken';
     protected static ? string $navigationLabel = 'Foutmeldingen';
     protected static ? string $cluster = AdminPanel::class;

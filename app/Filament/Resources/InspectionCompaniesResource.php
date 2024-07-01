@@ -25,6 +25,8 @@ use Filament\Tables\Columns\TextColumn;
 
 class InspectionCompaniesResource extends Resource
 {
+
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $model = inspectionCompany::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Keuringinstanties';

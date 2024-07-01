@@ -15,6 +15,9 @@ class ManageToolsInspectionMethods extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+            ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
+    
             Actions\CreateAction::make()->label('Toevoegen'),
         ];
     }
