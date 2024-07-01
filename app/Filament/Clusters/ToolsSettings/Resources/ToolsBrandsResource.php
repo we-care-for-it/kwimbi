@@ -63,12 +63,12 @@ class ToolsBrandsResource extends Resource
 
                 ToggleColumn::make('is_active')
                 ->label('Zichbaar')
-                ->searchable()
+       
                 ->width(100)
                                  
 
                 , TextColumn::make('name')
-                ->label('Naam'),
+                ->label('Naam')         ->searchable(),
  
 
                  
