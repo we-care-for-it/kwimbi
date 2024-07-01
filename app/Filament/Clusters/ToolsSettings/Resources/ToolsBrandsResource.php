@@ -59,7 +59,7 @@ class ToolsBrandsResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->label('')   ->width(100),
+                ImageColumn::make('image')->label('Logo'),
 
                 ToggleColumn::make('is_active')
                 ->label('Zichbaar')
