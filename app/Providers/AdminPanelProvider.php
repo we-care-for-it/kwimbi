@@ -51,7 +51,7 @@ class AdminPanelProvider extends PanelProvider
             ->topNavigation()
             ->default()
             ->id('admin')
-            ->path('')
+            ->path('admin')
             ->login(Login::class)
             ->profile()
             ->spa()
