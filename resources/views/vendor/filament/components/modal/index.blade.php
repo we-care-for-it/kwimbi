@@ -4,7 +4,7 @@
 @endphp
 
 @props([
-    'alignment' => Alignment::End,
+    'alignment' => Alignment::Start,
     'ariaLabelledby' => null,
     'autofocus' => \Filament\Support\View\Components\Modal::$isAutofocused,
     'closeButton' => \Filament\Support\View\Components\Modal::$hasCloseButton,
@@ -16,7 +16,7 @@
     'extraModalWindowAttributeBag' => null,
     'footer' => null,
     'footerActions' => [],
-    'footerActionsAlignment' => Alignment::End,
+    'footerActionsAlignment' => Alignment::Start,
     'header' => null,
     'heading' => null,
     'icon' => null,

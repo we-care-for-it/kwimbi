@@ -35,7 +35,7 @@ class ObjectInspecectionsZincodesResource extends Resource
     protected static ?string $title = 'Objecten - Zincodes';
 
     protected static ? string $navigationGroup = 'Vaste gegevens';
-    protected static ? string $navigationLabel = 'Zin codes';
+    protected static ? string $navigationLabel = 'ZIN codes';
 
 
 

@@ -68,7 +68,7 @@
     ]);
 
     $labelClasses = \Illuminate\Support\Arr::toCssClasses([
-        '  group-hover/link:underline group-focus-visible/link:underline' => ! $labelSrOnly,
+        'font-semibold group-hover/link:underline group-focus-visible/link:underline' => ! $labelSrOnly,
         match ($size) {
             ActionSize::ExtraSmall => 'text-xs',
             ActionSize::Small => 'text-sm',
