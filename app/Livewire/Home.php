@@ -18,22 +18,8 @@ class Home extends Component
      */
     public function render()
     {
-        seo()
-            ->title($title = config('app.name'))
-            ->description($description = 'Lorem ipsum...')
-            ->canonical($url = route('home'))
-            ->addSchema(
-                Schema::webPage()
-                    ->name($title)
-                    ->description($description)
-                    ->url($url)
-                    ->author(Schema::organization()->name($title))
-            );
+   
 
-        $posts = Post::published()
-            ->latest('published_at')
-            ->paginate(6);
-
-        return view('livewire.home', compact('posts'));
+        return view('livewire.home');
     }
 }
