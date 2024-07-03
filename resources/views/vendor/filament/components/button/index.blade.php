@@ -21,7 +21,7 @@
     'keyBindings' => null,
     'labeledFrom' => null,
     'labelSrOnly' => false,
-    'loadingIndicator' => false,
+    'loadingIndicator' => true,
     'outlined' => false,
     'size' => ActionSize::Medium,
     'spaMode' => null,
@@ -124,7 +124,7 @@
         '[:checked+*>&]:text-white' => $tag === 'label',
     ]);
 
-    $badgeContainerClasses = 'rounded-md fi-btn-badge-ctn absolute start-full top-0 z-[1] w-max -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-gray-900 rtl:translate-x-1/2';
+    $badgeContainerClasses = 'fi-btn-badge-ctn absolute start-full top-0 z-[1] w-max -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-gray-900 rtl:translate-x-1/2';
 
     $labelClasses = \Illuminate\Support\Arr::toCssClasses([
         'fi-btn-label',
@@ -322,7 +322,7 @@
     @endif
 
     @if (filled($badge))
-        <div class="{{ $badgeContainerClasses }}"  >
+        <div class="{{ $badgeContainerClasses }}">
             <x-filament::badge :color="$badgeColor" :size="$badgeSize">
                 {{ $badge }}
             </x-filament::badge>

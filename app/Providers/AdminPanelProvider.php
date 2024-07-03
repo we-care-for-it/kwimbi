@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
         ->breadcrumbs(false)
           //  ->sidebarCollapsibleOnDesktop()
-           ->topNavigation()
+         //  ->topNavigation()
             ->default()
             ->id('admin')
             ->path('admin')
@@ -110,17 +110,18 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => view('components.logo'))
             ->navigationGroups([
                 NavigationGroup::make()
+                ->label("Objecten") 
+       
+                ->collapsible(false)
+                ->extraSidebarAttributes(['class' => 'featured-sidebar-group']),
+    //            ->extraTopbarAttributes(['class' => 'featured-topbar-group']),
+          NavigationGroup::make()
                      ->label('Stamgegevens')
-                     ->collapsed(),
+                     ->collapsible(true),
                 NavigationGroup::make()
                     ->label('Beheer'),
           
-                NavigationGroup::make()
-                    ->label("Objecten"),
-           
-
-                    
-                NavigationGroup::make()
+                    NavigationGroup::make()
                 ->label("Systeembeheer")
        
                

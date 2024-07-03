@@ -3,11 +3,11 @@
         <header class="flex items-center gap-x-3 overflow-hidden py-4">
             <div class="grid flex-1 gap-y-1">
                 <h3 class="fi-section-header-heading text-base font-semibold leading-6 text-gray-950 dark:text-white">
-     red
+     Thema's
                 </h3>
 
                 <p class="fi-section-header-description text-sm text-gray-500 dark:text-gray-400">
-              red
+              Kies een theme
                 </p>
             </div>
         </header>
