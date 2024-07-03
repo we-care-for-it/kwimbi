@@ -9,7 +9,7 @@ use App\Models\Elevator;
 use Carbon\Carbon;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Inspection extends Model  implements Auditable
+class objectsInspection extends Model  implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;

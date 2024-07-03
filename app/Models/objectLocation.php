@@ -26,7 +26,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class location extends Model implements Auditable
+class objectLocation extends Model implements Auditable
 { 
     use SoftDeletes;
 

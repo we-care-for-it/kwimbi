@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolsResource\Pages;
-use App\Filament\Resources\ToolsResource\RelationManagers;
-use App\Models\Tools;
+use App\Filament\Resources\ObjectsInspectionCompaniesResource\Pages;
+use App\Filament\Resources\ObjectsInspectionCompaniesResource\RelationManagers;
+use App\Models\objectInspectionCompany;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ToolsResource extends Resource
+class ObjectsInspectionCompaniesResource extends Resource
 {
-    protected static ?string $model = Tools::class;
+    protected static ?string $model = objectInspectionCompany::class;
+
+    protected static ? string $navigationGroup = 'Stamgegevens';
+    protected static ? string $navigationLabel = 'Keurinstanties';  
+   
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ? string $navigationGroup = 'Beheer';
-    protected static ? string $navigationLabel = 'Gereedschap';  public static function form(Form $form): Form
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -56,9 +60,9 @@ class ToolsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTools::route('/'),
-            'create' => Pages\CreateTools::route('/create'),
-            'edit' => Pages\EditTools::route('/{record}/edit'),
+            'index' => Pages\ListObjectsInspectionCompanies::route('/'),
+            'create' => Pages\CreateObjectsInspectionCompanies::route('/create'),
+            'edit' => Pages\EditObjectsInspectionCompanies::route('/{record}/edit'),
         ];
     }
 }

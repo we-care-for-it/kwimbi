@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolsResource\Pages;
-use App\Filament\Resources\ToolsResource\RelationManagers;
-use App\Models\Tools;
+use App\Filament\Resources\ObjectsResource\Pages;
+use App\Filament\Resources\ObjectsResource\RelationManagers;
+use App\Models\Elevator;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ToolsResource extends Resource
+class ObjectsResource extends Resource
 {
-    protected static ?string $model = Tools::class;
+    protected static ?string $model = Elevator::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ? string $navigationGroup = 'Beheer';
-    protected static ? string $navigationLabel = 'Gereedschap';  public static function form(Form $form): Form
+
+            
+    protected static ? string $navigationGroup = 'Objecten';
+    protected static ? string $navigationLabel = 'Overzicht';
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -56,9 +60,9 @@ class ToolsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTools::route('/'),
-            'create' => Pages\CreateTools::route('/create'),
-            'edit' => Pages\EditTools::route('/{record}/edit'),
+            'index' => Pages\ListObjects::route('/'),
+            'create' => Pages\CreateObjects::route('/create'),
+            'edit' => Pages\EditObjects::route('/{record}/edit'),
         ];
     }
 }

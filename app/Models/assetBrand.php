@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Carbon\Carbon;
 
-
-class inspectionCompany extends Model 
+class assetBrand extends Model
 {
-  
+    use HasFactory;
     use SoftDeletes;
+
     protected $fillable = [
-        'name','address','zipcode','phonenumber','general_emailaddress','place','active','website'
+        'name',
+        'image'
     ];
 }

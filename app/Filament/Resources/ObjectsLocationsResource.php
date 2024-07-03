@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ToolsResource\Pages;
-use App\Filament\Resources\ToolsResource\RelationManagers;
-use App\Models\Tools;
+use App\Filament\Resources\ObjectsLocationsResource\Pages;
+use App\Filament\Resources\ObjectsLocationsResource\RelationManagers;
+use App\Models\objectLocation;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ToolsResource extends Resource
+class ObjectsLocationsResource extends Resource
 {
-    protected static ?string $model = Tools::class;
+    protected static ?string $model = objectLocation::class;
+     
+    protected static ? string $navigationGroup = 'Objecten';
+    protected static ? string $navigationLabel = 'Locaties';  
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ? string $navigationGroup = 'Beheer';
-    protected static ? string $navigationLabel = 'Gereedschap';  public static function form(Form $form): Form
+
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -56,9 +59,9 @@ class ToolsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTools::route('/'),
-            'create' => Pages\CreateTools::route('/create'),
-            'edit' => Pages\EditTools::route('/{record}/edit'),
+            'index' => Pages\ListObjectsLocations::route('/'),
+            'create' => Pages\CreateObjectsLocations::route('/create'),
+            'edit' => Pages\EditObjectsLocations::route('/{record}/edit'),
         ];
     }
 }

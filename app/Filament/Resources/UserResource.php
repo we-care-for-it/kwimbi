@@ -26,7 +26,7 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
         
-    protected static ? string $navigationGroup = 'Beheer';
+    protected static ? string $navigationGroup = 'Systeembeheer';
     protected static ? string $navigationLabel = 'Gebruikers';
 
     /**

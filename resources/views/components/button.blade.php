@@ -37,7 +37,7 @@
   @php($attributes = $attributes->merge(['href' => $url]))
 @endif
 
-<{{ $tag }} {{ $attributes->merge(['class' => "inline-flex items-center justify-center rounded-md transition-colors {$size} {$color}"]) }}>
+<{{ $tag }} {{ $attributes->merge(['class' => "inline-flex items-center justify-center  transition-colors {$size} {$color}"]) }}>
   @if ($icon)
     <x-icon :name="$icon" class="{{ $iconSize }} mr-2" />
   @endif
