@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('asset_categories', function (Blueprint $table) {
             $table->id();
-            $table->varchar('name')->nullable();
+            $table->string('name')->nullable();
             $table->longtext('image')->nullable();
             $table->boolean('is_active')->nullable()->default('1');;
             $table->timestamps();
