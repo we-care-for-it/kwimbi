@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\AssetsSettings\Resources;
 use App\Filament\Clusters\AssetsSettings;
 use App\Filament\Clusters\AssetsSettings\Resources\AssetsModelsResource\Pages;
 use App\Filament\Clusters\AssetsSettings\Resources\AssetsModelsResource\RelationManagers;
-use App\Models\AssetModel;
+use App\Models\assetModel;
 use App\Models\assetBrand;
 use App\Models\assetCategorie;
 
@@ -39,7 +39,7 @@ use Filament\Support\Enums\MaxWidth;
 
 class AssetsModelsResource extends Resource
 {
-    protected static ?string $model = AssetModel::class;
+    protected static ?string $model = assetModel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ? string $navigationGroup = 'Basisgegevens';

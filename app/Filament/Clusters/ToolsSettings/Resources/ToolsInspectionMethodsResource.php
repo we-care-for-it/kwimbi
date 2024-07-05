@@ -42,7 +42,7 @@ class ToolsInspectionMethodsResource extends Resource
                
             Forms\Components\TextInput::make('name')
             ->label('Naam')
-            ->columnSpan('full') ,
+            ->columnSpan('full')->required() ,
 
         Forms\Components\Toggle::make('is_active')
             ->label('Zichtbaar  ')
@@ -56,9 +56,11 @@ class ToolsInspectionMethodsResource extends Resource
         ->columns([
             ToggleColumn::make('is_active')
             ->label('Zichbaar')
-            ->searchable()
+           
+            ->sortable()
             ->width(100) , TextColumn::make('name')
-            ->label('Code')
+            ->label('Naam')      ->searchable()
+            ->sortable()
              
         ])
         ->filters([
