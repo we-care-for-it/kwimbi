@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsInspectionCompanies extends ManageRecords
 {
-    protected static ?string $title = 'Gereedschap - Inspectiebedrijven';
+    protected static ?string $title = 'Gereedschap - Keuringsinstanties';
 
     protected static string $resource = ToolsInspectionCompaniesResource::class;
 
