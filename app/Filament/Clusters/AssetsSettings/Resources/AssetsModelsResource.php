@@ -86,7 +86,8 @@ Select::make('brand_id')
                 ->label('Merk')->sortable(),
                 
 
-
+                TextColumn::make('name')
+                ->label('Naam')->sortable(),
                 
                 TextColumn::make('category.name') 
                 ->label('Categorie')->sortable()
