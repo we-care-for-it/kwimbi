@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('asset_brands', function (Blueprint $table) {
             $table->id();
-            $table->id();
+          
             $table->string('name')->nullable();
             $table->longtext('image')->nullable();
             $table->boolean('is_active')->nullable()->default('1');;
