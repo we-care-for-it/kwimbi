@@ -20,7 +20,7 @@ use Filament\Forms\Components\Textarea;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
- 
+use Filament\Support\Enums\MaxWidth;
 
 class WorkordersSolutionsResource extends Resource
 {
@@ -70,7 +70,7 @@ class WorkordersSolutionsResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen') ->modalWidth(MaxWidth::ExtraLarge),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
             ])
             ->bulkActions([

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         $table->longtext('name')->nullable();
-        $table->integer('default_minutes')->nullable();
+        $table->time('default_minutes')->nullable();
 
         $table->longtext('description')->nullable();
         $table->boolean('is_active')->nullable();

@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\WorkorderSettings\Resources\WorkordersSolutionsR
 use App\Filament\Clusters\WorkorderSettings\Resources\WorkordersSolutionsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
-
+use Filament\Support\Enums\MaxWidth;
 class ManageWorkordersSolutions extends ManageRecords
 {
     protected static string $resource = WorkordersSolutionsResource::class;
@@ -13,7 +13,8 @@ class ManageWorkordersSolutions extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen'),
+            Actions\CreateAction::make()->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
+
         ];
     }
 }

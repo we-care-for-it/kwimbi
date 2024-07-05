@@ -5,6 +5,8 @@ namespace App\Filament\Clusters\WorkorderSettings\Resources\WorkordersErrorsReso
 use App\Filament\Clusters\WorkorderSettings\Resources\WorkordersErrorsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Filament\Support\Enums\MaxWidth;
+
 
 class ManageWorkordersErrors extends ManageRecords
 {
@@ -14,7 +16,7 @@ class ManageWorkordersErrors extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen'),
+            Actions\CreateAction::make()->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
         ];
     }
 }

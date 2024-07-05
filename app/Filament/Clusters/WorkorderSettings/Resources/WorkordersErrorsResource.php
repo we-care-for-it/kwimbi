@@ -13,6 +13,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Enums\MaxWidth;
+
 
 
 
@@ -70,7 +72,7 @@ class WorkordersErrorsResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen') ->modalWidth(MaxWidth::ExtraLarge),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
      
             ])

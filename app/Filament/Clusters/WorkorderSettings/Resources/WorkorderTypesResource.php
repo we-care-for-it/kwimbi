@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
 
+use Filament\Support\Enums\MaxWidth;
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -53,6 +54,7 @@ class WorkorderTypesResource extends Resource
                         Forms\Components\TextInput::make('name')
                         ->label('Naam')
                             ->maxLength(255)
+                            ->columnSpan('full')
                             ->required(),
     
        
@@ -72,8 +74,8 @@ class WorkorderTypesResource extends Resource
     
                             Forms\Components\Toggle::make('is_active')
                             ->label('Zichtbaar  ')
-                            ->onColor('success')
-    ->offColor('danger')
+                            ->inline(false)
+ 
                             ->default(true) , 
                         
                         
@@ -127,14 +129,16 @@ class WorkorderTypesResource extends Resource
                                     Tables\Filters\TrashedFilter::make(), 
                                 ])
                                 ->actions([
-                                    Tables\Actions\EditAction::make(),
-                                    Tables\Actions\DeleteAction::make(),
+                                    Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::ExtraLarge),
+                                    Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
                                 ])
                                 ->bulkActions([
-                                    Tables\Actions\BulkActionGroup::make([
-                                        Tables\Actions\DeleteBulkAction::make()->label('Toevoegen'),
+                                  Tables\Actions\BulkActionGroup::make([
+                                     Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+                           
                                     ]),
-                                ]);
+                                ])  ->emptyState(view('partials.empty-state')) ;
+                                ;;
                         }
 
     public static function getPages(): array
