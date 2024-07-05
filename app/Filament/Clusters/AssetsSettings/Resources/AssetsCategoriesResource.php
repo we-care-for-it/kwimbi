@@ -60,9 +60,9 @@ class AssetsCategoriesResource extends Resource
         return $table
             ->columns([
                 ToggleColumn::make('is_active')
-                ->sortable()
                 ->label('Zichbaar')
-  
+                ->onColor('success')
+    ->offColor('danger')
                 ->width(100) , 
                 
                 TextColumn::make('name')

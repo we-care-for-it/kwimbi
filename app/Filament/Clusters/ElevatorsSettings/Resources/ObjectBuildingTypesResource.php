@@ -60,9 +60,11 @@ class ObjectBuildingTypesResource extends Resource
         return $table
         ->columns([
   
-
             ToggleColumn::make('is_active')
             ->label('Zichbaar')
+            ->onColor('success')
+->offColor('danger')
+
       
             ->width(50),
 

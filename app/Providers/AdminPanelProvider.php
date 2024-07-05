@@ -115,12 +115,12 @@ class AdminPanelProvider extends PanelProvider
                 ->collapsible(false)
                 ->extraSidebarAttributes(['class' => 'featured-sidebar-group']),
     //            ->extraTopbarAttributes(['class' => 'featured-topbar-group']),
-          NavigationGroup::make()
-                     ->label('Stamgegevens')
-                     ->collapsible(true),
+        
                 NavigationGroup::make()
                     ->label('Beheer'),
-          
+                    NavigationGroup::make()
+                    ->label('Stamgegevens')
+                    ->collapsible(true),
                     NavigationGroup::make()
                 ->label("Systeembeheer")
        

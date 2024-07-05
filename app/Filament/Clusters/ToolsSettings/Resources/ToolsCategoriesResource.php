@@ -61,8 +61,9 @@ class ToolsCategoriesResource extends Resource
             ->columns([
                 ToggleColumn::make('is_active')
                 ->label('Zichbaar')
-                ->searchable()
-                ->sortable()
+                ->onColor('success')
+    ->offColor('danger')
+ 
                 ->width(100) , TextColumn::make('name')     ->searchable()     ->sortable()
                 ->label('Naam')
                  

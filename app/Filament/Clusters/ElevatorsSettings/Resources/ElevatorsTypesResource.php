@@ -30,7 +30,7 @@ class ElevatorsTypesResource extends Resource
 
     protected static ?string $cluster = ElevatorsSettings::class;
 
-    protected static ?string $title = 'Objecten - Types';
+    protected static ?string $title = 'Object - Types';
 
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ? string $navigationLabel = 'Types';
@@ -55,7 +55,10 @@ class ElevatorsTypesResource extends Resource
         ->columns([
   
             ToggleColumn::make('is_active')
-            ->label('Zichbaar') ->sortable()
+            ->label('Zichbaar')
+            ->onColor('success')
+->offColor('danger')
+
       
             ->width(50),
             TextColumn::make('name')->searchable()   ->sortable()

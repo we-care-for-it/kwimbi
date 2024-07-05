@@ -20,7 +20,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Filters\SelectFilter;
 
 
 //Form
@@ -88,14 +88,23 @@ Select::make('brand_id')
                 
 
                 TextColumn::make('name')
-                ->label('Naam')->sortable(),
+                ->label('Naam')->sortable()->searchable(),
                 
                 TextColumn::make('category.name') 
                 ->label('Categorie')->sortable()
                  
             ])
             ->filters([
-                //
+                 
+
+                SelectFilter::make('brand_id')
+    ->label('Merk')       
+    ->options(assetBrand::all()->pluck('name', 'id')),
+
+
+
+SelectFilter::make('category_id')->label('Categorie')
+->options(assetCategorie::all()->pluck('name', 'id'))
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),

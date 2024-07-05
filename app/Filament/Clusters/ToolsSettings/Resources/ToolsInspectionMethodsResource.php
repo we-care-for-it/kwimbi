@@ -56,8 +56,9 @@ class ToolsInspectionMethodsResource extends Resource
         ->columns([
             ToggleColumn::make('is_active')
             ->label('Zichbaar')
-           
-            ->sortable()
+            ->onColor('success')
+->offColor('danger')
+
             ->width(100) , TextColumn::make('name')
             ->label('Naam')      ->searchable()
             ->sortable()

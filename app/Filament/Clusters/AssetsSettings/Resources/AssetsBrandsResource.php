@@ -66,11 +66,13 @@ class AssetsBrandsResource extends Resource
     public static function table(Table $table) : Table
     {
         return $table->columns([ImageColumn::make('image')
-            ->label('')
+            ->label('Logo')
             ->width(100) ,
 
-        ToggleColumn::make('is_active')
-            ->label('')
+            ToggleColumn::make('is_active')
+            ->label('Zichbaar')
+            ->onColor('success')
+->offColor('danger')
 
             ->width(100)
 

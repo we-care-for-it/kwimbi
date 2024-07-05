@@ -66,8 +66,10 @@ class ToolsBrandsResource extends Resource
                 ->width(100),
 
                 ToggleColumn::make('is_active')
-                ->label('Zichbaar')  ->sortable()
-       
+                ->label('Zichbaar')
+                ->onColor('success')
+    ->offColor('danger')
+ 
                 ->width(100)
                                  
 

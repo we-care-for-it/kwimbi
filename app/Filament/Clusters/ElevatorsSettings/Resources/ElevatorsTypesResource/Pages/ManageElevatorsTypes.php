@@ -10,7 +10,7 @@ use Filament\Support\Enums\MaxWidth;
 class ManageElevatorsTypes extends ManageRecords
 {
     protected static string $resource = ElevatorsTypesResource::class;
-    protected static ?string $title = 'Objecten - Types';
+    protected static ?string $title = 'Object - Types';
 
     protected function getHeaderActions(): array
     {

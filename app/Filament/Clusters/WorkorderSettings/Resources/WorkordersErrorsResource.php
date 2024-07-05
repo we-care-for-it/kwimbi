@@ -60,7 +60,10 @@ class WorkordersErrorsResource extends Resource
         return $table->columns([
             ToggleColumn::make('is_active')
             ->label('Zichbaar')
-            ->searchable()
+            ->onColor('success')
+->offColor('danger')
+  
+      
             ->width(100) , TextColumn::make('code')
             ->label('Code')
             ->width(100) , TextColumn::make('error')
