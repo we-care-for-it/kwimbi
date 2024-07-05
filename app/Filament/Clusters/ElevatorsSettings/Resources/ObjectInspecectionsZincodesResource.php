@@ -83,11 +83,11 @@ class ObjectInspecectionsZincodesResource extends Resource
         ])
         ->actions([
            // Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
-           Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+        //   Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([
            Tables\Actions\BulkActionGroup::make([
-              Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+         //     Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
    
           ]),
         ])      

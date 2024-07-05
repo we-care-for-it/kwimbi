@@ -6,7 +6,7 @@ use App\Filament\Clusters\ToolsSettings\Resources\ToolsCategoriesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
-
+use Filament\Support\Enums\MaxWidth;
 
 class ManageToolsCategories extends ManageRecords
 {
@@ -18,7 +18,10 @@ class ManageToolsCategories extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen'),
-        ];
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+            ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
+    
+            Actions\CreateAction::make()->modalWidth(MaxWidth::Large)->label('Toevoegen')->modalHeading('Toevoegen'),
+       ];
     }
 }

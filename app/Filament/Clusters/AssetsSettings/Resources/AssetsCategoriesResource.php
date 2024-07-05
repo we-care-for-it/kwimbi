@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
-
+use Filament\Support\Enums\MaxWidth;
 
 //Form
 use Filament\Forms\Components\TextInput;
@@ -45,11 +45,13 @@ class AssetsCategoriesResource extends Resource
  
             Forms\Components\TextInput::make('name')
                 ->label('Naam')
-                ->columnSpan('full') ,
+                ->columnSpan('full') 
+                ->required(),
 
             Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
                 ->default(true) , ]);
+                
 
     }
  
@@ -58,10 +60,14 @@ class AssetsCategoriesResource extends Resource
         return $table
             ->columns([
                 ToggleColumn::make('is_active')
+                ->sortable()
                 ->label('Zichbaar')
-                ->searchable()
-                ->width(100) , TextColumn::make('name')
-                ->label('Code')
+  
+                ->width(100) , 
+                
+                TextColumn::make('name')
+                ->sortable()              ->searchable()
+                ->label('Naam')
                  
             ])
             ->filters([
@@ -69,7 +75,7 @@ class AssetsCategoriesResource extends Resource
  
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen')->modalWidth(MaxWidth::Medium),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
             ])
             ->bulkActions([

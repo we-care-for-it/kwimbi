@@ -4,9 +4,9 @@ namespace App\Filament\Clusters\General\Resources\UploadsTypesResource\Pages;
 
 use App\Filament\Clusters\General\Resources\UploadsTypesResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListUploadsTypes extends ListRecords
+class ManageUploadsTypes extends ManageRecords
 {
     protected static string $resource = UploadsTypesResource::class;
 

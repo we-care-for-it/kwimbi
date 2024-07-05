@@ -14,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use Filament\Support\Enums\MaxWidth;
+
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -45,12 +47,13 @@ class ToolsBrandsResource extends Resource
  
             Forms\Components\TextInput::make('name')
                 ->label('Naam')
-                ->columnSpan('full') ,
+                ->columnSpan('full') 
+                ->required(),
 
-                FileUpload::make('image')->image(),
+                FileUpload::make('image')->image()->label('Logo / Afbeelding'),
 
             Forms\Components\Toggle::make('is_active')
-                ->label('Zichtbaar  ')
+                ->label('Zichtbaar  ')   ->inline(false)
                 ->default(true) , ]);
 
     }
@@ -63,12 +66,12 @@ class ToolsBrandsResource extends Resource
                 ->width(100),
 
                 ToggleColumn::make('is_active')
-                ->label('Zichbaar')
+                ->label('Zichbaar')  ->sortable()
        
                 ->width(100)
                                  
 
-                , TextColumn::make('name')
+                , TextColumn::make('name')  ->sortable()
                 ->label('Naam')         ->searchable(),
  
 
@@ -79,7 +82,7 @@ class ToolsBrandsResource extends Resource
  
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen')->modalWidth(MaxWidth::ExtraLarge),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen'),
             ])
             ->bulkActions([

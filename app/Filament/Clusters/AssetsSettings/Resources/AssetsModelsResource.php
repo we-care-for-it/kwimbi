@@ -32,6 +32,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 
+use Filament\Support\Enums\MaxWidth;
 
 
 
@@ -52,15 +53,15 @@ class AssetsModelsResource extends Resource
              
             Forms\Components\TextInput::make('name')
             ->label('Naam')
-            ->columnSpan('full') ,
+            ->columnSpan('full')      ->required(),  
 
            
  
 Select::make('brand_id')
-    ->label('Merk')
+    ->label('Merk')      ->required()
     ->options(assetBrand::all()->pluck('name', 'id'))
     ->searchable(),
-    Select::make('category_id')
+    Select::make('category_id')      ->required()
     ->label('Categorie')
     ->options(assetCategorie::all()->pluck('name', 'id'))
     ->searchable()
@@ -97,7 +98,7 @@ Select::make('brand_id')
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

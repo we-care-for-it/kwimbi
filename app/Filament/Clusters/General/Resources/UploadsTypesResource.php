@@ -41,6 +41,7 @@ class UploadsTypesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -49,19 +50,10 @@ class UploadsTypesResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUploadsTypes::route('/'),
-            'create' => Pages\CreateUploadsTypes::route('/create'),
-            'edit' => Pages\EditUploadsTypes::route('/{record}/edit'),
+            'index' => Pages\ManageUploadsTypes::route('/'),
         ];
     }
 }

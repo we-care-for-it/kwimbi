@@ -14,7 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
+use Filament\Support\Enums\MaxWidth;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 
@@ -41,7 +41,7 @@ class ElevatorsTypesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Omschrijving')
-                ->columnSpan('full') ,
+                ->columnSpan('full')  ->required(), 
 
                 Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
@@ -55,10 +55,10 @@ class ElevatorsTypesResource extends Resource
         ->columns([
   
             ToggleColumn::make('is_active')
-            ->label('Zichbaar')
+            ->label('Zichbaar') ->sortable()
       
             ->width(50),
-            TextColumn::make('name')->searchable()
+            TextColumn::make('name')->searchable()   ->sortable()
             ->label('Omschrijving')
          
       
@@ -68,7 +68,7 @@ class ElevatorsTypesResource extends Resource
 
         ])
         ->actions([
-           Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+           Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::Medium),
            Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([

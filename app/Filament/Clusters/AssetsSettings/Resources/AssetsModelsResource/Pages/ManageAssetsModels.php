@@ -8,12 +8,15 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageAssetsModels extends ManageRecords
 {
+    
     protected static string $resource = AssetsModelsResource::class;
-
+    protected static ? string $title = 'Hardware - Modellen';
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Toevoegen')
+            ->modalHeading('Merk toevoegen'),
         ];
     }
 }

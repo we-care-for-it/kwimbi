@@ -5,6 +5,8 @@ namespace App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypesR
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Filament\Support\Enums\MaxWidth;
+
 
 class ManageObjectBuildingTypes extends ManageRecords
 {
@@ -19,8 +21,8 @@ class ManageObjectBuildingTypes extends ManageRecords
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     
-            Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
-
+            Actions\CreateAction::make()->modalWidth(MaxWidth::Large)->label('Toevoegen')->modalHeading('Toevoegen'),
+ 
         ];
     }
 }

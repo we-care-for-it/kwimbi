@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\AssetsSettings\Resources\AssetsBrandsResource\Pa
 use App\Filament\Clusters\AssetsSettings\Resources\AssetsBrandsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
-
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Filters\Layout;
 class ManageAssetsBrands extends ManageRecords
 {

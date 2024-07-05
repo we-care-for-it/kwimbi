@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use Filament\Support\Enums\MaxWidth;
 
 //Form
 use Filament\Forms\Components\TextInput;
@@ -44,7 +45,8 @@ class ObjectBuildingTypesResource extends Resource
             ->schema([
       
                     Forms\Components\TextInput::make('name')
-                    ->label('Naam')
+                    ->label('Naam') ->required()
+                  
                     ->columnSpan('full') ,
 
                     Forms\Components\Toggle::make('is_active')
@@ -66,7 +68,9 @@ class ObjectBuildingTypesResource extends Resource
 
             TextColumn::make('name')->searchable()
             ->label('Omschrijving')
-            
+           
+            ->searchable()
+            ->sortable()
       
         ])
         ->filters([
@@ -74,7 +78,7 @@ class ObjectBuildingTypesResource extends Resource
 
         ])
         ->actions([
-          Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+            Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::Medium),
             Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([

@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use Filament\Support\Enums\MaxWidth;
 
 
 
@@ -44,7 +45,8 @@ class ToolsCategoriesResource extends Resource
  
             Forms\Components\TextInput::make('name')
                 ->label('Naam')
-                ->columnSpan('full') ,
+             
+                ->columnSpan('full')->required(),
 
             Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
@@ -60,8 +62,9 @@ class ToolsCategoriesResource extends Resource
                 ToggleColumn::make('is_active')
                 ->label('Zichbaar')
                 ->searchable()
-                ->width(100) , TextColumn::make('name')
-                ->label('Code')
+                ->sortable()
+                ->width(100) , TextColumn::make('name')     ->searchable()     ->sortable()
+                ->label('Naam')
                  
             ])
             ->filters([
@@ -69,7 +72,7 @@ class ToolsCategoriesResource extends Resource
  
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::Medium),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijder geselecteerde rijen'),
             ])
             ->bulkActions([
