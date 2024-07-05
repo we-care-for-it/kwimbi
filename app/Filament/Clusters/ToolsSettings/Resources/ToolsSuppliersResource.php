@@ -13,7 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Support\Enums\MaxWidth;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -43,6 +43,7 @@ class ToolsSuppliersResource extends Resource
                  
                     Forms\Components\TextInput::make('name')
                     ->label('Naam')
+                    
                         ->maxLength(255)
                         ->required(),
 
@@ -98,9 +99,10 @@ class ToolsSuppliersResource extends Resource
         ->columns([
             Tables\Columns\Layout\Split::make([
                 Tables\Columns\Layout\Stack::make([
-                    Tables\Columns\TextColumn::make('name')
+                    Tables\Columns\TextColumn::make('name')->label('Naam')
+                         
                         ->searchable()
-           
+                   
                         ->weight('medium')
                         ->alignLeft(),
 
@@ -147,9 +149,9 @@ class ToolsSuppliersResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen') ,
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
-            ])
+             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
