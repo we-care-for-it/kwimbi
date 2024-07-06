@@ -25,7 +25,9 @@ class uploadType extends Model implements Auditable
     // Number of items to be shown per page
     protected $perPage = 20;
 
-   
+    protected $fillable = [
+        'name','is_active'    ];
+
 
 
 
