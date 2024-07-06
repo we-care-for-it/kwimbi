@@ -13,7 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Forms\Components\Grid;
 
 use Filament\Support\Enums\MaxWidth;
 
@@ -25,8 +25,11 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
-
-
+use Filament\Forms\Components\Card;
+ use Filament\Forms\Components\Section;
+ use Filament\Forms\Components\Fieldset;
+ 
+          
 class WarehousesResource extends Resource
 {
     protected static ?string $model = warehouse::class;
@@ -40,19 +43,53 @@ class WarehousesResource extends Resource
  
 
     public static function form(Form $form): Form
-    {
-        return $form
+    {  return $form
         ->schema([
-            Forms\Components\TextInput::make('name')
-            ->label('naam')
+            Forms\Components\Section::make()
+                ->schema([
+       Forms\Components\TextInput::make('name')
+            ->label('Naam')
             ->required()
             ->columnSpan('full') ,
 
             Forms\Components\Toggle::make('is_active')
             ->label('Zichtbaar  ')
             ->default(true)
-        ]);
-    }
+     
+
+             
+                ])
+                ->columns(1)   
+                ->columnSpan(['lg' => fn (?warehouse $record) => $record === null ? 3 : 2]),
+       
+            Forms\Components\Section::make()
+                ->schema([
+                    Forms\Components\Placeholder::make('created_at')
+                        ->label('Aangemaakt op:')
+                        ->content(fn (warehouse $record): ?string => $record->updated_at?->diffForHumans()),
+
+                    Forms\Components\Placeholder::make('updated_at')
+                        ->label('Gewijzigd op:')
+           
+                         ->content(fn (warehouse $record): ?string => $record->updated_at?->diffForHumans()),
+                ])->columnSpan(['lg' => 1])
+                ->hidden(fn (?warehouse $record) => $record === null),
+             
+               // ->hidden(fn (?Customer $record) => $record === null),
+        ])
+        ->columns(3);
+}
+       
+        
+            // Forms\Components\TextInput::make('name')
+            // ->label('naam')
+            // ->required()
+            // ->columnSpan('full') ,
+
+            // Forms\Components\Toggle::make('is_active')
+            // ->label('Zichtbaar  ')
+            // ->default(true)
+     
 
     public static function table(Table $table): Table
     {
@@ -91,7 +128,7 @@ class WarehousesResource extends Resource
     public static function getRelations(): array
     {
         return [
-         //   RelationManagers\SubsRelationManager::class,
+       RelationManagers\SubsRelationManager::class,
         ];
     }
 

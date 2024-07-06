@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditWarehouses extends EditRecord
 {
     protected static string $resource = WarehousesResource::class;
+    protected static ?string $title = 'Magazijn bewerken';
 
     protected function getHeaderActions(): array
     {

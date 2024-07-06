@@ -25,7 +25,7 @@ class warehouse extends Model implements Auditable
 
 
     public function subs(){
-        return $this->hasMany(subWarehouse::class);
+        return $this->hasMany(Subwarehouse::class,'id','warehouse_id');
     }
 
 
