@@ -22,12 +22,4 @@ class warehouse extends Model implements Auditable
     // ];
 
     ///protected $appends = ['location_name'];
-
-
-    public function subs(){
-        return $this->hasMany(warehouse::class,'id','warehouse_id');
-    }
-
-
-
 }

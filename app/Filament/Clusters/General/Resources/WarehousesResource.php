@@ -3,9 +3,9 @@
 namespace App\Filament\Clusters\General\Resources;
 
 use App\Filament\Clusters\General;
-use App\Filament\Clusters\General\Resources\UploadsTypesResource\Pages;
-use App\Filament\Clusters\General\Resources\UploadsTypesResource\RelationManagers;
-use App\Models\uploadType;
+use App\Filament\Clusters\General\Resources\WarehousesResource\Pages;
+use App\Filament\Clusters\General\Resources\WarehousesResource\RelationManagers;
+use App\Models\warehouse;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 use Filament\Support\Enums\MaxWidth;
 
@@ -26,25 +27,25 @@ use Filament\Tables\Columns\ToggleColumn;
 
 
 
-class UploadsTypesResource extends Resource
+class WarehousesResource extends Resource
 {
-    protected static ?string $model = uploadType::class;
+    protected static ?string $model = warehouse::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $cluster = General::class;
 
-
     protected static ? string $navigationGroup = 'Basisgegevens';
-    protected static ? string $navigationLabel = 'Upload types';
-
+    protected static ? string $navigationLabel = 'Magazijnen';
+ 
 
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
             Forms\Components\TextInput::make('name')
-            ->label('Omschrijving')
+            ->label('naam')
+            ->required()
             ->columnSpan('full') ,
 
             Forms\Components\Toggle::make('is_active')
@@ -87,10 +88,20 @@ class UploadsTypesResource extends Resource
         ;
     }
 
+    public static function getRelations(): array
+    {
+        return [
+         //   RelationManagers\SubsRelationManager::class,
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageUploadsTypes::route('/'),
+            'index' => Pages\ListWarehouses::route('/'),
+            'create' => Pages\CreateWarehouses::route('/create'),
+            'view' => Pages\ViewWarehouses::route('/{record}'),
+            'edit' => Pages\EditWarehouses::route('/{record}/edit'),
         ];
     }
 }
