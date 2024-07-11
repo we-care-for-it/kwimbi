@@ -13,15 +13,11 @@ class assetCategorie extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name','show_on_facility',
+        'name','brand_id',
  
     ];
 
-
-    public function subCategory(){
-        return $this->hasMany(assetSubCategorie::class,'category_id','id');
-    }
-    
+ 
 
     
 

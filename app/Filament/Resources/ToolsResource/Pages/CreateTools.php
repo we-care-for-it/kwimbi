@@ -8,5 +8,13 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateTools extends CreateRecord
 {
+
+    protected static ?string $title = 'Gereedschap - Toevoegen';
     protected static string $resource = ToolsResource::class;
+
+    protected function getRedirectUrl(): string
+{
+return $this->getResource()::getUrl('index');
+}
+
 }

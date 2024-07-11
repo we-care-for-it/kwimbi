@@ -21,7 +21,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Tables\Enums\FiltersLayout;
 
 //Form
 use Filament\Forms\Components\TextInput;
@@ -33,7 +33,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 
 use Filament\Support\Enums\MaxWidth;
-use Filament\Forms\Components\FileUpload;
+
 
 
 
@@ -50,46 +50,43 @@ class AssetsModelsResource extends Resource
     {
         return $form
             ->schema([
-             
-            Forms\Components\TextInput::make('name')
-            ->label('Naam')
-            ->columnSpan('full')      ->required(),  
 
-           
- 
 
-            Select::make('brand_id')
-            ->label('Merk')
-          
-            ->loadingMessage('Merken laden...')
-            ->relationship(name: 'brand', titleAttribute: 'name')
-           // ->searchable()
-            ->createOptionForm([
                 Forms\Components\TextInput::make('name')
-                    ->required(),
-         
-            ]),
-            
+                ->label('Naam')
+                ->columnSpan('full') 
+                ->required(),
+
+
+
+                Select::make('brand_id')
+->label('Merk')
+                
+->relationship(name: 'brand', titleAttribute: 'name')
+->loadingMessage('Merken laden...')
+->createOptionForm([
+
+    Forms\Components\TextInput::make('name')
+        ->required(),
+
+])   ->required(),
+
+
 
 
 Select::make('category_id')
 ->label('Categorie')
-            
+                
 ->relationship(name: 'category', titleAttribute: 'name')
-->loadingMessage('Categorieën laden...')
+->loadingMessage('Categorieen laden...')
 ->createOptionForm([
-Forms\Components\TextInput::make('name')
-    ->required(),
 
-]),
+    Forms\Components\TextInput::make('name')
+        ->required(),
 
-
-    FileUpload::make('image')
-    ->image()
-    ->label('Afbeelding')
-
-,
-
+])   ->required(),
+             
+           
 ]);
 
 
@@ -101,10 +98,7 @@ Forms\Components\TextInput::make('name')
             ->columns([
 
                 
-                ImageColumn::make('image')->label('Afbeelding')  
-                ->width(100),
-
-
+          
 
 
                 TextColumn::make('brand.name')
@@ -115,9 +109,7 @@ Forms\Components\TextInput::make('name')
                 ->label('Naam')->sortable()->searchable(),
                 
                 TextColumn::make('category.name') 
-                ->label('Categorie')->sortable(),
-
-                
+                ->label('Categorie')->sortable()
                  
             ])
             ->filters([
@@ -127,22 +119,22 @@ Forms\Components\TextInput::make('name')
     ->label('Merk')       
     ->options(assetBrand::all()->pluck('name', 'id')),
 
+ 
+    SelectFilter::make('category_id')
+    ->label('Categorie ')       
+    ->options(assetCategorie::all()->pluck('name', 'id')),
 
-
-SelectFilter::make('category_id')->label('Categorie')
-->options(assetCategorie::all()->pluck('name', 'id'))
-            ])
+ 
+])
             ->actions([
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen')->modalWidth(MaxWidth::FiveExtraLarge),
-                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-         //           Tables\Actions\DeleteBulkAction::make()->modalHeading(''),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])      
-             ->emptyState(view('partials.empty-state')) ;
-            ;
+            ]);
     }
 
     public static function getPages(): array

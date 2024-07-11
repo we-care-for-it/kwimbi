@@ -16,6 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes(); 
             $table->string('name')->nullable();
+            $table->string('serial_number')->nullable();
+
+            
+
             $table->integer('category_id')->nullable();
             $table->integer('type_id')->nullable();
             $table->integer('brand_id')->nullable();
@@ -26,6 +30,11 @@ return new class extends Migration
             $table->longtext('description')->nullable();
             $table->longtext('minutiue')->nullable();
             $table->longtext('employee_id')->nullable();
+            $table->longtext('image')->nullable();
+            $table->integer('warehouse_id')->nullable();
+
+            
+
 
         });
     }

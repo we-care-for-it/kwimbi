@@ -9,11 +9,16 @@ use Filament\Resources\Pages\EditRecord;
 class EditTools extends EditRecord
 {
     protected static string $resource = ToolsResource::class;
-
+    protected static ?string $title = 'Gereedschap - Wijzigen';
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getRedirectUrl(): string
+{
+return $this->getResource()::getUrl('index');
+}
 }

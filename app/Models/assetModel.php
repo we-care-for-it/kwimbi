@@ -16,7 +16,7 @@ class assetModel extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name','brand_id','category_id','image','sub_category_id'
+        'name','brand_id','category_id','image'
     ];
 
     public function brand(){
@@ -27,9 +27,7 @@ class assetModel extends Model
         return $this->belongsTo(assetCategorie::class);
     }
 
-    public function subCategory(){
-        return $this->hasOne(assetSubCategorie::class,'id', 'sub_category_id');
-    }
+ 
 
 
  
