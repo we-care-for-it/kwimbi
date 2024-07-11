@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\AssetsSettings\Resources\AssetsModelsResource\Pa
 use App\Filament\Clusters\AssetsSettings\Resources\AssetsModelsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
-
+use Filament\Support\Enums\MaxWidth;
 class ManageAssetsModels extends ManageRecords
 {
     
@@ -16,7 +16,7 @@ class ManageAssetsModels extends ManageRecords
         return [
             Actions\CreateAction::make()
             ->label('Toevoegen')
-            ->modalHeading('Merk toevoegen'),
+            ->modalHeading('Merk toevoegen')   ->modalWidth(MaxWidth::FiveExtraLarge),
         ];
     }
 }

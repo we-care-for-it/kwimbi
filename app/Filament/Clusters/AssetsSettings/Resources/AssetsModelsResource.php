@@ -33,7 +33,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 
 use Filament\Support\Enums\MaxWidth;
-
+use Filament\Forms\Components\FileUpload;
 
 
 
@@ -57,14 +57,38 @@ class AssetsModelsResource extends Resource
 
            
  
-Select::make('brand_id')
-    ->label('Merk')      ->required()
-    ->options(assetBrand::all()->pluck('name', 'id'))
-    ->searchable(),
-    Select::make('category_id')      ->required()
-    ->label('Categorie')
-    ->options(assetCategorie::all()->pluck('name', 'id'))
-    ->searchable()
+
+            Select::make('brand_id')
+            ->label('Merk')
+          
+            ->loadingMessage('Merken laden...')
+            ->relationship(name: 'brand', titleAttribute: 'name')
+           // ->searchable()
+            ->createOptionForm([
+                Forms\Components\TextInput::make('name')
+                    ->required(),
+         
+            ]),
+            
+
+
+Select::make('category_id')
+->label('Categorie')
+            
+->relationship(name: 'category', titleAttribute: 'name')
+->loadingMessage('Categorieën laden...')
+->createOptionForm([
+Forms\Components\TextInput::make('name')
+    ->required(),
+
+]),
+
+
+    FileUpload::make('image')
+    ->image()
+    ->label('Afbeelding')
+
+,
 
 ]);
 
@@ -77,7 +101,7 @@ Select::make('brand_id')
             ->columns([
 
                 
-                ImageColumn::make('brand.image')->label('Logo')  
+                ImageColumn::make('image')->label('Afbeelding')  
                 ->width(100),
 
 
@@ -91,7 +115,9 @@ Select::make('brand_id')
                 ->label('Naam')->sortable()->searchable(),
                 
                 TextColumn::make('category.name') 
-                ->label('Categorie')->sortable()
+                ->label('Categorie')->sortable(),
+
+                
                  
             ])
             ->filters([
@@ -107,14 +133,16 @@ SelectFilter::make('category_id')->label('Categorie')
 ->options(assetCategorie::all()->pluck('name', 'id'))
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->modalHeading('Wijzigen')->modalWidth(MaxWidth::FiveExtraLarge),
+                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+         //           Tables\Actions\DeleteBulkAction::make()->modalHeading(''),
                 ]),
-            ]);
+            ])      
+             ->emptyState(view('partials.empty-state')) ;
+            ;
     }
 
     public static function getPages(): array

@@ -48,13 +48,13 @@ class AdminPanelProvider extends PanelProvider
         return $panel
         ->breadcrumbs(false)
           //  ->sidebarCollapsibleOnDesktop()
-           ->topNavigation()
+         //  ->topNavigation()
             ->default()
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
             ->profile()
-            ->spa()
+        //   ->spa()
             ->databaseNotifications()
             ->maxContentWidth(MaxWidth::Full)
             ->plugin(new Lockscreen())  // <- Add this
@@ -96,8 +96,8 @@ class AdminPanelProvider extends PanelProvider
                 //     ->navigationCountBadge(),
                  FilamentExceptionsPlugin::make(),
              
-                FilamentJobsMonitorPlugin::make()
-                 ->navigationCountBadge(),
+               // FilamentJobsMonitorPlugin::make()
+                // ->navigationCountBadge(),
        
             //    FilamentPeekPlugin::make()
              //       ->disablePluginStyles(),
@@ -122,7 +122,7 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Stamgegevens')
                     ->collapsible(true),
                     NavigationGroup::make()
-                ->label("Systeembeheer")
+                ->label("Systeembeheer")  ->collapsed(),
        
                
 

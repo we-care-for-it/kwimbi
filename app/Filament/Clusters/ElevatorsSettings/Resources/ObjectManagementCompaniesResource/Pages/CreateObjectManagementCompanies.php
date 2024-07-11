@@ -12,4 +12,10 @@ class CreateObjectManagementCompanies extends CreateRecord
     protected static ?string $title = 'Beheerder toevoegen';
     
     protected static string $resource = ObjectManagementCompaniesResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+    return $this->getResource()::getUrl('index');
+    }
+
 }

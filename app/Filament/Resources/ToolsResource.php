@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ToolsResource\Pages;
 use App\Filament\Resources\ToolsResource\RelationManagers;
-use App\Models\tools;
+use App\Models\Tools;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,13 +13,27 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
+//Form
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+
+//Table
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+
+
+
 class ToolsResource extends Resource
 {
-    protected static ?string $model = tools::class;
+    protected static ?string $model = Tools::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+            
     protected static ? string $navigationGroup = 'Beheer';
-    protected static ? string $navigationLabel = 'Gereedschap';  public static function form(Form $form): Form
+    protected static ? string $navigationLabel = 'Gereedsschappen';
+    public static function form(Form $form): Form
     {
         return $form
             ->schema([
@@ -31,7 +45,11 @@ class ToolsResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')->searchable()
+            ->label('Naam')
+           
+            ->searchable()
+            ->sortable()
             ])
             ->filters([
                 //

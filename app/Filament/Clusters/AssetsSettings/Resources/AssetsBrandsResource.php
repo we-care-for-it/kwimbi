@@ -57,7 +57,7 @@ class AssetsBrandsResource extends Resource
 
         FileUpload::make('image')
             ->image()
-            ->label('Afbeelding')
+            ->label('Afbeelding')    ->columnSpan('full') 
 
         , ]);
 

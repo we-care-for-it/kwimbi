@@ -14,6 +14,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Set;
+
+
 class ObjectManagementCompaniesResource extends Resource
 {
     protected static ?string $model = objectManagementCompany::class;
@@ -45,7 +51,7 @@ class ObjectManagementCompaniesResource extends Resource
                     Forms\Components\TextInput::make('zipcode')
                      
                         ->label('Postcode')
-                        ->maxLength(255),
+                        ->maxLength(255),   
                       
 
                     Forms\Components\TextInput::make('place')

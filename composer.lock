@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
-            "version": "v2.2.27",
+            "version": "v2.2.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Althinect/filament-spatie-roles-permissions.git",
@@ -65,7 +65,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Althinect/filament-spatie-roles-permissions/issues",
-                "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v2.2.27"
+                "source": "https://github.com/Althinect/filament-spatie-roles-permissions/tree/v2.2.28"
             },
             "time": "2024-06-20T17:37:43+00:00"
         },
@@ -1054,16 +1054,16 @@
         },
         {
             "name": "croustibat/filament-jobs-monitor",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/croustibat/filament-jobs-monitor.git",
-                "reference": "e177c426bcd7040699587a782fef0b3409a5ce07"
+                "reference": "6543ae2d5767de9a45f56d1396042dc3f6d08793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/croustibat/filament-jobs-monitor/zipball/e177c426bcd7040699587a782fef0b3409a5ce07",
-                "reference": "e177c426bcd7040699587a782fef0b3409a5ce07",
+                "url": "https://api.github.com/repos/croustibat/filament-jobs-monitor/zipball/6543ae2d5767de9a45f56d1396042dc3f6d08793",
+                "reference": "6543ae2d5767de9a45f56d1396042dc3f6d08793",
                 "shasum": ""
             },
             "require": {
@@ -1112,7 +1112,7 @@
             ],
             "support": {
                 "issues": "https://github.com/croustibat/filament-jobs-monitor/issues",
-                "source": "https://github.com/croustibat/filament-jobs-monitor/tree/2.4.0"
+                "source": "https://github.com/croustibat/filament-jobs-monitor/tree/2.5.0"
             },
             "funding": [
                 {
@@ -1120,7 +1120,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-29T10:18:13+00:00"
+            "time": "2024-07-04T09:49:21+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
@@ -1279,16 +1279,16 @@
         },
         {
             "name": "dflydev/dot-access-data",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dflydev/dflydev-dot-access-data.git",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549"
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/f41715465d65213d644d3141a6a93081be5d3549",
-                "reference": "f41715465d65213d644d3141a6a93081be5d3549",
+                "url": "https://api.github.com/repos/dflydev/dflydev-dot-access-data/zipball/a23a2bf4f31d3518f3ecb38660c95715dfead60f",
+                "reference": "a23a2bf4f31d3518f3ecb38660c95715dfead60f",
                 "shasum": ""
             },
             "require": {
@@ -1348,9 +1348,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dflydev/dflydev-dot-access-data/issues",
-                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
+                "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
-            "time": "2022-10-27T11:44:00+00:00"
+            "time": "2024-07-08T12:26:09+00:00"
         },
         {
             "name": "diglactic/laravel-breadcrumbs",
@@ -2065,16 +2065,16 @@
         },
         {
             "name": "eightynine/filament-excel-import",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/eighty9nine/filament-excel-import.git",
-                "reference": "80b149290c82df5c492716998e2cedcf313efbc9"
+                "reference": "d3acf88a3c4a2bf2ea81d6af4ca5f9e2d62398bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eighty9nine/filament-excel-import/zipball/80b149290c82df5c492716998e2cedcf313efbc9",
-                "reference": "80b149290c82df5c492716998e2cedcf313efbc9",
+                "url": "https://api.github.com/repos/eighty9nine/filament-excel-import/zipball/d3acf88a3c4a2bf2ea81d6af4ca5f9e2d62398bc",
+                "reference": "d3acf88a3c4a2bf2ea81d6af4ca5f9e2d62398bc",
                 "shasum": ""
             },
             "require": {
@@ -2135,7 +2135,7 @@
                 "issues": "https://github.com/eightynine/filament-excel-import/issues",
                 "source": "https://github.com/eightynine/filament-excel-import"
             },
-            "time": "2024-03-19T04:38:51+00:00"
+            "time": "2024-07-02T11:16:51+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -3694,16 +3694,16 @@
         },
         {
             "name": "joaopaulolndev/filament-general-settings",
-            "version": "v1.0.13",
+            "version": "v1.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joaopaulolndev/filament-general-settings.git",
-                "reference": "9fc092fd95b3233ffdcc520ea6186818fc6d8ca7"
+                "reference": "ca318b7de1d4da658870d0a4254ec10677560d7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joaopaulolndev/filament-general-settings/zipball/9fc092fd95b3233ffdcc520ea6186818fc6d8ca7",
-                "reference": "9fc092fd95b3233ffdcc520ea6186818fc6d8ca7",
+                "url": "https://api.github.com/repos/joaopaulolndev/filament-general-settings/zipball/ca318b7de1d4da658870d0a4254ec10677560d7a",
+                "reference": "ca318b7de1d4da658870d0a4254ec10677560d7a",
                 "shasum": ""
             },
             "require": {
@@ -3769,7 +3769,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-27T17:43:17+00:00"
+            "time": "2024-07-04T10:17:03+00:00"
         },
         {
             "name": "kenepa/translation-manager",
@@ -3892,16 +3892,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.13.0",
+            "version": "v11.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "92deaa4f037ff100e36809443811301819a8cf84"
+                "reference": "657e8464e13147d56bc3a399115c8c26f38d4821"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/92deaa4f037ff100e36809443811301819a8cf84",
-                "reference": "92deaa4f037ff100e36809443811301819a8cf84",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/657e8464e13147d56bc3a399115c8c26f38d4821",
+                "reference": "657e8464e13147d56bc3a399115c8c26f38d4821",
                 "shasum": ""
             },
             "require": {
@@ -3954,6 +3954,7 @@
             },
             "provide": {
                 "psr/container-implementation": "1.1|2.0",
+                "psr/log-implementation": "1.0|2.0|3.0",
                 "psr/simple-cache-implementation": "1.0|2.0|3.0"
             },
             "replace": {
@@ -4093,7 +4094,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-06-27T09:04:50+00:00"
+            "time": "2024-07-02T17:23:58+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -5095,16 +5096,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "da044261bb5c5449397f18fda3409f14acf47c0a"
+                "reference": "636725c1f87bc7844dd80277488268db27eec1aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/da044261bb5c5449397f18fda3409f14acf47c0a",
-                "reference": "da044261bb5c5449397f18fda3409f14acf47c0a",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/636725c1f87bc7844dd80277488268db27eec1aa",
+                "reference": "636725c1f87bc7844dd80277488268db27eec1aa",
                 "shasum": ""
             },
             "require": {
@@ -5159,7 +5160,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.1"
+                "source": "https://github.com/livewire/livewire/tree/v3.5.2"
             },
             "funding": [
                 {
@@ -5167,7 +5168,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-18T11:10:42+00:00"
+            "time": "2024-07-03T17:22:45+00:00"
         },
         {
             "name": "maatwebsite/excel",
@@ -5937,16 +5938,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.0.2",
+            "version": "v5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13"
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/139676794dc1e9231bf7bcd123cfc0c99182cb13",
-                "reference": "139676794dc1e9231bf7bcd123cfc0c99182cb13",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
                 "shasum": ""
             },
             "require": {
@@ -5957,7 +5958,7 @@
             },
             "require-dev": {
                 "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+                "phpunit/phpunit": "^9.0"
             },
             "bin": [
                 "bin/php-parse"
@@ -5989,9 +5990,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.0.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
             },
-            "time": "2024-03-05T20:51:40+00:00"
+            "time": "2024-07-01T20:03:41+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -7767,16 +7768,16 @@
         },
         {
             "name": "shuvroroy/filament-spatie-laravel-backup",
-            "version": "v2.1.4",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shuvroroy/filament-spatie-laravel-backup.git",
-                "reference": "b68443103942aceab17636285eb54b2d80e66a0f"
+                "reference": "92533cb170826eba5efc40e0966c946f1cb8ebaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shuvroroy/filament-spatie-laravel-backup/zipball/b68443103942aceab17636285eb54b2d80e66a0f",
-                "reference": "b68443103942aceab17636285eb54b2d80e66a0f",
+                "url": "https://api.github.com/repos/shuvroroy/filament-spatie-laravel-backup/zipball/92533cb170826eba5efc40e0966c946f1cb8ebaa",
+                "reference": "92533cb170826eba5efc40e0966c946f1cb8ebaa",
                 "shasum": ""
             },
             "require": {
@@ -7831,7 +7832,7 @@
             ],
             "support": {
                 "issues": "https://github.com/shuvroroy/filament-spatie-laravel-backup/issues",
-                "source": "https://github.com/shuvroroy/filament-spatie-laravel-backup/tree/v2.1.4"
+                "source": "https://github.com/shuvroroy/filament-spatie-laravel-backup/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -7839,7 +7840,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-28T10:24:11+00:00"
+            "time": "2024-07-07T12:14:12+00:00"
         },
         {
             "name": "sinnbeck/markdom",
@@ -12101,16 +12102,16 @@
         },
         {
             "name": "tomatophp/filament-icons",
-            "version": "v1.0.3",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomatophp/filament-icons.git",
-                "reference": "5df1fe58176ec1bf2ad1588b2d97000603ef46c1"
+                "reference": "a9d3f8dcf366596ec8eb44a8ec3c23a5082e28b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomatophp/filament-icons/zipball/5df1fe58176ec1bf2ad1588b2d97000603ef46c1",
-                "reference": "5df1fe58176ec1bf2ad1588b2d97000603ef46c1",
+                "url": "https://api.github.com/repos/tomatophp/filament-icons/zipball/a9d3f8dcf366596ec8eb44a8ec3c23a5082e28b6",
+                "reference": "a9d3f8dcf366596ec8eb44a8ec3c23a5082e28b6",
                 "shasum": ""
             },
             "require": {
@@ -12154,7 +12155,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tomatophp/filament-icons/issues",
-                "source": "https://github.com/tomatophp/filament-icons/tree/v1.0.3"
+                "source": "https://github.com/tomatophp/filament-icons/tree/v1.1.0"
             },
             "funding": [
                 {
@@ -12162,7 +12163,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-14T01:04:30+00:00"
+            "time": "2024-06-30T14:26:20+00:00"
         },
         {
             "name": "tomatophp/filament-menus",
@@ -12992,16 +12993,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.30.0",
+            "version": "v1.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "e08b594052385ab9891dd86047e52da8a953c827"
+                "reference": "8ba049b6c06e0330b6aa1fb7af2746fb4da445e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/e08b594052385ab9891dd86047e52da8a953c827",
-                "reference": "e08b594052385ab9891dd86047e52da8a953c827",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/8ba049b6c06e0330b6aa1fb7af2746fb4da445e4",
+                "reference": "8ba049b6c06e0330b6aa1fb7af2746fb4da445e4",
                 "shasum": ""
             },
             "require": {
@@ -13051,7 +13052,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-06-18T17:36:56+00:00"
+            "time": "2024-07-01T20:55:03+00:00"
         },
         {
             "name": "maximebf/debugbar",
