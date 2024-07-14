@@ -16,7 +16,7 @@ class tools extends Model implements Auditable
     
 
     protected $fillable = [
-   'serial_number',  'employee_id', 'warehouse_id','inspection_interval', 'name','brand_id','category_id','supplier_id','type_id','image','inspection_company_id','inspection_method'
+   'description','serial_number',  'employee_id', 'warehouse_id','inspection_interval', 'name','brand_id','category_id','supplier_id','type_id','image','inspection_company_id','inspection_method'
     ];
 
 

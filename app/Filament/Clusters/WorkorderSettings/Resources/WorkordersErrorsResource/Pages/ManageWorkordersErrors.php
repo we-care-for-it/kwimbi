@@ -16,7 +16,7 @@ class ManageWorkordersErrors extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
+            Actions\CreateAction::make()->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge)->modalHeading('Toevoegen foutmelding'),
         ];
     }
 }

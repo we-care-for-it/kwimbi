@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Clusters\WorkorderSettings\Resources\WorkorderTypesResource\Pages;
+namespace App\Filament\Clusters\General\Resources\WorkTypesResource\Pages;
 
-use App\Filament\Clusters\WorkorderSettings\Resources\WorkorderTypesResource;
+use App\Filament\Clusters\General\Resources\WorkTypesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
 
-class ManageWorkorderTypes extends ManageRecords
-{
-    protected static string $resource = WorkorderTypesResource::class;
-    protected static ?string $title = 'Werkopdrachten - Werkomschrijvingen';
 
+class ManageWorkTypes extends ManageRecords
+{
+    protected static string $resource = WorkTypesResource::class;
+    protected static ?string $title = 'Algemeen - Werkomschrijvingen';
     protected function getHeaderActions(): array
     {
         return [
@@ -19,6 +19,7 @@ class ManageWorkorderTypes extends ManageRecords
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     
             Actions\CreateAction::make()->modalWidth(MaxWidth::ExtraLarge)->label('Toevoegen')->modalHeading('Toevoegen'),
+
         ];
     }
 }

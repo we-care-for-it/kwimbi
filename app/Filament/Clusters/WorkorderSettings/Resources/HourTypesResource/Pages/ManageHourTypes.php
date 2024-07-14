@@ -21,7 +21,7 @@ class ManageHourTypes extends ManageRecords
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     
-            Actions\CreateAction::make()  ->modalHeading('Merk toevoegen')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
+            Actions\CreateAction::make()  ->modalHeading('Toevoegen')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
 
         ];
     }
