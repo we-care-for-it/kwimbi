@@ -16,6 +16,11 @@ class uploadType extends Model implements Auditable
  
 {
     
+
+ protected $casts = [
+        'visable_module' => 'array',
+    ];
+ 
      use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
  
@@ -26,7 +31,17 @@ class uploadType extends Model implements Auditable
     protected $perPage = 20;
 
     protected $fillable = [
-        'name','is_active'    ];
+        'name','visible_projects'
+
+        ,'visible_incidents'
+        ,'visible_assets'
+        ,'visible_tools'
+        ,'visible_workorders'
+        ,'visible_fleet'
+        ,'visible_object_management_companies'
+        ,'visible_object_suppliers'
+        ,'visible_object_maintenance_companies'
+    ];
 
 
 

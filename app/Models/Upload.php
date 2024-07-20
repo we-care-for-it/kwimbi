@@ -12,15 +12,12 @@ class Upload extends Model  implements Auditable
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-        'type',
+        'description',
         'filename',
-        'elevator_id',
-        'add_by_user_id',
-        'incident_id',
-        'relation_id',
-        'type_id',
-        'path',
-        'group_id',
-        'title'
+        'module_id',
+        'name',
+        'upload_type_id',
+        'module_id'
+       
     ];
 }

@@ -54,12 +54,16 @@ class Project extends Model implements Auditable
    
     public function status()
     {
-        return $this->belongsTo(Statuses::class);
+        return $this->belongsTo(projectStatus::class);
     }
 
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class,'object_id','id');
     }
 
 

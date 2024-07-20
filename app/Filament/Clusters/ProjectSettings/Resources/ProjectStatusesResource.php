@@ -110,7 +110,7 @@ class ProjectStatusesResource extends Resource
 public static function getPages(): array
 {
 return [
-'index' => Pages\ProjectStatuses::route('/'),
+'index' => Pages\ManageProjectStatuses::route('/'),
 ];
 }
  
