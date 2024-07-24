@@ -13,6 +13,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
+
+use Hexters\HexaLite\Traits\HexAccess;
+ 
+ 
+
+  
+
+
+
 class FleetManagementResource extends Resource
 {
     protected static ?string $model = fleetManagement::class;
@@ -21,6 +31,37 @@ class FleetManagementResource extends Resource
     protected static ? string $navigationGroup = 'Beheer';
     protected static ? string $navigationLabel = 'Wagenpark';
    
+
+    use HexAccess;
+
+    protected static ?array $subPermissions = [
+        'access.fleetmanagement.create' => 'Toevoegen',
+        'access.fleetmanagement.edit' => 'Wijzigen',
+        'access.fleetmanagement.delete' => 'Verwijderen',
+    ];
+     
+ 
+
+
+
+    
+    public static function canAccess(array $parameters = []): bool
+{
+    return hexa()->can('access.fleetmanagement.create');
+}
+
+
+ 
+protected static ?string $permissionId = 'access.fleetmanagement';
+ 
+protected static ?string $descriptionPermission = 'Wagenparkbeheer';
+
+
+
+
+
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -63,4 +104,8 @@ class FleetManagementResource extends Resource
             'edit' => Pages\EditFleetManagement::route('/{record}/edit'),
         ];
     }
+
+
+
+
 }

@@ -13,7 +13,7 @@ class EditTools extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()     ->visible(hexa()->can('access.tools.delete')),
         ];
     }
 

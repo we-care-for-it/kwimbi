@@ -32,7 +32,8 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
 
-
+use Hexters\HexaLite\Traits\HexAccess;
+ 
 use Filament\Forms\Components\Fieldset;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
@@ -46,6 +47,34 @@ class ToolsResource extends Resource
 
     protected static ? string $navigationGroup = 'Beheer';
     protected static ? string $navigationLabel = 'Gereedschap';
+
+
+    use HexAccess;
+
+
+     
+protected static ?string $permissionId = 'access.tools';
+ 
+protected static ?string $descriptionPermission = 'Het beheren van gereedschappen';
+
+
+
+    protected static ?array $subPermissions = [
+        'access.tools.index' => 'Overzicht bekijen',
+        'access.tools.create' => 'Toevoegen',
+        'access.tools.edit' => 'Wijzigen',
+        'access.tools.delete' => 'Verwijderen',
+    ];
+     
+    public static function canAccess(array $parameters = []): bool
+    {
+
+        return hexa()->can(static::$permissionId);
+       // return hexa()->can('access.tools.index');
+    }
+
+
+
     public static function form(Form $form) : Form
     {
         return $form->schema([
@@ -272,9 +301,12 @@ class ToolsResource extends Resource
 
                                         ])
                                             ->actions([Tables\Actions\EditAction::make()
+                                            ->visible(hexa()->can('access.tools.create'))
                                             ->modalHeading('Wijzigen')
+                                            ->visible(hexa()->can('access.tools.edit'))
                                             ->modalWidth(MaxWidth::FiveExtraLarge) , Tables\Actions\DeleteAction::make()
-                                            ->modalHeading('Verwijderen') ,
+                                            ->modalHeading('Verwijderen')          
+                                            ->visible(hexa()->can('access.tools.delete')) ,
 
                                         ])
                                             ->bulkActions([

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "807a258642ae11b4c5500f6f7b02867f",
+    "content-hash": "e3da4782212b3ff10e96674a62abd6b5",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -3531,6 +3531,83 @@
                 }
             ],
             "time": "2024-04-10T06:31:54+00:00"
+        },
+        {
+            "name": "hexters/hexa-lite",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hexters/hexa-lite.git",
+                "reference": "338847d596de98315fc866c2ee7e61971d166590"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hexters/hexa-lite/zipball/338847d596de98315fc866c2ee7e61971d166590",
+                "reference": "338847d596de98315fc866c2ee7e61971d166590",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Hexters\\HexaLite\\HexaLiteServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Hexters\\HexaLite\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Asep",
+                    "email": "hexters@gmail.com"
+                }
+            ],
+            "description": "Filament Hexa is a effortless role and permission management plugin for Filament",
+            "keywords": [
+                "Filament access control",
+                "Filament integration",
+                "Filament panel",
+                "Filament permission setup",
+                "Filament resource access",
+                "Filament widget permissions",
+                "Hexa Filament",
+                "Hexa installation",
+                "Hexa plugin",
+                "access permissions Filament",
+                "hexters ladmin",
+                "role and permission Filament",
+                "role management Filament",
+                "role management PHP"
+            ],
+            "support": {
+                "issues": "https://github.com/hexters/hexa-lite/issues",
+                "source": "https://github.com/hexters/hexa-lite/tree/1.0.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/hexters",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/hexters",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://www.patreon.com/hexters",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-07-11T10:04:57+00:00"
         },
         {
             "name": "intervention/image",

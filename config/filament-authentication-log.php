@@ -12,7 +12,7 @@ return [
 
     'navigation' => [
         'authentication-log' => [
-            'register' => true,
+            'register' => false,
             'sort' => 1,
             'navigationGroup' => 'Systeembeheer',
             'icon' => 'heroicon-o-shield-check',

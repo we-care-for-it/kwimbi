@@ -13,8 +13,16 @@ class CreateTools extends CreateRecord
     protected static string $resource = ToolsResource::class;
 
     protected function getRedirectUrl(): string
+
+
+    
+
+
+    
 {
 return $this->getResource()::getUrl('index');
 }
 
 }
+
+

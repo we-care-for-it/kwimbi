@@ -72,7 +72,9 @@ class UserResource extends Resource
                     ->password()
                     ->confirmed()
                     ->maxLength(255),
-
+                  
+                    Forms\Components\Select::make('roles')->multiple()->relationship('roles', 'name'),
+               
                 Forms\Components\TextInput::make('password_confirmation')
                     ->label('Confirm password')
                     ->password()

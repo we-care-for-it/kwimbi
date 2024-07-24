@@ -9,7 +9,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
  
-class department extends Model implements Auditable
+class asset extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;

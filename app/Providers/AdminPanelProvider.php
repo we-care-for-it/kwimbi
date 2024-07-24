@@ -36,6 +36,8 @@ use Filament\Support\Enums\MaxWidth;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Kenepa\TranslationManager\TranslationManagerPlugin;
 
+
+use Hexters\HexaLite\HexaLite;
 use lockscreen\FilamentLockscreen\Lockscreen;
 use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
 use Althinect\FilamentSpatieRolesPermissions\FilamentSpatieRolesPermissionsPlugin;
@@ -59,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth(MaxWidth::Full)
             ->plugin(new Lockscreen())  // <- Add this
 
-            ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
+       // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 //FilamentTimesheetsPlugin::make(),
@@ -86,7 +88,7 @@ class AdminPanelProvider extends PanelProvider
                         shouldRegisterNavigation: false,
                         hasAvatars: true
                     )
-                    ->enableTwoFactorAuthentication(),
+              ,
                     
                 // CuratorPlugin::make()
                 //     ->label('Media')
@@ -122,11 +124,15 @@ class AdminPanelProvider extends PanelProvider
                     ->label('Stamgegevens')
                     ->collapsible(true),
                     NavigationGroup::make()
-                ->label("Systeembeheer")  ->collapsed(),
-       
+                ->label("Systeembeheer")    
                
 
             ])
+ 
+     
+                    ->plugins([
+                        HexaLite::make(),
+                    ])
         
             ->colors([
                 'primary' => Color::Blue,
