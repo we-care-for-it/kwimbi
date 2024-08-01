@@ -13,7 +13,7 @@ use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Filament\Navigation\NavigationGroup;
 use Awcodes\FilamentGravatar\GravatarPlugin;
 use Awcodes\FilamentGravatar\GravatarProvider;
-use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
+//use BezhanSalleh\FilamentExceptions\FilamentExceptionsPlugin;
 use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -96,7 +96,7 @@ class AdminPanelProvider extends PanelProvider
                 //     ->navigationIcon('heroicon-o-photo')
                 //     ->navigationGroup('Media')
                 //     ->navigationCountBadge(),
-                 FilamentExceptionsPlugin::make(),
+              //   FilamentExceptionsPlugin::make(),
              
                // FilamentJobsMonitorPlugin::make()
                 // ->navigationCountBadge(),
