@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('module_id')->nullable();
  	   $table->boolean('is_active')->nullable()->default('1');
       $table->string('token_1')->nullable();
-      $table->string('token_1')->nullable();
+      $table->string('token_2')->nullable();
 	    $table->string('password')->nullable();
 
 
