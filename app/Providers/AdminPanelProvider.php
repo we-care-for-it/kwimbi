@@ -65,7 +65,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 //FilamentTimesheetsPlugin::make(),
-                FilamentSpatieLaravelBackupPlugin::make(),
+               // FilamentSpatieLaravelBackupPlugin::make(),
             //    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'nl']),
               //  \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
                 )
@@ -96,7 +96,7 @@ class AdminPanelProvider extends PanelProvider
                 //     ->navigationIcon('heroicon-o-photo')
                 //     ->navigationGroup('Media')
                 //     ->navigationCountBadge(),
-                 FilamentExceptionsPlugin::make(),
+               //  FilamentExceptionsPlugin::make(),
              
                // FilamentJobsMonitorPlugin::make()
                 // ->navigationCountBadge(),
@@ -121,8 +121,8 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label('Beheer'),
                     NavigationGroup::make()
-                    ->label('Stamgegevens')
-                    ->collapsible(true),
+                    ->label('Stamgegevens'),
+                   // ->collapsible(true),
                     NavigationGroup::make()
                 ->label("Systeembeheer")    
                
