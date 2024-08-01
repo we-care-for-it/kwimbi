@@ -19,5 +19,5 @@ class objectSupplier extends Model implements Auditable
     ];
  
 
-    ///protected $appends = ['location_name'];
+    
 }
