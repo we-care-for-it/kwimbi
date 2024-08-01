@@ -17,7 +17,7 @@ class objectSupplier extends Model implements Auditable
     protected $fillable = [
         'name','address','zipcode','phonenumber','emailaddress','place','active'
     ];
-     
+ 
 
-   
+    ///protected $appends = ['location_name'];
 }
