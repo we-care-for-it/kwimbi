@@ -65,7 +65,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 //FilamentTimesheetsPlugin::make(),
-               // FilamentSpatieLaravelBackupPlugin::make(),
+                FilamentSpatieLaravelBackupPlugin::make(),
             //    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'nl']),
               //  \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
                 )
@@ -96,7 +96,7 @@ class AdminPanelProvider extends PanelProvider
                 //     ->navigationIcon('heroicon-o-photo')
                 //     ->navigationGroup('Media')
                 //     ->navigationCountBadge(),
-               //  FilamentExceptionsPlugin::make(),
+                 FilamentExceptionsPlugin::make(),
              
                // FilamentJobsMonitorPlugin::make()
                 // ->navigationCountBadge(),
@@ -121,8 +121,8 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label('Beheer'),
                     NavigationGroup::make()
-                    ->label('Stamgegevens'),
-                   // ->collapsible(true),
+                    ->label('Stamgegevens')
+                    ->collapsible(true),
                     NavigationGroup::make()
                 ->label("Systeembeheer")    
                
@@ -141,12 +141,18 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
-             ->pages([
-                Pages\Dashboard::class,
-            ])
+            //  ->pages([
+            //     Pages\Dashboard::class,
+            // ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+             
+                \App\Filament\Resources\DashboardResource\Widgets\CustomersCount::class,
+
+                \App\Filament\Resources\DashboardResource\Widgets\LatestLocations::class,
+
+                \App\Filament\Resources\DashboardResource\Widgets\LatestObjects::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,
