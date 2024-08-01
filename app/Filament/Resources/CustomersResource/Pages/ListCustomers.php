@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListCustomers extends ListRecords
 {
     protected static string $resource = CustomersResource::class;
-    protected static ?string $title = 'Relatie';
+    protected static ?string $title = 'Relatie - Overzicht';
     protected function getHeaderActions(): array
     {
         return [

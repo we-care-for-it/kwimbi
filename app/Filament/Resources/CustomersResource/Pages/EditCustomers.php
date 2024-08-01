@@ -9,7 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditCustomers extends EditRecord
 {
     protected static string $resource = CustomersResource::class;
-
+    protected static ?string $title = 'Relatie - Bewerken';
     protected function getHeaderActions(): array
     {
         return [

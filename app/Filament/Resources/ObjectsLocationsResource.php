@@ -229,6 +229,7 @@ Select::make('building_type_id')
             'index' => Pages\ListObjectsLocations::route('/'),
            // 'create' => Pages\CreateObjectsLocations::route('/create'),
             'edit' => Pages\EditObjectsLocations::route('/{record}/edit'),
+            'view' => Pages\ViewObjectsLocations::route('/{record}'),
         ];
     }
 }
