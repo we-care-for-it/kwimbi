@@ -9,4 +9,5 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewObjectsLocations extends ViewRecord
 {
     protected static string $resource = ObjectsLocationsResource::class;
+    protected static ?string $title = 'Locatie - Bekijken';
 }

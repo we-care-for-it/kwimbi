@@ -9,7 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditObjectsLocations extends EditRecord
 {
     protected static string $resource = ObjectsLocationsResource::class;
-
+    protected static ?string $title = 'Locatie - Bewerken';
     protected function getHeaderActions(): array
     {
         return [

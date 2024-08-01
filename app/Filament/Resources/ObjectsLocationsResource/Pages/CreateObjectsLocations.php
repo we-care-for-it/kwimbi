@@ -10,7 +10,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateObjectsLocations extends CreateRecord
 {
     protected static string $resource = ObjectsLocationsResource::class;
-
+    protected static ?string $title = 'Locatie - Toevoegen';
 
     protected function getSteps(): array
     {
