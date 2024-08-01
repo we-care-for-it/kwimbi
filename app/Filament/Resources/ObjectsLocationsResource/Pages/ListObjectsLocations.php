@@ -9,11 +9,11 @@ use Filament\Resources\Pages\ListRecords;
 class ListObjectsLocations extends ListRecords
 {
     protected static string $resource = ObjectsLocationsResource::class;
-
+    protected static ?string $title = 'Locatie - Overzicht';
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Toevoegen'),
         ];
     }
 }

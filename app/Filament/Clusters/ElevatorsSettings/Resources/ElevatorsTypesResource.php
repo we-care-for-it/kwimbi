@@ -71,6 +71,7 @@ class ElevatorsTypesResource extends Resource
 
         ])
         ->actions([
+            Tables\Actions\ViewAction::make(),
            Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::Medium),
            Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
@@ -92,6 +93,7 @@ class ElevatorsTypesResource extends Resource
     {
         return [
             'index' => Pages\ManageElevatorsTypes::route('/'),
+            'view' => Pages\ViewElevatorsTypes::route('/{record}'),
         ];
     }
 }

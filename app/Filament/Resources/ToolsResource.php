@@ -53,25 +53,25 @@ class ToolsResource extends Resource
 
 
      
-protected static ?string $permissionId = 'access.tools';
+// protected static ?string $permissionId = 'access.tools';
  
-protected static ?string $descriptionPermission = 'Het beheren van gereedschappen';
+// protected static ?string $descriptionPermission = 'Het beheren van gereedschappen';
 
 
 
-    protected static ?array $subPermissions = [
-        'access.tools.index' => 'Overzicht bekijen',
-        'access.tools.create' => 'Toevoegen',
-        'access.tools.edit' => 'Wijzigen',
-        'access.tools.delete' => 'Verwijderen',
-    ];
+//     protected static ?array $subPermissions = [
+//         'access.tools.index' => 'Overzicht bekijen',
+//         'access.tools.create' => 'Toevoegen',
+//         'access.tools.edit' => 'Wijzigen',
+//         'access.tools.delete' => 'Verwijderen',
+//     ];
      
-    public static function canAccess(array $parameters = []): bool
-    {
+//     public static function canAccess(array $parameters = []): bool
+//     {
 
-        return hexa()->can(static::$permissionId);
-       // return hexa()->can('access.tools.index');
-    }
+//         return hexa()->can(static::$permissionId);
+//        // return hexa()->can('access.tools.index');
+//     }
 
 
 
@@ -301,12 +301,12 @@ protected static ?string $descriptionPermission = 'Het beheren van gereedschappe
 
                                         ])
                                             ->actions([Tables\Actions\EditAction::make()
-                                            ->visible(hexa()->can('access.tools.create'))
+                                           // ->visible(hexa()->can('access.tools.create'))
                                             ->modalHeading('Wijzigen')
-                                            ->visible(hexa()->can('access.tools.edit'))
+                                            //->visible(hexa()->can('access.tools.edit'))
                                             ->modalWidth(MaxWidth::FiveExtraLarge) , Tables\Actions\DeleteAction::make()
                                             ->modalHeading('Verwijderen')          
-                                            ->visible(hexa()->can('access.tools.delete')) ,
+                                         //   ->visible(hexa()->can('access.tools.delete')) ,
 
                                         ])
                                             ->bulkActions([

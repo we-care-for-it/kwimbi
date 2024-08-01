@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Filament\Clusters\ElevatorsSettings\Resources;
+namespace App\Filament\Resources;
 
-use App\Filament\Clusters\ElevatorsSettings;
-use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectSuppliersResource\Pages;
-use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectSuppliersResource\RelationManagers;
-use App\Models\objectSupplier;
+use App\Filament\Resources\CustomersResource\Pages;
+use App\Filament\Resources\CustomersResource\RelationManagers;
+use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,17 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ObjectSuppliersResource extends Resource
+class CustomersResource extends Resource
 {
-    protected static ?string $model = objectSupplier ::class;
-
+    protected static ?string $model = Customer::class;
+    protected static ?string $title = 'Relaties';
+ 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $cluster = ElevatorsSettings::class;
-
-    protected static ? string $navigationGroup = 'Extern';
-    protected static ? string $navigationLabel = 'Leveranciers';
-
 
     public static function form(Form $form): Form
     {
@@ -117,7 +111,7 @@ class ObjectSuppliersResource extends Resource
  
 
                     Tables\Columns\TextColumn::make('zipcode')->state(
-                        function (objectSupplier $rec) {
+                        function (Customer $rec) {
                           return $rec->zipcode . " " . $rec->place;
                          }),
  
@@ -142,8 +136,7 @@ class ObjectSuppliersResource extends Resource
                 Tables\Filters\TrashedFilter::make(), 
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->modalHeading('Wijzigen'),
-                Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+                 Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
                 Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
      
             ])
@@ -161,14 +154,14 @@ class ObjectSuppliersResource extends Resource
             //
         ];
     }
+   
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListObjectSuppliers::route('/'),
-            'create' => Pages\CreateObjectSuppliers::route('/create'),
-            'edit' => Pages\EditObjectSuppliers::route('/{record}/edit'),
-  'view' => Pages\ViewObjectSuppliers::route('/{record}'),
+            'index' => Pages\ListCustomers::route('/'),
+          //  'create' => Pages\CreateCustomers::route('/create'),
+            'edit' => Pages\EditCustomers::route('/{record}/edit'),
         ];
     }
 }

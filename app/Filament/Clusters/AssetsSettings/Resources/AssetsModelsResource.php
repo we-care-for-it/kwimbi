@@ -97,7 +97,9 @@ Select::make('category_id')
         return $table
             ->columns([
 
-                
+                ImageColumn::make('image')
+                ->label('Logo')
+                ->width(100) ,
           
 
 

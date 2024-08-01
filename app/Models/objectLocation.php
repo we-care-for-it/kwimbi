@@ -60,6 +60,7 @@ class objectLocation extends Model implements Auditable
     ,'province'
     ,'municipality'
     ,'housenumber',
+'image',
  
     'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
 
@@ -68,6 +69,13 @@ class objectLocation extends Model implements Auditable
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function objectbuildingtype()
+    {
+        return $this->belongsTo(objectBuildingType::class,'building_type_id','id');
+    }
+
+
 
     public function managementcompany()
     {
