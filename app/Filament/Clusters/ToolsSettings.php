@@ -20,12 +20,12 @@ class ToolsSettings extends Cluster
      
     protected static ?string $permissionId = 'access.masterdata.tools';
  
-    protected static ?string $descriptionPermission = 'Beheer van leveranciers, Categorieën,Merken, Types, Keuringsbedrijven en methodes, ';
+    protected static ?string $descriptionPermission = ', ';
     
     
     
         protected static ?array $subPermissions = [
-            'access.masterdata.tools' => 'Beheer van gereedschappenllll',
+            'access.masterdata.tools' => 'Beheer van leveranciers, Categorieën,Merken, Types, Keuringsbedrijven en methodes',
   
         ];
          
