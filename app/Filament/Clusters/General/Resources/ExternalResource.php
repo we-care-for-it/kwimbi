@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\General\Resources;
 use App\Filament\Clusters\General;
 use App\Filament\Clusters\General\Resources\ExternalResource\Pages;
 use App\Filament\Clusters\General\Resources\ExternalResource\RelationManagers;
-use App\Models\External;
+use App\Models\external;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -33,7 +33,7 @@ use Filament\Forms\Components\FileUpload;
 
 class ExternalResource extends Resource
 {
-    protected static ?string $model = External::class;
+    protected static ?string $model = external::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-link';
 
