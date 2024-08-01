@@ -3,7 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ToolsResource\Pages;
 use App\Filament\Resources\ToolsResource\RelationManagers;
-use App\Models\Tools;
+use App\Models\tools;
 use App\Models\toolsBrand;
 use App\Models\toolsCategory;
 
@@ -41,7 +41,7 @@ use Filament\Support\Enums\FontWeight;
 
 class ToolsResource extends Resource
 {
-    protected static ? string $model = Tools::class;
+    protected static ? string $model = tools::class;
 
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
 
