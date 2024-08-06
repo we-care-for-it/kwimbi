@@ -48,6 +48,8 @@ class AdminPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+
+        
         ->breadcrumbs(false)
           //  ->sidebarCollapsibleOnDesktop()
        // ->topNavigation()
@@ -65,7 +67,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
                 //FilamentTimesheetsPlugin::make(),
-                FilamentSpatieLaravelBackupPlugin::make(),
+        //        FilamentSpatieLaravelBackupPlugin::make(),
             //    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'nl']),
               //  \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()
                 )
@@ -80,7 +82,7 @@ class AdminPanelProvider extends PanelProvider
                         ->directory('images/swisnl/filament-backgrounds/elevators')
                 ),
              //   TranslationManagerPlugin::make(),
-                FilamentAuthenticationLogPlugin::make(),
+             //   FilamentAuthenticationLogPlugin::make(),
           //  FilamentEnvEditorPlugin::make(),
                 BreezyCore::make()
                     ->myProfile(
@@ -123,6 +125,11 @@ class AdminPanelProvider extends PanelProvider
                     NavigationGroup::make()
                     ->label('Stamgegevens')
                     ->collapsible(true),
+
+                    NavigationGroup::make()
+                    ->label('Setting & Access'),
+                    
+
                     NavigationGroup::make()
                 ->label("Systeembeheer")    
                
@@ -132,7 +139,7 @@ class AdminPanelProvider extends PanelProvider
      
                     ->plugins([
                         HexaLite::make(),
-                    ])
+                   ])
         
             ->colors([
                 'primary' => Color::Blue,
