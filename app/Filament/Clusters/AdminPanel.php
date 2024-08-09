@@ -10,5 +10,9 @@ class AdminPanel extends Cluster
      
      protected static ? string $navigationGroup = 'Systeembeheer';
      protected static ? string $navigationLabel = 'Administrator';
+     public static function shouldRegisterNavigation(): bool
+{
+    return false;
+}
 }
  

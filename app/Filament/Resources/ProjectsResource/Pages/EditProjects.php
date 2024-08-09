@@ -16,4 +16,23 @@ class EditProjects extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+
+    public function getRelationManagers(): array
+    {
+        return [];
+    }
+
+
+    public function getHeading(): string
+    {
+        return 'Wijzig: ' . $this->getRecord()->name;
+    }
+    
 }

@@ -6,7 +6,9 @@ use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
- 
+use Filament\Facades\Filament;
+use Filament\Navigation\NavigationItem;
+
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
  
@@ -41,6 +43,19 @@ class AppServiceProvider extends ServiceProvider
           FilamentAsset::register([
             Css::make('custom', __DIR__ . '/../../resources/css/custom.css'),
         ]);
+
+        
+// Filament::serving(function () {
+//     Filament::registerNavigationItems([
+//         NavigationItem::make('Basisgegevens')
+//             ->url('/admin/settings')
+//             ->icon('heroicon-o-cog-6-tooth')
+//             ->activeIcon('heroicon-s-cog-6-tooth')
+ 
+//             ->sort(3),
+//     ]);
+// });
+
         
         
         

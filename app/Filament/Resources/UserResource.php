@@ -19,7 +19,11 @@ class UserResource extends Resource
      * The resource model.
      */
     protected static ?string $model = User::class;
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+     
     /**
      * The resource navigation icon.
      */

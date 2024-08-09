@@ -37,7 +37,14 @@ class ProjectsResource extends Resource
 {
     protected static ?string $model = Project::class;
     protected static ?string $title = 'Projecten';
+    protected static ? string $navigationLabel = 'Projecten';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $isLazy = false;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -115,7 +122,7 @@ class ProjectsResource extends Resource
 
 
    
-Select::make('status_id')->label('Status')->columnSpan('full')
+Select::make('status_id')->label('Status')->columnSpan('full')       ->required() 
 ->options(projectStatus::all()->pluck('name', 'id')),
 
 
@@ -182,7 +189,7 @@ Select::make('customer_id')->label('Relatie')->columnSpan('full')
                 Tables\Actions\BulkActionGroup::make([
                  //   Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view('partials.empty-state'));;
     }
 
     public static function getRelations(): array

@@ -58,11 +58,14 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->profile()
-        //   ->spa()
+       ->spa()
+       ->databaseTransactions()
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->databaseNotifications()
+
             ->maxContentWidth(MaxWidth::Full)
             ->plugin(new Lockscreen())  // <- Add this
-
+            ->unsavedChangesAlerts()
        // ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
@@ -115,20 +118,20 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 NavigationGroup::make()
                 ->label("Objecten") 
-       
+           
                 ->collapsible(false)
                 ->extraSidebarAttributes(['class' => 'featured-sidebar-group']),
     //            ->extraTopbarAttributes(['class' => 'featured-topbar-group']),
         
-                NavigationGroup::make()
-                    ->label('Beheer'),
-                    NavigationGroup::make()
-                    ->label('Stamgegevens')
-                    ->collapsible(true),
+          
+        
+            
+          
 
                     NavigationGroup::make()
                     ->label('Setting & Access'),
-                    
+          
+
 
                     NavigationGroup::make()
                 ->label("Systeembeheer")    
