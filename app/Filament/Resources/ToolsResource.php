@@ -300,12 +300,15 @@ class ToolsResource extends Resource
                                             ->pluck('name', 'id')) ,
 
                                         ])
-                                            ->actions([Tables\Actions\EditAction::make()
+                                            ->actions([
+                                                
+                                                Tables\Actions\ViewAction::make(),
+                                                Tables\Actions\EditAction::make() 
+                                       
                                            // ->visible(hexa()->can('access.tools.create'))
                                             ->modalHeading('Wijzigen')
                                             //->visible(hexa()->can('access.tools.edit'))
-                                            ->modalWidth(MaxWidth::FiveExtraLarge) , Tables\Actions\DeleteAction::make()
-                                            ->modalHeading('Verwijderen')          
+                                            ->modalWidth(MaxWidth::SevenExtraLarge) , 
                                          //   ->visible(hexa()->can('access.tools.delete')) ,
 
                                         ])
@@ -328,7 +331,11 @@ class ToolsResource extends Resource
                                         public static function getPages():
                                             array
                                             {
-                                                return ['index' => Pages\ListTools::route('/') , 'create' => Pages\CreateTools::route('/create') , 'edit' => Pages\EditTools::route('/{record}/edit') , ];
+                                                return ['index' => Pages\ListTools::route('/') ,
+                                                'view' => Pages\ViewTools::route('/{record}') , 
+                                           //     'create' => Pages\CreateTools::route('/create') , 
+                                               // 'edit' => Pages\EditTools::route('/{record}/edit') 
+                                               ];
                                             }
                                         }
                                         

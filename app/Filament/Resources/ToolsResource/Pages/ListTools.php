@@ -13,7 +13,7 @@ class ListTools extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen')//->visible(hexa()->can('access.tools.create')) ,
+            Actions\CreateAction::make()->icon('heroicon-m-plus')->label('Toevoegen'),
         ];
     }
 }

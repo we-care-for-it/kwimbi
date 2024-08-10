@@ -13,12 +13,25 @@ class EditTools extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make()     ->visible(hexa()->can('access.tools.delete')),
+            Actions\DeleteAction::make(),
         ];
     }
 
+
     protected function getRedirectUrl(): string
-{
-return $this->getResource()::getUrl('index');
-}
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+
+    public function getRelationManagers(): array
+    {
+        return [];
+    }
+
+
+    public function getHeading(): string
+    {
+        return 'Wijzig: ' . $this->getRecord()->name;
+    }
 }

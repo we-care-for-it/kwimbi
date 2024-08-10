@@ -62,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
        ->databaseTransactions()
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->databaseNotifications()
-
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->maxContentWidth(MaxWidth::Full)
             ->plugin(new Lockscreen())  // <- Add this
             ->unsavedChangesAlerts()
