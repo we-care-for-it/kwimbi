@@ -116,7 +116,7 @@ class ToolsResource extends Resource
             
 
             Forms\Components\TextInput::make('serial_number')
-            ->label('Serienummer') , 
+            ->label('Serienummer')->required() , 
             
 
 
@@ -131,7 +131,7 @@ class ToolsResource extends Resource
             ]) ,
 
             Select::make('brand_id')
-                ->label('Merk')
+                ->label('Merk')->required()
 
                 ->relationship(name:
                 'brand', titleAttribute:
@@ -193,11 +193,11 @@ class ToolsResource extends Resource
     
                 ]),
                 
-                Select::make('employee_id')
-            ->label('Medewerker')
-            ->options(User::all()
-            ->pluck('name', 'id'))
-            ->searchable(),
+            //     Select::make('employee_id')
+            // ->label('Medewerker')
+            // ->options(User::all()
+            // ->pluck('name', 'id'))
+            // ->searchable(),
 
             Select::make('inspection_company_id')
             ->label('Keuringsinstantie')
@@ -252,6 +252,7 @@ class ToolsResource extends Resource
                                         TextColumn::make('name')
                                         ->searchable()
                                         ->label('Naam'),
+                                        // ->description(fn (tools $record): string => $record?->description),
 
                                         TextColumn::make('serial_number')
                                             ->searchable()
@@ -276,12 +277,12 @@ class ToolsResource extends Resource
                                             ->searchable()
                                             ->label('Type / Model') ,
 
-                                        TextColumn::make('employee.name')
-                                            ->searchable()
-                                            ->label('Gebruiker')
-                                            ->badge()
+                                        // TextColumn::make('employee.name')
+                                        //     ->searchable()
+                                        //     ->label('Gebruiker')
+                                        //     ->badge()
 
-                                            ->sortable() ,
+                                        //     ->sortable() ,
 
                                         ])
                                             ->filters([SelectFilter::make('brand_id')

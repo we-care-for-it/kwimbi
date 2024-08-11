@@ -5,7 +5,9 @@ namespace App\Filament\Resources\ToolsResource\Pages;
 use App\Filament\Resources\ToolsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
-
+use Filament\Actions\Action;
+use Filament\Support\Enums\MaxWidth;
+ 
 class ViewTools extends ViewRecord
 {
     protected static string $resource = ToolsResource::class;
@@ -14,17 +16,22 @@ class ViewTools extends ViewRecord
     array
     {
         return [
-            Actions\EditAction::make()->icon('heroicon-m-pencil-square'),
+            Action::make('back')
+            ->url(route('filament.admin.resources.tools.index'))
+            ->label('Terug naar overzicht') 
+            ->link()
+            ->color('gray'),
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')  ->modalWidth(MaxWidth::SevenExtraLarge),
             Actions\DeleteAction::make()->icon('heroicon-m-trash')
         ];
     }
     public function getHeading(): string
     {
-        return 'Wijzig: ' . $this->getRecord()->name;
+        return $this->getRecord()->name;
     }
     public function getTitle(): string
     {
-        return 'Wijzig: ' . $this->getRecord()->name;
+        return $this->getRecord()->name;
     }
 
 

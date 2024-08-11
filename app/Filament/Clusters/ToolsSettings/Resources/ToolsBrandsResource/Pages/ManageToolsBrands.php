@@ -6,6 +6,8 @@ use App\Filament\Clusters\ToolsSettings\Resources\ToolsBrandsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
+use Filament\Actions\Action;
+
 class ManageToolsBrands extends ManageRecords
 {
     protected static string $resource = ToolsBrandsResource::class;
@@ -14,6 +16,11 @@ class ManageToolsBrands extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+            ->url(route('filament.admin.resources.tools.index'))
+            ->label('Terug naar gereedschappen') 
+            ->link()
+            ->color('gray'),
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
             Actions\CreateAction::make()->modalWidth(MaxWidth::ExtraLarge)->label('Toevoegen')->modalHeading('Toevoegen'),

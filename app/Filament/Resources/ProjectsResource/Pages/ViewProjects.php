@@ -4,7 +4,7 @@ namespace App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
-
+use Filament\Actions\Action;
 class ViewProjects extends ViewRecord
 {
     protected static string $resource = ProjectsResource::class;
@@ -14,6 +14,11 @@ class ViewProjects extends ViewRecord
         array
         {
             return [
+                Action::make('back')
+                ->url(route('filament.admin.resources.tools.index'))
+                ->label('Terug naar overzicht') 
+                ->link()
+                ->color('gray'),
                 Actions\EditAction::make()->icon('heroicon-m-pencil-square'),
                 Actions\DeleteAction::make()->icon('heroicon-m-trash')
             ];
@@ -27,11 +32,11 @@ class ViewProjects extends ViewRecord
 
         public function getHeading(): string
         {
-            return 'Wijzig: ' . $this->getRecord()->name;
+            return $this->getRecord()->name;
         }
         public function getTitle(): string
         {
-            return 'Wijzig: ' . $this->getRecord()->name;
+            return $this->getRecord()->name;
         }
  
 

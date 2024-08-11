@@ -58,6 +58,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->profile()
+         
+            
        ->spa()
        ->databaseTransactions()
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)

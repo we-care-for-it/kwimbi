@@ -8,7 +8,8 @@ use  Illuminate\Support\Facades\Schema;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationItem;
-
+use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
+use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
  
@@ -57,6 +58,16 @@ class AppServiceProvider extends ServiceProvider
 // });
 
         
+
+ 
+// FilamentSettingsHub::register([
+//     SettingHold::make()
+//         ->label('Projecten')
+//         ->icon('heroicon-o-globe-alt')
+//         ->route('filament.admin.workorder-settings')
+//         ->description(__('Uursoorten, Foutmeldingen & Oplossingen'))
+//         ->group('ss'),
+// ]); 
         
         
       Schema::defaultStringLength(191);

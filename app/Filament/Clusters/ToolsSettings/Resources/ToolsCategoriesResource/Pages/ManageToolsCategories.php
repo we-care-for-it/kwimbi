@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ToolsSettings\Resources\ToolsCategoriesResource\
 use App\Filament\Clusters\ToolsSettings\Resources\ToolsCategoriesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
-
+use Filament\Actions\Action;
 use Filament\Support\Enums\MaxWidth;
 
 class ManageToolsCategories extends ManageRecords
@@ -18,6 +18,11 @@ class ManageToolsCategories extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+            ->url(route('filament.admin.resources.tools.index'))
+            ->label('Terug naar gereedschappen') 
+            ->link()
+            ->color('gray'),
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     

@@ -5,7 +5,7 @@ namespace App\Filament\Resources\ToolsResource\Pages;
 use App\Filament\Resources\ToolsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-
+use Filament\Actions\Action;
 class EditTools extends EditRecord
 {
     protected static string $resource = ToolsResource::class;
@@ -13,6 +13,12 @@ class EditTools extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+
+            Action::make('back')
+            ->url(route('filament.admin.resources.tools.index'))
+            ->label('Afbreken') 
+            ->link()
+            ->color('gray'),
             Actions\DeleteAction::make(),
         ];
     }
@@ -32,6 +38,6 @@ class EditTools extends EditRecord
 
     public function getHeading(): string
     {
-        return 'Wijzig: ' . $this->getRecord()->name;
+        return $this->getRecord()->name;
     }
 }
