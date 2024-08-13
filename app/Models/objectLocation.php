@@ -62,7 +62,7 @@ class objectLocation extends Model implements Auditable
     ,'housenumber',
 'image',
  
-    'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
+    'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id'];
 
   
     public function customer()
@@ -79,7 +79,7 @@ class objectLocation extends Model implements Auditable
 
     public function managementcompany()
     {
-        return $this->hasOne(ManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
     }
 
     public function objects()

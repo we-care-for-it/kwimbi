@@ -5,7 +5,7 @@ namespace App\Filament\Resources\ObjectsLocationsResource\Pages;
 use App\Filament\Resources\ObjectsLocationsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-
+use Filament\Support\Enums\MaxWidth;
 class ListObjectsLocations extends ListRecords
 {
     protected static string $resource = ObjectsLocationsResource::class;
@@ -13,7 +13,7 @@ class ListObjectsLocations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen'),
+            Actions\CreateAction::make()->icon('heroicon-m-plus')->label('Toevoegen')->modalWidth(MaxWidth::SevenExtraLarge)
         ];
     }
 }

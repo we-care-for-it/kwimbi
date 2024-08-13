@@ -23,7 +23,7 @@ return [
         //     'wsHost' => env('VITE_PUSHER_HOST'),
         //     'wsPort' => env('VITE_PUSHER_PORT'),
         //     'wssPort' => env('VITE_PUSHER_PORT'),
-        //     'authEndpoint' => '/api/v1/broadcasting/auth',
+        //     'authEndpoint' => '/broadcasting/auth',
         //     'disableStats' => true,
         //     'encrypted' => true,
         //     'forceTLS' => true,
@@ -41,7 +41,6 @@ return [
     |
     */
 
-    
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
 
     /*

@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Grid;
 
 class CustomersResource extends Resource
 {
@@ -31,60 +32,25 @@ class CustomersResource extends Resource
         return $form
         ->schema([
 
+            Forms\Components\Section::make()
+            ->schema([
+    
+                Forms\Components\TextInput::make('name')
+                ->label('Relatie naam')
+                ->maxLength(255) ,
+    
+            ]),
+
+  
+        ]);
+
+   
+               
+
+            }
+
+
             
-            Forms\Components\Section::make()
-                ->schema([
-                   
-                 
-                    Forms\Components\TextInput::make('name')
-                    ->label('Naam')
-                        ->maxLength(255)
-                        ->required(),
-
-                    Forms\Components\TextInput::make('zipcode')
-                     
-                        ->label('Postcode')
-                        ->maxLength(255),   
-                      
-
-                    Forms\Components\TextInput::make('place')
-                    ->label('Plaats')
-                        ->maxLength(255),
-
-                
-                        Forms\Components\TextInput::make('address')
-                        ->label('Adres')
-                        ->maxLength(255),
-                  
-                       // ->content(fn (Customer $record): ?string => $record->updated_at?->diffForHumans()),
-                ])
-                ->columnSpan(['lg' => 2]),
-              //  ->hidden(fn (?Customer $record) => $record === null),
-
-
-            Forms\Components\Section::make()
-                ->schema([
-
-                    Forms\Components\TextInput::make('emailaddress')
-                    ->email()
-                    ->label('E-mailadres')   ->columnSpan('full') 
-
-                    ->maxLength(255),
-                   
-                    Forms\Components\TextInput::make('phonenumber')
-                    ->label('Telefoonnummer')   ->columnSpan('full')
-
-                    ->maxLength(255),
-              
-
-                    
-                ])
-                ->columns(2)
-          ->columnSpan(['lg' => 1]),
-
-        ])
-        ->columns(3);
-    }
 
     public static function table(Table $table): Table
     {
@@ -157,7 +123,7 @@ class CustomersResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\LocationsRelationManager::class,
         ];
     }
    

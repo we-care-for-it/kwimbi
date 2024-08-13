@@ -28,5 +28,9 @@ class customer extends Model implements Auditable
         'name','address','zipcode','phonenumber','emailaddress','place','phonenumber','slug'
     ];
 
-
+  
+    public function locations()
+    {
+        return $this->hasMany(objectLocation::class,'customer_id','id');
+    }
 }

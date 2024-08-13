@@ -36,7 +36,7 @@ class Elevator extends Model implements Auditable
 {
     use SoftDeletes;
 
-public $table = "objects";
+public $table = "elevators";
  
     use \OwenIt\Auditing\Auditable;
  
