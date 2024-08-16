@@ -163,7 +163,7 @@ return [
         /*
          * Application Service Providers...
          */
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+      //  Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -172,7 +172,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+      //  Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
 
     ])->toArray(),
@@ -189,7 +189,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-      'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
+    //  'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ])->toArray(),
 
 ];
