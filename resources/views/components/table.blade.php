@@ -9,9 +9,12 @@
 --}}
 
 
-    <table class="table  table-hover table-striped">
-       <thead class= "bg-light">
-            <tr style = "text-align: left">
+
+<div class="table   table-hover">
+          <div id="datatable_wrapper" class="dataTables_wrapper no-footer"> 
+<table class="table   table-thead-bordered card-table dataTable no-footer">
+<thead class="thead-light">
+            <tr>
                 {{ $head }}
             </tr>
         </thead>
@@ -20,3 +23,4 @@
             {{ $body }}
         </tbody>
     </table>
+</div></div>

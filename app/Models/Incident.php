@@ -18,7 +18,7 @@ class Incident extends Model  implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['internalmessage','contactperson_address','contactperson','contactperson_phonenumber','stand_still','status_id','description','subject','document','report_date_time'];
+    protected $fillable = ['contactperson_address','contactperson','contactperson_phonenumber','stand_still','status_id','description','subject','document'];
   //  protected $appends = ['address'];
 
 
@@ -59,9 +59,9 @@ class Incident extends Model  implements Auditable
 
 
 
-
+   
     public function replys()
     {
-        return $this->hasMany(IncidentReplies::class)->orderby('created_at', 'desc');
+        return $this->hasMany(IncidentReplies::class)->orderby('id', 'desc');
     }
 }

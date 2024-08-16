@@ -8,6 +8,6 @@
 -- Purchase here: https://tailwindui.com/
 --}}
 
-<tr  style ="cursor: pointer" class = "align-middle" {{ $attributes->merge(['class' => 'bg-white']) }}>
+<tr class="align-middle"  style ="cursor: pointer" {{ $attributes->merge(['class' => 'bg-white']) }}>
     {{ $slot }}
 </tr>
