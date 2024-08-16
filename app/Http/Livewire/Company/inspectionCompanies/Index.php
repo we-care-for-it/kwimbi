@@ -8,9 +8,8 @@ use Livewire\Component;
 
 
 //Models
-use App\Models\Address;
+ 
 use App\Models\inspectionCompany;
-use App\Models\Customer;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,9 +46,9 @@ class Index extends Component
     public $zipcode;
     public $place;
     public $emailaddress;
-    public $edit_id;
     public $customer;
-
+    public $edit_id;
+    public $email;
  
 
     public $filters = [
@@ -136,28 +135,26 @@ public function clear()
     $this->address =NULL;
     $this->zipcode =NULL;
     $this->place =NULL;;
- 
+    $this->email =NULL;;
 }
 
  
 public function save(){
    
 $this->validate();
-    $data = managementCompany::updateOrCreate(
+    $data = inspectionCompany::updateOrCreate(
         ['id' =>$this->edit_id],
         [
-            'name' => $this->name,
+            'name'  => $this->name,
             'place' => $this->place,
             'zipcode' => $this->zipcode,
             'name' => $this->name,
             'address' => $this->address,
-
-
+            'email' => $this->email,
         ]
     );
- 
 
-    $this->clear();
+    $this->clear(); 
     $this->dispatch('close-crud-modal');
     pnotify()->addWarning('Gegevens opgeslagen');
 
@@ -200,24 +197,19 @@ $this->validate();
 
     public function edit($id)
     {
-        $this->edit_id = $id;
-
-        $item = managementCompany::where('id', $id)->first();
+        $item = inspectionCompany::where('id', $id)->first();
         $this->address      = $item->address;
         $this->zipcode      = $item->zipcode;
         $this->place        = $item->place;
         $this->name         = $item->name;
         $this->place        = $item->place;
- 
- 
-
-
-
+        $this->email        = $item->email;
+        $this->edit_id      = $id;
     }
 
 
     public function delete($id){
-        $item=managementCompany::find($id);
+        $item=inspectionCompany::find($id);
         $item->delete();  
         $this->dispatch('close-crud-modal');
         pnotify()->addWarning('Gegevens verwijderd');

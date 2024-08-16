@@ -17,28 +17,13 @@
             
       </div>
             <div class = "pb-3">
-               <center> <img src="/storage/tenant/logo.png" style="width: 300px;" /> </center>
+               <center> <img src="/assets/img/LVA.webp" style="width: 300px;" /> </center>
 </div>
             <div class="mb-5">
              
             </div>
 
-            <!-- List Checked -->
-            <ul class="list-checked list-checked-lg list-checked-primary  ">
-              <li class="list-checked-item">
-                <span class="d-block fw-semibold mb-1">Gebouwbeheer</span>
-                Beheer de eigenschappen van de complexen
-              </li>
-
-              <li class="list-checked-item">
-                <span class="d-block fw-semibold  ">Projecten</span>
-              Maak projecten aan en koppel alle relevante informatie van de projecten op 1 plek
-              </li>
-              <li class="list-checked-item">
-                <span class="d-block fw-semibold mb-1">Liftbeheer</span>
-            Registeer Onderhoudsbeurten, Storingen en lift eigenschappen
-              </li>
-            </ul>
+       
 
             <div class="row justify-content-between mt-5 gx-3">  
             </div>  
@@ -84,8 +69,7 @@
 
 
                      <!-- <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    
                 </label>                      -->
 
                      <!-- End Form --> <!-- End Form Check --> 

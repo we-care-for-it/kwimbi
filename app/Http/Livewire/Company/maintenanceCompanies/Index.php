@@ -48,7 +48,7 @@ class Index extends Component
     public $emailaddress;
     public $edit_id;
     public $customer;
-
+    public $email;
  
 
     public $filters = [
@@ -134,7 +134,8 @@ public function clear()
     $this->name =NULL;
     $this->address =NULL;
     $this->zipcode =NULL;
-    $this->place =NULL;;
+    $this->place =NULL;
+    $this->email =NULL;
  
 }
 
@@ -150,6 +151,7 @@ $this->validate();
             'zipcode' => $this->zipcode,
             'name' => $this->name,
             'address' => $this->address,
+            'email' => $this->email,
 
 
         ]
@@ -209,6 +211,7 @@ $this->validate();
         $this->name         = $item->name;
         $this->place        = $item->place;
         $this->edit_id      = $item->id;
+        $this->email      = $item->email;
  
 
 

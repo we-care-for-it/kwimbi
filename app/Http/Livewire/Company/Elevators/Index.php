@@ -2,33 +2,37 @@
 namespace App\Http\Livewire\Company\Elevators;
 
 use Livewire\Component;
-
 use App\Models\Elevator;
 use App\Models\Customer;
 use App\Models\Management;
 use App\Models\Supplier;
-use App\Models\Location;
+use App\Models\Address;
+
 use App\Models\managementCompany;
+use Illuminate\Http\Request;
+
+
 use App\Models\Auth;
 use App\Models\inspectionCompany;
+
 use App\Models\maintenanceCompany;
 
-use Livewire\Attributes\Validate;
+
+
 
 //Exports
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ElevatorExport;
 
 use App\Http\Livewire\DataTable\WithSorting;
-use App\Http\Livewire\DataTable\WithBulkActions;
-use App\Http\Livewire\DataTable\WithCachedRows;
-use App\Http\Livewire\DataTable\WithPerPagePagination;
 
+use App\Http\Livewire\DataTable\WithBulkActions;
+//use App\Http\Livewire\DataTable\WithCachedRows;
+use App\Http\Livewire\DataTable\WithPerPagePagination;
 use Illuminate\Database\Eloquent\Builder;
 
 
 use Symfony\Component\HttpFoundation\Session\Session;
-
 use DB;
 use Bugsnag;
 
@@ -46,22 +50,8 @@ class index extends Component
     public $check_date_valid;
     public $remark;
     public $showAddModal;
-    public $edit_id;
-    public $supplier_id;
-    public $address_id;
-    public $inspection_company_id;
-    public $maintenance_company_id;
-    public $stopping_places;
-    public $carrying_capacity;
-    public $energy_label;
-    public $stretcher_elevator;
-    public $fire_elevator;
-    public $name;
-    public $speakconnection;
-    public $object_type_id;
-    public $status_id;
-    public $location_id;
-    public $locations_relation = [];
+
+
     public $countdocument = 0;
     public $insertMode = false;
 
@@ -70,12 +60,14 @@ class index extends Component
     public $sortDirection = 'asc';
     public $cntFilters;
 
+
     public $selectPage = false;
     public $selectAll = false;
     public $selected = [];
+    public $ifArchive = false;
 
     public $filters = [
-      'search'  => '',
+      'search' => '',
       'nobo_no' => '',
       'place' => '',
       'install_no' => '',
@@ -83,6 +75,8 @@ class index extends Component
       'maintenance_company_id' => [],
       'management_id' => [],
       'customer_id' => [],
+      'management_elevator' => ['0','1']      
+
     ];
 
     protected $queryString = [];
@@ -101,68 +95,79 @@ class index extends Component
 
         }
 
-    protected $rules = [
-        'customer_id' => 'required',
-        'location_id' => 'required',
-    ];
 
-    public function mount()
+    public function mount(Request $request)
     {
-      $this->status_id = 1;
+
+
+
        if (session()
             ->get('elevator_relation_search_filters'))
           {
             $this->filters = json_decode(session()->get('elevator_relation_search_filters'), true);
+
            }
+
            $this->countFilters();
+
     }
 
     public function sortBy($field)
     {
         $this->sortDirection = $this->sortField === $field ? $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc' : 'asc';
+
         $this->sortField = $field;
     }
 
     public function resetFilters()
     {
         $this->reset('filters');
+
         session()->pull('elevator_relation_search_filters', '');
-        $this->gotoPage(1);
+       //  $this->gotoPage(1);
 
         pnotify()->addSuccess('Alle filters zijn verwijderd');
-        return redirect(request()->header('Referer'));
+ return redirect(request()->header('Referer'));
+
     }
+
+
 
     function count_($array) {
         return is_array($array) ? count($array) : 0;
     }
-
     public function render()
     {
-      return view('livewire.company.elevators.index', [
+
+     
+        
+        return view('livewire.company.elevators.index', [
         'elevators' =>  $this->rows,
-        'customers'  => Customer::orderBy('name', 'asc')->get(),
+        'customers'             => Customer::select('id', 'name')->where('name', '!=', '')->orderBy('name', 'asc')->get(),
         'managements' => managementCompany::orderBy('name', 'asc')->get() ,
         'inspectionCompanys' => inspectionCompany::orderBy('name', 'asc')->get() ,
-        'suppliers' => Supplier::orderBy('name', 'asc')->get() ,
         'maintenanceCompanys' => maintenanceCompany::orderBy('name', 'asc')->get() ,
-        'locations' => Location::orderBy('name', 'asc')->get() ,
+        'addresses' => Address::orderBy('name', 'asc')->get() ,
        ]);
+   
     }
 
-    public function search_loctions_by_relation() {
-        $this->locations_relation =  Location::orderBy('name', 'asc')->get();
-    }
+ public function updatedFilters()
+     {
+   //   dd('s');
+   //
 
-    public function updatedFilters()
-    {
-      Session()->put('elevator_relation_search_filters', json_encode($this->filters));
-      $this->countFilters();
+//   $this->elevators = [];
+    Session()->put('elevator_relation_search_filters', json_encode($this->filters));
+    $this->countFilters();
+
+   //
+   //
     }
 
 
   public function countFilters(){
-      $this->cntFilters = ($this->filters['search'] ? 1 : 0) +($this->filters['place'] ? 1 : 0) + ($this->filters['management_id'] ? 1 : 0) + ($this->filters['maintenance_company_id'] ? 1 : 0)  + ($this->filters['inspection_company_id'] ? 1 : 0)   + ($this->filters['customer_id'] ? 1 : 0) ;
+    $this->cntFilters = $this->filters['search'] ? 1 : 0 +  $this->count_($this->filters['place']) +  $this->count_($this->filters['management_id']) +  $this->count_($this->filters['maintenance_company_id']) +  $this->count_($this->filters['inspection_company_id']) +  $this->count_($this->filters['customer_id']);
   }
 
   public function updatedSelectPage($value)
@@ -215,85 +220,101 @@ class index extends Component
          $filename = "Liften Export " . $extention;
          return (new ElevatorExport())
              ->forSelected($this->selected)
+             // ->forPriority($priority)
+             // ->forStatus($this->filter_status_id)
              ->download($filename, $type);
      }
 
-     public function getRowsQueryProperty()
+     public function getRowsQueryProperty(Request $request)
         {
-            $query = Elevator::when($this->filters['place'], function ($query)
-           {
-                     $query->whereHas('address', function ($query)
-                     {
-                          $query->whereIn('place', $this->filters['place']);
-                      });
-                  }) ->when($this->filters['customer_id'], function ($query)
-                 {
-                               $query->whereHas('address', function ($query)
-                             {
-
-                                $query->whereIn('customer_id', $this->filters['customer_id']);
-                               });
-
-              })  ->when($this->filters['management_id'], function ($query)
+        
+ 
+            $query = Elevator::whereNULL('archive')->when($this->filters['place'], function ($query)
+            {
+              $query->whereHas('address', function ($query)
               {
-                            $query->whereHas('address', function ($query)
-                          {
+                   $query->whereIn('place', $this->filters['place']);
+               })
 
-                             $query->whereIn('management_id', $this->filters['management_id']);
-                            });
+            
+            
+        
 
-           })
-                 ->when($this->filters['search'], function ($query)
-                     {
-                         $query->whereHas('address', function ($query)
-                         {
-                             $query->where('address', 'like', '%' . $this->filters['search'] . '%')
-                                 ->orwhere('place', 'like', '%' . $this->filters['search'] . '%')
-                                 ->orwhere('name', 'like', '%' . $this->filters['search'] . '%')
-                                 ->orwhere('unit_no', 'like', '%' . $this->filters['search'] . '%')
-                                 ->orwhere('nobo_no', 'like', '%' . $this->filters['search'] . '%');
-                         });;
+               ->when($this->filters['inspection_company_id'], function ($query)
+               {
+                $query->whereIn('inspection_company_id', $this->filters['inspection_company_id']);
+            });
+             }) ->when($request->archive=='archive', function ($query)
+             {
+             // $query->where('archive', 1);
+     
+           }) ->when($this->filters['customer_id'], function ($query)
+          {
+                        $query->whereHas('address', function ($query)
+                      {
 
-           });
+                         $query->whereIn('customer_id', $this->filters['customer_id']);
+                        });
+
+       })  ->when($this->filters['management_id'], function ($query)
+       {
+                     $query->whereHas('address', function ($query)
+                   {
+
+                      $query->whereIn('management_id', $this->filters['management_id']);
+                     });
+
+    })      
+          ->when($this->filters['search'], function ($query)
+              {
+                  $query->whereHas('address', function ($query)
+                  {
+                      $query->where('address', 'like', '%' . $this->filters['search'] . '%')
+                          ->orwhere('place', 'like', '%' . $this->filters['search'] . '%')
+                          ->orwhere('name', 'like', '%' . $this->filters['search'] . '%')
+                          ->orwhere('unit_no', 'like', '%' . $this->filters['search'] . '%')
+                          ->orwhere('nobo_no', 'like', '%' . $this->filters['search'] . '%');
+                  })
+
+                      ->OrWhere('description', 'like', '%' . $this->filters['search'] . '%');
+                  //  ->OrWhere('description', );
+
+
+         //         //
+         //
+          })  ;
+          
+
+ 
+                
+ 
+                 
+
+
+
 
             return $this->applySorting($query);
         }
 
         public function getRowsProperty()
         {
-          return $this->applyPagination($this->rowsQuery);
+            // return $this->cache(function () {
+                return $this->applyPagination($this->rowsQuery);
+            // });
+
+            
+    
+
         }
+
 
         public function resetPageAfterSearch(){
+ 
           $this->resetPage();
-        }
-
-         public function clear(){
+             // persist to database here
          }
+     
 
-         public function save(){
-            $this->validate();
-            $elevator = [
-                'name' => $this->name,
-                'stretcher_elevator' => $this->stretcher_elevator,
-                'fire_elevator' => $this->fire_elevator,
-                'energy_label' => $this->energy_label,
-                'speakconnection' => $this->speakconnection,
-                'stopping_places' => $this->stopping_places,
-                'nobo_no' => $this->nobo_no,
-                'unit_no' => $this->unit_no,
-                'object_type_id' => $this->object_type_id,
-                'status_id' => $this->status_id,
-                'maintenance_company_id' => $this->maintenance_company_id,
-                'construction_year' => $this->construction_year,
-                'inspection_company_id' =>$this->inspection_company_id,
-                'customer_id' =>$this->customer_id,
-                'address_id' =>$this->location_id,
-            ];
 
-            $insert_elevator = Elevator::create($elevator);
-            pnotify()->addSuccess('Lift toegevoegd');
-            return redirect('/elevator/show/' . $insert_elevator->id );
-         }
-
+        
 }

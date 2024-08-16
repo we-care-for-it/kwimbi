@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <center>
-              <img style="height: 69px; margin-top: 6px;" src="https://portal.lvaliftadvies.nl/assets/img/LVAliftadvies.webp">
+              <img style="height: 80px; margin-top: 6px;" src="/assets/img/liftadvies.png"">
             </center>
           </div>
           <div>
@@ -26,7 +26,7 @@
         <div class="d-flex justify-content-between">
           <div>
             <center>
-              <img style="height: 80px; margin-top: 6px;" src="/img/liftbeheerlogo.png">
+              <img style="height: 80px; margin-top: 6px;" src="/assets/img/liftbeheerlogo.png">
             </center>
           </div>
           <div>
@@ -105,7 +105,7 @@ config_incidentchart
       <div class="card" style = "border-radius: 10px;">
           <div class="card-body"  style = "padding-top: 5px">
             <div class="card-title">
-   Keuringen ( 2023 )
+   Keuringen ( 2024 )
             </div>
 
 
@@ -177,8 +177,10 @@ const inspections_error_data = {
        </div>
     </div>
    </div>
-
+   <h5>Storingen</h5>
  <div class="row" >
+
+
    <div class="col-md-2" >
      <div style="border-radius: 10px;  padding: 10px; background-color: white">
        <h5>Doorgestuurd naar ohb</h5>
@@ -222,3 +224,71 @@ const inspections_error_data = {
      </div>
    </div>
 </div>
+<br>
+ <div   style = "clear-fix"></div>
+
+
+ <h5>Keuringen</h5>
+
+
+<div class="row  " >
+
+<div class="col-md-2" >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white">
+       <h5>Goedgekeurd</h5>
+       <br>
+       <h2>{{count($elevators->where('inspection_status_id', 1))}}</h2>
+     </div>
+   </div>
+
+
+   <div class="col-md-2" >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white">
+       <h5>Goedgekeurd met acties</h5>
+       <br>
+       <h2>{{count($elevators->where('inspection_status_id', 2))}}</h2>
+     </div>
+   </div>
+
+
+   <div class="col-md-2" >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white">
+       <h5>Afgekeurd <small>({{count($elevators->where('inspection_status_id', 3))}})</small></h5>
+       <br>
+       <h2>
+        {{count($elevators->where('inspection_status_id', 3)) - count($elevators->where('inspection_status_id', 3)->where('management_elevator', 1))}}  
+    /
+  
+    <span class = "text-primary"  > <i class="fa-solid fa-user-gear fa-sm"> </i>   </span>
+     {{count($elevators->where('inspection_status_id', 3)->where('management_elevator', 1))}}
+
+    </h2>
+  </div>
+   </div>
+
+   <div class="col-md-2" >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white">
+       <h5>Niet afgerond</h5>
+       <br>
+       <h2>{{count($elevators->where('inspection_status_id', 4))}}</h2>
+     </div>
+   </div>
+
+   <div class="col-md-2" >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white">
+       <h5>Niet afgerond</h5>
+       <br>
+       <h2>{{count($elevators->where('inspection_status_id', 5))}}</h2>
+     </div>
+   </div>
+
+   <div class="col-md-2"  >
+     <div style="border-radius: 10px;  padding: 10px; background-color: white" style = "border 1px  dotted red ">
+       <h5>Stilstaand</h5>
+       <br>
+       <h2>{{count($elevator_standing_still)}}</h2>
+     </div>
+   </div>
+
+
+   </div>     </div>

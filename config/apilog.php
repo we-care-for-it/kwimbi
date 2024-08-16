@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('API_LOGS_DRIVER', 'db'),
+    'driver' => env('API_LOGS_DRIVER', 'file'),
 
     /*
     |--------------------------------------------------------------------------

@@ -40,7 +40,17 @@ class azureController extends Controller
             {
 
                 $affected = User::where('email', $user->user['mail'])
-                    ->update(['azure_token' => $user->token, 'name' => $user->name, 'login_type' => '1', 'last_login_at' => date('Y-m-d H:i:s') , ]);
+                    ->update(
+                        ['azure_token' => $user->token, 
+                        'name' => $user->name, 
+                        'login_type' => '1', 
+                        'last_login_at' => date('Y-m-d H:i:s')
+                      //  'profile_photo_path' => $user->getPhoto()
+
+                        
+
+
+                        , ]);
 
                 Auth::login($finduser);
 

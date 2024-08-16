@@ -17,45 +17,13 @@
         "laravel/tinker": "^2.8",
         "league/flysystem-sftp-v3": "^3.0",
         "livewire/livewire": "^3.0",
+        "owen-it/laravel-auditing": "^13.6",
         "php-flasher/flasher-laravel": "^1.15",
         "php-flasher/flasher-noty-laravel": "^1.15",
         "php-flasher/flasher-pnotify-laravel": "^1.15",
-        "silviolleite/laravelpwa": "^2.0",
+        "sentry/sentry-laravel": "*",
         "socialiteproviders/microsoft-azure": "^5.1",
-        "torann/geoip": "^3.0",
-    "althinect/filament-spatie-roles-permissions": "^2.2",
-    "awcodes/filament-curator": "^3.3",
-    "awcodes/filament-gravatar": "^2.0",
-    "awcodes/light-switch": "*",
-    "bezhansalleh/filament-exceptions": "^2.0",
-    "bezhansalleh/filament-language-switch": "^3.1",
-    "bezhansalleh/filament-shield": "*",
-    "croustibat/filament-jobs-monitor": "^2.4.0",
-    "diglactic/laravel-breadcrumbs": "^9.0",
-    "eightynine/filament-excel-import": "^3.0",
-    "geo-sot/filament-env-editor": "^0.0.4",
-    "hasnayeen/themes": "^3.0",
-    
-    "hexters/hexa-lite": "^1.0",
-    "jeffgreco13/filament-breezy": "^2.2",
-    "joaopaulolndev/filament-general-settings": "^1.0",
-    "kenepa/translation-manager": "^4.0",
-    "marjose123/filament-lockscreen": "^2.0",
-    "owen-it/laravel-auditing": "^13.6",
-    "pboivin/filament-peek": "^2.2",
-    "rmsramos/activitylog": "*",
-    "romanzipp/laravel-seo": "^2.6",
-    "shuvroroy/filament-spatie-laravel-backup": "^2.1",
-    "sinnbeck/markdom": "^2.0",
-    "spatie/laravel-sluggable": "^3.6",
-    "swisnl/filament-backgrounds": "^1.1",
-    "tapp/filament-authentication-log": "^3.1",
-    "tapp/filament-maillog": "^1.0",
-    "timwassenburg/filament-timesheets": "^1.0",
-    "tomatophp/filament-menus": "^1.0",
-    "tomatophp/filament-settings-hub": "^1.0",
-    "tomatophp/filament-users": "^1.0",
-    "z3d0x/filament-logger": "^0.7.0"
+        "spatie/laravel-sluggable": "^3.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -81,8 +49,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan filament:upgrade"
+            "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

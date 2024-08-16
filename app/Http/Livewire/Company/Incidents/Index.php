@@ -8,36 +8,30 @@ use App\Http\Livewire\DataTable\WithCachedRows;
 use App\Http\Livewire\DataTable\WithBulkActions;
 use App\Http\Livewire\DataTable\WithPerPagePagination;
 
-
+use App\Models\maintenanceCompany;
 use App\Models\Incident;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-
-
-
 class Index extends Component
 {
-
-    
-public $page_number = 0;
-public $cntFilters;
-public $sortField = 'id';
-public $sortDirection = 'desc';
-
-
     use WithPerPagePagination;
     use WithSorting;
     use WithBulkActions;
     use WithCachedRows;
 
 
+    public $page_number = 0;
+    public $cntFilters;
+    public $sortField = 'id';
+    public $sortDirection = 'desc';
 
     public $filters  =
     [
         'status_id'                    => '',
         'keyword'               => '',
+        'maintenance_company_id'               => '',
 
 
 
@@ -50,6 +44,8 @@ public $sortDirection = 'desc';
             'livewire.company.incidents.index',
             [
                 'items' => $this->rows,
+                'maintenanceCompanys' => maintenanceCompany::orderBy('name', 'asc')->get() ,
+   
             ]
         );
 
@@ -59,20 +55,11 @@ public $sortDirection = 'desc';
     }
 
 
-    public function countFilters(){
-        $this->cntFilters = ($this->filters['keyword'] ? 1 : 0) + ($this->filters['status_id'] ? 1 : 0)  ;
-      }
-    
- 
+
     public function updatedFilters()
     {
-    Session()->put('incident_search_filters', json_encode($this->filters));
-    $this->countFilters();
-
+        Session()->put('incident_search_filters', json_encode($this->filters));
     }
-
-
-  
 
 
     public function updated()
@@ -96,14 +83,12 @@ public $sortDirection = 'desc';
         $this->reset('filters');
         session()->pull('incident_search_filters', '');
         $this->gotoPage(1);
-
-        $this->countFilters();
     }
 
     public function getRowsQueryProperty()
     {
 
-        $query = Incident::orderby('report_date_time', 'DESC')
+        $query = Incident::where("status_id", "!=", 99)->where("status_id", "!=", 6)->orderby('report_date_time', 'DESC')
 
          ->when($this->filters['status_id'], function ($query) {
              $query->where('status_id', $this->filters['status_id']);
@@ -111,11 +96,19 @@ public $sortDirection = 'desc';
 
 
 
+         ->when($this->filters['maintenance_company_id'], function ($query) {
+            $query->whereHas('elevator.maintenancecompany', function ($query) {
+                $query->whereIn('id', $this->filters['maintenance_company_id']);
+           
+            });
+        })
 
+
+       
 
 
           ->when($this->filters['keyword'], function ($query) {
-              $query->whereHas('elevator.location', function ($query) {
+              $query->whereHas('elevator.address', function ($query) {
                   $query->where('address', 'like', '%' . $this->filters['keyword'] . '%')
                   ->orwhere('place', 'like', '%' . $this->filters['keyword'] . '%')
                   ->orwhere('name', 'like', '%' . $this->filters['keyword'] . '%')

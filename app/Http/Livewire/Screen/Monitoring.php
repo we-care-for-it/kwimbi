@@ -19,6 +19,8 @@ class Monitoring extends Component
     public $incident_cnt_by_status;
     public $cnt_managment_elevators;
     public $cnt_all_elevators;
+    public $elevators = [];
+    public $elevator_standing_still;
 
 
     public function inArray($array)
@@ -32,7 +34,8 @@ class Monitoring extends Component
     }
 
     public function load_data(){
-
+        $this->elevator_standing_still = Incident::where('status_id', '!=', '99') ->where('status_id', '!=', '6')->where('stand_still', 1)->orderby('report_date_time', 'desc')->get();
+  
       //Incidenten bij status
       $this->incident_cnt_by_status =  array(
           "1"  =>   Incident::where('status_id', 1)->get(),
@@ -48,8 +51,8 @@ class Monitoring extends Component
 
 
 
-          $this->cnt_all_elevators         =  Elevator::count();
-          $this->cnt_managment_elevators   =  Elevator::where('management_elevator', 1)->count();
+          $this->cnt_all_elevators         =  Elevator::whereNull('archive')->count();
+          $this->cnt_managment_elevators   =  Elevator::whereNull('archive')->where('management_elevator', 1)->count();
 
 
 
@@ -271,6 +274,7 @@ class Monitoring extends Component
     {
 
         $this->incidents_standstill  = Incident::get();
+        $this->elevators  = Elevator::get();
 
     }
 

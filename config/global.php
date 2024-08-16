@@ -12,13 +12,15 @@ return [
     'upload_incident_types' =>
         [
             '1' => 'Servicebon',
-            '2' => 'Offerte',
+            '4' => 'Offerte',
             '3' => 'Storingsmelding',
-            '4' => 'Bevestiging storing/ afsluiting ',
+            '2' => 'Bevestiging storing/ afsluiting ',
             '5' => 'Onderhoud periodiek/ storing',
             '6' => 'Site Servey ',
-            '7' => 'Opdrachtbon',
-            '8' => 'Algemeen bestand',
+            '8' => 'Geen ',
+            '7' => 'Onbekend',
+            '100' => 'Opdrachtbon',
+            '101' => 'Algemeen bestand',
         ],
 
     'upload_elevator_types' =>
@@ -31,6 +33,7 @@ return [
             '6' => 'Site Servey ',
             '7' => 'Servicebon ',
             '8' => 'Algemeen bestand',
+         '101' => 'Geen',
         ],
 
     'ticket_types' =>

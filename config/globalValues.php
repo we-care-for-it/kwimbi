@@ -33,6 +33,7 @@ return array(
         4 => "Elektrische", 
         5 => "Deuren",
         6 => "Bediening",
+       
     ],
 
     

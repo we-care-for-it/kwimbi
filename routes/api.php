@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  });
+    return $request->user();
+});
 
 
+Route::middleware('apilogger')->get('endpoints/chex', [App\Http\Controllers\Api\Endpoints\ChexController::class,'handleWebhook']);
 
 
-  Route::get('object', \App\Http\Controllers\ApiObject::class)->middleware(['ensureTokenIsValid','apilogger']);

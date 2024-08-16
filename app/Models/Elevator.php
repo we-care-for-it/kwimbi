@@ -2,126 +2,205 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\Relation\Maintenance;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
+
+//Models
+use App\Models\inspectionCompany;
+use App\Models\Customer;
+use App\Models\maintenanceCompany;
+use App\Models\Address;
+use App\Models\Incident;
+use App\Models\Inspections;
 use OwenIt\Auditing\Contracts\Auditable;
-/**
- * Class ManagementCompany
- *
- * @property $id
- * @property $created_at
- * @property $updated_at
- * @property $deleted_at
- * @property $last_edit_at
- * @property $last_edit_by
- * @property $name
- * @property $zipcode
- * @property $place
- * @property $address
- * @property $general_emailaddress
- * @property $phonenumber
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
- 
 
- 
- 
+use App\Models\Maintenances;
+use App\Models\Management;
+use App\Models\Inspection;
+use App\Models\MaintenancyContracts;
+use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Carbon\Carbon;
 
 class Elevator extends Model implements Auditable
- 
 {
     use SoftDeletes;
-
-public $table = "elevators";
- 
     use \OwenIt\Auditing\Auditable;
- 
-    // Validation rules for this model
-    static $rules = [];
-
-    // Number of items to be shown per page
-    protected $perPage = 20;
-
-    // Attributes that should be mass-assignable
+    protected $appends = [''];
     protected $fillable = [
-       
-        'status_id',   'customer_id', 'inspection_state_id','supplier_id','remark','address_id','inspection_company_id','maintenance_company_id','stopping_places','carrying_capacity','energy_label','stretcher_elevator','fire_elevator','object_type_id','construction_year','nobo_no','name','unit_no'];
+     'customer_id',
+     'address_id',
+     'name',
+     'maintenance_company',
+     'unit_no',
+     'nobo_no',
+     'remark',
+     'managment_id',
+     'check_date',
+     'check_date_valid',
+     'building_id',
+     'construction_year',
+     'description',
+     'check_valid_date',
+     'inspection_company_id',
+     'check_remark',
+     'supplier_id',
+     'status_id',
+     'maintenance_company_id',
+     'total_maintenance_year',
+     'stand_still',
+     'speakconnection',
+     'inspection_plandate',
+     'install_no',
+     'type_id',
+     'inspection_status_id'
+    ];
 
-    // Attributes that are searchable
-    static $searchable = ['name','address','general_emailaddress','phonenumber'];
-  
-    public function location()
-    {
-        return $this->hasOne(Location::class,'id','address_id' );
-    }
 
     public function address()
     {
-        return $this->hasOne(Location::class, 'id', 'address_id');
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 
-    public function supplier()
+    public function management()
     {
-        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
+        return $this->hasOne(managementCompanies::class, 'id', 'management_id');
     }
 
     public function maintenancecompany()
     {
         return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
     }
- 
 
     public function inspectioncompany()
     {
-        return $this->hasOne(inspectionCompany::class, 'id', 'inspection_company_id');
+        return $this->hasOne(inspectionCompany::class, 'id', 'inspection_company');
     }
-    public function getAllElevatorOnThisAddressAttribute()
+
+    public function MaintenancyContracts()
     {
-
-        return Elevator::where('address_id', $this->attributes["address_id"])->get();
-
+        return $this->hasMany(MaintenancyContracts::class);
     }
 
     public function latestInspection()
-    {
-        return $this->hasOne(Inspection::class)->latestOfMany();
-    }
+{
+    return $this->hasOne(Inspection::class)->where('status_id',3)->latestOfMany();
+}
 
-    //Liftdata
+
+
+
     public function inspections()
     {
-        return $this->hasMany(Inspection::class);
+        return $this->hasMany(Inspection::class)->orderby('executed_datetime', 'desc');
     }
 
-    public function uploads()
+public function checkInspectionStatus(){
+
+    
+}
+
+    public function inspectionLatest()
     {
-        return $this->hasMany(Upload::class);
+        return $this->hasOne(Inspection::class)->latest();
     }
 
-
-    public function incidents()
+    public function ownElevator()
     {
-        return $this->hasMany(Incident::class);
+        return $this->hasMany(Address::class, 'id', 'address_id')->where('customer_id', '3');
     }
+
     public function maintenance()
     {
         return $this->hasMany(Maintenances::class);
     }
-
-    public function maintenance_contracts()
+    public function incident_status_new()
     {
-        return $this->hasMany(maintenanceContract::class);
+        return $this->hasOne(Incident::class)->where('status_id', '0');
+    }
+
+    public function getinspectionCompanyAttribute()
+    {
+        if ($this->attributes["inspection_company_id"]) {
+            return inspectionCompany::find($this->attributes["inspection_company_id"]);
+        }
     }
 
 
-    
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class, "elevator_id", "id")  ->orderby('created_at','desc');
+    }
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class, "elevator_id", "id")->orderby('report_date_time', 'desc');
+        ;
+    }
+
+ 
 
 
 
+
+
+
+
+    public function getcountAllIncidentAttribute()
+    {
+        return  Incident::where('elevator_id', $this->attributes["id"])->get()->count();
+    }
+
+    //  public function getmanagementInfoAttribute()
+    //  {
+    //    if ($this->attributes["management_id"]) {
+    // $data = Management::where('id', $this->attributes["management_id"])->first();
+
+
+    //  return Management::where('id', $this->attributes["management_id"])->first();
+    //}
+    //  }
+
+    // public function getmanagementIdAttribute()
+    //  {
+    //     if ($this->attributes["management_id"]) {
+    //        $address = Address::where('id', $this->attributes["address_id"])->first();
+    //  return $address->management_id;
+    //    }
+    // }
+
+
+
+
+
+    //public function getmanagementAttribute()
+    //  {
+    //    //   return $this->attributes["management_id"];
+    //    if ($this->attributes["management_id"]) {
+    ///      return Management::find($this->attributes["management_id"]);
+    //  }
+    //  }
+
+
+    //Laat zien of deze lift afgekeurd is
+    public function getdisapprovedStateAttribute()
+    {
+        // return Inspection::where('elevator_id', $this->attributes["id"])->first();
+    }
+
+
+
+    public function getAllElevatorOnThisAddressAttribute()
+    {
+        //Get first the complexnumber from this elvator  
+        if($this->address->complexnumber){
+            $address_array =  Address::where('complexnumber', $this->address->complexnumber)->pluck('id')->toArray();
+            return Elevator::whereIn('address_id', $address_array)->get();
+        }
+    }
 
 
 }

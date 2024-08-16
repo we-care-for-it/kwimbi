@@ -2,21 +2,20 @@
 
 namespace App\Models;
 
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Contracts\Auditable;
 
+ 
 
-class User extends Authenticatable implements FilamentUser
+ 
+class User extends Authenticatable implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
-    use HasRoles;
-    
+    use HasApiTokens, HasFactory, Notifiable;
+    use \OwenIt\Auditing\Auditable;
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +25,14 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'login_type',
+        'profile_photo_path'
     ];
+
+    protected $auditExclude = [
+        'password',
+    ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -39,33 +45,28 @@ class User extends Authenticatable implements FilamentUser
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function cntTasks(){
+return Task::where('user_id', $this->id)->orderby('id', 'desc')->count();
+
+
     }
 
-    /**
-     * Determine if the user can access the Filament admin panel.
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
+    public function getInitialsAttribute(){
+        $name = $this->name;
+        $name_array = explode(' ',trim($name));
+    
+        $firstWord = $name_array[0];
+        $lastWord = $name_array[count($name_array)-1];
+    
+        return $firstWord[0]."".$lastWord[0];
     }
-
-    /**
-     * The posts that belong to the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
+    
 }

@@ -12,8 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('media-library:delete-old-temporary-uploads')->daily();
+        $schedule->command('app:chex-import-inspections')->dailyAt('23:45');
     }
 
     /**

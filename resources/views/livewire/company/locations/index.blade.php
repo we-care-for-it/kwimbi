@@ -1,4 +1,4 @@
-<div>
+<div class = "container-fluid">
     <div class="page-header   ">
         <div class="row">
             <div class="col-sm-6">
@@ -90,8 +90,7 @@
                         @if($location->building_type_id)
                         <span
                            class=" badge bg-soft-primary text-primary py-1">{{config('globalValues.building_types')[$location->building_type_id]}}</span>
-                        @else
-                        <span class=" badge bg-soft-danger text-danger py-1 ">Onbekend</span>
+                        
 
                         @endif
                      </div>

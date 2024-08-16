@@ -47,8 +47,10 @@ class Index extends Component
     public $zipcode;
     public $place;
     public $emailaddress;
-    public $edit_id;
+    public $editId;
     public $customer;
+    public $email;
+    
 
  
 
@@ -136,6 +138,7 @@ public function clear()
     $this->address =NULL;
     $this->zipcode =NULL;
     $this->place =NULL;;
+    $this->email =NULL;;
  
 }
 
@@ -144,13 +147,14 @@ public function save(){
    
 $this->validate();
     $data = managementCompany::updateOrCreate(
-        ['id' =>$this->edit_id],
+        ['id' =>$this->editId],
         [
             'name' => $this->name,
             'place' => $this->place,
             'zipcode' => $this->zipcode,
             'name' => $this->name,
             'address' => $this->address,
+            'email' => $this->email,
 
 
         ]
@@ -200,7 +204,7 @@ $this->validate();
 
     public function edit($id)
     {
-        $this->edit_id = $id;
+        $this->editId = $id;
 
         $item = managementCompany::where('id', $id)->first();
         $this->address      = $item->address;
@@ -208,6 +212,12 @@ $this->validate();
         $this->place        = $item->place;
         $this->name         = $item->name;
         $this->place        = $item->place;
+        $this->email        = $item->email;
+ 
+ 
+
+
+
     }
 
 

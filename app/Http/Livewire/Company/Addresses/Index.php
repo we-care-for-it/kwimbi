@@ -70,8 +70,8 @@ class Index extends Component
     {
         return view('livewire.company.addresses.index',[
             'items' => $this->rows,
-            'management_companies' => managementCompany::get(),
-            'customers' => Customer::get(),
+            'management_companies' => managementCompany::orderby('name', 'asc')->get(),
+            'customers' => Customer::orderby('name', 'asc')->get(),
             ]);
     }
 

@@ -31,6 +31,8 @@ class Show extends Component
     public $message;
     public $status_id;
     public $replyMessage;
+    public $replyInternalMessage;
+
     public $replyStatus;
     public $replyDate;
     public $title;
@@ -43,6 +45,8 @@ class Show extends Component
     public $description;
     public $report_date_time;
     public $showReplyConfirmDelete = false;
+    public $stand_still = NULL;
+ 
 
 
 
@@ -53,7 +57,7 @@ class Show extends Component
 
     public function render()
     {
-        $this->upload_type = 1;
+     //   $this->upload_type = 1;
 
     
         return view("livewire.company.incidents.show", []);
@@ -78,7 +82,7 @@ class Show extends Component
 
         $incident = Incident::find($this->incident->id);
         $incident->description = $this->description;
-        //$incident->report_date_time = str_replace('T', " ", $this->report_date_time) . ":00";
+        $incident->report_date_time = $this->report_date_time; 
 
 
 
@@ -91,6 +95,8 @@ class Show extends Component
         $this->description       = $this->incident->description;
         $this->report_date_time  = $this->incident->report_date_time;
 
+
+        
 
 
 
@@ -128,12 +134,12 @@ class Show extends Component
 
     public function addIncidentReply(Request $request)
     {
-        $validatedData = $this->validate(
-            ["replyMessage" => "required"],
-            [
-                "replyMessage.required" => "Vul een bericht in",
-            ]
-        );
+        // $validatedData = $this->validate(
+        //     ["replyMessage" => "required"],
+        //     [
+        //         "replyMessage.required" => "Vul een bericht in",
+        //     ]
+        // );
         if(!$this->replyDate) {
             $this->replyDate = date('Y-m-d H:i:s');
         }
@@ -142,14 +148,27 @@ class Show extends Component
             "incident_id" => $this->incident->id,
             "user_id" => auth()->user()->id,
             "message" => $this->replyMessage,
+            "internalmessage" => $this->replyInternalMessage,
+            
+
             "created_at" => $this->replyDate,
             "status_id" => $this->replyStatus,
+          
+            
         ]);
 
         $this->incident->replys = IncidentReplies::orderby("id", "desc")->get();
 
+    if($this->stand_still){
+        $this->stand_still = 0;
+    }else{
+        $this->stand_still = 1;
+    }
+
         Incident::where("id", $this->incident->id)->update([
             "status_id" => $this->replyStatus,
+            "stand_still" => $this->stand_still,
+            
         ]);
 
         if ($this->replyStatus == 99) {
@@ -159,8 +178,14 @@ class Show extends Component
             ]);
         }
 
+     
+        
+
         $this->replyStatus = null;
         $this->replyMessage = null;
+        $this->replyInternalMessage = null;
+        
+
 
         $this->incident = Incident::where("id", $this->incident->id)->first();
 
