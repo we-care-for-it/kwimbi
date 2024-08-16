@@ -117,37 +117,13 @@ class SettingsPanelProvider extends PanelProvider
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
             ->brandLogo(fn () => view('components.logo'))
-            ->navigationGroups([
-                NavigationGroup::make()
-                ->label("Objecten") 
-           
-                ->collapsible(false)
-                ->extraSidebarAttributes(['class' => 'featured-sidebar-group']),
-    //            ->extraTopbarAttributes(['class' => 'featured-topbar-group']),
-        
-          
-        
-            
-          
-
-                    NavigationGroup::make()
-                    ->label('Setting & Access'),
-          
-
-
-                    NavigationGroup::make()
-                ->label("Systeembeheer")    
-               
-
-            ])
- 
-     
+      
                    
         
             ->colors([
                 'primary' => Color::Blue,
             ])
-           // ->viteTheme('resources/css/admin.css')
+        //  ->viteTheme('resources/css/admin.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
