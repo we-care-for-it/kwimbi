@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
       FilamentAsset::register([
-        Css::make('custom', __DIR__ . '/../../resources/css/custom.css'),
+        Css::make('custom', __DIR__ . '/../../../resources/css/custom.css'),
     ]);
 
 
