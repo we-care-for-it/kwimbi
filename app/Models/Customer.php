@@ -5,32 +5,41 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
-use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Elevator;
 
+use App\Models\Document;
 
-class customer extends Model implements Auditable
+use Carbon\Carbon;
 
+class Customer extends Model
 {
-    // use HasFactory; 
- use SoftDeletes;
-
-    use \OwenIt\Auditing\Auditable;
-
- 
-
- 
-
-
-
-
+    use SoftDeletes;
     protected $fillable = [
-        'name','address','zipcode','phonenumber','emailaddress','place','phonenumber','slug'
-    ];
+     'emailaddress',
+     'postalcode',
+     'address',
+     'active',
+     'place',
+     'mailbox',
+     'name',
+     'logo',
+     ];
 
-  
-    public function locations()
+
+
+
+    public function Document()
     {
-        return $this->hasMany(objectLocation::class,'customer_id','id');
+        return $this->hasMany(Document::class);
     }
+
+
+    public function Elevator()
+    {
+        return $this->hasMany(Elevator::class);
+    }
+
+
+
+    ///protected $appends = ['location_name'];
 }

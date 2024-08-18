@@ -54,10 +54,10 @@ class Edit extends Component
 
     use WithFileUploads;
 
- 
+
 
     protected $rules = ['name' => 'required', ];
-    
+
     public function mount($id)
     {
         $this->data = Location::findOrFail($id);
@@ -72,9 +72,8 @@ class Edit extends Component
         $this->remark  = $this->data->remark;
         $this->building_type_id  = $this->data->building_type_id;
         $this->building_access_type_id  = $this->data->building_access_type_id;
-
         $this->access_code  = $this->data->access_code;
-
+  $this->slug  = $this->data->slug;
         $this->gps_lat  = $this->data->gps_lat;
         $this->gps_lon  = $this->data->gps_lon;
         $this->construction_year  = $this->data->construction_year;
@@ -86,56 +85,57 @@ class Edit extends Component
         $this->municipality  = $this->data->municipality;
         $this->housenumber  = $this->data->housenumber;
         $this->building_type  = $this->data->building_type;
-      
-       
-
-        
-        
-
-        
-
-        
- 
-        
     }
 
     public function save()
     {
 
-        
+
         $this->validate();
- 
-        try {
-            $this->data->update($this->all());
-        } catch (QueryException $e) {
-            dd('Ioe fout');
-        }
-        
+        $location =  Location::where('id',
+        $this->edit_id)->update( $this->only([
+          'surface',
+          'levels',
+          'gps_lon',
+          'construction_year'
+          ,'access_code'
+          ,'gps_lat'
+           ,'customer_id'
+          ,'access_contact'
+          ,'location_key_lock'
+          ,'province'
+          ,'municipality'
+          ,'housenumber',
+          'building_type',
+          'building_access_type_id',
+          'remark',
+          'building_type_id',
+          'name',
+          'zipcode',
+          'place',
+          'address',
+          'complexnumber',
+          'management_id',
+          'customer_id'
+        ]));
+    $location = Location::where("id", $this->edit_id)->first();
 
-   
-
-      
-
+//     $this->only(['title', 'content'])
         if ($this->image  != $this->data->image_db ){
-    
+
             $filename = $this->image->getClientOriginalName();
             $directory = "uploads/locations/" . $this->data->id;
             $this->image->storePubliclyAS($directory, $filename, "public");
-    
+
             Location::where("id", $this->data->id)->update([
                 "image" => $directory . "/" . $filename,
             ]);
         }
-    
 
-        pnotify()->addWarning('Gegevens opgeslagen');
 
-        //image
-      
-      
- 
-         return redirect('/location/' .  $this->data->slug);
-        
+        $this->redirect('/location/'.$location->slug);
+        notyf()->success('Gegevens opgeslagen');
+
     }
 
     public function render()
@@ -143,7 +143,7 @@ class Edit extends Component
         return view('livewire.company.locations.edit',
         [
              'managementCompanies' => managementCompany::orderBy('name', 'asc')->get() ,
-             
+
            ]);
     }
 
@@ -151,26 +151,26 @@ class Edit extends Component
     public function clearImage()
     {
 
-        
+
         Location::where("id", $this->data->id)->update([
             "image" => NULL,
         ]);
-        
 
- 
+
+
 
         if (File::exists(public_path($this->image))) {
              File::delete(public_path($this->image));
          }
 
- 
+
 
 
         $this->image = null;
         $this->image_db = null;
 
 
-        
+
     }
 
      //Postcode check
@@ -178,16 +178,16 @@ class Edit extends Component
      {
          $this->zipcode = strtoupper(trim(preg_replace("/\s+/", "", $this->zipcode)));
          if (strlen($this->zipcode) == 6) {
-           
+
 
              $response = Http::get('https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=' . $this->zipcode.'&streetNumberAndPremise=' . $this->housenumber.'');
 
              //https://api.pro6pp.nl/v2/autocomplete/nl?authKey=dn2KXXsW2K1jzzgx&postalCode=
              $data = $response->json();
- 
 
 
- 
+
+
 
              if (!isset($data['error_id'])) {
                  $this->place = $data['settlement'];
@@ -200,12 +200,13 @@ class Edit extends Component
                  $this->surface = $data['surfaceArea'];
                  $this->building_type = ucfirst($data['purposes'][0]);
 
-          
-                 
+
+
              } else {
                  $this->place = "";
                  $this->address = "";
-                 pnotify()->addWarning('Geen gegevens gevonden met deze postcode en huisnummer');
+                   notyf()->warning('Geen gegevens gevonden met deze postcode en huisnummer');
+
              }
          }
      }

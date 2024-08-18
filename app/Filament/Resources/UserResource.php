@@ -10,8 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
-use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
-
+ 
 
 class UserResource extends Resource
 {
@@ -19,10 +18,7 @@ class UserResource extends Resource
      * The resource model.
      */
     protected static ?string $model = User::class;
-    public static function shouldRegisterNavigation(): bool
-    {
-        return false;
-    }
+   
      
     /**
      * The resource navigation icon.
@@ -127,7 +123,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AuthenticationLogsRelationManager::class,
+           
         ];
     }
 

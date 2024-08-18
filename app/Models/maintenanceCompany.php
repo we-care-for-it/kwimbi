@@ -14,8 +14,8 @@ class maintenanceCompany extends Model  implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-     public $table = "maintenancy_companies"; 
-    
+     public $table = "maintenance_companies"; 
+
     protected $fillable = [
         'name','address','zipcode','phonenumber','email','place','active'
     ];

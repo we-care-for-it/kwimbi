@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ElevatorsSettings\Resources;
 use App\Filament\Clusters\ElevatorsSettings;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectMaintenanceCompaniesResource\Pages;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectMaintenanceCompaniesResource\RelationManagers;
-use App\Models\objectMaintenanceCompany;
+use App\Models\maintenanceCompany;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ObjectMaintenanceCompaniesResource extends Resource
 {
-    protected static ?string $model = objectMaintenanceCompany::class;
+    protected static ?string $model = maintenanceCompany::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -118,7 +118,7 @@ class ObjectMaintenanceCompaniesResource extends Resource
  
 
                     Tables\Columns\TextColumn::make('zipcode')->state(
-                        function (objectMaintenanceCompany $rec) {
+                        function (maintenanceCompany $rec) {
                           return $rec->zipcode . " " . $rec->place;
                          }),
  

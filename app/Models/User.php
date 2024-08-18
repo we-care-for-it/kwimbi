@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
- 
 
-
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
- 
-    
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,7 +37,29 @@ class User extends Authenticatable implements FilamentUser
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
+
+ public function getInitialsAttribute(){
+        $name = $this->name;
+        $name_array = explode(' ',trim($name));
+    
+        $firstWord = $name_array[0];
+        $lastWord = $name_array[count($name_array)-1];
+    
+        return $firstWord[0]."".$lastWord[0];
+    }
+
 
     /**
      * Get the attributes that should be cast.
@@ -50,35 +73,4 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
         ];
     }
-
-    /**
-     * Determine if the user can access the Filament admin panel.
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true;
-    }
-
-    /**
-     * The posts that belong to the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-  public function getInitialsAttribute(){
-        $name = $this->name;
-        $name_array = explode(' ',trim($name));
-    
-        $firstWord = $name_array[0];
-        $lastWord = $name_array[count($name_array)-1];
-    
-        return $firstWord[0]."".$lastWord[0];
-    }
-
-
-
 }
