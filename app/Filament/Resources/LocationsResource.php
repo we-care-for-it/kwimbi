@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LocationsResource\Pages;
 use App\Filament\Resources\LocationsResource\RelationManagers;
-use App\Models\location;
+use App\Models\Location;
 use App\Models\objectBuildingType;
 use App\Models\ManagementCompany;
 
@@ -39,7 +39,7 @@ use Filament\Tables\Filters\SelectFilter;
 
 class LocationsResource extends Resource
 {
-    protected static ? string $model = location::class;
+    protected static ? string $model = Location::class;
 
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
 
