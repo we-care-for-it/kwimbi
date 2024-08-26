@@ -14,7 +14,7 @@
     "awcodes/filament-curator": "^3.3",
     "awcodes/filament-gravatar": "^2.0",
     "awcodes/light-switch": "*",
-    "bezhansalleh/filament-exceptions": "*",
+    "bezhansalleh/filament-exceptions": "^2.1",
     "bezhansalleh/filament-language-switch": "^3.1",
     "bezhansalleh/filament-shield": "*",
     "croustibat/filament-jobs-monitor": "^2.4.0",

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tools_categories', function (Blueprint $table) {
+        Schema::create('object_inpection_zincodes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
-            $table->string('name')->nullable();
-            $table->boolean('is_active')->nullable();
-
+            $table->string('code')->nullable();
+            $table->longText('description')->nullable();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tools_categories');
+        //
     }
 };

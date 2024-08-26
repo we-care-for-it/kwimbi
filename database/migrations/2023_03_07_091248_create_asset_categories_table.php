@@ -8,23 +8,28 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('tools_inspection_methods', function (Blueprint $table) {
+        Schema::create('asset_categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
             $table->string('name')->nullable();
+            $table->longtext('image')->nullable();
             $table->boolean('is_active')->nullable()->default('1');;
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('tools_inspection_methods');
+        Schema::dropIfExists('asset_categories');
     }
 };

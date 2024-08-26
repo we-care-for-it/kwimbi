@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
+use App\Models\Admin;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Seeder;
@@ -16,19 +16,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.test',
-            'password' => Hash::make('admin'),
+            'name' => 'Systeem Administartor',
+            'email' => 'sysadmin@lts-liftbeheer.nl',
+            'password' => Hash::make('LTSBeheer2024@'),
+
+
         ]);
 
-        Post::factory()
-            ->count(25)
-            ->create();
 
-        Notification::make()
-            ->title('Welcome to Filament')
-            ->body('You are ready to start building your application.')
-            ->success()
-            ->sendToDatabase($user);
+       $user = Admin::factory()->create([
+            'name' => 'Systeem Administartor',
+            'email' => 'sysadmin@lts-liftbeheer.nl',
+            'password' => Hash::make('LTSBeheer2024@'),
+        'is_superadmin' => 1,
+        ]);
+
+        
+
+       
     }
 }
