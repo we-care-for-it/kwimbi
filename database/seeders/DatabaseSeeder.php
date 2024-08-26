@@ -23,14 +23,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-
-       $user = Admin::factory()->create([
-            'name' => 'Systeem Administartor',
-            'email' => 'sysadmin@lts-liftbeheer.nl',
-            'password' => Hash::make('LTSBeheer2024@'),
-        'is_superadmin' => 1,
-        ]);
-
+ 
         
 
        
