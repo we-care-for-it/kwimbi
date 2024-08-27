@@ -23,7 +23,7 @@
            <img src ="\assets\img\documents.svg" style = "height: 400px">
 
                <div class="position-absolute top-0 start-0 end-0 mt-3 mx-3">
-              ssssssssssssss
+              {{env('APP_NAME')}} </b> | LTS Liftbeheer
                   
 
 
@@ -119,7 +119,7 @@
                </div>
             </div>
             <div class="bottom_left">
-              <b> {{env('APP_NAME')}} </b> | LTS Liftbeheer
+              <b> 
             </div>
 
   <div class="bottom_right">
