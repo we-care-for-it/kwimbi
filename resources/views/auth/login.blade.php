@@ -1,40 +1,49 @@
 <x-guest-layout>
 <style>
-     .bottom {
+     .bottom_right {
     position: absolute;
     right: 20px;
     bottom: 10px; /* Set div position to relative */
   } 
+  .bottom_left {
+    position: absolute;
+    left: 20px;
+    bottom: 10px; /* Set div position to relative */
+  } 
+
 </style>
    <div>
 
       <div class="container-fluid px-3">
          <div class="row">
             <div
-               class="col-lg-6 d-none d-lg-flex justify-content-center   align-items-center min-vh-lg-100 position-relative  px-0"
+               class="col-lg-6 bg-light  d-none d-lg-flex justify-content-center   align-items-center min-vh-lg-100 position-relative  px-0"
            >
 
-           <img src ="\assets\img\protect.jpg">
+           <img src ="\assets\img\documents.svg" style = "height: 400px">
 
                <div class="position-absolute top-0 start-0 end-0 mt-3 mx-3">
-                 <b>{{env('TENANT_NAME')}}</b>
+              ssssssssssssss
                   
 
 
                </div>
                <div style="max-width: 23rem;">
-                  <div class="text-center mb-5">
+               <ul class="list-checked list-checked-lg list-checked-primary  ">
+              <li class="list-checked-item">
+                <span class="d-block fw-semibold mb-1">Gebouwbeheer</span>
+                Beheer de eigenschappen van de complexen
+              </li>
 
-                  </div>
-                  <div class="pb-3">
-                 
-                  </div>
-                  <div class="mb-5">
-
-                  </div>
-
-                  <div class="row justify-content-between mt-5 gx-3">
-                  </div>
+              <li class="list-checked-item">
+                <span class="d-block fw-semibold  ">Projecten</span>
+              Maak projecten aan en koppel alle relevante informatie van de projecten op 1 plek
+              </li>
+              <li class="list-checked-item">
+                <span class="d-block fw-semibold mb-1">Liftbeheer</span>
+            Registeer Onderhoudsbeurten, Storingen en lift eigenschappen
+              </li>
+            </ul>
 
                </div>
             </div>
@@ -47,11 +56,11 @@
                     <br><Br>
 
 
-                    <h2>Login</h2>
+    
                     <a class="btn btn-white btn-lg d-grid mb-4" href="#">
                                <span class="d-flex justify-content-center align-items-center">
                                <img class="avatar sociallogin  me-2" src="/assets/svg/brands/microsoft-office-365-logo.png" alt="Image Description">
-                              Met Microsoft office365
+                              Login met Microsoft office365
                                </span>
                                </a>
                                <span class="divider-center text-muted mb-4">OF</span>
@@ -109,7 +118,11 @@
                   </div>
                </div>
             </div>
-  <div class="bottom">
+            <div class="bottom_left">
+              <b> {{env('APP_NAME')}} </b> | LTS Liftbeheer
+            </div>
+
+  <div class="bottom_right">
    <small>© LTS Software B.V. | <a href = "https://www.liftindex.nl"/>Helpdesk</a>  | <a href = "https://www.liftindex.nl"/>Contact</a> </small> </div>
             <script src="/assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
          </div>
