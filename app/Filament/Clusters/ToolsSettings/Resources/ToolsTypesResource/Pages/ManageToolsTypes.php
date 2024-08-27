@@ -7,7 +7,6 @@ use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Actions\Action;
-
 class ManageToolsTypes extends ManageRecords
 {
 

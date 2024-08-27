@@ -6,7 +6,6 @@ use App\Filament\Clusters\ToolsSettings\Resources\ToolsInspectionMethodsResource
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Actions\Action;
-
 class ManageToolsInspectionMethods extends ManageRecords
 {
     protected static ?string $title = 'Gereedschap - Keuringsmethodes';
@@ -16,14 +15,11 @@ class ManageToolsInspectionMethods extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-
-            
             Action::make('back')
             ->url(route('filament.admin.resources.tools.index'))
             ->label('Terug naar gereedschappen') 
             ->link()
             ->color('gray'),
-
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     

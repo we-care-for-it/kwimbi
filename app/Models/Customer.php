@@ -4,31 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\SoftDeletes;
+ 
 use OwenIt\Auditing\Contracts\Auditable;
 
 
-class Customer extends Model implements Auditable
+class customer extends Model implements Auditable
 
 {
-    // use HasFactory;
-   use HasSlug;
+    // use HasFactory; 
+ use SoftDeletes;
 
     use \OwenIt\Auditing\Auditable;
 
-    protected $table = 'customers';
+ 
 
-
-
-    
-   public function getSlugOptions() : SlugOptions
-      {
-         return SlugOptions::create()
-        ->generateSlugsFrom(['name', 'address'])
-           ->saveSlugsTo('slug');
-    }
+ 
 
 
 
@@ -37,5 +28,9 @@ class Customer extends Model implements Auditable
         'name','address','zipcode','phonenumber','emailaddress','place','phonenumber','slug'
     ];
 
-
+  
+    public function locations()
+    {
+        return $this->hasMany(objectLocation::class,'customer_id','id');
+    }
 }

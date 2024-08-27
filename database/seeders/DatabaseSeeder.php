@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use App\Models\User;
-use Filament\Notifications\Notification;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,17 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
-            'name' => 'Systeem Administartor',
-            'email' => 'sysadmin@lts-liftbeheer.nl',
-            'password' => Hash::make('LTSBeheer2024@'),
 
-
-        ]);
-
+ $this->call([
+       NewTenant::class
  
-        
+    ]);
 
-       
+
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }

@@ -6,7 +6,7 @@ use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Actions\Action;
+
 class ManageElevatorsTypes extends ManageRecords
 {
     protected static string $resource = ElevatorsTypesResource::class;
@@ -15,12 +15,10 @@ class ManageElevatorsTypes extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('back')
-            ->url(route('filament.admin.resources.elevators.index'))
-            ->label('Terug naar objecten') 
-            ->link()
-            ->color('gray'),
-            Actions\CreateAction::make() ->icon('heroicon-m-plus') ->modalHeading('Toevoegen')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
-       ];
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+            ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
+    
+            Actions\CreateAction::make()->modalWidth(MaxWidth::Large)->label('Toevoegen')->modalHeading('Toevoegen'),
+        ];
     }
 }

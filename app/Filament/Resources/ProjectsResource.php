@@ -36,7 +36,6 @@ class ProjectsResource extends Resource
     protected static ? string $model = Project::class;
     protected static ? string $title = 'Projecten';
     protected static ? string $SearchResultTitle = 'Projecten';
-    protected static ? string $navigationGroup = 'Hoofdmenu';
     protected static ? string $navigationLabel = 'Projecten';
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static bool $isLazy = false;

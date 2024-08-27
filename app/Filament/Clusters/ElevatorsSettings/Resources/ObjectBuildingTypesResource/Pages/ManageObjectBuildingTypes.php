@@ -6,7 +6,7 @@ use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypesResourc
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Actions\Action;
+
 
 class ManageObjectBuildingTypes extends ManageRecords
 {
@@ -18,11 +18,6 @@ class ManageObjectBuildingTypes extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('back')
-            ->url(route('filament.admin.resources.elevators.index'))
-            ->label('Terug naar objecten') 
-            ->link()
-            ->color('gray'),
             \EightyNine\ExcelImport\ExcelImportAction::make()
             ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
     

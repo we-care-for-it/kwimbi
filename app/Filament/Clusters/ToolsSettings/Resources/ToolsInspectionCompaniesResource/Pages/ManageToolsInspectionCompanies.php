@@ -6,8 +6,6 @@ use App\Filament\Clusters\ToolsSettings\Resources\ToolsInspectionCompaniesResour
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Actions\Action;
-
-
 class ManageToolsInspectionCompanies extends ManageRecords
 {
     protected static ?string $title = 'Gereedschap - Keuringsinstanties';
@@ -17,7 +15,6 @@ class ManageToolsInspectionCompanies extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            
             Action::make('back')
             ->url(route('filament.admin.resources.tools.index'))
             ->label('Terug naar gereedschappen') 

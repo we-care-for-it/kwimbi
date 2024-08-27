@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Statuses;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+ 
 use OwenIt\Auditing\Contracts\Auditable;
 use Log;
 use Str;
@@ -14,28 +13,13 @@ class Project extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    use HasSlug;
-
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
+ 
 
     public static function boot() {
   
       parent::boot();
   
-      static::created(function($item) {           
-        $status = Statuses::where('id', $item->status_id)->first();
-        $item->progress =$status->procent;
-      });
  
-      static::updating(function($item) {             
-        $status = Statuses::where('id', $item->status_id)->first();
-        $item->progress =$status->procent;
-      });
  
   }
 
@@ -61,11 +45,10 @@ class Project extends Model implements Auditable
     {
         return $this->belongsTo(Customer::class);
     }
-  public function uploads()
+    public function uploads()
     {
         return $this->hasMany(Upload::class,'object_id','id');
     }
-
 
 
 

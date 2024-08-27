@@ -19,14 +19,18 @@ class UserResource extends Resource
      * The resource model.
      */
     protected static ?string $model = User::class;
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+     
     /**
      * The resource navigation icon.
      */
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
         
-    protected static ? string $navigationGroup = 'Beheer';
+    protected static ? string $navigationGroup = 'Systeembeheer';
     protected static ? string $navigationLabel = 'Gebruikers';
 
     /**
@@ -72,7 +76,9 @@ class UserResource extends Resource
                     ->password()
                     ->confirmed()
                     ->maxLength(255),
-
+                  
+                    Forms\Components\Select::make('roles')->multiple()->relationship('roles', 'name'),
+               
                 Forms\Components\TextInput::make('password_confirmation')
                     ->label('Confirm password')
                     ->password()

@@ -14,7 +14,7 @@ class warehouse extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     
-    protected $fillable = ['name','zipcode','place','address'];
+    protected $fillable = ['name'];
     // protected $fillable = [
    //     'last_action_at',
     // /    'code',
@@ -22,4 +22,12 @@ class warehouse extends Model implements Auditable
     // ];
 
     ///protected $appends = ['location_name'];
+
+
+    public function subs(){
+        return $this->hasMany(subWarehouse::class);
+    }
+
+
+
 }

@@ -1,3 +1,16 @@
-Locaties
-- Doorklikken naar beheerder en relatie
-- Mogelijkheid tot exporteren 
+Technihe documetne
+gescande documente
+lift fot's
+overig dcument
+
+
+Nog te doen 
+Type keuringen toevoegen aan keuring
+
+
+Nieuwe tenant
+Inporteren werktypes
+Inporteen betaal methodes
+
+
+https://iconduck.com/

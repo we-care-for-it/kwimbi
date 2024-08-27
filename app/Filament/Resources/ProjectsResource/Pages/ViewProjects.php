@@ -15,7 +15,7 @@ class ViewProjects extends ViewRecord
         {
             return [
                 Action::make('back')
-               // ->url(route('filament.admin.resources.tools.index'))
+                ->url(route('filament.admin.resources.tools.index'))
                 ->label('Terug naar overzicht') 
                 ->link()
                 ->color('gray'),

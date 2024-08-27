@@ -11,6 +11,9 @@ class WorkorderSettings extends Cluster
     protected static ? string $navigationGroup = 'Stamgegevens';
     protected static ? string $navigationLabel = 'Werkopdrachten';
 
- 
+    public static function shouldRegisterNavigation(): bool
+{
+    return false;
+}
 
 }

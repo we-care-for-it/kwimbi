@@ -45,9 +45,9 @@ class ToolsResource extends Resource
 
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
 
- 
+    protected static ? string $navigationGroup = 'Beheer';
     protected static ? string $navigationLabel = 'Gereedschap';
-    protected static ? string $navigationGroup = 'Hoofdmenu';
+
 
     use HexAccess;
 

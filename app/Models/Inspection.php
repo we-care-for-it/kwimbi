@@ -24,11 +24,4 @@ class Inspection extends Model  implements Auditable
         return $this->hasOne(Elevator::class, 'id', 'elevator_id');
     }
      
-
-    
-    public function replys()
-    {
-        return $this->hasMany(Replies::class, 'id', 'item_id')->where('module','inspection')->orderby('id', 'desc');
-    }
-
 }
