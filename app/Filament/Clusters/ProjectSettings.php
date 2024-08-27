@@ -12,7 +12,7 @@ class ProjectSettings extends Cluster
 
     public static function shouldRegisterNavigation(): bool
 {
-    return true;
+return false;
 }
 
 

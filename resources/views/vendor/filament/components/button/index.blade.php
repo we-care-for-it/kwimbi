@@ -151,7 +151,6 @@
         :disabled="$disabled"
         :form="$form"
         :form-id="$formId"
-
         :href="$href"
         :icon="$icon"
         :icon-alias="$iconAlias"
@@ -270,7 +269,6 @@
         @if ($hasFormProcessingLoadingIndicator)
             x-show="! isProcessing"
         @endif
-     
         class="{{ $labelClasses }}"
     >
         {{ $slot }}

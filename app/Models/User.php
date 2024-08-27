@@ -9,13 +9,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
- 
+use Spatie\Permission\Traits\HasRoles;
 
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
- 
+    use HasRoles;
     
     /**
      * The attributes that are mass assignable.
@@ -68,17 +68,4 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Post::class);
     }
-
-  public function getInitialsAttribute(){
-        $name = $this->name;
-        $name_array = explode(' ',trim($name));
-    
-        $firstWord = $name_array[0];
-        $lastWord = $name_array[count($name_array)-1];
-    
-        return $firstWord[0]."".$lastWord[0];
-    }
-
-
-
 }

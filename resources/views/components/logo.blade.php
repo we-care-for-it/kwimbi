@@ -1,3 +1,3 @@
  
-<img  src = "/tenant/logo_header.png">
+<img  src = "/tenant/logo.png">
  

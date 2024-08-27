@@ -31,12 +31,17 @@
 
     position: relative;
 }
-.fi-sidebar {
-  @apply bg-gray-50 dark:bg-gray-950 !important;
+
+.fi-sidebar-item a:link {
+  font-weight: normal;
 }
 
-.fi-logo{
-  border: 2px solid red;
 
+
+.fi-ac-btn-action {
+  border-radius: 10px;
 }
-  
+
+
+
+

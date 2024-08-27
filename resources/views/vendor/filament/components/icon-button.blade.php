@@ -98,7 +98,6 @@
         $color,
         shades: [300, 400, 500, 600],
         alias: 'icon-button',
-
     );
 
     $iconClasses = \Illuminate\Support\Arr::toCssClasses([
@@ -111,7 +110,7 @@
         },
     ]);
 
-    $badgeContainerClasses = ' fi-icon-btn-badge-ctn absolute start-full top-1 z-[1] w-max -translate-x-1/2 -translate-y-1/2 rounded-md bg-white dark:bg-gray-900 rtl:translate-x-1/2';
+    $badgeContainerClasses = 'fi-icon-btn-badge-ctn absolute start-full top-1 z-[1] w-max -translate-x-1/2 -translate-y-1/2 rounded-md bg-white dark:bg-gray-900 rtl:translate-x-1/2';
 
     $wireTarget = $loadingIndicator ? $attributes->whereStartsWith(['wire:target', 'wire:click'])->filter(fn ($value): bool => filled($value))->first() : null;
 
@@ -126,8 +125,6 @@
 
 @if ($tag === 'button')
     <button
-
-         
         @if ($keyBindings || $hasTooltip)
             x-data="{}"
         @endif
@@ -152,7 +149,7 @@
                     'title' => $label,
                 ], escape: true)
                 ->class([$buttonClasses])
-          
+                ->style([$buttonStyles])
         }}
     >
         @if ($label)

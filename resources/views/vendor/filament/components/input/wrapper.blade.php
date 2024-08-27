@@ -35,16 +35,16 @@
     $hasAlpineValidClasses = filled($alpineValid);
     $hasAlpineClasses = $hasAlpineDisabledClasses || $hasAlpineValidClasses;
 
-    $enabledWrapperClasses = 'bg-white dark:bg-white/5 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-1 ring-gray-950/10';
+    $enabledWrapperClasses = 'bg-white dark:bg-white/5 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-2';
     $disabledWrapperClasses = 'fi-disabled bg-gray-50 dark:bg-transparent';
     $validWrapperClasses = 'ring-gray-950/10';
     $invalidWrapperClasses = 'fi-invalid ring-danger-600 dark:ring-danger-500';
-    $enabledValidWrapperClasses = 'dark:ring-white/20 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-500 ring-gray-950/10';
-    $enabledInvalidWrapperClasses = '[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-danger-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-danger-500 ring-gray-950/10';
-    $disabledValidWrapperClasses = 'dark:ring-white/10 ring-gray-950/10';
+    $enabledValidWrapperClasses = 'dark:ring-white/20 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-500';
+    $enabledInvalidWrapperClasses = '[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-danger-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-danger-500';
+    $disabledValidWrapperClasses = 'dark:ring-white/10';
 
     $actionsClasses = 'flex items-center gap-3';
-    $labelClasses = 'fi-input-wrp-label whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 rounded-none';
+    $labelClasses = 'fi-input-wrp-label whitespace-nowrap text-sm text-gray-500 dark:text-gray-400';
 
     $getIconClasses = fn (string | array $color = 'gray'): string => \Illuminate\Support\Arr::toCssClasses([
         'fi-input-wrp-icon h-5 w-5',

@@ -1,12 +1,14 @@
-.fi-topbar{
-    background-color: red!important;
-    }
-
-
-.fi-header-heading{
-     font-weight: normal!important;
-     color: #EFEFEF!important;
+ 
+.fi-sidebar {
+    background-color: #fafafa;
 }
+
+
+.fi-sidebar {
+    @apply bg-gray-50 dark:bg-gray-950;
+}
+
+
 
 
 
