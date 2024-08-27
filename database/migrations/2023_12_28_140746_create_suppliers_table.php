@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('object_management_companies', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('general_emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
+            $table->string('emailaddress')->nullable();
+
         });
     }
 
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('management_companies');
+        Schema::dropIfExists('suppliers');
     }
 };

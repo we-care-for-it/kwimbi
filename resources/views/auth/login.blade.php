@@ -17,15 +17,33 @@
       <div class="container-fluid px-3">
          <div class="row">
             <div
-               class="col-lg-6 bg-light  d-none d-lg-flex justify-content-center   align-items-center min-vh-lg-100 position-relative  px-0"
+               class="col-lg-6 bg-light  d-none d-lg-flex justify-content-center  justify-content-end  align-items-center min-vh-lg-100 position-relative  px-0"
            >
 
            <img src ="\assets\img\documents.svg" style = "height: 400px">
 
-               <div class="position-absolute top-0 start-0 end-0 mt-3 mx-3">
-              {{env('APP_NAME')}} </b> | LTS Liftbeheer
-                  
+               <div class="position-absolute top-0 start-0 end-0 mt-3 mx-3 justify-content-end">
+               <div class="dropdown ">
+                <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation=""><i class="bi-brightness-high"></i></button>
 
+                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
+                  <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                    <i class="bi-moon-stars me-2"></i>
+                    <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
+                  </a>
+                  <a class="dropdown-item active" href="#" data-icon="bi-brightness-high" data-value="default">
+                    <i class="bi-brightness-high me-2"></i>
+                    <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
+                  </a>
+                  <a class="dropdown-item" href="#" data-icon="bi-moon" data-value="dark">
+                    <i class="bi-moon me-2"></i>
+                    <span class="text-truncate" title="Dark">Dark</span>
+                  </a>
+                </div>
+              </div>
+
+
+          
 
                </div>
                <div style="max-width: 23rem;">
@@ -51,11 +69,7 @@
                <div class=" content-space-t-4 content-space-t-lg-2 content-space-b-1" style="max-width: 25rem;">
                   <div>
                      <div class="mb-3">
-                        <center>
-                     <img src ="\assets\img\protect.jpg" style = "height: 250px" class = "d-md-none d-md-block"></center>
-                    <br><Br>
-
-
+                 
     
                     <a class="btn btn-white btn-lg d-grid mb-4" href="#">
                                <span class="d-flex justify-content-center align-items-center">
@@ -121,6 +135,12 @@
             <div class="bottom_left">
               <b> 
             </div>
+
+            <div class="bottom_left">
+            {{env('APP_NAME')}} </b> | LTS Liftbeheer
+</div>     
+
+
 
   <div class="bottom_right">
    <small>© LTS Software B.V. | <a href = "https://www.liftindex.nl"/>Helpdesk</a>  | <a href = "https://www.liftindex.nl"/>Contact</a> </small> </div>

@@ -28,6 +28,20 @@ return new class extends Migration
             $table->integer('access_type_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('image')->nullable();
+       	    $table->string('access_code')->nullable();
+            $table->string('gps_lat')->nullable();
+            $table->string('gps_lon')->nullable();
+            $table->string('levels')->nullable();
+            $table->string('surface')->nullable();
+            $table->string('access_contact')->nullable();
+            $table->string('location_key_lock')->nullable();
+            $table->string('province')->nullable();
+            $table->string('municipality')->nullable();
+            $table->string('building_type')->nullable();
+            $table->string('housenumber')->nullable();
+            $table->string('building_access_type_id')->nullable();
+ 	    $table->string('construction_year')->nullable();
+           
             
 
         });

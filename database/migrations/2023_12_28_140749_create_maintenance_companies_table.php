@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('object_maintenance_companies', function (Blueprint $table) {
+        Schema::create('maintenance_companies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes(); 
