@@ -58,6 +58,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('objects');
+        Schema::dropIfExists('elevators');
     }
 };
