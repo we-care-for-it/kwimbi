@@ -12,7 +12,7 @@ class MaterialSettings extends Cluster
 
     public static function shouldRegisterNavigation(): bool
 {
-    return false;
+ return true;
 }
 
 }
