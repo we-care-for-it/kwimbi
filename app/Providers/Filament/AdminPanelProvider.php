@@ -60,7 +60,7 @@ class AdminPanelProvider extends PanelProvider
          //   ->plugin(FilamentSpatieRolesPermissionsPlugin::make())
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make(),
-                //FilamentTimesheetsPlugin::make(),
+        
                 FilamentSpatieLaravelBackupPlugin::make(),
             //    \Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['en', 'nl']),
               //  \TomatoPHP\FilamentMenus\FilamentMenusPlugin::make()

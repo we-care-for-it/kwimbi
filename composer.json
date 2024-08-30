@@ -49,7 +49,6 @@
         "swisnl/filament-backgrounds": "^1.1",
         "tapp/filament-authentication-log": "^3.1",
         "tapp/filament-maillog": "^1.0",
-        "timwassenburg/filament-timesheets": "^1.0",
         "tomatophp/filament-menus": "^1.0",
         "tomatophp/filament-settings-hub": "^1.0",
         "tomatophp/filament-users": "^1.0",
