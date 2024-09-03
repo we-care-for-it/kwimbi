@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
+ 
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Seeder;
@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.test',
-            'password' => Hash::make('admin'),
+        User::create([
+            'name' => 'sysadmin',
+            'email' => 'sysadmin@liftindex.nl',
+            'password' => Hash::make('!Timmer2024@')
         ]);
 
      
