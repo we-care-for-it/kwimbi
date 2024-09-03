@@ -12,6 +12,6 @@ class General extends Cluster
 
     public static function shouldRegisterNavigation(): bool
 {
-   return true;
+  return true;
 }
 }

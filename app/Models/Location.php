@@ -40,6 +40,7 @@ class Location extends Model implements Auditable
         ->generateSlugsFrom(['address', 'zipcode','place'])
             ->saveSlugsTo('slug');
     }
+ 
 
     // Validation rules for this model
     static $rules = [];
@@ -60,12 +61,12 @@ class Location extends Model implements Auditable
     ,'province'
     ,'municipality'
     ,'housenumber',
+    'complexnumber',
+    'image',
  
     'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
 
-    // Attributes that are searchable
-    static $searchable = ['name','zipcode','place','address','slug','complexnumber','management_id','customer_id','access_type_id'];
-
+  
     public function customer()
     {
         return $this->belongsTo(Customer::class);
@@ -73,7 +74,7 @@ class Location extends Model implements Auditable
 
     public function managementcompany()
     {
-        return $this->hasOne(ManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
     }
 
     public function objects()
@@ -81,7 +82,19 @@ class Location extends Model implements Auditable
         return $this->hasMany(Elevator::class,'address_id','id');
     }
 
- 
+
+   
+
+    
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class,'location_id','id');
+    }
+
+    public function buildingType()
+    {
+        return $this->hasOne(objectBuildingType::class,'id','building_type_id');
+    }
 
 
 

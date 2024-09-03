@@ -16,7 +16,11 @@ class ManageProjectStatuses extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-          
+            Action::make('back')
+            ->url(route('filament.admin.resources.projects.index'))
+            ->label('Terug naar projecten') 
+            ->link()
+            ->color('gray'),
             Actions\CreateAction::make()  ->modalHeading('Toevoegen')->icon('heroicon-m-plus')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
 
         ];

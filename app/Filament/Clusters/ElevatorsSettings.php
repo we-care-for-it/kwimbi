@@ -11,7 +11,7 @@ class ElevatorsSettings extends Cluster
     protected static ? string $navigationLabel = 'Objecten';
     public static function shouldRegisterNavigation(): bool
     {
-       return true;
+        return true;
     }
 
 }
