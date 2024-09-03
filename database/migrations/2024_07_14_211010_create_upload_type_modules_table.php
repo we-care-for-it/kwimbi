@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tools_categories', function (Blueprint $table) {
+        Schema::create('upload_type_modules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes(); 
-            $table->string('name')->nullable();
-            $table->boolean('is_active')->nullable();
-
+            $table->softDeletes();
+            $table->integer('module_id')->nullable();
+            $table->integer('upload_type_id')->nullable();
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tools_categories');
+        Schema::dropIfExists('upload_type_modules');
     }
 };

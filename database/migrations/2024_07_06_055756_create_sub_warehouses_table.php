@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tools_categories', function (Blueprint $table) {
-            $table->id();
+        Schema::create('sub_warehouses', function (Blueprint $table) {
+          $table->id();
             $table->timestamps();
             $table->softDeletes(); 
+          $table->integer('warehouse_id')->nullable();
             $table->string('name')->nullable();
-            $table->boolean('is_active')->nullable();
+            $table->boolean('is_active')->nullable()->default('1');
 
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tools_categories');
+        Schema::dropIfExists('sub_warehouses');
     }
 };

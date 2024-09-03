@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('object_inpection_zincodes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes(); 
             $table->string('code')->nullable();
-            $table->string('slug')->nullable();
-            $table->longtext('name')->nullable();
-            $table->boolean('is_active');
+            $table->longText('description')->nullable();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        //
     }
 };
