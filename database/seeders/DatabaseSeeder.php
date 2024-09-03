@@ -21,14 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
         ]);
 
-        Post::factory()
-            ->count(25)
-            ->create();
-
-        Notification::make()
-            ->title('Welcome to Filament')
-            ->body('You are ready to start building your application.')
-            ->success()
-            ->sendToDatabase($user);
+     
+ 
     }
 }
