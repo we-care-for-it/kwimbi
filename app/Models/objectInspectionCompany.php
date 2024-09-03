@@ -13,6 +13,7 @@ class objectInspectionCompany extends Model
 {
   
     use SoftDeletes;
+    public $table = "object_inspection_companies";
     protected $fillable = [
         'name','address','zipcode','phonenumber','general_emailaddress','place','active','website'
     ];
