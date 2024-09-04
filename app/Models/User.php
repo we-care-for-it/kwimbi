@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 
-
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements HasTenants
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasFactory;
     use HasRoles;
-    
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +28,8 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
     ];
+
+ 
 
     /**
      * The attributes that should be hidden for serialization.
@@ -51,21 +54,18 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-    /**
-     * Determine if the user can access the Filament admin panel.
-     */
-    public function canAccessPanel(Panel $panel): bool
+    public function companies(): BelongsToMany
     {
-        return true;
+        return $this->belongsToMany(Company::class);
     }
 
-    /**
-     * The posts that belong to the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function posts()
+    public function getTenants(Panel $panel): array|Collection
     {
-        return $this->hasMany(Post::class);
+        return $this->companies;
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->companies()->whereKey($tenant)->exists();
     }
 }

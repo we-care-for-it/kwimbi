@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,18 +14,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $superAdmin = User::factory()->create([
+            'first_name' => 'Super',
+            'last_name' => 'Admin',
+            'email' => 'SuperAdmin@liftbeheer.nl',
+            'password' => bcrypt('password'),
+        ]);
 
- $this->call([
-       NewTenant::class
- 
-    ]);
+        $company = Company::factory()->create([
+            'name' => 'PA Systems',
+        ]);
 
+        $superAdmin->companies()->attach($company);
 
-        // \App\Models\User::factory(10)->create();
+        $this->call(ShieldSeeder::class);
+        $this->command->call('shield:generate', ['--all' => true]);
+        $this->command->call('shield:super-admin', ['--user' => $superAdmin->id]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(LocationSeeder::class);
+        $this->call(AssetSeeder::class);
     }
 }

@@ -4,33 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-use App\Models\assetBrand;
-use App\Models\assetCategorie;
-
-
-class assetModel extends Model
+class AssetModel extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
-    protected $fillable = [
-        'name','brand_id','category_id','image'
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'metadata' => 'collection',
     ];
 
-    public function brand(){
-        return $this->belongsTo(assetBrand::class);
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(AssetBrand::class, 'brand_id');
     }
 
-    public function category(){
-        return $this->belongsTo(assetCategorie::class);
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(AssetCategory::class, 'category_id');
     }
 
- 
-
-
- 
+    public function assets(): HasMany
+    {
+        return $this->hasMany(Asset::class);
+    }
 }
-
-

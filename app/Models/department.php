@@ -4,22 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-use Carbon\Carbon;
- 
-class department extends Model implements Auditable
+class Department extends Model
 {
-    use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
-    
-    protected $fillable = ['name'];
-    // protected $fillable = [
-   //     'last_action_at',
-    // /    'code',
-   //     'location_id',
-    // ];
+    use HasFactory;
 
-    ///protected $appends = ['location_name'];
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function workspaces(): HasMany
+    {
+        return $this->hasMany(Workplace::class);
+    }
 }

@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+
 use OwenIt\Auditing\Contracts\Auditable;
 /**
  * Class Location
@@ -28,18 +27,11 @@ use OwenIt\Auditing\Contracts\Auditable;
  */
 class Location extends Model implements Auditable
 { 
-    use SoftDeletes;
-
+ 
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    use HasSlug;
-    
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-        ->generateSlugsFrom(['address', 'zipcode','place'])
-            ->saveSlugsTo('slug');
-    }
+ 
+  
  
 
     // Validation rules for this model
@@ -62,9 +54,9 @@ class Location extends Model implements Auditable
     ,'municipality'
     ,'housenumber',
     'complexnumber',
-    'image',
- 
-    'building_type','building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
+    'image', 
+    'building_type',
+    'building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
 
   
     public function customer()
@@ -81,10 +73,6 @@ class Location extends Model implements Auditable
     {
         return $this->hasMany(Elevator::class,'address_id','id');
     }
-
-
-   
-
     
     public function contacts()
     {
