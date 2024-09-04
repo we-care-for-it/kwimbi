@@ -14,15 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $superAdmin = User::factory()->create([
+        $superAdmin = User::create([
             'first_name' => 'Super',
             'last_name' => 'Admin',
             'email' => 'SuperAdmin@liftbeheer.nl',
             'password' => bcrypt('password'),
         ]);
 
-        $company = Company::factory()->create([
-            'name' => 'PA Systems',
+        $company = Company::create([
+            'name' => 'Liftbeheer',
         ]);
 
         $superAdmin->companies()->attach($company);
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->command->call('shield:generate', ['--all' => true]);
         $this->command->call('shield:super-admin', ['--user' => $superAdmin->id]);
 
-        $this->call(LocationSeeder::class);
-        $this->call(AssetSeeder::class);
+        //$this->call(LocationSeeder::class);
+       // $this->call(AssetSeeder::class);
     }
 }
