@@ -17,8 +17,7 @@ use Filament\Support\Enums\MaxWidth;
 //Models
 use App\Models\Location;
 use App\Models\Customer;
-use App\Models\objectBuildingType;
-use App\Models\objectManagementCompany;
+use App\Models\ObjectManagementCompany;
 
 //Filters
 use Filament\Tables\Filters\SelectFilter;
@@ -43,6 +42,9 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 
 use Filament\Notifications\Notification;
+ 
+
+use Filament\Tables\Enums\FiltersLayout;
 
 class ObjectLocationResource extends Resource
 {
@@ -53,7 +55,12 @@ class ObjectLocationResource extends Resource
     protected static ?string $navigationLabel = "Locaties";
     protected static ?string $navigationGroup = "Hoofdmenu";
 
-
+ 
+    protected function getTableFiltersLayout(): ?string
+    {
+        return Layout::AboveContent;
+    }
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -88,7 +95,7 @@ class ObjectLocationResource extends Resource
                         Select::make('management_id')
                             ->searchable()
                             ->label('Beheerder')
-                            ->options(objectManagementCompany::all()
+                            ->options(ObjectManagementCompany::all()
                                 ->pluck('name', 'id')),
 
                         Select::make('customer_id')
@@ -241,14 +248,14 @@ class ObjectLocationResource extends Resource
             ->filters([
                 SelectFilter::make("building_type_id")
                     ->label("Gebouwtype")
-                    ->options(objectBuildingType::all()->pluck("name", "id")),
+                    ->options(Location::all()->groupby('building_type')->pluck("building_type", "building_type")),
 
                 SelectFilter::make("management_id")
                     ->label("Beheerder")
                     ->options(objectManagementCompany::all()->pluck("name", "id")),
 
                 Tables\Filters\TrashedFilter::make(),
-            ])
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\ViewAction::make(),
 

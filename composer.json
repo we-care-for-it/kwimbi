@@ -7,13 +7,18 @@
     "require": {
         "php": "^8.2",
         "awcodes/filament-curator": "^3.6",
+        "awcodes/recently": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",
         "filament/filament": "^3.2",
+        "geo-sot/filament-env-editor": "*",
         "hasnayeen/themes": "^3.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "owen-it/laravel-auditing": "^13.6",
-        "swisnl/filament-backgrounds": "^1.1"
+        "shuvroroy/filament-spatie-laravel-backup": "^2.2",
+        "solution-forest/filament-firewall": "^2.0",
+        "swisnl/filament-backgrounds": "^1.1",
+        "z3d0x/filament-logger": "^0.7.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
