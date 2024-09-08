@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\Enums\MaxWidth;
 
 //Models
-use App\Models\Location;
+use App\Models\ObjectLocation;
 use App\Models\Customer;
 use App\Models\ObjectManagementCompany;
 
