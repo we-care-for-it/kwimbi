@@ -9,6 +9,7 @@
         "awcodes/filament-curator": "^3.6",
         "awcodes/recently": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",
+        "croustibat/filament-jobs-monitor": "*",
         "filament/filament": "^3.2",
         "geo-sot/filament-env-editor": "*",
         "hasnayeen/themes": "^3.0",
@@ -16,8 +17,10 @@
         "laravel/tinker": "^2.9",
         "owen-it/laravel-auditing": "^13.6",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
+        "shuvroroy/filament-spatie-laravel-health": "*",
         "solution-forest/filament-firewall": "^2.0",
         "swisnl/filament-backgrounds": "^1.1",
+        "tomatophp/filament-users": "*",
         "z3d0x/filament-logger": "^0.7.2"
     },
     "require-dev": {

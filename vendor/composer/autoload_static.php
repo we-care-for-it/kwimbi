@@ -9,8 +9,8 @@ class ComposerStaticInit582710557ba0522641f3c6272fb82c8e
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
@@ -71,6 +71,8 @@ class ComposerStaticInit582710557ba0522641f3c6272fb82c8e
         ),
         'T' => 
         array (
+            'TomatoPHP\\FilamentUsers\\' => 24,
+            'TomatoPHP\\ConsoleHelpers\\' => 25,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
@@ -283,6 +285,14 @@ class ComposerStaticInit582710557ba0522641f3c6272fb82c8e
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'TomatoPHP\\FilamentUsers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomatophp/filament-users/src',
+        ),
+        'TomatoPHP\\ConsoleHelpers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomatophp/console-helpers/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -9106,6 +9116,20 @@ class ComposerStaticInit582710557ba0522641f3c6272fb82c8e
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/ConsoleHelpersServiceProvider.php',
+        'TomatoPHP\\ConsoleHelpers\\Traits\\HandleFiles' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/HandleFiles.php',
+        'TomatoPHP\\ConsoleHelpers\\Traits\\HandleModules' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/HandleModules.php',
+        'TomatoPHP\\ConsoleHelpers\\Traits\\HandleStub' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/HandleStub.php',
+        'TomatoPHP\\ConsoleHelpers\\Traits\\RunCommand' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/RunCommand.php',
+        'TomatoPHP\\FilamentUsers\\Console\\PublishUserResourceCommand' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Console/PublishUserResourceCommand.php',
+        'TomatoPHP\\FilamentUsers\\Facades\\FilamentUser' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Facades/FilamentUser.php',
+        'TomatoPHP\\FilamentUsers\\FilamentUsersPlugin' => __DIR__ . '/..' . '/tomatophp/filament-users/src/FilamentUsersPlugin.php',
+        'TomatoPHP\\FilamentUsers\\FilamentUsersServiceProvider' => __DIR__ . '/..' . '/tomatophp/filament-users/src/FilamentUsersServiceProvider.php',
+        'TomatoPHP\\FilamentUsers\\Resources\\UserResource' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Resources/UserResource.php',
+        'TomatoPHP\\FilamentUsers\\Resources\\UserResource\\Pages\\CreateUser' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Resources/UserResource/Pages/CreateUser.php',
+        'TomatoPHP\\FilamentUsers\\Resources\\UserResource\\Pages\\EditUser' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Resources/UserResource/Pages/EditUser.php',
+        'TomatoPHP\\FilamentUsers\\Resources\\UserResource\\Pages\\ListUsers' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Resources/UserResource/Pages/ListUsers.php',
+        'TomatoPHP\\FilamentUsers\\Services\\FilamentUserServices' => __DIR__ . '/..' . '/tomatophp/filament-users/src/Services/FilamentUserServices.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

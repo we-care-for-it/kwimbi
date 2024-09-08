@@ -11,6 +11,8 @@ return array(
     'Z3d0X\\FilamentLogger\\' => array($vendorDir . '/z3d0x/filament-logger/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
+    'TomatoPHP\\FilamentUsers\\' => array($vendorDir . '/tomatophp/filament-users/src'),
+    'TomatoPHP\\ConsoleHelpers\\' => array($vendorDir . '/tomatophp/console-helpers/src'),
     'TijsVerkoyen\\CssToInlineStyles\\' => array($vendorDir . '/tijsverkoyen/css-to-inline-styles/src'),
     'Tests\\' => array($baseDir . '/tests'),
     'Termwind\\' => array($vendorDir . '/nunomaduro/termwind/src'),

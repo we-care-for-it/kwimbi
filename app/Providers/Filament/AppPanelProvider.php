@@ -18,13 +18,14 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use SolutionForest\FilamentFirewall\FilamentFirewallPanel;
-use GeoSot\FilamentEnvEditor\FilamentEnvEditorPlugin;
+ 
 
 
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
  
 
-
+use pxlrbt\FilamentEnvironmentIndicator\EnvironmentIndicatorPlugin;
+ 
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -40,8 +41,8 @@ class AppPanelProvider extends PanelProvider
             ])
             ->plugin(FilamentFirewallPanel::make())
             ->plugin(FilamentSpatieLaravelBackupPlugin::make())
-        //    ->plugin(FilamentEnvEditorPlugin::make())
-            
+        //  ->plugin(FilamentEnvEditorPlugin::make())
+                
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
@@ -52,8 +53,8 @@ class AppPanelProvider extends PanelProvider
                 config('filament-logger.activity_resource')
             ])
 
-            
-            
+            ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make())
+
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
