@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ObjectLocationResource\Pages;
 use App\Filament\Resources\ObjectLocationResource\RelationManagers;
-use App\Models\ObjectLocation;
+
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
