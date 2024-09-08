@@ -248,7 +248,7 @@ class ObjectLocationResource extends Resource
             ->filters([
                 SelectFilter::make("building_type_id")
                     ->label("Gebouwtype")
-                    ->options(Location::all()->groupby('building_type')->pluck("building_type", "building_type")),
+                    ->options(ObjectLocation::all()->groupby('building_type')->pluck("building_type", "building_type")),
 
                 SelectFilter::make("management_id")
                     ->label("Beheerder")
