@@ -246,13 +246,7 @@ class ObjectLocationResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                SelectFilter::make("building_type_id")
-                    ->label("Gebouwtype")
-                    ->options(ObjectLocation::all()->groupby('building_type')->pluck("building_type", "building_type")),
-
-                SelectFilter::make("management_id")
-                    ->label("Beheerder")
-                    ->options(objectManagementCompany::all()->pluck("name", "id")),
+             
 
                 Tables\Filters\TrashedFilter::make(),
             ], layout: FiltersLayout::AboveContent)
