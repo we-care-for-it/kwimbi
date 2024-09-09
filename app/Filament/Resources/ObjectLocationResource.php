@@ -71,31 +71,10 @@ class ObjectLocationResource extends Resource
             ->schema([
                 Forms\Components\Section::make()->schema([
 
-                    Grid::make(4)->schema([
-                        FileUpload::make("image")
-                            ->image()
-                            ->label("Afbeelding / foto")
-                            ->imagePreviewHeight("250")
-                            ->loadingIndicatorPosition("left")
-                            ->panelAspectRatio("2:1")
-                            ->panelLayout("integrated")
-                            ->removeUploadedFileButtonPosition("right")
-                            ->uploadButtonPosition("left")
-                            ->uploadProgressIndicatorPosition("left")
-                            ->imageEditor(),
-
-                        Textarea::make("remark")
-                            ->rows(7)
-                            ->label("Opmerking")
-                            ->columnSpan(3)
-                            ->autosize(),
-                           
-
-                        // ...
-                    ]),
+                  
                     Grid::make(4)->schema([
                                                 Forms\Components\TextInput::make("name")->label("Naam"),
-                        Forms\Components\TextInput::make("complexnumber")->label("complexnumber"),
+                        Forms\Components\TextInput::make("Complexnumber")->label("complexnumber"),
 
                         Select::make('management_id')
                             ->searchable()
@@ -214,8 +193,21 @@ class ObjectLocationResource extends Resource
             ])
             ->columns(3);
 
+     
+
+
+
         Section::make()
-            ->schema([]);
+            ->schema([      
+                      
+
+                Textarea::make("remark")
+                    ->rows(7)
+                    ->label("Opmerking")
+                    ->columnSpan(3)
+                    ->autosize(),
+                   
+ ]);
     }
 
     public static function table(Table $table): Table
