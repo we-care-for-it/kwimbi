@@ -30,6 +30,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Section;
 
 use Filament\GlobalSearch\Actions\Action;
 class ProjectsResource extends Resource
@@ -121,7 +122,7 @@ class ProjectsResource extends Resource
             ->label('Status')
             ->columnSpan('full')
             ->required()
-            ->options(projectStatus::all()
+            ->options(ProjectStatus::all()
             ->pluck('name', 'id')) ,
 
         Select::make('customer_id')
