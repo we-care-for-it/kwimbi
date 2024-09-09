@@ -69,37 +69,37 @@ class ProjectsResource extends Resource
         return $form
 ->schema([
 
-        Forms\Components\Section::make()
+        Section::make()
             ->schema([Forms\Components\TextInput::make('name')
             ->label('Naam')
             ->maxLength(255)
             ->required() ,
 
-        Forms\Components\TextArea::make('description')
+        TextArea::make('description')
             ->label('Omschrijving')
             ->required() ,
 
         ])
             ->columnSpan(['lg' => 3]) ,
 
-        Forms\Components\Section::make()
+       Section::make()
             ->schema([
 
-        Forms\Components\DatePicker::make('startdate')
+        DatePicker::make('startdate')
 
             ->label('Startdatum') ,
 
-        Forms\Components\DatePicker::make('enddate')
+        DatePicker::make('enddate')
 
             ->label('Einddatum') ,
 
         ])
             ->columnSpan(['lg' => 1]) ,
 
-        Forms\Components\Section::make()
+        Section::make()
             ->schema([
 
-        Forms\Components\TextInput::make('budget_hours')
+        TextInput::make('budget_hours')
 
             ->columnSpan('full')
             ->suffixIcon('heroicon-o-currency-euro')
@@ -114,7 +114,7 @@ class ProjectsResource extends Resource
             ->columns(2)
             ->columnSpan(['lg' => 1]) ,
 
-        Forms\Components\Section::make()
+        Section::make()
             ->schema([
 
         Select::make('status_id')

@@ -203,17 +203,17 @@ class ToolsResource extends Resource
             // ->pluck('name', 'id'))
             // ->searchable(),
 
-            Select::make('inspection_company_id')
-            ->label('Keuringsinstantie')
-            ->options(ToolsInspectionCompany::all()
-            ->pluck('name', 'id'))
-            ->searchable() ,
+            // Select::make('inspection_company_id')
+            // ->label('Keuringsinstantie')
+            // ->options(ToolsInspectionCompany::all()
+            // ->pluck('name', 'id'))
+            // ->searchable() ,
             
-            Select::make('inspection_method')
-            ->label('Keuringsmethode')
-            ->options(oolsInspectionMethod::all()
-            ->pluck('name', 'id'))
-            ->searchable() ,
+            // Select::make('inspection_method')
+            // ->label('Keuringsmethode')
+            // ->options(ToolsInspectionMethod::all()
+            // ->pluck('name', 'id'))
+            // ->searchable() ,
 
  
             
