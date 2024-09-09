@@ -43,6 +43,7 @@ use Filament\Tables\Columns\ImageColumn;
 
 use Filament\Notifications\Notification;
  
+use Filament\Tables\Grouping\Group;
 
 use Filament\Tables\Enums\FiltersLayout;
 
@@ -215,6 +216,28 @@ class ObjectLocationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
+        ->groups([
+
+            Group::make('name')
+            ->label('Naam'),
+
+            Group::make('managementcompany.name')
+            ->label('Beheerder'),
+
+            Group::make('building_type',)
+            ->label('Gebouwtype'),
+
+            Group::make('place',)
+            ->label('Plaats'),
+
+            
+
+ 
+        ])
+        ->defaultGroup('place')
+
+
             ->columns([
                 ImageColumn::make("image")
                     ->label("")
