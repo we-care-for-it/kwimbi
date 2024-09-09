@@ -271,7 +271,7 @@ class ObjectLocationResource extends Resource
                             ->searchable()
                
                             ->weight('medium')
-                            ->alignLeft()      ->toggleable()   ->label('Gebouwnaam'),
+                            ->alignLeft()      ->label('Gebouwnaam'),
     
                       
                     ])->space(),

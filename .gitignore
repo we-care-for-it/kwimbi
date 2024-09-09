@@ -5,6 +5,7 @@
 .env
 .phpunit.result.cache
 Homestead.json
+/public/storage
 Homestead.yaml
 npm-debug.log
 yarn-error.log
