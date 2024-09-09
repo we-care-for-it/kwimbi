@@ -86,6 +86,7 @@ class ObjectLocationResource extends Resource
                             ->label("Opmerking")
                             ->columnSpan(3)
                             ->autosize(),
+                           
 
                         // ...
                     ]),
@@ -96,6 +97,7 @@ class ObjectLocationResource extends Resource
                         Select::make('management_id')
                             ->searchable()
                             ->label('Beheerder')
+                            
                             ->options(ObjectManagementCompany::all()
                                 ->pluck('name', 'id')),
 
@@ -239,31 +241,28 @@ class ObjectLocationResource extends Resource
 
 
             ->columns([
-                ImageColumn::make("image")
-                    ->label("")
-                    ->width(100),
-
+             
                 Tables\Columns\TextColumn::make("name")->searchable()
                 ,
                 Tables\Columns\TextColumn::make("zipcode")
                     ->label("Postcode")
                     ->searchable(),
-                Tables\Columns\TextColumn::make("address")
+                Tables\Columns\TextColumn::make("address") ->sortable()
                     ->label("Adres")
                     ->searchable(),
-                Tables\Columns\TextColumn::make("place")
+                Tables\Columns\TextColumn::make("place") ->sortable()
                     ->label("Plaats")
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make("customer.name")
+                Tables\Columns\TextColumn::make("customer.name") ->sortable()
                     ->label("relatie")
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make("managementcompany.name")
+                Tables\Columns\TextColumn::make("managementcompany.name") ->sortable()
                     ->label("Beheerder")
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make("building_type")
+                Tables\Columns\TextColumn::make("building_type") ->sortable()
                     ->label("Type")
                     ->badge()
                     ->searchable(),
