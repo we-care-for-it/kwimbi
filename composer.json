@@ -6,10 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "amendozaaguiar/filament-route-statistics": "*",
         "awcodes/filament-curator": "^3.6",
         "awcodes/recently": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",
         "croustibat/filament-jobs-monitor": "*",
+        "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
         "geo-sot/filament-env-editor": "*",
         "hasnayeen/themes": "^3.0",
