@@ -9,7 +9,7 @@ use Filament\Support\Enums\MaxWidth;
 class ListObjectLocations extends ListRecords
 {
     protected static string $resource = ObjectLocationResource::class;
-    protected static ?string $title = 'Wijzig locatie';
+    protected static ?string $title = "locatie overzicht";
     protected function getHeaderActions(): array
     {
         return [

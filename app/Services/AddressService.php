@@ -45,7 +45,7 @@ final class AddressService
             'postalCode'    => $postalcode,
             'streetNumber'  => $number
         ]);
-
+ 
          return collect($request->json());       
 
     }

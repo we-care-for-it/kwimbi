@@ -21,7 +21,7 @@ use App\Models\ObjectManagementCompany;
 
 //Filters
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Tables\Actions\ActionGroup;
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -46,6 +46,9 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Grouping\Group;
 
 use Filament\Tables\Enums\FiltersLayout;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+
+
 
 class ObjectLocationResource extends Resource
 {
@@ -96,7 +99,7 @@ class ObjectLocationResource extends Resource
 
                         Select::make('management_id')
                             ->searchable()
-                            ->label('Beheerder')
+                            ->label('Beheerder')     
                             
                             ->options(ObjectManagementCompany::all()
                                 ->pluck('name', 'id')),
@@ -148,7 +151,7 @@ class ObjectLocationResource extends Resource
                                                 $set("address", $data?->street);
                                                 $set("municipality", $data?->municipality);
                                                 $set("province", $data?->province);
-                                                $set("settlement", $data?->municipality);
+                                                $set("place", $data?->settlement);
                                                 $set("building_type", $data?->purposes[0]);
                                                 $set("construction_year", $data?->constructionYear);
                                                 $set("surface", $data?->surfaceArea);
@@ -242,51 +245,144 @@ class ObjectLocationResource extends Resource
 
             ->columns([
              
-                Tables\Columns\TextColumn::make("name")->searchable()
-                ,
-                Tables\Columns\TextColumn::make("zipcode")
-                    ->label("Postcode")
-                    ->searchable(),
-                Tables\Columns\TextColumn::make("address") ->sortable()
-                    ->label("Adres")
-                    ->searchable(),
-                Tables\Columns\TextColumn::make("place") ->sortable()
-                    ->label("Plaats")
+
+                Tables\Columns\Layout\Split::make([
+                   
+     
+    
+
+
+                    Tables\Columns\Layout\Stack::make([
+                        Tables\Columns\TextColumn::make('address')
+                        ->searchable()
+                
+                        ->weight('medium')
+                        ->alignLeft(),
+    
+     
+    
+                        Tables\Columns\TextColumn::make('zipcode')->state(
+                            function (ObJectLocation $rec) {
+                              return $rec->zipcode . " " . $rec->place;
+                             }),
+     
+    
+     
+    
+    
+                    ])->space(2),
+
+
+
+                    Tables\Columns\Layout\Stack::make([
+                        Tables\Columns\TextColumn::make('name')
+                            ->searchable()
+               
+                            ->weight('medium')
+                            ->alignLeft()      ->toggleable()   ->label('Gebouwnaam'),
+    
+                      
+                    ])->space(),
+
+                    
+                    Tables\Columns\TextColumn::make("complex_number") ->sortable()
+                    ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make("customer.name") ->sortable()
-                    ->label("relatie")
+
+                    Tables\Columns\TextColumn::make("levels")  
+                    ->label("Verdiepingen") ->placeholder('Verdiepingen onbekend')   ->suffix(' verdieping')   ->toggleable(isToggledHiddenByDefault: true),
+
+             
+
+
+
+                    Tables\Columns\TextColumn::make("construction_year") ->sortable()
+                    ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')   ->toggleable(isToggledHiddenByDefault: true)
+                    ->prefix('Gebouw in ')   ->searchable(),
+
+
+
+
+                    Tables\Columns\TextColumn::make("customer.name") ->sortable()
+                    ->label("Relatie") ->placeholder('Geen relatie gekoppeld')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make("managementcompany.name") ->sortable()
-                    ->label("Beheerder")
+                    ->label("Beheerder") ->placeholder('Geen beheer gekoppeld')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make("building_type") ->sortable()
-                    ->label("Type")
+                    ->label("Gebouwtype")
                     ->badge()
                     ->searchable(),
+                    // Tables\Columns\TextColumn::make('phonenumber')
+                    // ->label('Telefoonnummer')
+                    // ->searchable()
+                    // ->sortable(),
+    
+       
+    
+    
+                ])->from('md'),
             ])
+
+  
             ->filters([
              
+                SelectFilter::make('customer_id')
+                ->relationship('customer', 'name')->label('Relatie'),
+                SelectFilter::make('management_id')->label('Beheerder')
+    ->relationship('managementcompany', 'name'),
+ 
+    SelectFilter::make('place')
+    ->label('Plaats')
+    ->options(ObjectLocation::all()->pluck('place','place')->groupby('place'))
+    ->searchable()
+ ,   
+ 
+ SelectFilter::make('building_type')
+ ->label('Gebouwtype')
+ ->options(ObjectLocation::all()->pluck('building_type','building_type')->groupby('building_type'))
+ ->searchable(),
+ 
 
                 Tables\Filters\TrashedFilter::make(),
-            ], layout: FiltersLayout::AboveContent)
-            ->actions([
-                Tables\Actions\ViewAction::make(),
+            ])  ->filtersFormColumns(2)
 
-                Tables\Actions\EditAction::make()
-                    ->modalHeading("Wijzigen")
-                    ->modalWidth(MaxWidth::SevenExtraLarge)
-                    ->label('Wijzigen')
+
+            // layout: FiltersLayout::AboveContent
+            ->actions([
+
+                ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+
+                    Tables\Actions\EditAction::make()
+                        ->modalHeading("Wijzigen")
+                        ->modalWidth(MaxWidth::SevenExtraLarge)
+                        ->label('Wijzigen')
+                ]),
+
+
+
+               
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+ 
+                        ExportBulkAction::make() ,
+                 
+
+
                     //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
                 ]),
             ])
             ->emptyState(view("partials.empty-state"));
     }
+
+
+
+ 
 
     public static function getRelations(): array
     {

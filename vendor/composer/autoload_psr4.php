@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
+    'pxlrbt\\FilamentExcel\\' => array($vendorDir . '/pxlrbt/filament-excel/src'),
     'ZipStream\\' => array($vendorDir . '/maennchen/zipstream-php/src'),
     'Z3d0X\\FilamentLogger\\Database\\Factories\\' => array($vendorDir . '/z3d0x/filament-logger/database/factories'),
     'Z3d0X\\FilamentLogger\\' => array($vendorDir . '/z3d0x/filament-logger/src'),
