@@ -32,7 +32,7 @@ use Filament\Forms\Components\FileUp;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Components\FileUpload;
-
+use Filament\Support\Enums\VerticalAlignment;
 //Services
 use App\Services\AddressService;
 
@@ -285,21 +285,22 @@ class ObjectLocationResource extends Resource
                     ])->space(),
 
                     
-                    Tables\Columns\TextColumn::make("complex_number") ->sortable()
-                    ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable(isToggledHiddenByDefault: true)
-                    ->searchable(),
+                    // Tables\Columns\TextColumn::make("complex_number") ->sortable()
+                    // ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable()
+                    // ->searchable(),
 
 
-                    Tables\Columns\TextColumn::make("levels")  
-                    ->label("Verdiepingen") ->placeholder('Verdiepingen onbekend')   ->suffix(' verdieping')   ->toggleable(isToggledHiddenByDefault: true),
+                    // Tables\Columns\TextColumn::make("levels")  
+                    // ->label("Verdiepingen") ->placeholder('Verdiepingen onbekend')   ->suffix(' verdieping')   ->toggleable(isToggledHiddenByDefault: true),
 
              
 
 
 
-                    Tables\Columns\TextColumn::make("construction_year") ->sortable()
-                    ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')   ->toggleable(isToggledHiddenByDefault: true)
-                    ->prefix('Gebouw in ')   ->searchable(),
+                    // Tables\Columns\TextColumn::make("construction_year") ->sortable()
+                    // ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')   
+                    // ->toggleable(isToggledHiddenByDefault: true)
+                    // ->prefix('Gebouw in ')   ->searchable(),
 
 
 
@@ -313,7 +314,7 @@ class ObjectLocationResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make("building_type") ->sortable()
-                    ->label("Gebouwtype")
+                    ->label("Gebouwtype")  ->verticalAlignment(VerticalAlignment::End)
                     ->badge()
                     ->searchable(),
                     // Tables\Columns\TextColumn::make('phonenumber')
