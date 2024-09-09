@@ -41,8 +41,8 @@ class AdminPanelProvider extends PanelProvider
             //->brandLogo(fn () => view('components.logo'))
        
  
-
-
+            ->sidebarCollapsibleOnDesktop()
+         //   ->topNavigation()
  
         ->plugins([
             FilamentBackgroundsPlugin::make()  ->imageProvider(

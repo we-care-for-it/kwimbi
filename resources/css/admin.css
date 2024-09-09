@@ -40,6 +40,7 @@
 
 }.fi-topbar{
   font-weight: normal!important;
+  
   }
 
 
@@ -47,9 +48,47 @@
    font-weight: normal!important;
    color:blue
 }
+.fi-topbar .bg-white {
+  background-color:rgb(139,217,144)
+}
+
+
+.fi-sidebar-header  {
+  background-color:rgb(125,196,129)!important
+}
+
+.fi-sidebar-header  {
+  background-color:rgb(125,196,129)!important
+}
+
+.fi-sidebar-header .fi-icon-btn-icon  {
+  color: white!important
+}
+
+
+
 
 .fi-btn-label{
   font-weight: normal!important;
 }
+.fi-ac-btn-action{
+ border-radius: 5px;
+ padding: 10px;
+ 
+}.fi-input-wrp{
+  background-color: white!important;;
+}
+ 
 
-  
+
+
+.fi-sidebar-nav{
+  background-color: white!important;;
+}
+.fi-main{
+  background-color: white!important;;
+}
+
+.fi-dropdown-panel{
+  background-color: white!important;;
+}

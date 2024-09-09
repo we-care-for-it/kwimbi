@@ -161,6 +161,42 @@
       <path value="$PROJECT_DIR$/vendor/filament/infolists" />
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/filament/tables" />
+      <path value="$PROJECT_DIR$/vendor/swisnl/filament-backgrounds" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/amendozaaguiar/filament-route-statistics" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/tomatophp/filament-users" />
+      <path value="$PROJECT_DIR$/vendor/tomatophp/console-helpers" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/eightynine/filament-excel-import" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/bilfeldt/laravel-correlation-id" />
+      <path value="$PROJECT_DIR$/vendor/bilfeldt/laravel-route-statistics" />
+      <path value="$PROJECT_DIR$/vendor/bilfeldt/laravel-request-logger" />
+      <path value="$PROJECT_DIR$/vendor/z3d0x/filament-logger" />
+      <path value="$PROJECT_DIR$/vendor/akaunting/laravel-firewall" />
+      <path value="$PROJECT_DIR$/vendor/croustibat/filament-jobs-monitor" />
+      <path value="$PROJECT_DIR$/vendor/spatie/enum" />
+      <path value="$PROJECT_DIR$/vendor/spatie/temporary-directory" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-health" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-signal-aware-command" />
+      <path value="$PROJECT_DIR$/vendor/spatie/db-dumper" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-activitylog" />
+      <path value="$PROJECT_DIR$/vendor/spatie/regex" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
+      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
+      <path value="$PROJECT_DIR$/vendor/geo-sot/filament-env-editor" />
+      <path value="$PROJECT_DIR$/vendor/geo-sot/laravel-env-editor" />
+      <path value="$PROJECT_DIR$/vendor/pxlrbt/filament-excel" />
+      <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
+      <path value="$PROJECT_DIR$/vendor/shuvroroy/filament-spatie-laravel-health" />
+      <path value="$PROJECT_DIR$/vendor/shuvroroy/filament-spatie-laravel-backup" />
+      <path value="$PROJECT_DIR$/vendor/awcodes/recently" />
+      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/vendor/jenssegers/agent" />
+      <path value="$PROJECT_DIR$/vendor/solution-forest/filament-firewall" />
+      <path value="$PROJECT_DIR$/vendor/calebporzio/sushi" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

@@ -40,7 +40,7 @@ class ProjectsResource extends Resource
     protected static ? string $SearchResultTitle = 'Projecten';
     protected static ? string $navigationGroup = 'Hoofdmenu';
     protected static ? string $navigationLabel = 'Projecten';
-    protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ? string $navigationIcon = 'heroicon-o-archive-box';
     protected static bool $isLazy = false;
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -57,7 +57,7 @@ class ProjectsResource extends Resource
     //         'Category' => $record->name,
     //     ];
     // }
- 
+
 
 
     public static function getNavigationBadge() : ? string
@@ -130,7 +130,7 @@ class ProjectsResource extends Resource
             ->label('Relatie')
             ->columnSpan('full')
             ->options(customer::all()
-             
+
             ->pluck('name', 'id')) ,
 
         ])
@@ -177,14 +177,14 @@ class ProjectsResource extends Resource
             ->multiple() ])
             ->actions([
 
-        Tables\Actions\ViewAction::make() , 
-        
-
-      
+        Tables\Actions\ViewAction::make() ,
 
 
-        
-        Tables\Actions\EditAction::make()     
+
+
+
+
+        Tables\Actions\EditAction::make()
          ])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
         ]) , ])
@@ -200,9 +200,9 @@ class ProjectsResource extends Resource
     {
         return [
 
-        'index' => Pages\ListProjects::route('/') , 
-         //'create' => Pages\CreateProjects::route('/create') , 
-        'view' => Pages\ViewProjects::route('/{record}') , 
+        'index' => Pages\ListProjects::route('/') ,
+         //'create' => Pages\CreateProjects::route('/create') ,
+        'view' => Pages\ViewProjects::route('/{record}') ,
         //'edit' => Pages\EditProjects::route('/{record}/edit')
          ];
     }

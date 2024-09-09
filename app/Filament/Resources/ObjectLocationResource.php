@@ -42,7 +42,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 
 use Filament\Notifications\Notification;
- 
+
 use Filament\Tables\Grouping\Group;
 
 use Filament\Tables\Enums\FiltersLayout;
@@ -54,32 +54,27 @@ class ObjectLocationResource extends Resource
 {
     protected static ?string $model = ObjectLocation::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
     protected static ?string $navigationLabel = "Locaties";
     protected static ?string $navigationGroup = "Hoofdmenu";
 
  
-    protected function getTableFiltersLayout(): ?string
-    {
-        return Layout::AboveContent;
-    }
-    
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make()->schema([
 
-                  
+
                     Grid::make(4)->schema([
                                                 Forms\Components\TextInput::make("name")->label("Naam"),
                         Forms\Components\TextInput::make("Complexnumber")->label("complexnumber"),
 
                         Select::make('management_id')
                             ->searchable()
-                            ->label('Beheerder')     
-                            
+                            ->label('Beheerder')
+
                             ->options(ObjectManagementCompany::all()
                                 ->pluck('name', 'id')),
 
@@ -193,20 +188,20 @@ class ObjectLocationResource extends Resource
             ])
             ->columns(3);
 
-     
+
 
 
 
         Section::make()
-            ->schema([      
-                      
+            ->schema([
+
 
                 Textarea::make("remark")
                     ->rows(7)
                     ->label("Opmerking")
                     ->columnSpan(3)
                     ->autosize(),
-                   
+
  ]);
     }
 
@@ -214,54 +209,54 @@ class ObjectLocationResource extends Resource
     {
         return $table
 
-        ->groups([
+     ///   ->groups([
 
-            Group::make('name')
-            ->label('Naam'),
-
-            Group::make('managementcompany.name')
-            ->label('Beheerder'),
-
-            Group::make('building_type',)
-            ->label('Gebouwtype'),
-
-            Group::make('place',)
-            ->label('Plaats'),
-
-            
-
- 
-        ])
-        ->defaultGroup('place')
+//            Group::make('name')
+//            ->label('Naam'),
+//
+//            Group::make('managementcompany.name')
+//            ->label('Beheerder'),
+//
+//            Group::make('building_type',)
+//            ->label('Gebouwtype'),
+//
+//            Group::make('place',)
+//            ->label('Plaats'),
+//
+//
+//
+//
+//        ])
+//        ->defaultGroup('place')
 
 
             ->columns([
-             
+
 
                 Tables\Columns\Layout\Split::make([
-                   
-     
-    
+
+
+
 
 
                     Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('address')
                         ->searchable()
-                
+
                         ->weight('medium')
                         ->alignLeft(),
-    
-     
-    
+
+
+
                         Tables\Columns\TextColumn::make('zipcode')->state(
                             function (ObJectLocation $rec) {
                               return $rec->zipcode . " " . $rec->place;
                              }),
-     
-    
-     
-    
-    
+
+
+
+
+
                     ])->space(2),
 
 
@@ -269,28 +264,28 @@ class ObjectLocationResource extends Resource
                     Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('name')
                             ->searchable()
-               
+
                             ->weight('medium')
                             ->alignLeft()      ->label('Gebouwnaam'),
-    
-                      
+
+
                     ])->space(),
 
-                    
+
                     // Tables\Columns\TextColumn::make("complex_number") ->sortable()
                     // ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable()
                     // ->searchable(),
 
 
-                    // Tables\Columns\TextColumn::make("levels")  
+                    // Tables\Columns\TextColumn::make("levels")
                     // ->label("Verdiepingen") ->placeholder('Verdiepingen onbekend')   ->suffix(' verdieping')   ->toggleable(isToggledHiddenByDefault: true),
 
-             
+
 
 
 
                     // Tables\Columns\TextColumn::make("construction_year") ->sortable()
-                    // ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')   
+                    // ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')
                     // ->toggleable(isToggledHiddenByDefault: true)
                     // ->prefix('Gebouw in ')   ->searchable(),
 
@@ -313,32 +308,32 @@ class ObjectLocationResource extends Resource
                     // ->label('Telefoonnummer')
                     // ->searchable()
                     // ->sortable(),
-    
-       
-    
-    
+
+
+
+
                 ])->from('md'),
             ])
 
-  
+
             ->filters([
-             
+
                 SelectFilter::make('customer_id')
                 ->relationship('customer', 'name')->label('Relatie'),
                 SelectFilter::make('management_id')->label('Beheerder')
     ->relationship('managementcompany', 'name'),
- 
+
     SelectFilter::make('place')
     ->label('Plaats')
     ->options(ObjectLocation::all()->pluck('place','place')->groupby('place'))
     ->searchable()
- ,   
- 
+ ,
+
 //  SelectFilter::make('building_type')
 //  ->label('Gebouwtype')
 //  ->options(ObjectLocation::all()->pluck('building_type','building_type')->groupby('building_type'))
 //  ->searchable(),
- 
+
 
                 Tables\Filters\TrashedFilter::make(),
             ])  ->filtersFormColumns(2)
@@ -358,13 +353,13 @@ class ObjectLocationResource extends Resource
 
 
 
-               
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
- 
+
                         ExportBulkAction::make() ,
-                 
+
 
 
                     //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
@@ -375,7 +370,7 @@ class ObjectLocationResource extends Resource
 
 
 
- 
+
 
     public static function getRelations(): array
     {
