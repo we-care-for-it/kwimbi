@@ -22,7 +22,7 @@ use Filament\Support\Enums\MaxWidth;
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 
 //tables
@@ -76,7 +76,7 @@ class ProjectsResource extends Resource
             ->maxLength(255)
             ->required() ,
 
-        TextArea::make('description')
+        Textarea::make('description')
             ->label('Omschrijving')
             ->required() ,
 
