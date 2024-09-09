@@ -214,25 +214,25 @@ class ObjectLocationResource extends Resource
     {
         return $table
 
-        // ->groups([
+        ->groups([
 
-        //     Group::make('name')
-        //     ->label('Naam'),
+            Group::make('name')
+            ->label('Naam'),
 
-        //     Group::make('managementcompany.name')
-        //     ->label('Beheerder'),
+            Group::make('managementcompany.name')
+            ->label('Beheerder'),
 
-        //     Group::make('building_type',)
-        //     ->label('Gebouwtype'),
+            Group::make('building_type',)
+            ->label('Gebouwtype'),
 
-        //     Group::make('place',)
-        //     ->label('Plaats'),
+            Group::make('place',)
+            ->label('Plaats'),
 
             
 
  
-        // ])
-        // ->defaultGroup('place')
+        ])
+        ->defaultGroup('place')
 
 
             ->columns([
@@ -334,10 +334,10 @@ class ObjectLocationResource extends Resource
     ->searchable()
  ,   
  
- SelectFilter::make('building_type')
- ->label('Gebouwtype')
- ->options(ObjectLocation::all()->pluck('building_type','building_type')->groupby('building_type'))
- ->searchable(),
+//  SelectFilter::make('building_type')
+//  ->label('Gebouwtype')
+//  ->options(ObjectLocation::all()->pluck('building_type','building_type')->groupby('building_type'))
+//  ->searchable(),
  
 
                 Tables\Filters\TrashedFilter::make(),
