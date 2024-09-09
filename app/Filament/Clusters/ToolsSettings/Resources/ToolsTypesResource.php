@@ -91,7 +91,7 @@ Select::make('category_id')
 
         ->groups([
 
-            Group::make('Typenaam')
+            Group::make('name')
             ->label('Naam'),
 
             Group::make('category.name')
@@ -109,20 +109,16 @@ Select::make('category_id')
                 ImageColumn::make('brand.image')->label('')  
                 ->width(100),
 
-
-
                 TextColumn::make('name')  ->sortable()
                 ->label('Modelnaam')         ->searchable(),
 
                 TextColumn::make('category.name')  ->sortable()
                 ->label('Categorie')         ->searchable(),
-
-
-   
-
-                
-                TextColumn::make('brand.name')  ->sortable()
-                ->label('Merk')         ->searchable(),
+            
+                TextColumn::make('brand.name')
+                ->sortable()
+                ->label('Merk')
+                ->searchable(),
 
             ])
             ->filters([

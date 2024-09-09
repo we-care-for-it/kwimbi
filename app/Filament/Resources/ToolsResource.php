@@ -41,7 +41,7 @@ use Filament\Support\Enums\FontWeight;
 
 
  
-
+use Filament\Tables\Grouping\Group;
 
 class ToolsResource extends Resource
 {
@@ -245,7 +245,27 @@ class ToolsResource extends Resource
                                 public static function table(Table $table):
                                     Table
                                     {
-                                        return $table->columns([
+                                        return $table
+                                        ->groups([
+
+                                            Group::make('name')
+                                            ->label('Naam'),
+                                
+                                            Group::make('category.name')
+                                            ->label('Categorie'),
+                                
+                                            Group::make('brand.name',)
+                                            ->label('Merk'),
+                                
+                                            Group::make('type.name',)
+                                            ->label('Model'),
+                                
+                                            
+
+                                 
+                                        ])
+                                        ->defaultGroup('name')
+                                     ->columns([
 
                                         ImageColumn::make('image')
                                             ->label('')
@@ -289,22 +309,22 @@ class ToolsResource extends Resource
                                         //     ->sortable() ,
 
                                         ])
-                                            ->filters([SelectFilter::make('brand_id')
-                                            ->label('Merk')
-                                            ->options(toolsBrand::all()
-                                            ->pluck('name', 'id')) ,
+                                        //     ->filters([SelectFilter::make('brand_id')
+                                        //     ->label('Merk')
+                                        //     ->options(toolsBrand::all()
+                                        //     ->pluck('name', 'id')) ,
 
-                                        SelectFilter::make('category_id')
-                                            ->label('Categorie')
-                                            ->options(toolsCategory::all()
-                                            ->pluck('name', 'id')) ,
+                                        // SelectFilter::make('category_id')
+                                        //     ->label('Categorie')
+                                        //     ->options(toolsCategory::all()
+                                        //     ->pluck('name', 'id')) ,
 
-                                        SelectFilter::make('employee_id')
-                                            ->label('Medewerker')
-                                            ->options(User::all()
-                                            ->pluck('name', 'id')) ,
+                                        // SelectFilter::make('employee_id')
+                                        //     ->label('Medewerker')
+                                        //     ->options(User::all()
+                                        //     ->pluck('name', 'id')) ,
 
-                                        ])
+                                      //  ])
                                             ->actions([
                                                 
                                                 Tables\Actions\ViewAction::make(),
