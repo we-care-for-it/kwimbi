@@ -39,6 +39,10 @@ use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\FontWeight;
 
+
+ 
+
+
 class ToolsResource extends Resource
 {
     protected static ? string $model = Tools::class;
@@ -207,7 +211,7 @@ class ToolsResource extends Resource
             
             Select::make('inspection_method')
             ->label('Keuringsmethode')
-            ->options(ToolsInspectionMethod::all()
+            ->options(oolsInspectionMethod::all()
             ->pluck('name', 'id'))
             ->searchable() ,
 

@@ -16,7 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
+use Filament\Tables\Grouping\Group;
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -88,6 +88,21 @@ Select::make('category_id')
     public static function table(Table $table): Table
     {
         return $table
+
+        ->groups([
+
+            Group::make('Typenaam')
+            ->label('Naam'),
+
+            Group::make('category.name')
+            ->label('Categorie'),
+
+            Group::make('brand.name',)
+            ->label('Merk'),
+
+ 
+        ])
+        ->defaultGroup('name')
             ->columns([
 
                 
