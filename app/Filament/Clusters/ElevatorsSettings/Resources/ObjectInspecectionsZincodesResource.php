@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ElevatorsSettings\Resources;
 use App\Filament\Clusters\ElevatorsSettings;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectInspecectionsZincodesResource\Pages;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectInspecectionsZincodesResource\RelationManagers;
-use App\Models\objectInspectionZincode;
+use App\Models\ObjectInspectionZincode;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,7 +26,7 @@ use Filament\Tables\Columns\ToggleColumn;
 
 class ObjectInspecectionsZincodesResource extends Resource
 {
-    protected static ?string $model = objectInspectionZincode::class;
+    protected static ?string $model = ObjectInspectionZincode::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
