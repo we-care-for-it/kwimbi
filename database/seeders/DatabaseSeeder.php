@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $superAdmin = User::create([
-            'first_name' => 'Super',
+            'name' => 'Super Admin',
             'last_name' => 'Admin',
+            'first_name' => 'Super Admin',
             'email' => 'SuperAdmin@liftbeheer.nl',
             'password' => bcrypt('password'),
         ]);

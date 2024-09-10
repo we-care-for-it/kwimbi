@@ -42,8 +42,9 @@ $table->longtext('image')->nullable();
             $table->string('municipality')->nullable();
             $table->string('building_type')->nullable();
             $table->string('housenumber')->nullable();
+            $table->string('construction_year')->nullable();
             $table->string('building_access_type_id')->nullable();
-
+            
             
 
         });
