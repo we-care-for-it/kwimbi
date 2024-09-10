@@ -101,6 +101,8 @@ class ObjectLocationResource extends Resource
                                     Action::make("searchAddressByZipcode")
                                         ->icon("heroicon-m-magnifying-glass")
                                         ->action(function (Get $get, Set $set) {
+
+                                            $set("place", $data?->settlement);
                                             $data = (new AddressService())->GetAddress(
                                                 $get("zipcode"),
                                                 $get("number")

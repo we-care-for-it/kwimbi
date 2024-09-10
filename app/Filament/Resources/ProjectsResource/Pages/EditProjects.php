@@ -9,7 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditProjects extends EditRecord
 {
     protected static string $resource = ProjectsResource::class;
-    protected static ?string $title = 'Wijzig project';
+    protected static ?string $title = 'Project bekijken';
     protected function getHeaderActions(): array
     {
         return [
@@ -23,16 +23,21 @@ class EditProjects extends EditRecord
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
 
-
-    public function getRelationManagers(): array
+    public function refreshForm()
     {
-        return [];
+        $this->fillForm();
     }
-
-
+    public static function getRelations() : array
+    {
+        return [
+            RelationManagers\ReactionsRelationManager::class,
+            RelationManagers\UploadsRelationManager::class,
+            RelationManagers\LocationsRelationManager::class
+        ];
+    }
     public function getHeading(): string
     {
-        return 'Wijzig: ' . $this->getRecord()->name;
+        return $this->getRecord()->name;
     }
-    
+
 }

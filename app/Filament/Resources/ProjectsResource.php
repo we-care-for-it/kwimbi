@@ -44,11 +44,6 @@ class ProjectsResource extends Resource
     protected static bool $isLazy = false;
     protected static ?string $recordTitleAttribute = 'name';
 
-    #[On('refreshPage')]
-    public function refresh(): void
-    {
-    }
-
 
     // public static function getGlobalSearchResultDetails(Model $record): array
     // {
@@ -59,14 +54,20 @@ class ProjectsResource extends Resource
     // }
 
 
-
     public static function getNavigationBadge() : ? string
     {
         return static ::getModel() ::count();
     }
 
+    protected $listeners = ['refresh' => '$refresh'];
+
     public static function form(Form $form) : Form
     {
+
+
+
+
+
         return $form
 ->schema([
 
@@ -76,12 +77,12 @@ class ProjectsResource extends Resource
             ->maxLength(255)
             ->required() ,
 
-        Textarea::make('description')
+                TextInput::make('description')
             ->label('Omschrijving')
             ->required() ,
 
         ])
-            ->columnSpan(['lg' => 3]) ,
+            ->columnSpan(['lg' => 1]) ,
 
        Section::make()
             ->schema([
@@ -122,6 +123,7 @@ class ProjectsResource extends Resource
             ->label('Status')
             ->columnSpan('full')
             ->required()
+            ->reactive()
             ->options(ProjectStatus::all()
             ->pluck('name', 'id')) ,
 
@@ -138,7 +140,7 @@ class ProjectsResource extends Resource
             ->columnSpan(['lg' => 1]) ,
 
         ])
-            ->columns(3);
+            ->columns(4);
     }
 
     public static function table(Table $table) : Table
@@ -193,7 +195,11 @@ class ProjectsResource extends Resource
 
     public static function getRelations() : array
     {
-        return [RelationManagers\UploadsRelationManager::class , ];
+       return [
+           RelationManagers\ReactionsRelationManager::class,
+           RelationManagers\UploadsRelationManager::class,
+           RelationManagers\LocationsRelationManager::class
+        ];
     }
 
     public static function getPages() : array
@@ -202,9 +208,12 @@ class ProjectsResource extends Resource
 
         'index' => Pages\ListProjects::route('/') ,
          //'create' => Pages\CreateProjects::route('/create') ,
-        'view' => Pages\ViewProjects::route('/{record}') ,
-        //'edit' => Pages\EditProjects::route('/{record}/edit')
+      //  'view' => Pages\ViewProjects::route('/{record}') ,
+         'edit' => Pages\EditProjects::route('/{record}/edit')
          ];
     }
+
+
+
 }
 
