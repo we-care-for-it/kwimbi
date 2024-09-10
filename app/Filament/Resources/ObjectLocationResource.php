@@ -59,7 +59,7 @@ class ObjectLocationResource extends Resource
     protected static ?string $navigationLabel = "Locaties";
     protected static ?string $navigationGroup = "Hoofdmenu";
 
- 
+
     public static function form(Form $form): Form
     {
         return $form
@@ -233,13 +233,10 @@ class ObjectLocationResource extends Resource
             ->columns([
 
 
-                Tables\Columns\Layout\Split::make([
 
 
 
 
-
-                    Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('address')
                         ->searchable()
 
@@ -257,19 +254,13 @@ class ObjectLocationResource extends Resource
 
 
 
-                    ])->space(2),
 
-
-
-                    Tables\Columns\Layout\Stack::make([
                         Tables\Columns\TextColumn::make('name')
                             ->searchable()
 
                             ->weight('medium')
                             ->alignLeft()      ->label('Gebouwnaam'),
 
-
-                    ])->space(),
 
 
                     // Tables\Columns\TextColumn::make("complex_number") ->sortable()
@@ -311,8 +302,6 @@ class ObjectLocationResource extends Resource
 
 
 
-
-                ])->from('md'),
             ])
 
 
