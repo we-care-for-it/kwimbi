@@ -33,32 +33,32 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
 
 use Hexters\HexaLite\Traits\HexAccess;
- 
+
 use Filament\Forms\Components\Fieldset;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\FontWeight;
 
 
- 
+
 use Filament\Tables\Grouping\Group;
 
 class ToolsResource extends Resource
 {
     protected static ? string $model = Tools::class;
 
-    protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ? string $navigationIcon = 'heroicon-o-wrench-screwdriver';
 
- 
+
     protected static ? string $navigationLabel = 'Gereedschap';
     protected static ? string $navigationGroup = 'Hoofdmenu';
 
- 
 
 
-     
+
+
 // protected static ?string $permissionId = 'access.tools';
- 
+
 // protected static ?string $descriptionPermission = 'Het beheren van gereedschappen';
 
 
@@ -69,7 +69,7 @@ class ToolsResource extends Resource
 //         'access.tools.edit' => 'Wijzigen',
 //         'access.tools.delete' => 'Verwijderen',
 //     ];
-     
+
 //     public static function canAccess(array $parameters = []): bool
 //     {
 
@@ -116,12 +116,12 @@ class ToolsResource extends Resource
             ->schema([
 
         Forms\Components\TextInput::make('name')
-            ->label('Naam') , 
-            
+            ->label('Naam') ,
+
 
             Forms\Components\TextInput::make('serial_number')
-            ->label('Serienummer')->required() , 
-            
+            ->label('Serienummer')->required() ,
+
 
 
             Select::make('category_id')
@@ -172,8 +172,8 @@ class ToolsResource extends Resource
 
                                     ]) ,
 
- 
-    
+
+
 
 
 
@@ -187,16 +187,16 @@ class ToolsResource extends Resource
 
                 Select::make('warehouse_id')
                 ->label('Magazijn')
-    
+
                 ->relationship(name : 'warehouse', titleAttribute : 'name')
                 ->loadingMessage('Magazijnen laden...')
                 ->createOptionForm([
-    
+
             Forms\Components\TextInput::make('name')
                 ->required() ,
-    
+
                 ]),
-                
+
             //     Select::make('employee_id')
             // ->label('Medewerker')
             // ->options(User::all()
@@ -208,16 +208,16 @@ class ToolsResource extends Resource
             // ->options(ToolsInspectionCompany::all()
             // ->pluck('name', 'id'))
             // ->searchable() ,
-            
+
             // Select::make('inspection_method')
             // ->label('Keuringsmethode')
             // ->options(ToolsInspectionMethod::all()
             // ->pluck('name', 'id'))
             // ->searchable() ,
 
- 
-            
- 
+
+
+
             ])
             ->columnSpan(['lg' => 1])
 
@@ -231,13 +231,13 @@ class ToolsResource extends Resource
         Forms\Components\TextInput::make('name')
             ->label('Naam') ,
         //->columnSpan('full')
-        
 
 
-      
-                                 
 
-                                     
+
+
+
+
 
                                     ]);
                                 }
@@ -250,19 +250,19 @@ class ToolsResource extends Resource
 
                                             Group::make('name')
                                             ->label('Naam'),
-                                
+
                                             Group::make('category.name')
                                             ->label('Categorie'),
-                                
+
                                             Group::make('brand.name',)
                                             ->label('Merk'),
-                                
+
                                             Group::make('type.name',)
                                             ->label('Model'),
-                                
-                                            
 
-                                 
+
+
+
                                         ])
                                         ->defaultGroup('name')
                                      ->columns([
@@ -272,7 +272,7 @@ class ToolsResource extends Resource
                                             ->width(100) ,
 
 
-                                            
+
                                         TextColumn::make('name')
                                         ->searchable()
                                         ->label('Naam'),
@@ -326,14 +326,14 @@ class ToolsResource extends Resource
 
                                       //  ])
                                             ->actions([
-                                                
+
                                                 Tables\Actions\ViewAction::make(),
-                                                Tables\Actions\EditAction::make() 
-                                       
+                                                Tables\Actions\EditAction::make()
+
                                            // ->visible(hexa()->can('access.tools.create'))
                                             ->modalHeading('Wijzigen')
                                             //->visible(hexa()->can('access.tools.edit'))
-                                            ->modalWidth(MaxWidth::SevenExtraLarge) , 
+                                            ->modalWidth(MaxWidth::SevenExtraLarge) ,
                                          //   ->visible(hexa()->can('access.tools.delete')) ,
 
                                         ])
@@ -357,10 +357,9 @@ class ToolsResource extends Resource
                                             array
                                             {
                                                 return ['index' => Pages\ListTools::route('/') ,
-                                                'view' => Pages\ViewTools::route('/{record}') , 
-                                           //     'create' => Pages\CreateTools::route('/create') , 
-                                               // 'edit' => Pages\EditTools::route('/{record}/edit') 
+                                                'view' => Pages\ViewTools::route('/{record}') ,
+                                           //     'create' => Pages\CreateTools::route('/create') ,
+                                               // 'edit' => Pages\EditTools::route('/{record}/edit')
                                                ];
                                             }
                                         }
-                                        
