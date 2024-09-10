@@ -245,6 +245,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Lexer\\' => 22,
             'Dflydev\\DotAccessData\\' => 22,
+            'Devaslanphp\\FilamentAvatar\\' => 27,
             'DeepCopy\\' => 9,
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
@@ -563,8 +564,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -636,8 +637,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         ),
         'League\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/uri-interfaces',
-            1 => __DIR__ . '/..' . '/league/uri',
+            0 => __DIR__ . '/..' . '/league/uri',
+            1 => __DIR__ . '/..' . '/league/uri-interfaces',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -817,6 +818,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
+        ),
+        'Devaslanphp\\FilamentAvatar\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src',
         ),
         'DeepCopy\\' => 
         array (
@@ -1103,6 +1108,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\Elevator' => __DIR__ . '/../..' . '/app/Models/Elevator.php',
         'App\\Models\\Location' => __DIR__ . '/../..' . '/app/Models/Location.php',
+        'App\\Models\\ObjectBuildingType' => __DIR__ . '/../..' . '/app/Models/ObjectBuildingType.php',
+        'App\\Models\\ObjectLocation' => __DIR__ . '/../..' . '/app/Models/ObjectLocation.php',
         'App\\Models\\Project' => __DIR__ . '/../..' . '/app/Models/Project.php',
         'App\\Models\\ProjectHourTypes' => __DIR__ . '/../..' . '/app/Models/ProjectHourTypes.php',
         'App\\Models\\ProjectStatus' => __DIR__ . '/../..' . '/app/Models/ProjectStatus.php',
@@ -1117,10 +1124,6 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Models\\Workplace' => __DIR__ . '/../..' . '/app/Models/Workplace.php',
         'App\\Models\\external' => __DIR__ . '/../..' . '/app/Models/external.php',
         'App\\Models\\hourTypes' => __DIR__ . '/../..' . '/app/Models/hourTypes.php',
-        'App\\Models\\objectInspectionCompany' => __DIR__ . '/../..' . '/app/Models/objectInspectionCompany.php',
-        'App\\Models\\objectInspectionZincode' => __DIR__ . '/../..' . '/app/Models/objectInspectionZincode.php',
-        'App\\Models\\objectMaintenanceCompany' => __DIR__ . '/../..' . '/app/Models/objectMaintenanceCompany.php',
-        'App\\Models\\objectManagementCompany' => __DIR__ . '/../..' . '/app/Models/objectManagementCompany.php',
         'App\\Models\\objectType' => __DIR__ . '/../..' . '/app/Models/objectType.php',
         'App\\Models\\uploadType' => __DIR__ . '/../..' . '/app/Models/uploadType.php',
         'App\\Models\\warehouse' => __DIR__ . '/../..' . '/app/Models/warehouse.php',
@@ -1435,6 +1438,11 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
         'Detection\\MobileDetect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php',
+        'Devaslanphp\\FilamentAvatar\\Core\\FilamentUserAvatarProvider' => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src/Core/FilamentUserAvatarProvider.php',
+        'Devaslanphp\\FilamentAvatar\\Core\\GravatarProvider' => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src/Core/GravatarProvider.php',
+        'Devaslanphp\\FilamentAvatar\\Core\\HasAvatarUrl' => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src/Core/HasAvatarUrl.php',
+        'Devaslanphp\\FilamentAvatar\\Core\\UiAvatarsProvider' => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src/Core/UiAvatarsProvider.php',
+        'Devaslanphp\\FilamentAvatar\\FilamentAvatarProvider' => __DIR__ . '/..' . '/devaslanphp/filament-avatar/src/FilamentAvatarProvider.php',
         'Dflydev\\DotAccessData\\Data' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Data.php',
         'Dflydev\\DotAccessData\\DataInterface' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/DataInterface.php',
         'Dflydev\\DotAccessData\\Exception\\DataException' => __DIR__ . '/..' . '/dflydev/dot-access-data/src/Exception/DataException.php',

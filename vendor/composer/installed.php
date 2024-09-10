@@ -184,6 +184,15 @@
                 0 => '*',
             ),
         ),
+        'devaslanphp/filament-avatar' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => '36f1151f48e6938bc16dc3ece03e3ec153a88806',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../devaslanphp/filament-avatar',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'dflydev/dot-access-data' => array(
             'pretty_version' => 'v3.0.3',
             'version' => '3.0.3.0',

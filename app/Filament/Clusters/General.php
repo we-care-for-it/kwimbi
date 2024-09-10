@@ -14,5 +14,5 @@ class General extends Cluster
     {
         return false;
     }
-    
+
 }

@@ -197,6 +197,7 @@
       <path value="$PROJECT_DIR$/vendor/jenssegers/agent" />
       <path value="$PROJECT_DIR$/vendor/solution-forest/filament-firewall" />
       <path value="$PROJECT_DIR$/vendor/calebporzio/sushi" />
+      <path value="$PROJECT_DIR$/vendor/devaslanphp/filament-avatar" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
