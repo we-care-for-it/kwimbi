@@ -20,13 +20,13 @@
 .fi-wi-stats-overview-stat-icon,
 .fi-section-header-icon,
 .fi-ta-text-item-icon {
-   
+
 }
 
 .filament-peek-modal-title {
   @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
 }
- 
+
 #fi-topbar {
 
     position: relative;
@@ -40,7 +40,7 @@
 
 }.fi-topbar{
   font-weight: normal!important;
-  
+
   }
 
 
@@ -74,11 +74,11 @@
 .fi-ac-btn-action{
  border-radius: 5px;
  padding: 10px;
- 
+
 }.fi-input-wrp{
   background-color: white!important;;
 }
- 
+
 
 
 
@@ -91,8 +91,6 @@
 
 .fi-dropdown-panel{
   background-color: white!important;;
-}
-
-.fi-layout{
-  background-color: white!important;;
-}
+}.fi-layout{
+     background-color: white!important;;
+ }

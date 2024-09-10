@@ -31,27 +31,28 @@ class AppServiceProvider extends ServiceProvider
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/admin.css'),
         ]);
 
-         
         Filament::serving(function () {
             Filament::registerUserMenuItems([
                 UserMenuItem::make()
-                    
+                    ->label('Instellingen')
                     ->url(route('filament.admin.general'))
-                    ->icon('heroicon-o-cog-6-tooth'),
+                    ->icon('heroicon-s-cog'),
                 // ...
             ]);
-
-            Filament::registerUserMenuItems([
-                UserMenuItem::make()
-                    
-                    ->url(route('filament.admin.general'))
-                    ->icon('heroicon-o-cog-6-tooth'),
-                // ...
-            ]);
-
-
         });
+
+
+
+
+
 
         Model::unguard();
     }
 }
+
+
+
+
+
+
+

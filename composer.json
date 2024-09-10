@@ -11,6 +11,7 @@
         "awcodes/recently": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",
         "croustibat/filament-jobs-monitor": "*",
+        "devaslanphp/filament-avatar": "^1.0",
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
         "geo-sot/filament-env-editor": "*",
