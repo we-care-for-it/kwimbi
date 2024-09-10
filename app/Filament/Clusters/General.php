@@ -11,7 +11,8 @@ class General extends Cluster
     protected static ? string $navigationLabel = 'Algemeen';
 
     public static function shouldRegisterNavigation(): bool
-{
-  return true;
-}
+    {
+        return false;
+    }
+    
 }
