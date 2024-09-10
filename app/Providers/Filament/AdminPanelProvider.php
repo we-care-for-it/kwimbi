@@ -23,7 +23,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
- 
+
 use Filament\Support\Enums\MaxWidth;
 
 class AdminPanelProvider extends PanelProvider
@@ -37,20 +37,20 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->colors([
                 'primary' => Color::Amber,
-            ])  
+            ])
             //->brandLogo(fn () => view('components.logo'))
-       
- 
+
+            ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
          //   ->topNavigation()
- 
+
         ->plugins([
             FilamentBackgroundsPlugin::make()  ->imageProvider(
                 MyImages::make()
                     ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
             ),
         ])
- 
+
 
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -60,13 +60,13 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            
+
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
-                
+
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
@@ -78,7 +78,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ]) ->tenantMiddleware([
-            
+
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ])
             ->authMiddleware([
