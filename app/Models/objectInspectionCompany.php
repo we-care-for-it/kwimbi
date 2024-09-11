@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
 
-class objectInspectionCompany extends Model 
+class ObjectInspectionCompany extends Model 
 {
   
     use SoftDeletes;

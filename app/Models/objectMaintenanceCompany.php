@@ -10,7 +10,7 @@ use App\Models\Building;
 use Carbon\Carbon;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class objectMaintenanceCompany extends Model  implements Auditable
+class ObjectMaintenanceCompany extends Model  implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
