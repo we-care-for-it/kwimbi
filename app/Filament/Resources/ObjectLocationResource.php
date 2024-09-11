@@ -35,7 +35,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Support\Enums\VerticalAlignment;
 //Services
 use App\Services\AddressService;
-
+use Filament\Support\Enums\Alignment;
 //Table
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -247,23 +247,24 @@ class ObjectLocationResource extends Resource
 
 
 
-                        Tables\Columns\TextColumn::make('zipcode')->state(
-                            function (ObJectLocation $rec) {
-                              return $rec->zipcode . " " . $rec->place;
-                             }),
+
+                Tables\Columns\TextColumn::make('zipcode')
+                    ->searchable(),
 
 
 
 
 
 
-                        Tables\Columns\TextColumn::make('name')
-                            ->searchable()
+                Tables\Columns\TextColumn::make('place')
+                    ->searchable()
 
-                            ->weight('medium')
-                            ->alignLeft()      ->label('Gebouwnaam'),
+                    ->alignLeft(),
 
 
+
+
+                TextColumn::make('objects_count')->counts('objects')    ->label('Aantal liften') ->sortable() ->badge()  ->alignment(Alignment::Center),
 
                     // Tables\Columns\TextColumn::make("complex_number") ->sortable()
                     // ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable()
@@ -296,7 +297,8 @@ class ObjectLocationResource extends Resource
                 Tables\Columns\TextColumn::make("building_type") ->sortable()
                     ->label("Gebouwtype")  ->verticalAlignment(VerticalAlignment::End)
                     ->badge()
-                    ->searchable(),
+                    ->searchable()
+                ->placeholder('Onbekend'),
                     // Tables\Columns\TextColumn::make('phonenumber')
                     // ->label('Telefoonnummer')
                     // ->searchable()
@@ -366,7 +368,7 @@ class ObjectLocationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ObjectsRelationManager::class,
         ];
     }
 

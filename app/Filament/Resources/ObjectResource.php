@@ -60,13 +60,27 @@ class ObjectResource extends Resource
                     ->label('Nobonummer')->searchable()
                     ->placeholder('Geen Nobonummer'),
 
-                Tables\Columns\TextColumn::make('location.name')
+                Tables\Columns\TextColumn::make('location')
+                    ->getStateUsing(function (Elevator $record): ?string {
+                         if($record?->location->name){
+                             return $record?->location->name;
+                         }else{
+                             return $record->location->address . " - " . $record->location->zipcode .  " " . $record->location->place;
+                         }
+                    })
                     ->searchable()
-                    ->label('Locatie')->description(         function (Elevator $rec) {
-                        $description = $rec->location->address . " - " . $rec->location->zipcode .  " " . $rec->location->place;
-                        return $description;
+                    ->label('Locatie')
+                    ->description(         function (Elevator $record) {
+
+                        if(!$record?->location->name){
+                            return $record?->location->name;
+                        }else{
+                            return $record->location->address . " - " . $record->location->zipcode .  " " . $record->location->place;
+                        }
+
+
                     }
-            )     ->placeholder('Niet gekoppeld aan locatie') ,
+            )     ,
 
                 Tables\Columns\TextColumn::make('location.address')
                     ->label('Adres')->searchable()->sortable() ->hidden(true),
