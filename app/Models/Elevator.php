@@ -70,6 +70,15 @@ public $table = "elevators";
         return $this->hasOne(Supplier::class, 'id', 'supplier_id');
     }
 
+    public function type()
+    {
+        return $this->hasOne(ObjectType::class, 'id', 'type_id');
+    }
+
+
+
+
+
     public function company()
     {
         return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');

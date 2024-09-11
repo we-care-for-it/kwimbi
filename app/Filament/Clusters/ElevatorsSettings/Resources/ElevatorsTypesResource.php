@@ -20,7 +20,7 @@ use Filament\Forms\Components\Textarea;
 
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
- 
+
 
 class ElevatorsTypesResource extends Resource
 {
@@ -41,7 +41,7 @@ class ElevatorsTypesResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Omschrijving')
-                ->columnSpan('full')  ->required(), 
+                ->columnSpan('full')  ->required(),
 
                 Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
@@ -53,37 +53,38 @@ class ElevatorsTypesResource extends Resource
     {
         return $table
         ->columns([
-  
+
             ToggleColumn::make('is_active')
             ->label('Zichbaar')
             ->onColor('success')
 ->offColor('danger')
 
-      
+
             ->width(50),
             TextColumn::make('name')->searchable()   ->sortable()
             ->label('Omschrijving')
-         
-      
+
+
         ])
         ->filters([
-            Tables\Filters\TrashedFilter::make(), 
+            Tables\Filters\TrashedFilter::make(),
 
         ])
         ->actions([
-            Tables\Actions\ViewAction::make(),
+              Tables\Actions\ViewAction::make(),
            Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::Medium),
            Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
         ])
         ->bulkActions([
           Tables\Actions\BulkActionGroup::make([
              Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-   
+
          ]),
-        ])      
+        ])
          ->emptyState(view('partials.empty-state')) ;
-        ;
+
     }
+
 
 
 

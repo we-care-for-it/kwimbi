@@ -5,6 +5,7 @@ namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;
 use App\Models\ObjectManagementCompany;
+use App\Models\ObjectType;
 use App\Models\ProjectStatus;
 use App\Services\AddressService;
 use Filament\Forms;
@@ -54,6 +55,8 @@ class ObjectsRelationManager extends RelationManager
                     ->schema([
 
 
+                        Forms\Components\TextInput::make("name")
+                            ->label("Omschrijving"),
 
                         Forms\Components\TextInput::make('unit_no')
                             ->required()
@@ -63,18 +66,18 @@ class ObjectsRelationManager extends RelationManager
                             ->required()
                             ->maxLength(255),
 
-                        Select::make('management_id')
-                            ->label('Beheerder')
-                            ->columnSpan('full')
-                            ->required()
-                            ->reactive()
-                            ->options(ObjectManagementCompany::all()
-                                ->pluck('name', 'id')) ,
+
+
+                        Select::make('type_id')
+                            ->label('Soort / Type')
+
+                    ->options(ObjectType::where('is_active',1)->pluck('name', 'id')),
+
 
 
                         Select::make('maintenance_company_id')
                             ->label('Onderhoudspartij')
-                            ->columnSpan('full')
+
                             ->required()
                             ->reactive()
                             ->options(ObjectMaintenanceCompany::all()
@@ -110,6 +113,8 @@ class ObjectsRelationManager extends RelationManager
 
 
 
+
+
                 TextColumn::make('inspections_count')->counts('inspections')
                     ->label('Keuringen')
                     ->sortable()
@@ -124,9 +129,17 @@ class ObjectsRelationManager extends RelationManager
                     ->alignment(Alignment::Center),
 
 
-                Tables\Columns\TextColumn::make('management_company.name')
-                    ->searchable()
-                    ->label('Beheerder') ->placeholder('Geen beheerder')->sortable() ,
+
+                Tables\Columns\TextColumn::make('type.name')
+                    ->label('Type')->searchable()
+                    ->badge()
+                    ->placeholder('Onbekend'),
+
+
+
+//                Tables\Columns\TextColumn::make('location.managementcompany.name')
+//                    ->searchable()
+//                    ->label('Beheerder') ->placeholder('Geen beheerder')->sortable() ,
 
                 Tables\Columns\TextColumn::make('maintenance_company.name')
                     ->searchable()->placeholder('Geen onderhoudspartij')
@@ -140,7 +153,10 @@ class ObjectsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Lift toevoegen')
+                    ->modalHeading('Lift toevoegen')
+                    ->modalDescription('Om een lift toe te voegen en te koppelen aan deze locatie zijn er een aantal gegevens nodig ')
+                ,
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

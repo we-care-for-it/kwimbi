@@ -11,7 +11,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  
 
 
-class objectType extends Model implements Auditable
+class ObjectType extends Model implements Auditable
  
 {
     use SoftDeletes;

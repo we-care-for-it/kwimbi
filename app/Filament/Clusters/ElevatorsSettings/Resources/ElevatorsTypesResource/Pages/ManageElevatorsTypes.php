@@ -15,11 +15,14 @@ class ManageElevatorsTypes extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
+
             Action::make('back')
             ->url(route('filament.admin.resources.elevators.index'))
-            ->label('Terug naar objecten') 
+            ->label('Terug naar objecten')
             ->link()
             ->color('gray'),
+            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
+                ->color("primary"),
             Actions\CreateAction::make() ->icon('heroicon-m-plus') ->modalHeading('Toevoegen')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
        ];
     }
