@@ -3,14 +3,24 @@
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Elevator;
+use App\Models\ObjectMaintenanceCompany;
+use App\Models\ObjectManagementCompany;
+use App\Models\ProjectStatus;
+use App\Services\AddressService;
 use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+use App\Models\ObjectLocation;
 
 
 //Form
@@ -30,15 +40,56 @@ use Filament\Forms\Components\FileUpload;
 class ObjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'Objects';
-
+    protected static ?string $title = 'Gekoppelde objecten';
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+
+
+                Grid::make([
+                    'default' => 2,
+
+                ])
+                    ->schema([
+
+
+
+                        Forms\Components\TextInput::make('unit_no')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('nobo_no')
+                            ->required()
+                            ->maxLength(255),
+
+                        Select::make('management_id')
+                            ->label('Beheerder')
+                            ->columnSpan('full')
+                            ->required()
+                            ->reactive()
+                            ->options(ObjectManagementCompany::all()
+                                ->pluck('name', 'id')) ,
+
+
+                        Select::make('maintenance_company_id')
+                            ->label('Onderhoudspartij')
+                            ->columnSpan('full')
+                            ->required()
+                            ->reactive()
+                            ->options(ObjectMaintenanceCompany::all()
+                                ->pluck('name', 'id')) ,
+
+
+
+
+                    ])
+
+
+
             ]);
+
+
     }
 
     public function table(Table $table): Table
@@ -57,12 +108,21 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Nobonummer')->searchable()
                     ->placeholder('Geen Nobonummer'),
 
-           
 
 
-                Tables\Columns\TextColumn::make('customer.name')
-                    ->searchable()
-                    ->label('Relatie') ->placeholder('Niet gekoppeld aan relatie')->sortable() ,
+                TextColumn::make('inspections_count')->counts('inspections')
+                    ->label('Keuringen')
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center),
+
+
+                TextColumn::make('maintenance_count')->counts('maintenance')
+                    ->label('Onderhoudsbeurten')
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center),
+
 
                 Tables\Columns\TextColumn::make('management_company.name')
                     ->searchable()
@@ -72,6 +132,7 @@ class ObjectsRelationManager extends RelationManager
                     ->searchable()->placeholder('Geen onderhoudspartij')
                     ->sortable()
                     ->label('Onderhoudspartij'),
+
 
 
             ])

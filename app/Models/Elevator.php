@@ -94,13 +94,13 @@ public $table = "elevators";
 
     public function latestInspection()
     {
-        return $this->hasOne(Inspection::class)->latestOfMany();
+        return $this->hasOne(ObjectInspections::class)->latestOfMany();
     }
 
     //Liftdata
     public function inspections()
     {
-        return $this->hasMany(Inspection::class);
+        return $this->hasMany(ObjectInspections::class);
     }
 
     public function management_company()
@@ -122,7 +122,7 @@ public $table = "elevators";
     }
     public function maintenance()
     {
-        return $this->hasMany(Maintenances::class);
+        return $this->hasMany(ObjectMaintenances::class);
     }
 
     public function maintenance_contracts()
