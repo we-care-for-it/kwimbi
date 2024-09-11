@@ -13,6 +13,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+//Form
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
+
+//Table
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Support\Enums\MaxWidth;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\FileUpload;
+
 class ElevatorsResource extends Resource
 {
     protected static ?string $model = Elevator::class;
@@ -33,7 +46,22 @@ class ElevatorsResource extends Resource
     {
         return $table
             ->columns([
-                //
+
+                Tables\Columns\TextColumn::make('unit_nr')
+                    ->label('Nummer'),
+
+                Tables\Columns\TextColumn::make('nobo_nr ')
+                    ->label('Nobonummer'),
+
+                Tables\Columns\TextColumn::make('location.name ')
+                    ->label('Locatie'),
+
+                Tables\Columns\TextColumn::make('customer.name ')
+                    ->label('Relatie'),
+
+                Tables\Columns\TextColumn::make('customer.name ')
+                    ->label('Relatie'),
+
             ])
             ->filters([
                 //

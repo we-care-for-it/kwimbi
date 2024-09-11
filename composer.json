@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "amendozaaguiar/filament-route-statistics": "*",
+        "awcodes/filament-badgeable-column": "^2.3",
         "awcodes/filament-curator": "^3.6",
         "awcodes/recently": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",

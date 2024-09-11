@@ -161,6 +161,7 @@ return array(
     'BezhanSalleh\\FilamentShield\\' => array($vendorDir . '/bezhansalleh/filament-shield/src'),
     'Awcodes\\Recently\\Database\\Factories\\' => array($vendorDir . '/awcodes/recently/database/factories'),
     'Awcodes\\Recently\\' => array($vendorDir . '/awcodes/recently/src'),
+    'Awcodes\\FilamentBadgeableColumn\\' => array($vendorDir . '/awcodes/filament-badgeable-column/src'),
     'Awcodes\\Curator\\Tests\\Database\\Factories\\' => array($vendorDir . '/awcodes/filament-curator/tests/database/factories'),
     'Awcodes\\Curator\\Tests\\' => array($vendorDir . '/awcodes/filament-curator/tests/src'),
     'Awcodes\\Curator\\Database\\Factories\\' => array($vendorDir . '/awcodes/filament-curator/database/factories'),

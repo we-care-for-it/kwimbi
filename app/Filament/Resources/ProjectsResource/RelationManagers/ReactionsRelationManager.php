@@ -68,9 +68,8 @@ class ReactionsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Toegevoegd op')
-                    ->dateTime('d-m-Y H:m:s') ,
+                Tables\Columns\TextColumn::make('nobo_nr')
+                    ->label('Toegevoegd op'),
 
 
                         Tables\Columns\TextColumn::make('user.name'),
