@@ -264,6 +264,8 @@ class ObjectLocationResource extends Resource
 
 
 
+                TextColumn::make('objects_count')->counts('objects')    ->label('Aantal liften') ->sortable() ->badge()  ->alignment(Alignment::Center),
+
                     // Tables\Columns\TextColumn::make("complex_number") ->sortable()
                     // ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable()
                     // ->searchable(),
