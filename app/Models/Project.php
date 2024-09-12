@@ -20,23 +20,12 @@ class Project extends Model implements Auditable
             ->saveSlugsTo('slug');
     }
 
-    public static function boot() {
-
-      parent::boot();
-
-      static::created(function($item) {
-        $status = Statuses::where('id', $item->status_id)->first();
-        $item->progress =$status->procent;
-      });
-
-      static::updating(function($item) {
-        $status = Statuses::where('id', $item->status_id)->first();
-        $item->progress =$status->procent;
-      });
-
-  }
 
 
+    public function location()
+    {
+        return $this->hasOne(ObjectLocation::class, 'id', 'location_id');
+    }
 
     static $rules = [
       'name' => 'required',
@@ -51,7 +40,7 @@ class Project extends Model implements Auditable
 
     public function status()
     {
-        return $this->belongsTo(ProjectStatus::class);
+        return $this->belongsTo(Statuses::class);
     }
 
     public function customer()

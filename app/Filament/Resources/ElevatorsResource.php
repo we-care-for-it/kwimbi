@@ -34,6 +34,9 @@ class ElevatorsResource extends Resource
     protected static ? string $navigationGroup = 'Hoofdmenu';
     protected static ? string $navigationLabel = 'Objecten';
 
+
+
+
     public static function form(Form $form): Form
     {
         return $form

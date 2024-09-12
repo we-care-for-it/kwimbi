@@ -12,16 +12,20 @@ class ManageProjectStatuses extends ManageRecords
 {
     protected static string $resource = ProjectStatusesResource::class;
     protected static ?string $title = 'Projecten - Statussen';
- 
+
     protected function getHeaderActions(): array
     {
         return [
             Action::make('back')
             ->url(route('filament.admin.resources.projects.index'))
-            ->label('Terug naar projecten') 
+            ->label('Terug naar projecten')
             ->link()
             ->color('gray'),
-            Actions\CreateAction::make()  ->modalHeading('Toevoegen')->icon('heroicon-m-plus')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
+            Actions\CreateAction::make()  ->modalHeading('Toevoegen')->icon('heroicon-m-plus')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge)->mutateFormDataUsing(function (array $data): array {
+
+                $data['model'] = "Project";
+                return $data;
+            }),
 
         ];
     }

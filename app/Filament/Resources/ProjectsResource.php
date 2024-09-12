@@ -1,11 +1,13 @@
 <?php
 namespace App\Filament\Resources;
-
+use App\Models\Elevator;
+use App\Models\ObjectLocation;
+use Filament\Forms\Components\Grid;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\Project;
-
-use App\Models\ProjectStatus;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use App\Models\Statuses;
 use App\Models\Customer;
 
 use Filament\Forms;
@@ -15,7 +17,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Grouping\Group;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\MaxWidth;
 
@@ -29,6 +31,8 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
+
+
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 
@@ -52,6 +56,7 @@ class ProjectsResource extends Resource
     //         'Category' => $record->name,
     //     ];
     // }
+    private null $id;
 
 
     public static function getNavigationBadge() : ? string
@@ -72,7 +77,8 @@ class ProjectsResource extends Resource
 ->schema([
 
         Section::make()
-            ->schema([Forms\Components\TextInput::make('name')
+            ->schema([
+                Forms\Components\TextInput::make('name')
             ->label('Naam')
             ->maxLength(255)
             ->required() ,
@@ -87,53 +93,125 @@ class ProjectsResource extends Resource
        Section::make()
             ->schema([
 
-        DatePicker::make('startdate')
 
-            ->label('Startdatum') ,
+                Grid::make([
+                    'default' => 2,
+                    'sm' => 2,
+                    'md' => 2,
+                    'lg' => 2,
+                    'xl' => 2,
+                    '2xl' => 2,
+                ])
+                    ->schema([
+                        DatePicker::make('startdate')
 
-        DatePicker::make('enddate')
+                            ->label('Startdatum') ,
 
-            ->label('Einddatum') ,
+                        DatePicker::make('enddate')
+
+                            ->label('Einddatum') ,
+
+
+
+                        DatePicker::make('date_of_execution')
+
+                            ->label('Plandatum') ,
+
+
+
+                    ]),
+
+
 
         ])
             ->columnSpan(['lg' => 1]) ,
 
+
+
+
+
+
+
+
         Section::make()
             ->schema([
 
-        TextInput::make('budget_hours')
 
-            ->columnSpan('full')
-            ->suffixIcon('heroicon-o-currency-euro')
-            ->label('Begrote uren') ,
+                Grid::make([
+                    'default' => 2,
+                    'sm' => 2,
+                    'md' => 2,
+                    'lg' => 2,
+                    'xl' => 2,
+                    '2xl' => 2,
+                ])
+                    ->schema([
 
         TextInput::make('budget_costs')
-            ->label('Begrote kosten')
-            ->columnSpan('full')
+            ->label('Budget')
+
             ->suffixIcon('heroicon-o-currency-euro') ,
 
-        ])
+
+                        Select::make('status_id')
+                            ->label('Status')
+
+                            ->required()
+                            ->reactive()
+                            ->options(Statuses::where('model','Project')
+                                ->pluck('name', 'id')) ,
+
+
+                    ]),
+
+
+                Grid::make([
+                    'default' => 2,
+                    'sm' => 2,
+                    'md' => 2,
+                    'lg' => 2,
+                    'xl' => 2,
+                    '2xl' => 2,
+                ])
+                    ->schema([
+                        TextInput::make('quote_price')
+                            ->label('Offertebedrag')
+                            ->suffixIcon('heroicon-o-currency-euro') ,
+
+
+                        TextInput::make('cost_price')
+                            ->label('Kostprijs')
+                            ->suffixIcon('heroicon-o-currency-euro')
+                    ])
+
+
+
+
+
+
+            ])
             ->columns(2)
             ->columnSpan(['lg' => 1]) ,
 
         Section::make()
             ->schema([
 
-        Select::make('status_id')
-            ->label('Status')
-            ->columnSpan('full')
-            ->required()
-            ->reactive()
-            ->options(ProjectStatus::all()
-            ->pluck('name', 'id')) ,
+
 
         Select::make('customer_id')
         ->searchable()
             ->label('Relatie')
             ->columnSpan('full')
-            ->options(customer::all()
-
+            ->options(Customer::all()
             ->pluck('name', 'id')) ,
+
+                Select::make('location_id')
+                    ->searchable()
+                    ->label('Locatie')
+                    ->columnSpan('full')
+                    ->options(ObjectLocation::all()
+                        ->pluck('address', 'id')) ,
+
 
         ])
             ->columns(2)
@@ -145,38 +223,158 @@ class ProjectsResource extends Resource
 
     public static function table(Table $table) : Table
     {
-        return $table->columns([Tables\Columns\TextColumn::make('name')
+        return $table  ->groups([
+
+            Group::make('customer.name')
+                ->label('Relatie'),
+
+        ])
+            ->columns([
+
+
+
+            Tables\Columns\TextColumn::make('id')
+                ->label('#')
+                ->getStateUsing(function (Project $record): ?string {
+                    return sprintf('%08d', $record?->id);
+                })
+                ->searchable()    ->sortable() ,
+
+
+
+
+
+
+
+
+
+            Tables\Columns\TextColumn::make('name')
             ->label('Naam')
             ->searchable() ,
 
-        Tables\Columns\TextColumn::make('customer.name')
-            ->searchable() ,
 
-        Tables\Columns\TextColumn::make('startdate')
-            ->label('Startdatum')
-            ->dateTime('d-m-Y') ,
+                Tables\Columns\TextColumn::make('customer.name')
+                    ->getStateUsing(function (Project $record): ?string {
 
-        Tables\Columns\TextColumn::make('enddate')
-            ->label('Eindddatum')
-            ->dateTime('d-m-Y') ,
+
+
+                            return $record?->customer->name;
+
+                    })
+                    ->searchable()
+                    ->sortable()
+                    ->label('Adres')
+                    ->description(function (Project $record) {
+
+                        if (!$record?->location_id) {
+                            return "Geen locatie gekoppeld";
+                        } else {
+                            return $record->location?->address . " - " . $record->location?->zipcode . "  " . $record->location?->place;
+                        }
+
+
+                    }
+                    ),
+
+
+
+
+
+
+            Tables\Columns\TextColumn::make('startdate')
+                ->label('Looptijd')
+
+                ->getStateUsing(function (Project $record): ?string {
+
+
+                    $startdate =    $record->startdate ? date("d-m-Y", strtotime($record?->startdate)) : "nodate";
+                    $enddate =    $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
+
+                    if($record->enddate || $record->$startdate){
+                        return  $startdate . " - ".  $enddate;
+                    }else{
+                        return  "";
+                    }
+
+                })
+                ->searchable() ,
+
+
 
         Tables\Columns\TextColumn::make('description')
             ->label('Omschrijving')
-            ->weight(FontWeight::Light) ,
+            ->weight(FontWeight::Light)
+            ->sortable(),
 
-        Tables\Columns\TextColumn::make('status.name')
-            ->label('Status')
 
-            ->label('Status')
+
+
+
+
+
+
+                Tables\Columns\TextColumn::make('date_of_execution')
+                    ->label('Plandatum')
+                    ->getStateUsing(function (Project $record): ?string {
+
+
+
+                        if($record->date_of_execution){
+                            return  strtotime($record?->date_of_execution);
+                        }else{
+                            return  "-";
+                        }
+
+                    })
+                    ->searchable()
+                    ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? 'danger' : 'success')
+
+
+                ,
+
+
+
+
+
+                Tables\Columns\TextColumn::make('cost_price')
+                    ->label('Winst')
+                    ->getStateUsing(function (Project $record): ?string {
+                        return $record?->quote_price - $record?->cost_price;
+                    }) ->prefix('€')
+
+                    ->color(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'danger' : 'success')
+                    ->badge()->sortable()
+
+            ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
+
+
+
+
+                Tables\Columns\TextColumn::make('budget_costs')
+                    ->label('Over')
+                    ->getStateUsing(function (Project $record): ?string {
+                        $total_price =  $record?->budget_costs - ($record?->quote_price - $record?->cost_price);
+                        Return $total_price;
+                    }) ->prefix('€'),
+
+
+
+                Tables\Columns\TextColumn::make('status.name')
+            ->label('Status')    ->sortable()
+
             ->badge() ,
 
         ])
-            ->filters([SelectFilter::make('status_id')
-            ->label('Status')
-            ->relationship('status', 'name')
-            ->searchable()
-            ->preload()
-            ->multiple() ])
+            ->filters([
+
+//                SelectFilter::make('status_id')
+//            ->label('Status')
+//            ->relationship('status', 'name')
+//            ->searchable()
+//            ->preload()
+//            ->multiple()
+//
+            ])
             ->actions([
 
         Tables\Actions\ViewAction::make() ,
@@ -189,8 +387,9 @@ class ProjectsResource extends Resource
         Tables\Actions\EditAction::make()
          ])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
+                ExportBulkAction::make(),
         ]) , ])
-            ->emptyState(view('partials.empty-state'));;
+            ->emptyState(view('partials.empty-state'));
     }
 
     public static function getRelations() : array
@@ -198,7 +397,7 @@ class ProjectsResource extends Resource
        return [
            RelationManagers\ReactionsRelationManager::class,
            RelationManagers\UploadsRelationManager::class,
-           RelationManagers\LocationsRelationManager::class
+           //RelationManagers\LocationsRelationManager::class
         ];
     }
 
@@ -207,7 +406,7 @@ class ProjectsResource extends Resource
         return [
 
         'index' => Pages\ListProjects::route('/') ,
-         //'create' => Pages\CreateProjects::route('/create') ,
+       'create' => Pages\CreateProjects::route('/create') ,
       //  'view' => Pages\ViewProjects::route('/{record}') ,
          'edit' => Pages\EditProjects::route('/{record}/edit')
          ];

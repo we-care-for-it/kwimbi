@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ProjectSettings\Resources;
 use App\Filament\Clusters\ProjectSettings;
 use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\Pages;
 use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\RelationManagers;
-use App\Models\ProjectStatus;
+use App\Models\statuses;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,22 +24,30 @@ use Filament\Forms\Components\TimePicker;
 //tables
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
- 
+
 
 
 
 class ProjectStatusesResource extends Resource
 {
-    protected static ?string $model = ProjectStatus::class;
+    protected static ?string $model = Statuses::class;
     protected static ?string $navigationLabel = 'Statussen';
     protected static ? string $navigationGroup = 'Basisgegevens';
     protected static ?string $recordTitleAttribute = 'name';
- 
-    
+
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $cluster = ProjectSettings::class;
+
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('model', "Project");
+    }
+
+
 
     public static function form(Form $form): Form
     {
@@ -50,22 +58,17 @@ class ProjectStatusesResource extends Resource
                     ->maxLength(255)
                     ->columnSpan('full')
                     ->required(),
-     
-                        
-            
-    
-    
-                    Forms\Components\Toggle::make('is_active')
-                    ->label('Zichtbaar  ')
-                    ->inline(false)
-    
-                    ->default(true) , 
-                
-                
-                
-                
-                
-                
+
+
+
+
+
+
+
+
+
+
+
             ]);
     }
 
@@ -73,25 +76,18 @@ class ProjectStatusesResource extends Resource
     {
         return $table
             ->columns([
-                ToggleColumn::make('is_active')
-                ->label('Zichbaar')
-                ->onColor('success')
-    ->offColor('danger')
- 
-      
-                ->width(100),
 
                 TextColumn::make('name')
             ->label('Naam')
             ->searchable() ,
 
-          
-     
+
+
 
 
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(), 
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::ExtraLarge),
@@ -100,7 +96,7 @@ class ProjectStatusesResource extends Resource
             ->bulkActions([
               Tables\Actions\BulkActionGroup::make([
                  Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-       
+
                 ]),
             ])  ->emptyState(view('partials.empty-state')) ;
             ;;
@@ -113,5 +109,5 @@ return [
 'index' => Pages\ManageProjectStatuses::route('/'),
 ];
 }
- 
+
 }

@@ -37,7 +37,7 @@ class EditProjects extends EditRecord
     }
     public function getHeading(): string
     {
-        return $this->getRecord()->name;
+       return "#". sprintf('%08d', $this->getRecord()->id) ." - " .$this->getRecord()->name;
     }
 
 }
