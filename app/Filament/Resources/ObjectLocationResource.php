@@ -118,7 +118,7 @@ class ObjectLocationResource extends Resource
                                                 $set("building_type", $data?->purposes[0]);
                                                 $set("construction_year", $data?->constructionYear);
                                                 $set("surface", $data?->surfaceArea);
-                                            
+
                                             }
                                         })
                                 ),
@@ -225,9 +225,9 @@ class ObjectLocationResource extends Resource
                     ->label('Plaats')->searchable()->hidden(true),
 
 
-                TextColumn::make('objects_count')->counts('objects')->label('Objecten')->sortable()->badge()->alignment(Alignment::Center),
-                TextColumn::make('notes_count')->counts('notes')->label('Notites')->sortable()->badge()->alignment(Alignment::Center),
-                TextColumn::make('attachments_count')->counts('attachments')->label('Bijlages')->sortable()->badge()->alignment(Alignment::Center),
+                TextColumn::make('objects_count')->counts('objects')->label('Objecten')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
+                TextColumn::make('notes_count')->counts('notes')->label('Notites')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
+                TextColumn::make('attachments_count')->counts('attachments')->label('Bijlages')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
 
 
                 Tables\Columns\TextColumn::make("customer.name")->sortable()

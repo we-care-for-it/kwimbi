@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Models\Company;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -11,7 +10,10 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Widgets;
+use Hasnayeen\Themes\Http\Middleware\SetTheme;
+use Hasnayeen\Themes\ThemesPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -19,12 +21,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
-
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
-use Filament\Support\Enums\MaxWidth;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -38,20 +37,17 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            //->brandLogo(fn () => view('components.logo'))
-
+            ->brandLogo(fn() => view('components.logo'))
             ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
-         //   ->topNavigation()
+            //   ->topNavigation()
 
-        ->plugins([
-            FilamentBackgroundsPlugin::make()  ->imageProvider(
-                MyImages::make()
-                    ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
-            ),
-        ])
-
-
+            ->plugins([
+                FilamentBackgroundsPlugin::make()->imageProvider(
+                    MyImages::make()
+                        ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+                ),
+            ])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -60,7 +56,6 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -76,20 +71,20 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-            ]) ->tenantMiddleware([
+                SetTheme::class
+            ])->tenantMiddleware([
 
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
+                SetTheme::class
             ])
             ->authMiddleware([
                 Authenticate::class,
             ])
-         //   ->tenant(Company::class)
+            //   ->tenant(Company::class)
             ->plugins([
                 FilamentShieldPlugin::make(),
             ])
             ->plugin(
-                \Hasnayeen\Themes\ThemesPlugin::make()
+                ThemesPlugin::make()
             );
     }
 }
