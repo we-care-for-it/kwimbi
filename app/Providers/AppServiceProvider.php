@@ -2,23 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\ServiceProvider;
-use Filament\Support\Facades\FilamentAsset;
-use Filament\Support\Assets\Css;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
-
     /**
      * Bootstrap any application services.
      */
@@ -29,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/custom.css'),
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/admin.css'),
+            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
 
         Filament::serving(function () {
@@ -42,11 +35,15 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-
-
-
-
         Model::unguard();
+    }
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
     }
 }
 

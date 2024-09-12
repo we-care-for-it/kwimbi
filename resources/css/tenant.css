@@ -34,16 +34,19 @@
 
 .fi-sidebar {
     @apply bg-gray-50 dark:bg-gray-950 !important;
+
+
 }
 
 .fi-logo {
-    border: 2px solid red;
+
 
 }
 
 .fi-topbar {
     font-weight: normal !important;
-
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 
@@ -58,12 +61,15 @@
 
 
 .fi-sidebar-header {
-    background-color: rgb(244, 36, 28) !important
+    background-color: rgb(244, 36, 28) !important;
+
 }
 
 
 .fi-sidebar-header .fi-icon-btn-icon {
     color: white !important
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 

@@ -200,7 +200,7 @@ class ObjectLocationResource extends Resource
                         if ($record?->name) {
                             return $record?->name;
                         } else {
-                            return $record->address . " - " . $record->zipcode . " dd" . $record->place;
+                            return $record->address . " - " . $record->zipcode . " - " . $record->place;
                         }
                     })
                     ->searchable()
