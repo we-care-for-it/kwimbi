@@ -101,7 +101,7 @@ class ObjectsRelationManager extends RelationManager
 
 
                 Tables\Columns\TextColumn::make('type.name')
-                    ->label('Type')->searchable()
+                    ->label('object_type_id')->searchable()
                     ->badge()
                     ->placeholder('Onbekend'),
 

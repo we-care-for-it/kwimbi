@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectManagementCompaniesResource\Pages\CreateObjectManagementCompanies;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use OwenIt\Auditing\Contracts\Auditable;
+
 /**
  * Class ManagementCompany
  *
@@ -24,40 +24,34 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property $phonenumber
  *
  * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin Builder
  */
-
-
-
-
-
-
 class Elevator extends Model implements Auditable
 
 {
     use SoftDeletes;
 
-public $table = "elevators";
+    static $rules = [];
 
     use \OwenIt\Auditing\Auditable;
 
     // Validation rules for this model
-    static $rules = [];
+    static $searchable = ['name', 'address', 'general_emailaddress', 'phonenumber'];
 
     // Number of items to be shown per page
-    protected $perPage = 20;
+    public $table = "elevators";
 
     // Attributes that should be mass-assignable
-    protected $fillable = [
-
-        'status_id',   'customer_id', 'inspection_state_id','supplier_id','remark','address_id','inspection_company_id','maintenance_company_id','stopping_places','carrying_capacity','energy_label','stretcher_elevator','fire_elevator','object_type_id','construction_year','nobo_no','name','unit_no'];
+    protected $perPage = 20;
 
     // Attributes that are searchable
-    static $searchable = ['name','address','general_emailaddress','phonenumber'];
+    protected $fillable = [
+
+        'status_id', 'customer_id', 'inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'];
 
     public function location()
     {
-        return $this->hasOne(ObjectLocation::class,'id','address_id' );
+        return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
 
     public function customer()
@@ -72,11 +66,8 @@ public $table = "elevators";
 
     public function type()
     {
-        return $this->hasOne(ObjectType::class, 'id', 'type_id');
+        return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
     }
-
-
-
 
 
     public function company()
@@ -87,13 +78,14 @@ public $table = "elevators";
 
     public function maintenance_company()
     {
-        return $this->hasOne(ObjectMaintenanceCompany::class,'id','maintenance_company_id');
+        return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
     }
 
     public function inspectioncompany()
     {
         return $this->hasOne(inspectionCompany::class, 'id', 'inspection_company_id');
     }
+
     public function getAllElevatorOnThisAddressAttribute()
     {
 
@@ -114,9 +106,8 @@ public $table = "elevators";
 
     public function management_company()
     {
-        return $this->hasOne(ObjectManagementCompany::class,'id','management_id');
+        return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
     }
-
 
 
     public function uploads()
@@ -129,6 +120,7 @@ public $table = "elevators";
     {
         return $this->hasMany(Incident::class);
     }
+
     public function maintenance()
     {
         return $this->hasMany(ObjectMaintenances::class);
@@ -138,12 +130,6 @@ public $table = "elevators";
     {
         return $this->hasMany(maintenanceContract::class);
     }
-
-
-
-
-
-
 
 
 }
