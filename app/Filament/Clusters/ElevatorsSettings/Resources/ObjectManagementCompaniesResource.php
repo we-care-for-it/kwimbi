@@ -72,9 +72,6 @@ class ObjectManagementCompaniesResource extends Resource
             Forms\Components\Section::make()
                 ->schema([
 
-                    Forms\Components\TextInput::make('emailaddress')
-                    ->email()
-                    ->label('E-mailadres')   ->columnSpan('full')
 
                     ->maxLength(255),
 
@@ -106,9 +103,7 @@ class ObjectManagementCompaniesResource extends Resource
                         ->weight('medium')
                         ->alignLeft()        ->label('Bedrijfsnaam'),
 
-                    Tables\Columns\TextColumn::make('emailaddress')
-                        ->label('Email address')
-                        ->searchable()
+ 
 
 
                         ->alignLeft(),
