@@ -181,42 +181,17 @@ class ObjectLocationResource extends Resource
 
         Section::make()
             ->schema([
-
-
                 Textarea::make("remark")
                     ->rows(7)
                     ->label("Opmerking")
                     ->columnSpan(3)
                     ->autosize(),
-
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-
-            ///   ->groups([
-
-//            Group::make('name')
-//            ->label('Naam'),
-//
-//            Group::make('managementcompany.name')
-//            ->label('Beheerder'),
-//
-//            Group::make('building_type',)
-//            ->label('Gebouwtype'),
-//
-//            Group::make('place',)
-//            ->label('Plaats'),
-//
-//
-//
-//
-//        ])
-//        ->defaultGroup('place')
-
-
             ->columns([
                 Tables\Columns\TextColumn::make('address')
                     ->getStateUsing(function (ObjectLocation $record): ?string {
@@ -250,21 +225,9 @@ class ObjectLocationResource extends Resource
                     ->label('Plaats')->searchable()->hidden(true),
 
 
-                TextColumn::make('objects_count')->counts('objects')->label('Aantal liften')->sortable()->badge()->alignment(Alignment::Center),
-
-                // Tables\Columns\TextColumn::make("complex_number") ->sortable()
-                // ->label("Complexnummer") ->placeholder('Geen complexnummer')   ->toggleable()
-                // ->searchable(),
-
-
-                // Tables\Columns\TextColumn::make("levels")
-                // ->label("Verdiepingen") ->placeholder('Verdiepingen onbekend')   ->suffix(' verdieping')   ->toggleable(isToggledHiddenByDefault: true),
-
-
-                // Tables\Columns\TextColumn::make("construction_year") ->sortable()
-                // ->label("Bouwjaar") ->placeholder('Onbekend bouwjaar')
-                // ->toggleable(isToggledHiddenByDefault: true)
-                // ->prefix('Gebouw in ')   ->searchable(),
+                TextColumn::make('objects_count')->counts('objects')->label('Objecten')->sortable()->badge()->alignment(Alignment::Center),
+                TextColumn::make('notes_count')->counts('notes')->label('Notites')->sortable()->badge()->alignment(Alignment::Center),
+                TextColumn::make('attachments_count')->counts('attachments')->label('Bijlages')->sortable()->badge()->alignment(Alignment::Center),
 
 
                 Tables\Columns\TextColumn::make("customer.name")->sortable()
@@ -307,11 +270,6 @@ class ObjectLocationResource extends Resource
                     ->searchable()
             ,
 
-//  SelectFilter::make('building_type')
-//  ->label('Gebouwtype')
-//  ->options(ObjectLocation::all()->pluck('building_type','building_type')->groupby('building_type'))
-//  ->searchable(),
-
 
                 Tables\Filters\TrashedFilter::make(),
             ))->filtersFormColumns(3)
@@ -344,8 +302,9 @@ class ObjectLocationResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\NotesRelationManager::class,
             RelationManagers\ObjectsRelationManager::class,
-            RelationManagers\NotesRelationManager::class
+            RelationManagers\AttachmentsRelationManager::class
         ];
     }
 

@@ -58,7 +58,6 @@ class ObjectLocation extends Model implements Auditable
 
         'building_type', 'building_access_type_id', 'remark', 'building_type_id', 'name', 'zipcode', 'place', 'address', 'slug', 'complexnumber', 'management_id'];
 
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
@@ -68,7 +67,6 @@ class ObjectLocation extends Model implements Auditable
     {
         return $this->belongsTo(objectBuildingType::class, 'building_type_id', 'id');
     }
-
 
     public function managementcompany()
     {
@@ -84,9 +82,12 @@ class ObjectLocation extends Model implements Auditable
     public function notes()
     {
         return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation');
-
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation');
+    }
 
     public function contacts()
     {
