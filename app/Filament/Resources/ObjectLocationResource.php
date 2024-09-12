@@ -89,7 +89,7 @@ class ObjectLocationResource extends Resource
                                         ->icon("heroicon-m-magnifying-glass")
                                         ->action(function (Get $get, Set $set) {
 
-                                            $set("place", $data?->settlement);
+
                                             $data = (new AddressService())->GetAddress(
                                                 $get("zipcode"),
                                                 $get("number")
@@ -118,6 +118,7 @@ class ObjectLocationResource extends Resource
                                                 $set("building_type", $data?->purposes[0]);
                                                 $set("construction_year", $data?->constructionYear);
                                                 $set("surface", $data?->surfaceArea);
+                                            
                                             }
                                         })
                                 ),
