@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ProjectSettings\Resources;
 use App\Filament\Clusters\ProjectSettings;
 use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\Pages;
 use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\RelationManagers;
-use App\Models\statuses;
+use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
