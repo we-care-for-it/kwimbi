@@ -320,7 +320,7 @@ class ProjectsResource extends Resource
 
 
                         if($record->date_of_execution){
-                            return  strtotime($record?->date_of_execution);
+                            return  date("d-m-Y",strtotime($record?->date_of_execution));
                         }else{
                             return  "-";
                         }
