@@ -1,5 +1,3 @@
-@@ -1,20 +0,0 @@
-<?php
 <?PHP
 namespace App\Models;
 
