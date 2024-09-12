@@ -49,17 +49,15 @@
    color:blue
 }
 .fi-topbar .bg-white {
-  background-color:rgb(139,217,144)
+  background-color: black
 }
 
 
 .fi-sidebar-header  {
-  background-color:rgb(125,196,129)!important
+  background-color:rgb(244,36,28)!important
 }
 
-.fi-sidebar-header  {
-  background-color:rgb(125,196,129)!important
-}
+ 
 
 .fi-sidebar-header .fi-icon-btn-icon  {
   color: white!important
