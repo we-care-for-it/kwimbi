@@ -261,8 +261,8 @@ class ObjectLocationResource extends Resource
                     ->Searchable(),
 
 
-                SelectFilter::make('management_id')->label('Beheerder')
-                    ->relationship('managementcompany', 'name'),
+//                SelectFilter::make('management_id')->label('Beheerder')
+//                    ->relationship('managementcompany', 'name'),
 
                 SelectFilter::make('place')
                     ->label('Plaats')
