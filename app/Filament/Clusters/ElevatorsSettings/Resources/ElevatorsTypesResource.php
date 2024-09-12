@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\ElevatorsSettings\Resources;
 use App\Filament\Clusters\ElevatorsSettings;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\Pages;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\RelationManagers;
-use App\Models\objectType;
+use App\Models\ObjectType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,7 +24,7 @@ use Filament\Tables\Columns\ToggleColumn;
 
 class ElevatorsTypesResource extends Resource
 {
-    protected static ?string $model = objectType::class;
+    protected static ?string $model = ObjectType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
