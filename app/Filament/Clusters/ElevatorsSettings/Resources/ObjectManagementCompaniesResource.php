@@ -101,12 +101,9 @@ class ObjectManagementCompaniesResource extends Resource
                         ->searchable()
 
                         ->weight('medium')
-                        ->alignLeft()        ->label('Bedrijfsnaam'),
-
- 
+                        ->alignLeft()        ->label('Bedrijfsnaam') 
 
 
-                        ->alignLeft(),
                 ])->space(),
 
                 Tables\Columns\Layout\Stack::make([
