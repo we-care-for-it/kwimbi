@@ -9,11 +9,11 @@
 .dark .fi-sidebar,
 .dark .fi-sidebar-header,
 .dark .fi-topbar nav {
-    @apply !bg-[#111] !ring-0;
+  @apply !bg-[#111] !ring-0;
 }
 
 .dark .fi-topbar nav {
-    @apply !border-0;
+  @apply !border-0;
 }
 
 .fi-header-heading,
@@ -24,86 +24,76 @@
 }
 
 .filament-peek-modal-title {
-    @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
+  @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
 }
 
 #fi-topbar {
 
     position: relative;
 }
-
 .fi-sidebar {
-    @apply bg-gray-50 dark:bg-gray-950 !important;
-
-
+  @apply bg-gray-50 dark:bg-gray-950 !important;
 }
 
-.fi-logo {
+.fi-logo{
+  border: 2px solid red;
+
+}.fi-topbar{
+  font-weight: normal!important;
+
+  }
 
 
+.fi-header-heading{
+   font-weight: normal!important;
+   color:blue
 }
-
-.fi-topbar {
-    font-weight: normal !important;
-    padding: 0px !important;
-    margin: 0px !important;
-}
-
-
-.fi-header-heading {
-    font-weight: normal !important;
-    color: blue
-}
-
 .fi-topbar .bg-white {
-    background-color: black
+  background-color:rgb(139,217,144)
 }
 
 
-.fi-sidebar-header {
-    background-color: rgb(244, 36, 28) !important;
+.fi-sidebar-header  {
+  background-color:rgb(125,196,129)!important
+}
 
+.fi-sidebar-header  {
+  background-color:rgb(125,196,129)!important
+}
+
+.fi-sidebar-header .fi-icon-btn-icon  {
+  color: white!important
 }
 
 
-.fi-sidebar-header .fi-icon-btn-icon {
-    color: white !important
-    padding: 0px !important;
-    margin: 0px !important;
+
+
+.fi-btn-label{
+  font-weight: normal!important;
+}
+.fi-ac-btn-action{
+ border-radius: 5px;
+ padding: 10px;
+
+}.fi-input-wrp{
+  background-color: white!important;;
 }
 
 
-.fi-btn-label {
-    font-weight: normal !important;
+
+
+.fi-sidebar-nav{
+  background-color: white!important;;
+}
+.fi-main{
+  background-color: white!important;;
 }
 
-.fi-ac-btn-action {
-    border-radius: 5px;
-    padding: 10px;
-
-}
-
-.fi-input-wrp {
-    background-color: white !important;;
-}
-
-
-.fi-sidebar-nav {
-    background-color: white !important;;
-}
-
-.fi-main {
-    background-color: white !important;;
-}
-
-.fi-dropdown-panel {
-    background-color: white !important;;
-}
-
-.fi-layout {
-    background-color: white !important;;
-}
-
-.fi-section-header-heading {
+.fi-dropdown-panel{
+  background-color: white!important;;
+}.fi-layout{
+     background-color: white!important;;
+ }
+.fi-section-header-heading{
 
 }

@@ -24,7 +24,6 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
-
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -41,7 +40,6 @@ class AdminPanelProvider extends PanelProvider
             ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
             //   ->topNavigation()
-
             ->plugins([
                 FilamentBackgroundsPlugin::make()->imageProvider(
                     MyImages::make()
@@ -61,7 +59,6 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
-
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,

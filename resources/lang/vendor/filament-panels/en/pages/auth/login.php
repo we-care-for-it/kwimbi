@@ -4,7 +4,7 @@ return [
 
     'title' => 'Login',
 
-    'heading' => 'Sign in',
+    'heading' => 'Sigsssssssssssn in',
 
     'actions' => [
 
