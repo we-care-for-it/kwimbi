@@ -1,48 +1,26 @@
 <?php
 
-namespace App\Filament\Resources\ProjectsResource\RelationManagers;
+namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
-use App\Models\ProjectStatus;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-//Form
-
-//Table
-
-
-class ReactionsRelationManager extends RelationManager
+class NotesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'Reactions';
-    protected $listeners = ['refreshRelation' => '$refresh'];
-
-    public function hasCombinedRelationManagerTabsWithForm(): bool
-    {
-        return true;
-    }
-
+    protected static string $relationship = 'Notes';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-
-                Textarea::make('reaction')
+                Textarea::make('note')
                     ->rows(7)
-                    ->label('Opmerking')
+                    ->label('Notitie')
                     ->columnSpan(3)
                     ->autosize(),
-
-                Select::make('status_id')
-                    ->label('Status')
-                    ->required()
-                    ->options(ProjectStatus::all()
-                        ->pluck('name', 'id')),
-
 
             ]);
     }
@@ -52,16 +30,10 @@ class ReactionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Toegevoegd op'),
-
-
-                Tables\Columns\TextColumn::make('user.name'),
-                Tables\Columns\TextColumn::make('reaction')->wrap(),
-                Tables\Columns\TextColumn::make('status.name')->label('Status')->badge(),
-
-
+                Tables\Columns\TextColumn::make('user.name')->label('Medewerker'),
+                Tables\Columns\TextColumn::make('note')->wrap()->label('Notitie'),
             ])
             ->filters([
                 //
@@ -69,10 +41,9 @@ class ReactionsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
-
+                    $data['model'] = "ObjectLocation";
                     return $data;
-                })
-
+                }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -80,7 +51,7 @@ class ReactionsRelationManager extends RelationManager
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    //      Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
