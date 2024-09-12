@@ -23,7 +23,6 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -252,23 +251,23 @@ class ObjectLocationResource extends Resource
             ])
             ->filters(array(
 
-                SelectFilter::make('customer_id')
-                    ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
-                    ->Searchable(),
-
-                SelectFilter::make('building_type')
-                    ->options(ObjectLocation::pluck('building_type', 'id')->groupby('building_type'))->label('Gebouwtype')
-                    ->Searchable(),
-
-
-//                SelectFilter::make('management_id')->label('Beheerder')
-//                    ->relationship('managementcompany', 'name'),
-
-                SelectFilter::make('place')
-                    ->label('Plaats')
-                    ->options(ObjectLocation::all()->pluck('place', 'place')->groupby('place'))
-                    ->searchable()
-            ,
+//                SelectFilter::make('customer_id')
+//                    ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
+//                    ->Searchable(),
+//
+//                SelectFilter::make('building_type')
+//                    ->options(ObjectLocation::pluck('building_type', 'id')->groupby('building_type'))->label('Gebouwtype')
+//                    ->Searchable(),
+//
+//
+////                SelectFilter::make('management_id')->label('Beheerder')
+////                    ->relationship('managementcompany', 'name'),
+//
+//                SelectFilter::make('place')
+//                    ->label('Plaats')
+//                    ->options(ObjectLocation::all()->pluck('place', 'place')->groupby('place'))
+//                    ->searchable()
+//            ,
 
 
                 Tables\Filters\TrashedFilter::make(),
