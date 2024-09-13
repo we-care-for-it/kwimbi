@@ -8,12 +8,13 @@ class InspectionChart extends ChartWidget
 {
     protected static ?string $heading = 'Keuringen';
     protected static ?int $sort = 4;
+    protected int | string | array $columnSpan = '4';
     protected function getData(): array
     {
         return [
             'datasets' => [
                 [
-                    'label' => 'Keuringen',
+                    'label' => 'Uitgevoerd',
                     'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 89],
                 ],
                 [

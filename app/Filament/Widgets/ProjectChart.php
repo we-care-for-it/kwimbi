@@ -8,6 +8,7 @@ class ProjectChart extends ChartWidget
 {
     protected static ?string $heading = 'Chart';
     protected static ?int $sort = 5;
+    protected int | string | array $columnSpan = '4';
     protected function getData(): array
     {
         return [

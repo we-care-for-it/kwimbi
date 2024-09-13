@@ -7,7 +7,8 @@ use Filament\Widgets\ChartWidget;
 class IncidentChart extends ChartWidget
 {
     protected static ?string $heading = 'Storingen';
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 4;
+    protected int | string | array $columnSpan = '4';
     protected function getData(): array
     {
 

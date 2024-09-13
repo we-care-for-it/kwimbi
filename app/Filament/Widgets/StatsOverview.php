@@ -8,9 +8,11 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 class StatsOverview extends BaseWidget
 {
 
-    protected static ?string $heading = 'Porjecten';
+
     protected static ?int $sort = 1;
- protected function getStats(): array
+    protected int | string | array $columnSpan = '12';
+
+    protected function getStats(): array
     {
         return [
         Stat::make('Storingen', '192.1k')

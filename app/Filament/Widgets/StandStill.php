@@ -7,11 +7,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
-class LatestInspections extends BaseWidget
+class StandStill extends BaseWidget
 {
-    protected static ?int $sort = 7;
+    protected static ?int $sort = 8;
     protected int | string | array $columnSpan = '6';
-    protected static ?string $heading = 'INspecties';
+    protected static ?string $heading = 'Stilstaande liften';
 
 
     public function table(Table $table): Table

@@ -11,8 +11,8 @@ class LatestInsidents extends BaseWidget
 {
 
     protected static ?int $sort =6;
-    protected int | string | array $columnSpan = '2';
-
+    protected int | string | array $columnSpan = '6';
+    protected static ?string $heading = 'Keuringen';
     public function table(Table $table): Table
     {
         return $table
