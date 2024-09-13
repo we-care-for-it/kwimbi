@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
-use App\Models\ProjectStatus;
+use App\Models\Statuses;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -40,8 +40,8 @@ class ReactionsRelationManager extends RelationManager
                 Select::make('status_id')
                     ->label('Status')
                     ->required()
-                    ->options(ProjectStatus::all()
-                        ->pluck('name', 'id')),
+                    ->options(Statuses::where('model', 'Project')
+                        ->pluck('name', 'id'))
 
 
             ]);
