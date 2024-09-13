@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
+use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;
 use App\Models\ObjectType;
 use Filament\Forms;
@@ -127,13 +128,19 @@ class ObjectsRelationManager extends RelationManager
                 ,
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
+                    return "/admin/objects/".$record->id."/edit";
+
+                })->icon('heroicon-c-link')
+
+                    //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
+                    //->openUrlInNewTab()
+            //    Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+//                Tables\Actions\BulkActionGroup::make([
+//                    Tables\Actions\DeleteBulkAction::make(),
+//                ]),
             ]);
     }
 }

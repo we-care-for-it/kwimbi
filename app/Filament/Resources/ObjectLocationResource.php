@@ -278,18 +278,16 @@ class ObjectLocationResource extends Resource
             // layout: FiltersLayout::AboveContent
             ->actions([
 
+                Tables\Actions\EditAction::make()->label('Open project')->url(function (Object $record){
+                    return "/admin/projects/".$record->id."/edit";
 
-                Tables\Actions\EditAction::make()
-                    ->modalHeading("Wijzigen")
-                    ->modalWidth(MaxWidth::SevenExtraLarge)
-                    ->label('Wijzigen')
+                })->icon('heroicon-c-link')
 
-
-            ])
+                    ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
 
-                    ExportBulkAction::make(),
+                //    ExportBulkAction::make(),
 
 
                     //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
@@ -304,6 +302,7 @@ class ObjectLocationResource extends Resource
         return [
             RelationManagers\NotesRelationManager::class,
             RelationManagers\ObjectsRelationManager::class,
+            RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class
         ];
     }

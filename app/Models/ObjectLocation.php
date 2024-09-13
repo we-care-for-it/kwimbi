@@ -91,5 +91,11 @@ class ObjectLocation extends Model implements Auditable
         return $this->hasMany(Contact::class, 'location_id', 'id');
     }
 
+    public function projects()
+    {
+        return $this->hasMany(Project::class,'location_id', 'id');
+    }
+
+
 
 }

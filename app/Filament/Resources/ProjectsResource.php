@@ -76,12 +76,14 @@ class ProjectsResource extends Resource
 
 
                                 Forms\Components\TextInput::make('name')
-                                    ->label('Naam')
+                                    ->label('Omschrijving')
                                     ->maxLength(255)
+                                    ->helperText('Omschrijving van het project')
                                     ->required(),
 
                                 TextInput::make('description')
-                                    ->label('Opmerking'),
+                                    ->label('Opmerking')
+                                    ->helperText('Eventueel een opmerking'),
                             ])
 
                     ])
@@ -104,19 +106,19 @@ class ProjectsResource extends Resource
                                 DatePicker::make('requestdate')
                                     ->label('Aanvraagdatum'),
 
-                                DatePicker::make('startdate')
-                                    ->label('Startdatum'),
+
+                                DatePicker::make('date_of_execution')
+                                    ->label('Plandatum'),
 
 
                                 DatePicker::make('startdate')
                                     ->label('Startdatum'),
+
+
 
                                 DatePicker::make('enddate')
                                     ->label('Einddatum'),
 
-
-                                DatePicker::make('date_of_execution')
-                                    ->label('Plandatum'),
 
 
                             ]),
@@ -166,22 +168,16 @@ class ProjectsResource extends Resource
                         ])
                             ->schema([
                                 TextInput::make('quote_price')
+                                    ->integer()
+                                    ->inputMode('decimal')
                                     ->label('Offertebedrag')
                                     ->suffixIcon('heroicon-o-currency-euro'),
 
 
                                 TextInput::make('cost_price')
+                                    ->inputMode('decimal')
+                                    ->integer()
                                     ->label('Kostprijs')
-                                    ->suffixIcon('heroicon-o-currency-euro'),
-
-
-                                TextInput::make('quote_number')
-                                    ->label('Offertenummer')
-                                    ->suffixIcon('heroicon-o-currency-euro'),
-
-
-                                TextInput::make('quote_number_external')
-                                    ->label('Offertenummer (Extern)')
                                     ->suffixIcon('heroicon-o-currency-euro'),
 
 
@@ -191,6 +187,23 @@ class ProjectsResource extends Resource
                     ])
                     ->columns(2)
                     ->columnSpan(['lg' => 1]),
+
+
+
+                Section::make()
+                    ->schema([
+
+                TextInput::make('quote_number')
+                    ->label('Offertenummer')         ->columnSpan(2),
+
+
+                TextInput::make('quote_number_external')
+                    ->label('Offertenummer (Extern)')->columnSpan(2),
+
+                    ])
+                    ->columns(2)
+                    ->columnSpan(['lg' => 1]),
+
 
                 Section::make()
                     ->schema([
@@ -213,10 +226,10 @@ class ProjectsResource extends Resource
 
                     ])
                     ->columns(2)
-                    ->columnSpan(['lg' => 1]),
+                    ->columnSpan(2),
 
             ])
-            ->columns(3);
+            ->columns(5);
     }
 
     public static function table(Table $table): Table
@@ -249,7 +262,7 @@ class ProjectsResource extends Resource
 
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Naam')
+                    ->label('Omschrijvinf')
                     ->searchable()->wrap(),
 
 
