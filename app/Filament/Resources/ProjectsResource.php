@@ -63,17 +63,29 @@ class ProjectsResource extends Resource
 
                 Section::make()
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Naam')
-                            ->maxLength(255)
-                            ->required(),
 
-                        TextInput::make('description')
-                            ->label('Omschrijving'),
+                        Grid::make([
+                            'default' => 2,
+                            'sm' => 2,
+                            'md' => 2,
+                            'lg' => 2,
+                            'xl' => 2,
+                            '2xl' => 2,
+                        ])
+                            ->schema(components: [
 
+
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Naam')
+                                    ->maxLength(255)
+                                    ->required(),
+
+                                TextInput::make('description')
+                                    ->label('Omschrijving'),
+                            ])
 
                     ])
-                    ->columnSpan(['lg' => 1]),
+                    ->columnSpan('full'),
 
                 Section::make()
                     ->schema([
@@ -204,7 +216,7 @@ class ProjectsResource extends Resource
                     ->columnSpan(['lg' => 1]),
 
             ])
-            ->columns(4);
+            ->columns(3);
     }
 
     public static function table(Table $table): Table

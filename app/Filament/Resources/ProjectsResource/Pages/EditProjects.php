@@ -10,24 +10,8 @@ class EditProjects extends EditRecord
 {
     protected static string $resource = ProjectsResource::class;
     protected static ?string $title = 'Project bekijken';
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
 
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->previousUrl ?? $this->getResource()::getUrl('index');
-    }
-
-    public function refreshForm()
-    {
-        $this->fillForm();
-    }
-    public static function getRelations() : array
+    public static function getRelations(): array
     {
         return [
             RelationManagers\ReactionsRelationManager::class,
@@ -35,9 +19,27 @@ class EditProjects extends EditRecord
             RelationManagers\LocationsRelationManager::class
         ];
     }
+
+    public function refreshForm()
+    {
+        $this->fillForm();
+    }
+
     public function getHeading(): string
     {
-       return "#". sprintf('%08d', $this->getRecord()->id) ." - " .$this->getRecord()->name;
+        return "#" . sprintf('%05d', $this->getRecord()->id) . " - " . $this->getRecord()->name;
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+        ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
 
 }
