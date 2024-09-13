@@ -194,7 +194,8 @@ class ProjectsResource extends Resource
 
             Group::make('customer.name')
                 ->label('Relatie'),
-
+            Group::make('status_id')
+                ->label('Status'),
         ])
             ->columns([
 
