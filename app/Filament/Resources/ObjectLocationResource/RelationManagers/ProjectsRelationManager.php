@@ -101,14 +101,14 @@ class ProjectsRelationManager extends RelationManager
                 ,
 
 
-                Tables\Columns\TextColumn::make('cost_price')
-                    ->label('Winst')
-                    ->getStateUsing(function (Project $record): ?string {
-                        return $record?->quote_price - $record?->cost_price;
-                    })->prefix('€')
-                    ->color(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'danger' : 'success')
-                    ->badge()->sortable()
-                    ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
+//                Tables\Columns\TextColumn::make('cost_price')
+//                    ->label('Winst')
+//                    ->getStateUsing(function (Project $record): ?string {
+//                        return $record?->quote_price - $record?->cost_price;
+//                    })->prefix('€')
+//                    ->color(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'danger' : 'success')
+//                    ->badge()->sortable()
+//                    ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
 
 
 //                Tables\Columns\TextColumn::make('budget_costs')
