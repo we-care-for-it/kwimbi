@@ -81,7 +81,7 @@ class ProjectsResource extends Resource
                                     ->required(),
 
                                 TextInput::make('description')
-                                    ->label('Omschrijving'),
+                                    ->label('Opmerking'),
                             ])
 
                     ])
