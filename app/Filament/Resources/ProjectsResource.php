@@ -89,6 +89,14 @@ class ProjectsResource extends Resource
                             '2xl' => 2,
                         ])
                             ->schema([
+
+                                DatePicker::make('requestdate')
+                                    ->label('Aanvraag datum'),
+
+                                DatePicker::make('startdate')
+                                    ->label('Startdatum'),
+
+
                                 DatePicker::make('startdate')
                                     ->label('Startdatum'),
 
