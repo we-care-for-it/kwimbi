@@ -16,7 +16,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
@@ -225,12 +224,21 @@ class ProjectsResource extends Resource
                     ->getStateUsing(function (Project $record): ?string {
                         return sprintf('%08d', $record?->id);
                     })
-                    ->searchable()->sortable(),
+                    ->searchable()->sortable()->description(function (Project $record) {
+
+                        if (!$record?->description) {
+                            return false;
+                        } else {
+                            return $record->description;
+                        }
+
+
+                    }),
 
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Naam')
-                    ->searchable(),
+                    ->searchable()->wrap(),
 
 
                 Tables\Columns\TextColumn::make('customer.name')
@@ -274,10 +282,10 @@ class ProjectsResource extends Resource
                     ->searchable(),
 
 
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Omschrijving')
-                    ->weight(FontWeight::Light)
-                    ->sortable()->wrap(),
+//                Tables\Columns\TextColumn::make('description')
+//                    ->label('Omschrijving')
+//                    ->weight(FontWeight::Light)
+//                    ->sortable()->wrap(),
 
 
                 Tables\Columns\TextColumn::make('date_of_execution')
@@ -309,12 +317,12 @@ class ProjectsResource extends Resource
                     ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
 
 
-                Tables\Columns\TextColumn::make('budget_costs')
-                    ->label('Over')
-                    ->getStateUsing(function (Project $record): ?string {
-                        $total_price = $record?->budget_costs - ($record?->quote_price - $record?->cost_price);
-                        return $total_price;
-                    })->prefix('€'),
+//                Tables\Columns\TextColumn::make('budget_costs')
+//                    ->label('Over')
+//                    ->getStateUsing(function (Project $record): ?string {
+//                        $total_price = $record?->budget_costs - ($record?->quote_price - $record?->cost_price);
+//                        return $total_price;
+//                    })->prefix('€'),
 
 
                 Tables\Columns\TextColumn::make('status.name')
