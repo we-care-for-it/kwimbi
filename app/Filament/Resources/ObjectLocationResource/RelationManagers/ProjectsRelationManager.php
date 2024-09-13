@@ -15,7 +15,7 @@ class ProjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'projects';
     protected static bool $isLazy = false;
-    protected static ?string $badge = 'new';
+
     public function form(Form $form): Form
     {
         return $form
@@ -25,6 +25,8 @@ class ProjectsRelationManager extends RelationManager
                     ->maxLength(255),
             ]);
     }
+
+
 
     public function table(Table $table): Table
     {
@@ -50,7 +52,7 @@ class ProjectsRelationManager extends RelationManager
 
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Omschrijvinf')
+                    ->label('Omschrijving')
                     ->searchable()->wrap(),
 
 
@@ -125,7 +127,7 @@ class ProjectsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+               // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open project')->url(function (Project $record){

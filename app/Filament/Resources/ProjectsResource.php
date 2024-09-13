@@ -262,7 +262,7 @@ class ProjectsResource extends Resource
 
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Omschrijvinf')
+                    ->label('Omschrijving')
                     ->searchable()->wrap(),
 
 
@@ -273,6 +273,11 @@ class ProjectsResource extends Resource
                         return $record?->customer->name;
 
                     })
+                    ->url(function (Project $record){
+                        return "/admin/customers/".$record->customer_id."/edit";
+
+                    })
+
                     ->searchable()
                     ->sortable()
                     ->label('Adres')
@@ -307,10 +312,6 @@ class ProjectsResource extends Resource
                     ->searchable(),
 
 
-//                Tables\Columns\TextColumn::make('description')
-//                    ->label('Omschrijving')
-//                    ->weight(FontWeight::Light)
-//                    ->sortable()->wrap(),
 
 
                 Tables\Columns\TextColumn::make('date_of_execution')
@@ -342,12 +343,7 @@ class ProjectsResource extends Resource
                     ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
 
 
-//                Tables\Columns\TextColumn::make('budget_costs')
-//                    ->label('Over')
-//                    ->getStateUsing(function (Project $record): ?string {
-//                        $total_price = $record?->budget_costs - ($record?->quote_price - $record?->cost_price);
-//                        return $total_price;
-//                    })->prefix('€'),
+
 
 
                 Tables\Columns\TextColumn::make('status.name')
@@ -375,10 +371,8 @@ class ProjectsResource extends Resource
             ])
             ->actions([
 
-                Tables\Actions\ViewAction::make(),
+             //   Tables\Actions\EditAction::make()->label('Open details')
 
-
-                Tables\Actions\EditAction::make()
             ])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
                 ExportBulkAction::make(),

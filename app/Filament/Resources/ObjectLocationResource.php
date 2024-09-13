@@ -7,6 +7,7 @@ use App\Filament\Resources\ObjectLocationResource\RelationManagers;
 use App\Models\Customer;
 use App\Models\ObjectLocation;
 use App\Models\ObjectManagementCompany;
+use App\Models\Project;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -78,7 +79,7 @@ class ObjectLocationResource extends Resource
                     // ...
                 ]),
 
-                Forms\Components\Section::make("Locatie gegevens")
+                Forms\Components\Section::make("Locatie gegevens")  ->collapsible()
                     ->schema([
                         Grid::make(4)->schema([
                             Forms\Components\TextInput::make("zipcode")
@@ -232,7 +233,10 @@ class ObjectLocationResource extends Resource
 
                 Tables\Columns\TextColumn::make("customer.name")->sortable()
                     ->label("Relatie")->placeholder('Geen relatie gekoppeld')
-                    ->searchable(),
+                    ->searchable() ->url(function (ObjectLocation $record){
+                        return "/admin/customers/".$record->customer_id."/edit";
+
+                    }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")->sortable()
                     ->label("Beheerder")->placeholder('Geen beheer gekoppeld')
@@ -278,10 +282,6 @@ class ObjectLocationResource extends Resource
             // layout: FiltersLayout::AboveContent
             ->actions([
 
-                Tables\Actions\EditAction::make()->label('Open project')->url(function (Object $record){
-                    return "/admin/projects/".$record->id."/edit";
-
-                })->icon('heroicon-c-link')
 
                     ])
             ->bulkActions([
