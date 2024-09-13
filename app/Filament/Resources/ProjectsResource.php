@@ -158,14 +158,22 @@ class ProjectsResource extends Resource
                                     ->label('Offertebedrag')
                                     ->suffixIcon('heroicon-o-currency-euro'),
 
+
+                                TextInput::make('cost_price')
+                                    ->label('Kostprijs')
+                                    ->suffixIcon('heroicon-o-currency-euro'),
+
+
                                 TextInput::make('quote_number')
                                     ->label('Offertenummer')
                                     ->suffixIcon('heroicon-o-currency-euro'),
 
 
-                                TextInput::make('cost_price')
-                                    ->label('Kostprijs')
-                                    ->suffixIcon('heroicon-o-currency-euro')
+                                TextInput::make('quote_number_external')
+                                    ->label('Offertenummer (Extern)')
+                                    ->suffixIcon('heroicon-o-currency-euro'),
+
+
                             ])
 
 
