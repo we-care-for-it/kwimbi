@@ -91,7 +91,7 @@ class ProjectsResource extends Resource
                             ->schema([
 
                                 DatePicker::make('requestdate')
-                                    ->label('Aanvraag datum'),
+                                    ->label('Aanvraagdatum'),
 
                                 DatePicker::make('startdate')
                                     ->label('Startdatum'),
@@ -156,6 +156,10 @@ class ProjectsResource extends Resource
                             ->schema([
                                 TextInput::make('quote_price')
                                     ->label('Offertebedrag')
+                                    ->suffixIcon('heroicon-o-currency-euro'),
+
+                                TextInput::make('quote_number')
+                                    ->label('Offertenummer')
                                     ->suffixIcon('heroicon-o-currency-euro'),
 
 
@@ -265,7 +269,7 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->label('Omschrijving')
                     ->weight(FontWeight::Light)
-                    ->sortable(),
+                    ->sortable()->wrap(),
 
 
                 Tables\Columns\TextColumn::make('date_of_execution')
