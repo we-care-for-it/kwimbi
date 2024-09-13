@@ -70,8 +70,8 @@ class ProjectsResource extends Resource
                             ->required(),
 
                         TextInput::make('description')
-                            ->label('Omschrijving')
-                            ->required(),
+                            ->label('Omschrijving'),
+
 
                     ])
                     ->columnSpan(['lg' => 1]),
