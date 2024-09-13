@@ -126,7 +126,7 @@ class ProjectsResource extends Resource
                             'xl' => 2,
                             '2xl' => 2,
                         ])
-                            ->schema([
+                            ->schema(components: [
 
                                 TextInput::make('budget_costs')
                                     ->label('Budget')
@@ -222,7 +222,7 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->label('#')
                     ->getStateUsing(function (Project $record): ?string {
-                        return sprintf('%08d', $record?->id);
+                        return sprintf('%05d', $record?->id);
                     })
                     ->searchable()->sortable()->description(function (Project $record) {
 
