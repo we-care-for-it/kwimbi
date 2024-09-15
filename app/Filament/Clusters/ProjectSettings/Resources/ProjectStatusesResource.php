@@ -20,10 +20,12 @@ use Filament\Support\Enums\MaxWidth;
 //Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Select;
 
 //tables
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Columns\SelectColumn;
 
 
 
@@ -44,7 +46,7 @@ class ProjectStatusesResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('model', "Project");
+        return parent::getEloquentQuery()->whereIn('model', ['Project','ProjectQuotes']);
     }
 
 
@@ -59,6 +61,16 @@ class ProjectStatusesResource extends Resource
                     ->columnSpan('full')
                     ->required(),
 
+
+                Select::make("model")
+                    ->label("Onderdeel")
+                    ->required()
+                    ->reactive()
+                    ->options([
+                            'Project' => 'Project',
+                            'ProjectQuotes' => 'Project Offertes'
+                        ]
+                    )->columnSpan("full")
 
 
 
@@ -82,6 +94,11 @@ class ProjectStatusesResource extends Resource
             ->searchable() ,
 
 
+                SelectColumn::make('model')->label('Onderdeel')
+                    ->options([
+                        'Project' => 'Project',
+                        'ProjectQuotes' => 'Project Offertes'
+                    ])
 
 
 

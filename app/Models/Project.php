@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Statuses;
+
 use OwenIt\Auditing\Contracts\Auditable;
 use Log;
 use Str;
@@ -40,7 +41,7 @@ class Project extends Model implements Auditable
 
     public function status()
     {
-        return $this->belongsTo(Statuses::class);
+        return $this->hasMany(Statuses::class,'id','status_id')->where('model', 'Project');
     }
 
     public function customer()
@@ -55,6 +56,11 @@ class Project extends Model implements Auditable
     public function reactions()
     {
         return $this->hasMany(ProjectReaction::class,'project_id','id');
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class,'project_id','id');
     }
 
 
