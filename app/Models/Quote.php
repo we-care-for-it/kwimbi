@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Log;
 use Str;
+use App\Enums\QuoteTypes;
 class Quote extends Model implements Auditable
 {
     use SoftDeletes;
@@ -17,7 +18,12 @@ class Quote extends Model implements Auditable
 
 
 
-
+    protected function casts(): array
+    {
+        return [
+            'type_id' => QuoteTypes::class,
+        ];
+    }
 
     // Attributes that should be mass-assignable
     protected $fillable = ['number','type'];

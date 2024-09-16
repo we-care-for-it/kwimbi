@@ -19,6 +19,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Support\Enums\MaxWidth;
+
+//Enums
+
+use App\Enums\QuoteTypes;
+
+use Filament\Tables\Columns\SelectColumn;
+
 
 class QuotesRelationManager extends RelationManager
 {
@@ -38,25 +46,14 @@ class QuotesRelationManager extends RelationManager
                             ->label("Type")
                             ->required()
                             ->reactive()
-                            ->options([
-                                '1' => 'Eigen offerte ',
-                                '2' => 'Exteren leveranier'
-                            ]
-                            )->columnSpan("full")
+                            ->options(QuoteTypes::class)
+                            ->columnSpan("full")
                             ->default('1'),
 
                         Select::make("company_id")
 
-                            ->label("Extern leverancier")
-                            ->default('1')
-//                            ->columnSpan("full")
-//                            ->disabled(function (Quote $record) {
-//                                if (!$record?->type_id) {
-//                                    return false;
-//                                } else {
-//                                    return true;
-//                                }
-//                            })
+                            ->label("Externe partij")
+
 
                             ->options(
                                 ObjectMaintenanceCompany::all()->pluck("name", "id")
@@ -64,11 +61,12 @@ class QuotesRelationManager extends RelationManager
 
 
                         TextInput::make("number")
-                            ->label("Nummer"),
+                            ->label("Nummer")
+                            ->placeholder('-'),
 
                         TextInput::make("Price")
 
-                            ->label("Prijs"),
+                            ->label("Prijs")->placeholder('-'),
 
 
 
@@ -78,20 +76,23 @@ class QuotesRelationManager extends RelationManager
 
 
                     ])
-                    ->columns(2)
-                    ->columnSpan(1),
+               ->columns(2)
+                   ->columnSpan(1),
 
                 Section::make()
                     ->schema([
 
 
-          DatePicker::make("request_date")->label("Aanvraagdatum"),
+          DatePicker::make("request_date")
+              ->default(now())
+              ->label("Aanvraagdatum")
+              ->required(),
 
                 DatePicker::make("remembered_at")->label(
-                    "Herindering op"),
+                    "Herindering op")->placeholder('-'),
 
                       DatePicker::make("accepted_at")->label(
-                          "Geaccpteerd op"),
+                          "Geaccpteerd op")->placeholder('-'),
 
                             DatePicker::make("end_date")->label(
                                 "Einddatum"),
@@ -129,6 +130,7 @@ class QuotesRelationManager extends RelationManager
                 Section::make()
                     ->schema([
                         FileUpload::make('attachment')
+                            ->label('Bijlage')
                             ->columnSpan(3)
                             ->preserveFilenames()
 
@@ -162,26 +164,41 @@ class QuotesRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
-                    ->badge(),
+                    ->badge()
+                    ->placeholder('-'),
 
                         Tables\Columns\TextColumn::make("price")
-                            ->label("Prijs"),
+                            ->label("Prijs") ->prefix('€')
+                            ->placeholder('-'),
 
 
                 Tables\Columns\TextColumn::make("remembered_at")
-                    ->label("Herindering verstuurd")
-                    ->dateTime("d-m-Y"),
+                    ->label("Herinnering verstuurd")
+                    ->dateTime("d-m-Y")
+                    ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make("accepted_at")
                     ->label("Accepteer datum ")
-                    ->dateTime("d-m-Y"),
+                    ->dateTime("d-m-Y")->placeholder('-'),
 
 
                 Tables\Columns\TextColumn::make("end_date")
-                    ->label("Aanvraag einde")
-                    ->dateTime("d-m-Y")
+                    ->label("Einddatum")
+                    ->dateTime("d-m-Y")->placeholder('-')
                 ,
 
+                Tables\Columns\TextColumn::make("type_id")
+                    ->label("Type")
+
+                ,
+
+
+//
+//                SelectColumn::make('type')
+//                    ->options([
+//                        '1' => 'Eigen offerte ',
+//                        '2' => 'Externe leveranier'
+//                    ])   ,
 
 
 
@@ -193,10 +210,10 @@ class QuotesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()   ->modalWidth(MaxWidth::SixExtraLarge),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()   ->modalWidth(MaxWidth::SixExtraLarge),
                 Tables\Actions\DeleteAction::make()->label(''),
             ])
             ->bulkActions([

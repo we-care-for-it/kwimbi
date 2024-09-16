@@ -6,6 +6,7 @@ use App\Filament\Clusters\ElevatorsSettings;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectMaintenanceCompaniesResource\Pages;
 use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectMaintenanceCompaniesResource\RelationManagers;
 use App\Models\ObjectInspectionCompany;
+use App\Models\ObjectMaintenanceCompany;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,7 +15,7 @@ use Filament\Tables\Table;
 
 class ObjectMaintenanceCompaniesResource extends Resource
 {
-    protected static ?string $model = ObjectInspectionCompany::class;
+    protected static ?string $model = ObjectMaintenanceCompany::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
