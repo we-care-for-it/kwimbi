@@ -152,6 +152,11 @@ class QuoteResource extends Resource
 
             ->columns([
 
+                Tables\Columns\TextColumn::make("status.name")
+                    ->label("Status")
+                    ->badge()
+                    ->placeholder('-')
+                    ->sortable()->searchable(),
 
 
                 Tables\Columns\TextColumn::make("number")->sortable()
@@ -185,11 +190,6 @@ class QuoteResource extends Resource
                     ,
 
 
-                Tables\Columns\TextColumn::make("status.name")
-                    ->label("Status")
-                    ->badge()
-                    ->placeholder('-')
-                    ->sortable()->searchable(),
 
 
                 Tables\Columns\TextColumn::make("price")
