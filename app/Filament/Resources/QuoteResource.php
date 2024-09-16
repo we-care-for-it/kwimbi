@@ -176,10 +176,10 @@ class QuoteResource extends Resource
                     })->wrap()
                     ->placeholder('-')
                     ->description(function (Quote $record) {
-                        if (!$record?->project->name) {
+                        if (!$record?->project->company_id) {
                             return false;
                         } else {
-                            return $record?->project->name;
+                            return $record?->supplier()->name;
                         }
                     })
                     ,
