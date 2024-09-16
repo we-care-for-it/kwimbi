@@ -67,7 +67,7 @@ class ReactionsRelationManager extends RelationManager
                     ->label("Toegevoegd op"),
 
                 Tables\Columns\TextColumn::make("user.name")->label('Medewerker'),
-                Tables\Columns\TextColumn::make("reaction")->label('Reactie')->grow(true),
+                Tables\Columns\TextColumn::make("reaction")->label('Reactie')->grow(true)->wrap(),
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->badge()
