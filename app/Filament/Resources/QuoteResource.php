@@ -145,7 +145,7 @@ class QuoteResource extends Resource
             ->groups([
                 Group::make("project.location.name")->label("Locatie")    ->titlePrefixedWithLabel(false),
                 Group::make("project.customer.name")->label("Relatie")    ->titlePrefixedWithLabel(false),
-                Group::make("company_id")->label("Leverancier")    ->titlePrefixedWithLabel(false),
+                Group::make("supplier.name")->label("Leverancier")    ->titlePrefixedWithLabel(false),
 
             ])
 
