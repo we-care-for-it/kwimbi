@@ -257,6 +257,7 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('quotes_count')
                     ->counts('quotes')
                     ->badge()
+                    ->sortable()
                     ->label("Offertes")
                     ->alignment('center'),
 
