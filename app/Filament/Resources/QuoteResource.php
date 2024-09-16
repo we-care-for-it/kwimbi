@@ -168,18 +168,18 @@ class QuoteResource extends Resource
                 Tables\Columns\TextColumn::make("supplier.name")
                     ->label("")
                     ->getStateUsing(function (Quote $record): ?string {
-                        if (!$record?->name) {
+                        if (!$record?->project_id) {
                             return false;
                         } else {
-                            return $record->name;
+                            return $record?->project->name;
                         }
                     })->wrap()
                     ->placeholder('-')
                     ->description(function (Quote $record) {
-                        if (!$record?->project->customer->name) {
+                        if (!$record?->project->name) {
                             return false;
                         } else {
-                            return $record?->project->customer->name;
+                            return $record?->project->name;
                         }
                     })
                     ,
