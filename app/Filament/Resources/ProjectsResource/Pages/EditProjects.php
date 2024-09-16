@@ -40,12 +40,20 @@ class EditProjects extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('save_top')
-                ->action('save'),
+            Actions\DeleteAction::make()
+                ->link()
+                ->icon('heroicon-o-trash'),
             Actions\Action::make('cancel_top')
+                ->link()
+                ->label('Afbreken')
+
                 ->url($this->getResource()::getUrl('index'))
                 ->outlined(),
-            Actions\DeleteAction::make(),
+            Actions\Action::make('save_top')
+                ->action('save')
+                ->label('Opslaan'),
+
+
         ];
     }
 

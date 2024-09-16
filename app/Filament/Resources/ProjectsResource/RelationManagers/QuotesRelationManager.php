@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use App\Enums\QuoteTypes;
 use App\Models\ObjectMaintenanceCompany;
+use App\Models\Supplier;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -47,17 +48,28 @@ class QuotesRelationManager extends RelationManager
                     ->default('1'),
 
                 Select::make("company_id")
-                    ->label("Externe partij")
-                    ->options(ObjectMaintenanceCompany::all()
-                        ->pluck("name", "id")),
 
+                    ->relationship(name: 'supplier', titleAttribute: 'name')
+
+                    ->options(Supplier::all()
+                        ->pluck("name", "id")) ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+
+
+
+                    ])         ->columnSpan("full"),
                 TextInput::make("number")
                     ->label("Nummer")
                     ->placeholder('-'),
 
+
+
                 TextInput::make("Price")
                     ->label("Prijs")
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->numeric()
+                    ->prefix('€')
+
 
             ])
             ->columns(2)
@@ -126,6 +138,11 @@ class QuotesRelationManager extends RelationManager
                 ->label("Offertedatum"), Tables\Columns\TextColumn::make("number")
                 ->label('Nummer'),
 
+                Tables\Columns\TextColumn::make("supplier.name")
+                    ->label("Leverancier")
+
+                    ->placeholder('-'),
+
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->badge()
@@ -153,6 +170,7 @@ class QuotesRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
+                    ->badge()
             ])
             ->filters([
                 //
