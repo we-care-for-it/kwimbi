@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
 use Filament\Actions;
+use Filament\Resources\Pages\ContentTabPosition;
 use Filament\Resources\Pages\EditRecord;
 
 class EditProjects extends EditRecord
@@ -20,6 +21,12 @@ class EditProjects extends EditRecord
         ];
     }
 
+
+    public function getContentTabPosition(): ?ContentTabPosition
+    {
+        return ContentTabPosition::After;
+    }
+
     public function refreshForm()
     {
         $this->fillForm();
@@ -33,6 +40,11 @@ class EditProjects extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Actions\Action::make('save_top')
+                ->action('save'),
+            Actions\Action::make('cancel_top')
+                ->url($this->getResource()::getUrl('index'))
+                ->outlined(),
             Actions\DeleteAction::make(),
         ];
     }
@@ -40,6 +52,11 @@ class EditProjects extends EditRecord
     protected function getRedirectUrl(): string
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return []; // necessary to remove the bottom actions
     }
 
 }

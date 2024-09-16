@@ -22,9 +22,6 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-//Form
-
-//tables
 
 class ProjectsResource extends Resource
 {
@@ -96,12 +93,11 @@ class ProjectsResource extends Resource
                                 "Aanvraagdatum"
                             ),
 
-                            DatePicker::make("date_of_execution")->label(
-                                "Plandatum"
-                            ),
+                            DatePicker::make("date_of_execution")
+                                ->label("Plandatum")
+                                ->placeholder('Onbekend'),
 
                             DatePicker::make("startdate")->label("Startdatum"),
-
                             DatePicker::make("enddate")->label("Einddatum"),
                         ]),
                     ])
@@ -137,42 +133,6 @@ class ProjectsResource extends Resource
                         )
                     ])->columnSpan(1),
 
-//                        Grid::make([
-//                            "default" => 2,
-//                            "sm" => 2,
-//                            "md" => 2,
-//                            "lg" => 2,
-//                            "xl" => 2,
-//                            "2xl" => 2,
-                //   ])->schema([
-//                            TextInput::make("quote_price")
-//                                ->integer()
-//                                ->inputMode("decimal")
-//                                ->label("Offertebedrag")
-//                                ->suffixIcon("heroicon-o-currency-euro"),
-//
-//                            TextInput::make("cost_price")
-//                                ->inputMode("decimal")
-//                                ->integer()
-//                                ->label("Kostprijs")
-//                                ->suffixIcon("heroicon-o-currency-euro"),
-                //    ]),
-                //  ])
-                //   ->columns(2)
-                // ->columnSpan(["lg" => 1]),
-
-                // Section::make()
-                // ->schema([
-//                        TextInput::make("quote_number")
-//                            ->label("Offertenummer")
-//                            ->columnSpan(2),
-
-//                        TextInput::make("quote_number_external")
-//                            ->label("Offertenummer (Extern)")
-//                            ->columnSpan(2),
-                // ])
-//                    ->columns(2)
-//                    ->columnSpan(["lg" => 1]),
 
                 Section::make()
                     ->schema([
@@ -264,6 +224,7 @@ class ProjectsResource extends Resource
                             return "";
                         }
                     })
+                    ->placeholder('Onbekend')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make("date_of_execution")
@@ -275,9 +236,10 @@ class ProjectsResource extends Resource
                                 strtotime($record?->date_of_execution)
                             );
                         } else {
-                            return "-";
+                            return false;
                         }
                     })
+                    ->placeholder('Onbekend')
                     ->searchable()
                     ->color(
                         fn($record) => strtotime($record?->date_of_execution) <
@@ -286,37 +248,24 @@ class ProjectsResource extends Resource
                             : "success"
                     ),
 
-//                Tables\Columns\TextColumn::make("cost_price")
-//                    ->label("Winst")
-//                    ->getStateUsing(function (Project $record): ?string {
-//                        return $record?->quote_price - $record?->cost_price;
-//                    })
-//                    ->prefix("€")
-//                    ->color(
-//                        fn($record) => $record?->quote_price -
-//                        $record?->cost_price <
-//                        0
-//                            ? "danger"
-//                            : "success"
-//                    )
-//                    ->badge()
-//                    ->sortable()
-//                    ->icon(
-//                        fn($record) => $record?->quote_price -
-//                        $record?->cost_price <
-//                        0
-//                            ? "heroicon-m-exclamation-triangle"
-//                            : false
-//                    ),
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->sortable()
                     ->badge(),
 
-                Tables\Columns\TextColumn::make('quotes_count')->counts('quotes')
+                Tables\Columns\TextColumn::make('quotes_count')
+                    ->counts('quotes')
                     ->badge()
-                    ->label("Offertes"),
+                    ->label("Offertes")
+                    ->alignment('center'),
+
+                Tables\Columns\TextColumn::make('reactions_count')
+                    ->counts('reactions')
+                    ->badge()
+                    ->label("Reacties")
+                    ->alignment('center'),
+
 
             ])
             ->filters([
