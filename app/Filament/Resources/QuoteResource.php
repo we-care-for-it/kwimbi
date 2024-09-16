@@ -25,7 +25,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-
+use Filament\Support\Enums\VerticalAlignment;
 class QuoteResource extends Resource
 {
     protected static ?string $model = Quote::class;
@@ -150,49 +150,67 @@ class QuoteResource extends Resource
             ])
 
 
-            ->columns([Tables\Columns\TextColumn::make("request_date")
-                ->dateTime("d-m-Y")
-                ->label("Offertedatum"), Tables\Columns\TextColumn::make("number")
-                ->label('Nummer'),
+            ->columns([
+
+
+
+                Tables\Columns\TextColumn::make("number")->sortable()
+                ->label('Datum / nummer')->sortable()->searchable()
+                ->description(function (Quote $record) {
+                    if (!$record?->request_date) {
+                        return false;
+                    } else {
+                        return date("d-m-Y",strtotime($record?->request_date));
+                    }
+                })   ->verticalAlignment(VerticalAlignment::Start)
+                ,
 
                 Tables\Columns\TextColumn::make("supplier.name")
-                    ->label("Leverancier")
-
-                    ->placeholder('-')
-                    ->description(function (Quote $record) {
+                    ->label("")
+                    ->getStateUsing(function (Quote $record): ?string {
                         if (!$record?->project_id) {
                             return false;
                         } else {
                             return $record?->project->customer->name . ' - '. $record?->project->name;
                         }
-                    }),
+                    })->wrap()
+                    ->placeholder('-')
+                    ->description(function (Quote $record) {
+                        if (!$record?->project->name) {
+                            return false;
+                        } else {
+                            return $record?->project->name;
+                        }
+                    })
+                    ,
 
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->badge()
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->sortable()->searchable(),
 
 
                 Tables\Columns\TextColumn::make("price")
                     ->label("Prijs")
                     ->prefix('€')
-                    ->placeholder('-'),
+                    ->placeholder('-')->sortable(),
 
                 Tables\Columns\TextColumn::make("remembered_at")
                     ->label("Herinnering verstuurd")
                     ->dateTime("d-m-Y")
-                    ->placeholder('-'),
+                    ->placeholder('-')->sortable(),
 
                 Tables\Columns\TextColumn::make("accepted_at")
                     ->label("Accepteer datum ")
                     ->dateTime("d-m-Y")
-                    ->placeholder('-'),
+                    ->placeholder('-')->sortable(),
 
                 Tables\Columns\TextColumn::make("end_date")
                     ->label("Einddatum")
                     ->dateTime("d-m-Y")
-                    ->placeholder('-'),
+                    ->placeholder('-')->sortable(),
 
 
 
@@ -200,11 +218,34 @@ class QuoteResource extends Resource
 
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
-                    ->badge()
+                    ->badge()->sortable(),
             ])
             ->filters([
-                //
-            ])
+                SelectFilter::make("status_id")
+                    ->label("Status")
+
+                    ->relationship('status', 'name')
+                    ->searchable()
+                    ->preload(),
+
+                SelectFilter::make("project_id")
+                    ->label("Project")
+
+                    ->relationship('project', 'name')
+                    ->searchable()
+                    ->preload(),
+
+
+                SelectFilter::make("company_id")
+                    ->label("Leverancier")
+
+                    ->relationship('supplier', 'name')
+                    ->searchable()
+                    ->preload(),
+
+
+
+            ])   ->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

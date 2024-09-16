@@ -181,7 +181,7 @@ class ProjectsResource extends Resource
                         } else {
                             return $record->description;
                         }
-                    }),
+                    })->wrap(),
 
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
@@ -282,11 +282,14 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->preload(),
 
-                SelectFilter::make("status_id")
-                    ->label("Status")
+                SelectFilter::make("customer_id")
+                    ->label("Relatie")
                     ->options(Customer::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
+
+
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open details')
