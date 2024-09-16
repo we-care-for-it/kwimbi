@@ -160,8 +160,12 @@ class ProjectsResource extends Resource
     {
         return $table
             ->groups([
-                Group::make("customer.name")->label("Relatie"),
-                Group::make("status_id")->label("Status"),
+                Group::make("customer.name")->label("Relatie")
+                    ->titlePrefixedWithLabel(false),
+                Group::make("status.name")->label("Status")
+                    ->titlePrefixedWithLabel(false)
+                    ->getKeyFromRecordUsing(fn (Project $record): string => $record->status->name),
+
             ])
             ->columns([
                 Tables\Columns\TextColumn::make("id")

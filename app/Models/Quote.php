@@ -34,6 +34,13 @@ class Quote extends Model implements Auditable
         return $this->hasMany(Statuses::class,'id','status_id');
     }
 
+    public function project()
+    {
+        return $this->hasOne(Project::class,'id','project_id');
+    }
+
+
+
 
     public function supplier()
     {

@@ -41,7 +41,7 @@ class Project extends Model implements Auditable
 
     public function status()
     {
-        return $this->hasMany(Statuses::class,'id','status_id')->where('model', 'Project');
+        return $this->hasOne(Statuses::class,'id','status_id')->where('model', 'Project');
     }
 
     public function customer()
