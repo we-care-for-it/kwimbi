@@ -16,6 +16,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
@@ -166,7 +167,7 @@ class ProjectsResource extends Resource
                     ->titlePrefixedWithLabel(false)
                     ->getKeyFromRecordUsing(fn (Project $record): string => $record->status->name),
 
-            ])
+            ])->defaultGroup("customer.name")
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
@@ -175,18 +176,19 @@ class ProjectsResource extends Resource
                     })
                     ->searchable()
                     ->sortable()
-                    ->description(function (Project $record) {
+                    ->wrap()
+                    ->verticalAlignment(VerticalAlignment::Start),
+
+                Tables\Columns\TextColumn::make("name")
+                    ->label("Omschrijving")
+                    ->searchable()
+                    ->wrap() ->description(function (Project $record) {
                         if (!$record?->description) {
                             return false;
                         } else {
                             return $record->description;
                         }
-                    })->wrap(),
-
-                Tables\Columns\TextColumn::make("name")
-                    ->label("Omschrijving")
-                    ->searchable()
-                    ->wrap(),
+                    })->verticalAlignment(VerticalAlignment::Start),
 
                 Tables\Columns\TextColumn::make("customer.name")
                     ->getStateUsing(function (Project $record): ?string {
@@ -199,7 +201,9 @@ class ProjectsResource extends Resource
                     })
                     ->searchable()
                     ->sortable()
-                    ->label("Adres")
+                    ->verticalAlignment(VerticalAlignment::Start)
+
+            ->label("Adres")
                     ->description(function (Project $record) {
                         if (!$record?->location_id) {
                             return "Geen locatie gekoppeld";

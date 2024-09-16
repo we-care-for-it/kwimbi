@@ -30,8 +30,8 @@ class QuoteResource extends Resource
 {
     protected static ?string $model = Quote::class;
     protected static ?string $title = 'Offertes';
-     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
-     protected static ?string $SearchResultTitle = "Offertes";
+    protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
+    protected static ?string $SearchResultTitle = "Offertes";
     protected static ?string $navigationGroup = "Hoofdmenu";
     protected static ?string $navigationLabel = "Offertes";
     protected static bool $isLazy = false;
@@ -168,18 +168,18 @@ class QuoteResource extends Resource
                 Tables\Columns\TextColumn::make("supplier.name")
                     ->label("")
                     ->getStateUsing(function (Quote $record): ?string {
-                        if (!$record?->project_id) {
+                        if (!$record?->name) {
                             return false;
                         } else {
-                            return $record?->project->customer->name . ' - '. $record?->project->name;
+                            return $record->name;
                         }
                     })->wrap()
                     ->placeholder('-')
                     ->description(function (Quote $record) {
-                        if (!$record?->project->name) {
+                        if (!$record?->project->customer->name) {
                             return false;
                         } else {
-                            return $record?->project->name;
+                            return $record?->project->customer->name;
                         }
                     })
                     ,
