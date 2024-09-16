@@ -9,13 +9,11 @@ use App\Models\ObjectLocation;
 use App\Models\Project;
 use App\Models\Statuses;
 use Filament\Forms;
-
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -60,9 +58,6 @@ class ProjectsResource extends Resource
             ->schema([
 
 
-
-
-
                 Section::make()
                     ->schema([
                         Grid::make([
@@ -82,7 +77,7 @@ class ProjectsResource extends Resource
                             TextInput::make("description")
                                 ->label("Opmerking")
                                 ->columnSpan("full")
-                                 ]),
+                        ]),
                     ])
                     ->columnSpan(["lg" => 2]),
 
@@ -140,7 +135,7 @@ class ProjectsResource extends Resource
                                     )->columnSpan("full"),
                             ]
                         )
-                    ])  ->columnSpan(1),
+                    ])->columnSpan(1),
 
 //                        Grid::make([
 //                            "default" => 2,
@@ -149,7 +144,7 @@ class ProjectsResource extends Resource
 //                            "lg" => 2,
 //                            "xl" => 2,
 //                            "2xl" => 2,
-                     //   ])->schema([
+                //   ])->schema([
 //                            TextInput::make("quote_price")
 //                                ->integer()
 //                                ->inputMode("decimal")
@@ -161,13 +156,13 @@ class ProjectsResource extends Resource
 //                                ->integer()
 //                                ->label("Kostprijs")
 //                                ->suffixIcon("heroicon-o-currency-euro"),
-                    //    ]),
-                  //  ])
-                 //   ->columns(2)
-                   // ->columnSpan(["lg" => 1]),
+                //    ]),
+                //  ])
+                //   ->columns(2)
+                // ->columnSpan(["lg" => 1]),
 
-               // Section::make()
-                   // ->schema([
+                // Section::make()
+                // ->schema([
 //                        TextInput::make("quote_number")
 //                            ->label("Offertenummer")
 //                            ->columnSpan(2),
@@ -175,7 +170,7 @@ class ProjectsResource extends Resource
 //                        TextInput::make("quote_number_external")
 //                            ->label("Offertenummer (Extern)")
 //                            ->columnSpan(2),
-                   // ])
+                // ])
 //                    ->columns(2)
 //                    ->columnSpan(["lg" => 1]),
 
@@ -238,7 +233,6 @@ class ProjectsResource extends Resource
                             $record->customer_id .
                             "/edit";
                     })
-
                     ->searchable()
                     ->sortable()
                     ->label("Adres")
@@ -319,6 +313,11 @@ class ProjectsResource extends Resource
                     ->label("Status")
                     ->sortable()
                     ->badge(),
+
+                Tables\Columns\TextColumn::make('quotes_count')->counts('quotes')
+                    ->badge()
+                    ->label("Offertes"),
+
             ])
             ->filters([
                 SelectFilter::make("status_id")
@@ -336,7 +335,7 @@ class ProjectsResource extends Resource
                     ->preload(),
             ])
             ->actions([
-                   Tables\Actions\EditAction::make()->label('Open details')
+                Tables\Actions\EditAction::make()->label('Open details')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
