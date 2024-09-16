@@ -64,10 +64,6 @@ class ObjectMaintenanceCompaniesResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
 
-                        Forms\Components\TextInput::make('emailaddress')
-                            ->email()
-                            ->label('E-mailadres')->columnSpan('full')
-                            ->maxLength(255),
 
                         Forms\Components\TextInput::make('phonenumber')
                             ->label('Telefoonnummer')->columnSpan('full')
