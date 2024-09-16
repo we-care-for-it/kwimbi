@@ -44,7 +44,7 @@ class Quote extends Model implements Auditable
 
     public function supplier()
     {
-        return $this->hasMany(Supplier::class,'id','company_id');
+        return $this->hasOne(Supplier::class,'id','company_id');
     }
 
 
