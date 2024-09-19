@@ -121,15 +121,26 @@ class Elevator extends Model implements Auditable
         return $this->hasMany(Incident::class);
     }
 
+
     public function maintenance()
     {
         return $this->hasMany(ObjectMaintenances::class);
     }
 
-    public function maintenance_contracts()
+    public function maintenanceContracts()
     {
-        return $this->hasMany(maintenanceContract::class);
+        return $this->hasMany(ObjectMaintenanceContract::class);
     }
 
+    public function maintenanceVisits()
+    {
+        return $this->hasMany(ObjectMaintenanceContract::class);
+    }
+
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation');
+    }
 
 }

@@ -8,6 +8,7 @@ use App\Models\Elevator;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationGroup;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -110,8 +111,14 @@ class ObjectResource extends Resource
     {
         return [
             RelationManagers\IncidentsRelationManager::class,
-            //RelationManagers\UploadsRelationManager::class,
-            // RelationManagers\QuotesRelationManager::class
+
+
+            RelationGroup::make('Onderhoud', [
+                RelationManagers\MaintenanceContractsRelationManager::class,
+                RelationManagers\MaintenanceVisitsRelationManager::class,
+            ]),
+            RelationManagers\AttachmentRelationManager::class,
+
         ];
     }
 
