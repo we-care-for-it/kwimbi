@@ -190,6 +190,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/z3d0x/filament-logger" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/devaslanphp/filament-avatar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/awcodes/filament-badgeable-column" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/awt/apilogger" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

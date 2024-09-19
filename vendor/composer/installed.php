@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'bc5af3d21aa659b6ba76fdead24cc0e6fd13b0c1',
+        'reference' => '5c99f035ee94a58edca34b86c27df7a26691d827',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -62,6 +62,17 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../awcodes/recently',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'awt/apilogger' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '558119656dccd34220edc82f22a57ff56de495f5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../awt/apilogger',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'bezhansalleh/filament-shield' => array(
@@ -715,7 +726,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'bc5af3d21aa659b6ba76fdead24cc0e6fd13b0c1',
+            'reference' => '5c99f035ee94a58edca34b86c27df7a26691d827',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

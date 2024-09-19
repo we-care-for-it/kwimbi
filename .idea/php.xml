@@ -199,6 +199,7 @@
       <path value="$PROJECT_DIR$/vendor/calebporzio/sushi" />
       <path value="$PROJECT_DIR$/vendor/devaslanphp/filament-avatar" />
       <path value="$PROJECT_DIR$/vendor/awcodes/filament-badgeable-column" />
+      <path value="$PROJECT_DIR$/vendor/awt/apilogger" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

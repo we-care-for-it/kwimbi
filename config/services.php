@@ -18,6 +18,14 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+
+    'chex' => [
+        'token' => env('CHEX_TOKEN'),
+        'url' => env('CHEX_URL'),
+        'company_id' => env('COMPANY_ID')
+    ],
+
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -34,7 +42,7 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-    
+
     'pro6pp' => [
         'url' => env('3PRO6PP_HOST'),
         'token' => env('3PRO6PP_TOKEN'),
