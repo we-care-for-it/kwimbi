@@ -10,7 +10,10 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
+
 use Livewire\Component;
+
+
 
 
 class ListInspectionData   extends Component implements HasForms, HasTable
@@ -20,7 +23,7 @@ class ListInspectionData   extends Component implements HasForms, HasTable
     use InteractsWithForms;
 
 
-    public ObjectInspection $category;
+
 
 
 
@@ -29,14 +32,24 @@ class ListInspectionData   extends Component implements HasForms, HasTable
     {
         return $table
 
-            ->relationship(fn (): BelongsToMany => $this->category->itemdata())
-            ->inverseRelationship('itemdata')
+
 
 
 
             ->query(ObjectInspection::query())
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make("status_id")
+
+                    ->label("Einddatum")
+                    ->sortable(),
+
+ TextColumn::make("zin_code")
+
+                    ->label("Einddatum")
+                    ->sortable(),
+
+
+
             ])
             ->filters([
                 // ...

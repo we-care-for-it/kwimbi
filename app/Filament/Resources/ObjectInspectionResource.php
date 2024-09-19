@@ -170,11 +170,11 @@ class ObjectInspectionResource extends Resource
             ->actions([
 
                 Tables\Actions\Action::make('itemdata')
-                    ->action(fn (ObjectInspection $record) => $record->itemdata())
+//                    ->action(fn (ObjectInspection $record) => $record->itemdata())
                     ->label('Bekijk acties')
                     ->modalContent(fn (ObjectInspection $record): View => view(
                         'components.modals.inspection-data-modal',
-                        ['record' => $record],
+                        ['record' => $record->itemdata]
                     ))
      ->hidden(fn (ObjectInspection $record): bool => count($record->itemdata) <= 1),
 
