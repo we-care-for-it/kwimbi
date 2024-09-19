@@ -95,13 +95,13 @@ class Elevator extends Model implements Auditable
 
     public function latestInspection()
     {
-        return $this->hasOne(ObjectInspections::class)->latestOfMany();
+        return $this->hasOne(ObjectInspection::class)->latestOfMany();
     }
 
     //Liftdata
     public function inspections()
     {
-        return $this->hasMany(ObjectInspections::class);
+        return $this->hasMany(ObjectInspection::class);
     }
 
     public function management_company()

@@ -5,30 +5,16 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Elevator;
-use Filament\Forms;
+use Awcodes\FilamentBadgeableColumn\Components\Badge;
+use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 //Form
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Select;
 
 //Table
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Support\Enums\MaxWidth;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\FileUpload;
-
-use Awcodes\FilamentBadgeableColumn\Components\Badge;
-use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
-
 
 
 class ObjectResource extends Resource
@@ -54,7 +40,7 @@ class ObjectResource extends Resource
                     ->placeholder('Geen unitnummer'),
 
                 Tables\Columns\TextColumn::make('name')->badge()
-                    ->label('Naam')->placeholder('-') ,
+                    ->label('Naam')->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('nobo_no')
                     ->label('Nobonummer')->searchable()
@@ -62,31 +48,31 @@ class ObjectResource extends Resource
 
                 Tables\Columns\TextColumn::make('location')
                     ->getStateUsing(function (Elevator $record): ?string {
-                         if($record?->location->name){
-                             return $record?->location->name;
-                         }else{
-                             return $record->location->address . " - " . $record->location->zipcode .  " " . $record->location->place;
-                         }
+                        if ($record?->location->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record->location->address . " - " . $record->location->zipcode . " " . $record->location->place;
+                        }
                     })
                     ->searchable()
                     ->label('Locatie')
-                    ->description(         function (Elevator $record) {
+                    ->description(function (Elevator $record) {
 
-                        if(!$record?->location->name){
+                        if (!$record?->location->name) {
                             return $record?->location->name;
-                        }else{
-                            return $record->location->address . " - " . $record->location->zipcode .  " " . $record->location->place;
+                        } else {
+                            return $record->location->address . " - " . $record->location->zipcode . " " . $record->location->place;
                         }
 
 
                     }
-            )     ,
+                    ),
 
                 Tables\Columns\TextColumn::make('location.address')
-                    ->label('Adres')->searchable()->sortable() ->hidden(true),
+                    ->label('Adres')->searchable()->sortable()->hidden(true),
 
                 Tables\Columns\TextColumn::make('location.zipcode')
-                    ->label('Postcode')->searchable() ->hidden(true),
+                    ->label('Postcode')->searchable()->hidden(true),
 
                 Tables\Columns\TextColumn::make('location.place')
                     ->label('Plaats')->searchable(),
@@ -94,11 +80,11 @@ class ObjectResource extends Resource
 
                 Tables\Columns\TextColumn::make('customer.name')
                     ->searchable()
-                    ->label('Relatie') ->placeholder('Niet gekoppeld aan relatie')->sortable() ,
+                    ->label('Relatie')->placeholder('Niet gekoppeld aan relatie')->sortable(),
 
                 Tables\Columns\TextColumn::make('management_company.name')
                     ->searchable()
-                    ->label('Beheerder') ->placeholder('Geen beheerder')->sortable() ,
+                    ->label('Beheerder')->placeholder('Geen beheerder')->sortable(),
 
                 Tables\Columns\TextColumn::make('maintenance_company.name')
                     ->searchable()->placeholder('Geen onderhoudspartij')
@@ -111,7 +97,7 @@ class ObjectResource extends Resource
                 //
             ])
             ->actions([
-              //  Tables\Actions\EditAction::make(),
+                //  Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([
@@ -123,7 +109,9 @@ class ObjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\IncidentsRelationManager::class,
+            //RelationManagers\UploadsRelationManager::class,
+            // RelationManagers\QuotesRelationManager::class
         ];
     }
 
