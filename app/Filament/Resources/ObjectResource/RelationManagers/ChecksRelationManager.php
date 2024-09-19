@@ -7,12 +7,11 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ChecksRelationManager extends RelationManager
 {
     protected static string $relationship = 'Checks';
+    protected static ?string $title = 'Keuringen';
 
     public function form(Form $form): Form
     {
@@ -35,7 +34,7 @@ class ChecksRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Toevoegen'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -43,7 +42,7 @@ class ChecksRelationManager extends RelationManager
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
