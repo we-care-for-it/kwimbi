@@ -3,9 +3,8 @@
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use App\Enums\QuoteTypes;
-use App\Models\ObjectMaintenanceCompany;
-use App\Models\Supplier;
 use App\Models\Statuses;
+use App\Models\Supplier;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -48,20 +47,16 @@ class QuotesRelationManager extends RelationManager
                     ->default('1'),
 
                 Select::make("company_id")
-
                     ->relationship(name: 'supplier', titleAttribute: 'name')
-
                     ->options(Supplier::all()
-                        ->pluck("name", "id")) ->createOptionForm([
+                        ->pluck("name", "id"))->createOptionForm([
                         Forms\Components\TextInput::make('name')
 
 
-
-                    ])         ->columnSpan("full"),
+                    ])->columnSpan("full"),
                 TextInput::make("number")
                     ->label("Nummer")
                     ->placeholder('-'),
-
 
 
                 TextInput::make("Price")
@@ -133,14 +128,14 @@ class QuotesRelationManager extends RelationManager
     Table
     {
         return $table->recordTitleAttribute('name')
-            ->columns([Tables\Columns\TextColumn::make("request_date")
-                ->dateTime("d-m-Y")
-                ->label("Offertedatum"), Tables\Columns\TextColumn::make("number")
-                ->label('Nummer'),
+            ->columns([
+                Tables\Columns\TextColumn::make("request_date")
+                    ->dateTime("d-m-Y")
+                    ->label("Offertedatum"), Tables\Columns\TextColumn::make("number")
+                    ->label('Nummer'),
 
                 Tables\Columns\TextColumn::make("supplier.name")
                     ->label("Leverancier")
-
                     ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make("status.name")

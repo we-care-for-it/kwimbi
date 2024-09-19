@@ -165,7 +165,7 @@ class ProjectsResource extends Resource
                     ->titlePrefixedWithLabel(false),
                 Group::make("status.name")->label("Status")
                     ->titlePrefixedWithLabel(false)
-                    ->getKeyFromRecordUsing(fn (Project $record): string => $record->status->name),
+                    ->getKeyFromRecordUsing(fn(Project $record): string => $record->status->name),
 
             ])->defaultGroup("customer.name")
             ->columns([
@@ -182,7 +182,7 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
                     ->searchable()
-                    ->wrap() ->description(function (Project $record) {
+                    ->wrap()->description(function (Project $record) {
                         if (!$record?->description) {
                             return false;
                         } else {
@@ -202,8 +202,7 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
-
-            ->label("Adres")
+                    ->label("Adres")
                     ->description(function (Project $record) {
                         if (!$record?->location_id) {
                             return "Geen locatie gekoppeld";
@@ -256,7 +255,6 @@ class ProjectsResource extends Resource
                             : "success"
                     ),
 
-
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->sortable()
@@ -291,7 +289,6 @@ class ProjectsResource extends Resource
                     ->options(Customer::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
-
 
 
             ])

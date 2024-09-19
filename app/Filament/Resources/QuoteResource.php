@@ -6,32 +6,29 @@ use App\Enums\QuoteTypes;
 use App\Filament\Resources\QuoteResource\Pages;
 use App\Filament\Resources\QuoteResource\RelationManagers;
 use App\Models\Quote;
-use App\Models\Customer;
-use App\Models\ObjectLocation;
-use App\Models\Project;
 use App\Models\Statuses;
 use App\Models\Supplier;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use Filament\Support\Enums\VerticalAlignment;
+
 class QuoteResource extends Resource
 {
     protected static ?string $model = Quote::class;
     protected static ?string $title = 'Offertes';
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
-     protected static ?string $SearchResultTitle = "Offertes";
+    protected static ?string $SearchResultTitle = "Offertes";
     protected static ?string $navigationGroup = "Hoofdmenu";
     protected static ?string $navigationLabel = "Offertes";
     protected static bool $isLazy = false;
@@ -57,21 +54,16 @@ class QuoteResource extends Resource
                     ->default('1'),
 
                 Select::make("company_id")
-
                     ->relationship(name: 'supplier', titleAttribute: 'name')
-
-
                     ->options(Supplier::all()
                         ->pluck("name", "id"))->createOptionForm([
                         Forms\Components\TextInput::make('name')
 
 
-
-                    ])         ->columnSpan("full"),
+                    ])->columnSpan("full"),
                 TextInput::make("number")
                     ->label("Nummer")
                     ->placeholder('-'),
-
 
 
                 TextInput::make("Price")
@@ -141,15 +133,12 @@ class QuoteResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->recordTitleAttribute('name')
-
             ->groups([
-                Group::make("project.location.name")->label("Locatie")    ->titlePrefixedWithLabel(false),
-                Group::make("project.customer.name")->label("Relatie")    ->titlePrefixedWithLabel(false),
-                Group::make("supplier.name")->label("Leverancier")    ->titlePrefixedWithLabel(false),
+                Group::make("project.location.name")->label("Locatie")->titlePrefixedWithLabel(false),
+                Group::make("project.customer.name")->label("Relatie")->titlePrefixedWithLabel(false),
+                Group::make("supplier.name")->label("Leverancier")->titlePrefixedWithLabel(false),
 
             ])
-
-
             ->columns([
 
                 Tables\Columns\TextColumn::make("status.name")
@@ -160,14 +149,14 @@ class QuoteResource extends Resource
 
 
                 Tables\Columns\TextColumn::make("number")->sortable()
-                ->label('Datum / nummer')->sortable()->searchable()
-                ->description(function (Quote $record) {
-                    if (!$record?->request_date) {
-                        return false;
-                    } else {
-                        return date("d-m-Y",strtotime($record?->request_date));
-                    }
-                })   ->verticalAlignment(VerticalAlignment::Start)
+                    ->label('Datum / nummer')->sortable()->searchable()
+                    ->description(function (Quote $record) {
+                        if (!$record?->request_date) {
+                            return false;
+                        } else {
+                            return date("d-m-Y", strtotime($record?->request_date));
+                        }
+                    })->verticalAlignment(VerticalAlignment::Start)
                 ,
 
                 Tables\Columns\TextColumn::make("supplier.name")
@@ -176,12 +165,10 @@ class QuoteResource extends Resource
                         if (!$record?->project?->customer_id) {
                             return false;
                         } else {
-                            return $record?->project->customer->name . ' - '. $record?->project->name;
+                            return $record?->project->customer->name . ' - ' . $record?->project->name;
                         }
                     })->wrap()
                     ->placeholder('-')
-
-
                     ->description(function (Quote $record) {
                         if (!$record?->company_id) {
                             return false;
@@ -189,9 +176,7 @@ class QuoteResource extends Resource
                             return $record?->supplier?->name;
                         }
                     })
-                    ,
-
-
+                ,
 
 
                 Tables\Columns\TextColumn::make("price")
@@ -215,24 +200,21 @@ class QuoteResource extends Resource
                     ->placeholder('-')->sortable(),
 
 
-
-
-
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
                     ->badge()->sortable(),
+
+
             ])
             ->filters([
                 SelectFilter::make("status_id")
                     ->label("Status")
-
                     ->relationship('status', 'name')
                     ->searchable()
                     ->preload(),
 
                 SelectFilter::make("project_id")
                     ->label("Project")
-
                     ->relationship('project', 'name')
                     ->searchable()
                     ->preload(),
@@ -240,14 +222,12 @@ class QuoteResource extends Resource
 
                 SelectFilter::make("company_id")
                     ->label("Leverancier")
-
                     ->relationship('supplier', 'name')
                     ->searchable()
                     ->preload(),
 
 
-
-            ])   ->filtersFormColumns(3)
+            ])->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
