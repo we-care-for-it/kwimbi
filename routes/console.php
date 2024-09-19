@@ -6,5 +6,5 @@ use Illuminate\Support\Facades\Schedule;
 
 use App\Console\Commands\importChex;
 
-Schedule::command('app:import-chex')->everyMinute()->appendOutputTo('chex.log');;;
+Schedule::command('app:import-chex')->everyMinute();
 

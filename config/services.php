@@ -22,7 +22,7 @@ return [
     'chex' => [
         'token' => env('CHEX_TOKEN'),
         'url' => env('CHEX_URL'),
-        'company_id' => env('COMPANY_ID')
+        'company_id' => env('CHEX_COMPANY_ID')
     ],
 
 

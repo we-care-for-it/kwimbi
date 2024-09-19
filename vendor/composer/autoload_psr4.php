@@ -170,4 +170,5 @@ return array(
     'AnourValar\\EloquentSerialize\\' => array($vendorDir . '/anourvalar/eloquent-serialize/src'),
     'Amendozaaguiar\\FilamentRouteStatistics\\' => array($vendorDir . '/amendozaaguiar/filament-route-statistics/src'),
     'Akaunting\\Firewall\\' => array($vendorDir . '/akaunting/laravel-firewall/src'),
+    'AWT\\' => array($vendorDir . '/awt/apilogger/src'),
 );

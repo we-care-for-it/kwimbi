@@ -2,34 +2,42 @@
 
 namespace App\Models;
 
+use App\Enums\QuoteTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
-<<<<<<<< HEAD:app/Models/ObjectInspection.php
+use App\Enums\InspectionStatus;
 
 class ObjectInspection extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
-========
- 
-class ObjectMaintenanceVisits extends Model implements Auditable
-{
-    use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
-   // public $table = "object_inpection_zincodes";
->>>>>>>> 570f38f36f5a567b987f05b61fc64559d1a673fd:app/Models/ObjectMaintenanceVisits.php
-    protected $fillable = ['code','description'];
 
+    protected function casts(): array
+    {
+        return [
+            'status_id' => InspectionStatus::class,
+        ];
+    }
 
 
     public function elevator()
     {
         return $this->belongsTo(Elevator::class);
+    }
+
+    public function itemdata()
+    {
+        return $this->hasMany(ObjectInspectionData::class,'inspection_id','id');
+    }
+
+    public function inspectioncompany()
+    {
+        return $this->belongsTo(ObjectInspectionCompany::class,'inspection_company_id','id');
     }
 
 
