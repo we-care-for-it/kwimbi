@@ -21,8 +21,6 @@ class MaintenanceContractsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-
-
                 Grid::make(3)
                     ->schema([
 
