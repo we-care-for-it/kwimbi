@@ -25,8 +25,7 @@ class ListInspectionData   extends Component implements HasForms, HasTable
 
 
 
-
-
+dd($this->record);
 
     public function table(Table $table): Table
     {
