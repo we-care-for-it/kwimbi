@@ -8,13 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 use Carbon\Carbon;
- 
+
 class ObjectMaintenanceContract extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     public $table = "object_maintenance_contracts";
     protected $fillable = ['code','description'];
- 
- 
+
+
+
+
+    public function maintenance_company()
+    {
+        return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
+    }
+
+
 }

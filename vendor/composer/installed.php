@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5c99f035ee94a58edca34b86c27df7a26691d827',
+        'reference' => 'ea289cdb57f04a662a7a91655046de13a5b63372',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -699,6 +699,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'joaopaulolndev/filament-pdf-viewer' => array(
+            'pretty_version' => 'v1.0.5',
+            'version' => '1.0.5.0',
+            'reference' => '31f93c828ecefe54f16047453254b3cf7036183c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../joaopaulolndev/filament-pdf-viewer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kirschbaum-development/eloquent-power-joins' => array(
             'pretty_version' => '3.5.7',
             'version' => '3.5.7.0',
@@ -726,7 +735,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5c99f035ee94a58edca34b86c27df7a26691d827',
+            'reference' => 'ea289cdb57f04a662a7a91655046de13a5b63372',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

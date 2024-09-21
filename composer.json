@@ -18,6 +18,7 @@
         "filament/filament": "^3.2",
         "geo-sot/filament-env-editor": "*",
         "hasnayeen/themes": "^3.0",
+        "joaopaulolndev/filament-pdf-viewer": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "owen-it/laravel-auditing": "^13.6",

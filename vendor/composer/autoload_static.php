@@ -195,6 +195,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         ),
         'J' => 
         array (
+            'Joaopaulolndev\\FilamentPdfViewer\\Database\\Factories\\' => 52,
+            'Joaopaulolndev\\FilamentPdfViewer\\' => 33,
             'Jenssegers\\Agent\\' => 17,
             'Jaybizzle\\CrawlerDetect\\' => 24,
         ),
@@ -691,6 +693,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             0 => __DIR__ . '/..' . '/kirschbaum-development/eloquent-power-joins/src',
         ),
+        'Joaopaulolndev\\FilamentPdfViewer\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/database/factories',
+        ),
+        'Joaopaulolndev\\FilamentPdfViewer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src',
+        ),
         'Jenssegers\\Agent\\' => 
         array (
             0 => __DIR__ . '/..' . '/jenssegers/agent/src',
@@ -1160,6 +1170,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Filament\\Widgets\\StandStill' => __DIR__ . '/../..' . '/app/Filament/Widgets/StandStill.php',
         'App\\Filament\\Widgets\\StatsOverview' => __DIR__ . '/../..' . '/app/Filament/Widgets/StatsOverview.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Livewire\\ListInspectionData' => __DIR__ . '/../..' . '/app/Livewire/ListInspectionData.php',
         'App\\Models\\Asset' => __DIR__ . '/../..' . '/app/Models/Asset.php',
         'App\\Models\\AssetBrand' => __DIR__ . '/../..' . '/app/Models/AssetBrand.php',
         'App\\Models\\AssetCategory' => __DIR__ . '/../..' . '/app/Models/AssetCategory.php',
@@ -5311,6 +5322,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Jenssegers\\Agent\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Agent.php',
         'Jenssegers\\Agent\\AgentServiceProvider' => __DIR__ . '/..' . '/jenssegers/agent/src/AgentServiceProvider.php',
         'Jenssegers\\Agent\\Facades\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Facades/Agent.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\Commands\\FilamentPdfViewerCommand' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Commands/FilamentPdfViewerCommand.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\Facades\\FilamentPdfViewer' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Facades/FilamentPdfViewer.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\FilamentPdfViewer' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/FilamentPdfViewer.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\FilamentPdfViewerPlugin' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/FilamentPdfViewerPlugin.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\FilamentPdfViewerServiceProvider' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/FilamentPdfViewerServiceProvider.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\Forms\\Components\\PdfViewerField' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Forms/Components/PdfViewerField.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\Infolists\\Components\\PdfViewerEntry' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Infolists/Components/PdfViewerEntry.php',
+        'Joaopaulolndev\\FilamentPdfViewer\\Testing\\TestsFilamentPdfViewer' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Testing/TestsFilamentPdfViewer.php',
         'Kirschbaum\\PowerJoins\\EloquentJoins' => __DIR__ . '/..' . '/kirschbaum-development/eloquent-power-joins/src/EloquentJoins.php',
         'Kirschbaum\\PowerJoins\\FakeJoinCallback' => __DIR__ . '/..' . '/kirschbaum-development/eloquent-power-joins/src/FakeJoinCallback.php',
         'Kirschbaum\\PowerJoins\\JoinsHelper' => __DIR__ . '/..' . '/kirschbaum-development/eloquent-power-joins/src/JoinsHelper.php',

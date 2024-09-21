@@ -105,6 +105,8 @@ return array(
     'Laravel\\Sail\\' => array($vendorDir . '/laravel/sail/src'),
     'Laravel\\Prompts\\' => array($vendorDir . '/laravel/prompts/src'),
     'Kirschbaum\\PowerJoins\\' => array($vendorDir . '/kirschbaum-development/eloquent-power-joins/src'),
+    'Joaopaulolndev\\FilamentPdfViewer\\Database\\Factories\\' => array($vendorDir . '/joaopaulolndev/filament-pdf-viewer/database/factories'),
+    'Joaopaulolndev\\FilamentPdfViewer\\' => array($vendorDir . '/joaopaulolndev/filament-pdf-viewer/src'),
     'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
     'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),

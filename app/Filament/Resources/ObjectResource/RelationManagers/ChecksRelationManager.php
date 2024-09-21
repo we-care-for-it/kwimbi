@@ -12,7 +12,7 @@ class ChecksRelationManager extends RelationManager
 {
     protected static string $relationship = 'Checks';
     protected static ?string $title = 'Keuringen';
-
+    protected static bool $isLazy = false;
     public function form(Form $form): Form
     {
         return $form

@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 class AttachmentRelationManager extends RelationManager
 {
     protected static string $relationship = 'attachments';
-
+    protected static bool $isLazy = false;
     public function form(Form $form): Form
     {
         return $form

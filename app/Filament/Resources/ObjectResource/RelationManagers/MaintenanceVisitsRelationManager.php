@@ -10,9 +10,9 @@ use Filament\Tables\Table;
 
 class MaintenanceVisitsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'maintenanceVisits';
+    protected static string $relationship = 'maintenance_visits';
     protected static ?string $title = 'Onderhoudsbeurten';
-
+    protected static bool $isLazy = false;
     public function form(Form $form): Form
     {
         return $form

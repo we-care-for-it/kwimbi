@@ -12,7 +12,7 @@ class ProjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'projects';
     protected static ?string $title = 'Projecten';
-
+    protected static bool $isLazy = false;
     public function form(Form $form): Form
     {
         return $form

@@ -191,6 +191,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/devaslanphp/filament-avatar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/awcodes/filament-badgeable-column" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/awt/apilogger" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/joaopaulolndev/filament-pdf-viewer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

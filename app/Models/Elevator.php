@@ -123,7 +123,7 @@ class Elevator extends Model implements Auditable
     }
 
 
-    public function uploads()
+    public function attachments()
     {
         return $this->hasMany(Upload::class);
     }
@@ -141,8 +141,16 @@ class Elevator extends Model implements Auditable
 
     public function maintenance_contracts()
     {
-        return $this->hasMany(maintenanceContract::class);
+        return $this->hasMany(ObjectMaintenanceContract::class);
     }
+
+
+    public function maintenance_visits()
+    {
+        return $this->hasMany(ObjectMaintenanceVisits::class);
+    }
+
+
 
 
 }
