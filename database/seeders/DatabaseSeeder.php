@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
 
         $superAdmin->companies()->attach($company);
 
-        $this->call(ShieldSeeder::class);
-        $this->command->call('shield:generate', ['--all' => true]);
-        $this->command->call('shield:super-admin', ['--user' => $superAdmin->id]);
-
-        //$this->call(LocationSeeder::class);
+//        $this->call(ShieldSeeder::class);
+//        $this->command->call('shield:generate', ['--all' => true]);
+//        $this->command->call('shield:super-admin', ['--user' => $superAdmin->id]);
+//
+//        //$this->call(LocationSeeder::class);
        // $this->call(AssetSeeder::class);
     }
 }

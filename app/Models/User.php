@@ -11,8 +11,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable implements HasTenants
+
+class User extends Authenticatable implements  FilamentUser
+
 {
     use HasFactory;
     use HasRoles;
@@ -29,7 +32,10 @@ class User extends Authenticatable implements HasTenants
         'password',
     ];
 
- 
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
