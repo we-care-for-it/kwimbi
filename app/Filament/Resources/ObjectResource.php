@@ -113,10 +113,10 @@ class ObjectResource extends Resource
             RelationManagers\IncidentsRelationManager::class,
 
 
-            RelationGroup::make('Onderhoud', [
+         //   RelationGroup::make('Onderhoud', [
                 RelationManagers\MaintenanceContractsRelationManager::class,
                 RelationManagers\MaintenanceVisitsRelationManager::class,
-            ]),
+          //  ]),
             RelationManagers\AttachmentRelationManager::class,
 
         ];
