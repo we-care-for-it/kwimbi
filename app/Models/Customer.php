@@ -21,7 +21,17 @@ class Customer extends Model implements Auditable
 
 
 
-   
+    public function locations()
+    {
+        return $this->hasMany(ObjectLocation::class, 'customer_id', 'id');
+    }
+
+    public function objects()
+    {
+      return $this->hasMany(Elevator::class, 'customer_id', 'id');
+    }
+
+
 
 
 

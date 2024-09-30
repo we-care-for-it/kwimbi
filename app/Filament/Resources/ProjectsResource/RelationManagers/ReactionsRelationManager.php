@@ -30,7 +30,7 @@ class ReactionsRelationManager extends RelationManager
 
     public function getContentTabIcon(): ?string
     {
-        return 'heroicon-m-cog';
+        return 'heroicon-m-eye';
     }
 
     public function form(Form $form): Form

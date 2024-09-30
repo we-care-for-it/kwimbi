@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateObjectLocation extends CreateRecord
 {
     protected static string $resource = ObjectLocationResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
 }
