@@ -18,20 +18,20 @@ array
     return [
         Action::make('back')
         ->url(route('filament.admin.resources.object-locations.index'))
-        ->label('Terug naar overzicht') 
+        ->label('Terug naar overzicht')
         ->link()
         ->color('gray'),
         Actions\EditAction::make()->icon('heroicon-m-pencil-square')
             ->modalWidth(MaxWidth::SevenExtraLarge)
             ->after(function (): void {
-          
+
                 $this->fillForm();
 }),
-            
+
         // Tables\Actions\DeleteAction::make()->modalHeading(
         //     "Verwijderen van deze rij"
-    
-        Actions\DeleteAction::make()->icon('heroicon-m-trash')->label('Verwijderen')  
+
+        Actions\DeleteAction::make()->icon('heroicon-m-trash')->label('')
     ];
 }
 // public function getHeading(): string
@@ -55,7 +55,7 @@ public function getHeading(): string
     }else{
         return 'Locatie bekijken';
     }
-   
+
 }
 
 

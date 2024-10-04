@@ -182,7 +182,9 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
                     ->searchable()
-                    ->wrap()->description(function (Project $record) {
+                    ->wrap()
+
+                    ->description(function (Project $record) {
                         if (!$record?->description) {
                             return false;
                         } else {

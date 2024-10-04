@@ -22,7 +22,7 @@ use Filament\Forms\Components\TimePicker;
 //tables
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
- 
+
 
 
 class HourTypesResource extends Resource
@@ -33,41 +33,41 @@ class HourTypesResource extends Resource
 
     protected static ?string $navigationLabel = 'Uursoorten';
     protected static ? string $navigationGroup = 'Basisgegevens';
- 
+
 
     protected static ?string $cluster = ProjectSettings::class;
 
     public static function form(Form $form): Form
     {
         return $form
-           
+
         ->schema([
             Forms\Components\TextInput::make('name')
             ->label('Naam')
                 ->maxLength(255)
                 ->columnSpan('full')
                 ->required(),
- 
-                    
-        
+
+
+
 
 
                 Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
                 ->inline(false)
 
-                ->default(true) , 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                ->default(true) ,
+
+
+
+
+
+
+
+
+
+
+
             ]);
     }
     public static function table(Table $table): Table
@@ -78,21 +78,21 @@ class HourTypesResource extends Resource
                 ->label('Zichbaar')
                 ->onColor('success')
     ->offColor('danger')
- 
-      
+
+
                 ->width(100),
 
                 TextColumn::make('name')
             ->label('Naam')
             ->searchable() ,
 
-          
-     
+
+
 
 
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(), 
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->modalHeading('Wijzigen')   ->modalWidth(MaxWidth::ExtraLarge),
@@ -100,11 +100,12 @@ class HourTypesResource extends Resource
             ])
             ->bulkActions([
               Tables\Actions\BulkActionGroup::make([
+
                  Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-       
+
                 ]),
             ])  ->emptyState(view('partials.empty-state')) ;
-            ;;
+
     }
 
 

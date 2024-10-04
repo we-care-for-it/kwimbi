@@ -25,7 +25,14 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use pxlrbt\FilamentExcel\Columns\Column;
+use Filament\Actions\Exports\Models\Export;
+
+
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+
+
 
 //Models
 
@@ -37,6 +44,9 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 //Services
 
 //Table
+
+use Filament\Tables\Filters\SelectFilter;
+
 
 
 class ObjectLocationResource extends Resource
@@ -58,7 +68,7 @@ class ObjectLocationResource extends Resource
 
                     Grid::make(4)->schema([
                         Forms\Components\TextInput::make("name")->label("Naam"),
-                        Forms\Components\TextInput::make("Complexnumber")->label("complexnumber"),
+                        Forms\Components\TextInput::make("Complexnumber")->label("Complexnumber"),
 
                         Select::make('management_id')
                             ->searchable()
@@ -79,7 +89,7 @@ class ObjectLocationResource extends Resource
                     // ...
                 ]),
 
-                Forms\Components\Section::make("Locatie gegevens")  ->collapsible()
+                Forms\Components\Section::make("Locatie gegevens")
                     ->schema([
                         Grid::make(4)->schema([
                             Forms\Components\TextInput::make("zipcode")
@@ -127,11 +137,13 @@ class ObjectLocationResource extends Resource
 
                             Forms\Components\TextInput::make("address")
                                 ->label("Straatnaam")
+                                ->required()
                                 ->columnSpan(2),
 
                             Forms\Components\TextInput::make(
                                 "housenumber"
                             )->label("Huisnummer"),
+
 
                             Forms\Components\TextInput::make("place")->label(
                                 "Plaats"
@@ -172,6 +184,7 @@ class ObjectLocationResource extends Resource
 
                             Forms\Components\TextInput::make("building_type")
                                 ->label("Gebouwtype")
+
                                 ->columnSpan(3),
                         ]),
                     ])
@@ -233,13 +246,19 @@ class ObjectLocationResource extends Resource
 
                 Tables\Columns\TextColumn::make("customer.name")->sortable()
                     ->label("Relatie")->placeholder('Geen relatie gekoppeld')
-                    ->searchable() ->url(function (ObjectLocation $record){
+                    ->searchable()
+                    ->url(function (ObjectLocation $record){
                         return "/admin/customers/".$record->customer_id."/edit";
 
                     }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")->sortable()
-                    ->label("Beheerder")->placeholder('Geen beheer gekoppeld')
+                    ->url(function (ObjectLocation $record){
+                        return "/admin/elevators-settings/object-management-companies/".$record->management_id."";
+
+                    })
+
+            ->label("Beheerder")->placeholder('Geen beheer gekoppeld')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make("building_type")->sortable()
@@ -256,42 +275,70 @@ class ObjectLocationResource extends Resource
             ])
             ->filters(array(
 
-//                SelectFilter::make('customer_id')
-//                    ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
-//                    ->Searchable(),
-//
-//                SelectFilter::make('building_type')
-//                    ->options(ObjectLocation::pluck('building_type', 'id')->groupby('building_type'))->label('Gebouwtype')
-//                    ->Searchable(),
-//
-//
-////                SelectFilter::make('management_id')->label('Beheerder')
-////                    ->relationship('managementcompany', 'name'),
-//
-//                SelectFilter::make('place')
-//                    ->label('Plaats')
-//                    ->options(ObjectLocation::all()->pluck('place', 'place')->groupby('place'))
-//                    ->searchable()
-//            ,
+
+
+
+
+                SelectFilter::make('customer_id')
+                    ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
+                    ->Searchable(),
+
+                SelectFilter::make('building_type')
+                    ->options(ObjectLocation::pluck('building_type', 'building_type'))->label('Gebouwtype')
+                    ->Searchable(),
+
+
+              SelectFilter::make('management_id')->label('Beheerder')
+                    ->relationship('managementcompany', 'name'),
+
+                SelectFilter::make('place')
+                    ->label('Plaats')
+                    ->options(ObjectLocation::all()->pluck('place', 'place'))
+                    ->searchable()
+            ,
 
 
                 Tables\Filters\TrashedFilter::make(),
-            ))->filtersFormColumns(3)
+            ))->filtersFormColumns(2)
 
 
             // layout: FiltersLayout::AboveContent
             ->actions([
-
+                Tables\Actions\Action::make('Download')
+                    ->label('Toon details')->color('success')->icon('heroicon-m-eye')
+                    ->url(function (ObjectLocation $record) {
+                        return "/admin/object-locations/" .
+                            $record->id;
+                    }),
 
                     ])
+
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
 
-                //    ExportBulkAction::make(),
+                ExportBulkAction::make()->exports([
+                    // Pass a string
+
+                    ExcelExport::make()
+                        ->fromTable()
+                        ->askForFilename()
+                        ->askForWriterType()
+                        ->withColumns([
+                            Column::make('place')->heading('Plaats'),
+                            Column::make('address')->heading('Straatnaam'),
+                            Column::make('zipcode')->heading('Postcode'),
+                            Column::make('housenumber')->heading('Huisnummer'),
+                            Column::make('province')->heading('Provincie'),
+                            Column::make('gps_lon')->heading('GPS longitude'),
+                            Column::make('gps_lat')->heading('GPS latitude'),
+                            Column::make('levels')->heading('Verdiepingen'),
+
+                           ])
+                        ->withFilename(date('m-d-Y H:i') . ' - locatie export'),
 
 
-                    //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-                ]),
+                ])
+
+
             ])
             ->emptyState(view("partials.empty-state"));
     }
