@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Attachment;
+use App\Models\ObjectMaintenanceContract;
+
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Storage;
 
 class AttachmentsRelationManager extends RelationManager
 {
@@ -47,23 +50,28 @@ class AttachmentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
+                Tables\Columns\TextColumn::make('user.name')->label('Medewerker')
+                ,
+
+
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Toegevoegd op'),
-                Tables\Columns\TextColumn::make('user.name')->label('Medewerker'),
+                    ->label('Datum / tijd')
+                    ->sortable()
+                    ->dateTime("d-m-Y H:i"),
 
-                Tables\Columns\TextColumn::make('filename')
-                    ->getStateUsing(function (Attachment $record): ?string {
+                Tables\Columns\TextColumn::make('description')->grow(true)->label('Omschrijvinf')
+                ,
 
-                        return $record->filename;
-                    }),
 
-                Tables\Columns\TextColumn::make('description')->wrap()->label('Omschrijving'),
 
             ])
             ->filters([
                 //
             ])
             ->headerActions([
+
+
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
                     $data['model'] = "ObjectLocation";
@@ -71,6 +79,11 @@ class AttachmentsRelationManager extends RelationManager
                 }),
             ])
             ->actions([
+                Tables\Actions\Action::make('Download')
+                    ->label('Download bestand')
+                    ->action(fn($record) => Storage::disk('private')
+                        ->download($record->filename))
+                    ->icon('heroicon-o-document-arrow-down'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
