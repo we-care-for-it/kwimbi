@@ -48,9 +48,9 @@ class QuotesRelationManager extends RelationManager
 
                 Select::make("company_id")
                     ->relationship(name: 'supplier', titleAttribute: 'name')
-                    ->options(Supplier::all()
-                        ->pluck("name", "id"))->createOptionForm([
-                        Forms\Components\TextInput::make('name')
+                    ->label('Leverancier')
+              ->createOptionForm([
+                        Forms\Components\TextInput::make('name')->label('Naam van de leveracnier')->required(),
 
 
                     ])->columnSpan("full"),
@@ -166,7 +166,7 @@ class QuotesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
                     ->badge()
-            ])
+            ])->emptyState(view('partials.empty-state-small'))
             ->filters([
                 //
             ])

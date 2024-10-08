@@ -13,13 +13,39 @@ class EditObjectLocation extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-
-            Actions\Action::make('back')
-                ->url(route('filament.admin.resources.object-locations.index'))
-                ->label('Terug naar overzicht')
+            Actions\DeleteAction::make()
                 ->link()
-                ->color('gray'),
+                ->iconbutton()
+                ->icon('heroicon-o-trash'),
+         
 
-            Actions\DeleteAction::make()->icon('heroicon-m-trash')   ->outlined()->color('danger')        ];
+        
+                    Actions\Action::make('cancel_top')
+                ->link()
+                ->label('Afbreken')
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->url($this->getResource()::getUrl('index'))
+                ->outlined(),
+
+                
+        
+
+                
+            Actions\Action::make('save_top')
+                ->action('save')
+            
+                ->label('Opslaan'),
+
+        ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
+    protected function getFormActions(): array
+    {
+        return []; // necessary to remove the bottom actions
     }
 }

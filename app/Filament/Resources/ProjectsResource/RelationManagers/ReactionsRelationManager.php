@@ -73,7 +73,7 @@ class ReactionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->badge()
-            ])
+                  ])->emptyState(view('partials.empty-state-small'))
             ->filters([
                 //No Filters
             ])

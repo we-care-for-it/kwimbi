@@ -98,7 +98,7 @@ class Elevator extends Model implements Auditable
     //Liftdata
     public function latestinspections()
     {
-        return $this->hasOne(ObjectInspections::class, 'elevator_id', 'id');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
     }
 
 
@@ -107,13 +107,13 @@ class Elevator extends Model implements Auditable
     //Liftdata
     public function inspections()
     {
-        return $this->hasMany(ObjectInspections::class, 'elevator_id', 'id');
+        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id');
     }
 
 
     public function inspection()
     {
-        return $this->hasOne(ObjectInspections::class, 'elevator_id', 'id');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
     }
 
 

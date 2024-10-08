@@ -30,7 +30,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Support\Enums\MaxWidth;
+
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
 
@@ -40,8 +40,6 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\FontWeight;
-
-
 
 use Filament\Tables\Grouping\Group;
 

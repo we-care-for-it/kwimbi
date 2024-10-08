@@ -14,6 +14,7 @@ use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 
 //Form
@@ -24,7 +25,14 @@ use Filament\Tables\Table;
 class ObjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'Objects';
-    protected static ?string $title = 'Gekoppelde objecten';
+    protected static ?string $title = 'Objecten';
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        // $ownerModel is of actual type Job
+        return $ownerRecord->objects->count();
+
+
+    }
 
     public function form(Form $form): Form
     {
@@ -43,16 +51,17 @@ class ObjectsRelationManager extends RelationManager
                             ->label("Omschrijving"),
 
                         Forms\Components\TextInput::make('unit_no')
-                            ->required()
+
+                            ->numeric()
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('nobo_no')
-                            ->required()
+                            ->numeric()
                             ->maxLength(255),
 
 
                         Select::make('object_type_id')
-                            ->label('Soort / Type')
+                            ->label('Type')
                             ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
 
 
@@ -102,7 +111,7 @@ class ObjectsRelationManager extends RelationManager
 
 
                 Tables\Columns\TextColumn::make('type.name')
-                    ->label('object_type_id')->searchable()
+                    ->label('Type')->searchable()
                     ->badge()
                     ->placeholder('Onbekend'),
 
@@ -117,14 +126,14 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Onderhoudspartij'),
 
 
-            ])
+            ])->emptyState(view('partials.empty-state-small'))
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Lift toevoegen')
+                Tables\Actions\CreateAction::make()->label('Object toevoegen')
                     ->modalHeading('Lift toevoegen')
-                    ->modalDescription('Om een lift toe te voegen en te koppelen aan deze locatie zijn er een aantal gegevens nodig ')
+                    ->modalDescription('Om een object toe te voegen en te koppelen aan deze locatie zijn er een aantal gegevens nodig. Na het opslaan kan je meer gegevens aanpassen van dit object ')
                 ,
             ])
             ->actions([

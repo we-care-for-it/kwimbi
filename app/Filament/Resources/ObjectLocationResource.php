@@ -71,16 +71,24 @@ class ObjectLocationResource extends Resource
                         Forms\Components\TextInput::make("Complexnumber")->label("Complexnumber"),
 
                         Select::make('management_id')
+                            ->relationship(name: 'managementcompany', titleAttribute: 'name')
+
                             ->searchable()
                             ->label('Beheerder')
-                            ->options(ObjectManagementCompany::all()
-                                ->pluck('name', 'id')),
+//                            ->options(ObjectManagementCompany::all()
+//                                ->pluck('name', 'id'))
+
+                            ->createOptionForm([Forms\Components\TextInput::make('name') ->label('Naam van de beheerder')  ->required()   ]) ,
+
 
                         Select::make('customer_id')
                             ->searchable()
                             ->label('Relatie')
-                            ->options(Customer::all()
-                                ->pluck('name', 'id')),
+                            ->required()
+                            ->createOptionForm([Forms\Components\TextInput::make('name')   ->required()->label('Naam van de relatie')   ])
+
+                            ->relationship(name: 'customer', titleAttribute: 'name')
+
 
 
                     ]),

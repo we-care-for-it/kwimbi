@@ -84,17 +84,19 @@ class NotesRelationManager extends RelationManager
 
             ])
             ->actions([
+
+                Tables\Actions\ActionGroup::make([
                 Tables\Actions\EditAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
                     $data['model'] = "ObjectLocation";
                     return $data;
                 })
-                    ->iconButton()    ->iconButton()->modalHeading('Notitie wijzigen'),
-                Tables\Actions\DeleteAction::make()    ->iconButton()
+                   ->modalHeading('Notitie wijzigen') ,
+                Tables\Actions\DeleteAction::make()
 
                     ->modalHeading('Bevestig actie')
             ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
-
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
