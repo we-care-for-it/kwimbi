@@ -14,27 +14,27 @@ class EditObjectLocation extends EditRecord
     {
         return [
             Actions\DeleteAction::make()
-                ->link()
-                ->iconbutton()
-                ->icon('heroicon-o-trash'),
-         
+            ->link()
+       
+            ->icon('heroicon-o-trash'),
+     
 
-        
-                    Actions\Action::make('cancel_top')
-                ->link()
-                ->label('Afbreken')
-                ->icon('heroicon-o-arrow-uturn-left')
-                ->url($this->getResource()::getUrl('index'))
-                ->outlined(),
+    
+                Actions\Action::make('cancel_top')
+            ->link()
+            ->label('Afbreken')
+            ->icon('heroicon-o-arrow-uturn-left')
+            ->url($this->getResource()::getUrl('index'))
+            ->outlined(),
 
-                
-        
-
-                
-            Actions\Action::make('save_top')
-                ->action('save')
             
-                ->label('Opslaan'),
+    
+
+            
+        Actions\Action::make('save_top')
+            ->action('save')
+            ->label('Gegevens opslaan'),
+
 
         ];
     }

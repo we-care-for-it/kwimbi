@@ -6,6 +6,7 @@ use App\Filament\Resources\ProjectsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ContentTabPosition;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\ActionSize;
 
 class EditProjects extends EditRecord
 {
@@ -44,7 +45,7 @@ class EditProjects extends EditRecord
  
                 Actions\DeleteAction::make()
                 ->link()
-                ->iconbutton()
+           
                 ->icon('heroicon-o-trash'),
          
 
@@ -62,8 +63,8 @@ class EditProjects extends EditRecord
                 
             Actions\Action::make('save_top')
                 ->action('save')
-            
-                ->label('Opslaan'),
+           
+                ->label('Gegevens opslaan'),
 
 
         ];
