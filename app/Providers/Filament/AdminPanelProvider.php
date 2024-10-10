@@ -21,6 +21,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\FontProviders\SpatieGoogleFontProvider;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 
@@ -32,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->font('Inter', provider: SpatieGoogleFontProvider::class)
             ->id('admin')
             ->path('admin')
             ->login()

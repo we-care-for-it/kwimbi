@@ -125,6 +125,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'Spatie\\Invade\\' => 14,
             'Spatie\\Health\\Database\\Factories\\' => 33,
             'Spatie\\Health\\' => 14,
+            'Spatie\\GoogleFonts\\Database\\Factories\\' => 38,
+            'Spatie\\GoogleFonts\\' => 19,
             'Spatie\\Enum\\' => 12,
             'Spatie\\DbDumper\\' => 16,
             'Spatie\\Color\\' => 13,
@@ -231,6 +233,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'Filament\\Notifications\\' => 23,
             'Filament\\Infolists\\' => 19,
             'Filament\\Forms\\' => 15,
+            'Filament\\FontProviders\\' => 23,
             'Filament\\Actions\\' => 17,
             'Filament\\' => 9,
             'Faker\\' => 6,
@@ -499,6 +502,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Spatie\\Health\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-health/src',
+        ),
+        'Spatie\\GoogleFonts\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-google-fonts/database/factories',
+        ),
+        'Spatie\\GoogleFonts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-google-fonts/src',
         ),
         'Spatie\\Enum\\' => 
         array (
@@ -784,6 +795,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Filament\\Forms\\' => 
         array (
             0 => __DIR__ . '/..' . '/filament/forms/src',
+        ),
+        'Filament\\FontProviders\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filament/spatie-laravel-google-fonts-plugin/src',
         ),
         'Filament\\Actions\\' => 
         array (
@@ -2696,6 +2711,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Filament\\FontProviders\\Contracts\\FontProvider' => __DIR__ . '/..' . '/filament/filament/src/FontProviders/Contracts/FontProvider.php',
         'Filament\\FontProviders\\GoogleFontProvider' => __DIR__ . '/..' . '/filament/filament/src/FontProviders/GoogleFontProvider.php',
         'Filament\\FontProviders\\LocalFontProvider' => __DIR__ . '/..' . '/filament/filament/src/FontProviders/LocalFontProvider.php',
+        'Filament\\FontProviders\\SpatieGoogleFontProvider' => __DIR__ . '/..' . '/filament/spatie-laravel-google-fonts-plugin/src/SpatieGoogleFontProvider.php',
         'Filament\\Forms\\Commands\\Aliases\\MakeFieldCommand' => __DIR__ . '/..' . '/filament/forms/src/Commands/Aliases/MakeFieldCommand.php',
         'Filament\\Forms\\Commands\\Aliases\\MakeLayoutComponentCommand' => __DIR__ . '/..' . '/filament/forms/src/Commands/Aliases/MakeLayoutComponentCommand.php',
         'Filament\\Forms\\Commands\\Concerns\\CanGenerateForms' => __DIR__ . '/..' . '/filament/forms/src/Commands/Concerns/CanGenerateForms.php',
@@ -4542,6 +4558,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Illuminate\\Foundation\\Console\\InteractsWithComposerPackages' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/InteractsWithComposerPackages.php',
         'Illuminate\\Foundation\\Console\\InterfaceMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/InterfaceMakeCommand.php',
         'Illuminate\\Foundation\\Console\\JobMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/JobMakeCommand.php',
+        'Illuminate\\Foundation\\Console\\JobMiddlewareMakeCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/JobMiddlewareMakeCommand.php',
         'Illuminate\\Foundation\\Console\\Kernel' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php',
         'Illuminate\\Foundation\\Console\\KeyGenerateCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/KeyGenerateCommand.php',
         'Illuminate\\Foundation\\Console\\LangPublishCommand' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/Console/LangPublishCommand.php',
@@ -9349,6 +9366,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Spatie\\Enum\\Exceptions\\UnknownEnumProperty' => __DIR__ . '/..' . '/spatie/enum/src/Exceptions/UnknownEnumProperty.php',
         'Spatie\\Enum\\Faker\\FakerEnumProvider' => __DIR__ . '/..' . '/spatie/enum/src/Faker/FakerEnumProvider.php',
         'Spatie\\Enum\\Phpunit\\EnumAssertions' => __DIR__ . '/..' . '/spatie/enum/src/Phpunit/EnumAssertions.php',
+        'Spatie\\GoogleFonts\\Commands\\FetchGoogleFontsCommand' => __DIR__ . '/..' . '/spatie/laravel-google-fonts/src/Commands/FetchGoogleFontsCommand.php',
+        'Spatie\\GoogleFonts\\Fonts' => __DIR__ . '/..' . '/spatie/laravel-google-fonts/src/Fonts.php',
+        'Spatie\\GoogleFonts\\GoogleFonts' => __DIR__ . '/..' . '/spatie/laravel-google-fonts/src/GoogleFonts.php',
+        'Spatie\\GoogleFonts\\GoogleFontsServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-google-fonts/src/GoogleFontsServiceProvider.php',
         'Spatie\\Health\\Checks\\Check' => __DIR__ . '/..' . '/spatie/laravel-health/src/Checks/Check.php',
         'Spatie\\Health\\Checks\\Checks\\BackupsCheck' => __DIR__ . '/..' . '/spatie/laravel-health/src/Checks/Checks/BackupsCheck.php',
         'Spatie\\Health\\Checks\\Checks\\CacheCheck' => __DIR__ . '/..' . '/spatie/laravel-health/src/Checks/Checks/CacheCheck.php',

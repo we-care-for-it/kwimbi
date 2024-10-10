@@ -16,6 +16,7 @@
         "devaslanphp/filament-avatar": "^1.0",
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-google-fonts-plugin": "^3.2",
         "geo-sot/filament-env-editor": "*",
         "hasnayeen/themes": "^3.0",
         "joaopaulolndev/filament-pdf-viewer": "^1.0",
