@@ -33,7 +33,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->font('Inter', provider: SpatieGoogleFontProvider::class)
+           // ->font('Inter', provider: SpatieGoogleFontProvider::class)
             ->id('admin')
             ->path('admin')
             ->login()
