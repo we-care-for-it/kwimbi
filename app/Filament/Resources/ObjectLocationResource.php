@@ -367,6 +367,7 @@ class ObjectLocationResource extends Resource
         return [
             'index' => Pages\ListObjectLocations::route('/'),
             'edit' => Pages\EditObjectLocation::route('/{record}'),
+            'view' => Pages\ViewObjectLocation::route('/{record}')
 
         ];
     }
