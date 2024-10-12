@@ -6,16 +6,15 @@ use App\Enums\QuoteTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
+ 
 
 use Carbon\Carbon;
 use App\Enums\InspectionStatus;
 
-class ObjectInspection extends Model implements Auditable
+class ObjectInspection extends Model  
 {
     use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
-
+ 
 
     protected function casts(): array
     {

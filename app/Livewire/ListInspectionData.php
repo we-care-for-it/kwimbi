@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\ObjectInspection;
+use App\Models\ObjectInspectionData;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
@@ -10,32 +11,31 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-
+ 
 use Livewire\Component;
 
-
-
+use Illuminate\Http\Request;
 
 class ListInspectionData   extends Component implements HasForms, HasTable
 {
 
     use InteractsWithTable;
     use InteractsWithForms;
+ 
+    public $inpection_id;
 
+    public function mount(): void 
+    {
+        $this->inpection_id =$inpection_id;
+    }
 
-
-
-dd($this->record);
 
     public function table(Table $table): Table
     {
         return $table
 
 
-
-
-
-            ->query(ObjectInspection::query())
+         ->query(ObjectInspectionData::where('inspection_id', $this->inpection_id))
             ->columns([
                 TextColumn::make("status_id")
 

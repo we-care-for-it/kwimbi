@@ -7,11 +7,4 @@
     </x-slot>
 
 
-
-
-
-
-
-    dddddddddddddddddddddd
-    {{-- Modal content --}}
 </x-filament::modal>

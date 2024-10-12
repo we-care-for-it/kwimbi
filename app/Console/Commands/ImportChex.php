@@ -38,7 +38,7 @@ class ImportChex extends Command
         $response = Http::withHeaders([
             "Authorization" => config("services.chex.token"),
         ])->get($url, [
-            "fromDate" => "2024-09-09",
+            "fromDate" => "2024-07-07",
         ]);
 
         $records = json_decode($response->getBody())->result;

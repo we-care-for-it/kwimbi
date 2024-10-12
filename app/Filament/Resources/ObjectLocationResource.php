@@ -28,7 +28,7 @@ use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Actions\Exports\Models\Export;
 
- 
+
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
@@ -317,7 +317,7 @@ class ObjectLocationResource extends Resource
                     ->url(function (ObjectLocation $record) {
                         return "/admin/object-locations/" .
                             $record->id;
-                    }),   Tables\Actions\EditAction::make()->label('Wijzigen')    ->modalWidth(MaxWidth::SevenExtraLarge),
+                    }),   Tables\Actions\EditAction::make()->label('Wijzigen'),
 
                     ])
 

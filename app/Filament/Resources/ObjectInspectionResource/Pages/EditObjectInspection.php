@@ -16,4 +16,29 @@ class EditObjectInspection extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+
+
+    
+    
+
+    public function getSubheading(): ?string
+    {
+       
+        if ($this->getRecord()->if_match) {
+
+
+
+            return  "Geimporteerd vanuit de keuringsinstantie koppeling"  ;
+        } else {
+            return "";
+        }
+    }
+
+    
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
 }

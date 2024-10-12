@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Filament\Resources;
-
+use App\Models\ObjectInspectionCompany;
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
@@ -19,6 +19,18 @@ use Filament\Tables\Columns\Layout\Panel;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Actions\Exports\ExportColumn;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Grid;
+
+use Filament\Support\Enums\MaxWidth;
+ 
+
+
+
 use Illuminate\Contracts\View\View;
 class ObjectInspectionResource extends Resource
 {
@@ -30,7 +42,91 @@ class ObjectInspectionResource extends Resource
     {
         return $form
             ->schema([
-                //
+               
+ 
+ 
+         
+
+          
+
+Grid::make(4)
+->schema([   
+        DatePicker::make("executed_datetime")
+        ->label("Uitvoerdatum")
+        ->required() ,
+
+        DatePicker::make("end_date")
+            ->label("Einddatum")
+            ->required() ,
+ 
+ 
+ 
+    Select::make("status_id")
+    ->label("Status")
+    ->required()
+ 
+    ->options(InspectionStatus::class),
+ 
+    Select::make("type")
+    ->label("Type keuring")
+    ->required()
+ 
+    ->options([
+        "Periodieke keuring" => "Periodieke keuring",
+        "Modernisering keuring" => "Modernisering keuring",
+        "Oplever keuring" => "Oplever keuring",
+    ]),
+
+
+]),
+
+
+Grid::make(4)
+->schema([   
+   
+
+
+    
+        Select::make("inspection_company_id")
+        ->label("Keuringsinstantie")
+        ->required()
+ 
+        ->options(ObjectInspectionCompany::pluck("name", "id")) ,
+
+ 
+
+
+    ]),
+
+                            
+
+        
+
+          
+
+Grid::make(2)
+->schema([
+    FileUpload::make('document')
+    ->columnSpan(1)
+
+    ->label('Rapportage')
+
+  ,
+
+    
+
+
+
+
+Textarea::make('remark')
+    ->rows(3)
+    ->label('Opmerking')
+    ->columnSpan(1)
+    ->autosize()
+])
+
+       
+  
             ]);
     }
 
@@ -71,13 +167,13 @@ class ObjectInspectionResource extends Resource
 
                     ->getStateUsing(function (ObjectInspection $record): ?string {
 
-                        return $record->elevator->location->address;
+                        return $record?->elevator?->location?->address;
                     })
 
                     ->description(function (ObjectInspection $record): ?string {
 
 
-                            return $record->elevator->location->zipcode . " - " . $record->elevator->location->place;
+                            return $record?->elevator?->location?->zipcode . " - " . $record?->elevator?->location?->place;
 
 
                     })
@@ -169,17 +265,7 @@ class ObjectInspectionResource extends Resource
             ])->filtersFormColumns(2)
             ->actions([
 
-                Tables\Actions\Action::make('itemdata')
-                   ->action(fn (ObjectInspection $record) => $record->itemdata())
-                    ->label('Bekijk acties')
-
-                    ->modalContent(fn (ObjectInspection $record): View => view(
-                        'components.modals.inspection-data-modal',
-                        ['record' => $record->itemdata]
-                    ))
-     ->hidden(fn (ObjectInspection $record): bool => count($record->itemdata) <= 1),
-
-               // Tables\Actions\EditAction::make()->label("Bekijk punten")
+   Tables\Actions\EditAction::make()->label("Meer details")
                ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
