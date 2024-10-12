@@ -260,7 +260,7 @@ class InspectionsRelationManager extends RelationManager
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
                             return "/admin/object-inspections/" .
-                                $record->id . "/edit";
+                                $record->id ;
                         }), 
 
 

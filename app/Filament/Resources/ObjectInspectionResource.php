@@ -289,6 +289,7 @@ Textarea::make('remark')
             'index' => Pages\ListObjectInspections::route('/'),
             'create' => Pages\CreateObjectInspection::route('/create'),
             'edit' => Pages\EditObjectInspection::route('/{record}/edit'),
+            'view' => Pages\ViewObjectInspection::route('/{record}'),
         ];
     }
 }

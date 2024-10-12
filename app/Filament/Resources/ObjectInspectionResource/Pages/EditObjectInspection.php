@@ -13,12 +13,39 @@ class EditObjectInspection extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+           
+ 
+            Actions\DeleteAction::make()
+            ->link()
+       
+            ->icon('heroicon-o-trash'),
+     
+
+    
+                Actions\Action::make('cancel_top')
+            ->link()
+            ->label('Afbreken')
+            ->icon('heroicon-o-arrow-uturn-left')
+            ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
+            ->outlined(),
+
+            
+    
+
+            
+        Actions\Action::make('save_top')
+            ->action('save')
+       
+            ->label('Gegevens opslaan'),
+
         ];
     }
 
 
-
+    protected function getFormActions(): array
+    {
+        return []; // necessary to remove the bottom actions
+    }
     
     
 
