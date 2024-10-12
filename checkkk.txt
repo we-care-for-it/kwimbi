@@ -1,0 +1,195 @@
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`ltsliftbeheer`.`object_inspections`, CONSTRAINT `object_inspections_elevator_id_foreign` FOREIGN KEY (`elevator_id`) REFERENCES `elevators` (`id`)) (Connection: mysql, SQL: insert into `object_inspections` (`external_uuid`, `status_id`, `inspection_company_id`, `type`, `nobo_number`, `elevator_id`, `executed_datetime`, `if_match`, `end_date`, `updated_at`, `created_at`) values (62422, 3, 1, Periodieke keuring, 1021490, 999999, 2024-09-25T00:00:00, 0, 2024-09-25T00:00:00, 2024-10-11 12:24:08, 2024-10-11 12:24:08))
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOException::("SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`ltsliftbeheer`.`object_inspections`, CONSTRAINT `object_inspections_elevator_id_foreign` FOREIGN KEY (`elevator_id`) REFERENCES `elevators` (`id`))")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOStatement::execute()
+
+
+   ErrorException 
+
+  Undefined variable $elevator_id
+
+  at app\Console\Commands\ImportChex.php:71
+     67▕                     "status_id"             => $status_id,
+     68▕                     "inspection_company_id"  => config("services.chex.company_id"),
+     69▕                     "type"                   => $item->inspectionType,
+     70▕                     "nobo_number" => $item->objectId,
+  ➜  71▕                     "elevator_id" => $elevator_id,
+     72▕                     "executed_datetime" => $item->inspectionDate,
+     73▕                     "if_match" => isset($elevator_information->id) ? 1 : 0,
+     74▕                     "end_date" => $item->expiryDate,
+     75▕                 ]
+
+  1   app\Console\Commands\ImportChex.php:71
+      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}("Undefined variable $elevator_id", "D:\LTS-Software\liftbeheer\app\Console\Commands\ImportChex.php")
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+
+   Error 
+
+  Class "App\Console\Commands\Inspection" not found
+
+  at app\Console\Commands\ImportChex.php:100
+     96▕             ]);
+     97▕ 
+     98▕             //Check of of er goedgekeurd is met acties
+     99▕             if($records->comments && $status_id==1){
+  ➜ 100▕                 Inspection::where('external_uuid',$item->inspectionId)->update(['status_id' => 2]);
+    101▕             }
+    102▕ 
+    103▕             foreach ($records->comments as $item) {
+    104▕                 if ($item->status == "Herhaling") {
+
+  1   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+  2   vendor\laravel\framework\src\Illuminate\Container\Util.php:43
+      Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+
+
+   TypeError 
+
+  count(): Argument #1 ($value) must be of type Countable|array, stdClass given
+
+  at app\Console\Commands\ImportChex.php:128
+    124▕             }
+    125▕         }
+    126▕ 
+    127▕ 
+  ➜ 128▕         $logitem = "Er zijn " . count($records) . " geimporteerd ";
+    129▕         externalApilogs::Create(
+    130▕             [
+    131▕                 "model"     => "ObjectInspectionData",
+    132▕                 "logitem"          => $item->code,
+
+  1   app\Console\Commands\ImportChex.php:128
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+Import Chex inspections!
+Import Chex inspections!
+
+   TypeError 
+
+  count(): Argument #1 ($value) must be of type Countable|array, stdClass given
+
+  at app\Console\Commands\ImportChex.php:128
+    124▕             }
+    125▕         }
+    126▕ 
+    127▕ 
+  ➜ 128▕         $logitem = "Er zijn " . count($records) . " geimporteerd ";
+    129▕         externalApilogs::Create(
+    130▕             [
+    131▕                 "model"     => "ObjectInspectionData",
+    132▕                 "logitem"          => $logitem,
+
+  1   app\Console\Commands\ImportChex.php:128
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+
+   Error 
+
+  Class "App\Console\Commands\externalApilogs" not found
+
+  at app\Console\Commands\ImportChex.php:124
+    120▕         }
+    121▕ 
+    122▕ 
+    123▕         $logitem = "Check keuringsrapportage opgehaald ";
+  ➜ 124▕         externalApilogs::Create(
+    125▕             [
+    126▕                 "model"     => "ObjectInspectionData",
+    127▕                 "logitem"          => $logitem,
+    128▕                 "model_sub"          => 'chex',
+
+  1   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+  2   vendor\laravel\framework\src\Illuminate\Container\Util.php:43
+      Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+
+
+   Symfony\Component\ErrorHandler\Error\FatalError 
+
+  Class App\Models\ExternalApilog contains 16 abstract methods and must therefore be declared abstract or implement the remaining methods (OwenIt\Auditing\Contracts\Auditable::audits, OwenIt\Auditing\Contracts\Auditable::setAuditEvent, OwenIt\Auditing\Contracts\Auditable::getAuditEvent, ...)
+
+  at app\Models\ExternalApiLog.php:13
+      9▕ use App\Models\Building;
+     10▕ use Carbon\Carbon;
+     11▕ use OwenIt\Auditing\Contracts\Auditable;
+     12▕ 
+  ➜  13▕ class ExternalApilog extends Model  implements Auditable
+     14▕ {   
+     15▕     protected $fillable = [
+     16▕         'model'
+     17▕     ];
+
+
+   Whoops\Exception\ErrorException 
+
+  Class App\Models\ExternalApilog contains 16 abstract methods and must therefore be declared abstract or implement the remaining methods (OwenIt\Auditing\Contracts\Auditable::audits, OwenIt\Auditing\Contracts\Auditable::setAuditEvent, OwenIt\Auditing\Contracts\Auditable::getAuditEvent, ...)
+
+  at app\Models\ExternalApiLog.php:13
+      9▕ use App\Models\Building;
+     10▕ use Carbon\Carbon;
+     11▕ use OwenIt\Auditing\Contracts\Auditable;
+     12▕ 
+  ➜  13▕ class ExternalApilog extends Model  implements Auditable
+     14▕ {   
+     15▕     protected $fillable = [
+     16▕         'model'
+     17▕     ];
+
+  1   vendor\filp\whoops\src\Whoops\Run.php:510
+      Whoops\Run::handleError("Class App\Models\ExternalApilog contains 16 abstract methods and must therefore be declared abstract or implement the remaining methods (OwenIt\Auditing\Contracts\Auditable::audits, OwenIt\Auditing\Contracts\Auditable::setAuditEvent, OwenIt\Auditing\Contracts\Auditable::getAuditEvent, ...)", "D:\LTS-Software\liftbeheer\app\Models\ExternalApiLog.php")
+
+  2   [internal]:0
+      Whoops\Run::handleShutdown()
+
+Import Chex inspections!
+Import Chex inspections!
+Import Chex inspections!
+
+   Error 
+
+  Call to undefined function App\Console\Commands\inverse()
+
+  at app\Console\Commands\ImportChex.php:34
+     30▕     public function handle()
+     31▕     {
+     32▕ 
+     33▕         try {
+  ➜  34▕             echo inverse(0) . "\n";
+     35▕       
+     36▕ 
+     37▕         $url = config("services.chex.url") . "/inspections";
+     38▕         $schedule_run_token = Str::random();
+
+  1   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+  2   vendor\laravel\framework\src\Illuminate\Container\Util.php:43
+      Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+

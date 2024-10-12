@@ -5,6 +5,7 @@ use Illuminate\Console\Command;
 use App\Models\ObjectInspection;
 use App\Models\Elevator;
 use App\Models\ObjectInspectionData;
+use App\Models\ExternalApiLog;
 
 use Carbon\Carbon;
 
@@ -16,7 +17,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Psr\SimpleCache\InvalidArgumentException;
 use Throwable;
@@ -28,8 +29,12 @@ class ImportChex extends Command
 
     public function handle()
     {
-        $url = config("services.chex.url") . "/inspections";
 
+        try {
+          
+
+        $url = config("services.chex.url") . "/inspections";
+        $schedule_run_token = Str::random();
         $response = Http::withHeaders([
             "Authorization" => config("services.chex.token"),
         ])->get($url, [
@@ -63,23 +68,20 @@ class ImportChex extends Command
                 ["external_uuid" => $item->inspectionId],
 
                 [
-                    "status_id" => $status_id,
-                    "inspection_company_id" => config(
-                        "services.chex.company_id"
-                    ),
-                    "type" => $item->inspectionType,
+                    "status_id"             => $status_id,
+                    "inspection_company_id"  => config("services.chex.company_id"),
+                    "type"                   => $item->inspectionType,
                     "nobo_number" => $item->objectId,
                     "elevator_id" => $elevator_information?->id,
                     "executed_datetime" => $item->inspectionDate,
                     "if_match" => isset($elevator_information->id) ? 1 : 0,
                     "end_date" => $item->expiryDate,
+                    "schedule_run_token" =>  $schedule_run_token
+
                 ]
             );
 
-            $url =
-                config("services.chex.url") .
-                "/inspections/" .
-                $item->inspectionId;
+            $url =  config("services.chex.url") . "/inspections/" . $item->inspectionId;
 
             $response = Http::withHeaders([
                 "Authorization" => config("services.chex.token"),
@@ -94,6 +96,11 @@ class ImportChex extends Command
                 "certification" => $records->certificateData,
             ]);
 
+            //Check of of er goedgekeurd is met acties
+            if($records->comments && $status_id==1){
+                ObjectInspection::where('external_uuid',$item->inspectionId)->update(['status_id' => 2]);
+            }
+
             foreach ($records->comments as $item) {
                 if ($item->status == "Herhaling") {
                     ObjectInspection::where(
@@ -104,20 +111,45 @@ class ImportChex extends Command
 
                 ObjectInspectionData::updateOrCreate(
                     [
-                        "inspection_id" => $inspection_data_from_db->id,
-                        "zin_code" => $item->code,
+                        "inspection_id"     => $inspection_data_from_db->id,
+                        "zin_code"          => $item->code,
                     ],
                     [
-                        "zin_code" => $item->code,
-                        "comment" => $item->comment,
-                        "type" => $item->type,
-                        "inspection_id" => $inspection_data_from_db->id,
-                        "status" => $item->status,
+                        "zin_code"          => $item->code,
+                        "comment"           => $item->comment,
+                        "type"              => $item->type,
+                        "inspection_id"     => $inspection_data_from_db->id,
+                        "status"            => $item->status,
+                        "schedule_run_token" =>  $schedule_run_token
                     ]
                 );
             }
         }
 
-        $this->info("Import Chex inspections!");
+
+        $logitem = "Check keuringsrapportage opgehaald ";
+       
+ 
+        
+
+    } catch (Exception $e) {
+        $logitem = "foutmelding" . $e->getMessage();
+ 
+    }  
+
+
+    ExternalApiLog::Create(
+        [
+            "model"         => "Keuringinstanties",
+            "logitem"       => $logitem,
+            "model_sub"     => 'Chex',
+            "status_id"     => '1',
+            
+            "schedule_run_token" =>  $schedule_run_token
+        ]
+         
+    );
+
+
     }
 }

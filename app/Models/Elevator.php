@@ -53,6 +53,8 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
+ 
+
 
     public function customer()
     {

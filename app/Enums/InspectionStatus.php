@@ -20,7 +20,20 @@ enum InspectionStatus: string implements HasLabel,HasColor
     case APPROVED_REPEAT = "6";
 
     
-    
+    public function label(): string
+{
+    return match($this)
+    {
+        self::APPROVED => 'Goedgekeurd',
+        self::APPROVED_ACTIONS => 'Goedgekeurd met acties',
+        self::REJECTED => 'Afgekeurd',
+        self::UNDECIDED => 'Onbeslist',
+        self::NOT_COMPLETED => 'Niet afgrond',
+        self::APPROVED_REPEAT => 'Goedgekeurd met herhaalpunten',
+   };
+}
+
+
 
     public function getlabel(): string
     {
