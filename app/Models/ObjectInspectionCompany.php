@@ -17,4 +17,8 @@ class ObjectInspectionCompany extends Model
     protected $fillable = [
         'name','address','zipcode','phonenumber','general_emailaddress','place','active','website'
     ];
+
+
+
+
 }

@@ -41,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
+          //  ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))
             ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
