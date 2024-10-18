@@ -31,16 +31,17 @@ class ViewObjectInspection extends ViewRecord
             ->label('Terug')
             ->icon('heroicon-o-arrow-uturn-left')
             ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
-            ->outlined(),
+            ->color("danger")
+            ->iconButton(),
 
             Actions\EditAction::make('cancel_top')
  
-            ->label('Wijzig')  ,
+            ->label('Wijzig')->link()  ,
   
             
 
             Actions\Action::make("Downloaddocument")->color("warning")  
-            ->label("Download rapport")
+            ->label("Download rapport")->link() 
             ->icon("heroicon-o-document-arrow-down")
             ->fillForm(
                 fn($record): array => [
@@ -88,13 +89,11 @@ class ViewObjectInspection extends ViewRecord
     {
        
         if ($this->getRecord()->if_match) {
-
-
-
-            return  "Geimporteerd vanuit de keuringsinstantie koppeling"  ;
+            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
         } else {
             return "";
         }
+    
     }
 
 

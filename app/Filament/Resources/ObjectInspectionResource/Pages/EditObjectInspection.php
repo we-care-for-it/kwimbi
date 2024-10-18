@@ -9,34 +9,28 @@ use Filament\Resources\Pages\EditRecord;
 class EditObjectInspection extends EditRecord
 {
     protected static string $resource = ObjectInspectionResource::class;
-
+    protected static ?string $title = 'Keuringsrapportage bewerken';
+  
     protected function getHeaderActions(): array
     {
         return [
            
  
             Actions\DeleteAction::make()
-            ->link()
-       
-            ->icon('heroicon-o-trash'),
-     
+                ->link()
+                ->iconButton()
+                ->icon('heroicon-o-trash'),
 
-    
-                Actions\Action::make('cancel_top')
-            ->link()
-            ->label('Afbreken')
-            ->icon('heroicon-o-arrow-uturn-left')
-            ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
-            ->outlined(),
+            Actions\Action::make('cancel_top')
+                ->link()
+                ->label('Afbreken')
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
+                ->iconButton(),
 
-            
-    
-
-            
-        Actions\Action::make('save_top')
-            ->action('save')
-       
-            ->label('Gegevens opslaan'),
+            Actions\Action::make('save_top')
+                ->action('save')
+                ->label('Gegevens opslaan'),
 
         ];
     }
@@ -51,15 +45,12 @@ class EditObjectInspection extends EditRecord
 
     public function getSubheading(): ?string
     {
-       
         if ($this->getRecord()->if_match) {
-
-
-
-            return  "Geimporteerd vanuit de keuringsinstantie koppeling"  ;
+            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
         } else {
             return "";
         }
+    
     }
 
     

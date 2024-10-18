@@ -196,7 +196,7 @@ class ObjectInspectionResource extends Resource
             ->label('Relatie') ,
 
         Group::make('elevator.maintenance_company_id')
-            ->label('Onderhoudspartij') ,
+            ->label('Onderhoudspartij'),
 
         ])
 ->columns([
@@ -244,7 +244,7 @@ class ObjectInspectionResource extends Resource
 
         Tables\Columns\TextColumn::make("inspectioncompany.name")
             ->label("Onderhoudspartij")
-            ->sortable() ,
+            ->sortable()->required() ,
 
         Tables\Columns\TextColumn::make("status_id")
             ->label("Status")

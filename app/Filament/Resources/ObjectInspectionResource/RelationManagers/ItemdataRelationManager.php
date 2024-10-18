@@ -72,11 +72,11 @@ class ItemdataRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Toevoegen'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->iconbutton(),
+                Tables\Actions\DeleteAction::make()->iconbutton(),
 
               
 
