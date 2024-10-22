@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use SolutionForest\FilamentFirewall\FilamentFirewallPanel;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
  
 
 
@@ -33,7 +34,8 @@ class AppPanelProvider extends PanelProvider
         return $panel
 
  
-
+ 
+ 
             ->id('app')
             ->path('app')
             ->colors([
@@ -53,7 +55,8 @@ class AppPanelProvider extends PanelProvider
                 config('filament-logger.activity_resource')
             ])
 
-            ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make())
+            ->plugins([FilamentFullCalendarPlugin::make()])
+ 
 
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([

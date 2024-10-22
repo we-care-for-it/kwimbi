@@ -113,14 +113,14 @@ class ObjectInspectionResource extends Resource
                 
                 Components\Split::make([
                     
-                    Components\Grid::make(4)->schema([
+       
                
                         Components\TextEntry::make('remark')
                   
                         ->label("Opmerking")  ->placeholder("Geen opmerking")
                         ])
                   
-                        ]) 
+                      
                     ]) 
                 
                 ]);
@@ -244,7 +244,7 @@ class ObjectInspectionResource extends Resource
 
         Tables\Columns\TextColumn::make("inspectioncompany.name")
             ->label("Onderhoudspartij")
-            ->sortable()->required() ,
+            ->sortable(),
 
         Tables\Columns\TextColumn::make("status_id")
             ->label("Status")

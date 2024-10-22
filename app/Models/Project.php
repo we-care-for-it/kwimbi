@@ -11,16 +11,8 @@ use Log;
 use Str;
 class Project extends Model implements Auditable
 {
-    use SoftDeletes;
+  //  use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-
-    public function getSlugOptions() : SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
-    }
-
 
 
     public function location()
@@ -37,7 +29,7 @@ class Project extends Model implements Auditable
     protected $perPage = 20;
 
     // Attributes that should be mass-assignable
-    protected $fillable = ['slug','name','description','code','customer_id','progress','startdate','enddate','status_id','budget_hours','budget_costs','contact_person_name'];
+    protected $fillable = ['slug','name','description','code','customer_id','progress','end_date','begin_date','status_id','budget_hours','budget_costs','contact_person_name'];
 
     public function status()
     {
@@ -70,5 +62,6 @@ class Project extends Model implements Auditable
         return $this->hasMany(ProjectLocation::class,'project_id','location_id');
     }
 
+ 
 
 }

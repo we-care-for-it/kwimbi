@@ -24,6 +24,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\FontProviders\SpatieGoogleFontProvider;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
+ 
 
 use Filament\Widgets\StatsOverview;
 
@@ -52,6 +54,7 @@ class AdminPanelProvider extends PanelProvider
                         ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
                 ),
             ])
+            ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

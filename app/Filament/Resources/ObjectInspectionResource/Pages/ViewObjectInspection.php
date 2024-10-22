@@ -35,14 +35,15 @@ class ViewObjectInspection extends ViewRecord
             ->iconButton(),
 
             Actions\EditAction::make('cancel_top')
- 
-            ->label('Wijzig')->link()  ,
+            ->link()
+            ->label('Wijzig'),
   
             
 
             Actions\Action::make("Downloaddocument")->color("warning")  
-            ->label("Download rapport")->link() 
+            ->label("Download rapport")
             ->icon("heroicon-o-document-arrow-down")
+            ->link()
             ->fillForm(
                 fn($record): array => [
                     "filename" =>

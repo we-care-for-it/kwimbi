@@ -32,6 +32,11 @@ class Customer extends Model implements Auditable
     }
 
 
+    public function users()
+    {
+      return $this->hasMany(User::class, 'customer_id', 'id');
+    }
+
 
 
 
