@@ -38,9 +38,7 @@ class AppPanelProvider extends PanelProvider
  
             ->id('app')
             ->path('app')
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+      
             ->plugin(FilamentFirewallPanel::make())
             ->plugin(FilamentSpatieLaravelBackupPlugin::make())
         //  ->plugin(FilamentEnvEditorPlugin::make())

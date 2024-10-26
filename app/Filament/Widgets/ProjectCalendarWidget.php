@@ -12,6 +12,8 @@ class ProjectCalendarWidget extends FullCalendarWidget
      * FullCalendar will call this function whenever it needs new event data.
      * This is triggered when the user clicks prev/next or switches views on the calendar.
      */
+    protected static ?string $pollingInterval = '10s';
+    
     public function fetchEvents(array $fetchInfo): array
     {
         return Project::query()

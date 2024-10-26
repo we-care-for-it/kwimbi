@@ -24,21 +24,23 @@ class ViewObjectInspection extends ViewRecord
         return [
            
  
-
             
+            
+           
+
             Actions\Action::make('cancel_top')
+            ->label('Terug naar object')
+            ->color('gray')
             ->link()
-            ->label('Terug')
             ->icon('heroicon-o-arrow-uturn-left')
-            ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
-            ->color("danger")
-            ->iconButton(),
+                        
+            ->url(function ($record) {
+                return "/admin/objects/".$record->elevator_id."/edit?activeRelationManager=3";
+                   
+            }),
 
-            Actions\EditAction::make('cancel_top')
-            ->link()
-            ->label('Wijzig'),
-  
-            
+ 
+                     
 
             Actions\Action::make("Downloaddocument")->color("warning")  
             ->label("Download rapport")
@@ -53,7 +55,16 @@ class ViewObjectInspection extends ViewRecord
                         ", " .
                         $record?->elevator?->location?->place,
                 ]
-            )
+                ),
+
+                Actions\EditAction::make('cancel_top')
+                ->icon('heroicon-o-pencil')
+                ->label('Wijzig')
+          
+      
+
+
+
             ->action(function ($data, $record) {
                 $contents = base64_decode($record->document);
                 $path = public_path($data["filename"] . ".pdf");

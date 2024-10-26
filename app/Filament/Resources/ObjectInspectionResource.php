@@ -186,6 +186,8 @@ class ObjectInspectionResource extends Resource
     public static function table(Table $table) : Table
     {
         return $table
+
+
 ->groups([Group::make('status_id')
             ->label('Status') ,
 
@@ -199,6 +201,7 @@ class ObjectInspectionResource extends Resource
             ->label('Onderhoudspartij'),
 
         ])
+  
 ->columns([
 
         Tables\Columns\TextColumn::make("elevator.nobo_no")
@@ -252,8 +255,8 @@ class ObjectInspectionResource extends Resource
             ->sortable() ,
 
         ])
-
-            ->filters([
+    
+        ->filters([
 
         SelectFilter::make('status_id')
             ->options(InspectionStatus::class)
@@ -266,6 +269,12 @@ class ObjectInspectionResource extends Resource
 
         Tables\Actions\EditAction::make()
             ->label("Meer details") ])
+
+            ->recordUrl(function ($record) {
+                return "/admin/object-inspections/" . $record->id;
+            })
+
+            
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
         //  ExportBulkAction::make(),
         ]) , ]);

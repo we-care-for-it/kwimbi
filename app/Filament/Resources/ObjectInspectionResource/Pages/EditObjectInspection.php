@@ -16,22 +16,23 @@ class EditObjectInspection extends EditRecord
         return [
            
  
-            Actions\DeleteAction::make()
-                ->link()
+
+
+
+                Actions\DeleteAction::make()
                 ->iconButton()
                 ->icon('heroicon-o-trash'),
 
-            Actions\Action::make('cancel_top')
-                ->link()
-                ->label('Afbreken')
-                ->icon('heroicon-o-arrow-uturn-left')
-                ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
-                ->iconButton(),
+            // Actions\Action::make('cancel_top')
+            //     ->label('Afbreken')
+            //     ->icon('heroicon-o-arrow-uturn-left')
+            //     ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
+            //     ->iconButton(),
+                
 
-            Actions\Action::make('save_top')
+                Actions\Action::make('save_top')
                 ->action('save')
-                ->label('Gegevens opslaan'),
-
+                ->label('Opslaan'),
         ];
     }
 

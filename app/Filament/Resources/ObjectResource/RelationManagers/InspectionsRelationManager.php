@@ -105,22 +105,24 @@ class InspectionsRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("inspectioncompany.name")
                     ->label("Instantie")
-
+                    ->sortable()
                     ->description(fn($record) => $record->remark)
                     ->wrap(),
 
                 Tables\Columns\TextColumn::make("executed_datetime")
                     ->dateTime("d-m-Y")
-                    ->label("Uitgevoerd op"),
+                    ->label("Uitgevoerd op")
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make("end_date")
                     ->dateTime("d-m-Y")
-                    ->label("Geldig tot"),
+                    ->label("Geldig tot")
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),
-            ])
+            ])     ->defaultSort('executed_datetime', 'desc')
             ->filters([
                 //
             ])
@@ -234,7 +236,7 @@ class InspectionsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     //      Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                ])->label('Tovoegen'),
             ]);
     }
 }
