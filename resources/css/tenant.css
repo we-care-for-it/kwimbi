@@ -90,6 +90,25 @@
  
 }
 
+.fi-ta-header{
+  background-color:#F9FAFC;
+  border-top: 1px solid #EFEFEF;
+  font-weight: normal!important;
+  padding: 2px;
+}
+.fi-ta-header-heading{
+  font-weight:lighter!important;
+}
+
+.fi-ta-content{
+  padding: 10px;
+}
+
+.fi-ta-ctn{
+  border: 1px solid #EFEFEF;
+  box-shadow: none!important;
+}
+
 .fi-sidebar-nav{
   background-color: white!important;;
 }

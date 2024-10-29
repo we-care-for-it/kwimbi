@@ -28,7 +28,8 @@ class InspectionsRelationManager extends RelationManager
 {
     protected static string $relationship = "inspections";
     protected static ?string $title = "Keuringen";
-
+    protected static bool $isLazy = false;
+    
     public static function getBadge($ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->inspections->count();
@@ -122,7 +123,10 @@ class InspectionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),
-            ])     ->defaultSort('executed_datetime', 'desc')
+            ])
+            ->paginated(false)
+            ->emptyState(view('partials.empty-state-small'))
+            ->defaultSort('executed_datetime', 'desc')
             ->filters([
                 //
             ])
@@ -168,41 +172,41 @@ class InspectionsRelationManager extends RelationManager
             ])
 
             ->actions([
-                // Tables\Actions\Action::make("DownloadDocument")
-                //     ->label("Rapportage")
-                //     ->icon("heroicon-o-document-arrow-down")
-                //     ->fillForm(
-                //         fn($record): array => [
-                //             "filename" =>
-                //                 $record->status_id->getlabel() .
-                //                 " - Rapportage - " .
-                //                 $record?->elevator?->location?->address .
-                //                 ", " .
-                //                 $record?->elevator?->location?->place,
-                //         ]
-                //     )
-                //     ->action(function ($data, $record) {
-                //         $contents = base64_decode($record->document);
-                //         $path = public_path($data["filename"] . ".pdf");
+                Tables\Actions\Action::make("DownloadDocument")
+                    ->label("Rapportage")
+                    ->icon("heroicon-o-document-arrow-down")
+                    ->fillForm(
+                        fn($record): array => [
+                            "filename" =>
+                                $record->status_id->getlabel() .
+                                " - Rapportage - " .
+                                $record?->elevator?->location?->address .
+                                ", " .
+                                $record?->elevator?->location?->place,
+                        ]
+                    )
+                    ->action(function ($data, $record) {
+                        $contents = base64_decode($record->document);
+                        $path = public_path($data["filename"] . ".pdf");
 
-                //         file_put_contents($path, $contents);
+                        file_put_contents($path, $contents);
 
-                //         return response()
-                //             ->download($path)
-                //             ->deleteFileAfterSend(true);
-                //     })
-                //     ->modalWidth(MaxWidth::Large)
-                //     ->modalHeading("Bestand downloaden")
-                //     ->modalDescription(
-                //         "Geef een bestandsnaam om om het bestand te downloaden"
-                //     )
+                        return response()
+                            ->download($path)
+                            ->deleteFileAfterSend(true);
+                    })
+                    ->modalWidth(MaxWidth::Large)
+                    ->modalHeading("Bestand downloaden")
+                    ->modalDescription(
+                        "Geef een bestandsnaam om om het bestand te downloaden"
+                    )
 
-                //     ->form([
-                //         TextInput::make("filename")
-                //             ->label("Bestandsnaam")
-                //             ->required(),
-                //     ])
-                //     ->visible(fn($record) => $record->document),
+                    ->form([
+                        TextInput::make("filename")
+                            ->label("Bestandsnaam")
+                            ->required(),
+                    ])
+                    ->visible(fn($record) => $record->document),
 
          
 

@@ -60,6 +60,9 @@ class ViewObjectInspection extends ViewRecord
                 Actions\EditAction::make('cancel_top')
                 ->icon('heroicon-o-pencil')
                 ->label('Wijzig')
+               
+
+ 
           
       
 
@@ -76,7 +79,7 @@ class ViewObjectInspection extends ViewRecord
                     ->deleteFileAfterSend(true);
             })
             ->modalWidth(MaxWidth::Large)
-            ->modalHeading("Bestand downlaoden")
+            ->modalHeading("Bestand downloaden")
             ->modalDescription(
                 "Geef een bestandsnaam om om het bestand te downloaden"
             )

@@ -32,6 +32,9 @@
     position: relative;
 }
 
+
+
+
 .fi-sidebar {
     @apply bg-gray-50 dark:bg-gray-950 !important;
 }
@@ -46,11 +49,6 @@
 
 }
 
-
-.fi-header-heading {
-    font-weight: normal !important;
-    color: blue
-}
 
 .fi-topbar .bg-white {
     background-color:rgb(139,217,144) !important

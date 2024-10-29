@@ -17,7 +17,18 @@ class EditObjectInspection extends EditRecord
            
  
 
+            Actions\Action::make('cancel_top')
+            ->label('Pagina terug')
+            ->color('gray')
+            ->link()
+            ->icon('heroicon-o-arrow-uturn-left')
+                        
+            ->url(function ($record) {
+                return "/admin/object-inspections/".$record->id;
+                   
+            }),
 
+ 
 
                 Actions\DeleteAction::make()
                 ->iconButton()

@@ -11,13 +11,16 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Grid;
+// use Filament\Infolists\Components\Grid;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Forms\Components\Grid;
+ 
 class MaintenanceContractsRelationManager extends RelationManager
 {
     protected static string $relationship = 'maintenance_contracts';
@@ -32,24 +35,32 @@ class MaintenanceContractsRelationManager extends RelationManager
     }
     public function form(Form $form) : Form
     {
-        return $form->schema([DatePicker::make("startdate")
+        return $form->schema([
+
+
+         
+Grid::make([
+    'default' => 3,
+  
+])
+    ->schema([
+        Select::make("maintenance_company_id")
+            ->label("Onderhoudsbedrijf")
+            ->required()
+       
+            ->options(ObjectMaintenanceCompany::pluck("name", "id")) ,
+
+
+            DatePicker::make("startdate")
             ->label("Startdatum")
-            ->required() ,
+            ->required(),
 
             DatePicker::make("enddate")
                 ->label("Einddatum")
-                ->required() ,
+                ->required()      
+    ]),
+           
 
-            TextInput::make("count_of_maintenance")
-                //   ->default(now())
-
-                ->label("Aantal beurten") ,
-
-            Select::make("maintenance_company_id")
-                ->label("Onderhoudsbedrijf")
-                ->required()
-                ->reactive()
-                ->options(ObjectMaintenanceCompany::pluck("name", "id")) ,
 
             FileUpload::make('contract')
                 ->columnSpan(3)
@@ -79,27 +90,31 @@ class MaintenanceContractsRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("maintenance_company.name")
                     ->label("Onderhoudsbedrijf")
-
+                    ->sortable()
                     ->placeholder('-') ,
 
                 Tables\Columns\TextColumn::make("startdate")
                     ->label("Startdatum")
                     ->dateTime("d-m-Y")
+                    ->sortable()
                     ->placeholder('-') ,
 
                 Tables\Columns\TextColumn::make("enddate")
                     ->label("Einddatum")
                     ->dateTime("d-m-Y")
+                    ->sortable()
                     ->placeholder('-') ,
 
                 Tables\Columns\TextColumn::make("remark")
                     ->label("Opmerking")
+                    
                     ->placeholder('')
                     ->wrap() ,
 
 
-                Tables\Columns\TextColumn::make("geldigheud")
-                    ->label("geldigheud")
+                Tables\Columns\TextColumn::make("Geldigheid")
+                    ->label("Geldigheid")
+                    ->sortable()
                     ->getStateUsing(function (ObjectMaintenanceContract $record): ?string {
 
                         $Date1 = strtotime(date('Y-m-d', strtotime($record?->enddate) ) ).' ';
@@ -113,20 +128,24 @@ class MaintenanceContractsRelationManager extends RelationManager
 
 
 
-                    })->badge()->color('danger'),
+                    })->badge(),
 
 
-                Tables\Columns\TextColumn::make("count_of_maintenance")
-                    ->label("Aantal beurten")
-                    ->placeholder('-')
-                    ->alignment('center') ,
+                // Tables\Columns\TextColumn::make("count_of_maintenance")
+                //     ->label("Aantal beurten")
+                //     ->placeholder('-')
+                //     ->alignment('center') ,
 
             ])
             ->paginated(false)
+            ->emptyState(view('partials.empty-state-small'))
+            ->defaultSort('startdate', 'desc')
             ->filters([
                 //
             ])
-            ->headerActions([Tables\Actions\CreateAction::make()
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+               
                 ->modalHeading('Contract toevoegen')
                 ->label('Toevoegen')])->actions([
 
