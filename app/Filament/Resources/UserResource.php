@@ -46,9 +46,12 @@ class UserResource extends Resource
                             ->password()
                             ->revealable(),
                      
-Forms\Components\CheckboxList::make('roles')
-->relationship('roles', 'name')
-->searchable(),
+// Using Select Component
+Forms\Components\Select::make('roles')
+    ->relationship('roles', 'name')
+    ->multiple()
+    ->preload()
+    ->searchable(),
 
                         TextInput::make('email')
                             ->label(__('users.fields.email'))
