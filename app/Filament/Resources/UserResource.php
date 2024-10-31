@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Select;
 
 class UserResource extends Resource
 {
@@ -47,7 +48,7 @@ class UserResource extends Resource
                             ->revealable(),
                      
 // Using Select Component
-Forms\Components\Select::make('roles')
+ Select::make('roles')
     ->relationship('roles', 'name')
     ->multiple()
     ->preload()
