@@ -19,7 +19,7 @@ class ObjectManagementCompaniesResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-
+    protected static ?string $title = "Locaties";
     protected static ?string $navigationGroup = 'Extern';
     protected static ?string $navigationLabel = 'Beheerders';
 

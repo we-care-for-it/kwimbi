@@ -55,8 +55,23 @@ class ObjectLocationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
+
     protected static ?string $navigationLabel = "Locaties";
     protected static ?string $navigationGroup = "Hoofdmenu";
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'address'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Adres' => $record->address . ' , ' . $record->place
+        ];
+    }
 
 
     public static function form(Form $form): Form

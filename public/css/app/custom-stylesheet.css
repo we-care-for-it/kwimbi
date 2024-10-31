@@ -33,6 +33,14 @@
 
     position: relative;
 }
+.fi-global-search-result-group{
+  background-color: white!important;
+}
+
+
+.fi-global-search-result{
+ background-color: white!important;
+}
 
 
 

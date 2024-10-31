@@ -52,7 +52,7 @@ class AdminPanelProvider extends PanelProvider
            // ->tenantDomain('{tenant:slug}.localhost')
           //  ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))
-            ->globalSearch(false)
+           // ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
             //   ->topNavigation()
             ->plugins([
@@ -63,7 +63,7 @@ class AdminPanelProvider extends PanelProvider
                 ),
             ])
 
-      
+            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
                 
             ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
