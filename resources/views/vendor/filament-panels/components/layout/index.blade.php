@@ -1,3 +1,7 @@
+@php
+ 
+    $navigation = filament()->getNavigation();
+@endphp
 
 <x-filament-panels::layout.base :livewire="$livewire">
     {{-- The sidebar is after the page content in the markup to fix issues with page content overlapping dropdown content from the sidebar. --}}
