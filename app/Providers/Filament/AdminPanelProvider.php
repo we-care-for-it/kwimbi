@@ -26,6 +26,11 @@ use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
  
+use Awcodes\LightSwitch\LightSwitchPlugin;
+ 
+ 
+
+
 
 use Filament\Widgets\StatsOverview;
 
@@ -38,11 +43,13 @@ class AdminPanelProvider extends PanelProvider
            // ->font('Inter', provider: SpatieGoogleFontProvider::class)
             ->id('admin')
             ->path('admin')
+          //  ->tenant(Company::class)
             ->login()
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,
-            ])
+            ])  
+           // ->tenantDomain('{tenant:slug}.localhost')
           //  ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))
             ->globalSearch(false)
@@ -51,9 +58,13 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentBackgroundsPlugin::make()->imageProvider(
                     MyImages::make()
-                        ->directory('images/swisnl/filament-backgrounds/curated-by-swis')
+                        ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
+                        LightSwitchPlugin::make(),
                 ),
             ])
+
+      
+                
             ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -77,10 +88,11 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 SetTheme::class
-            ])->tenantMiddleware([
+             ])
+            //->tenantMiddleware([
 
-                SetTheme::class
-            ])
+            //     SetTheme::class
+            // ])
             ->authMiddleware([
                 Authenticate::class,
             ])

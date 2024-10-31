@@ -9,6 +9,7 @@
         "amendozaaguiar/filament-route-statistics": "*",
         "awcodes/filament-badgeable-column": "^2.3",
         "awcodes/filament-curator": "^3.6",
+        "awcodes/light-switch": "^1.0",
         "awcodes/recently": "^1.0",
         "awt/apilogger": "@dev",
         "bezhansalleh/filament-shield": "^3.2",

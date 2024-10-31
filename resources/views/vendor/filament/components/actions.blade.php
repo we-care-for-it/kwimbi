@@ -38,6 +38,7 @@
     <div
         {{
             $attributes->class([
+                'btn-primary',
                 'fi-ac gap-3',
                 'flex flex-wrap items-center' => ! $fullWidth,
                 match ($alignment) {

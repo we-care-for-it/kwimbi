@@ -282,6 +282,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             'Awcodes\\Recently\\Database\\Factories\\' => 36,
             'Awcodes\\Recently\\' => 17,
+            'Awcodes\\LightSwitch\\' => 20,
             'Awcodes\\FilamentBadgeableColumn\\' => 32,
             'Awcodes\\Curator\\Tests\\Database\\Factories\\' => 41,
             'Awcodes\\Curator\\Tests\\' => 22,
@@ -927,6 +928,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             0 => __DIR__ . '/..' . '/awcodes/recently/src',
         ),
+        'Awcodes\\LightSwitch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/awcodes/light-switch/src',
+        ),
         'Awcodes\\FilamentBadgeableColumn\\' => 
         array (
             0 => __DIR__ . '/..' . '/awcodes/filament-badgeable-column/src',
@@ -1111,6 +1116,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Filament\\Clusters\\WorkorderSettings\\Resources\\WorkordersSolutionsResource\\Pages\\ManageWorkordersSolutions' => __DIR__ . '/../..' . '/app/Filament/Clusters/WorkorderSettings/Resources/WorkordersSolutionsResource/Pages/ManageWorkordersSolutions.php',
         'App\\Filament\\Exports\\LocationExporter' => __DIR__ . '/../..' . '/app/Filament/Exports/LocationExporter.php',
         'App\\Filament\\Pages\\Dashboard' => __DIR__ . '/../..' . '/app/Filament/Pages/Dashboard.php',
+        'App\\Filament\\Pages\\ProjectCalender' => __DIR__ . '/../..' . '/app/Filament/Pages/ProjectCalender.php',
         'App\\Filament\\Resources\\CustomerResource' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource.php',
         'App\\Filament\\Resources\\CustomerResource\\Pages\\CreateCustomer' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource/Pages/CreateCustomer.php',
         'App\\Filament\\Resources\\CustomerResource\\Pages\\EditCustomer' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource/Pages/EditCustomer.php',
@@ -1119,10 +1125,6 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Filament\\Resources\\CustomerResource\\RelationManagers\\LocationsRelationManager' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource/RelationManagers/LocationsRelationManager.php',
         'App\\Filament\\Resources\\CustomerResource\\RelationManagers\\ObjectsRelationManager' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource/RelationManagers/ObjectsRelationManager.php',
         'App\\Filament\\Resources\\CustomerResource\\RelationManagers\\UsersRelationManager' => __DIR__ . '/../..' . '/app/Filament/Resources/CustomerResource/RelationManagers/UsersRelationManager.php',
-        'App\\Filament\\Resources\\ElevatorsResource' => __DIR__ . '/../..' . '/app/Filament/Resources/ElevatorsResource.php',
-        'App\\Filament\\Resources\\ElevatorsResource\\Pages\\CreateElevators' => __DIR__ . '/../..' . '/app/Filament/Resources/ElevatorsResource/Pages/CreateElevators.php',
-        'App\\Filament\\Resources\\ElevatorsResource\\Pages\\EditElevators' => __DIR__ . '/../..' . '/app/Filament/Resources/ElevatorsResource/Pages/EditElevators.php',
-        'App\\Filament\\Resources\\ElevatorsResource\\Pages\\ListElevators' => __DIR__ . '/../..' . '/app/Filament/Resources/ElevatorsResource/Pages/ListElevators.php',
         'App\\Filament\\Resources\\ObjectInspectionResource' => __DIR__ . '/../..' . '/app/Filament/Resources/ObjectInspectionResource.php',
         'App\\Filament\\Resources\\ObjectInspectionResource\\Pages\\CreateObjectInspection' => __DIR__ . '/../..' . '/app/Filament/Resources/ObjectInspectionResource/Pages/CreateObjectInspection.php',
         'App\\Filament\\Resources\\ObjectInspectionResource\\Pages\\EditObjectInspection' => __DIR__ . '/../..' . '/app/Filament/Resources/ObjectInspectionResource/Pages/EditObjectInspection.php',
@@ -1178,6 +1180,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Filament\\Widgets\\InspectionChart' => __DIR__ . '/../..' . '/app/Filament/Widgets/InspectionChart.php',
         'App\\Filament\\Widgets\\LatestInsidents' => __DIR__ . '/../..' . '/app/Filament/Widgets/LatestInsidents.php',
         'App\\Filament\\Widgets\\LatestInspections' => __DIR__ . '/../..' . '/app/Filament/Widgets/LatestInspections.php',
+        'App\\Filament\\Widgets\\ProjectCalendarWidget' => __DIR__ . '/../..' . '/app/Filament/Widgets/ProjectCalendarWidget.php',
         'App\\Filament\\Widgets\\ProjectChart' => __DIR__ . '/../..' . '/app/Filament/Widgets/ProjectChart.php',
         'App\\Filament\\Widgets\\Projects' => __DIR__ . '/../..' . '/app/Filament/Widgets/Projects.php',
         'App\\Filament\\Widgets\\StandStill' => __DIR__ . '/../..' . '/app/Filament/Widgets/StandStill.php',
@@ -1285,6 +1288,9 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Awcodes\\FilamentBadgeableColumn\\Components\\BadgeableEntry' => __DIR__ . '/..' . '/awcodes/filament-badgeable-column/src/Components/BadgeableEntry.php',
         'Awcodes\\FilamentBadgeableColumn\\Concerns\\HasBadges' => __DIR__ . '/..' . '/awcodes/filament-badgeable-column/src/Concerns/HasBadges.php',
         'Awcodes\\FilamentBadgeableColumn\\Enums\\BadgeSize' => __DIR__ . '/..' . '/awcodes/filament-badgeable-column/src/Enums/BadgeSize.php',
+        'Awcodes\\LightSwitch\\Enums\\Alignment' => __DIR__ . '/..' . '/awcodes/light-switch/src/Enums/Alignment.php',
+        'Awcodes\\LightSwitch\\LightSwitchPlugin' => __DIR__ . '/..' . '/awcodes/light-switch/src/LightSwitchPlugin.php',
+        'Awcodes\\LightSwitch\\LightSwitchServiceProvider' => __DIR__ . '/..' . '/awcodes/light-switch/src/LightSwitchServiceProvider.php',
         'Awcodes\\Recently\\Commands\\RecentlyCommand' => __DIR__ . '/..' . '/awcodes/recently/src/Commands/RecentlyCommand.php',
         'Awcodes\\Recently\\Concerns\\HasRecentHistoryRecorder' => __DIR__ . '/..' . '/awcodes/recently/src/Concerns/HasRecentHistoryRecorder.php',
         'Awcodes\\Recently\\Database\\Factories\\RecentEntryFactory' => __DIR__ . '/..' . '/awcodes/recently/database/factories/RecentEntryFactory.php',

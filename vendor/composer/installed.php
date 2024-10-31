@@ -55,6 +55,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'awcodes/light-switch' => array(
+            'pretty_version' => 'v1.0.3',
+            'version' => '1.0.3.0',
+            'reference' => '5242d514bc9e8f14fb7158a97a876e905027d9c7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../awcodes/light-switch',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'awcodes/recently' => array(
             'pretty_version' => 'v1.0.5',
             'version' => '1.0.5.0',

@@ -38,11 +38,7 @@
 .fi-sidebar {
     @apply bg-gray-50 dark:bg-gray-950 !important;
 }
-
-.fi-logo {
-    border: 2px solid red;
-
-}
+ 
 
 .fi-topbar {
     font-weight: normal !important;

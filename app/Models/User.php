@@ -12,9 +12,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Models\Contracts\FilamentUser;
+ 
 
-
-class User extends Authenticatable implements  FilamentUser
+class User extends Authenticatable implements  FilamentUser, HasTenants
 
 {
     use HasFactory;
