@@ -45,6 +45,10 @@ class UserResource extends Resource
                             TextInput::make('password')
                             ->password()
                             ->revealable(),
+                     
+Forms\Components\CheckboxList::make('roles')
+->relationship('roles', 'name')
+->searchable(),
 
                         TextInput::make('email')
                             ->label(__('users.fields.email'))
