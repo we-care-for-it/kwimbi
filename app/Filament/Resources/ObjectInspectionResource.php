@@ -7,6 +7,8 @@ use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 use App\Models\ObjectInspection;
 use App\Models\ObjectLocation;
 use App\Models\Project;
+
+use App\Models\Elevator;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -38,7 +40,7 @@ use Illuminate\Contracts\View\View;
 class ObjectInspectionResource extends Resource
 {
     protected static ? string $model = ObjectInspection::class;
-
+    protected static ?string $navigationLabel = "Keuringen";
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ? string $title = "Bekijk keuring";
 
@@ -78,9 +80,7 @@ class ObjectInspectionResource extends Resource
             ->label("Onderhoudspartij")
             ->placeholder("Niet opgegeven") ,
 
-        // Components\TextEntry::make('elevator.unit_no')
-        //     ->label("Unit Nummer") , 
-            
+  
     
             Components\TextEntry::make('inspectioncompany.name')
             ->label("Keuringsinstantie")
@@ -141,6 +141,7 @@ class ObjectInspectionResource extends Resource
 
             ->required() ,
 
+
         Select::make("status_id")
             ->label("Status")
             ->required()
@@ -158,6 +159,23 @@ class ObjectInspectionResource extends Resource
         Grid::make(4)
             ->schema([
 
+
+                
+                
+        Select::make("status_id")
+        ->label("Status")
+        ->required()
+
+        ->options(InspectionStatus::class) ,
+
+
+        Select::make("elevator_id")
+            ->label("NoBo Nummer")
+            ->required()
+            ->options(Elevator::all()->pluck('nobo_no', 'id'))
+            ->searchable(),
+
+             
         Select::make("inspection_company_id")
             ->label("Keuringsinstantie")
             ->required()

@@ -55,11 +55,9 @@ class ViewObjectInspection extends ViewRecord
                         ", " .
                         $record?->elevator?->location?->place,
                 ]
-                ),
+                )
 
-                Actions\EditAction::make('cancel_top')
-                ->icon('heroicon-o-pencil')
-                ->label('Wijzig')
+              
                
 
  
@@ -90,6 +88,11 @@ class ViewObjectInspection extends ViewRecord
                     ->required(),
             ])
         ->visible(fn($record) => $record?->document ?? true),
+
+        Actions\EditAction::make('cancel_top')
+        ->icon('heroicon-o-pencil')
+        ->label('Wijzig')
+        ,
 
  
       

@@ -82,7 +82,9 @@ class ItemdataRelationManager extends RelationManager
             ->recordTitleAttribute("name")
             ->columns([
                 Tables\Columns\TextColumn::make("zin_code")->label("Code"),
-                Tables\Columns\TextColumn::make("comment")->label("Opmerking"),
+                Tables\Columns\TextColumn::make("comment")
+                ->label("Opmerking")
+                ->wrap(),
                 Tables\Columns\TextColumn::make("type")->label("Type"),
                 Tables\Columns\TextColumn::make("status")
                     ->label("Status")
@@ -110,6 +112,6 @@ class ItemdataRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view('partials.empty-state-small')) ;
     }
 }
