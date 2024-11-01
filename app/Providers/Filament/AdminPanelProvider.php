@@ -63,8 +63,7 @@ class AdminPanelProvider extends PanelProvider
                 ),
             ])
 
-            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
-                
+          
             ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
