@@ -52,10 +52,10 @@ enum IncidentStatus: string implements HasLabel,HasColor
     public function getColor(): string | array | null
     {
         return match ($this) {
-            self::STATUS01 => 'Nieuw',
-            self::STATUS02 => 'Wacht op klant ',
-            self::STATUS03 => 'Wacht op leveranier',
-            self::STATUS04 => 'Gesloten',
+            self::STATUS01 => 'success',
+            self::STATUS02 => 'warning ',
+            self::STATUS03 => 'warning',
+            self::STATUS04 => 'danger',
         };
     }
 }
