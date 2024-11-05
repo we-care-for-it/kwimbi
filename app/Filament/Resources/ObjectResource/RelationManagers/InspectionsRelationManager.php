@@ -234,13 +234,14 @@ class InspectionsRelationManager extends RelationManager
                     Tables\Actions\DeleteAction::make(),
                 ]),
             ])
+
             ->recordUrl(function ($record) {
                 return "/admin/object-inspections/" . $record->id;
             })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     //      Tables\Actions\DeleteBulkAction::make(),
-                ])->label('Tovoegen'),
+                ])->label('Toevoegen'),
             ]);
     }
 }

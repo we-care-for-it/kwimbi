@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->longtext('description')->nullable();
             $table->string('contact_name')->nullable();
-            $table->string('contact_phonennumber')->nullable();
+            $table->string('contact_phonenumber')->nullable();
             $table->longtext('contact_remark')->nullable();
             $table->integer('standing_still')->nullable();
             $table->integer('priority_id')->nullable();
             $table->integer('status_id')->nullable();
 
             $table->integer('type_id')->nullable();
-            $table->date('report_date_time')->nullable();
+            $table->dateTime('report_date_time')->nullable();
         });
     }
 

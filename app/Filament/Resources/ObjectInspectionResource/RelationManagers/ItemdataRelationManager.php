@@ -68,7 +68,7 @@ class ItemdataRelationManager extends RelationManager
                 ]),
 
                 Grid::make(1)->schema([
-                    Forms\Components\TextArea::make("comment")->label(
+                    TextArea::make("comment")->label(
                         "Omschrijving"
                     ),
                 ]),

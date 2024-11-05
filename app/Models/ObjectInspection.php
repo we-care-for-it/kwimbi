@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use App\Enums\InspectionStatus;
 
+
+
 class ObjectInspection extends Model  
 {
     use SoftDeletes;
@@ -20,6 +22,7 @@ class ObjectInspection extends Model
     {
         return [
             'status_id' => InspectionStatus::class,
+             
         ];
     }
 
