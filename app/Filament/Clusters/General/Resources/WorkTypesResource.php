@@ -30,64 +30,39 @@ use Filament\Tables\Columns\ToggleColumn;
 class WorkTypesResource extends Resource
 {
     protected static ?string $model = workType::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-
     protected static ?string $navigationLabel = 'Werkomschrijvingen';
-    protected static ? string $navigationGroup = 'Algemeen';
+    protected static ?string $navigationGroup = 'Algemeen';
     protected static ?string $recordTitleAttribute = 'name';
- 
     protected static ?string $cluster = General::class;
 
     public static function form(Form $form): Form
     {
         return $form
- 
                  
         ->schema([
             Forms\Components\TextInput::make('name')
-            ->label('Naam')
+                ->label('Naam')
                 ->maxLength(255)
                 ->columnSpan('full')
                 ->required(),
 
-
-
-                    Forms\Components\TextArea::make('description')
-                    ->label('Omschrijving')
-                    ->columnSpan('full') ,
-
-                    
-                Forms\Components\TimePicker::make('default_minutes')
+            Forms\Components\TextArea::make('description')
+                ->label('Omschrijving')
+                ->columnSpan('full') ,
+                   
+            Forms\Components\TimePicker::make('default_minutes')
                 ->displayFormat('H:i')
                 ->hoursStep(1)
                 ->minutesStep(5)
                 ->label('Standaard tijd '),
        
-
-
-                Forms\Components\Toggle::make('is_active')
+            Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
                 ->inline(false)
-
                 ->default(true) , 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            ]);
-
-
-                
-            }
+            ]);        
+        }
         
 
 
@@ -96,28 +71,23 @@ class WorkTypesResource extends Resource
                 return $table
                     ->columns([
                         ToggleColumn::make('is_active')
-                        ->label('Zichbaar')
-                        ->onColor('success')
-            ->offColor('danger')
-         
-              
-                        ->width(100),
-        
+                            ->label('Zichbaar')
+                            ->onColor('success')
+                            ->offColor('danger')            
+                            ->width(100),
+            
                         TextColumn::make('name')
-                    ->label('Naam')
-                    ->searchable() ,
-        
-                    TextColumn::make('description')
-                    ->label('Omschrijving')
-                    ->searchable() ,
-        
-                    TextColumn::make('default_minutes')
-                    ->label('Standaardtijd')
-                    ->dateTime($format = 'H:i')
-                    
-           
-                    ->searchable() ,
-        
+                            ->label('Naam')
+                            ->searchable() ,
+                
+                        TextColumn::make('description')
+                            ->label('Omschrijving')
+                            ->searchable() ,
+            
+                        TextColumn::make('default_minutes')
+                            ->label('Standaardtijd')
+                            ->dateTime($format = 'H:i')               
+                            ->searchable()
         
                     ])
                     ->filters([

@@ -14,3 +14,8 @@ Upload type modile
 Status
 1 = succes;vol
 2 = error
+
+
+##Elevator statussen 
+AFDGEKEURD 
+BUITEN BEDRIJ

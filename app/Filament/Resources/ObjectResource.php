@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Elevator;
+use App\Models\Inspec;
+
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\Forms\Form;
@@ -12,11 +14,11 @@ use Filament\Resources\RelationManagers\RelationGroup;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
-//Form
-
-//Table
-
+use Filament\Forms\Components\Section;
+ 
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\ViewEntry;
 
 class ObjectResource extends Resource
 {
@@ -29,7 +31,7 @@ class ObjectResource extends Resource
     {
         return $form
             ->schema([
-                //
+               
             ]);
     }
 
@@ -108,6 +110,104 @@ class ObjectResource extends Resource
             ]);
     }
 
+
+    public static function infolist(Infolist $infolist) : Infolist
+    {
+
+        return $infolist->schema([
+        
+        Components\Section::make()->schema(
+            [
+                
+                Components\Split::make([Components\Grid::make(4)->schema([
+
+   
+        Components\TextEntry::make('nobo_no')
+            ->label("NOBO Nummer") , 
+ 
+            Components\TextEntry::make('type.name')
+            ->badge()
+            ->label("Type")
+            ->color('success')
+            ->placeholder("Niet opgegeven") ,
+       
+
+              
+        Components\TextEntry::make('unit_no')
+        ->label("Unit Nummer")      ->placeholder("Niet opgegeven") ,  
+
+
+
+        ViewEntry::make('energy_label')
+        ->view('filament.infolists.entries.energylabel')
+        ->label("Energielabel")
+      ->placeholder("Niet opgegeven") ,  
+
+            Components\TextEntry::make('install_date')
+            ->label("Installatie datum")->date('m-d-Y')
+            ->placeholder("Niet opgegeven") , 
+ 
+
+            
+        Components\TextEntry::make('status_id')
+        ->label("Status")
+        ->badge()
+        ->placeholder("Niet opgegeven") ,  
+
+         
+        Components\TextEntry::make('supplier.name')
+        ->label("Leverancier")      ->placeholder("Niet opgegeven") ,  
+
+        Components\TextEntry::make('customer.name')
+        ->label("Relatie")      ->placeholder("Niet opgegeven") ,  
+
+
+            
+        Components\TextEntry::make('stopping_places')
+        ->label("Stoppplaatsen")      ->placeholder("Niet opgegeven") ,  
+
+            Components\TextEntry::make('construction_year')
+            ->label("Bouwjaar")
+            ->placeholder("Niet opgegeven") , 
+ 
+
+
+            Components\TextEntry::make('inspectioncompany.name')
+            ->label("Onderhoudspartij")
+            ->placeholder("Niet opgegeven")  
+ 
+
+
+            , ]) ,
+
+        ])
+            ->from('lg') , ])  
+
+       
+  ,
+ 
+
+
+        Components\Section::make()->schema(
+            [
+                
+                Components\Split::make([
+                    
+       
+               
+                        Components\TextEntry::make('remark')
+                  
+                        ->label("Opmerking")  ->placeholder("Geen opmerking")
+                        ])
+                  
+                      
+                    ]) 
+                
+                ]);
+
+    }
+
+
     public static function getRelations(): array
     {
         return [
@@ -131,6 +231,7 @@ class ObjectResource extends Resource
             'index' => Pages\ListObjects::route('/'),
             'create' => Pages\CreateObject::route('/create'),
             'edit' => Pages\EditObject::route('/{record}/edit'),
+            'view' => Pages\ViewObject::route('/{record}'),
         ];
     }
 }

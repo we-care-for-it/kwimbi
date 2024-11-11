@@ -79,21 +79,35 @@ class IncidentsRelationManager extends RelationManager
             return $table->recordTitleAttribute('name')->columns([
 
             Tables\Columns\TextColumn::make("id")
-                ->label("#")->getStateUsing(function ($record): ? string
+                ->label("#")
+                ->getStateUsing(function ($record): ? string
                 {
                     return sprintf("%05d", $record ?->id);
                 }) ,
 
+                Tables\Columns\TextColumn::make("standing_still")
+                ->label('')
+                ->getStateUsing(function ($record): ? string
+                {
+                    if($record->standing_still=="1"){
+                    return "Stilstand";
+                    }else{
+                     return   NULL;
+                    }
+                }) 
+
+                ->color('danger')
+                ->badge()
+ ,
+
                 Tables\Columns\TextColumn::make("report_date_time")
                     ->label("Gemeld op ")
-                    ->searchable()
                     ->sortable()
                     ->date('d-m-Y H:i')
                     ->wrap() ,
 
                 Tables\Columns\TextColumn::make("description")
                     ->label("Omschrijving")
-                    ->searchable()
                     ->sortable()
                     ->wrap() ,
 
@@ -110,6 +124,8 @@ class IncidentsRelationManager extends RelationManager
                     ->filters([
                  
                 ])
+                ->paginated(false)
+                ->emptyState(view('partials.empty-state-small'))
                     ->headerActions([Tables\Actions\CreateAction::make()
                     ->label('Toevoegen') , ])->actions([Tables\Actions\Action::make('seeDetails')
                     ->label('Toon details')

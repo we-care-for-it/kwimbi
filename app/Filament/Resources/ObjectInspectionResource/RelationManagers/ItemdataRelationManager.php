@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\Enums\MaxWidth;
 
+use Filament\Notifications\Notification;
+
 //Form
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -50,14 +52,19 @@ class ItemdataRelationManager extends RelationManager
 
                                 if (count($data) != 0) {
                                     $set("comment", $data[0]->description);
+                                }else{
+                                    Notification::make()
+                                    ->title('Geen ZIN Code gevonden in de database')
+                                    ->danger()
+                                    ->send();
                                 }
                             })
                     ),
 
                     Select::make("type")->options([
-                        "Technisch" => "Technisch",
+                        "Technisch"     => "Technisch",
                         "Arbotechnisch" => "Arbotechnisch",
-                        "Bouwkundig" => "Bouwkundig",
+                        "Bouwkundig"    => "Bouwkundig",
                     ]),
                     
                     Select::make("status")->options([

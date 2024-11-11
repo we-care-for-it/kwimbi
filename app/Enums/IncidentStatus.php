@@ -8,8 +8,6 @@ use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasIcon;
 
 
- 
-
 enum IncidentStatus: string implements HasLabel,HasColor
 {
     case STATUS01 = "1";
@@ -19,41 +17,31 @@ enum IncidentStatus: string implements HasLabel,HasColor
 
     
     public function label(): string
-{
-    return match($this)
     {
-        self::STATUS01 => 'Nieuw',
-        self::STATUS02 => 'Wacht op klant ',
-        self::STATUS03 => 'Wacht op leveranier',
-        self::STATUS04 => 'Gesloten',
-   };
-}
-
-
+        return match($this)
+        {
+            self::STATUS01 => 'Nieuw',
+            self::STATUS02 => 'Wacht op klant',
+            self::STATUS03 => 'Wacht op leveranier',
+            self::STATUS04 => 'Gesloten',
+        };
+    }
 
     public function getlabel(): string
     {
         return match ($this) {
             self::STATUS01 => 'Nieuw',
-            self::STATUS02 => 'Wacht op klant ',
+            self::STATUS02 => 'Wacht op klant',
             self::STATUS03 => 'Wacht op leveranier',
             self::STATUS04 => 'Gesloten'
         };
     }
 
-    // public function getIcon(): ?string
-    // {
-    //     return match ($this) {
-    //         self::EXTERN => 'heroicon-o-cpu-chip',
-    //         self::INTERN => 'heroicon-m-check'
-    //     };
-    // }
-
     public function getColor(): string | array | null
     {
         return match ($this) {
             self::STATUS01 => 'success',
-            self::STATUS02 => 'warning ',
+            self::STATUS02 => 'warning',
             self::STATUS03 => 'warning',
             self::STATUS04 => 'danger',
         };

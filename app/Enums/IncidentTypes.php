@@ -15,9 +15,8 @@ enum IncidentTypes: string implements HasLabel,HasColor
     case TYPE01 = "1";
     case TYPE02 = "2";
     case TYPE03 = "3";
-    case TYPE04 =  "4";
-    // case NOT_COMPLETED = "5";
-    // case APPROVED_REPEAT = "6";
+    case TYPE04 = "4";
+
 
  
 

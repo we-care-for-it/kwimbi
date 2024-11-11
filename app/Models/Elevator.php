@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-
+use App\Enums\ElevatorStatus;
 /**
  * Class ManagementCompany
  *
@@ -30,6 +30,17 @@ class Elevator extends Model implements Auditable
 
 {
     use SoftDeletes;
+
+    
+    protected function casts(): array
+    {
+        return [
+            'status_id' => ElevatorStatus::class,
+             
+        ];
+    }
+
+
 
     static $rules = [];
 
@@ -85,7 +96,7 @@ class Elevator extends Model implements Auditable
 
     public function inspectioncompany()
     {
-        return $this->hasOne(inspectionCompany::class, 'id', 'inspection_company_id');
+        return $this->hasOne(ObjectInspectionCompany::class, 'id', 'inspection_company_id');
     }
 
     public function getAllElevatorOnThisAddressAttribute()
