@@ -58,14 +58,17 @@ class Elevator extends Model implements Auditable
     // Attributes that are searchable
     protected $fillable = [
 
-        'status_id', 'customer_id', 'inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'];
+        'status_id', 'customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'];
 
     public function location()
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
  
-
+    public function management()
+    {
+        return $this->hasOne(ObjectmanagementCompanies::class, 'id', 'management_id');
+    }
 
     public function customer()
     {
@@ -82,12 +85,10 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
     }
 
-
     public function company()
     {
         return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
     }
-
 
     public function maintenance_company()
     {
@@ -106,41 +107,35 @@ class Elevator extends Model implements Auditable
 
     }
 
-
-
-    //Liftdata
     public function latestinspections()
     {
         return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
     }
 
-
-
-
-    //Liftdata
     public function inspections()
     {
         return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id');
     }
-
 
     public function inspection()
     {
         return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
     }
 
-
+    public function features()
+    {
+        return $this->hasMany(ObjectFeatures::class, 'object_id', 'id');
+    }
+    
     public function management_company()
     {
         return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
     }
 
-
     public function attachments()
     {
         return $this->hasMany(Upload::class);
     }
-
 
     public function incidents()
     {
@@ -156,7 +151,6 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasMany(ObjectMaintenanceContract::class);
     }
-
 
     public function maintenance_visits()
     {

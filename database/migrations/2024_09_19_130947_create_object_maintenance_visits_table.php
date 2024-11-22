@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->integer('maintenance_company_id')->nullable();
             $table->integer('elevator_id')->nullable();
             $table->longText('remark')->nullable();
-	    $table->longText('document')->nullable();
+	        $table->longText('document')->nullable();
 
 
         });

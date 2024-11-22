@@ -74,4 +74,20 @@ class User extends Authenticatable implements  FilamentUser, HasTenants
     {
         return $this->companies()->whereKey($tenant)->exists();
     }
+
+
+    public function customer()
+    {
+        return $this->BelongsTo(Customer::class);
+    }
+
+    
+    public function managementCompany()
+    {
+        return $this->BelongsTo(ObjectManagementCompany::class,'management_id','id');
+    }
+
+
+
+
 }

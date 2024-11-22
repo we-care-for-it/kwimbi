@@ -55,7 +55,6 @@ class HourTypesResource extends Resource
                 Forms\Components\Toggle::make('is_active')
                 ->label('Zichtbaar  ')
                 ->inline(false)
-
                 ->default(true) ,
 
 

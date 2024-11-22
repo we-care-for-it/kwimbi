@@ -42,7 +42,10 @@ class QuoteResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form->schema([Section::make()
+        return $form->schema(
+            
+            [
+                Section::make()
             ->schema([
 
                 Select::make("type_id")

@@ -14,7 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 
-
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\ObjectMaintenanceVisits;
 use App\Models\ObjectMaintenanceCompany;
@@ -31,7 +31,11 @@ class MaintenanceVisitsRelationManager extends RelationManager
     protected static ?string $title = 'Onderhoudsbeurten';
     protected static bool $isLazy = false;
 
- 
+    public static function getBadge($ownerRecord, string $pageClass) : ? string
+    {
+        return $ownerRecord->maintenance_visits->count();
+    }
+
 
     public function form(Form $form): Form
     {
@@ -49,22 +53,19 @@ class MaintenanceVisitsRelationManager extends RelationManager
                         ->required()
                         ->options(ObjectMaintenanceCompany::pluck("name", "id")) ,
             
-            
                         DatePicker::make("execution_date")
-                        ->label("Uitvoerdatum")
-                        ->required(),
+                        ->label("Uitvoerdatum"),
             
                         DatePicker::make("planning_date")
                             ->label("Plandatum")
                             ->required()      
                 ]),
                        
-            
-            
-                        FileUpload::make('contract')
+           
+                        FileUpload::make('document')
                             ->columnSpan(3)
                             ->preserveFilenames()
-                            ->label('Docuement')
+                            ->label('Werkbon / Document / Rapport')
                             ->visibility('private')->directory(function ()
                             {
                                 $parent_id = $this
@@ -91,19 +92,20 @@ class MaintenanceVisitsRelationManager extends RelationManager
                     ->label("Onderhoudsbedrijf")
                     ->sortable()
                     ->placeholder('-') ,
-                
-
-                Tables\Columns\TextColumn::make("execution_date")
-                ->label("Einddatum")
-                ->dateTime("d-m-Y")
-                ->sortable()
-                ->placeholder('-') ,
+        
 
                 Tables\Columns\TextColumn::make("planning_date")
-                ->label("Einddatum")
+                ->label("Plandatum")
                 ->dateTime("d-m-Y")
                 ->sortable()
                 ->placeholder('-') ,
+
+                Tables\Columns\TextColumn::make("execution_date")
+                ->label("Uitvoerdatum")
+                ->dateTime("d-m-Y")
+                ->sortable()
+                ->placeholder('-') ,
+
 
                 Tables\Columns\TextColumn::make("remark")
                 ->label("Opmerking")
@@ -112,12 +114,18 @@ class MaintenanceVisitsRelationManager extends RelationManager
                 ->wrap() ,
 
                 Tables\Columns\TextColumn::make("status_id")
-                ->label("Satus"),
+                ->label("Status")
+                ->getStateUsing(function ($record): ?string {
 
-            
+                    if(empty($record->execution_date)) {
+                        return 'Gepland';
+                    }else{
+                        return "Uitgevoerd";
+                    }
 
+                })->badge()->color('primary'),
 
-
+        
 
             ])
             ->paginated(false)
@@ -126,17 +134,10 @@ class MaintenanceVisitsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Toevoegen'),
+                Tables\Actions\CreateAction::make()->label('Toevoegen')
+                ->modalHeading('Onderhoudsbeurt toevoegen'),
 
-                Tables\Actions\Action::make('Download')
-                    ->label('Download dpcument')
-                    ->action(fn($record) => Storage::disk('private')
-                    ->download($record->document))
-                    ->icon('heroicon-o-document-arrow-down')
-                    ->visible(function ($record): ? string
-                    {
-                        return $record ?->document;
-                    }),
+            
                     // ActionGroup::make(
                     //     [
                     //         Tables\Actions\EditAction::make()
@@ -146,8 +147,21 @@ class MaintenanceVisitsRelationManager extends RelationManager
                   
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make(
+                    [
+                Tables\Actions\EditAction::make()   ->modalHeading('Onderhoudsbeurt wijzigen'),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('Download')
+                ->label('Download')
+                ->action(fn($record) => Storage::disk('private')
+                ->download($record->document))
+                ->icon('heroicon-o-document-arrow-down')
+                ->visible(function ($record): ? string
+                {
+                    return $record ?->document;
+                })
+                
+            ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

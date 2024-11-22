@@ -119,65 +119,55 @@ class ObjectResource extends Resource
         Components\Section::make()->schema(
             [
                 
-                Components\Split::make([Components\Grid::make(4)->schema([
-
+        Components\Split::make([Components\Grid::make(4)->schema([
    
-        Components\TextEntry::make('nobo_no')
-            ->label("NOBO Nummer") , 
+                Components\TextEntry::make('nobo_no')
+                    ->label("NOBO Nummer") , 
+        
+                Components\TextEntry::make('type.name')
+                    ->badge()
+                    ->label("Type")
+                    ->color('success')
+                    ->placeholder("Niet opgegeven") ,
+
+                Components\TextEntry::make('unit_no')
+                    ->label("Unit Nummer")
+                    ->placeholder("Niet opgegeven") ,  
+
+                ViewEntry::make('energy_label')
+                    ->view('filament.infolists.entries.energylabel')
+                    ->label("Energielabel")
+                    ->placeholder("Niet opgegeven") ,  
+
+                Components\TextEntry::make('install_date')
+                    ->label("Installatie datum")->date('m-d-Y')
+                    ->placeholder("Niet opgegeven") , 
+                    
+                Components\TextEntry::make('status_id')
+                    ->label("Status")
+                    ->badge()
+                    ->placeholder("Niet opgegeven") ,  
+                    
+                Components\TextEntry::make('supplier.name')
+                    ->label("Leverancier")
+                    ->placeholder("Niet opgegeven") ,  
+
+                Components\TextEntry::make('customer.name')
+                    ->label("Relatie")
+                    ->placeholder("Niet opgegeven") ,  
+                        
+                Components\TextEntry::make('stopping_places')
+                    ->label("Stoppplaatsen")
+                    ->placeholder("Niet opgegeven") ,  
+
+                Components\TextEntry::make('construction_year')
+                    ->label("Bouwjaar")
+                    ->placeholder("Niet opgegeven") , 
+                
+                Components\TextEntry::make('inspectioncompany.name')
+                    ->label("Onderhoudspartij")
+                    ->placeholder("Niet opgegeven")  
  
-            Components\TextEntry::make('type.name')
-            ->badge()
-            ->label("Type")
-            ->color('success')
-            ->placeholder("Niet opgegeven") ,
-       
-
-              
-        Components\TextEntry::make('unit_no')
-        ->label("Unit Nummer")      ->placeholder("Niet opgegeven") ,  
-
-
-
-        ViewEntry::make('energy_label')
-        ->view('filament.infolists.entries.energylabel')
-        ->label("Energielabel")
-      ->placeholder("Niet opgegeven") ,  
-
-            Components\TextEntry::make('install_date')
-            ->label("Installatie datum")->date('m-d-Y')
-            ->placeholder("Niet opgegeven") , 
- 
-
-            
-        Components\TextEntry::make('status_id')
-        ->label("Status")
-        ->badge()
-        ->placeholder("Niet opgegeven") ,  
-
-         
-        Components\TextEntry::make('supplier.name')
-        ->label("Leverancier")      ->placeholder("Niet opgegeven") ,  
-
-        Components\TextEntry::make('customer.name')
-        ->label("Relatie")      ->placeholder("Niet opgegeven") ,  
-
-
-            
-        Components\TextEntry::make('stopping_places')
-        ->label("Stoppplaatsen")      ->placeholder("Niet opgegeven") ,  
-
-            Components\TextEntry::make('construction_year')
-            ->label("Bouwjaar")
-            ->placeholder("Niet opgegeven") , 
- 
-
-
-            Components\TextEntry::make('inspectioncompany.name')
-            ->label("Onderhoudspartij")
-            ->placeholder("Niet opgegeven")  
- 
-
-
             , ]) ,
 
         ])
@@ -211,17 +201,12 @@ class ObjectResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\FeatureRelationManager::class,
             RelationManagers\IncidentsRelationManager::class,
-
-
-         //   RelationGroup::make('Onderhoud', [
-                RelationManagers\MaintenanceContractsRelationManager::class,
-                RelationManagers\MaintenanceVisitsRelationManager::class,
-          //  ]),
-        RelationManagers\inspectionsRelationManager::class,
-
-          RelationManagers\AttachmentRelationManager::class,
-
+            RelationManagers\MaintenanceContractsRelationManager::class,
+            RelationManagers\MaintenanceVisitsRelationManager::class,
+            RelationManagers\inspectionsRelationManager::class,
+       //     RelationManagers\AttachmentRelationManager::class,
         ];
     }
 

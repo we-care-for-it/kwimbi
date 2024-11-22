@@ -307,7 +307,9 @@ class ObjectInspectionResource extends Resource
 
     public static function getPages() : array
     {
-        return ['index' => Pages\ListObjectInspections::route('/') , 'create' => Pages\CreateObjectInspection::route('/create') , 'edit' => Pages\EditObjectInspection::route('/{record}/edit') , 'view' => Pages\ViewObjectInspection::route('/{record}') , ];
+        return ['index' => Pages\ListObjectInspections::route('/') , 'create' => Pages\CreateObjectInspection::route('/create') , 'edit' => Pages\EditObjectInspection::route('/{record}/edit') , 
+        
+        'view' => Pages\ViewObjectInspection::route('/{record}') , ];
     }
 }
 

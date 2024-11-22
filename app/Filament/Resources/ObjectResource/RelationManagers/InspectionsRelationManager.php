@@ -49,23 +49,20 @@ class InspectionsRelationManager extends RelationManager
             Select::make("status_id")
                 ->label("Status")
                 ->required()
-
                 ->options(InspectionStatus::class),
 
             Select::make("type")
                 ->label("Type keuring")
                 ->required()
-
                 ->options([
                     "Periodieke keuring" => "Periodieke keuring",
                     "Modernisering keuring" => "Modernisering keuring",
-                    "Oplever keuring" => "Oplever keuring",
+                    "Opleveringskeuring" => "Oplever keuring",
                 ]),
 
             Select::make("inspection_company_id")
                 ->label("Keuringsinstantie")
                 ->required()
-
                 ->options(ObjectInspectionCompany::pluck("name", "id")),
 
             Grid::make(2)->schema([

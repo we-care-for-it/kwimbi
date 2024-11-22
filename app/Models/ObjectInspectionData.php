@@ -20,7 +20,7 @@ class ObjectInspectionData extends Model implements Auditable
 
     public function elevator()
     {
-        return $this->belongsTo(Elevator::class);
+        return $this->belongsTo(Feature::class);
     }
 
 
