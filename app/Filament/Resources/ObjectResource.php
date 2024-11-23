@@ -70,7 +70,7 @@ class ObjectResource extends Resource
 
 
                     }
-                    ),
+                ),
 
                 Tables\Columns\TextColumn::make('location.address')
                     ->label('Adres')->searchable()->sortable()->hidden(true),

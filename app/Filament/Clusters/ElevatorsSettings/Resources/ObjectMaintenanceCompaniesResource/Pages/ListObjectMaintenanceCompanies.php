@@ -15,10 +15,13 @@ class ListObjectMaintenanceCompanies extends ListRecords
     {
         return [
             Action::make('back')
-            ->url(route('filament.admin.resources.elevators.index'))
-            ->label('Terug naar objecten') 
+            ->url(route('filament.admin.resources.objects.index'))
+            ->label('Terug naar objecten')
             ->link()
             ->color('gray'),
+            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
+                ->color("primary"),
+ 
             Actions\CreateAction::make()->label('Toevoegen'),
         ];
     }

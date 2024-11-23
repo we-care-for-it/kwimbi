@@ -25,7 +25,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Grouping\Group;
 use Illuminate\Support\Facades\Hash;
-
+use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
 {
@@ -166,6 +166,7 @@ class UserResource extends Resource
         
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Impersonate::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -17,7 +17,7 @@ class ManageElevatorsTypes extends ManageRecords
         return [
 
             Action::make('back')
-            //->url(route('filament.admin.resources.index'))
+            ->url(route('filament.admin.resources.objects.index'))
             ->label('Terug naar objecten')
             ->link()
             ->color('gray'),

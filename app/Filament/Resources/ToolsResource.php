@@ -10,7 +10,7 @@ use App\Models\ToolsCategory;
 use App\Models\User;
 use App\Models\ToolsInspectionCompany;
 use App\Models\ToolsInspectionMethod;
-
+use Filament\Support\Enums\MaxWidth;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

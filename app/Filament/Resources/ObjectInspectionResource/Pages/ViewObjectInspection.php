@@ -22,25 +22,15 @@ class ViewObjectInspection extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-           
- 
-            
-            
-           
-
             Actions\Action::make('cancel_top')
-            ->label('Terug naar object')
+             ->iconButton()
             ->color('gray')
+            ->label('Naar object')
             ->link()
             ->icon('heroicon-o-arrow-uturn-left')
-                        
             ->url(function ($record) {
-                return "/admin/objects/".$record->elevator_id."/edit?activeRelationManager=3";
-                   
+                return "/admin/objects/".$record->elevator_id."/edit?activeRelationManager=3";      
             }),
-
- 
-                     
 
             Actions\Action::make("Downloaddocument")->color("warning")  
             ->label("Download rapport")
@@ -55,16 +45,7 @@ class ViewObjectInspection extends ViewRecord
                         ", " .
                         $record?->elevator?->location?->place,
                 ]
-                )
-
-              
-               
-
- 
-          
-      
-
-
+            )
 
             ->action(function ($data, $record) {
                 $contents = base64_decode($record->document);
@@ -88,24 +69,15 @@ class ViewObjectInspection extends ViewRecord
                     ->required(),
             ])
         ->visible(fn($record) => $record?->document ?? true),
-
         Actions\EditAction::make('cancel_top')
         ->icon('heroicon-o-pencil')
         ->label('Wijzig')
-        ,
-
- 
-      
-    
- 
-
         ];
     }
 
 
     public function getSubheading(): ?string
-    {
-       
+    {  
         if ($this->getRecord()->if_match) {
             return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
         } else {

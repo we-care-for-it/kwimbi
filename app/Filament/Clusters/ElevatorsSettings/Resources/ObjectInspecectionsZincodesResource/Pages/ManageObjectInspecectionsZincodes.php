@@ -15,10 +15,11 @@ class ManageObjectInspecectionsZincodes extends ManageRecords
     {
         return [
             Action::make('back')
-            ->url(route('filament.admin.resources.elevators.index'))
-            ->label('Terug naar objecten') 
+            ->url(route('filament.admin.resources.objects.index'))
+            ->label('Terug naar objecten')
             ->link()
             ->color('gray'),
+      
  
             \EightyNine\ExcelImport\ExcelImportAction::make()
                 ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),

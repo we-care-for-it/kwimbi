@@ -26,11 +26,11 @@ use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
  
+
 use Awcodes\LightSwitch\LightSwitchPlugin;
  
  
-
-
+//use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
 
 use Filament\Widgets\StatsOverview;
 
@@ -49,6 +49,9 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])  
+          //  ->plugin(FilamentTenancyAppPlugin::make())
+           // ->plugin(FilamentTenancyAppPlugin::make())
+
            // ->tenantDomain('{tenant:slug}.localhost')
          ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))

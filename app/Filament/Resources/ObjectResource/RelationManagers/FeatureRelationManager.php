@@ -55,7 +55,9 @@ class FeatureRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('remark')
                     ->label('Omschrijving')
                     ->grow()
-            ])
+            ]) ->paginated(false)
+            ->emptyState(view('partials.empty-state-small'))
+          
             ->filters([
                 //
             ])

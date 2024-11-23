@@ -18,7 +18,7 @@ class EditObjectInspection extends EditRecord
  
 
             Actions\Action::make('cancel_top')
-            ->label('Pagina terug')
+            ->iconButton()
             ->color('gray')
             ->link()
             ->icon('heroicon-o-arrow-uturn-left')

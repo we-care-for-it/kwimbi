@@ -15,7 +15,7 @@ class ListObjectManagementCompanies extends ListRecords
     {
         return [
             Action::make('back')
-            ->url(route('filament.admin.resources.elevators.index'))
+            ->url(route('filament.admin.resources.objects.index'))
             ->label('Terug naar objecten') 
             ->link()
             ->color('gray'),
