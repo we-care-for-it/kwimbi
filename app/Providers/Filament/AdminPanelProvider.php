@@ -57,12 +57,13 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn() => view('components.logo'))
            // ->globalSearch(false)
             ->sidebarCollapsibleOnDesktop()
+            ->darkMode(false)
             //   ->topNavigation()
             ->plugins([
                 FilamentBackgroundsPlugin::make()->imageProvider(
                     MyImages::make()
                         ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
-                        LightSwitchPlugin::make(),
+                     //   LightSwitchPlugin::make(),
                 ),
             ])
 
