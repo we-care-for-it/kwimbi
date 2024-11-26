@@ -25,7 +25,8 @@ use Filament\FontProviders\SpatieGoogleFontProvider;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
- 
+
+use Filament\FontProviders\GoogleFontProvider;
 
 use Awcodes\LightSwitch\LightSwitchPlugin;
  
@@ -40,35 +41,22 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-           // ->font('Inter', provider: SpatieGoogleFontProvider::class)
             ->id('admin')
             ->path('admin')
-          //  ->tenant(Company::class)
             ->login()
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,
             ])  
-          //  ->plugin(FilamentTenancyAppPlugin::make())
-           // ->plugin(FilamentTenancyAppPlugin::make())
-
-           // ->tenantDomain('{tenant:slug}.localhost')
-         ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))
-           // ->globalSearch(false)
-            ->sidebarCollapsibleOnDesktop()
             ->darkMode(false)
-            //   ->topNavigation()
             ->plugins([
                 FilamentBackgroundsPlugin::make()->imageProvider(
                     MyImages::make()
                         ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
-                     //   LightSwitchPlugin::make(),
                 ),
-            ])
-
-         //   ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
-                
+            ])         
             ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -77,9 +65,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->pages([])
             ->widgets([
-
-
-
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -93,14 +78,9 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 SetTheme::class
              ])
-            //->tenantMiddleware([
-
-            //     SetTheme::class
-            // ])
             ->authMiddleware([
                 Authenticate::class,
             ])
-            //   ->tenant(Company::class)
             ->plugins([
                 FilamentShieldPlugin::make(),
             ])

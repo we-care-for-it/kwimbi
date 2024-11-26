@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\FontProviders\GoogleFontProvider;
  
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyPlugin
@@ -31,7 +32,7 @@ class ManagementPanelProvider extends PanelProvider
             ->path('management')
             ->colors([
                 'primary' => Color::Amber,
-            ])
+            ]) ->font('Inter', provider: GoogleFontProvider::class)
 
             // ->plugin(FilamentTenancyPlugin::make() 
 
