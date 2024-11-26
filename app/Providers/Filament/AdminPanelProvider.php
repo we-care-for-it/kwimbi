@@ -56,7 +56,8 @@ class AdminPanelProvider extends PanelProvider
                     MyImages::make()
                         ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
                 ),
-            ])         
+            ])       
+            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())  
             ->plugins([FilamentFullCalendarPlugin::make()])
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
