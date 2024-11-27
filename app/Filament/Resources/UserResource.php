@@ -12,6 +12,14 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\CheckboxList;
+ 
+
+
+
+
+
+
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -64,14 +72,8 @@ class UserResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->required(),
 
-                            Select::make("customer_id")
-                            ->label("Relatie")
-                            ->options(Customer::all()->pluck('name', 'id'))
-                            ->searchable(),
-
-                            Select::make("management_id")
-                            ->label("Beheerder")
-                            ->options(ObjectManagementCompany::all()->pluck('name', 'id'))
+                            CheckboxList::make('roles')
+                            ->relationship('roles', 'name')
                             ->searchable(),
 
                             Toggle::make('is_active')
