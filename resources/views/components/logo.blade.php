@@ -1,1 +1,1 @@
-<img src = "/tenant/logo.png">
+<img src="{{ asset('storage/'.(\TomatoPHP\FilamentSettingsHub\Models\Setting::where('name', 'site_logo'))->first('payload')->payload) }}">

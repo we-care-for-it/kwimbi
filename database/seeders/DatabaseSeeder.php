@@ -16,15 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         $superAdmin = User::create([
             'name' => 'Super Admin',
-            'email' => 'SuperAdmin@liftbeheer.nl',
-            'password' => bcrypt('password'),
+            'email' => 'superAdmin@digilevel.nl',
+            'password' => bcrypt('M9kKhE2tl7'),
         ]);
 
-        $company = Company::create([
-            'name' => 'Liftbeheer',
-        ]);
+        // $company = Company::create([
+        //     'name' => 'Liftbeheer',
+        // ]);
 
-        $superAdmin->companies()->attach($company);
+       // $superAdmin->companies()->attach($company);
 
 //        $this->call(ShieldSeeder::class);
 //        $this->command->call('shield:generate', ['--all' => true]);

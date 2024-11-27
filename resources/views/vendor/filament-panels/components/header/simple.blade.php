@@ -5,8 +5,5 @@
 ])
 
 <header class="fi-simple-header flex flex-col items-center">
- 
-
-<img style = "max-height: 120px" src = "/tenant/logo.png"> 
-
+<img src="{{ asset('storage/'.(\TomatoPHP\FilamentSettingsHub\Models\Setting::where('name', 'site_logo'))->first('payload')->payload) }}">
 </header>
