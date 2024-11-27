@@ -1,1 +1,2 @@
-<img src="{{ asset('storage/'.(\TomatoPHP\FilamentSettingsHub\Models\Setting::where('name', 'site_logo'))->first('payload')->payload) }}">
+<img src="/images/digilift.nl.png">
+
