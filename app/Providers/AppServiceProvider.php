@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Role;
 use App\Models\User;
-use BezhanSalleh\PanelSwitch\PanelSwitch;
+
 use Filament\Facades\Filament;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
