@@ -78,7 +78,7 @@ class AppPanelProvider extends PanelProvider
                         force: false,
                     ),
             ])
-            ->viteTheme('resources/css/filament/app/theme.css')
+           // ->viteTheme('resources/css/filament/app/theme.css')
             ->maxContentWidth(MaxWidth::Full)
             ->middleware([
                 EncryptCookies::class,
