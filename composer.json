@@ -25,6 +25,7 @@
         "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
         "saade/filament-fullcalendar": "^3.2",
+        "sentry/sentry-laravel": "^4.10",
         "stechstudio/filament-impersonate": "^3.14",
         "ysfkaya/filament-phone-input": "^2.3"
     },
