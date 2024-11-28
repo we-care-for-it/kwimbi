@@ -2,7 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+ 
+use Awcodes\Curator\CuratorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -11,29 +12,17 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Widgets;
-use Hasnayeen\Themes\Http\Middleware\SetTheme;
-use Hasnayeen\Themes\ThemesPlugin;
+use Filament\Support\Facades\FilamentView;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\FontProviders\SpatieGoogleFontProvider;
-use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
-use Swis\Filament\Backgrounds\ImageProviders\MyImages;
-use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
-
-use Filament\FontProviders\GoogleFontProvider;
-
-use Awcodes\LightSwitch\LightSwitchPlugin;
- 
- 
-//use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
-
-use Filament\Widgets\StatsOverview;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -42,35 +31,41 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->domain(env('ADMIN_SUBDOMAIN'))
             ->login()
-            ->unsavedChangesAlerts()
             ->colors([
-                'primary' => Color::Amber,
-            ])  
-            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-         //   ->brandLogo(fn() => view('components.logo'))
-            ->darkMode(false)
+                'primary' => Color::Cyan,
+            ])
             ->plugins([
-                FilamentBackgroundsPlugin::make()->imageProvider(
-                    MyImages::make()
-                        ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
-                ),
-            ])       
-            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
-            )  
-            ->plugins([FilamentFullCalendarPlugin::make()])->plugin(
-                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-                    ->allowShield()
-            )
-            ->maxContentWidth(MaxWidth::Full)
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->pages([])
-            ->widgets([
+            ->pages([
+                Pages\Dashboard::class,
             ])
+            ->sidebarCollapsibleOnDesktop()
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->plugins([
+                BreezyCore::make()
+                    ->avatarUploadComponent(fn ($fileUpload) => $fileUpload->disableLabel())
+                    ->myProfile(
+                        shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
+                        shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
+                        hasAvatars: true, // Enables the avatar upload form component (default = false)
+                        slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
+                    )
+                    ->passwordUpdateRules(
+                        rules: [Password::default()->mixedCase()->uncompromised(3)], // you may pass an array of validation rules as well. (default = ['min:8'])
+                        requiresCurrentPassword: true, // when false, the user can update their password without entering their current password. (default = true)
+                    )
+                    ->enableTwoFactorAuthentication(
+                        force: false, // force the user to enable 2FA before they can use the application (default = false)
+                    ),
+            ])
+            ->maxContentWidth(MaxWidth::Full)
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -81,16 +76,17 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SetTheme::class
-             ])
+            ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('1s')
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->plugins([
-                FilamentShieldPlugin::make(),
-            ])
-            ->plugin(
-                ThemesPlugin::make()
-            );
+            ]);
+    }
+
+    public function register(): void
+    {
+        parent::register();
+        FilamentView::registerRenderHook('panels::body.end', fn (): string => Blade::render("@vite('resources/js/app.js')"));
     }
 }

@@ -1,15 +1,25 @@
 <?php
 
+use App\Http\Controllers\InvoicePDFController;
+use App\Http\Controllers\QuotePDFController;
 use Illuminate\Support\Facades\Route;
-use App\Filament\Pages\ProjectCalender;
 
+Route::view('/', 'welcome');
 
-Route::get('/', function () {
-    return redirect()->to('/admin');
-});
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
+Route::middleware('signed')
+    ->get('quotes/{quote}/pdf', QuotePDFController::class)
+    ->name('quote.view');
 
+Route::middleware('signed')
+    ->get('invoices/{invoice}/pdf', InvoicePDFController::class)
+    ->name('invoice.view');
 
-Route::get('/project-calender', ProjectCalender::class)->name('project-calender');
-
+require __DIR__.'/auth.php';

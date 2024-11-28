@@ -24,7 +24,7 @@ return [
     | may even configure multiple disks for the same driver. Examples for
     | most supported storage drivers are configured here for reference.
     |
-    | Supported drivers: "local", "ftp", "sftp", "s3"
+    | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
 
@@ -44,12 +44,28 @@ return [
             'throw' => false,
         ],
 
-        'private' => [
+        'documents' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/documents'),
             'url' => env('APP_URL').'/storage',
-            'visibility' => 'private',
-            'throw' => true,
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'quotes' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/quotes'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'invoices' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/invoices'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
         ],
 
         's3' => [
