@@ -10,7 +10,10 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
-
+use Filament\Support\Colors\Color;
+use Filament\Support\Facades\FilamentColor;
+use Filament\Navigation\UserMenuItem;
+ 
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,15 +24,23 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+   
+
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
-        // PanelSwitch::configureUsing(function (PanelSwitch $panelSwitch) {
+        FilamentAsset::register([
+            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/admin.css'),
+            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
+        ]);
 
-        //     $panelSwitch->simple()
-        //         ->visible(fn (): bool => auth()->user()->hasRole(Role::ADMIN));
-        // });
+        UserMenuItem::make()
+        ->label('Logboek')
+        
+        ->icon('heroicon-m-clipboard-document-list');
+
+
     }
 }

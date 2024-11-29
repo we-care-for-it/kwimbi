@@ -28,7 +28,8 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
-
+ 
+ 
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -46,6 +47,9 @@ class AppPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
+            ->plugin(
+                \Hasnayeen\Themes\ThemesPlugin::make()
+            )
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->tenant(Company::class, )
             //->tenantRegistration(RegisterCompany::class)
@@ -90,6 +94,10 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                
+            ]) ->tenantMiddleware([
+               
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ])
             ->databaseNotifications()
             ->databaseNotificationsPolling('1s')

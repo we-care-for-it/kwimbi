@@ -221,6 +221,10 @@ class ComposerStaticInitb7546531532198d671834e189b2ba9a7
             'Illuminate\\Support\\' => 19,
             'Illuminate\\' => 11,
         ),
+        'H' => 
+        array (
+            'Hasnayeen\\Themes\\' => 17,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\UriTemplate\\' => 23,
@@ -737,6 +741,10 @@ class ComposerStaticInitb7546531532198d671834e189b2ba9a7
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
+        ),
+        'Hasnayeen\\Themes\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hasnayeen/themes/src',
         ),
         'GuzzleHttp\\UriTemplate\\' => 
         array (
@@ -3908,6 +3916,22 @@ class ComposerStaticInitb7546531532198d671834e189b2ba9a7
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'Hasnayeen\\Themes\\Commands\\ThemesMakeCommand' => __DIR__ . '/..' . '/hasnayeen/themes/src/Commands/ThemesMakeCommand.php',
+        'Hasnayeen\\Themes\\Commands\\UpgradeCommand' => __DIR__ . '/..' . '/hasnayeen/themes/src/Commands/UpgradeCommand.php',
+        'Hasnayeen\\Themes\\Contracts\\CanModifyPanelConfig' => __DIR__ . '/..' . '/hasnayeen/themes/src/Contracts/CanModifyPanelConfig.php',
+        'Hasnayeen\\Themes\\Contracts\\HasChangeableColor' => __DIR__ . '/..' . '/hasnayeen/themes/src/Contracts/HasChangeableColor.php',
+        'Hasnayeen\\Themes\\Contracts\\HasOnlyDarkMode' => __DIR__ . '/..' . '/hasnayeen/themes/src/Contracts/HasOnlyDarkMode.php',
+        'Hasnayeen\\Themes\\Contracts\\HasOnlyLightMode' => __DIR__ . '/..' . '/hasnayeen/themes/src/Contracts/HasOnlyLightMode.php',
+        'Hasnayeen\\Themes\\Contracts\\Theme' => __DIR__ . '/..' . '/hasnayeen/themes/src/Contracts/Theme.php',
+        'Hasnayeen\\Themes\\Filament\\Pages\\Themes' => __DIR__ . '/..' . '/hasnayeen/themes/src/Filament/Pages/Themes.php',
+        'Hasnayeen\\Themes\\Http\\Middleware\\SetTheme' => __DIR__ . '/..' . '/hasnayeen/themes/src/Http/Middleware/SetTheme.php',
+        'Hasnayeen\\Themes\\Themes' => __DIR__ . '/..' . '/hasnayeen/themes/src/Themes.php',
+        'Hasnayeen\\Themes\\ThemesPlugin' => __DIR__ . '/..' . '/hasnayeen/themes/src/ThemesPlugin.php',
+        'Hasnayeen\\Themes\\ThemesServiceProvider' => __DIR__ . '/..' . '/hasnayeen/themes/src/ThemesServiceProvider.php',
+        'Hasnayeen\\Themes\\Themes\\DefaultTheme' => __DIR__ . '/..' . '/hasnayeen/themes/src/Themes/DefaultTheme.php',
+        'Hasnayeen\\Themes\\Themes\\Dracula' => __DIR__ . '/..' . '/hasnayeen/themes/src/Themes/Dracula.php',
+        'Hasnayeen\\Themes\\Themes\\Nord' => __DIR__ . '/..' . '/hasnayeen/themes/src/Themes/Nord.php',
+        'Hasnayeen\\Themes\\Themes\\Sunset' => __DIR__ . '/..' . '/hasnayeen/themes/src/Themes/Sunset.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Events\\GateEvaluated' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Events/GateEvaluated.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',

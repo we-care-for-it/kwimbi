@@ -14,12 +14,12 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::middleware('signed')
-    ->get('quotes/{quote}/pdf', QuotePDFController::class)
-    ->name('quote.view');
+// Route::middleware('signed')
+//     ->get('quotes/{quote}/pdf', QuotePDFController::class)
+//     ->name('quote.view');
 
-Route::middleware('signed')
-    ->get('invoices/{invoice}/pdf', InvoicePDFController::class)
-    ->name('invoice.view');
+// Route::middleware('signed')
+//     ->get('invoices/{invoice}/pdf', InvoicePDFController::class)
+//     ->name('invoice.view');
 
 require __DIR__.'/auth.php';
