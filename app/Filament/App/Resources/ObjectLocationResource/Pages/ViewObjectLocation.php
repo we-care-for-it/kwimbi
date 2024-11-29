@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ObjectLocationResource\Pages;
+namespace App\Filament\App\Resources\ObjectLocationResource\Pages;
 
-use App\Filament\Resources\ObjectLocationResource;
+use App\Filament\App\Resources\ObjectLocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 

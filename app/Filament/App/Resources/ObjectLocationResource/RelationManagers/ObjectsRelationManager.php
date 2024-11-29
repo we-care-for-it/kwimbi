@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
+namespace App\Filament\App\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;

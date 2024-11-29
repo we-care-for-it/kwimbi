@@ -18,6 +18,18 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+    'pro6pp' => [
+        'url' => env('3PRO6PP_HOST'),
+        'token' => env('3PRO6PP_TOKEN'),
+    ],
+
+   'chex' => [
+        'token' => env('CHEX_TOKEN'),
+        'url' => env('CHEX_URL'),
+        'company_id' => env('CHEX_COMPANY_ID')
+    ],
+
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),

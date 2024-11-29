@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\ObjectLocationResource\Pages;
 use App\Filament\App\Resources\ObjectLocationResource\RelationManagers;
