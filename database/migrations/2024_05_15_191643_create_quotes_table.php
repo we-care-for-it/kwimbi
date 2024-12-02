@@ -17,22 +17,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Task::class)->nullable()->cascadeOnDelete();
-            $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Currency::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('subtotal');
-            $table->unsignedInteger('taxes');
-            $table->unsignedInteger('total');
-            $table->integer('serial_number')->nullable();
-            $table->string('serial')->nullable();
-            $table->json('items');
-            $table->longText('notes');
-            $table->boolean('mail');
-            $table->enum('template', Template::values())->default(Template::DEFAULT);
-            $table->softDeletes();
+                      $table->id();
             $table->timestamps();
+            $table->softDeletes();
+            $table->string('external_uuid')->nullable();
+            $table->string('number')->nullable();
+            $table->string('type_id')->nullable();
+            $table->date('request_date')->nullable();
+            $table->date('remembered_at')->nullable();
+            $table->date('accepted_at')->nullable();
+            $table->date('end_date')->nullable();
+            $table->integer('status_id')->nullable();
+            $table->integer('company_id')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('project_id')->nullable();
+            $table->longtext('remark')->nullable();
+            $table->longtext('attachment')->nullable();
         });
     }
 

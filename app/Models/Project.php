@@ -5,10 +5,15 @@ namespace App\Models;
 use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Contracts\Auditable;
 use Log;
 use Str;
+
+use App\Observers\ProjectObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+ 
+
 class Project extends Model implements Auditable
 {
   //  use SoftDeletes;
@@ -55,7 +60,10 @@ class Project extends Model implements Auditable
         return $this->hasMany(Quote::class,'project_id','id');
     }
 
-
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     public function locations()
     {

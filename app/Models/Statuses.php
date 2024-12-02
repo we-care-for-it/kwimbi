@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Supplier
@@ -17,16 +17,10 @@ class Statuses extends Model
     use SoftDeletes;
 
   
- 
-    
-    // // Number of items to be shown per page
-    // protected $perPage = 20;
-
-    // // Attributes that should be mass-assignable
-    // protected $fillable = ['last_edit_at','last_edit_by','name','zipcode','place','address','emailaddress','phonenumber'];
-    
-    // // Attributes that are searchable
-    // static $searchable = ['last_edit_at','last_edit_by','name','zipcode','place','address','emailaddress','phonenumber']; 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
     
     
 }

@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Filament\Facades\Filament;
 /**
  * Class location
  *
@@ -31,6 +31,16 @@ class ObjectLocation extends Model implements Auditable
 
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
+
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('team', function (Builder $query) {
+            if (auth()->hasUser()) {
+                $query->where('company_id', Filament::getTenant()->id);     
+            }
+        });
+    }
 
     public function company(): BelongsTo
     {

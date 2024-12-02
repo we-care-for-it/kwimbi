@@ -1,8 +1,9 @@
-<?php
+ <?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Company;
 
 return new class extends Migration
 {
@@ -28,6 +29,8 @@ return new class extends Migration
             $table->foreignId('status_id')->default(0);
             $table->string('slug')->nullable();
             $table->timestamps();
+            $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
+          
         });
     }
 

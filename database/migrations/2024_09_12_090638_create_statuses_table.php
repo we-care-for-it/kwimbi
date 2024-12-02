@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\Company;
 return new class extends Migration
 {
     /**
@@ -17,6 +17,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('model');
             $table->string('name')->nullable();
+       	    $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Company;
 
 return new class extends Migration
 {
@@ -17,6 +18,8 @@ return new class extends Migration
             $table->softDeletes(); 
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
+	    $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
+          
         });
     }
 

@@ -81,6 +81,13 @@ class Company extends Model
         return $this->hasMany(Equipment::class);
     }
 
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
@@ -90,4 +97,12 @@ class Company extends Model
     {
         return $this->hasMany(Quote::class);
     }
+
+    public function objectLocations(): HasMany
+    {
+        return $this->hasMany(objectLocation::class);
+    }
+
+    
+
 }

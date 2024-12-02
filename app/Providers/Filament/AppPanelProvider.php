@@ -28,7 +28,8 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
- 
+use App\Http\Middleware\ApplyTenantScopes;
+
  
 class AppPanelProvider extends PanelProvider
 {
@@ -96,9 +97,9 @@ class AppPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 
             ]) ->tenantMiddleware([
-               
+      
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-            ])
+            ], isPersistent: true)
             ->databaseNotifications()
             ->databaseNotificationsPolling('1s')
             ->authMiddleware([
