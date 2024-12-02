@@ -92,8 +92,7 @@ class NotesRelationManager extends RelationManager
                     return $data;
                 })
                    ->modalHeading('Notitie wijzigen') ,
-                Tables\Actions\DeleteAction::make()
-
+            Tables\Actions\DeleteAction::make()
                     ->modalHeading('Bevestig actie')
             ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
                 ])

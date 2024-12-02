@@ -16,7 +16,7 @@ class Note extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
 
-    protected $fillable = ['user_id', 'note'];
+    protected $fillable = ['user_id', 'note','model'];
 
     public function user()
     {

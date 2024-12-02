@@ -291,23 +291,23 @@ class ObjectLocationResource extends Resource
 
 
 
-                SelectFilter::make('customer_id')
-                    ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
-                    ->Searchable(),
+            //     SelectFilter::make('customer_id')
+            //         ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
+            //         ->Searchable(),
 
-                SelectFilter::make('building_type')
-                    ->options(ObjectLocation::pluck('building_type', 'building_type'))->label('Gebouwtype')
-                    ->Searchable(),
+            //     SelectFilter::make('building_type')
+            //         ->options(ObjectLocation::pluck('building_type', 'building_type'))->label('Gebouwtype')
+            //         ->Searchable(),
 
 
-              SelectFilter::make('management_id')->label('Beheerder')
-                    ->relationship('managementcompany', 'name'),
+            //   SelectFilter::make('management_id')->label('Beheerder')
+            //         ->relationship('managementcompany', 'name'),
 
-                SelectFilter::make('place')
-                    ->label('Plaats')
-                    ->options(ObjectLocation::all()->pluck('place', 'place'))
-                    ->searchable()
-            ,
+            //     SelectFilter::make('place')
+            //         ->label('Plaats')
+            //         ->options(ObjectLocation::all()->pluck('place', 'place'))
+            //         ->searchable()
+            // ,
 
 
                 Tables\Filters\TrashedFilter::make(),
@@ -319,7 +319,7 @@ class ObjectLocationResource extends Resource
                 Tables\Actions\Action::make('Download')
                     ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                     ->url(function (ObjectLocation $record) {
-                        return "/admin/object-locations/" .
+                        return "object-locations/" .
                             $record->id;
                     }),   Tables\Actions\EditAction::make()->label('Wijzigen'),
 

@@ -36,6 +36,7 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+        ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->id('app')
             ->domain(env('APP_SUBDOMAIN'))
             ->login()
