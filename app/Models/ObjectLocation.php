@@ -81,7 +81,7 @@ class ObjectLocation extends Model implements Auditable
 
     public function managementcompany()
     {
-        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
     }
 
     public function objects()
