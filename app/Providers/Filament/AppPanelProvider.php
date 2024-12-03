@@ -40,15 +40,13 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->plugins([
-                FilamentBackgroundsPlugin::make() ->showAttribution(false),
-            ])
+      
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->id('app')
             ->domain(env('APP_SUBDOMAIN'))
             ->login()
             ->colors([
-                'primary' => Color::Teal,
+                'primary' => Color::hex('#7DC481'),
             ])      
             ->brandLogo(fn() => view('components.logo')) 
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
@@ -57,9 +55,7 @@ class AppPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->plugin(
-                \Hasnayeen\Themes\ThemesPlugin::make()
-            )
+          
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->tenant(Company::class, )
             //->tenantRegistration(RegisterCompany::class)
@@ -107,7 +103,7 @@ class AppPanelProvider extends PanelProvider
      
             ]) ->tenantMiddleware([
       
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
+              //  \Hasnayeen\Themes\Http\Middleware\SetTheme::class
             ], isPersistent: true)
             ->databaseNotifications()
             ->databaseNotificationsPolling('1s')

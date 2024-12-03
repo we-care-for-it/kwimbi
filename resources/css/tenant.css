@@ -119,95 +119,14 @@
  display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 80px;
+  height: 100px;;
+ 
 }
 .simple-header-heading{
-  visibility: hidden!important
-} 
- 
-.dark .fi-topbar nav {
-    @apply !border-0;
+  visibility: hidden!;
+}.fi-ac-btn-action{
+  padding: 12px!important;
+  border-radius: 5px!important;
+  width: 120px!important;
+  background-color: #7DC481!important;
 }
-
-.fi-header-heading,
-.fi-wi-stats-overview-stat-icon,
-.fi-section-header-icon,
-.fi-ta-text-item-icon {
-
-}
-
-.filament-peek-modal-title {
-    @apply text-primary-500 uppercase tracking-wider before:content-['Page_'] before:text-white;
-}
-
-#fi-topbar {
-
-    position: relative;
-}
-
-
-.fi-fo-field-wrp-label{
-    font-weight: normal!important;
-  }
-
-.fi-sidebar {
-    @apply bg-gray-50 dark:bg-gray-950 !important;
-}
-
-
- .fi-topbar {
-    font-weight: normal !important;
-
-}
-
-
-.fi-topbar .bg-white {
-    background-color:rgb(139,217,144) !important
-}
-
-
-.fi-sidebar-header {
-    background-color: rgb(125, 196, 129) !important
-}
-
-
-.fi-sidebar-header .fi-icon-btn-icon {
-    color: white !important
-}
-
-
-.fi-btn-label {
-    font-weight: normal !important;
-}
-
-.fi-ac-btn-action {
-    border-radius: 5px;
-    padding: 10px;
-
-}
-
-.fi-input-wrp {
-    background-color: white !important;;
-}
-
-
-.fi-sidebar-nav {
-    background-color: white !important;;
-}
-
-.fi-main {
-    background-color: white !important;;
-}
-
-.fi-dropdown-panel {
-    background-color: white !important;;
-}
-
-.fi-layout {
-    background-color: white !important;;
-}
-
-
-
-
- 
