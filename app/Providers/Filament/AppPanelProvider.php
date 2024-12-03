@@ -29,6 +29,10 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use App\Http\Middleware\ApplyTenantScopes;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+ 
+
+
 
  
 class AppPanelProvider extends PanelProvider
@@ -36,13 +40,17 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+        ->plugins([
+            FilamentBackgroundsPlugin::make() ->showAttribution(false),
+        ])
         ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->id('app')
             ->domain(env('APP_SUBDOMAIN'))
             ->login()
             ->colors([
                 'primary' => Color::Teal,
-            ])       
+            ])      
+            ->brandLogo(fn() => view('components.logo')) 
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->discoverClusters(in: app_path('Filament/App/Clusters'), for: 'App\\Filament\\App\\Clusters')

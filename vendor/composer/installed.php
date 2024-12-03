@@ -1646,6 +1646,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'swisnl/filament-backgrounds' => array(
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'reference' => '3025bf108ceffb21468f4ad42183014cc22133e6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../swisnl/filament-backgrounds',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/clock' => array(
             'pretty_version' => 'v7.1.6',
             'version' => '7.1.6.0',
