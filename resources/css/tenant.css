@@ -127,6 +127,6 @@
 }.fi-ac-btn-action{
   padding: 12px!important;
   border-radius: 5px!important;
-  width: 120px!important;
+  min-width:120px!important;
   background-color: #7DC481!important;
 }

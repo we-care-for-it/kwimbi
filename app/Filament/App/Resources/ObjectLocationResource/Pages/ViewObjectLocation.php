@@ -5,6 +5,8 @@ namespace App\Filament\App\Resources\ObjectLocationResource\Pages;
 use App\Filament\App\Resources\ObjectLocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Support\Enums\MaxWidth;
+
 
 class ViewObjectLocation extends ViewRecord
 {
@@ -12,7 +14,8 @@ class ViewObjectLocation extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-          //  Actions\EditAction::make()->label('Wijzigen'),
+      Actions\EditAction::make()->label('Wijzigen')
+      ->modalWidth(MaxWidth::SevenExtraLarge),
         ];
     }
 

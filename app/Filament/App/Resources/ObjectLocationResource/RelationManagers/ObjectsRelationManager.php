@@ -131,7 +131,7 @@ class ObjectsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Object toevoegen')
+                Tables\Actions\CreateAction::make()->label('Toevoegen')
                     ->modalHeading('Lift toevoegen')
                     ->modalDescription('Om een object toe te voegen en te koppelen aan deze locatie zijn er een aantal gegevens nodig. Na het opslaan kan je meer gegevens aanpassen van dit object ')
                 ,

@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Facades\Filament;
 
+
+use App\Observers\CustomerObserver;
+
+#[ObservedBy([ProjectReactionObserver::class])]
 class Customer extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+ 
 
     protected $guarded = [];
 

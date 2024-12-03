@@ -6,36 +6,25 @@ use App\Filament\Resources\ObjectLocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions\Action;
+
 class EditObjectLocation extends EditRecord
 {
     protected static string $resource = ObjectLocationResource::class;
-
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make()
-            ->link()
-       
-            ->icon('heroicon-o-trash'),
-     
-
-    
-                Actions\Action::make('cancel_top')
-            ->link()
-            ->label('Afbreken')
-            ->icon('heroicon-o-arrow-uturn-left')
-            ->url($this->getResource()::getUrl('index'))
-            ->outlined(),
-
-            
-    
-
-            
-        Actions\Action::make('save_top')
-            ->action('save')
-            ->label('Gegevens opslaan'),
-
-
+                ->link()
+                ->icon('heroicon-o-trash'),    
+            Actions\Action::make('cancel_top')
+                ->link()
+                ->label('Afbreken')
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->url($this->getResource()::getUrl('index'))
+                ->outlined(),
+            Actions\Action::make('save_top')
+                ->action('save')
+                ->label('Opslaan'),
         ];
     }
 
@@ -46,6 +35,6 @@ class EditObjectLocation extends EditRecord
 
     protected function getFormActions(): array
     {
-        return []; // necessary to remove the bottom actions
+        return [];
     }
 }

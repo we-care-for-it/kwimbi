@@ -15,7 +15,7 @@ class ListObjectLocations extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->modalWidth(MaxWidth::SevenExtraLarge)
-                ->modalHeading('Locatie toevoegen')
+                ->modalHeading('Toevoegen')
                 ->modalDescription('Voeg een nieuwe locatie toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->label('Locatie toevoegen'),
@@ -24,9 +24,7 @@ class ListObjectLocations extends ListRecords
 
     public function getHeading(): string
     {
-      
         return "Locatie overzicht";
-       
     }
 
 }

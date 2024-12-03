@@ -192,29 +192,8 @@ class ProjectsRelationManager extends RelationManager
                         }
 
                     })
-                        ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? 'danger' : 'success')
-
-
-                ,
-
-
-//                Tables\Columns\TextColumn::make('cost_price')
-//                    ->label('Winst')
-//                    ->getStateUsing(function (Project $record): ?string {
-//                        return $record?->quote_price - $record?->cost_price;
-//                    })->prefix('€')
-//                    ->color(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'danger' : 'success')
-//                    ->badge()->sortable()
-//                    ->icon(fn($record) => $record?->quote_price - $record?->cost_price < 0 ? 'heroicon-m-exclamation-triangle' : false),
-
-
-//                Tables\Columns\TextColumn::make('budget_costs')
-//                    ->label('Over')
-//                    ->getStateUsing(function (Project $record): ?string {
-//                        $total_price = $record?->budget_costs - ($record?->quote_price - $record?->cost_price);
-//                        return $total_price;
-//                    })->prefix('€'),
-
+                        ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? 'danger' : 'success'),
+ 
 
                 Tables\Columns\TextColumn::make('status.name')
                     ->label('Status')->sortable()
@@ -230,15 +209,10 @@ class ProjectsRelationManager extends RelationManager
             Tables\Actions\CreateAction::make()
                 ->mutateFormDataUsing(function (array $data): array {
                     $data['customer_id'] = $this->getOwnerRecord()->customer_id;
-
                     return $data;
                 })
             ->modalWidth(MaxWidth::SevenExtraLarge)
-
-
-
-
-
+            ->label('Toevoegen')
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open project')->url(function (Project $record){
@@ -250,6 +224,6 @@ class ProjectsRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->recordUrl(fn ($record): string => ObjectLocation::getUrl('view', ['record' => $record]));
     }
 }

@@ -88,9 +88,14 @@ class ObjectLocationResource extends Resource
                             ->searchable()
                             ->label('Relatie')
                             ->required()
-                            ->createOptionForm([Forms\Components\TextInput::make('name')   ->required()->label('Naam van de relatie')   ])
+                            // ->createOptionForm(
+                            //     [
+                            //         Forms\Components\TextInput::make('name')
+                            //             ->required()
+                            //             ->label('Naam van de relatie')
+                            //         ])
 
-                            ->relationship(name: 'customer', titleAttribute: 'name')
+                            // ->relationship(name: 'customer', titleAttribute: 'name')
 
 
 
@@ -285,44 +290,18 @@ class ObjectLocationResource extends Resource
 
             ])
             ->filters(array(
-
-
-
-
-
-            //     SelectFilter::make('customer_id')
-            //         ->options(Customer::all()->pluck('name', 'id'))->label('Relatie')
-            //         ->Searchable(),
-
-            //     SelectFilter::make('building_type')
-            //         ->options(ObjectLocation::pluck('building_type', 'building_type'))->label('Gebouwtype')
-            //         ->Searchable(),
-
-
-            //   SelectFilter::make('management_id')->label('Beheerder')
-            //         ->relationship('managementcompany', 'name'),
-
-            //     SelectFilter::make('place')
-            //         ->label('Plaats')
-            //         ->options(ObjectLocation::all()->pluck('place', 'place'))
-            //         ->searchable()
-            // ,
-
-
                 Tables\Filters\TrashedFilter::make(),
             ))->filtersFormColumns(2)
-
-
-            // layout: FiltersLayout::AboveContent
             ->actions([
                 Tables\Actions\Action::make('Download')
                     ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                     ->url(function (ObjectLocation $record) {
                         return "object-locations/" .
                             $record->id;
-                    }),   Tables\Actions\EditAction::make()->label('Wijzigen'),
+                }),
+                Tables\Actions\EditAction::make()->label('Wijzigen'),
 
-                    ])
+            ])
 
             ->bulkActions([
 
@@ -345,11 +324,7 @@ class ObjectLocationResource extends Resource
 
                            ])
                         ->withFilename(date('m-d-Y H:i') . ' - locatie export'),
-
-
                 ])
-
-
             ])
             ->emptyState(view("partials.empty-state"));
     }
@@ -369,9 +344,7 @@ class ObjectLocationResource extends Resource
     {
         return [
             'index' => Pages\ListObjectLocations::route('/'),
-        
-          'view' => Pages\ViewObjectLocation::route('/{record}'),
-         // 'edit' => Pages\EditObjectLocation::route('/{record}/edit'),
+            'view' => Pages\ViewObjectLocation::route('/{record}'),
         ];
     }
 
