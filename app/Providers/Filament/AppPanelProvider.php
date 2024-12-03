@@ -40,10 +40,10 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-        ->plugins([
-            FilamentBackgroundsPlugin::make() ->showAttribution(false),
-        ])
-        ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
+            ->plugins([
+                FilamentBackgroundsPlugin::make() ->showAttribution(false),
+            ])
+            ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->id('app')
             ->domain(env('APP_SUBDOMAIN'))
             ->login()
@@ -104,7 +104,7 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                
+     
             ]) ->tenantMiddleware([
       
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
