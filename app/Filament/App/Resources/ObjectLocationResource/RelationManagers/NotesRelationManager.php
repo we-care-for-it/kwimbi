@@ -29,8 +29,6 @@ class NotesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-
-
                 Textarea::make('note')
                     ->rows(7)
                     ->label('Notitie')
@@ -49,9 +47,7 @@ class NotesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('Medewerker')
-                ,
-
+                Tables\Columns\TextColumn::make('user.name')->label('Medewerker'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Datum / tijd')
                     ->sortable()
@@ -70,7 +66,6 @@ class NotesRelationManager extends RelationManager
             ])             ->emptyState(view('partials.empty-state-small'))
 
         ->filters([
-                //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
@@ -80,8 +75,6 @@ class NotesRelationManager extends RelationManager
                     return $data;
                 })->label('Toevoegen')
                     ->modalHeading('Notitie toevoegen'),
-
-
             ])
             ->actions([
 
@@ -104,4 +97,12 @@ class NotesRelationManager extends RelationManager
                 ]),
             ]);
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['user_id'] = auth()->id();
+     dd($data);
+        return $data;
+    }
+
 }

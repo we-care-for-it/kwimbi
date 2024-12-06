@@ -146,14 +146,16 @@ class ProjectsResource extends Resource
                             ->searchable()
                             ->label("Relatie")
                             ->columnSpan("full")
-                            ->options(Customer::all()->pluck("name", "id")),
+                            ->native(false)
+                            ->options(Customer::all()->where('company_id', Filament::getTenant()->id)->pluck("name", "id")),
 
                         Select::make("location_id")
                             ->searchable()
                             ->label("Locatie")
+                            ->native(false)
                             ->columnSpan("full")
                             ->options(
-                                ObjectLocation::all()->pluck("address", "id")
+                                ObjectLocation::all()->where('company_id', Filament::getTenant()->id)->pluck("address", "id")
                             ),
                     ])
                     ->columns(2)
@@ -286,16 +288,16 @@ class ProjectsResource extends Resource
                 SelectFilter::make("status_id")
                     ->label("Status")
                     ->options(
-                        Statuses::where("model", "Project")->pluck("name", "id")
+                        Statuses::where("model", "Project")->where('company_id', Filament::getTenant()->id)->pluck("name", "id")
                     )
                     ->searchable()
-                    ->preload(),
+                   ,
 
                 SelectFilter::make("customer_id")
                     ->label("Relatie")
-                    ->options(Customer::get()->pluck("name", "id"))
+                    ->options(Customer::get()->where('company_id', Filament::getTenant()->id)->pluck("name", "id"))
                     ->searchable()
-                    ->preload(),
+             ,
 
 
             ])

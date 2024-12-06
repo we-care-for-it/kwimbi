@@ -156,6 +156,8 @@ return array(
     'App\\Models\\workType' => $baseDir . '/app/Models/workType.php',
     'App\\Models\\workordersError' => $baseDir . '/app/Models/workordersError.php',
     'App\\Models\\workordersSolution' => $baseDir . '/app/Models/workordersSolution.php',
+    'App\\Observers\\CustomerObserver' => $baseDir . '/app/Observers/CustomerObserver.php',
+    'App\\Observers\\ElevatorObserver' => $baseDir . '/app/Observers/ElevatorObserver.php',
     'App\\Observers\\HiringObserver' => $baseDir . '/app/Observers/HiringObserver.php',
     'App\\Observers\\ProjectObserver' => $baseDir . '/app/Observers/ProjectObserver.php',
     'App\\Observers\\ProjectReactionObserver' => $baseDir . '/app/Observers/ProjectReactionObserver.php',

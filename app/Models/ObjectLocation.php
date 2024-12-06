@@ -86,12 +86,12 @@ class ObjectLocation extends Model implements Auditable
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id');
+        return $this->hasMany(Elevator::class, 'address_id', 'id')->where('company_id', get_tenant_id());
     }
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation');
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation')->where('company_id', get_tenant_id());
     }
 
     public function attachments()

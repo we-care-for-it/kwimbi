@@ -59,6 +59,7 @@ class ComposerStaticInitb7546531532198d671834e189b2ba9a7
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '34e34955a43330e7417781c95d547857' => __DIR__ . '/..' . '/saade/filament-fullcalendar/src/helpers.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -1140,6 +1141,8 @@ class ComposerStaticInitb7546531532198d671834e189b2ba9a7
         'App\\Models\\workType' => __DIR__ . '/../..' . '/app/Models/workType.php',
         'App\\Models\\workordersError' => __DIR__ . '/../..' . '/app/Models/workordersError.php',
         'App\\Models\\workordersSolution' => __DIR__ . '/../..' . '/app/Models/workordersSolution.php',
+        'App\\Observers\\CustomerObserver' => __DIR__ . '/../..' . '/app/Observers/CustomerObserver.php',
+        'App\\Observers\\ElevatorObserver' => __DIR__ . '/../..' . '/app/Observers/ElevatorObserver.php',
         'App\\Observers\\HiringObserver' => __DIR__ . '/../..' . '/app/Observers/HiringObserver.php',
         'App\\Observers\\ProjectObserver' => __DIR__ . '/../..' . '/app/Observers/ProjectObserver.php',
         'App\\Observers\\ProjectReactionObserver' => __DIR__ . '/../..' . '/app/Observers/ProjectReactionObserver.php',

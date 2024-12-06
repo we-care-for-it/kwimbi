@@ -114,12 +114,7 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Type')->searchable()
                     ->badge()
                     ->placeholder('Onbekend'),
-
-
-//                Tables\Columns\TextColumn::make('location.managementcompany.name')
-//                    ->searchable()
-//                    ->label('Beheerder') ->placeholder('Geen beheerder')->sortable() ,
-
+                    
                 Tables\Columns\TextColumn::make('maintenance_company.name')
                     ->searchable()->placeholder('Geen onderhoudspartij')
                     ->sortable()
@@ -138,7 +133,7 @@ class ObjectsRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
-                    return "/admin/objects/".$record->id."/edit";
+                    return "/objects/".$record->id."/edit";
 
                 })->icon('heroicon-c-link')
 
@@ -152,4 +147,14 @@ class ObjectsRelationManager extends RelationManager
 //                ]),
             ]);
     }
+
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+{
+        $data['company_id'] = auth()->user()->company_id;
+        
+            return $data;
+}
+
+
 }
