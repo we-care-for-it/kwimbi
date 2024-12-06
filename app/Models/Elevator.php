@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Enums\ElevatorStatus;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Filament\Facades\Filament;
 /**
  * Class ManagementCompany
@@ -33,7 +34,7 @@ use Filament\Facades\Filament;
 class Elevator extends Model implements Auditable
 
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
     public $table = "elevators";
@@ -63,6 +64,12 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
  
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
+
     public function management()
     {
         return $this->hasOne(ObjectmanagementCompanies::class, 'id', 'management_id');
@@ -83,10 +90,10 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
     }
 
-    public function company()
-    {
-        return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
-    }
+    // public function company()
+    // {
+    //     return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
+    // }
 
     public function maintenance_company()
     {

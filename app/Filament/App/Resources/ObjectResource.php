@@ -57,7 +57,7 @@ class ObjectResource extends Resource
                     ->label('Nobonummer')->searchable()
                     ->placeholder('Geen Nobonummer'),
 
-                Tables\Columns\TextColumn::make('location')
+                Tables\Columns\TextColumn::make('address_id')
                     ->getStateUsing(function (Elevator $record): ?string {
                         if ($record?->location->name) {
                             return $record?->location->name;

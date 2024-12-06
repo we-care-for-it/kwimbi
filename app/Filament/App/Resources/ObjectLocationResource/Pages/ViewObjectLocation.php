@@ -20,4 +20,24 @@ class ViewObjectLocation extends ViewRecord
     }
 
 
+    public function getSubheading(): ?string
+    {
+       
+  
+
+           
+            if( $this->getRecord()->name){
+                $location_name =  " | " .  $this->getRecord()->name;
+            }
+            return   $this->getRecord()->address . " " . $this->getRecord()->zipcode . " "  . $this->getRecord()->place .  $location_name ;
+
+
+
+
+      
+    
+    }
+
+
+
 }

@@ -27,19 +27,22 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Actions\Exports\Models\Export;
+ 
 
-
+use Filament\Forms\Components\TextInput;
+ 
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-
-
  
 
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\ViewEntry;
 use Filament\Tables\Filters\SelectFilter;
 
-
-
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
 class ObjectLocationResource extends Resource
 {
     protected static ?string $model = ObjectLocation::class;
@@ -218,6 +221,76 @@ class ObjectLocationResource extends Resource
                     ->autosize(),
             ]);
     }
+
+
+    
+    public static function infolist(Infolist $infolist) : Infolist
+    {
+
+        return $infolist->schema([
+               
+
+             
+Section::make()
+->schema([
+ 
+    Components\Split::make(
+        [Components\Grid::make(4)->schema([
+   
+       
+                TextEntry::make('address')
+
+                
+                    ->label("Adres")
+                    ->getStateUsing(function (ObjectLocation $record): ?string {
+               
+                            return $record->address . " - " . $record->zipcode . " " . $record->place;
+           
+                    })
+                    ->placeholder("Niet opgegeven") , 
+
+                    TextEntry::make('name')
+                        ->label("Complexnaam")
+                        ->placeholder("Niet opgegeven") , 
+
+
+                        TextEntry::make('construction_year')
+                        ->label("Bouwjaar")
+                        ->placeholder("Niet opgegeven") , 
+                        
+
+                    TextEntry::make('customer.name')
+                        ->label("Relatie")
+                        ->placeholder("Niet opgegeven") , 
+
+
+                    TextEntry::make('building_type')
+                        ->label("Gebouwtype")
+                        ->badge()
+                        ->placeholder("Niet opgegeven") , 
+
+       
+                        TextEntry::make('complexnummer')
+                        ->label("Complexnummer")
+                        ->placeholder("Niet opgegeven") , 
+
+                    TextEntry::make('province')
+                        ->label("Provincie")
+                        ->placeholder("Niet opgegeven") , 
+
+                    TextEntry::make('management.name')
+                        ->label("Beheerder")
+                        ->placeholder("Niet opgegeven") , 
+
+    
+
+
+    ])   ])
+
+    ])
+        
+                ]);
+    }   
 
     public static function table(Table $table): Table
     {
