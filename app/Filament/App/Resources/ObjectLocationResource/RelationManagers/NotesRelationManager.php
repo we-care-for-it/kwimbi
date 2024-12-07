@@ -51,16 +51,16 @@ class NotesRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Datum / tijd')
                     ->sortable()
-                    ->dateTime("d-m-Y H:i")
+                    ->dateTime("d-m-Y H:i"),
 
 
-            ->description(function ($record) {
-                if (!$record?->updated_at) {
-                    return false;
-                } else {
-                    return "Ge-update op:".  date("d-m-Y", strtotime($record?->updated_at)) . " om " . date("H:i", strtotime($record?->updated_at));
-                }
-            }),
+            // ->description(function ($record) {
+            //     if (!$record?->updated_at) {
+            //         return false;
+            //     } else {
+            //         return "Ge-update op:".  date("d-m-Y", strtotime($record?->updated_at)) . " om " . date("H:i", strtotime($record?->updated_at));
+            //     }
+            // }),
 
                 Tables\Columns\TextColumn::make('note')->label('Notitie')->grow(true)->wrap(),
             ])             ->emptyState(view('partials.empty-state-small'))

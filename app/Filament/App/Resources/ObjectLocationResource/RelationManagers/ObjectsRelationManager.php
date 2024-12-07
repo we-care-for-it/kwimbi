@@ -85,14 +85,14 @@ class ObjectsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('unit_no')
-                    ->label('Nummer')->searchable()->sortable()
+                    ->label('Nummer')->sortable()
                     ->placeholder('Geen unitnummer'),
 
                 Tables\Columns\TextColumn::make('name')->badge()
                     ->label('Naam')->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('nobo_no')
-                    ->label('Nobonummer')->searchable()
+                    ->label('Nobonummer')
                     ->placeholder('Geen Nobonummer'),
 
 
@@ -111,12 +111,12 @@ class ObjectsRelationManager extends RelationManager
 
 
                 Tables\Columns\TextColumn::make('type.name')
-                    ->label('Type')->searchable()
+                    ->label('Type')
                     ->badge()
                     ->placeholder('Onbekend'),
                     
                 Tables\Columns\TextColumn::make('maintenance_company.name')
-                    ->searchable()->placeholder('Geen onderhoudspartij')
+                    ->placeholder('Geen onderhoudspartij')
                     ->sortable()
                     ->label('Onderhoudspartij'),
 
@@ -132,12 +132,15 @@ class ObjectsRelationManager extends RelationManager
                 ,
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
-                    return "/objects/".$record->id."/edit";
-
+                Tables\Actions\EditAction::make()->label('Open object')
+                
+               
+                ->url(function (Object $record){
+                    return "/".get_tenant_id() ."/objects/".$record->id;
+ 
                 })->icon('heroicon-c-link')
 
-                    //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
+                    //
                     //->openUrlInNewTab()
             //    Tables\Actions\DeleteAction::make(),
             ])
