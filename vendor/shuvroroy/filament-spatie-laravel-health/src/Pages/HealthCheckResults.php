@@ -8,6 +8,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Artisan;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\ResultStores\ResultStore;
 
@@ -66,5 +67,10 @@ class HealthCheckResults extends Page
             ->title('Health check results refreshed')
             ->success()
             ->send();
+    }
+
+    public static function canAccess(): bool
+    {
+        return FilamentSpatieLaravelHealthPlugin::get()->isAuthorized();
     }
 }

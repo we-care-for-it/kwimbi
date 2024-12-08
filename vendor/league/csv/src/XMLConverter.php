@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace League\Csv;
 
+use Deprecated;
 use DOMAttr;
 use DOMDocument;
 use DOMElement;
