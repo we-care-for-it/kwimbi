@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('M9kKhE2tl7'),
         ]);
 
+        $this->call(ShieldSeeder::class);
         $this->command->call('shield:generate', ['--all' => true]);
         $this->command->call('shield:super-admin', ['--user' => $superAdmin->id]);
     }
