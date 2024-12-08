@@ -390,7 +390,7 @@ it('can send invoices', function () {
         'invoice' => $invoice,
     ])
         ->mountFormComponentAction('customer_id', 'send')
-        ->setFormComponentActionData([
+        ->setFormComponentActionData('customer_id', 'send', data: [
             'email' => $email = fake()->email(),
         ])
 });

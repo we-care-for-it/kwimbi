@@ -11,15 +11,13 @@ trait HasPanelShield
 {
     public static function bootHasPanelShield()
     {
-        if (! app()->runningInConsole()) {
-            if (Utils::isPanelUserRoleEnabled()) {
+        if (Utils::isPanelUserRoleEnabled()) {
 
-                Utils::createPanelUserRole();
+            Utils::createPanelUserRole();
 
-                static::created(fn ($user) => $user->assignRole(Utils::getPanelUserRoleName()));
+            static::created(fn ($user) => $user->assignRole(Utils::getPanelUserRoleName()));
 
-                static::deleting(fn ($user) => $user->removeRole(Utils::getPanelUserRoleName()));
-            }
+            static::deleting(fn ($user) => $user->removeRole(Utils::getPanelUserRoleName()));
         }
     }
 

@@ -2,7 +2,6 @@
 
 namespace Filament\Actions\Concerns;
 
-use BackedEnum;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -21,10 +20,6 @@ trait CanBeHidden
      */
     public function authorize(mixed $abilities, Model | string | array | null $arguments = null): static
     {
-        if ($abilities instanceof BackedEnum) {
-            $abilities = $abilities->value;
-        }
-
         if (is_string($abilities) || is_array($abilities)) {
             $this->authorization = [
                 'type' => 'all',
@@ -39,15 +34,11 @@ trait CanBeHidden
     }
 
     /**
-     * @param  string | BackedEnum | array<string>  $abilities
+     * @param  string | array<string>  $abilities
      * @param  Model | array<mixed> | null  $arguments
      */
-    public function authorizeAny(string | BackedEnum | array $abilities, Model | array | null $arguments = null): static
+    public function authorizeAny(string | array $abilities, Model | array | null $arguments = null): static
     {
-        if ($abilities instanceof BackedEnum) {
-            $abilities = $abilities->value;
-        }
-
         $this->authorization = [
             'type' => 'any',
             'abilities' => Arr::wrap($abilities),

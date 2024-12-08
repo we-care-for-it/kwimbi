@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use App\Models\Project;
 
 class ProjectStatus extends Model implements Auditable
@@ -23,10 +23,7 @@ class ProjectStatus extends Model implements Auditable
 
 
 
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
+
 
 }
 

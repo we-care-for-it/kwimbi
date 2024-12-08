@@ -12,7 +12,6 @@
 @endphp
 
 <div
-    x-bind:tabindex="$el.querySelector('[autofocus]') ? '-1' : '0'"
     x-bind:class="{
         @js($activeStepClasses): step === @js($id),
         @js($inactiveStepClasses): step !== @js($id),
@@ -31,6 +30,7 @@
                 'aria-labelledby' => $id,
                 'id' => $id,
                 'role' => 'tabpanel',
+                'tabindex' => '0',
             ], escape: false)
             ->merge($getExtraAttributes(), escape: false)
             ->class(['fi-fo-wizard-step outline-none'])

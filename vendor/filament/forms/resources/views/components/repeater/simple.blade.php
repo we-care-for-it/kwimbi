@@ -1,6 +1,5 @@
 @php
     use Filament\Forms\Components\Actions\Action;
-    use Filament\Support\Enums\Alignment;
 
     $containers = $getChildComponentContainers();
 
@@ -118,17 +117,7 @@
         @endif
 
         @if ($isAddable && $addAction->isVisible())
-            <div
-                @class([
-                    'flex',
-                    match ($getAddActionAlignment()) {
-                        Alignment::Start, Alignment::Left => 'justify-start',
-                        Alignment::Center, null => 'justify-center',
-                        Alignment::End, Alignment::Right => 'justify-end',
-                        default => $alignment,
-                    },
-                ])
-            >
+            <div class="flex justify-center">
                 {{ $addAction }}
             </div>
         @endif

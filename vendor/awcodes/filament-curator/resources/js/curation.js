@@ -1,11 +1,10 @@
 import Cropper from "cropperjs";
 
-export default function curation({statePath, fileName, fileType, presets = {}, checkCrossOrigin = true}) {
+export default function curation({statePath, fileName, fileType, presets = {}}) {
     return {
         statePath: statePath,
         filename: fileName,
         filetype: fileType,
-        checkCrossOrigin: checkCrossOrigin,
         cropper: null,
         presets: presets,
         preset: 'custom',
@@ -36,7 +35,6 @@ export default function curation({statePath, fileName, fileType, presets = {}, c
 
             setTimeout(() => {
                 this.cropper = new Cropper(this.$refs.image, {
-                    checkCrossOrigin: this.checkCrossOrigin,
                     background: false,
                 });
             }, 100);

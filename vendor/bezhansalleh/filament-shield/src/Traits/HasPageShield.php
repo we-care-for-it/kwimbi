@@ -56,12 +56,12 @@ trait HasPageShield
             ->toString();
     }
 
-    public static function shouldRegisterNavigation(array $parameters = []): bool
+    public static function shouldRegisterNavigation(): bool
     {
         return static::canAccess() && parent::shouldRegisterNavigation();
     }
 
-    public static function canAccess(array $parameters = []): bool
+    public static function canAccess(): bool
     {
         return Filament::auth()->user()->can(static::getPermissionName());
     }

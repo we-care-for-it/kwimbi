@@ -2,29 +2,24 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
+ 
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasTenants
+class User extends Authenticatable implements  FilamentUser, HasTenants
+
 {
     use HasFactory;
     use HasRoles;
     use Notifiable;
-    use SoftDeletes;
-    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +30,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasTenant
         'name',
         'email',
         'password',
-        'avatar_url',
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -61,32 +60,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasTenant
         ];
     }
 
-    public function canAccessPanel(Panel $panel): bool
+    public function companies(): BelongsToMany
     {
-        if ($panel->getId() == 'admin') {
-
-            return $this->hasRole(Role::ADMIN);
-
-        } elseif ($panel->getId() == 'app') {
-
-            return $this->hasRole([
-                Role::ADMIN,
-                Role::OWNER
-            ]);
-
-        } elseif ($panel->getId() == 'staff') {
-
-            return true;
-
-        }
+        return $this->belongsToMany(Company::class);
     }
 
-    public function companies(): HasMany
-    {
-        return $this->hasMany(Company::class);
-    }
-
-    public function getTenants(Panel $panel): Collection
+    public function getTenants(Panel $panel): array|Collection
     {
         return $this->companies;
     }
@@ -96,8 +75,19 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasTenant
         return $this->companies()->whereKey($tenant)->exists();
     }
 
-    public function getFilamentAvatarUrl(): ?string
+
+    public function customer()
     {
-        return $this->avatar_url ? Storage::url($this->avatar_url) : 'https://ui-avatars.com/api/?name='.$this->name;
+        return $this->BelongsTo(Customer::class);
     }
+
+    
+    public function managementCompany()
+    {
+        return $this->BelongsTo(ObjectManagementCompany::class,'management_id','id');
+    }
+
+
+
+
 }

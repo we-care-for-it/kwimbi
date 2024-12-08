@@ -78,10 +78,6 @@ class PrepareCsvExport implements ShouldQueue
             $query->reorder($qualifiedKeyName);
 
             foreach ($originalOrders as $order) {
-                if (blank($order['column'] ?? null) || blank($order['direction'] ?? null)) {
-                    continue;
-                }
-
                 $query->orderBy($order['column'], $order['direction']);
             }
 
@@ -174,8 +170,7 @@ class PrepareCsvExport implements ShouldQueue
                 fn (Collection $records) => $dispatchRecords(
                     Arr::pluck($records->all(), $keyName),
                 ),
-                column: $qualifiedKeyName,
-                alias: $keyName,
+                column: $keyName,
                 descending: ($baseQueryOrders[0]['direction'] ?? 'asc') === 'desc',
             );
     }

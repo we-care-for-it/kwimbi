@@ -115,15 +115,9 @@ trait CanExportRecords
 
             $query = $exporter::modifyQuery($query);
 
-            $options = array_merge(
-                $action->getOptions(),
-                Arr::except($data, ['columnMap']),
-            );
-
             if ($this->modifyQueryUsing) {
                 $query = $this->evaluate($this->modifyQueryUsing, [
                     'query' => $query,
-                    'options' => $options,
                 ]) ?? $query;
             }
 
@@ -145,6 +139,11 @@ trait CanExportRecords
             }
 
             $user = auth()->user();
+
+            $options = array_merge(
+                $action->getOptions(),
+                Arr::except($data, ['columnMap']),
+            );
 
             if ($action->hasColumnMapping()) {
                 $columnMap = collect($data['columnMap'])
@@ -240,15 +239,13 @@ trait CanExportRecords
                 )
                 ->dispatch();
 
-            if ($jobConnection !== 'sync') {
-                Notification::make()
-                    ->title($action->getSuccessNotificationTitle())
-                    ->body(trans_choice('filament-actions::export.notifications.started.body', $export->total_rows, [
-                        'count' => Number::format($export->total_rows),
-                    ]))
-                    ->success()
-                    ->send();
-            }
+            Notification::make()
+                ->title($action->getSuccessNotificationTitle())
+                ->body(trans_choice('filament-actions::export.notifications.started.body', $export->total_rows, [
+                    'count' => Number::format($export->total_rows),
+                ]))
+                ->success()
+                ->send();
         });
 
         $this->color('gray');

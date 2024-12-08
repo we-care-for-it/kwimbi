@@ -1,6 +1,5 @@
 @php
     use Filament\Forms\Components\Actions\Action;
-    use Filament\Support\Enums\Alignment;
 
     $containers = $getChildComponentContainers();
     $blockPickerBlocks = $getBlockPickerBlocks();
@@ -229,10 +228,10 @@
                             x-show="! isCollapsed"
                             @class([
                                 'fi-fo-builder-item-content relative border-t border-gray-100 dark:border-white/10',
-                                'p-4' => ! ($hasBlockPreviews && $item->getParentComponent()->hasPreview()),
+                                'p-4' => ! $hasBlockPreviews,
                             ])
                         >
-                            @if ($hasBlockPreviews && $item->getParentComponent()->hasPreview())
+                            @if ($hasBlockPreviews)
                                 <div
                                     @class([
                                         'fi-fo-builder-item-preview',
@@ -302,15 +301,7 @@
                 :columns="$blockPickerColumns"
                 :state-path="$statePath"
                 :width="$blockPickerWidth"
-                @class([
-                    'flex',
-                    match ($getAddActionAlignment()) {
-                        Alignment::Start, Alignment::Left => 'justify-start',
-                        Alignment::Center, null => 'justify-center',
-                        Alignment::End, Alignment::Right => 'justify-end',
-                        default => $alignment,
-                    },
-                ])
+                class="flex justify-center"
             >
                 <x-slot name="trigger">
                     {{ $addAction }}

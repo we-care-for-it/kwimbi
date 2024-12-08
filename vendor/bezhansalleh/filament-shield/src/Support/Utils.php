@@ -5,10 +5,8 @@ namespace BezhanSalleh\FilamentShield\Support;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use BezhanSalleh\FilamentShield\FilamentShield;
 use Filament\Facades\Filament;
-use Filament\Panel;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Spatie\Permission\PermissionRegistrar;
 
 class Utils
 {
@@ -17,14 +15,13 @@ class Utils
         return Filament::getCurrentPanel()?->getAuthGuard() ?? '';
     }
 
-    public static function isResourcePublished(Panel $panel): bool
+    public static function isResourcePublished(): bool
     {
-        return str(
-            string: collect(value: $panel->getResources())
-                ->values()
-                ->join(',')
-        )
-            ->contains('RoleResource');
+        $roleResourcePath = app_path((string) Str::of('Filament\\Resources\\Shield\\RoleResource.php')->replace('\\', '/'));
+
+        $filesystem = new Filesystem;
+
+        return (bool) $filesystem->exists($roleResourcePath);
     }
 
     public static function getResourceSlug(): string
@@ -223,14 +220,12 @@ class Utils
 
     public static function getRoleModel(): string
     {
-        return app(PermissionRegistrar::class)
-            ->getRoleClass();
+        return config('permission.models.role', 'Spatie\\Permission\\Models\\Role');
     }
 
     public static function getPermissionModel(): string
     {
-        return app(PermissionRegistrar::class)
-            ->getPermissionClass();
+        return config('permission.models.permission', 'Spatie\\Permission\\Models\\Permission');
     }
 
     public static function discoverAllResources(): bool
@@ -260,20 +255,5 @@ class Utils
         $filesystem = new Filesystem;
 
         return (bool) $filesystem->exists(app_path(static::getPolicyPath() . DIRECTORY_SEPARATOR . 'RolePolicy.php'));
-    }
-
-    public static function isTenancyEnabled(): bool
-    {
-        return (bool) config()->get('permission.teams', false);
-    }
-
-    public static function getTenantModel(): ?string
-    {
-        return config()->get('filament-shield.tenant_model', null);
-    }
-
-    public static function getTenantModelForeignKey(): string
-    {
-        return config()->get('permission.column_names.team_foreign_key', 'team_id');
     }
 }

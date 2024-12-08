@@ -9,11 +9,9 @@ return [
         'navigation_group' => true,
         'is_globally_searchable' => false,
         'show_model_path' => true,
-        'is_scoped_to_tenant' => true,
+        'is_scoped_to_tenant' => false,
         'cluster' => null,
     ],
-
-    'tenant_model' => 'Company',
 
     'auth_provider_model' => [
         'fqcn' => 'App\\Models\\User',

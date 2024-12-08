@@ -13,7 +13,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class FilamentShield
@@ -106,18 +105,8 @@ class FilamentShield
         }
     }
 
-    public static function createRole(?string $name = null, ?int $tenantId = null): Role
+    public static function createRole(?string $name = null)
     {
-        if (Utils::isTenancyEnabled()) {
-            return Utils::getRoleModel()::firstOrCreate(
-                [
-                    'name' => $name ?? Utils::getSuperAdminName(),
-                    Utils::getTenantModelForeignKey() => $tenantId,
-                ],
-                ['guard_name' => Utils::getFilamentAuthGuard()]
-            );
-        }
-
         return Utils::getRoleModel()::firstOrCreate(
             ['name' => $name ?? Utils::getSuperAdminName()],
             ['guard_name' => Utils::getFilamentAuthGuard()]
@@ -394,20 +383,5 @@ class FilamentShield
             ->values()
             ->unique()
             ->toArray();
-    }
-
-    /**
-     * Indicate if destructive Shield commands should be prohibited.
-     *
-     * Prohibits: shield:setup, shield:install, and shield:generate
-     *
-     * @return void
-     */
-    public static function prohibitDestructiveCommands(bool $prohibit = true)
-    {
-        Commands\GenerateCommand::prohibit($prohibit);
-        Commands\InstallCommand::prohibit($prohibit);
-        Commands\PublishCommand::prohibit($prohibit);
-        Commands\SetupCommand::prohibit($prohibit);
     }
 }

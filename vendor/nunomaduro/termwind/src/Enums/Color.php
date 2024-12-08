@@ -280,7 +280,7 @@ final class Color
 
     public const TEAL_500 = '#14b8a6';
 
-    public const TEAL_600 = 'red';
+    public const TEAL_600 = '#0d9488';
 
     public const TEAL_700 = '#0f766e';
 

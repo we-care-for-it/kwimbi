@@ -4,70 +4,46 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Facades\Filament;
+ use Illuminate\Database\Eloquent\SoftDeletes;
+
+use OwenIt\Auditing\Contracts\Auditable;
 
 
-use App\Observers\CustomerObserver;
+class Customer extends Model implements Auditable
 
-#[ObservedBy([ProjectReactionObserver::class])]
-class Customer extends Model
 {
-    use HasFactory;
+    // use HasFactory;
     use SoftDeletes;
 
- 
+    use \OwenIt\Auditing\Auditable;
 
-    protected $guarded = [];
+    protected $table = 'customers';
 
-    public function company(): BelongsTo
+
+
+    public function locations()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasMany(ObjectLocation::class, 'customer_id', 'id');
     }
 
-    public function tags(): BelongsToMany
+    public function objects()
     {
-        return $this->belongsToMany(Tag::class);
+      return $this->hasMany(Elevator::class, 'customer_id', 'id');
     }
 
-    public function lead(): BelongsTo
+
+    public function users()
     {
-        return $this->belongsTo(Lead::class);
+      return $this->hasMany(User::class, 'customer_id', 'id');
     }
 
-    public function documents(): HasMany
-    {
-        return $this->hasMany(Document::class);
-    }
 
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
 
-    public function completeTasks(): HasMany
-    {
-        return $this->hasMany(Task::class)
-            ->where('is_completed', true);
-    }
 
-    public function incompleteTasks(): HasMany
-    {
-        return $this->hasMany(Task::class)
-            ->where('is_completed', false);
-    }
 
-    public function quotes(): HasMany
-    {
-        return $this->hasMany(Quote::class);
-    }
+    protected $fillable = [
+        'name','address','zipcode','phonenumber','emailaddress','place','phonenumber','slug'
+    ];
 
-    public function invoices(): HasMany
-    {
-        return $this->hasMany(Invoice::class);
-    }
+
 }

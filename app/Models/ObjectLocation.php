@@ -4,8 +4,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Filament\Facades\Filament;
+
+
 /**
  * Class location
  *
@@ -33,19 +33,6 @@ class ObjectLocation extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
 
-    protected static function booted(): void
-    {
-        static::addGlobalScope('team', function (Builder $query) {
-            if (auth()->hasUser()) {
-                $query->where('company_id', Filament::getTenant()->id);     
-            }
-        });
-    }
-
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
     // Validation rules for this model
     static $rules = [];
 
@@ -62,7 +49,8 @@ class ObjectLocation extends Model implements Auditable
         , 'location_id', 'customer_id'
         , 'access_contact'
         , 'location_key_lock'
-        , 'province'
+        , 'province',  'complexnumber',
+        'management_company_id'
         , 'municipality'
         , 'housenumber',
         'image',
@@ -81,17 +69,17 @@ class ObjectLocation extends Model implements Auditable
 
     public function managementcompany()
     {
-        return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
     }
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id')->where('company_id', get_tenant_id());
+        return $this->hasMany(Elevator::class, 'address_id', 'id');
     }
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation')->where('company_id', get_tenant_id());
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation');
     }
 
     public function attachments()

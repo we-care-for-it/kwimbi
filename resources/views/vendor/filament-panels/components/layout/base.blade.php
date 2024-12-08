@@ -94,8 +94,7 @@
             </script>
         @endif
 
-        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::HEAD_END, scopes: $livewire->getRenderHookScopes()) }}
-    </head>
+      </head>
 
     <body
         {{ $attributes

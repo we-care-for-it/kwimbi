@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Enums\ElevatorStatus;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Filament\Facades\Filament;
 /**
  * Class ManagementCompany
  *
@@ -28,48 +26,45 @@ use Filament\Facades\Filament;
  * @package App
  * @mixin Builder
  */
-
-//  use App\Observers\ElevatorObserver;
-// #[ObservedBy([ElevatorObserver::class])]
 class Elevator extends Model implements Auditable
 
 {
-    //use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 
-    public $table = "elevators";
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($query) {
-            $query->company_id = get_tenant_id();
-        });
-    }
- 
+    
     protected function casts(): array
     {
         return [
-            'status_id' => ElevatorStatus::class,             
+            'status_id' => ElevatorStatus::class,
+             
         ];
     }
+
+
+
+    static $rules = [];
+
+    use \OwenIt\Auditing\Auditable;
+
+    // Validation rules for this model
+    static $searchable = ['name', 'address', 'general_emailaddress', 'phonenumber'];
+
+    // Number of items to be shown per page
+    public $table = "elevators";
+
+    // Attributes that should be mass-assignable
+    protected $perPage = 20;
 
     // Attributes that are searchable
     protected $fillable = [
 
-        'status_id', 'customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no','company_id'];
+        'status_id', 'customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'];
 
     public function location()
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
  
-
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
-
     public function management()
     {
         return $this->hasOne(ObjectmanagementCompanies::class, 'id', 'management_id');
@@ -90,10 +85,10 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
     }
 
-    // public function company()
-    // {
-    //     return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
-    // }
+    public function company()
+    {
+        return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
+    }
 
     public function maintenance_company()
     {

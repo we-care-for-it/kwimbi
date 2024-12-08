@@ -116,7 +116,6 @@ export default function fileUploadFormComponent({
                 imageResizeTargetWidth,
                 imageResizeMode,
                 imageResizeUpscale,
-                imageTransformOutputStripImageHead: false,
                 itemInsertLocation: shouldAppendFiles ? 'after' : 'before',
                 ...(placeholder && { labelIdle: placeholder }),
                 maxFiles,

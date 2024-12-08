@@ -13,7 +13,7 @@ use Spatie\Permission\Guard;
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\RefreshesPermissionCache;
-use App\Models\Company;
+
 /**
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
@@ -24,7 +24,6 @@ class Role extends Model implements RoleContract
     use RefreshesPermissionCache;
 
     protected $guarded = [];
-
 
     public function __construct(array $attributes = [])
     {
@@ -118,7 +117,7 @@ class Role extends Model implements RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::findByParam([(new static)->getKeyName() => $id, 'guard_name' => $guardName]);
+        $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
 
         if (! $role) {
             throw RoleDoesNotExist::withId($id, $guardName);
@@ -186,7 +185,7 @@ class Role extends Model implements RoleContract
         $permission = $this->filterPermission($permission, $guardName);
 
         if (! $this->getGuardNames()->contains($permission->guard_name)) {
-            throw GuardDoesNotMatch::create($permission->guard_name, $guardName ? collect([$guardName]) : $this->getGuardNames());
+            throw GuardDoesNotMatch::create($permission->guard_name, $guardName ?? $this->getGuardNames());
         }
 
         return $this->permissions->contains($permission->getKeyName(), $permission->getKey());

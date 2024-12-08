@@ -183,13 +183,13 @@ return [
             'is_max' => [
 
                 'label' => [
-                    'direct' => '以下',
-                    'inverse' => 'より大きい',
+                    'direct' => '最大',
+                    'inverse' => '以上',
                 ],
 
                 'summary' => [
-                    'direct' => ':attributeは:number以下',
-                    'inverse' => ':attributeは:numberより大きい',
+                    'direct' => ':attributeは:number以下である',
+                    'inverse' => 'attributeは:numberより大きい',
                 ],
 
             ],
@@ -197,12 +197,12 @@ return [
             'is_min' => [
 
                 'label' => [
-                    'direct' => '以上',
-                    'inverse' => 'より小さい',
+                    'direct' => '最小',
+                    'inverse' => '以下',
                 ],
 
                 'summary' => [
-                    'direct' => ':attributeは:number以上',
+                    'direct' => ':attributeは:number以上である',
                     'inverse' => ':attributeは:numberより小さい',
                 ],
 

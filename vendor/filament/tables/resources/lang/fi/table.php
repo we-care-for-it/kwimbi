@@ -10,10 +10,6 @@ return [
 
     'columns' => [
 
-        'actions' => [
-            'label' => 'Toiminta|Toiminnat',
-        ],
-
         'text' => [
 
             'actions' => [

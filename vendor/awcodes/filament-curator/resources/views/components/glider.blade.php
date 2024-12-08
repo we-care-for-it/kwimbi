@@ -2,7 +2,7 @@
     @if (str($media->type)->contains('image'))
         <img
             src="{{ $source }}"
-            alt="{{ $attributes->get('alt', $media->alt) }}"
+            alt="{{ $media->alt }}"
             @if ($width && $height)
                 width="{{ $width }}"
                 height="{{ $height }}"

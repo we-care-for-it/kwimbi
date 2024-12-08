@@ -50,8 +50,7 @@
   font-weight: normal!important;
 }
 .fi-input-wrp{
-  background-color: white!important;
-  border-radius: 2px!important;
+  background-color: white!important;;
 }
 
 
@@ -113,20 +112,4 @@
   
 .fi-sidebar-header  {
     background-color:rgb(125,196,129)!important
-}
-.fi-simple-header {
- 
- display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100px;;
- 
-}
-.simple-header-heading{
-  visibility: hidden!;
-}.fi-ac-btn-action{
-  padding: 12px!important;
-  border-radius: 5px!important;
-  min-width:120px!important;
-  background-color: #7DC481!important;
 }

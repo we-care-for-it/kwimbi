@@ -20,7 +20,7 @@ class MemoryCacheDeprecated implements CacheInterface
     /**
      * @param  int|null  $memoryLimit
      */
-    public function __construct(?int $memoryLimit = null)
+    public function __construct(int $memoryLimit = null)
     {
         $this->memoryLimit = $memoryLimit;
     }
@@ -60,7 +60,8 @@ class MemoryCacheDeprecated implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null)  : bool
+  //  public function get($key, $default = null)
     {
         if ($this->has($key)) {
             return $this->cache[$key];

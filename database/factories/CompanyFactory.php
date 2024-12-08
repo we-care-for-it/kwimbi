@@ -2,13 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Enums\EntityType;
-use App\Models\Currency;
-use App\Models\User;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Company>
+ * @extends Factory<Company>
  */
 class CompanyFactory extends Factory
 {
@@ -20,12 +18,7 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
-            'email' => fake()->unique()->companyEmail(),
-            'phone' => fake()->phoneNumber(),
-            'currency_id' => fake()->randomElement(Currency::all()->pluck('id')),
-            'user_id' => fake()->randomElement(User::all()->pluck('id')),
-            'entity_type' => fake()->randomElement(EntityType::cases())->value,
+            'name' => fake()->name(),
         ];
     }
 }

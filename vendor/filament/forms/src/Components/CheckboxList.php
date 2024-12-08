@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 
 class CheckboxList extends Field implements Contracts\CanDisableOptions, Contracts\HasNestedRecursiveValidationRules
 {
-    use Concerns\CanAllowHtml;
     use Concerns\CanBeSearchable;
     use Concerns\CanDisableOptions;
     use Concerns\CanDisableOptionsWhenSelectedInSiblingRepeaterItems;

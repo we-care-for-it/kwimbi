@@ -13,9 +13,6 @@ return [
         'cloudinary',
         'imgix',
     ],
-    'cropper' => [
-        'check_cross_origin' => true,
-    ],
     'curation_formats' => [
         'jpg',
         'jpeg',

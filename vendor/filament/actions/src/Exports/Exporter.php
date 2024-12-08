@@ -143,13 +143,7 @@ abstract class Exporter
 
     public function getFileDisk(): string
     {
-        $disk = config('filament.default_filesystem_disk');
-
-        if (($disk === 'public') && array_key_exists('local', config('filesystems.disks'))) {
-            return 'local';
-        }
-
-        return $disk;
+        return config('filament.default_filesystem_disk');
     }
 
     public function getFileName(Export $export): string

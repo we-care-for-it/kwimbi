@@ -25,9 +25,7 @@ class DownloadImportFailureCsv
         $csv = Writer::createFromFileObject(new SplTempFileObject);
         $csv->setOutputBOM(ByteSequence::BOM_UTF8);
 
-        $firstFailedRow = $import->failedRows()->first();
-
-        $columnHeaders = $firstFailedRow ? array_keys($firstFailedRow->data) : [];
+        $columnHeaders = array_keys($import->failedRows()->first()->data);
         $columnHeaders[] = __('filament-actions::import.failure_csv.error_header');
 
         $csv->insertOne($columnHeaders);

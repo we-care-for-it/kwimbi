@@ -51,6 +51,7 @@
                     });
 
                     $watch('state', (value, old) => {
+                        console.log('new',value,' - old',old)
                         if (value === old) {
                             this.toggleAll();
                         }

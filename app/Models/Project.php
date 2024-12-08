@@ -5,15 +5,10 @@ namespace App\Models;
 use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use OwenIt\Auditing\Contracts\Auditable;
 use Log;
 use Str;
-
-use App\Observers\ProjectObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
- 
-
 class Project extends Model implements Auditable
 {
   //  use SoftDeletes;
@@ -34,7 +29,7 @@ class Project extends Model implements Auditable
     protected $perPage = 20;
 
     // Attributes that should be mass-assignable
-    protected $fillable = ['slug','location_id','name','description','code','customer_id','progress','end_date','begin_date','status_id','budget_hours','budget_costs','contact_person_name'];
+    protected $fillable = ['slug','name','description','code','customer_id','progress','end_date','begin_date','status_id','budget_hours','budget_costs','contact_person_name'];
 
     public function status()
     {
@@ -60,10 +55,7 @@ class Project extends Model implements Auditable
         return $this->hasMany(Quote::class,'project_id','id');
     }
 
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
+
 
     public function locations()
     {

@@ -62,7 +62,7 @@ it('can send invoices', function () {
         'invoice' => $invoice,
     ])
         ->mountAction('send')
-        ->setActionData([
+        ->setActionData('send', data: [
             'email' => $email = fake()->email(),
         ])
 });

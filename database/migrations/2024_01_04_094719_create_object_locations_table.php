@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Company;
+
 return new class extends Migration
 {
     /**
@@ -16,7 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->string('name')->nullable();
-            $table->longtext('image')->nullable();
+$table->longtext('image')->nullable();
+
             $table->string('zipcode')->nullable();     
             $table->string('place')->nullable();
             $table->string('address')->nullable();
@@ -24,11 +25,13 @@ return new class extends Migration
             $table->string('complexnumber')->nullable();
             $table->integer('management_id')->nullable();
             $table->integer('customer_id')->nullable();
-            $table->integer('building_type_id')->nullable();  
+            $table->integer('building_type_id')->nullable();
+            
             $table->integer('building_acces_type_id')->nullable();      
             $table->integer('access_type_id')->nullable();
             $table->longtext('remark')->nullable();
-            $table->string('access_code')->nullable();
+
+ $table->string('access_code')->nullable();
             $table->string('gps_lat')->nullable();
             $table->string('gps_lon')->nullable();
             $table->string('levels')->nullable();
@@ -41,8 +44,7 @@ return new class extends Migration
             $table->string('housenumber')->nullable();
             $table->string('construction_year')->nullable();
             $table->string('building_access_type_id')->nullable();
-            $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
-         
+            
             
 
         });

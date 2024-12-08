@@ -10,7 +10,6 @@
     use Illuminate\Support\Str;
 
     $actions = $getActions();
-    $flatActionsCount = count($getFlatActions());
     $actionsAlignment = $getActionsAlignment();
     $actionsPosition = $getActionsPosition();
     $actionsColumnLabel = $getActionsColumnLabel();
@@ -794,10 +793,7 @@
                                         {{ $actionsColumnLabel }}
                                     </x-filament-tables::header-cell>
                                 @else
-                                    <th
-                                        aria-label="{{ trans_choice('filament-tables::table.columns.actions.label', $flatActionsCount) }}"
-                                        class="fi-ta-actions-header-cell w-1"
-                                    ></th>
+                                    <th class="w-1"></th>
                                 @endif
                             @endif
 
@@ -832,10 +828,7 @@
                                         {{ $actionsColumnLabel }}
                                     </x-filament-tables::header-cell>
                                 @else
-                                    <th
-                                        aria-label="{{ trans_choice('filament-tables::table.columns.actions.label', $flatActionsCount) }}"
-                                        class="fi-ta-actions-header-cell w-1"
-                                    ></th>
+                                    <th class="w-1"></th>
                                 @endif
                             @endif
                         @endif
@@ -857,6 +850,7 @@
                                         ->class([
                                             'fi-table-header-cell-' . str($column->getName())->camel()->kebab(),
                                             'w-full' => blank($columnWidth) && $column->canGrow(default: false),
+                                            '[&:not(:first-of-type)]:border-s [&:not(:last-of-type)]:border-e border-gray-200 dark:border-white/5' => $column->getGroup(),
                                             $getHiddenClasses($column),
                                         ])
                                         ->style([
@@ -877,10 +871,7 @@
                                         {{ $actionsColumnLabel }}
                                     </x-filament-tables::header-cell>
                                 @else
-                                    <th
-                                        aria-label="{{ trans_choice('filament-tables::table.columns.actions.label', $flatActionsCount) }}"
-                                        class="fi-ta-actions-header-cell w-1"
-                                    ></th>
+                                    <th class="w-1"></th>
                                 @endif
                             @endif
 
@@ -917,10 +908,7 @@
                                         {{ $actionsColumnLabel }}
                                     </x-filament-tables::header-cell>
                                 @else
-                                    <th
-                                        aria-label="{{ trans_choice('filament-tables::table.columns.actions.label', $flatActionsCount) }}"
-                                        class="fi-ta-actions-header-cell w-1"
-                                    ></th>
+                                    <th class="w-1"></th>
                                 @endif
                             @endif
                         @endif
