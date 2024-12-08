@@ -76,10 +76,7 @@ class UserResource extends Resource
                             ->relationship('roles', 'name')
                             ->searchable(),
 
-                            Toggle::make('is_active')
-                            ->label('Actief')
-                            ->inline(false),
-
+             
 
                             
                     ]),
@@ -115,9 +112,6 @@ class UserResource extends Resource
             // )
             ->columns([
  
-                ToggleColumn::make('is_active')
-                ->label('Actief'),
-
                 TextColumn::make('name')
                     ->label('Naam')
                     ->searchable()

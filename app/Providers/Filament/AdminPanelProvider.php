@@ -24,7 +24,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\FontProviders\SpatieGoogleFontProvider;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
-use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
+//use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
 
 use Filament\FontProviders\GoogleFontProvider;
 
