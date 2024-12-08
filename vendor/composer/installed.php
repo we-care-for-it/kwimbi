@@ -28,6 +28,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'andrewdwallo/filament-selectify' => array(
+            'pretty_version' => 'v2.0.9',
+            'version' => '2.0.9.0',
+            'reference' => '2c01aae4f9ef9910b8746805ebd3ee6801aad57d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../andrewdwallo/filament-selectify',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'anourvalar/eloquent-serialize' => array(
             'pretty_version' => '1.2.25',
             'version' => '1.2.25.0',

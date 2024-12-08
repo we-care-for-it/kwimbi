@@ -79,6 +79,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
+            'Wallo\\FilamentSelectify\\' => 24,
         ),
         'T' => 
         array (
@@ -352,6 +353,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Wallo\\FilamentSelectify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/andrewdwallo/filament-selectify/src',
         ),
         'Tree\\' => 
         array (
@@ -1387,8 +1392,6 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Policies\\workTypePolicy' => __DIR__ . '/../..' . '/app/Policies/workTypePolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\Filament\\AdminPanelProvider' => __DIR__ . '/../..' . '/app/Providers/Filament/AdminPanelProvider.php',
-        'App\\Providers\\Filament\\AppPanelProvider' => __DIR__ . '/../..' . '/app/Providers/Filament/AppPanelProvider.php',
-        'App\\Providers\\Filament\\ManagementPanelProvider' => __DIR__ . '/../..' . '/app/Providers/Filament/ManagementPanelProvider.php',
         'App\\Services\\AddressService' => __DIR__ . '/../..' . '/app/Services/AddressService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Awcodes\\Curator\\Actions\\MediaAction' => __DIR__ . '/..' . '/awcodes/filament-curator/src/Actions/MediaAction.php',
@@ -11145,6 +11148,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Tree\\Visitor\\YieldVisitor' => __DIR__ . '/..' . '/nicmart/tree/src/Visitor/YieldVisitor.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Wallo\\FilamentSelectify\\Components\\ButtonGroup' => __DIR__ . '/..' . '/andrewdwallo/filament-selectify/src/Components/ButtonGroup.php',
+        'Wallo\\FilamentSelectify\\Components\\Concerns\\HasToggleLabels' => __DIR__ . '/..' . '/andrewdwallo/filament-selectify/src/Components/Concerns/HasToggleLabels.php',
+        'Wallo\\FilamentSelectify\\Components\\ToggleButton' => __DIR__ . '/..' . '/andrewdwallo/filament-selectify/src/Components/ToggleButton.php',
+        'Wallo\\FilamentSelectify\\FilamentSelectifyServiceProvider' => __DIR__ . '/..' . '/andrewdwallo/filament-selectify/src/FilamentSelectifyServiceProvider.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
