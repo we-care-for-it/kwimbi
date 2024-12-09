@@ -82,7 +82,7 @@ class ObjectLocationResource extends Resource
             ->label("Relatie")
             ->placeholder("Niet opgegeven") ,
 
-        TextEntry::make('building_type')
+        TextEntry::make('buildingtype.name')
             ->label("Gebouwtype")
             ->badge()
             ->placeholder("Niet opgegeven") ,
@@ -216,14 +216,14 @@ class ObjectLocationResource extends Resource
                     Forms\Components\TextInput::make("surface")
                         ->label("Aantal m2") ,
 
-                     Select::make("building_type")
-                      ->relationship(name : 'buildingtype', titleAttribute:'name')
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Omschrijving')
-                        ])    
+                     Select::make("building_type_id")
+                     ->options(ObjectBuildingType::pluck('name', 'id'))
+                    // ->createOptionForm([
+                    //     Forms\Components\TextInput::make('name')
+                    //         ->label('Omschrijving')
+                    //     ])    
     
-                         ->preload()
+                    //      ->preload()
                          ->label("Gebouwtype")
                        ->columnSpan(3)
                         
@@ -327,7 +327,7 @@ class ObjectLocationResource extends Resource
                         ->placeholder('Geen beheer gekoppeld')
                         ->searchable() ,
 
-                    Tables\Columns\TextColumn::make("building_type")
+                    Tables\Columns\TextColumn::make("buildingtype.name")
                         ->sortable()
                         ->label("Gebouwtype")
                         ->badge()

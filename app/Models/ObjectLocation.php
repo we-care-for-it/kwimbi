@@ -55,7 +55,7 @@ class ObjectLocation extends Model implements Auditable
         , 'housenumber',
         'image',
 
-        'building_type', 'building_access_type_id', 'remark', 'building_type_id', 'name', 'zipcode', 'place', 'address', 'slug', 'complexnumber', 'management_id'];
+        'building_type_id', 'building_access_type_id', 'remark', 'building_type_id', 'name', 'zipcode', 'place', 'address', 'slug', 'complexnumber', 'management_id'];
 
     public function customer()
     {
@@ -69,7 +69,7 @@ class ObjectLocation extends Model implements Auditable
 
     public function buildingtype()
     {
-        return $this->belongsTo(ObjectBuildingType::class);
+        return $this->belongsTo(objectBuildingType::class, 'building_type_id', 'id');
     }
 
 
