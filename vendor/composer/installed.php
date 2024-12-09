@@ -1462,15 +1462,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'saade/filament-fullcalendar' => array(
-            'pretty_version' => 'v3.2.2',
-            'version' => '3.2.2.0',
-            'reference' => 'd40410e6bc46057628fb9fa8f62b6090452914d3',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../saade/filament-fullcalendar',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'sabberworm/php-css-parser' => array(
             'pretty_version' => 'v8.7.0',
             'version' => '8.7.0.0',

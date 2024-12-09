@@ -82,7 +82,7 @@ class ObjectLocationResource extends Resource
             ->label("Relatie")
             ->placeholder("Niet opgegeven") ,
 
-        TextEntry::make('buildingtype.name')
+        TextEntry::make('building_type')
             ->label("Gebouwtype")
             ->badge()
             ->placeholder("Niet opgegeven") ,
@@ -217,7 +217,7 @@ class ObjectLocationResource extends Resource
                         ->label("Aantal m2") ,
 
                      Select::make("building_type_id")
-                     ->options(ObjectBuildingType::pluck('name', 'id'))
+                 ->options(ObjectBuildingType::pluck('name', 'name'))
                     // ->createOptionForm([
                     //     Forms\Components\TextInput::make('name')
                     //         ->label('Omschrijving')
@@ -327,7 +327,7 @@ class ObjectLocationResource extends Resource
                         ->placeholder('Geen beheer gekoppeld')
                         ->searchable() ,
 
-                    Tables\Columns\TextColumn::make("buildingtype.name")
+                    Tables\Columns\TextColumn::make("building_type_id")
                         ->sortable()
                         ->label("Gebouwtype")
                         ->badge()
@@ -342,10 +342,10 @@ class ObjectLocationResource extends Resource
                             ->label('Relatie')
                             ->Searchable() ,
 
-                        // SelectFilter::make('building_type')
-                        //     ->options(ObjectBuildingType::pluck('name', 'name'))
-                        //     ->label('Gebouwtype')
-                        //     ->Searchable(),
+                        SelectFilter::make('building_type')
+                            ->options(ObjectBuildingType::pluck('name', 'name'))
+                            ->label('Gebouwtype')
+                            ->Searchable(),
 
                         SelectFilter::make('management_id')
                             ->label('Beheerder')

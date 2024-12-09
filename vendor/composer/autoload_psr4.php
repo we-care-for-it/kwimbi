@@ -84,7 +84,6 @@ return array(
     'ShuvroRoy\\FilamentSpatieLaravelBackup\\' => array($vendorDir . '/shuvroroy/filament-spatie-laravel-backup/src'),
     'Sentry\\' => array($vendorDir . '/sentry/sentry/src'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
-    'Saade\\FilamentFullCalendar\\' => array($vendorDir . '/saade/filament-fullcalendar/src'),
     'STS\\FilamentImpersonate\\' => array($vendorDir . '/stechstudio/filament-impersonate/src'),
     'RyanChandler\\BladeCaptureDirective\\Database\\Factories\\' => array($vendorDir . '/ryangjchandler/blade-capture-directive/database/factories'),
     'RyanChandler\\BladeCaptureDirective\\' => array($vendorDir . '/ryangjchandler/blade-capture-directive/src'),

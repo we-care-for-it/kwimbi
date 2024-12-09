@@ -24,10 +24,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\FontProviders\SpatieGoogleFontProvider;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
-//use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin; 
-
 use Filament\FontProviders\GoogleFontProvider;
-
 use Awcodes\LightSwitch\LightSwitchPlugin;
  
  
@@ -90,7 +87,7 @@ class AdminPanelProvider extends PanelProvider
                 FilamentShieldPlugin::make(),
             ])
             ->plugin(
-                ThemesPlugin::make()
+               ThemesPlugin::make()
             );
     }
 }
