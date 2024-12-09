@@ -283,7 +283,7 @@ class ObjectLocationResource extends Resource
                         }
                         else
                         {
-                            return $record->address  . $housnumber . " - " . $record->zipcode . "  " . $record->place ;
+                            return $record->address  . $housenumber . " - " . $record->zipcode . "  " . $record->place ;
                         }
 
                     }) ,
