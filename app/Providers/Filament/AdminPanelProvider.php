@@ -56,10 +56,10 @@ class AdminPanelProvider extends PanelProvider
             ])       
             ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
             )  
-            // ->plugins([FilamentFullCalendarPlugin::make()])->plugin(
-            //    // \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-            //      //   ->allowShield()
-            // )
+            ->plugin(
+               \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+                   ->allowShield()
+            )
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
