@@ -122,7 +122,8 @@ class ObjectResource extends Resource
         Components\Split::make([Components\Grid::make(4)->schema([
    
                 Components\TextEntry::make('nobo_no')
-                    ->label("NOBO Nummer") , 
+                    ->label("NOBO Nummer")
+                    ->placeholder("Niet opgegeven") , 
         
                 Components\TextEntry::make('type.name')
                     ->badge()
@@ -166,7 +167,12 @@ class ObjectResource extends Resource
                 
                 Components\TextEntry::make('inspectioncompany.name')
                     ->label("Onderhoudspartij")
-                    ->placeholder("Niet opgegeven")  
+                    ->placeholder("Niet opgegeven"),
+                
+                Components\TextEntry::make('name')
+                    ->label("Naam")
+                    ->placeholder("Niet opgegeven")
+
  
             , ]) ,
 

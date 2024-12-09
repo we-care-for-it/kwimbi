@@ -48,7 +48,7 @@ class ObjectsRelationManager extends RelationManager
 
 
                         Forms\Components\TextInput::make("name")
-                            ->label("Omschrijving"),
+                            ->label("Naam"),
 
                         Forms\Components\TextInput::make('unit_no')
 
@@ -88,7 +88,7 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Nummer')->searchable()->sortable()
                     ->placeholder('Geen unitnummer'),
 
-                Tables\Columns\TextColumn::make('name')->badge()
+                Tables\Columns\TextColumn::make('name') 
                     ->label('Naam')->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('nobo_no')

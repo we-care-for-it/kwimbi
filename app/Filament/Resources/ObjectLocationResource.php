@@ -65,7 +65,13 @@ class ObjectLocationResource extends Resource
             ->label("Adres")->getStateUsing(function (ObjectLocation $record) : ? string
         {
 
-            return $record->address . " - " . $record->zipcode . " " . $record->place;
+
+            $housenumber = "";
+            if($record->housenumber){
+                $housenumber = " ". $record->housenumber;
+            } 
+
+            return $record->address . " "  . $housenumber . " - " . $record->zipcode . " " . $record->place;
 
         })
             ->placeholder("Niet opgegeven") ,
