@@ -376,17 +376,17 @@ class ObjectLocationResource extends Resource
                         ->filtersFormColumns(2)
 
                     // layout: FiltersLayout::AboveContent
-                    ->actions([Tables\Actions\Action::make('Download')
-                        ->label('Toon details')
-                        ->color('success')
-                        ->icon('heroicon-m-eye')->url(function (ObjectLocation $record)
-                    {
-                        return "/admin/object-locations/" . $record->id;
-                    }) ,
+                    // ->actions([Tables\Actions\Action::make('Download')
+                    //     ->label('Toon details')
+                    //     ->color('success')
+                    //     ->icon('heroicon-m-eye')->url(function (ObjectLocation $record)
+                    // {
+                    //     return "/admin/object-locations/" . $record->id;
+                    // }) ,
 
-                    Tables\Actions\EditAction::make() ->slideOver() 
-                        ->label('Wijzigen')
-                    ])
+                    // Tables\Actions\EditAction::make() ->slideOver() 
+                    //     ->label('Wijzigen')
+                    // ])
 
                         ->bulkActions([
 
