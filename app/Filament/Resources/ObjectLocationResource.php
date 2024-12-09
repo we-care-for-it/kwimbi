@@ -121,9 +121,11 @@ class ObjectLocationResource extends Resource
         return $form->schema([Forms\Components\Section::make()
             ->schema([
 
-            Grid::make(4)
+            Grid::make(2)
                 ->schema([Forms\Components\TextInput::make("name")
-                ->label("Naam") , Forms\Components\TextInput::make("Complexnumber")
+                ->label("Naam") ,
+                
+                Forms\Components\TextInput::make("complexnumber")
                 ->label("Complexnumber") ,
 
             Select::make('management_id')
@@ -203,7 +205,7 @@ class ObjectLocationResource extends Resource
                     // ...
                     ]) , ])
                         ->columns(2)
-                        ->columnSpan(2) ,
+                        ->columnSpan(3) ,
 
                     Forms\Components\Section::make("Gebouwgegevens")
                         ->schema([Forms\Components\Grid::make(3)
@@ -233,7 +235,7 @@ class ObjectLocationResource extends Resource
                         ])
                          
                          , ])
-                        ->columnSpan(["lg" => 1]) , ])
+                        ->columnSpan(["lg" => 2]) , ])
                         ->columns(3);
 
                     Section::make()
@@ -382,7 +384,7 @@ class ObjectLocationResource extends Resource
                         return "/admin/object-locations/" . $record->id;
                     }) ,
 
-                    Tables\Actions\EditAction::make() ->modalWidth(MaxWidth::SevenExtraLarge)
+                    Tables\Actions\EditAction::make() ->slideOver() 
                         ->label('Wijzigen')
                     ])
 
