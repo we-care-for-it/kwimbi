@@ -17,16 +17,6 @@ class EditObjectInspection extends EditRecord
            
  
 
-            Actions\Action::make('cancel_top')
-            ->iconButton()
-            ->color('gray')
-            ->link()
-            ->icon('heroicon-o-arrow-uturn-left')
-                        
-            ->url(function ($record) {
-                return "/admin/object-inspections/".$record->id;
-                   
-            }),
 
  
 
@@ -34,11 +24,11 @@ class EditObjectInspection extends EditRecord
                 ->iconButton()
                 ->icon('heroicon-o-trash'),
 
-            // Actions\Action::make('cancel_top')
-            //     ->label('Afbreken')
-            //     ->icon('heroicon-o-arrow-uturn-left')
-            //     ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
-            //     ->iconButton(),
+            Actions\Action::make('cancel_top')
+                ->label('Afbreken')
+                ->icon('heroicon-o-arrow-uturn-left')
+                ->url($this->previousUrl ?? $this->getResource()::getUrl('index'))
+                ->iconButton(),
                 
 
                 Actions\Action::make('save_top')
@@ -57,7 +47,7 @@ class EditObjectInspection extends EditRecord
 
     public function getSubheading(): ?string
     {
-        if ($this->getRecord()->if_match) {
+        if ($this->getRecord()->schedule_run_token) {
             return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
         } else {
             return "";

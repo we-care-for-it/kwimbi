@@ -72,13 +72,15 @@ class ViewObjectInspection extends ViewRecord
         Actions\EditAction::make('cancel_top')
         ->icon('heroicon-o-pencil')
         ->label('Wijzig')
+        
+      //  ->hidden(fn($record) => $record?->schedule_run_token &&  $record?->if_match <> 0)
         ];
     }
 
 
     public function getSubheading(): ?string
     {  
-        if ($this->getRecord()->if_match) {
+        if ($this->getRecord()->schedule_run_token) {
             return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
         } else {
             return "";

@@ -58,7 +58,12 @@ class ObjectInspectionResource extends Resource
             ->label("Liftadres")->getStateUsing(function ($record) : ? string
         {
 
-            return $record ?->elevator ?->location ?->address . "," . $record ?->elevator ?->location ?->zipcode . "," . $record ?->elevator ?->location ?->place;
+            if($record?->elevator_id){
+                return $record ?->elevator ?->location ?->address . " " . $record ?->elevator ?->location ?->zipcode . " " . $record ?->elevator ?->location ?->place;
+            }else{
+                return "Niet gekoppeld";
+            }
+            
         })
 
         ,
@@ -169,12 +174,12 @@ class ObjectInspectionResource extends Resource
         ->options(InspectionStatus::class) ,
 
 
+
         Select::make("elevator_id")
             ->label("NoBo Nummer")
             ->required()
-            ->options(Elevator::all()->pluck('nobo_no', 'id'))
+            ->options(Elevator::whereNot('nobo_no',NULL)->pluck('nobo_no', 'id'))
             ->searchable(),
-
              
         Select::make("inspection_company_id")
             ->label("Keuringsinstantie")
@@ -205,10 +210,8 @@ class ObjectInspectionResource extends Resource
     {
         return $table
 
-
-->groups([Group::make('status_id')
+    ->groups([Group::make('status_id')
             ->label('Status') ,
-
         Group::make('elevator.location_id')
             ->label('Locatie') ,
 
@@ -217,13 +220,14 @@ class ObjectInspectionResource extends Resource
 
         Group::make('elevator.maintenance_company_id')
             ->label('Onderhoudspartij'),
-
         ])
-  
-->columns([
+    ->columns([
+
+
 
         Tables\Columns\TextColumn::make("elevator.nobo_no")
             ->label("Object")
+            ->placeholder("Geen object")
             ->sortable()
             ->wrap() ,
 
@@ -232,26 +236,34 @@ class ObjectInspectionResource extends Resource
             ->searchable()
             ->sortable()
             ->wrap()
-->getStateUsing(function (ObjectInspection $record) : ? string
+            ->placeholder("Geen object")
+            ->getStateUsing(function (ObjectInspection $record) : ? string
+                {
+                    if($record?->elevator_id){
+                        return $record ?->elevator ?->location ?->address . "," . $record ?->elevator ?->location ?->zipcode . "," . $record ?->elevator ?->location ?->place;
+                    }else{
+                        return "-";
+                    }
+                })
+
+
+    ->description(function (ObjectInspection $record) : ? string
         {
-
-            return $record ?->elevator ?->location ?->address;
-        })
-->description(function (ObjectInspection $record) : ? string
-        {
-
-            return $record ?->elevator ?->location ?->zipcode . " - " . $record ?->elevator ?->location ?->place;
-
-        }) ,
+           
+                return $record ?->elevator ?->location ?->zipcode . "   " . $record ?->elevator ?->location ?->place;
+     
+        }),
+    
 
         Tables\Columns\TextColumn::make("executed_datetime")
             ->dateTime("d-m-Y")
-            ->label("Begindatum") ,
+            ->label("Begindatum")
+            ->sortable(),
 
         Tables\Columns\TextColumn::make("end_date")
             ->dateTime("d-m-Y")
             ->label("Einddatum")
-            ->sortable() ,
+            ->sortable(),
 
         Tables\Columns\TextColumn::make("type")
             ->label("Type keuring")
@@ -283,14 +295,14 @@ class ObjectInspectionResource extends Resource
 
         ])
             ->filtersFormColumns(2)
-            ->actions([
+            //->actions([
 
-        Tables\Actions\EditAction::make()
-            ->label("Meer details") ])
+        // Tables\Actions\EditAction::make()
+        //     ->label("Meer details") ])
 
-            ->recordUrl(function ($record) {
-                return "/admin/object-inspections/" . $record->id;
-            })
+        //     ->recordUrl(function ($record) {
+        //         return "/admin/object-inspections/" . $record->id;
+        //     })
 
             
             ->bulkActions([Tables\Actions\BulkActionGroup::make([

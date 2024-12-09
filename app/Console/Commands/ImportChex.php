@@ -31,14 +31,12 @@ class ImportChex extends Command
     {
 
         try {
-          
-
         $url = config("services.chex.url") . "/inspections";
         $schedule_run_token = Str::random();
         $response = Http::withHeaders([
             "Authorization" => config("services.chex.token"),
         ])->get($url, [
-            "fromDate" => "2024-07-07",
+            "fromDate" => date('Y-m-d'),
         ]);
 
         $records = json_decode($response->getBody())->result;

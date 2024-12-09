@@ -107,7 +107,9 @@ class ItemdataRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->label("Toevoegen")
-                    ->modalHeading("Keuringspunt toevoegen"),
+                //    ->hidden($this->getOwnerRecord()->schedule_run_token)
+              
+                        ->modalHeading("Keuringspunt toevoegen"),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
