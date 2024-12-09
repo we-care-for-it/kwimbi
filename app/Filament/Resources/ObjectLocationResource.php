@@ -252,13 +252,10 @@ class ObjectLocationResource extends Resource
                         
                         Tables\Columns\TextColumn::make('address')->getStateUsing(function (ObjectLocation $record) : ? string
                     {
-
+                        $housenumber = "";
                         if($record->housenumber){
                             $housenumber = " ". $record->housenumber;
-                        }else{
-                            $housenumber = NULL;
-                        }
-
+                        } 
 
                     
 
@@ -268,18 +265,16 @@ class ObjectLocationResource extends Resource
                         }
                         else
                         {
-                            return $record->address . " - " . $record->zipcode . " - " . $record->place;
+                            return $record->address   . " ". $housenumber . " - " . $record->zipcode . " - " . $record->place;
                         }
                     })
                         ->searchable()
                         ->label('Adres')->description(function (ObjectLocation $record)
                     {
 
-
+                        $housenumber = "";
                         if($record->housenumber){
                             $housenumber = " ". $record->housenumber;
-                        }else{
-                            $housenumber = NULL;
                         }
                     
 
@@ -289,7 +284,7 @@ class ObjectLocationResource extends Resource
                         }
                         else
                         {
-                            return $record->address  . $housenumber . " - " . $record->zipcode . "  " . $record->place ;
+                            return $record->address  . " ". $housenumber . " - " . $record->zipcode . "  " . $record->place ;
                         }
 
                     }) ,
