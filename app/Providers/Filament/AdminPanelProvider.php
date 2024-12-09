@@ -41,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+             ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,

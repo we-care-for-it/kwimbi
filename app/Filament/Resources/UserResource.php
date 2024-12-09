@@ -46,6 +46,13 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
+    public static function getEloquentQuery(): Builder
+{
+    return static::getModel()::query()->whereNot('email', 'superadmin@digilevel.nl');
+}
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -72,7 +79,8 @@ class UserResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->required(),
 
-                            CheckboxList::make('roles')
+                            select::make('roles')
+                            ->preload()
                             ->relationship('roles', 'name')
                             ->searchable(),
 
@@ -147,15 +155,15 @@ class UserResource extends Resource
             ])
             ->filters([
                 
-                SelectFilter::make('customer_id')
-                ->searchable()
-                ->options(Customer::all()->pluck('name', 'id'))
-                ->label('Relatie'),
+                // SelectFilter::make('customer_id')
+                // ->searchable()
+                // ->options(Customer::all()->pluck('name', 'id'))
+                // ->label('Relatie'),
                 
-                SelectFilter::make('management_id')
-                ->searchable()
-                ->options(ObjectManagementCompany::all()->pluck('name', 'id'))
-                ->label('Beheerder'),
+                // SelectFilter::make('management_id')
+                // ->searchable()
+                // ->options(ObjectManagementCompany::all()->pluck('name', 'id'))
+                // ->label('Beheerder'),
                          
 
             ], layout: FiltersLayout::AboveContent)
