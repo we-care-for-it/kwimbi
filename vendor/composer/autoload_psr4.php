@@ -183,6 +183,8 @@ return array(
     'Bilfeldt\\LaravelRouteStatistics\\Database\\Factories\\' => array($vendorDir . '/bilfeldt/laravel-route-statistics/database/factories'),
     'Bilfeldt\\LaravelRouteStatistics\\' => array($vendorDir . '/bilfeldt/laravel-route-statistics/src'),
     'Bilfeldt\\CorrelationId\\' => array($vendorDir . '/bilfeldt/laravel-correlation-id/src'),
+    'BezhanSalleh\\PanelSwitch\\Database\\Factories\\' => array($vendorDir . '/bezhansalleh/filament-panel-switch/database/factories'),
+    'BezhanSalleh\\PanelSwitch\\' => array($vendorDir . '/bezhansalleh/filament-panel-switch/src'),
     'BezhanSalleh\\FilamentShield\\Database\\Factories\\' => array($vendorDir . '/bezhansalleh/filament-shield/database/factories'),
     'BezhanSalleh\\FilamentShield\\' => array($vendorDir . '/bezhansalleh/filament-shield/src'),
     'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),

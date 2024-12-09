@@ -14,6 +14,7 @@
         "awcodes/recently": "^1.0",
         "awt/apilogger": "@dev",
         "barryvdh/laravel-dompdf": "^3.0",
+        "bezhansalleh/filament-panel-switch": "^1.0",
         "bezhansalleh/filament-shield": "^3.2",
         "devaslanphp/filament-avatar": "^1.0",
         "eightynine/filament-excel-import": "^3.1",

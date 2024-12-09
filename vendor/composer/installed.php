@@ -102,6 +102,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'bezhansalleh/filament-panel-switch' => array(
+            'pretty_version' => '1.0.7',
+            'version' => '1.0.7.0',
+            'reference' => 'ff16445ca70551954bd1c6d4a257f13c6f30af47',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bezhansalleh/filament-panel-switch',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'bezhansalleh/filament-shield' => array(
             'pretty_version' => '3.3.4',
             'version' => '3.3.4.0',

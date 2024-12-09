@@ -301,6 +301,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'Bilfeldt\\LaravelRouteStatistics\\Database\\Factories\\' => 51,
             'Bilfeldt\\LaravelRouteStatistics\\' => 32,
             'Bilfeldt\\CorrelationId\\' => 23,
+            'BezhanSalleh\\PanelSwitch\\Database\\Factories\\' => 44,
+            'BezhanSalleh\\PanelSwitch\\' => 25,
             'BezhanSalleh\\FilamentShield\\Database\\Factories\\' => 47,
             'BezhanSalleh\\FilamentShield\\' => 28,
             'Barryvdh\\DomPDF\\' => 16,
@@ -1041,6 +1043,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             0 => __DIR__ . '/..' . '/bilfeldt/laravel-correlation-id/src',
         ),
+        'BezhanSalleh\\PanelSwitch\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/database/factories',
+        ),
+        'BezhanSalleh\\PanelSwitch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/src',
+        ),
         'BezhanSalleh\\FilamentShield\\Database\\Factories\\' => 
         array (
             0 => __DIR__ . '/..' . '/bezhansalleh/filament-shield/database/factories',
@@ -1511,6 +1521,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'BezhanSalleh\\FilamentShield\\Traits\\HasPanelShield' => __DIR__ . '/..' . '/bezhansalleh/filament-shield/src/Traits/HasPanelShield.php',
         'BezhanSalleh\\FilamentShield\\Traits\\HasShieldFormComponents' => __DIR__ . '/..' . '/bezhansalleh/filament-shield/src/Traits/HasShieldFormComponents.php',
         'BezhanSalleh\\FilamentShield\\Traits\\HasWidgetShield' => __DIR__ . '/..' . '/bezhansalleh/filament-shield/src/Traits/HasWidgetShield.php',
+        'BezhanSalleh\\PanelSwitch\\Concerns\\HasPanelValidator' => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/src/Concerns/HasPanelValidator.php',
+        'BezhanSalleh\\PanelSwitch\\Facades\\PanelSwitch' => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/src/Facades/PanelSwitch.php',
+        'BezhanSalleh\\PanelSwitch\\PanelSwitch' => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/src/PanelSwitch.php',
+        'BezhanSalleh\\PanelSwitch\\PanelSwitchServiceProvider' => __DIR__ . '/..' . '/bezhansalleh/filament-panel-switch/src/PanelSwitchServiceProvider.php',
         'Bilfeldt\\CorrelationId\\CorrelationIdServiceProvider' => __DIR__ . '/..' . '/bilfeldt/laravel-correlation-id/src/CorrelationIdServiceProvider.php',
         'Bilfeldt\\CorrelationId\\Jobs\\Middleware\\LogContext' => __DIR__ . '/..' . '/bilfeldt/laravel-correlation-id/src/Jobs/Middleware/LogContext.php',
         'Bilfeldt\\CorrelationId\\Middleware\\ClientRequestIdMiddleware' => __DIR__ . '/..' . '/bilfeldt/laravel-correlation-id/src/Middleware/ClientRequestIdMiddleware.php',
