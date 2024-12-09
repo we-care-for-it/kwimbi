@@ -82,7 +82,7 @@ class ObjectLocationResource extends Resource
             ->label("Relatie")
             ->placeholder("Niet opgegeven") ,
 
-        TextEntry::make('building_type')
+        TextEntry::make('buildingtype.name')
             ->label("Gebouwtype")
             ->badge()
             ->placeholder("Niet opgegeven") ,
@@ -217,13 +217,14 @@ class ObjectLocationResource extends Resource
                         ->label("Aantal m2") ,
 
                      Select::make("building_type_id")
-                 ->options(ObjectBuildingType::pluck('name', 'name'))
-                    // ->createOptionForm([
-                    //     Forms\Components\TextInput::make('name')
-                    //         ->label('Omschrijving')
-                    //     ])    
+                 ->options(ObjectBuildingType::pluck('name', 'id'))
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Omschrijving')
+                        ])    
     
-                    //      ->preload()
+                         ->preload()
+                        ->searchable()
                          ->label("Gebouwtype")
                        ->columnSpan(3)
                         
@@ -327,7 +328,7 @@ class ObjectLocationResource extends Resource
                         ->placeholder('Geen beheer gekoppeld')
                         ->searchable() ,
 
-                    Tables\Columns\TextColumn::make("building_type_id")
+                    Tables\Columns\TextColumn::make("buildingtype.name")
                         ->sortable()
                         ->label("Gebouwtype")
                         ->badge()
@@ -343,7 +344,7 @@ class ObjectLocationResource extends Resource
                             ->Searchable() ,
 
                         SelectFilter::make('building_type')
-                            ->options(ObjectBuildingType::pluck('name', 'name'))
+                            ->options(ObjectBuildingType::pluck('name', 'id'))
                             ->label('Gebouwtype')
                             ->Searchable(),
 
