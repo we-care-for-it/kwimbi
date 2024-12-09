@@ -253,6 +253,11 @@ class ObjectLocationResource extends Resource
                         Tables\Columns\TextColumn::make('address')->getStateUsing(function (ObjectLocation $record) : ? string
                     {
 
+                        if($record->housenumber){
+                            $housnumber = " ". $record->housenumber;
+                        }
+                    
+
                         if ($record ?->name)
                         {
                             return $record ?->name;
@@ -266,13 +271,19 @@ class ObjectLocationResource extends Resource
                         ->label('Adres')->description(function (ObjectLocation $record)
                     {
 
+
+                        if($record->housenumber){
+                            $housnumber = " ". $record->housenumber;
+                        }
+                    
+
                         if (!$record ?->name)
                         {
                             return $record ?->name;
                         }
                         else
                         {
-                            return $record->address . " - " . $record->zipcode . "  " . $record->place;
+                            return $record->address  . $housnumber . " - " . $record->zipcode . "  " . $record->place ;
                         }
 
                     }) ,
@@ -370,7 +381,7 @@ class ObjectLocationResource extends Resource
                         return "/admin/object-locations/" . $record->id;
                     }) ,
 
-                    Tables\Actions\EditAction::make()
+                    Tables\Actions\EditAction::make() ->modalWidth(MaxWidth::SevenExtraLarge)
                         ->label('Wijzigen')
                     ])
 
@@ -404,7 +415,8 @@ class ObjectLocationResource extends Resource
 
                 public static function getRelations() : array
                 {
-                    return [RelationManagers\NotesRelationManager::class , RelationManagers\ObjectsRelationManager::class , RelationManagers\ProjectsRelationManager::class , RelationManagers\AttachmentsRelationManager::class ];
+                    return [
+                        RelationManagers\NotesRelationManager::class , RelationManagers\ObjectsRelationManager::class , RelationManagers\ProjectsRelationManager::class , RelationManagers\AttachmentsRelationManager::class ];
                 }
 
                 public static function getPages() : array
