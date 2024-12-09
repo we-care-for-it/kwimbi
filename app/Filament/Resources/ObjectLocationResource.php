@@ -28,7 +28,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Actions\Exports\Models\Export;
-
+use Filament\Tables\Grouping\Group;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\ViewEntry;
@@ -138,6 +138,7 @@ class ObjectLocationResource extends Resource
                 ->relationship(name : 'managementcompany', titleAttribute:'name')
                 ->searchable()
                 ->label('Beheerder')
+                ->preload()
                 ->createOptionForm([
                     Forms\Components\TextInput::make('name')
                         ->label('Naam van de beheerder')
@@ -146,6 +147,7 @@ class ObjectLocationResource extends Resource
             Select::make('customer_id')
                 ->searchable()
                 ->label('Relatie')
+                ->preload()
                 ->required()
                 ->createOptionForm([Forms\Components\TextInput::make('name')
                 ->required()
@@ -254,22 +256,52 @@ class ObjectLocationResource extends Resource
 
                 public static function table(Table $table) : Table
                 {
-                    return $table->columns(
+                    return $table
+                    
+                    
+                    ->groups([
+                        Group::make('complexnumber')
+                            ->label('Complex'),
+                            Group::make('customer_id')
+                            ->label('Relatie'),
+                            Group::make('buildingtype.name')
+                            ->label('Gebouwtype'),
+                            Group::make('management_id')
+                            ->label('Beheerder'),
+
+                    ])->columns(
+
+
+
+
                         
                         [
                         
                         Tables\Columns\TextColumn::make('address')->getStateUsing(function (ObjectLocation $record) : ? string
                     {
                         $housenumber = "";
+                        $complexnumber = "";
+                        $name = "";
                         if($record->housenumber){
                             $housenumber = " ". $record->housenumber;
                         } 
 
                     
 
-                        if ($record ?->name)
+                        if ($record ?->name || $record ?->complexnumber )
                         {
-                            return $record ?->name;
+                            if($record ?->complexnumber) {
+                                $complexnumber = " - " .$record ?->complexnumber;
+                            }
+
+                            if($record ?->name) {
+                                $name = " - " .$record ?->name;
+                            }
+
+
+
+
+                            return $record ?->name . " " . $complexnumber;
                         }
                         else
                         {
@@ -288,7 +320,7 @@ class ObjectLocationResource extends Resource
 
                         if (!$record ?->name)
                         {
-                            return $record ?->name;
+                            return $record ?->name . $record ?->name;
                         }
                         else
                         {
@@ -374,7 +406,7 @@ class ObjectLocationResource extends Resource
 
                         SelectFilter::make('place')
                             ->label('Plaats')
-                            ->options(ObjectLocation::all()
+                            ->options(ObjectLocation::whereNotNull('place')
                             ->pluck('place', 'place'))
                             ->searchable() ,
                         Tables\Filters\TrashedFilter::make() ,
