@@ -16,7 +16,7 @@ class ViewObject extends ViewRecord
        
         if ($this->getRecord()->location) {
 
-           
+            $location_name = NULL;
             if( $this->getRecord()->location?->name){
                 $location_name =  " | " .  $this->getRecord()->location?->name;
             }
