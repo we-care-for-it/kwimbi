@@ -317,15 +317,9 @@ class ObjectLocationResource extends Resource
                             $housenumber = " ". $record->housenumber;
                         }
                     
-
-                        if (!$record ?->name)
-                        {
-                            return $record ?->name . $record ?->name;
-                        }
-                        else
-                        {
+ 
                             return $record->address  . " ". $housenumber . " - " . $record->zipcode . "  " . $record->place ;
-                        }
+                 
 
                     }) ,
 
