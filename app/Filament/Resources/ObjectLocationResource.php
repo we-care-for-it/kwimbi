@@ -288,14 +288,14 @@ class ObjectLocationResource extends Resource
 
                     
 
-                        if ($record ?->name || $record ?->complexnumber )
+                        if ($record ?->name or $record ?->complexnumber )
                         {
                             if($record ?->complexnumber) {
-                                $complexnumber = " - " .$record ?->complexnumber;
+                                $complexnumber = $record ?->complexnumber;
                             }
 
                             if($record ?->name) {
-                                $name = " - " .$record ?->name;
+                                $name = $record ?->name;
                             }
 
 
