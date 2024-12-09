@@ -254,8 +254,12 @@ class ObjectLocationResource extends Resource
                     {
 
                         if($record->housenumber){
-                            $housnumber = " ". $record->housenumber;
+                            $housenumber = " ". $record->housenumber;
+                        }else{
+                            $housenumber = NULL;
                         }
+
+
                     
 
                         if ($record ?->name)
@@ -273,7 +277,9 @@ class ObjectLocationResource extends Resource
 
 
                         if($record->housenumber){
-                            $housnumber = " ". $record->housenumber;
+                            $housenumber = " ". $record->housenumber;
+                        }else{
+                            $housenumber = NULL;
                         }
                     
 
