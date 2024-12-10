@@ -34,6 +34,7 @@
         "solution-forest/filament-firewall": "^2.0",
         "stechstudio/filament-impersonate": "^3.14",
         "swisnl/filament-backgrounds": "^1.1",
+        "tomatophp/filament-logger": "^1.0",
         "tomatophp/filament-pwa": "^1.0",
         "z3d0x/filament-logger": "^0.7.2"
     },

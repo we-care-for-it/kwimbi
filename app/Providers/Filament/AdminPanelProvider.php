@@ -45,7 +45,8 @@ class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,
-            ])  
+            ])
+            ->plugin(\TomatoPHP\FilamentLogger\FilamentLoggerPlugin::make())
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
            ->brandLogo(fn() => view('components.logo'))
             ->darkMode(false)

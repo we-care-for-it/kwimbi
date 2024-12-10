@@ -204,11 +204,13 @@ class ObjectLocationResource extends Resource
 
                     Forms\Components\TextInput::make("gps_lat")
                         ->label("GPS latitude")
-                        ->columnSpan(1) ,
+                        ->columnSpan(1)
+                        ->hidden(),
 
                     Forms\Components\TextInput::make("gps_lon")
                         ->label("GPS longitude")
-                        ->columnSpan(1) ,
+                        ->columnSpan(1)
+                        ->hidden(),
 
                     // ...
                     ]) , ])

@@ -85,6 +85,7 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'Tree\\' => 5,
             'TomatoPHP\\FilamentSettingsHub\\' => 30,
             'TomatoPHP\\FilamentPWA\\' => 22,
+            'TomatoPHP\\FilamentLogger\\' => 25,
             'TomatoPHP\\ConsoleHelpers\\' => 25,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
@@ -374,6 +375,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'TomatoPHP\\FilamentPWA\\' => 
         array (
             0 => __DIR__ . '/..' . '/tomatophp/filament-pwa/src',
+        ),
+        'TomatoPHP\\FilamentLogger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomatophp/filament-logger/src',
         ),
         'TomatoPHP\\ConsoleHelpers\\' => 
         array (
@@ -11369,6 +11374,28 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'TomatoPHP\\ConsoleHelpers\\Traits\\HandleModules' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/HandleModules.php',
         'TomatoPHP\\ConsoleHelpers\\Traits\\HandleStub' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/HandleStub.php',
         'TomatoPHP\\ConsoleHelpers\\Traits\\RunCommand' => __DIR__ . '/..' . '/tomatophp/console-helpers/src/Traits/RunCommand.php',
+        'TomatoPHP\\FilamentLogger\\Console\\FilamentLoggerInstall' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Console/FilamentLoggerInstall.php',
+        'TomatoPHP\\FilamentLogger\\Contracts\\InterpolationContract' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Contracts/InterpolationContract.php',
+        'TomatoPHP\\FilamentLogger\\EventServiceProvider' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/EventServiceProvider.php',
+        'TomatoPHP\\FilamentLogger\\Facades\\FilamentLogger' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Facades/FilamentLogger.php',
+        'TomatoPHP\\FilamentLogger\\FilamentLoggerPlugin' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/FilamentLoggerPlugin.php',
+        'TomatoPHP\\FilamentLogger\\FilamentLoggerServiceProvider' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/FilamentLoggerServiceProvider.php',
+        'TomatoPHP\\FilamentLogger\\Filament\\Resources\\ActivityResource' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Filament/Resources/ActivityResource.php',
+        'TomatoPHP\\FilamentLogger\\Filament\\Resources\\ActivityResource\\Pages\\ManageActivities' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Filament/Resources/ActivityResource/Pages/ManageActivities.php',
+        'TomatoPHP\\FilamentLogger\\Formatters\\LineWithHashFormatter' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Formatters/LineWithHashFormatter.php',
+        'TomatoPHP\\FilamentLogger\\Handlers\\RequestLoggerHandler' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Handlers/RequestLoggerHandler.php',
+        'TomatoPHP\\FilamentLogger\\Interpolations\\BaseInterpolation' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Interpolations/BaseInterpolation.php',
+        'TomatoPHP\\FilamentLogger\\Interpolations\\RequestInterpolation' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Interpolations/RequestInterpolation.php',
+        'TomatoPHP\\FilamentLogger\\Interpolations\\ResponseInterpolation' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Interpolations/ResponseInterpolation.php',
+        'TomatoPHP\\FilamentLogger\\Jobs\\RequestLogJob' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Jobs/RequestLogJob.php',
+        'TomatoPHP\\FilamentLogger\\Listeners\\RequestLoggerListener' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Listeners/RequestLoggerListener.php',
+        'TomatoPHP\\FilamentLogger\\Listeners\\RequestLoggerListenerHandler' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Listeners/RequestLoggerListenerHandler.php',
+        'TomatoPHP\\FilamentLogger\\LogCustomizers\\HashLogCustomizer' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/LogCustomizers/HashLogCustomizer.php',
+        'TomatoPHP\\FilamentLogger\\Loggers\\RequestLogger' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Loggers/RequestLogger.php',
+        'TomatoPHP\\FilamentLogger\\Models\\Activity' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Models/Activity.php',
+        'TomatoPHP\\FilamentLogger\\Services\\Benchmark' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Services/Benchmark.php',
+        'TomatoPHP\\FilamentLogger\\Services\\LoggerServices' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Services/LoggerServices.php',
+        'TomatoPHP\\FilamentLogger\\Services\\RequestLoggerService' => __DIR__ . '/..' . '/tomatophp/filament-logger/src/Services/RequestLoggerService.php',
         'TomatoPHP\\FilamentPWA\\Console\\FilamentPwaInstall' => __DIR__ . '/..' . '/tomatophp/filament-pwa/src/Console/FilamentPwaInstall.php',
         'TomatoPHP\\FilamentPWA\\FilamentPWAPlugin' => __DIR__ . '/..' . '/tomatophp/filament-pwa/src/FilamentPWAPlugin.php',
         'TomatoPHP\\FilamentPWA\\FilamentPwaServiceProvider' => __DIR__ . '/..' . '/tomatophp/filament-pwa/src/FilamentPwaServiceProvider.php',

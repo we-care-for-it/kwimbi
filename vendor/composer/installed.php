@@ -2191,6 +2191,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'tomatophp/filament-logger' => array(
+            'pretty_version' => 'v1.0.4',
+            'version' => '1.0.4.0',
+            'reference' => '8bbeb4a6bf81290ac0ce88d226e9f66f357860d8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tomatophp/filament-logger',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'tomatophp/filament-pwa' => array(
             'pretty_version' => 'v1.0.2',
             'version' => '1.0.2.0',
