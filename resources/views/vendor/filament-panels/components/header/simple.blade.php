@@ -7,7 +7,7 @@
 <header class="fi-simple-header flex flex-col items-center pb-10">
     @if ($logo)
 
-    <img style = "padding: 0px; margin: 0px; height: 80px; "  src = "/images/digilift.nl.png"> 
+    <img  style = "height:90px" src = "/images/digilevel_logo.png"> 
        
     @endif
 
