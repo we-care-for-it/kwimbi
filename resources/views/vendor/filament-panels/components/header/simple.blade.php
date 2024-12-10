@@ -7,8 +7,8 @@
 <header class="fi-simple-header flex flex-col items-center pb-10">
     @if ($logo)
 
-        <x-filament-panels::logo />
-        <br><br>
+    <img style = "padding: 0px; margin: 0px; height: 80px; "  src = "/images/digilift.nl.png"> 
+       
     @endif
 
     @if (filled($heading))
