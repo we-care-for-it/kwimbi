@@ -13,7 +13,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\CheckboxList;
- 
+use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
+
 
 
 
@@ -183,7 +184,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AuthenticationLogsRelationManager::class,
         ];
     }
 

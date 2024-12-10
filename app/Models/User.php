@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Models\Contracts\FilamentUser;
- 
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 
 class User extends Authenticatable implements  FilamentUser, HasTenants
 
@@ -20,6 +20,7 @@ class User extends Authenticatable implements  FilamentUser, HasTenants
     use HasFactory;
     use HasRoles;
     use Notifiable;
+    use AuthenticationLoggable;
 
     /**
      * The attributes that are mass assignable.

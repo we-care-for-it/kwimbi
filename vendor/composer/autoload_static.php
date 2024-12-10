@@ -68,6 +68,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'pxlrbt\\FilamentExcel\\' => 21,
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'l' => 
+        array (
+            'lockscreen\\FilamentLockscreen\\' => 30,
+        ),
         'Z' => 
         array (
             'ZipStream\\' => 10,
@@ -90,6 +94,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
+            'Tapp\\FilamentAuthenticationLog\\' => 31,
+            'Tapp\\FilamentAuditing\\' => 22,
         ),
         'S' => 
         array (
@@ -161,6 +167,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             'RyanChandler\\BladeCaptureDirective\\Database\\Factories\\' => 54,
             'RyanChandler\\BladeCaptureDirective\\' => 35,
+            'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\' => 54,
+            'Rappasoft\\LaravelAuthenticationLog\\' => 35,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -342,6 +350,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
+        'lockscreen\\FilamentLockscreen\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src',
+        ),
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
@@ -397,6 +409,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Termwind\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
+        ),
+        'Tapp\\FilamentAuthenticationLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tapp/filament-authentication-log/src',
+        ),
+        'Tapp\\FilamentAuditing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tapp/filament-auditing/src',
         ),
         'Symfony\\Polyfill\\Uuid\\' => 
         array (
@@ -657,6 +677,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'RyanChandler\\BladeCaptureDirective\\' => 
         array (
             0 => __DIR__ . '/..' . '/ryangjchandler/blade-capture-directive/src',
+        ),
+        'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/database/factories',
+        ),
+        'Rappasoft\\LaravelAuthenticationLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -1404,13 +1432,16 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Models\\workType' => __DIR__ . '/../..' . '/app/Models/workType.php',
         'App\\Models\\workordersError' => __DIR__ . '/../..' . '/app/Models/workordersError.php',
         'App\\Models\\workordersSolution' => __DIR__ . '/../..' . '/app/Models/workordersSolution.php',
+        'App\\Policies\\ActivityPolicy' => __DIR__ . '/../..' . '/app/Policies/ActivityPolicy.php',
         'App\\Policies\\AssetBrandPolicy' => __DIR__ . '/../..' . '/app/Policies/AssetBrandPolicy.php',
         'App\\Policies\\AssetCategoryPolicy' => __DIR__ . '/../..' . '/app/Policies/AssetCategoryPolicy.php',
         'App\\Policies\\AssetPolicy' => __DIR__ . '/../..' . '/app/Policies/AssetPolicy.php',
+        'App\\Policies\\AuthenticationLogPolicy' => __DIR__ . '/../..' . '/app/Policies/AuthenticationLogPolicy.php',
         'App\\Policies\\CustomerPolicy' => __DIR__ . '/../..' . '/app/Policies/CustomerPolicy.php',
         'App\\Policies\\ElevatorPolicy' => __DIR__ . '/../..' . '/app/Policies/ElevatorPolicy.php',
         'App\\Policies\\ExternalApiLogPolicy' => __DIR__ . '/../..' . '/app/Policies/ExternalApiLogPolicy.php',
         'App\\Policies\\LocationPolicy' => __DIR__ . '/../..' . '/app/Policies/LocationPolicy.php',
+        'App\\Policies\\ObjectBuildingTypePolicy' => __DIR__ . '/../..' . '/app/Policies/ObjectBuildingTypePolicy.php',
         'App\\Policies\\ObjectInspectionCompanyPolicy' => __DIR__ . '/../..' . '/app/Policies/ObjectInspectionCompanyPolicy.php',
         'App\\Policies\\ObjectInspectionPolicy' => __DIR__ . '/../..' . '/app/Policies/ObjectInspectionPolicy.php',
         'App\\Policies\\ObjectInspectionZincodePolicy' => __DIR__ . '/../..' . '/app/Policies/ObjectInspectionZincodePolicy.php',
@@ -9502,6 +9533,17 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Commands\\PurgeAuthenticationLogCommand' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Commands/PurgeAuthenticationLogCommand.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Database\\Factories\\AuthenticationLogFactory' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/database/factories/AuthenticationLogFactory.php',
+        'Rappasoft\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/LaravelAuthenticationLogServiceProvider.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\FailedLoginListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/FailedLoginListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\LoginListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/LoginListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\LogoutListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/LogoutListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Listeners\\OtherDeviceLogoutListener' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Listeners/OtherDeviceLogoutListener.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Models\\AuthenticationLog' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Models/AuthenticationLog.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Notifications\\FailedLogin' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Notifications/FailedLogin.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Notifications\\NewDevice' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Notifications/NewDevice.php',
+        'Rappasoft\\LaravelAuthenticationLog\\Traits\\AuthenticationLoggable' => __DIR__ . '/..' . '/rappasoft/laravel-authentication-log/src/Traits/AuthenticationLoggable.php',
         'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirective' => __DIR__ . '/..' . '/ryangjchandler/blade-capture-directive/src/BladeCaptureDirective.php',
         'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider' => __DIR__ . '/..' . '/ryangjchandler/blade-capture-directive/src/BladeCaptureDirectiveServiceProvider.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
@@ -11343,6 +11385,13 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
         'Symfony\\Polyfill\\Php83\\Php83' => __DIR__ . '/..' . '/symfony/polyfill-php83/Php83.php',
         'Symfony\\Polyfill\\Uuid\\Uuid' => __DIR__ . '/..' . '/symfony/polyfill-uuid/Uuid.php',
+        'Tapp\\FilamentAuditing\\FilamentAuditingServiceProvider' => __DIR__ . '/..' . '/tapp/filament-auditing/src/FilamentAuditingServiceProvider.php',
+        'Tapp\\FilamentAuditing\\RelationManagers\\AuditsRelationManager' => __DIR__ . '/..' . '/tapp/filament-auditing/src/RelationManagers/AuditsRelationManager.php',
+        'Tapp\\FilamentAuthenticationLog\\FilamentAuthenticationLogPlugin' => __DIR__ . '/..' . '/tapp/filament-authentication-log/src/FilamentAuthenticationLogPlugin.php',
+        'Tapp\\FilamentAuthenticationLog\\FilamentAuthenticationLogServiceProvider' => __DIR__ . '/..' . '/tapp/filament-authentication-log/src/FilamentAuthenticationLogServiceProvider.php',
+        'Tapp\\FilamentAuthenticationLog\\RelationManagers\\AuthenticationLogsRelationManager' => __DIR__ . '/..' . '/tapp/filament-authentication-log/src/RelationManagers/AuthenticationLogsRelationManager.php',
+        'Tapp\\FilamentAuthenticationLog\\Resources\\AuthenticationLogResource' => __DIR__ . '/..' . '/tapp/filament-authentication-log/src/Resources/AuthenticationLogResource.php',
+        'Tapp\\FilamentAuthenticationLog\\Resources\\AuthenticationLogResource\\Pages\\ListAuthenticationLogs' => __DIR__ . '/..' . '/tapp/filament-authentication-log/src/Resources/AuthenticationLogResource/Pages/ListAuthenticationLogs.php',
         'Termwind\\Actions\\StyleToMethod' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Actions/StyleToMethod.php',
         'Termwind\\Components\\Anchor' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/Anchor.php',
         'Termwind\\Components\\BreakLine' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Components/BreakLine.php',
@@ -11517,6 +11566,13 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'ZipStream\\Zip64\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zip64/ExtendedInformationExtraField.php',
         'ZipStream\\ZipStream' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/ZipStream.php',
         'ZipStream\\Zs\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zs/ExtendedInformationExtraField.php',
+        'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/FilamentLockscreenServiceProvider.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Livewire\\LockerScreen' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Livewire/LockerScreen.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Livewire\\LockerScreenLoginPage' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Livewire/LockerScreenLoginPage.php',
+        'lockscreen\\FilamentLockscreen\\Http\\LockscreenSessionController' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/LockscreenSessionController.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Middleware\\Locker' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Middleware/Locker.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Middleware\\LockerTimer' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Middleware/LockerTimer.php',
+        'lockscreen\\FilamentLockscreen\\Lockscreen' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Lockscreen.php',
         'phpDocumentor\\Reflection\\Element' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/Element.php',
         'phpDocumentor\\Reflection\\File' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/File.php',
         'phpDocumentor\\Reflection\\Fqsen' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/Fqsen.php',

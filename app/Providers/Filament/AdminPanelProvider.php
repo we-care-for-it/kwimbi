@@ -27,7 +27,11 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\FontProviders\GoogleFontProvider;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
- 
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
+use lockscreen\FilamentLockscreen\Lockscreen;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+
 
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
@@ -48,9 +52,15 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->plugin(new Lockscreen())
+
             ->plugins([
                 FilamentEditProfilePlugin::make()
                 ->shouldRegisterNavigation(false)
+            ])
+            ->plugins([
+                FilamentAuthenticationLogPlugin::make()
+                    // ->panelName('admin') // Optional: specify the panel name if needed
             ])
             ->plugin(\TomatoPHP\FilamentLogger\FilamentLoggerPlugin::make())
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
@@ -86,10 +96,13 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SetTheme::class
+                SetTheme::class,
+                LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+ 
              ])
             ->authMiddleware([
                 Authenticate::class,
+                Locker::class, // <- Add this
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
