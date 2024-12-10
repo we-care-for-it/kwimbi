@@ -29,8 +29,8 @@ use Awcodes\LightSwitch\LightSwitchPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use lockscreen\FilamentLockscreen\Lockscreen;
-use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+// use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+// use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 
 
  
@@ -52,7 +52,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->plugin(new Lockscreen())
+           // ->plugin(new Lockscreen())
 
             ->plugins([
                 FilamentEditProfilePlugin::make()
@@ -97,12 +97,12 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 SetTheme::class,
-                LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+            //    LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
  
              ])
             ->authMiddleware([
                 Authenticate::class,
-                Locker::class, // <- Add this
+               // Locker::class, // <- Add this
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
