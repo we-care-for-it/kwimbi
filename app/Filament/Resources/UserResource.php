@@ -80,8 +80,8 @@ class UserResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->required(),
 
-                            select::make('roles')
-                            ->preload()
+                            CheckboxList::make('roles')
+                        
                             ->relationship('roles', 'name')
                             ->searchable(),
 
@@ -184,7 +184,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AuthenticationLogsRelationManager::class,
+                AuthenticationLogsRelationManager::class,
         ];
     }
 
