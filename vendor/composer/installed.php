@@ -786,6 +786,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'joaopaulolndev/filament-edit-profile' => array(
+            'pretty_version' => 'v1.0.33',
+            'version' => '1.0.33.0',
+            'reference' => '990f7d19c50a0239711a530308aca5adf21c9343',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../joaopaulolndev/filament-edit-profile',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'joaopaulolndev/filament-pdf-viewer' => array(
             'pretty_version' => 'v1.0.6',
             'version' => '1.0.6.0',

@@ -26,7 +26,9 @@ use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\FontProviders\GoogleFontProvider;
 use Awcodes\LightSwitch\LightSwitchPlugin;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
  
+
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
 
@@ -45,6 +47,10 @@ class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->colors([
                 'primary' => Color::Amber,
+            ])
+            ->plugins([
+                FilamentEditProfilePlugin::make()
+                ->shouldRegisterNavigation(false)
             ])
             ->plugin(\TomatoPHP\FilamentLogger\FilamentLoggerPlugin::make())
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)

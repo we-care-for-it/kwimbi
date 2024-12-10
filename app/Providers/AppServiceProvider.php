@@ -35,6 +35,13 @@ class AppServiceProvider extends ServiceProvider
                     ->label('Logboek')
                     ->url(route('filament.admin.logs'))
                     ->icon('heroicon-m-clipboard-document-list'),
+                UserMenuItem::make()
+                    ->label('Mijn profiel')
+                    ->url('/admin/edit-profile')
+                    ->icon('heroicon-o-user'),
+ 
+
+
             ]);
         });
 

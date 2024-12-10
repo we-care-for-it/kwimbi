@@ -223,6 +223,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             'Joaopaulolndev\\FilamentPdfViewer\\Database\\Factories\\' => 52,
             'Joaopaulolndev\\FilamentPdfViewer\\' => 33,
+            'Joaopaulolndev\\FilamentEditProfile\\Database\\Factories\\' => 54,
+            'Joaopaulolndev\\FilamentEditProfile\\' => 35,
             'Jenssegers\\Agent\\' => 17,
             'Jean85\\' => 7,
             'Jaybizzle\\CrawlerDetect\\' => 24,
@@ -822,6 +824,14 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Joaopaulolndev\\FilamentPdfViewer\\' => 
         array (
             0 => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src',
+        ),
+        'Joaopaulolndev\\FilamentEditProfile\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/database/factories',
+        ),
+        'Joaopaulolndev\\FilamentEditProfile\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src',
         ),
         'Jenssegers\\Agent\\' => 
         array (
@@ -5698,6 +5708,22 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'Jenssegers\\Agent\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Agent.php',
         'Jenssegers\\Agent\\AgentServiceProvider' => __DIR__ . '/..' . '/jenssegers/agent/src/AgentServiceProvider.php',
         'Jenssegers\\Agent\\Facades\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Facades/Agent.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Commands\\FilamentEditProfileCommand' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Commands/FilamentEditProfileCommand.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Concerns\\HasSort' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Concerns/HasSort.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Concerns\\HasUser' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Concerns/HasUser.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Facades\\FilamentEditProfile' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Facades/FilamentEditProfile.php',
+        'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfile' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/FilamentEditProfile.php',
+        'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfilePlugin' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/FilamentEditProfilePlugin.php',
+        'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfileServiceProvider' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/FilamentEditProfileServiceProvider.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\BaseProfileForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/BaseProfileForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\BrowserSessionsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/BrowserSessionsForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\CustomFieldsForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/CustomFieldsForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\DeleteAccountForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/DeleteAccountForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\EditPasswordForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/EditPasswordForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\EditProfileForm' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/EditProfileForm.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Livewire\\SanctumTokens' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Livewire/SanctumTokens.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Pages\\EditProfilePage' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Pages/EditProfilePage.php',
+        'Joaopaulolndev\\FilamentEditProfile\\Testing\\TestsFilamentEditProfile' => __DIR__ . '/..' . '/joaopaulolndev/filament-edit-profile/src/Testing/TestsFilamentEditProfile.php',
         'Joaopaulolndev\\FilamentPdfViewer\\Commands\\FilamentPdfViewerCommand' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Commands/FilamentPdfViewerCommand.php',
         'Joaopaulolndev\\FilamentPdfViewer\\Facades\\FilamentPdfViewer' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/Facades/FilamentPdfViewer.php',
         'Joaopaulolndev\\FilamentPdfViewer\\FilamentPdfViewer' => __DIR__ . '/..' . '/joaopaulolndev/filament-pdf-viewer/src/FilamentPdfViewer.php',

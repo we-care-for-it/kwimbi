@@ -129,6 +129,8 @@ return array(
     'Kirschbaum\\PowerJoins\\' => array($vendorDir . '/kirschbaum-development/eloquent-power-joins/src'),
     'Joaopaulolndev\\FilamentPdfViewer\\Database\\Factories\\' => array($vendorDir . '/joaopaulolndev/filament-pdf-viewer/database/factories'),
     'Joaopaulolndev\\FilamentPdfViewer\\' => array($vendorDir . '/joaopaulolndev/filament-pdf-viewer/src'),
+    'Joaopaulolndev\\FilamentEditProfile\\Database\\Factories\\' => array($vendorDir . '/joaopaulolndev/filament-edit-profile/database/factories'),
+    'Joaopaulolndev\\FilamentEditProfile\\' => array($vendorDir . '/joaopaulolndev/filament-edit-profile/src'),
     'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
     'Jean85\\' => array($vendorDir . '/jean85/pretty-package-versions/src'),
     'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
