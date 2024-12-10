@@ -34,7 +34,7 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\ViewEntry;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
+
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 
@@ -210,7 +210,7 @@ class ObjectLocationResource extends Resource
                     Forms\Components\TextInput::make("gps_lon")
                         ->label("GPS longitude")
                         ->columnSpan(1)
-                        ->hidden(),
+                         ,
 
                     // ...
                     ]) , ])
@@ -450,27 +450,12 @@ class ObjectLocationResource extends Resource
                         ->emptyState(view("partials.empty-state"));
                 }
 
-
-                public static function canViewAny(): bool
-    {
-        return auth()->user()->id==1;
-    }
-
-    
                 public static function getRelations() : array
                 {
                     return [
-                        RelationManagers\NotesRelationManager::class,
-                        RelationManagers\ObjectsRelationManager::class,
-                        RelationManagers\ProjectsRelationManager::class,
-                        RelationManagers\AttachmentsRelationManager::class,
-                        AuditsRelationManager::class,
-                    
-                    ];
+                        RelationManagers\NotesRelationManager::class , RelationManagers\ObjectsRelationManager::class , RelationManagers\ProjectsRelationManager::class , RelationManagers\AttachmentsRelationManager::class ];
                 }
 
-
-                
                 public static function getPages() : array
                 {
                     return ['index' => Pages\ListObjectLocations::route('/') ,
