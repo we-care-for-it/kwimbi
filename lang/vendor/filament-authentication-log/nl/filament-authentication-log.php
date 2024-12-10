@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'navigation.group' => 'Logins',
+    'navigation.group' => 'Beheer',
 
-    'navigation.authentication-log.label' => 'Authentication Log',
-    'navigation.authentication-log.plural-label' => 'Authentication Logs',
+    'navigation.authentication-log.label' => 'Authenticatie Log',
+    'navigation.authentication-log.plural-label' => 'Authenticatie Logs',
 
-    'table.heading' => 'Authentication Logs',
+    'table.heading' => 'Log Logs',
 
-    'column.authenticatable' => 'Authenticatable',
-    'column.ip_address' => 'IP Address',
-    'column.user_agent' => 'User Agent',
-    'column.login_at' => 'Login At',
-    'column.login_successful' => 'Login Successful',
-    'column.logout_at' => 'Logout At',
-    'column.cleared_by_user' => 'Cleared By User',
+    'column.authenticatable' => 'Authenticatie',
+    'column.ip_address' => 'IPAdres',
+    'column.user_agent' => 'Browser',
+    'column.login_at' => 'Ingelogd op',
+    'column.login_successful' => 'Login gelukt',
+    'column.logout_at' => 'Uitgelogd op',
+    'column.cleared_by_user' => 'Gewist door gebruiker',
 ];
