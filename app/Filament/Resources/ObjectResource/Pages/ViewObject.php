@@ -31,5 +31,28 @@ class ViewObject extends ViewRecord
     
     }
 
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\Action::make('cancel_top')
+            ->iconButton()
+           ->color('gray')
+           ->label('Open locatie')
+           ->link()
+           ->icon('heroicon-s-map-pin')
+           ->url(function ($record) {
+               return "/admin/object-locations/".$this->getRecord()->location->id;      
+           }),
+
+
+
+        Actions\EditAction::make('cancel_top')
+        ->icon('heroicon-o-pencil')
+        ->label('Wijzig')
+
+        ];
+    }
+
+ 
 
 }

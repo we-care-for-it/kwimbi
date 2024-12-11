@@ -36,7 +36,7 @@ class ImportChex extends Command
         $response = Http::withHeaders([
             "Authorization" => config("services.chex.token"),
         ])->get($url, [
-            "fromDate" => date('Y-m-d'),
+            "fromDate" => "2024-08-08", //date('Y-m-d'),
         ]);
 
         $records = json_decode($response->getBody())->result;
@@ -61,20 +61,21 @@ class ImportChex extends Command
                 "nobo_no",
                 $item->objectId
             )->first();
+            
 
             $inspection_data_from_db = ObjectInspection::updateOrCreate(
                 ["external_uuid" => $item->inspectionId],
 
                 [
-                    "status_id"             => $status_id,
+                    "status_id"              => $status_id,
                     "inspection_company_id"  => config("services.chex.company_id"),
                     "type"                   => $item->inspectionType,
-                    "nobo_number" => $item->objectId,
-                    "elevator_id" => $elevator_information?->id,
-                    "executed_datetime" => $item->inspectionDate,
-                    "if_match" => isset($elevator_information->id) ? 1 : 0,
-                    "end_date" => $item->expiryDate,
-                    "schedule_run_token" =>  $schedule_run_token
+                    "nobo_number"            => $item->objectId,
+                    "elevator_id"            => $elevator_information?->id,
+                    "executed_datetime"      => $item->inspectionDate,
+                    "if_match"               => isset($elevator_information->id) ? 1 : 0,
+                    "end_date"               => $item->expiryDate,
+                    "schedule_run_token"     => $schedule_run_token
 
                 ]
             );

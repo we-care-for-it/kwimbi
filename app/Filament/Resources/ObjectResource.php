@@ -5,7 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Elevator;
-use App\Models\Inspec;
+use App\Models\ObjectMaintenanceCompany;
+use App\Models\ObjectSupplier;
+use App\Models\Customer;
+
+use App\Enums\ElevatorStatus;
+
+
 
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
@@ -16,10 +22,31 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Section;
  
+ 
+//Form
+ 
+ 
+use Filament\Forms\Components\Select;
+use Filament\Infolists\Components\Split;
+ 
+
+
+//Form
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+ 
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
+
+
+
+
+
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\ViewEntry;
-
+ 
+use App\Models\ObjectType;
 class ObjectResource extends Resource
 {
     protected static ?string $model = Elevator::class;
@@ -27,14 +54,100 @@ class ObjectResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-m-arrow-up-on-square-stack';
     protected static ? string $navigationLabel = 'Objecten';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-               
-            ]);
-    }
 
+       
+    public static function form(Form $form) : Form
+    {
+        return $form->schema([
+
+        Grid::make(4)
+            ->schema([
+
+                
+                TextInput::make('nobo_no')
+                    ->label("NOBO Nummer")
+                    ->placeholder("Niet opgegeven") , 
+        
+                    Select::make('object_type_id')
+                    ->label('Type')
+                    ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
+
+
+                    TextInput::make('unit_no')
+                    ->label("Unit Nummer")
+                   ,  
+
+                Select::make('energy_label')
+                    
+                    ->label("Energielabel")
+                    ->options([
+                        'a' => "A",
+                        'b' => "B",
+                        'c' => "C",
+                        'd' => "D",
+                        'r' => "E",
+                        'f' => "F",
+                    ]) ,  
+
+                    DatePicker::make('install_date')
+                    ->label("Installatie datum")
+                    ->placeholder("Niet opgegeven") , 
+                    
+                Select::make('status_id')
+                    ->label("Status")
+                    ->options(ElevatorStatus::class) ,
+
+                    
+
+
+                    
+               Select::make('supplier_id')
+                    ->label("Leverancier")
+                    ->options(ObjectSupplier::
+                    pluck('name', 'id')),
+                    
+
+                       
+
+                Select::make('customer_id')
+                    ->label("Relatie")
+                    ->options(Customer::
+                    pluck('name', 'id')),
+                        
+                    TextInput::make('stopping_places')
+                    ->label("Stoppplaatsen")
+                    ->placeholder("Niet opgegeven") ,  
+
+                    TextInput::make('construction_year')
+                    ->label("Bouwjaar")
+                    ->placeholder("Niet opgegeven") , 
+                
+                    Select::make('maintenance_company_id')
+                    ->label('Onderhoudspartij')
+                    ->options(ObjectMaintenanceCompany::
+                    pluck('name', 'id')),
+                
+                    TextInput::make('name')
+                    ->label("Naam")
+                    
+
+
+        ]) ,
+
+     
+
+        Grid::make(2)
+            ->schema([ 
+
+  
+        Textarea::make('remark')
+            ->rows(3)
+            ->label('Opmerking')
+            ->columnSpan(4)
+            ->autosize() ])
+
+        ]);
+    }
     public static function table(Table $table): Table
     {
         return $table
@@ -43,7 +156,14 @@ class ObjectResource extends Resource
                     ->label('Nummer')->searchable()->sortable()
                     ->placeholder('Geen unitnummer'),
 
-                Tables\Columns\TextColumn::make('name')->badge()
+
+                    Tables\Columns\TextColumn::make("status_id")
+                    ->label("Status")
+                    ->badge()
+                    ->sortable() ,
+
+
+                Tables\Columns\TextColumn::make('name')
                     ->label('Naam')->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('nobo_no')

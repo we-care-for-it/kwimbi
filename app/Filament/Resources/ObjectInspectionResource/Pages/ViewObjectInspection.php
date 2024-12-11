@@ -29,7 +29,7 @@ class ViewObjectInspection extends ViewRecord
             ->link()
             ->icon('heroicon-o-arrow-uturn-left')
             ->url(function ($record) {
-                return "/admin/objects/".$record->elevator_id."/edit?activeRelationManager=3";      
+                return "/admin/objects/".$record->elevator_id."?activeRelationManager=3";      
             }),
 
             Actions\Action::make("Downloaddocument")->color("warning")  
