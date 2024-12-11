@@ -6,7 +6,7 @@ use App\Filament\Resources\ObjectLocationResource\RelationManagers;
 use App\Models\Customer;
 use App\Models\ObjectLocation;
 use App\Models\ObjectBuildingType;
-
+use Filament\Resources\RelationManagers\RelationGroup;
 use App\Models\ObjectManagementCompany;
 use App\Models\Project;
 use App\Services\AddressService;
@@ -230,10 +230,10 @@ class ObjectLocationResource extends Resource
 
                      Select::make("building_type_id")
                  ->options(ObjectBuildingType::pluck('name', 'id'))
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
-                            ->label('Omschrijving')
-                        ])    
+                    // ->createOptionForm([
+                    //     Forms\Components\TextInput::make('name')
+                    //         ->label('Omschrijving')
+                    //     ])    
     
                          ->preload()
                         ->searchable()
@@ -453,7 +453,16 @@ class ObjectLocationResource extends Resource
                 public static function getRelations() : array
                 {
                     return [
-                        RelationManagers\NotesRelationManager::class , RelationManagers\ObjectsRelationManager::class , RelationManagers\ProjectsRelationManager::class , RelationManagers\AttachmentsRelationManager::class ];
+                     //   RelationGroup::make('Objecten', [
+                       
+                            RelationManagers\ObjectsRelationManager::class , 
+                         //   RelationManagers\ObjectsSameComplexRelationManager::class , 
+                      //  ]),
+
+
+                        RelationManagers\NotesRelationManager::class , 
+                        RelationManagers\ProjectsRelationManager::class , 
+                        RelationManagers\AttachmentsRelationManager::class ];
                 }
 
                 public static function getPages() : array

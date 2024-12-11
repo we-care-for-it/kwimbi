@@ -2,91 +2,56 @@
 
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;
 use App\Models\ObjectType;
-use Filament\Forms;
+ 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
+ 
+ 
 use Filament\Support\Enums\Alignment;
-use Filament\Tables;
+ 
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+ 
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\ElevatorStatus;
 
-//Form
-
-//Table
 
 
-class ObjectsRelationManager extends RelationManager
+class ObjectsSameComplexRelationManager extends RelationManager
 {
-    protected static string $relationship = 'Objects';
-    protected static ?string $title = 'Objecten';
-    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
-    {
-        // $ownerModel is of actual type Job
-        return $ownerRecord->objects->count();
-
-
-    }
-
+    protected static string $relationship = 'objects_same_complex';
+    protected static ?string $title = 'Objecten is het zelfde complex';
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-
-
-                Grid::make([
-                    'default' => 2,
-
-                ])
-                    ->schema([
-
-
-                        Forms\Components\TextInput::make("name")
-                            ->label("Naam"),
-
-                        Forms\Components\TextInput::make('unit_no')
-
-                            ->numeric()
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('nobo_no')
-                        ->required()
-                            ->numeric()
-                            ->maxLength(255),
-
-
-                        Select::make('object_type_id')
-                            ->label('Type')
-                            ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
-
-
-                        Select::make('maintenance_company_id')
-                            ->label('Onderhoudspartij')
-                            ->options(ObjectMaintenanceCompany::
-                            pluck('name', 'id')),
-
-                            Select::make('status_id')
-                            ->label("Status")->required()
-                            ->options(ElevatorStatus::class) ,
-        
-
-                    ])
-
-
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
             ]);
-
-
     }
 
     public function table(Table $table): Table
     {
         return $table
+
+
+        // ->modifyQueryUsing(function (Builder $query) { 
+         
+        //    $query->where('location.address_id',$this->getOwnerRecord()->complexnumber); 
+           
+        // }) 
+
+
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('unit_no')
@@ -101,7 +66,7 @@ class ObjectsRelationManager extends RelationManager
                     ->placeholder('Geen Nobonummer'),
 
 
-                TextColumn::make('inspections_count')->counts('inspections')
+                TextColumn::make('elevator.inspections_count')->counts('inspections')
                     ->label('Keuringen')
                     ->sortable()
                     ->badge()
@@ -136,11 +101,7 @@ class ObjectsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Object toevoegen')
-                    ->modalHeading('Lift toevoegen')
-                    ->modalDescription('Om een object toe te voegen en te koppelen aan deze locatie zijn er een aantal gegevens nodig. Na het opslaan kan je meer gegevens aanpassen van dit object ')
-                ,
-            ])
+                     ])
             ->actions([
                 Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
                     return "/admin/objects/".$record->id."";
@@ -157,4 +118,5 @@ class ObjectsRelationManager extends RelationManager
 //                ]),
             ]);
     }
+ 
 }

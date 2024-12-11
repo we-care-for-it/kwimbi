@@ -28,7 +28,7 @@ class ListObjects extends ListRecords
                 ->link()
                 ->url(route('filament.admin.elevators-settings')),
 
-            Actions\CreateAction::make()->icon('heroicon-m-plus')->label('Toevoegen'),
+         //   Actions\CreateAction::make()->icon('heroicon-m-plus')->label('Toevoegen'),
         ];
     }
 }

@@ -340,7 +340,7 @@ class ObjectResource extends Resource
     {
         return [
             'index' => Pages\ListObjects::route('/'),
-            'create' => Pages\CreateObject::route('/create'),
+         //   'create' => Pages\CreateObject::route('/create'),
             'edit' => Pages\EditObject::route('/{record}/edit'),
             'view' => Pages\ViewObject::route('/{record}'),
         ];
