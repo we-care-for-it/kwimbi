@@ -31,7 +31,8 @@ class EditObject extends EditRecord
                     ->label("Relatie")
                     ->live()
                     ->searchable()
-                    ->options(Customer::pluck('name', 'id')),
+                    ->options(Customer::whereHas('locations')->pluck('name', 'id'))
+                    ->helperText('Allen relaties met locaties worden getoond'),
                 Select::make('address_id')
                     ->label("Locatie")
                     ->options(function (Get $get){
@@ -44,6 +45,7 @@ class EditObject extends EditRecord
                 $record->customer_id = $data['customer_id'];
                 $record->save();
             })
+                ->icon('heroicon-o-arrows-right-left')
                 ->outlined()
                 ->link()
                 ->label('Verplaats object')
