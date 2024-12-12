@@ -70,11 +70,7 @@ class ObjectLocation extends Model implements Auditable
     public function buildingtype()
     {
        return $this->belongsTo(objectBuildingType::class, 'building_type_id', 'id');
-   }
-
-
-    
-
+    }
 
     public function managementcompany()
     {
@@ -87,9 +83,11 @@ class ObjectLocation extends Model implements Auditable
     }
 
     public function objects_same_complex()
-    {
-        return $this->hasMany(Elevator::class, 'address_id', 'id');
-        }
+    {       
+        return Elevator::whereHas('locations', function ($query) {
+            return $query->where('complexnumber', '=', 1);
+        })->get();
+    }
 
     public function notes()
     {

@@ -453,11 +453,11 @@ class ObjectLocationResource extends Resource
                 public static function getRelations() : array
                 {
                     return [
-                     //   RelationGroup::make('Objecten', [
+                       // RelationGroup::make('Objecten', [
                        
                             RelationManagers\ObjectsRelationManager::class , 
-                         //   RelationManagers\ObjectsSameComplexRelationManager::class , 
-                      //  ]),
+                       //    RelationManagers\ObjectsSameComplexRelationManager::class , 
+                       // ]),
 
 
                         RelationManagers\NotesRelationManager::class , 

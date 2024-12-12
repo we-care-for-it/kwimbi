@@ -65,6 +65,13 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
  
+
+    // public function locations()
+    // {
+    //     return $this->belongsTo(ObjectLocation::class, 'address_id', 'id');
+    // } 
+ 
+
     public function management()
     {
         return $this->hasOne(ObjectmanagementCompanies::class, 'id', 'management_id');
