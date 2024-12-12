@@ -109,10 +109,10 @@ class ObjectResource extends Resource
 
                        
 
-                Select::make('customer_id')
-                    ->label("Relatie")
-                    ->options(Customer::
-                    pluck('name', 'id')),
+                // Select::make('customer_id')
+                //     ->label("Relatie")
+                //     ->options(Customer::
+                //     pluck('name', 'id')),
                         
                     TextInput::make('stopping_places')
                     ->label("Stoppplaatsen")

@@ -44,8 +44,12 @@ class EditObject extends EditRecord
                 $record->customer_id = $data['customer_id'];
                 $record->save();
             })
+                ->outlined()
+                ->link()
+                ->label('Verplaats object')
+                ->color('secondary')
                 ->modalWidth(MaxWidth::Large)
-                ->modalHeading('Obejct verplaatsen')
+                ->modalHeading('Object verplaatsen')
                 ->modalDescription('Verplaatst een object naar een andere relatie en locatie.'),
             Actions\Action::make('cancel_top')
                 ->label('Afbreken')
@@ -67,7 +71,6 @@ class EditObject extends EditRecord
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
 
-      
     public function getSubheading(): ?string
     {       
         if ($this->getRecord()->location) {
