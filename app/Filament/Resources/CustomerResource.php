@@ -24,6 +24,39 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+ 
+use Filament\Resources\RelationManagers\RelationGroup;
+ 
+ 
+use Filament\Forms\Components\Section;
+ 
+ 
+//Form
+ 
+ 
+ 
+use Filament\Infolists\Components\Split;
+ 
+
+
+//Form
+use Filament\Forms\Components\TextInput;
+ 
+ 
+use Filament\Forms\Components\DatePicker;
+ 
+
+
+
+
+
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\ViewEntry;
+ 
+use App\Models\ObjectType;
+ 
+
 
 class CustomerResource extends Resource
 {
@@ -31,6 +64,12 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+
+
+
+
+
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -117,6 +156,22 @@ class CustomerResource extends Resource
 
 
     }
+
+    public static function infolist(Infolist $infolist) : Infolist
+    {
+
+        return $infolist->schema([
+        
+
+            Components\TextEntry::make('nobo_no')
+            ->label("NOBO Nummer")
+            ->placeholder("Niet opgegeven") 
+
+        ]);
+
+
+    }
+
 
     public static function table(Table $table): Table
     {
