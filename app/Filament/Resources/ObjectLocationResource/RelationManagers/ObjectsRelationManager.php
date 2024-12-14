@@ -16,7 +16,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\ElevatorStatus;
-
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 //Form
 
 //Table
@@ -145,8 +148,14 @@ class ObjectsRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
                     return "/admin/objects/".$record->id."";
 
-                })->icon('heroicon-c-link')
-
+                })->icon('heroicon-c-link'),
+          
+                    ActionGroup::make([
+                       
+                        EditAction::make(),
+                        DeleteAction::make(),
+                    ]),
+        
                     //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
                     //->openUrlInNewTab()
             //    Tables\Actions\DeleteAction::make(),
@@ -155,6 +164,10 @@ class ObjectsRelationManager extends RelationManager
 //                Tables\Actions\BulkActionGroup::make([
 //                    Tables\Actions\DeleteBulkAction::make(),
 //                ]),
-            ]);
+            ]) ->recordUrl(
+                function (Object $record){
+                    return "/admin/objects/".$record->id."";
+
+                }            );;
     }
 }

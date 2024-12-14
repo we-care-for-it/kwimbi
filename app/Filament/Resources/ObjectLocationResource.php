@@ -35,6 +35,10 @@ use Filament\Infolists\Components\ViewEntry;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 
@@ -86,6 +90,12 @@ class ObjectLocationResource extends Resource
 
         TextEntry::make('customer.name')
             ->label("Relatie")
+            ->Url(
+                function (Object $record){
+                    return "/admin/customers/".$record->id."";
+
+                } )
+                ->icon('heroicon-c-link')
             ->placeholder("Niet opgegeven") ,
 
         TextEntry::make('buildingtype.name')
@@ -389,6 +399,7 @@ class ObjectLocationResource extends Resource
                             ->options(Customer::all()
                             ->pluck('name', 'id'))
                             ->label('Relatie')
+                            
                             ->Searchable() ,
 
                         SelectFilter::make('building_type')
@@ -422,7 +433,13 @@ class ObjectLocationResource extends Resource
                     //     ->label('Wijzigen')
                     // ])
 
-                        ->bulkActions([
+                    ->actions([
+                        ActionGroup::make([
+                            ViewAction::make(),
+                            EditAction::make(),
+                            DeleteAction::make(),
+                        ]),
+                    ])  ->bulkActions([
 
                     ExportBulkAction::make()
                         ->exports([

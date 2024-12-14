@@ -13,6 +13,10 @@ use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;
 use App\Models\ObjectType;
  
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
  
@@ -108,10 +112,17 @@ class ObjectsSameComplexRelationManager extends RelationManager
 
                 })->icon('heroicon-c-link')
 
-                    //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
-                    //->openUrlInNewTab()
-            //    Tables\Actions\DeleteAction::make(),
-            ])
+                   
+                
+                ->actions([
+                    ActionGroup::make([
+                     
+                        EditAction::make(),
+                        DeleteAction::make(),
+                    ]),
+                ])
+                
+                ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([
 //                    Tables\Actions\DeleteBulkAction::make(),

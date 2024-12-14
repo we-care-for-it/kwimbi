@@ -12,7 +12,10 @@ use App\Models\Customer;
 use App\Enums\ElevatorStatus;
 
 
-
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
 use Filament\Forms\Form;
@@ -221,7 +224,11 @@ class ObjectResource extends Resource
                 //
             ])
             ->actions([
-                //  Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ]),
             ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([
@@ -341,7 +348,7 @@ class ObjectResource extends Resource
         return [
             'index' => Pages\ListObjects::route('/'),
          //   'create' => Pages\CreateObject::route('/create'),
-            'edit' => Pages\EditObject::route('/{record}/edit'),
+          //  'edit' => Pages\EditObject::route('/{record}/edit'),
             'view' => Pages\ViewObject::route('/{record}'),
         ];
     }

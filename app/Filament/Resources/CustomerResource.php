@@ -175,7 +175,7 @@ class CustomerResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make()->modalHeading('Wijzigen'),
                 Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
-                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+              //  Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
 
             ])
             ->bulkActions([
@@ -202,6 +202,6 @@ class CustomerResource extends Resource
             'index' => Pages\ListCustomers::route('/'),
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
-        ];
+            'view' => Pages\ViewCustomer::route('/{record}'),   ];
     }
 }
