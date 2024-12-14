@@ -92,7 +92,7 @@ class ObjectLocationResource extends Resource
             ->label("Relatie")
             ->Url(
                 function (Object $record){
-                    return "/admin/customers/".$record->id."";
+                    return "/admin/customers/".$record->customer_id."";
 
                 } )
                 ->icon('heroicon-c-link')
