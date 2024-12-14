@@ -101,6 +101,13 @@
 }.fi-layout{
      background-color: white!important;;
  }
+
+ .fi-global-search-result-group{
+  background-color: white!important;;
+}
+
+
+
 .fi-section-header-heading{
 
 }
@@ -108,7 +115,10 @@
 
 
 
-
+.fi-global-search-result
+{
+  background-color:rgb(139,217,144)
+}
 .fi-topbar .bg-white {
   background-color:rgb(139,217,144)
 }
