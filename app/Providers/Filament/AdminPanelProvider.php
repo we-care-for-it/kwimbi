@@ -32,7 +32,7 @@ use lockscreen\FilamentLockscreen\Lockscreen;
 // use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
 // use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 
-
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
 
@@ -49,12 +49,14 @@ class AdminPanelProvider extends PanelProvider
             ->login()
              ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
+            
             ->colors([
                 'primary' => Color::Amber,
             ])
            // ->plugin(new Lockscreen())
 
             ->plugins([
+                FilamentAuthenticationLogPlugin::make(),
                 FilamentEditProfilePlugin::make()
                 ->shouldRegisterNavigation(false)
             ])
