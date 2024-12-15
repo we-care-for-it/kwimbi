@@ -58,6 +58,14 @@ class ObjectResource extends Resource
     protected static ?string $navigationIcon = "heroicon-m-arrow-up-on-square-stack";
     protected static ?string $navigationLabel = "Objecten";
 
+
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    
     public static function form(Form $form): Form
     {
         return $form->schema([

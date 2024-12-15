@@ -9,82 +9,61 @@ use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Support\Enums\Alignment;
 class StandStill extends BaseWidget
 {
-    protected static ?int $sort = 8;
-    protected int | string | array $columnSpan = '12';
-    protected static ?string $heading = 'Stilstaande liften';
+ 
+    protected static ?int $sort = 2;
+    protected static ?string $heading = "Stilstaande liften";
 
-
+    protected int | string | array $columnSpan = '6';
     public function table(Table $table): Table
     {
         return $table
-            ->query(
-                Elevator::has('incident_stand_still')->latest()
-            )
+            ->query(Elevator::has("incident_stand_still")->latest()->limit(10))
             ->columns([
+                Tables\Columns\TextColumn::make("location")
+                    ->getStateUsing(function (Elevator $record): ?string {
+                        if ($record?->location->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record->location->address .
+                                " - " .
+                                $record->location->zipcode .
+                                " " .
+                                $record->location->place;
+                        }
+                    })
+                    ->label("Locatie")
+                    ->description(function (Elevator $record) {
+                        if (!$record?->location->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record->location->address .
+                                " - " .
+                                $record->location->zipcode .
+                                " " .
+                                $record->location->place;
+                        }
+                    }),
 
-
-     Tables\Columns\TextColumn::make("location")
-                ->getStateUsing(function (Elevator $record): ?string {
-                    if ($record?->location->name) {
-                        return $record?->location->name;
-                    } else {
-                        return $record->location->address .
-                            " - " .
-                            $record->location->zipcode .
-                            " " .
-                            $record->location->place;
-                    }
-                })
-                ->label("Locatie")
-                ->description(function (Elevator $record) {
-                    if (!$record?->location->name) {
-                        return $record?->location->name;
-                    } else {
-                        return $record->location->address .
-                            " - " .
-                            $record->location->zipcode .
-                            " " .
-                            $record->location->place;
-                    }
-                }),
-           
-                Tables\Columns\TextColumn::make("incidents_count")
-                ->toggleable()
-                ->counts("incidents")
-                ->label("Storingen")
-                ->alignment(Alignment::Center)
-                ->sortable()
-                ->badge(),
-
-                
                 Tables\Columns\TextColumn::make("location.customer.name")
+                ->label("Relatie"),
 
-                ->label("Relatie")
-
-  ,
-
-  Tables\Columns\TextColumn::make("status_id")
-  ->label("Status")
-  ->badge()
-,
-Tables\Columns\TextColumn::make("type.name")
-->label("Type")
- 
-->sortable()
-->color('secondary')
- ,
-
-
-
-           
+                Tables\Columns\TextColumn::make("status_id")
+                    ->label("Status")
+                    ,
+                Tables\Columns\TextColumn::make("type.name")
+                    ->label("Type")
+                    ->sortable()
+                    ->badge()
+                    ->color("primary"),
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Unit nummer")
-                    ->placeholder("Geen unitnummer")
-            ]) ->recordUrl( function (Elevator $record) {
-              return "admin/objects/".$record->id."?activeRelationManager=1";
-            });
+                    ->placeholder("Geen unitnummer"),
+            ])
+            ->recordUrl(function (Elevator $record) {
+                return "admin/objects/" .
+                    $record->id .
+                    "?activeRelationManager=1";
+            })
+            ->paginated(false);
     }
 }
-
-
-
