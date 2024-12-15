@@ -171,7 +171,6 @@ class ObjectLocationResource extends Resource
                         }
                         else
                         {
-                            //dd($data);
                             $set("place", $data ?->municipality);
                             $set("gps_lat", $data ?->lat);
                             $set("gps_lon", $data ?->lng);
@@ -199,8 +198,6 @@ class ObjectLocationResource extends Resource
                         ->hidden() , Forms\Components\TextInput::make("gps_lon")
                         ->label("GPS longitude")
                         ->columnSpan(1) ,
-
-                    // ...
                     ]) , ])
                         ->columns(2)
                         ->columnSpan(3) ,
@@ -239,7 +236,7 @@ class ObjectLocationResource extends Resource
                 public static function table(Table $table) : Table
                 {
                     return $table
-->groups([Group::make("complexnumber")
+                    ->groups([Group::make("complexnumber")
                         ->label("Complex") , Group::make("customer_id")
                         ->label("Relatie") , Group::make("buildingtype.name")
                         ->label("Gebouwtype") , Group::make("management_id")
