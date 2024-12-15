@@ -149,6 +149,13 @@ class Elevator extends Model implements Auditable
         return $this->hasMany(ObjectIncident::class);
     }
 
+    
+    public function incident_stand_still()
+    {
+        return $this->hasOne(ObjectIncident::class)->where('standing_still',1);
+    }
+
+
     public function maintenance()
     {
         return $this->hasMany(ObjectMaintenances::class);

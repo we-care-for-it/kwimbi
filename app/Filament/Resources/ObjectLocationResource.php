@@ -71,12 +71,21 @@ class ObjectLocationResource extends Resource
             $housenumber = "";
             if ($record->housenumber)
             {
-                $housenumber = " " . $record->housenumber;
+                $housenumber = " " . $record?->housenumber;
             }
 
-            return $record->address . " " . $housenumber . " - " . $record->zipcode . " " . $record->place;
+            return $record?->address . " " . $housenumber . " - " . $record?->zipcode . " " . $record?->place;
         })
-            ->placeholder("Niet opgegeven") ,
+            ->placeholder("Niet opgegeven")
+            
+            ->Url(function (object $record)
+                        {
+                            return "https://www.google.com/maps/dir/".$record?->address."+". $record?->housenumber."+".$record?->zipcode."+" . $record?->place ;
+                        })
+                        ->icon('heroicon-s-map-pin')
+                        ->openUrlInNewTab()
+ 
+                            ,
 
         TextEntry::make("name")
             ->label("Complexnaam")
@@ -361,11 +370,20 @@ class ObjectLocationResource extends Resource
                         ->label("Plaats")
                         ->options(ObjectLocation::whereNotNull("place")
                         ->pluck("place", "place"))
-                        ->searchable() , Tables\Filters\TrashedFilter::make() , ], layout : FiltersLayout::AboveContent)
+                        ->searchable() ,
+                        Tables\Filters\TrashedFilter::make() , ], layout : FiltersLayout::AboveContent)
 
-                        ->actions([ActionGroup::make([ViewAction::make() , EditAction::make() , DeleteAction::make() , ]) , ])
+                        ->actions([ActionGroup::make([
+ 
+                            
+                            EditAction::make()
+                            ->modalHeading('Locatie snel bewerken')
+                            ->modalIcon('heroicon-o-pencil')
+                            ->label('Snel bewerken')
+                            ->slideOver(),   DeleteAction::make() , ]) , ])
                         ->bulkActions([ExportBulkAction::make()
-                        ->exports([ExcelExport::make()
+                        ->exports([
+                            ExcelExport::make()
                         ->fromTable()
                         ->askForFilename()
                         ->askForWriterType()

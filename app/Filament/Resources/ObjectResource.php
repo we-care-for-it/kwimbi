@@ -342,9 +342,13 @@ class ObjectResource extends Resource
                             ->label("Leverancier")
                             ->placeholder("Niet opgegeven"),
 
-                        Components\TextEntry::make("customer.name")
-                            ->label("Relatie")
-                            ->placeholder("Niet opgegeven"),
+                            Components\TextEntry::make("customer.name")
+                            ->label("Relatie")->Url(function (object $record)
+                        {
+                            return "/admin/customers/" . $record->customer_id . "";
+                        })
+                            ->icon("heroicon-c-link")
+                            ->placeholder("Niet opgegeven") ,
 
                         Components\TextEntry::make("stopping_places")
                             ->label("Stoppplaatsen")

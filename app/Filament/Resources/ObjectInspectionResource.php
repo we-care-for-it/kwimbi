@@ -203,8 +203,10 @@ class ObjectInspectionResource extends Resource
             ->columnSpan(1)
             ->autosize() ])
 
-        ]);
+        ]) 
+        ->emptyState(view('partials.empty-state'));
     }
+
 
     public static function table(Table $table) : Table
     {
