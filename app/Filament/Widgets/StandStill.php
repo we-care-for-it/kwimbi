@@ -72,9 +72,9 @@ class StandStill extends BaseWidget
                 Tables\Columns\TextColumn::make("location.customer.name")
                 ->label("Relatie"),
 
-                Tables\Columns\TextColumn::make("status_id")
-                    ->label("Status")
-                    ,
+                // Tables\Columns\TextColumn::make("status_id")
+                //     ->label("Status")
+                //     ,
 
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Unit nummer")
