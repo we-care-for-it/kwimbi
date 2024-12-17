@@ -64,13 +64,6 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
     }
- 
-
-    // public function locations()
-    // {
-    //     return $this->belongsTo(ObjectLocation::class, 'address_id', 'id');
-    // } 
- 
 
     public function management()
     {
@@ -109,9 +102,7 @@ class Elevator extends Model implements Auditable
 
     public function getAllElevatorOnThisAddressAttribute()
     {
-
         return Elevator::where('address_id', $this->attributes["address_id"])->get();
-
     }
 
     public function latestinspections()
@@ -148,13 +139,11 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasMany(ObjectIncident::class);
     }
- 
-    
+     
     public function incident_stand_still()
     {
         return $this->hasOne(ObjectIncident::class)->where('standing_still',1);
     }
-
 
     public function maintenance()
     {

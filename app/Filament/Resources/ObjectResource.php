@@ -6,6 +6,7 @@ use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Elevator;
 use App\Models\ObjectMaintenanceCompany;
+use App\Models\ObjectInspectionCompany;
 use App\Models\ObjectSupplier;
 use App\Models\Customer;
 use Filament\Tables\Enums\FiltersLayout;
@@ -107,11 +108,6 @@ class ObjectResource extends Resource
                     ->label("Leverancier")
                     ->options(ObjectSupplier::pluck("name", "id")),
 
-                // Select::make('customer_id')
-                //     ->label("Relatie")
-                //     ->options(Customer::
-                //     pluck('name', 'id')),
-
                 TextInput::make("stopping_places")
                     ->label("Stoppplaatsen")
                     ->placeholder("Niet opgegeven"),
@@ -123,6 +119,11 @@ class ObjectResource extends Resource
                 Select::make("maintenance_company_id")
                     ->label("Onderhoudspartij")
                     ->options(ObjectMaintenanceCompany::pluck("name", "id")),
+
+                Select::make("inspection_company_id")
+                    ->label("Keuringsinstantie")
+                    ->live()
+                    ->options(ObjectInspectionCompany::pluck("name", "id")),
 
                 TextInput::make("name")->label("Naam"),
             ]),
@@ -251,6 +252,9 @@ class ObjectResource extends Resource
                     ->placeholder("Geen onderhoudspartij")
                     ->sortable()
                     ->label("Onderhoudspartij"),
+
+
+                    
             ])
             ->filters([
                
@@ -396,7 +400,7 @@ class ObjectResource extends Resource
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
-                        Components\TextEntry::make("inspectioncompany.name")
+                        Components\TextEntry::make("maintenance_company.name")
                             ->label("Onderhoudspartij")
                             ->placeholder("Niet opgegeven"),
             
