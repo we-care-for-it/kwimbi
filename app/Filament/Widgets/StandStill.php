@@ -75,11 +75,7 @@ class StandStill extends BaseWidget
                 Tables\Columns\TextColumn::make("status_id")
                     ->label("Status")
                     ,
-                Tables\Columns\TextColumn::make("type.name")
-                    ->label("Type")
-                    ->sortable()
-                    ->badge()
-                    ->color("primary"),
+
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Unit nummer")
                     ->placeholder("Geen unitnummer"),
