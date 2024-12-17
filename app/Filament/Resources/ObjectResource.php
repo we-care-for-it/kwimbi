@@ -65,10 +65,12 @@ class ObjectResource extends Resource
         return static::getModel()::count();
     }
 
-    
+
     public static function form(Form $form): Form
     {
         return $form->schema([
+
+
             Grid::make(4)->schema([
                 TextInput::make("nobo_no")
                     ->label("NOBO Nummer")
@@ -311,9 +313,28 @@ class ObjectResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
+
+
+    
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
+
+                        Components\TextEntry::make("address")
+
+            ->label("Adres")->getStateUsing(function ($record) : ? string
+        {
+            $housenumber = "";
+            if ($record->location->housenumber)
+            {
+                $housenumber = " " . $record?->location?->housenumber;
+            }
+
+            return $record?->location?->address . " " . $housenumber . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
+        })
+            ->placeholder("Niet opgegeven"),
+
+
                         Components\TextEntry::make("nobo_no")
                             ->label("NOBO Nummer")
                             ->placeholder("Niet opgegeven"),
@@ -362,10 +383,7 @@ class ObjectResource extends Resource
                             ->label("Stoppplaatsen")
                             ->placeholder("Niet opgegeven"),
 
-                        Components\TextEntry::make("inspectioncompany.name")
-                            ->label("Onderhoudspartij")
-                            ->placeholder("Niet opgegeven"),
-
+     
                         Components\TextEntry::make("name")
                             ->label("Naam")
                             ->placeholder("Niet opgegeven"),
@@ -373,14 +391,32 @@ class ObjectResource extends Resource
                 ])->from("lg"),
             ]),
 
+            
+    
             Components\Section::make()->schema([
                 Components\Split::make([
-                    Components\TextEntry::make("remark")
+                    Components\Grid::make(4)->schema([
+                        Components\TextEntry::make("inspectioncompany.name")
+                            ->label("Onderhoudspartij")
+                            ->placeholder("Niet opgegeven"),
+            
+                        Components\TextEntry::make("location.managementcompany.name")
+                            ->label("Beheerder")
+                            ->placeholder("Niet opgegeven"),
+                     
+                        Components\TextEntry::make("inspectioncompany.name")
+                            ->label("Keuringinstantie")
+                            ->placeholder("Niet opgegeven"),
 
-                        ->label("Opmerking")
-                        ->placeholder("Geen opmerking"),
+                        Components\TextEntry::make("remark")
+                            ->label("Opmerking")
+                            ->placeholder("Geen opmerking"),
+                    ])
+                    ])
                 ]),
-            ]),
+
+
+             
         ]);
     }
 

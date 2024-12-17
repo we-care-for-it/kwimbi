@@ -14,7 +14,7 @@ enum ElevatorStatus: string implements HasLabel,HasColor
 {
     case OPERATIONAL    = "1";
     case TURNEDOFF      = "2";
-    case STANDSTILL     = "3";
+  //  case STANDSTILL     = "3";
 
     
  
@@ -25,7 +25,7 @@ enum ElevatorStatus: string implements HasLabel,HasColor
         return match ($this) {
             self::OPERATIONAL => 'Operationeel',
             self::TURNEDOFF => 'Buitenbedrijf',
-            self::STANDSTILL => 'Stilstaand',
+           // self::STANDSTILL => 'Stilstaand',
         };
     }
 
@@ -42,7 +42,7 @@ enum ElevatorStatus: string implements HasLabel,HasColor
         return match ($this) {
             self::OPERATIONAL => 'success',
             self::TURNEDOFF => 'warning',
-            self::STANDSTILL => 'danger',
+          //  self::STANDSTILL => 'danger',
           
         };
     }

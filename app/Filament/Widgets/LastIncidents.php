@@ -63,7 +63,7 @@ class LastIncidents extends BaseWidget
             ])
             ->recordUrl(function (ObjectIncident $record) {
                 return "admin/objects/" .
-                    $record->id .
+                    $record->elevator_id .
                     "?activeRelationManager=1";
             })
             ->paginated(false);

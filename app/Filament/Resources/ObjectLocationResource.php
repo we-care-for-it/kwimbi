@@ -402,12 +402,18 @@ class ObjectLocationResource extends Resource
 
                 public static function getRelations() : array
                 {
-                    return [RelationManagers\ObjectsRelationManager::class , RelationManagers\NotesRelationManager::class , RelationManagers\ProjectsRelationManager::class , RelationManagers\AttachmentsRelationManager::class , ];
+                    return [
+                        RelationManagers\ObjectsRelationManager::class ,
+                    RelationManagers\NotesRelationManager::class , 
+                    RelationManagers\ProjectsRelationManager::class , 
+                    RelationManagers\AttachmentsRelationManager::class , ];
                 }
 
                 public static function getPages() : array
                 {
-                    return ["index" => Pages\ListObjectLocations::route("/") , "view" => Pages\ViewObjectLocation::route("/{record}") , ];
+                    return 
+                    ["index" => Pages\ListObjectLocations::route("/") ,
+                     "view" => Pages\ViewObjectLocation::route("/{record}") , ];
                 }
 
                 public static function getModelLabel() : string

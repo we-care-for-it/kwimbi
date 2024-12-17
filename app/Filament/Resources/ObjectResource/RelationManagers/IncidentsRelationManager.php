@@ -3,7 +3,7 @@ namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
 use App\Enums\IncidentTypes;
 use App\Enums\IncidentStatus;
-
+use App\Models\Elevator;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -118,6 +118,7 @@ class IncidentsRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
+                    
                     ->badge() ,
 
                 ])
@@ -127,6 +128,15 @@ class IncidentsRelationManager extends RelationManager
                 ->paginated(false)
                 ->emptyState(view('partials.empty-state-small'))
                     ->headerActions([Tables\Actions\CreateAction::make()
+
+                    ->mutateFormDataUsing(function (array $data): array {
+                   dd($data['standing_still']);
+ 
+                        Elevator::where('id', $this->ownerRecord->id)
+                        ->update(['standing_still' => $data->standing_still]);
+
+                    })
+                    
                     ->label('Toevoegen') , ])->actions([Tables\Actions\Action::make('seeDetails')
                     ->label('Toon details')
                     ->color('success')

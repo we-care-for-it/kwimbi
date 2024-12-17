@@ -38,6 +38,7 @@ class ViewObject extends ViewRecord
             ->iconButton()
            ->color('gray')
            ->label('Open locatie')
+           
            ->link()
            ->icon('heroicon-s-map-pin')
            ->url(function ($record) {
@@ -47,6 +48,7 @@ class ViewObject extends ViewRecord
 
 
         Actions\EditAction::make('cancel_top')
+        ->slideOver() 
         ->icon('heroicon-o-pencil')
         ->label('Wijzig')
 
