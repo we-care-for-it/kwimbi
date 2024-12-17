@@ -85,15 +85,15 @@ class ObjectResource extends Resource
 
                 TextInput::make("unit_no")->label("Unit Nummer"),
                 Select::make("energy_label")
-
+                    ->live()
                     ->label("Energielabel")
                     ->options([
-                        "a" => "A",
-                        "b" => "B",
-                        "c" => "C",
-                        "d" => "D",
-                        "r" => "E",
-                        "f" => "F",
+                        "A" => "A",
+                        "B" => "B",
+                        "C" => "C",
+                        "D" => "D",
+                        "E" => "E",
+                        "F" => "F",
                     ]),
 
                 DatePicker::make("install_date")
@@ -257,7 +257,6 @@ class ObjectResource extends Resource
                     
             ])
             ->filters([
-               
                 SelectFilter::make('object_type_id')
                     ->label('Type')
                     ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
@@ -271,7 +270,6 @@ class ObjectResource extends Resource
             ],layout : FiltersLayout::AboveContent)
             ->actions([
                 ActionGroup::make([
-                    
                     EditAction::make()
                         ->modalHeading('Object snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
@@ -291,21 +289,19 @@ class ObjectResource extends Resource
             ->askForWriterType()
             ->withColumns([
 
- 
-
-            Column::make("customer.name")->heading("Relatie") , 
-            Column::make("type.name")->heading("Type"), 
-            Column::make("unit_no")->heading("Unit no") ,
-            Column::make("nobo_no")->heading("Nobo no") ,
-            Column::make("energy_label")->heading("Energielael") ,
-            Column::make("install_date")->heading("Installatie datum") , 
-            Column::make("status_id")->heading("Status") , 
-            Column::make("supplier.name")->heading("Leverancier") , 
-            Column::make("stopping_places")->heading("Stopplaatsen"),
-            Column::make("inspectioncompany.name")->heading("Keuringsinstantie"),
-            Column::make("name")->heading("Naam"),
-            Column::make("management_company.name")->heading("Beheerder"),
-            Column::make("remark")->heading("Opmerking")
+                Column::make("customer.name")->heading("Relatie") , 
+                Column::make("type.name")->heading("Type"), 
+                Column::make("unit_no")->heading("Unit no") ,
+                Column::make("nobo_no")->heading("Nobo no") ,
+                Column::make("energy_label")->heading("Energielael") ,
+                Column::make("install_date")->heading("Installatie datum") , 
+                Column::make("status_id")->heading("Status") , 
+                Column::make("supplier.name")->heading("Leverancier") , 
+                Column::make("stopping_places")->heading("Stopplaatsen"),
+                Column::make("inspectioncompany.name")->heading("Keuringsinstantie"),
+                Column::make("name")->heading("Naam"),
+                Column::make("management_company.name")->heading("Beheerder"),
+                Column::make("remark")->heading("Opmerking")
 
                      , ])
             ->withFilename(date("m-d-Y H:i") . " - objecten export") , ]) , ])
@@ -427,12 +423,12 @@ class ObjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\FeatureRelationManager::class,
-            RelationManagers\IncidentsRelationManager::class,
-            RelationManagers\MaintenanceContractsRelationManager::class,
-            RelationManagers\MaintenanceVisitsRelationManager::class,
-            RelationManagers\inspectionsRelationManager::class,
-            //     RelationManagers\AttachmentRelationManager::class,
+            //RelationManagers\FeatureRelationManager::class,
+                RelationManagers\IncidentsRelationManager::class,
+                RelationManagers\MaintenanceContractsRelationManager::class,
+                RelationManagers\MaintenanceVisitsRelationManager::class,
+                RelationManagers\inspectionsRelationManager::class,
+            //RelationManagers\AttachmentRelationManager::class,
         ];
     }
 

@@ -10,37 +10,15 @@ use Filament\Support\Enums\Alignment;
 class LastIncidents extends BaseWidget
 {
  
-    protected static ?int $sort = 3;
+    protected static ?int $sort = 2;
     protected static ?string $heading = "Nieuwste storingen";
-
+    protected ?string $description = 'An overview of some analytics.';
     protected int | string | array $columnSpan = '6';
     public function table(Table $table): Table
     {
         return $table
-            ->query(ObjectIncident::limit(10))
+            ->query(ObjectIncident::orderby('created_at','desc')->limit(10))
             ->columns([
-//                 Tables\Columns\TextColumn::make("id")
-//                 ->label("#")
-//                 ->getStateUsing(function ($record): ? string
-//                 {
-//                     return sprintf("%05d", $record ?->id);
-//                 }) ,
-
-//                 Tables\Columns\TextColumn::make("standing_still")
-//                 ->label('')
-//                 ->getStateUsing(function ($record): ? string
-//                 {
-//                     if($record->standing_still=="1"){
-//                     return "Stilstand";
-//                     }else{
-//                      return   NULL;
-//                     }
-//                 }) 
-
-//                 ->color('danger')
-//                 ->badge()
-//  ,
-
                 Tables\Columns\TextColumn::make("report_date_time")
                     ->label("Gemeld op ")
                     ->sortable()

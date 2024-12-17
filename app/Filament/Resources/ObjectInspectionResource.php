@@ -203,8 +203,8 @@ class ObjectInspectionResource extends Resource
             ->columnSpan(1)
             ->autosize() ])
 
-        ]) 
-        ->emptyState(view('partials.empty-state'));
+        ]) ;
+
     }
 
 
@@ -309,7 +309,7 @@ class ObjectInspectionResource extends Resource
             
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
         //  ExportBulkAction::make(),
-        ]) , ]);
+        ]) , ])        ->emptyState(view('partials.empty-state'));
     }
 
     public static function getRelations() : array

@@ -30,8 +30,6 @@ class Elevator extends Model implements Auditable
 
 {
     use SoftDeletes;
-
-    
     protected function casts(): array
     {
         return [
@@ -39,26 +37,12 @@ class Elevator extends Model implements Auditable
              
         ];
     }
-
-
-
     static $rules = [];
-
     use \OwenIt\Auditing\Auditable;
 
-    // Validation rules for this model
-    static $searchable = ['name', 'address', 'general_emailaddress', 'phonenumber'];
-
-    // Number of items to be shown per page
-    public $table = "elevators";
-
-    // Attributes that should be mass-assignable
-    protected $perPage = 20;
-
-    // Attributes that are searchable
     protected $fillable = [
-
-        'status_id', 'customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'];
+        'status_id', 'energy_label','customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'
+    ];
 
     public function location()
     {
@@ -107,7 +91,9 @@ class Elevator extends Model implements Auditable
 
     public function latestinspections()
     {
-        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id')->orderBy('executed_datetime','desc');   
+    
+    
     }
 
     public function inspections()
@@ -117,7 +103,7 @@ class Elevator extends Model implements Auditable
 
     public function inspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id')->orderBy('executed_datetime','desc')->orderBy('executed_datetime','desc');
     }
 
     public function features()
@@ -159,8 +145,4 @@ class Elevator extends Model implements Auditable
     {
         return $this->hasMany(ObjectMaintenanceVisits::class);
     }
-
-
-
-
 }

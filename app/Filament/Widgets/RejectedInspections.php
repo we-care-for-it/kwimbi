@@ -7,42 +7,18 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Support\Enums\Alignment;
-
-class StandStill extends BaseWidget
+class RejectedInspections extends BaseWidget
 {
-
-    protected static ?int $sort = 1;
-    protected static ?string $heading = "Stilstaande liften";
-
-    protected int | string | array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
+ 
+    protected static ?int $sort = 3;
+    protected static ?string $heading = "Afgekeurde objecten";
     protected ?string $description = 'An overview of some analytics.';
-
-
+    protected int | string | array $columnSpan = '6';
     public function table(Table $table): Table
     {
-
-        $status_id = NULL;
-              return $table
-
-        
-        ->query(
-            Elevator::with(['inspections' => function ($query) use ($status_id) {
-                 
-                        $query->where('status_id',31);
-                   
-                    
-                }])
-                ->limit(10)
-        )
-
-
-
-            // ->query(
-            //      Elevator::has("incident_stand_still")->latest()->limit(10)
-
-            //     )
-          
+        return $table
+            ->query(Elevator::has("latestinspections")->limit(10))
+            
             ->columns([
                 Tables\Columns\TextColumn::make("location")
                     ->getStateUsing(function (Elevator $record): ?string {
@@ -72,7 +48,7 @@ class StandStill extends BaseWidget
                 Tables\Columns\TextColumn::make("location.customer.name")
                 ->label("Relatie"),
 
-                Tables\Columns\TextColumn::make("status_id")
+                Tables\Columns\TextColumn::make("inspection.status_id")
                     ->label("Status")
                     ,
                 Tables\Columns\TextColumn::make("type.name")
@@ -89,10 +65,6 @@ class StandStill extends BaseWidget
                     $record->id .
                     "?activeRelationManager=1";
             })
-            
             ->paginated(false);
     }
-
-
- 
 }

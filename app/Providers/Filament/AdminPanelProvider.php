@@ -49,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
              ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
-            
+            ->breadcrumbs(false)
             ->colors([
                 'primary' => Color::Amber,
             ])

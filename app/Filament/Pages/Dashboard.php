@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Filament\Pages;
+use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
+use Filament\Forms\Components\TextInput;
+
+
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
@@ -9,4 +13,7 @@ class Dashboard extends \Filament\Pages\Dashboard
  
     return 12;
 }
+
+
+
 }
