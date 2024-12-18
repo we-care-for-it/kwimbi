@@ -56,25 +56,15 @@ class StandStill extends BaseWidget
                                 $record->location->place;
                         }
                     })
-                    ->label("Locatie")
-                    ->description(function (Elevator $record) {
-                        if (!$record?->location->name) {
-                            return $record?->location->name;
-                        } else {
-                            return $record->location->address .
-                                " - " .
-                                $record->location->zipcode .
-                                " " .
-                                $record->location->place;
-                        }
-                    }),
+                   ->label("Locatie"),
+
+
+                    // ->description(),
 
                 Tables\Columns\TextColumn::make("location.customer.name")
                 ->label("Relatie"),
 
-                // Tables\Columns\TextColumn::make("status_id")
-                //     ->label("Status")
-                //     ,
+         
 
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Unit nummer")
