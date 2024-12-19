@@ -27,9 +27,6 @@ class ObjectType extends Model implements Auditable
 
 
 
-    // public function modules(){
-    //     return $this->belongsTo(uploadTypeModule::class,'');
-    // }
 
 
 

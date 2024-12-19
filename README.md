@@ -1,6 +1,6 @@
 Upload type modile
 1 = projecten
-
+2 = Elevators
 
 ##Keuringstatussen
 1 = Goedgekeurd

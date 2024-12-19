@@ -116,9 +116,9 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
     }
 
-    public function attachments()
+    public function uploads()
     {
-        return $this->hasMany(Upload::class);
+        return $this->hasMany(Upload::class,'item_id','id');
     }
 
     public function incidents()

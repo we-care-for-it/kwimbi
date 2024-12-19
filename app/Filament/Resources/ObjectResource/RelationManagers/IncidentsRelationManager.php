@@ -24,7 +24,7 @@ class IncidentsRelationManager extends RelationManager
     public static function getBadge($ownerRecord, string $pageClass) : ? string
     {
         return $ownerRecord
-            ->incidents
+            ->uploads
             ->count();
     }
 

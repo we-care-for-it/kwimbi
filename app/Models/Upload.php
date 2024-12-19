@@ -23,4 +23,12 @@ class Upload extends Model  implements Auditable
         'group_id',
         'title'
     ];
+
+
+    public function type(){
+        return $this->hasOne(uploadType::class,'id','upload_type_id');
+    }
+
+
+
 }

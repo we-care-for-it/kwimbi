@@ -55,21 +55,18 @@ class UploadsTypesResource extends Resource
             Forms\Components\TextInput::make('name')
             ->label('Omschrijving')
             ->columnSpan('full') ,
-
-
- 
-
-     
-Checkbox::make('visible_projects')->label('Projecten'),
-Checkbox::make('visible_incidents')->label('Storingen'),
-Checkbox::make('visible_assets')->label('Hardwarebeheer'),
-Checkbox::make('visible_tools')->label('Gereedschap'),
-Checkbox::make('visible_workorders')->label('Werkopdrachten'),
-Checkbox::make('visible_fleet')->label('Voertuigbeheer'),
-Checkbox::make('visible_object_management_companies')->label('Object beheerders'),
-Checkbox::make('visible_object_suppliers')->label('Object leveranciers'),
-Checkbox::make('visible_object_maintenance_companies')->label('Object onderhoudspartijen')
- 
+   
+                Checkbox::make('visible_projects')->label('Projecten'),
+                Checkbox::make('visible_incidents')->label('Storingen'),
+                Checkbox::make('visible_assets')->label('Hardwarebeheer'),
+                Checkbox::make('visible_tools')->label('Gereedschap'),
+                Checkbox::make('visible_workorders')->label('Werkopdrachten'),
+                Checkbox::make('visible_fleet')->label('Voertuigbeheer'),
+                Checkbox::make('visible_object_management_companies')->label('Object beheerders'),
+                Checkbox::make('visible_object_suppliers')->label('Object leveranciers'),
+                Checkbox::make('visible_object_maintenance_companies')->label('Object onderhoudspartijen'),
+                Checkbox::make('visible_object_attachments')->label('Object bijlages')
+                
              
         ]);
     }

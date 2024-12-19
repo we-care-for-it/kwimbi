@@ -339,8 +339,6 @@ class ObjectResource extends Resource
                             ->label("NOBO Nummer")
                             ->placeholder("Niet opgegeven"),
 
-
-
                         Components\TextEntry::make("type.name")
                             ->badge()
                             ->label("Type")
@@ -351,8 +349,7 @@ class ObjectResource extends Resource
                             ->label("Unit Nummer")
                             ->placeholder("Niet opgegeven"),
 
-
-                              ViewEntry::make("energy_label")
+                        ViewEntry::make("energy_label")
                             ->view("filament.infolists.entries.energylabel")
                             ->label("Energielabel")
                             ->placeholder("Niet opgegeven"),
@@ -428,7 +425,7 @@ class ObjectResource extends Resource
                 RelationManagers\MaintenanceContractsRelationManager::class,
                 RelationManagers\MaintenanceVisitsRelationManager::class,
                 RelationManagers\inspectionsRelationManager::class,
-            //RelationManagers\AttachmentRelationManager::class,
+                RelationManagers\AttachmentRelationManager::class,
         ];
     }
 
