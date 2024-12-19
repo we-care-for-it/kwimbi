@@ -52,6 +52,8 @@ use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\ViewEntry;
 
  
+
+
 class ObjectResource extends Resource
 {
     protected static ?string $model = Elevator::class;
@@ -422,9 +424,11 @@ class ObjectResource extends Resource
         return [
             //RelationManagers\FeatureRelationManager::class,
                 RelationManagers\IncidentsRelationManager::class,
-                RelationManagers\MaintenanceContractsRelationManager::class,
-                RelationManagers\MaintenanceVisitsRelationManager::class,
-                RelationManagers\inspectionsRelationManager::class,
+             //   RelationGroup::make('Onderhoud', [
+                    RelationManagers\MaintenanceContractsRelationManager::class,
+                    RelationManagers\MaintenanceVisitsRelationManager::class,
+              //  ]),
+                 RelationManagers\inspectionsRelationManager::class,
                 RelationManagers\AttachmentRelationManager::class,
         ];
     }

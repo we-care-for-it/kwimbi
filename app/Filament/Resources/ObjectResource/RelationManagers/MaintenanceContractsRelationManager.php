@@ -21,12 +21,18 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Grid;
  
+
+
 class MaintenanceContractsRelationManager extends RelationManager
 {
     protected static string $relationship = 'maintenance_contracts';
-    protected static ? string $title = 'Onderhoudcontracten';
+    protected static ? string $title = 'Onderhoudscontracten';
     protected static bool $isLazy = false;
     
+
+
+
+
     public static function getBadge(Model $ownerRecord, string $pageClass) : ? string
     {
         // $ownerModel is of actual type Job

@@ -12,13 +12,13 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
 use App\Models\uploadType;
 use Filament\Tables\Actions\ActionGroup;
 use App\Models\Upload;
 use Illuminate\Support\Facades\Storage;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\Textarea;
 
 class AttachmentRelationManager extends RelationManager
 {
@@ -39,7 +39,7 @@ class AttachmentRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                TextArea::make('description')
+                Textarea::make('description')
                     ->label('Omschrijving')
                     ->required()
                     ->maxLength(255),

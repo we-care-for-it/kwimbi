@@ -29,7 +29,10 @@ class InspectionsRelationManager extends RelationManager
     protected static string $relationship = "inspections";
     protected static ?string $title = "Keuringen";
     protected static bool $isLazy = false;
-    
+    public function getContentTabIcon(): ?string
+    {
+        return 'heroicon-m-cog';
+    }
     public static function getBadge($ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->inspections->count();
