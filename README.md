@@ -15,6 +15,11 @@ Status
 1 = succes;vol
 2 = error
 
+##Type berdijven
+1 = Onderhoudsbedrijven
+2 = Beheerders
+3 = Keuringsinstanties
+4 = Algemeen
 
 ##Elevator statussen 
 AFDGEKEURD 

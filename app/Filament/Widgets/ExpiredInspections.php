@@ -11,8 +11,8 @@ class ExpiredInspections  extends BaseWidget
 {
  
     protected static ?int $sort = 4;
-    protected static ?string $heading = "Verlopen keuringen";
-    protected ?string $description = 'An overview of some analytics.';
+    protected static ?string $heading = "Afgekeurde objecten";
+
     protected int | string | array $columnSpan = '6';
     public function table(Table $table): Table
     {
