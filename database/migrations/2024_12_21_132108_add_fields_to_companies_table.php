@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->dropForeign(['companies_user_id_foreign']);
+            $table->dropForeign(['user_id_foreign']);
             $table->dropColumn('user_id');
             $table->string('zipcode')->nullable();
             $table->string('place')->nullable();
