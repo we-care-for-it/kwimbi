@@ -12,7 +12,14 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Grouping\Group;
 class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
@@ -23,27 +30,127 @@ class ContactResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+            Forms\Components\TextInput::make('first_name')
+                ->label('Voornaam')
+                ->required()
+                ->maxLength(255),
+                Forms\Components\TextInput::make('last_name')
+                ->label('Achternaam')
+                ->required()
+                ->maxLength(255),
+
+                Forms\Components\TextInput::make('email')
+                ->label('E-mailadres')
+                ->maxLength(255),
+
+                Forms\Components\TextInput::make('department')
+                ->label('Afdeling')
+                ->maxLength(255),
+
+                Forms\Components\TextInput::make('function')
+                ->label('Functie')
+                ->maxLength(255),
+
+                Forms\Components\TextInput::make('phone_number')
+                ->label('Telefoonnummer')
+                ->maxLength(255),
+
+
+                Forms\Components\TextInput::make('mobile_number')
+                ->label('Intern telefoonnummer')
+                ->maxLength(255),
+
+
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+
+        ->groups([
+            Group::make('company.name')
+                ->label('Bedrijf'),
+        ])
+
+
             ->columns([
-                //
+            
+
+       
+
+
+ 
+    // ImageColumn::make('avatar')->label("")
+    // ->defaultImageUrl(url('/images/noavatar.jpg'))
+    //     ->circular()
+    //     ->grow(true),
+    TextColumn::make('name')
+    ->label('Naam')
+    ->searchable()
+    ->getStateUsing(function ($record) : ? string
+                {
+                 
+
+
+        
+                    return $record?->first_name . " " . $record?->last_name;
+                }) ,
+ 
+        
+      
+    TextColumn::make('email')
+    ->searchable(),
+
+    Tables\Columns\TextColumn::make("department")
+    ->label("Afdeling")
+    ->description(function ($record) : ? string
+    {
+           return $record?->function ?? NULL;
+    }),
+
+    Tables\Columns\TextColumn::make("phone_number")
+    ->label("Telefoonnummers")
+    ->description(function ($record) : ? string
+    {
+           return $record?->mobile_number ?? NULL;
+    }),
+
+
+    Tables\Columns\TextColumn::make("company.name")
+    ->label("Bedrijfsnaam"),
+
+
+    
+
+    Tables\Columns\TextColumn::make('company.type.name')
+    ->label('Type')
+    ->badge()
+    ->searchable()
+    ->sortable(),
+
+
+ 
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->modalHeading('Snel bewerken')
+                        ->modalIcon('heroicon-o-pencil')
+                        ->label('Snel bewerken')
+                        ->slideOver(),
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->modalHeading('Object verwijderen')
+                        ->color('danger'),
+                ]),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+             
             ]);
     }
 
@@ -58,8 +165,8 @@ class ContactResource extends Resource
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-            'create' => Pages\CreateContact::route('/create'),
-            'edit' => Pages\EditContact::route('/{record}/edit'),
+           // 'create' => Pages\CreateContact::route('/create'),
+            //'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }

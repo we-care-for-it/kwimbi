@@ -9,11 +9,11 @@ use Filament\Resources\Pages\ListRecords;
 class ListContacts extends ListRecords
 {
     protected static string $resource = ContactResource::class;
-
+    protected static ?string $title = "Contactpersonen";
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+           // Actions\CreateAction::make(),
         ];
     }
 }

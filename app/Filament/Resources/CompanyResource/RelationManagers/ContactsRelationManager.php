@@ -14,6 +14,11 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Notifications\Notification;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Columns\Layout\Split;
+ 
+use Filament\Tables\Columns\TextColumn;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -60,25 +65,53 @@ class ContactsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+             
             ->columns([
-                Tables\Columns\TextColumn::make('first_name')->getStateUsing(function ($record) : ? string
+
+    TextColumn::make('name')
+    ->getStateUsing(function ($record) : ? string
                 {
                  
+
+
         
                     return $record?->first_name . " " . $record?->last_name;
-                })    ->label("Naam")
+                }) ,
+ 
+        
+      
+    TextColumn::make('email'),
+
+    Tables\Columns\TextColumn::make("department")
+    ->label("Afdeling")
+    ->description(function ($record) : ? string
+    {
+           return $record?->function ?? NULL;
+    }),
+
+    Tables\Columns\TextColumn::make("phone_number")
+    ->label("Telefoonnummers")
+    ->description(function ($record) : ? string
+    {
+           return $record?->mobile_number ?? NULL;
+    }),
+
+
+
+
+ 
+
+                // Tables\Columns\TextColumn::make('first_name')   ->label("Naam")
                 
-                ,
+                // ,
 
-                Tables\Columns\TextColumn::make("email")
-                ->label("E-mailadres"),
+                // Tables\Columns\TextColumn::make("email")
+                // ->label("E-mailadres"),
 
-                Tables\Columns\TextColumn::make("department")
-                ->label("Afdeling"),
+  
 
-                Tables\Columns\TextColumn::make("function")
-                ->label("Functies"),
+            
+ 
 
 
 
@@ -87,7 +120,9 @@ class ContactsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->slideOver(),
+                Tables\Actions\CreateAction::make()
+                    ->label('Toevoegen')
+                    ->slideOver(),
             ])
             ->actions([
                 ActionGroup::make([
@@ -103,9 +138,9 @@ class ContactsRelationManager extends RelationManager
                 ]),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 }
