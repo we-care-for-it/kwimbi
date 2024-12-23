@@ -83,12 +83,10 @@ class ContactsRelationManager extends RelationManager
     TextColumn::make('email'),
 
     Tables\Columns\TextColumn::make("department")
-    ->label("Afdeling")
-    ->description(function ($record) : ? string
-    {
-           return $record?->function ?? NULL;
-    }),
-
+    ->label("Afdeling"),
+ 
+    Tables\Columns\TextColumn::make("function")
+    ->label("Functie"),
     Tables\Columns\TextColumn::make("phone_number")
     ->label("Telefoonnummers")
     ->description(function ($record) : ? string

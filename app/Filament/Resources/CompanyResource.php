@@ -26,6 +26,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Notifications\Notification;
   
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 
@@ -123,7 +124,7 @@ class CompanyResource extends Resource
 
 
                         Forms\Components\TextInput::make("address")
-                            ->label("Straatnaam")
+                            ->label("Adres")
                             ->columnSpan(2),
 
 //                            Forms\Components\TextInput::make(
@@ -135,7 +136,7 @@ class CompanyResource extends Resource
                         )     ->columnSpan(2),
 
                         Forms\Components\Select::make("type_id")
-                        ->label("Type bedrijf")
+                        ->label("Categorie")
 
                         ->options(companyType::where('is_active', 1)->pluck('name', 'id'))
                         ->columnSpan(2),
@@ -173,8 +174,8 @@ public static function infolist(Infolist $infolist) : Infolist
         ->label("Bedrijfsnaam")
         ->placeholder("Niet opgegeven"),
 
-        Components\TextEntry::make('name')
-        ->label("Type")
+        Components\TextEntry::make('type.name')
+        ->label("Categorie")
         ->badge()
         ->placeholder("Niet opgegeven"),
 
@@ -202,8 +203,15 @@ public static function infolist(Infolist $infolist) : Infolist
     public static function table(Table $table): Table
     {
         return $table
+        ->groups([
+            Group::make("type.name")  ->titlePrefixedWithLabel(false)
+        ->label("Categorie")  
+        
+         
+  ])
+   ->defaultGroup('type_id')->
 
-            ->columns([
+            columns([
 
 
 
@@ -216,13 +224,14 @@ public static function infolist(Infolist $infolist) : Infolist
 
                         Tables\Columns\TextColumn::make('address')
                             ->searchable()
-
+                ->label('Adres')
                             ->weight('medium')
                             ->alignLeft(),
 
 
 
-                        Tables\Columns\TextColumn::make('zipcode')->state(
+                        Tables\Columns\TextColumn::make('zipcode')
+                        ->label('Postcode')->state(
                             function (Company $rec) {
                                 return $rec->zipcode . " " . $rec->place;
                             }),
@@ -232,7 +241,7 @@ public static function infolist(Infolist $infolist) : Infolist
 
 
                     Tables\Columns\TextColumn::make('type.name')
-                    ->label('Type')
+                    ->label('Categorie')
                     ->badge()
                     ->searchable()
                     ->sortable(),
@@ -244,7 +253,7 @@ public static function infolist(Infolist $infolist) : Infolist
             ->filters([
              
                 SelectFilter::make('type_id')
-                ->label('Type')
+                ->label('Categorie')
                 ->options(companyType::where('is_active', 1)->pluck('name', 'id')),
                 Tables\Filters\TrashedFilter::make(),
                         

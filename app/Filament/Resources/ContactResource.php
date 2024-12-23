@@ -119,6 +119,10 @@ class ContactResource extends Resource
 
 
     Tables\Columns\TextColumn::make("company.name")
+    ->url(function ($record) {
+        return "/admin/companies/" .
+            $record->company_id;
+    })
     ->label("Bedrijfsnaam"),
 
 
@@ -134,9 +138,17 @@ class ContactResource extends Resource
  
             ])
             ->filters([
-                //
+                    SelectFilter::make("status_id")
+                    ->label("Status")
+                    ->options(
+                        Statuses::where("model", "Project")->pluck("name", "id")
+                    )
+                    ->searchable()
+                    ->preload(),
             ])
             ->actions([
+
+
                 ActionGroup::make([
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
@@ -151,7 +163,7 @@ class ContactResource extends Resource
             ])
             ->bulkActions([
              
-            ]);
+            ])->emptyState(view('partials.empty-state')) ;
     }
 
     public static function getRelations(): array
