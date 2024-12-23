@@ -209,7 +209,7 @@ public static function infolist(Infolist $infolist) : Infolist
         
          
   ])
-   ->defaultGroup('type_id')->
+   ->defaultGroup('type.name')->
 
             columns([
 

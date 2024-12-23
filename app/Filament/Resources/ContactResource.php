@@ -20,6 +20,9 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
+use Filament\Tables\Filters\SelectFilter;
+use App\Models\companyType;
+
 class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
@@ -138,13 +141,11 @@ class ContactResource extends Resource
  
             ])
             ->filters([
-                    SelectFilter::make("status_id")
-                    ->label("Status")
-                    ->options(
-                        Statuses::where("model", "Project")->pluck("name", "id")
-                    )
-                    ->searchable()
-                    ->preload(),
+                    // SelectFilter::make("company.type_id")
+                    // ->label("Categorie")
+                    // ->options(companyType::where('is_active', 1)->pluck('name', 'id'))
+                    // ->searchable()
+                    // ->preload(),
             ])
             ->actions([
 
