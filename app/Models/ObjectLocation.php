@@ -64,17 +64,17 @@ class ObjectLocation extends Model implements Auditable
 
     public function objectbuildingtype()
     {
-        return $this->belongsTo(objectBuildingType::class, 'building_type_id', 'id');
+        return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
     }
 
     public function buildingtype()
     {
-       return $this->belongsTo(objectBuildingType::class, 'building_type_id', 'id');
+       return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
     }
 
     public function managementcompany()
     {
-        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
     }
 
     public function objects()
