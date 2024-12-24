@@ -32,7 +32,7 @@
    font-weight: normal!important;
 
 }
-.fi-topbar .bg-white {
+/* .fi-topbar .bg-white {
   background-color:rgb(139,217,144)
 }
 
@@ -43,7 +43,7 @@
 
 .fi-sidebar-header  {
   background-color:rgb(125,196,129)!important
-}
+} */
 
 .fi-sidebar-header .fi-icon-btn-icon  {
   color: white!important
@@ -112,7 +112,7 @@
 
 }
 
-
+/* 
 
 
 .fi-global-search-result
@@ -139,4 +139,4 @@
 
 .widget_dasboard{
   background-color:rgb(125,196,129)!important
-}
+} */
