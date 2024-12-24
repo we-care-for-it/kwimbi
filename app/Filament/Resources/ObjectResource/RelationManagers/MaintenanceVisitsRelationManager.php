@@ -15,7 +15,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Company;
 use App\Models\ObjectMaintenanceVisits;
 use App\Models\ObjectMaintenanceCompany;
 
@@ -51,8 +51,9 @@ class MaintenanceVisitsRelationManager extends RelationManager
                     Select::make("maintenance_company_id")
                         ->label("Onderhoudsbedrijf")
                         ->required()
-                        ->options(ObjectMaintenanceCompany::pluck("name", "id")) ,
-            
+                        ->options(Company::where('type_id',1)->pluck("name", "id")),
+
+
                         DatePicker::make("execution_date")
                         ->label("Uitvoerdatum"),
             

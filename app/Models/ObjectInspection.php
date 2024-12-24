@@ -39,7 +39,7 @@ class ObjectInspection extends Model
 
     public function inspectioncompany()
     {
-        return $this->belongsTo(ObjectInspectionCompany::class,'inspection_company_id','id')->withTrashed();
+        return $this->belongsTo(Company::class,'inspection_company_id','id')->withTrashed();
     }
 
 

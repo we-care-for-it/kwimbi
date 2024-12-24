@@ -1,13 +1,13 @@
 <?php
 namespace App\Filament\Resources;
-use App\Models\ObjectInspectionCompany;
+ 
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 use App\Models\ObjectInspection;
 use App\Models\ObjectLocation;
 use App\Models\Project;
-
+use App\Models\Company;
 use App\Models\Elevator;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -42,7 +42,7 @@ class ObjectInspectionResource extends Resource
     protected static ? string $model = ObjectInspection::class;
     protected static ?string $navigationLabel = "Keuringen";
     protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ? string $title = "Bekijk keuring";
+ 
 
     public static function infolist(Infolist $infolist) : Infolist
     {
@@ -184,9 +184,7 @@ class ObjectInspectionResource extends Resource
         Select::make("inspection_company_id")
             ->label("Keuringsinstantie")
             ->required()
-
-            ->options(ObjectInspectionCompany::pluck("name", "id")) ,
-
+            ->options(Company::where('type_id',3)->pluck("name", "id")),
         ]) ,
 
         Grid::make(2)

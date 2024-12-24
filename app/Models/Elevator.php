@@ -71,17 +71,17 @@ class Elevator extends Model implements Auditable
 
     public function company()
     {
-        return $this->hasOne(maintenanceCompany::class, 'id', 'maintenance_company_id');
+        return $this->hasOne(Company::class, 'id', 'maintenance_company_id');
     }
 
     public function maintenance_company()
     {
-        return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
+        return $this->hasOne(Company::class, 'id', 'maintenance_company_id');
     }
 
     public function inspectioncompany()
     {
-        return $this->hasOne(ObjectInspectionCompany::class, 'id', 'inspection_company_id');
+        return $this->hasOne(Company::class, 'id', 'inspection_company_id');
     }
 
     public function getAllElevatorOnThisAddressAttribute()
@@ -117,7 +117,7 @@ class Elevator extends Model implements Auditable
     
     public function management_company()
     {
-        return $this->hasOne(ObjectManagementCompany::class, 'id', 'management_id');
+        return $this->hasOne(Company::class, 'id', 'management_id');
     }
 
     public function uploads()

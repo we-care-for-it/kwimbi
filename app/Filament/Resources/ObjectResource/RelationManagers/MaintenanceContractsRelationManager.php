@@ -21,7 +21,7 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\Grid;
  
-
+use App\Models\Company;
 
 class MaintenanceContractsRelationManager extends RelationManager
 {
@@ -55,8 +55,7 @@ Grid::make([
             ->label("Onderhoudsbedrijf")
             ->required()
        
-            ->options(ObjectMaintenanceCompany::pluck("name", "id")) ,
-
+            ->options(Company::where('type_id',1)->pluck("name", "id")),
 
             DatePicker::make("startdate")
             ->label("Startdatum")

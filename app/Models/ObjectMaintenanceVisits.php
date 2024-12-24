@@ -28,7 +28,7 @@ class ObjectMaintenanceVisits extends Model implements Auditable
 
     public function maintenance_company()
     {
-        return $this->hasOne(ObjectMaintenanceCompany::class, 'id', 'maintenance_company_id');
+        return $this->hasOne(Company::class, 'id', 'maintenance_company_id');
     }
 
 }

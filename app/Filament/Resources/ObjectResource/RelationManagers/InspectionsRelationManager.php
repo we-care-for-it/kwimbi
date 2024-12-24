@@ -13,10 +13,10 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Http\Response;
 use Filament\Support\Enums\MaxWidth;
 use App\Models\ObjectInspection;
+use App\Models\Company;
 use App\Enums\InspectionStatus;
 use Filament\Forms\Components\Grid;
-
-use App\Models\ObjectInspectionCompany;
+ 
 
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\DatePicker;
@@ -66,7 +66,7 @@ class InspectionsRelationManager extends RelationManager
             Select::make("inspection_company_id")
                 ->label("Keuringsinstantie")
                 ->required()
-                ->options(ObjectInspectionCompany::pluck("name", "id")),
+                ->options(Company::where('type_id',3)->pluck("name", "id")),
 
             Grid::make(2)->schema([
                 FileUpload::make("document")
