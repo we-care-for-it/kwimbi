@@ -89,7 +89,7 @@ class CompanyCategoriesResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()
 
-                    ->hidden(function ($record): ?string {
+                    ->visible(function ($record): ?string {
                         if (
                             $record?->id == 1 ||
                             $record?->id == 2 ||
