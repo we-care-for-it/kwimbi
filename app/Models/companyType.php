@@ -26,7 +26,10 @@ class companyType extends Model implements Auditable
     ];
 
 
-
+    public function companies()
+    {
+        return $this->hasMany(Company::class,'type_Id','id');
+    }
 
 
 

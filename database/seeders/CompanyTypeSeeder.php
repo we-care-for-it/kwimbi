@@ -17,7 +17,8 @@ class CompanyTypeSeeder extends Seeder
         $data = [
             ['id' => 1, 'name' => 'Onderhoudspartij'],
             ['id' => 2, 'name' => 'Beheerder'],
-            ['id' => 3, 'name' => 'Keuringsinstantie']
+            ['id' => 3, 'name' => 'Keuringsinstantie'],
+            ['id' => 3, 'name' => 'Leveranciers']
         ];
             
         companyType::insert($data);
