@@ -25,7 +25,10 @@
   
     }
   
-
+    .bg-white {
+      background-color:white!important;
+    }
+    
   
 
 .fi-header-heading{
@@ -44,7 +47,12 @@
 .fi-sidebar-header .fi-icon-btn-icon  {
   color: white!important
 }
-
+.fi-icon-btn-icon  {
+  color: white!important
+}
+.fi-input-wrp-prefix{
+  background-color: white!important;
+}
 
 
 
@@ -55,7 +63,10 @@
   background-color: white!important;
   border-radius: 2px!important;
 }
-
+.fi-input{
+  background-color: white!important;
+  border-radius: 2px!important;
+}
 
 .fi-ac{
   float: right;
@@ -94,13 +105,25 @@
 
 .fi-dropdown-panel{
   background-color: white!important;;
-}.fi-layout{
+}
+ 
+.fi-layout{
      background-color: white!important;;
  }
 
  .fi-global-search-result-group{
-  background-color: white!important;;
+  
+  background-color: #7ce377!important;
 }
+
+.fi-global-search-no-results-message{
+  
+  background-color: white!important;
+}
+
+
+
+
 
 .fi-ac-btn-action{
   padding: 12px!important;
