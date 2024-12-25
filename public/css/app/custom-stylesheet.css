@@ -32,18 +32,14 @@
    font-weight: normal!important;
 
 }
-/* .fi-topbar .bg-white {
-  background-color:rgb(139,217,144)
+.fi-topbar .bg-white {
+  background-color:#777EE3!important;
 }
 
-
+ 
 .fi-sidebar-header  {
-  background-color:rgb(125,196,129)!important
+  background-color:#4148AE!important;
 }
-
-.fi-sidebar-header  {
-  background-color:rgb(125,196,129)!important
-} */
 
 .fi-sidebar-header .fi-icon-btn-icon  {
   color: white!important
