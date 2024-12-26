@@ -1,4 +1,4 @@
 <center>
-    <img  src = "/images/digilevel_purple.png">
+    <img  style = "height: 80px;" src = "/images/logo.png">
 
 </center>
