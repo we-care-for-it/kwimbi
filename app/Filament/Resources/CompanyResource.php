@@ -78,6 +78,7 @@ class CompanyResource extends Resource
 
                     Forms\Components\TextInput::make("name")
                         ->label("Naam / Bedrijfsnaam")
+                        ->required()
                 ->columnSpan("full"),
 
             Grid::make(5)->schema([
@@ -136,6 +137,7 @@ class CompanyResource extends Resource
                         )     ->columnSpan(2),
 
                         Forms\Components\Select::make("type_id")
+                        ->required()
                         ->label("Categorie")
 
                         ->options(companyType::where('is_active', 1)->pluck('name', 'id'))
@@ -261,7 +263,7 @@ public static function infolist(Infolist $infolist) : Infolist
             ->actions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Snel bewerken')
+                        ->modalHeading('Bewerken')
                         ->modalIcon('heroicon-o-pencil')
                         ->label('Snel bewerken')
                         ->slideOver(),

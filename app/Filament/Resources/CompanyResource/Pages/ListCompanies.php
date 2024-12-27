@@ -16,6 +16,7 @@ class ListCompanies extends ListRecords
             Actions\CreateAction::make()
             ->icon('heroicon-m-plus')
             ->label('Toevoegen')
+            ->modalHeading('Object snel bewerken')
             ->slideOver(),
         ];
     }
