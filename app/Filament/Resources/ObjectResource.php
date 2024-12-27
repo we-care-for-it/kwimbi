@@ -120,12 +120,12 @@ class ObjectResource extends Resource
 
                 Select::make("maintenance_company_id")
                     ->label("Onderhoudspartij")
-                    ->options(ObjectMaintenanceCompany::pluck("name", "id")),
+                    ->options(Company::where('type_id',1)->pluck("name", "id")),
 
                 Select::make("inspection_company_id")
                     ->label("Keuringsinstantie")
                     ->live()
-                    ->options(ObjectInspectionCompany::pluck("name", "id")),
+                    ->options(Company::where('type_id',3)->pluck("name", "id")),
 
                 TextInput::make("name")->label("Naam"),
             ]),
@@ -200,21 +200,21 @@ class ObjectResource extends Resource
                 Tables\Columns\TextColumn::make("location")
                     ->toggleable()
                     ->getStateUsing(function (Elevator $record): ?string {
-                        if ($record?->location->name) {
+                        if ($record?->location?->name) {
                             return $record?->location->name;
                         } else {
-                            return $record->location->address .
+                            return $record?->location?->address .
                                 " - " .
-                                $record->location->zipcode .
+                                $record?->location?->zipcode .
                                 " " .
-                                $record->location->place;
+                                $record?->location?->place;
                         }
                     })
                     ->toggleable()
                     ->label("Locatie")
                     ->description(function (Elevator $record) {
-                        if (!$record?->location->name) {
-                            return $record?->location->name;
+                        if (!$record?->location?->name) {
+                            return $record?->location?->name;
                         } else {
                             return $record->location->address .
                                 " - " .
