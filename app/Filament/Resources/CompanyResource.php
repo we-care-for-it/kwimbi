@@ -259,7 +259,9 @@ public static function infolist(Infolist $infolist) : Infolist
                 ->options(companyType::where('is_active', 1)->pluck('name', 'id')),
                 Tables\Filters\TrashedFilter::make(),
                         
-            ],layout : FiltersLayout::AboveContent)
+            ],
+            //layout : FiltersLayout::AboveContent
+            )
             ->actions([
                 ActionGroup::make([
                     EditAction::make()

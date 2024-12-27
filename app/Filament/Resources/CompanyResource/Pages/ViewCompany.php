@@ -28,7 +28,9 @@ class ViewCompany extends ViewRecord
                 ->label('Terug naar overzicht') 
                 ->link()
                 ->color('gray'),
-                Actions\EditAction::make()->icon('heroicon-m-pencil-square'),
+                Actions\EditAction::make() 
+                ->modalHeading('Bedrijf bewerken')
+ ,
             ];
         }
 
