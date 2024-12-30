@@ -26,10 +26,12 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Grid;
-
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
-
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Support\Enums\MaxWidth;
 
 use Filament\Infolists\Components\TextEntry;
@@ -41,7 +43,7 @@ class ObjectInspectionResource extends Resource
 {
     protected static ? string $model = ObjectInspection::class;
     protected static ?string $navigationLabel = "Keuringen";
-    protected static ? string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ? string $navigationIcon = 'heroicon-m-check-badge';
  
 
     public static function infolist(Infolist $infolist) : Infolist
@@ -164,14 +166,7 @@ class ObjectInspectionResource extends Resource
         Grid::make(4)
             ->schema([
 
-
-                
-                
-        Select::make("status_id")
-        ->label("Status")
-        ->required()
-
-        ->options(InspectionStatus::class) ,
+ 
 
 
 
@@ -198,6 +193,7 @@ class ObjectInspectionResource extends Resource
         Textarea::make('remark')
             ->rows(3)
             ->label('Opmerking')
+            
             ->columnSpan(1)
             ->autosize() ])
 
@@ -210,17 +206,15 @@ class ObjectInspectionResource extends Resource
     {
         return $table
 
-    ->groups([Group::make('status_id')
-            ->label('Status') ,
-        Group::make('elevator.location_id')
-            ->label('Locatie') ,
+    // ->groups([Group::make('status_id')
+    //         ->label('Status') ,
 
-        Group::make('elevator.location.customer.id')
-            ->label('Relatie') ,
+    //     Group::make('elevator.location.customer.id')
+    //         ->label('Relatie') ,
 
-        Group::make('elevator.maintenance_company_id')
-            ->label('Onderhoudspartij'),
-        ])
+    //     Group::make('elevator.maintenance_company_id')
+    //         ->label('Onderhoudspartij'),
+    //     ])
     ->columns([
 
 
@@ -229,12 +223,14 @@ class ObjectInspectionResource extends Resource
             ->label("Object")
             ->placeholder("Geen object")
             ->sortable()
+            ->toggleable()
             ->wrap() ,
 
         Tables\Columns\TextColumn::make('elevator.location')
             ->label('Adres')
             ->searchable()
             ->sortable()
+            ->toggleable()
             ->wrap()
             ->placeholder("Geen object")
             ->getStateUsing(function (ObjectInspection $record) : ? string
@@ -258,10 +254,12 @@ class ObjectInspectionResource extends Resource
         Tables\Columns\TextColumn::make("executed_datetime")
             ->dateTime("d-m-Y")
             ->label("Begindatum")
+            ->toggleable()
             ->sortable(),
 
         Tables\Columns\TextColumn::make("end_date")
             ->dateTime("d-m-Y")
+            ->toggleable()
             ->label("Einddatum")
             ->sortable(),
 
@@ -273,15 +271,18 @@ class ObjectInspectionResource extends Resource
             ->counts('itemdata')
             ->label("Aantal punten")
             ->alignment('center')
+            ->toggleable()
             ->badge() ,
 
         Tables\Columns\TextColumn::make("inspectioncompany.name")
             ->label("Onderhoudspartij")
+            ->toggleable()
             ->sortable(),
 
         Tables\Columns\TextColumn::make("status_id")
             ->label("Status")
             ->badge()
+            ->toggleable()
             ->sortable() ,
 
         ])
@@ -304,6 +305,24 @@ class ObjectInspectionResource extends Resource
         //         return "/admin/object-inspections/" . $record->id;
         //     })
 
+
+        ->actions([
+
+
+            ActionGroup::make([
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->label('Snel bewerken')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->modalHeading('Keuring verwijderen')
+                    ->color('danger'),
+            ]),
+        ])
+
+
             
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
         //  ExportBulkAction::make(),
@@ -319,7 +338,9 @@ class ObjectInspectionResource extends Resource
 
     public static function getPages() : array
     {
-        return ['index' => Pages\ListObjectInspections::route('/') , 'create' => Pages\CreateObjectInspection::route('/create') , 'edit' => Pages\EditObjectInspection::route('/{record}/edit') , 
+        return ['index' => Pages\ListObjectInspections::route('/') , 
+        'create' => Pages\CreateObjectInspection::route('/create') , 
+        //'edit' => Pages\EditObjectInspection::route('/{record}/edit') , 
         
         'view' => Pages\ViewObjectInspection::route('/{record}') , ];
     }

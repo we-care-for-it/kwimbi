@@ -19,7 +19,6 @@ class EditQuote extends EditRecord
             Actions\Action::make('cancel_top')
                 ->link()
                 ->label('Afbreken')
-
                 ->url($this->getResource()::getUrl('index'))
                 ->outlined(),
             Actions\Action::make('save_top')

@@ -27,9 +27,11 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationLabel = "Contactpersonen";
     protected static ?string $title = "Contactpersonen";
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -89,7 +91,11 @@ class ContactResource extends Resource
     // ->defaultImageUrl(url('/images/noavatar.jpg'))
     //     ->circular()
     //     ->grow(true),
-    TextColumn::make('name')
+    TextColumn::make('last_name')
+    ->hidden()
+    ->searchable(),
+
+    TextColumn::make('first_name')
     ->label('Naam')
     ->searchable()
     ->getStateUsing(function ($record) : ? string
@@ -106,8 +112,21 @@ class ContactResource extends Resource
     TextColumn::make('email')
     ->searchable(),
 
+    Tables\Columns\TextColumn::make("company.name")
+    ->url(function ($record) {
+        return "/admin/companies/" .
+            $record->company_id;
+    })
+    ->label("Bedrijfsnaam")
+    ->placeholder("-")
+    ->toggleable(),
+
+
+
     Tables\Columns\TextColumn::make("department")
     ->label("Afdeling")
+    ->toggleable()
+    ->placeholder("-")
     ->description(function ($record) : ? string
     {
            return $record?->function ?? NULL;
@@ -118,23 +137,18 @@ class ContactResource extends Resource
     ->description(function ($record) : ? string
     {
            return $record?->mobile_number ?? NULL;
-    }),
+    })                   ->toggleable(),
 
-
-    Tables\Columns\TextColumn::make("company.name")
-    ->url(function ($record) {
-        return "/admin/companies/" .
-            $record->company_id;
-    })
-    ->label("Bedrijfsnaam"),
 
 
     
 
     Tables\Columns\TextColumn::make('company.type.name')
-    ->label('Type')
+    ->label('Categorie')
     ->badge()
     ->searchable()
+    ->placeholder('-')
+    ->toggleable()
     ->sortable(),
 
 
@@ -143,7 +157,9 @@ class ContactResource extends Resource
             ->filters([
                     // SelectFilter::make("company.type_id")
                     // ->label("Categorie")
-                    // ->options(companyType::where('is_active', 1)->pluck('name', 'id'))
+                    // ->relationship('company', 'type.name')
+
+ 
                     // ->searchable()
                     // ->preload(),
             ])
@@ -158,7 +174,7 @@ class ContactResource extends Resource
                         ->slideOver(),
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Object verwijderen')
+                        ->modalHeading('Contactpersoon verwijderen')
                         ->color('danger'),
                 ]),
             ])

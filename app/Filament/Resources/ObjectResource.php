@@ -59,7 +59,7 @@ class ObjectResource extends Resource
 {
     protected static ?string $model = Elevator::class;
 
-    protected static ?string $navigationIcon = "heroicon-m-arrow-up-on-square-stack";
+    protected static ?string $navigationIcon = "heroicon-c-arrows-up-down";
     protected static ?string $navigationLabel = "Objecten";
 
 
@@ -109,7 +109,7 @@ class ObjectResource extends Resource
 
                 Select::make("supplier_id")
                     ->label("Leverancier")
-                    ->options(ObjectSupplier::pluck("name", "id")),
+                    ->options(Company::where('type_id',4)->pluck("name", "id")),
 
                 TextInput::make("stopping_places")
                     ->label("Stoppplaatsen")
@@ -133,10 +133,14 @@ class ObjectResource extends Resource
 
             Grid::make(2)->schema([
                 Textarea::make("remark")
-                    ->rows(3)
-                    ->label("Opmerking")
-                    ->columnSpan(4)
-                    ->autosize(),
+                ->rows(7)
+                ->label('Notitie')
+                ->columnSpan(3)
+                ->required()
+                ->autosize()
+                ->hint(fn ($state, $component) => "Aantal karakters: ". $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                ->maxlength(255)
+                ->reactive()
             ]),
         ]);
     }
@@ -274,7 +278,7 @@ class ObjectResource extends Resource
             ->actions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Object snel bewerken')
+                        ->modalHeading('Bedrijf snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
                         ->label('Snel bewerken')
                         ->slideOver(),

@@ -17,7 +17,7 @@ use App\Models\ObjectLocation;
 use App\Models\ObjectBuildingType;
 use App\Models\ObjectManagementCompany;
 use App\Models\Project;
-
+use App\Models\Company;
 use App\Services\AddressService;
 
 use Filament\Forms;
@@ -142,14 +142,11 @@ class ObjectLocationResource extends Resource
             ->label("Complexnumber") ,
 
         Select::make("management_id")
-            ->relationship(name : "managementcompany", titleAttribute:
-            "name")
+        ->options(Company::where('type_id',2)->pluck("name", "id"))
+
                 ->searchable()
                 ->label("Beheerder")
-                ->preload()
-
-                ->createOptionForm([Forms\Components\TextInput::make("name")
-                ->label("Naam van de beheerder") , ]) ,
+                ->preload()  ,
 
             Select::make("customer_id")
                 ->searchable()
@@ -249,7 +246,11 @@ class ObjectLocationResource extends Resource
                         ->label("Complex") , Group::make("customer_id")
                         ->label("Relatie") , Group::make("buildingtype.name")
                         ->label("Gebouwtype") , Group::make("management_id")
-                        ->label("Beheerder") , ])->columns([Tables\Columns\TextColumn::make("address")
+                        ->label("Beheerder") , ])->columns(
+                            
+                            [
+                                
+                                Tables\Columns\TextColumn::make("address")
                         ->toggleable()->getStateUsing(function (ObjectLocation $record) : ? string
                     {
                         $housenumber = "";
@@ -360,6 +361,7 @@ class ObjectLocationResource extends Resource
                     SelectFilter::make("building_type")
                         ->options(ObjectBuildingType::pluck("name", "id"))
                         ->label("Gebouwtype")
+                        ->preload()
                         ->Searchable() ,
 
                     SelectFilter::make("management_id")
