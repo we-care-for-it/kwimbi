@@ -41,10 +41,20 @@
 
  
 .fi-sidebar-header  {
-  background-color:#5369F8!important;
+  background-color:#5788FF!important;
 }
 
- 
+
+.fi-dropdown-panel  {
+  background-color:white!important;
+}
+
+
+
+
+
+
+
  
 .fi-input-wrp-prefix{
   background-color: white!important;
