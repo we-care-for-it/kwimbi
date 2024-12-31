@@ -136,7 +136,6 @@ class ObjectResource extends Resource
                 ->rows(7)
                 ->label('Notitie')
                 ->columnSpan(3)
-                ->required()
                 ->autosize()
                 ->hint(fn ($state, $component) => "Aantal karakters: ". $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
                 ->maxlength(255)

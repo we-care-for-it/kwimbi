@@ -17,14 +17,14 @@ class ListProjects extends ListRecords
         return [
 
 
-            Action::make('edit')
-            ->icon('heroicon-o-cog-6-tooth')
-            ->color('gray')
-            ->label('Instellingen')
-            ->link()
-            ->url(route('filament.admin.project-settings')),
+            // Action::make('edit')
+            // ->icon('heroicon-o-cog-6-tooth')
+            // ->color('gray')
+            // ->label('Instellingen')
+            // ->link()
+            // ->url(route('filament.admin.project-settings')),
 
-            Actions\CreateAction::make()->icon('heroicon-m-plus')->modalWidth(MaxWidth::SevenExtraLarge)->label('Toevoegen'),
+            // Actions\CreateAction::make()->icon('heroicon-m-plus')->modalWidth(MaxWidth::SevenExtraLarge)->label('Toevoegen'),
         ];
     }
 }

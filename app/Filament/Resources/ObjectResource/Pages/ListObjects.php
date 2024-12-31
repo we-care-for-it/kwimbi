@@ -21,13 +21,7 @@ class ListObjects extends ListRecords
         
 
 
-            Action::make('edit')
-                ->icon('heroicon-o-cog-6-tooth')
-                ->color('gray')
-                ->label('Instellingen')
-                ->link()
-                ->url(route('filament.admin.elevators-settings')),
-
+         
          //   Actions\CreateAction::make()->icon('heroicon-m-plus')->label('Toevoegen'),
         ];
     }

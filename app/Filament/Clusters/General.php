@@ -6,13 +6,13 @@ use Filament\Clusters\Cluster;
 
 class General extends Cluster
 {
-    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
-    protected static ? string $navigationGroup = 'Stamgegevens';
-    protected static ? string $navigationLabel = 'Algemeen';
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static ? string $navigationGroup = 'Systeembeheer';
+    protected static ? string $navigationLabel = 'Basisgegevens';
 
     public static function shouldRegisterNavigation(): bool
     {
-        return false;
+        return true;
     }
 
 }

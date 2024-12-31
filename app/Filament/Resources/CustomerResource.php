@@ -185,12 +185,13 @@ class CustomerResource extends Resource
                             ->searchable()
                             ->weight('medium')
                             ->alignLeft()
+                            ->placeholder('-')
                             ->label('Bedrijfsnaam'),
 
                         Tables\Columns\TextColumn::make('emailaddress')
                             ->label('Email address')
                             ->searchable()
-
+                            ->placeholder('-')
 
                             ->alignLeft(),
 
@@ -198,7 +199,7 @@ class CustomerResource extends Resource
 
                         Tables\Columns\TextColumn::make('address')
                             ->searchable()
-
+                            ->placeholder('-')
                             ->weight('medium')
                             ->alignLeft(),
 
