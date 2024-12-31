@@ -51,7 +51,7 @@ class ToolsResource extends Resource
 
 
     protected static ? string $navigationLabel = 'Gereedschap';
-    protected static ? string $navigationGroup = 'Hoofdmenu';
+ 
 
 
 

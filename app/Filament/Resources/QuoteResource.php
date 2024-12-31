@@ -29,7 +29,7 @@ class QuoteResource extends Resource
     protected static ?string $title = 'Offertes';
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
     protected static ?string $SearchResultTitle = "Offertes";
-    protected static ?string $navigationGroup = "Hoofdmenu";
+ 
     protected static ?string $navigationLabel = "Offertes";
     protected static bool $isLazy = false;
 

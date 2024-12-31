@@ -42,7 +42,7 @@ class UserResource extends Resource
     
     protected static ?string $title = "Gebruikers";
     protected static ?string $SearchResultTitle = "Gebruikers";
-    protected static ?string $navigationGroup = "Hoofdmenu";
+    protected static ?string $navigationGroup = "Systeembeheer";
     protected static ?string $navigationLabel = "Gebruikers";
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
