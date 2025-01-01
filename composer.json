@@ -26,7 +26,6 @@
         "joaopaulolndev/filament-pdf-viewer": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "marjose123/filament-lockscreen": "^2.0",
         "owen-it/laravel-auditing": "^13.6",
         "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
@@ -43,12 +42,6 @@
         "tomatophp/filament-pwa": "^1.0",
         "z3d0x/filament-logger": "^0.7.2"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "filament-lockscreen"
-        }
-    ],
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",

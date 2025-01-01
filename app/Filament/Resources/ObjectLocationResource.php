@@ -12,10 +12,11 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Columns\Column;
 use Filament\Actions\Exports\Models\Export;
 
+ 
 use App\Models\Customer;
 use App\Models\ObjectLocation;
 use App\Models\ObjectBuildingType;
-use App\Models\ObjectManagementCompany;
+ 
 use App\Models\Project;
 use App\Models\Company;
 use App\Services\AddressService;
@@ -104,6 +105,7 @@ class ObjectLocationResource extends Resource
 
         TextEntry::make("buildingtype.name")
             ->label("Gebouwtype")
+            ->preloaded()
             ->badge()
             ->placeholder("Niet opgegeven") ,
 
@@ -365,7 +367,7 @@ class ObjectLocationResource extends Resource
 
                     SelectFilter::make("management_id")
                         ->label("Beheerder")
-                        ->relationship("managementcompany", "name") ,
+                        ->options(Company::where('type_id',2)->pluck("name", "id")),
 
                     SelectFilter::make("place")
                         ->label("Plaats")

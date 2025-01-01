@@ -19,6 +19,7 @@ Status
 1 = Onderhoudsbedrijven
 2 = Beheerders
 3 = Keuringsinstanties
+4 leveranciuer
 
 
 ##Elevator statussen 
