@@ -24,6 +24,11 @@ class ListCompanies extends ListRecords
             ->label('Toevoegen')
             ->modalHeading('Bedrijf toevoegen')
             ->slideOver(),
+
+            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
+            ->color("primary"),
+
+            
         ];
     }
 

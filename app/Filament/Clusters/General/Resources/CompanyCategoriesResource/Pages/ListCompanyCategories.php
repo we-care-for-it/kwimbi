@@ -22,6 +22,8 @@ class ListCompanyCategories extends ListRecords
             ->url($this->getResource()::getUrl('index'))
             ->outlined(),
 
+            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
+            ->color("primary"),
             Actions\CreateAction::make()
                 ->label('Toevoegen')
                 ->modalWidth(MaxWidth::Large)
