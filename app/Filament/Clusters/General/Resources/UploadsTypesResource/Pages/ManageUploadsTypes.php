@@ -16,7 +16,11 @@ class ManageUploadsTypes extends ManageRecords
     {
         return [
             \EightyNine\ExcelImport\ExcelImportAction::make()
-                ->color("success")->label('Importeren')->modalHeading('Selecteer een excel bestand'),
+            ->label('Importeren')
+            ->outlined()
+            ->link()
+   
+         ->modalHeading('Selecteer een excel bestand'),
                 Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
  
         ];

@@ -32,7 +32,7 @@ class CompanyCategoriesResource extends Resource
     protected static ?string $navigationIcon = "heroicon-o-rectangle-stack";
     protected static ?string $cluster = General::class;
     protected static ?string $navigationGroup = "Basisgegevens";
-    protected static ?string $navigationLabel = "Bedrijfscategorieën";
+    protected static ?string $navigationLabel = "Relatie categorieën";
   
     
     public static function form(Form $form): Form

@@ -11,19 +11,18 @@ use Filament\Actions\Action;
 class ListCompanyCategories extends ListRecords
 {
     protected static string $resource = CompanyCategoriesResource::class;
-    protected static ?string $title = "Bedrijfscategorieën";
+    protected static ?string $title = "Relatie categorieën";
     protected function getHeaderActions(): array
     {
         return [
 
-            Actions\Action::make('cancel_top')
-            ->link()
-            ->label('Afbreken')
-            ->url($this->getResource()::getUrl('index'))
-            ->outlined(),
+ 
 
-            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
-            ->color("primary"),
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->label('Importeren')
+                ->outlined()
+                ->link(),
+       
             Actions\CreateAction::make()
                 ->label('Toevoegen')
                 ->modalWidth(MaxWidth::Large)
