@@ -57,7 +57,10 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 1 ||
                             $record?->id == 2 ||
                             $record?->id == 3 ||
-                            $record?->id == 4
+                            $record?->id == 4 ||
+                            $record?->id == 5 ||
+                            $record?->id == 6 ||
+                            $record?->id == 7
                         ) {
                             return "Systeem standaard";
                         } else {
@@ -69,7 +72,10 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 1 ||
                             $record?->id == 2 ||
                             $record?->id == 3 ||
-                            $record?->id == 4
+                            $record?->id == 4 ||
+                            $record?->id == 5 ||
+                            $record?->id == 6 ||
+                            $record?->id == 7
                         ) {
                             return "danger";
                         } else {
@@ -88,13 +94,15 @@ class CompanyCategoriesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-
                     ->visible(function ($record): ?string {
                         if (
-                            $record?->id == 1 ||
+                       $record?->id == 1 ||
                             $record?->id == 2 ||
                             $record?->id == 3 ||
-                            $record?->id == 4
+                            $record?->id == 4 ||
+                            $record?->id == 5 ||
+                            $record?->id == 6 ||
+                            $record?->id == 7
                         ) {
                             return false;
                         } else {
@@ -105,6 +113,29 @@ class CompanyCategoriesResource extends Resource
                     ->label("Bewerken")
                     ->modalHeading("Bewerken")
                     ->modalWidth(MaxWidth::Large),
+
+                    Tables\Actions\DeleteAction::make()
+                    ->visible(function ($record): ?string {
+                        if (
+                       $record?->id == 1 ||
+                            $record?->id == 2 ||
+                            $record?->id == 3 ||
+                            $record?->id == 4 ||
+                            $record?->id == 5 ||
+                            $record?->id == 6 ||
+                            $record?->id == 7
+                        ) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    })
+
+                    ->label("")
+                    ->modalHeading("Verwijderen")
+                    ->modalWidth(MaxWidth::Large),
+
+
             ])
             ->bulkActions([
             ]);
