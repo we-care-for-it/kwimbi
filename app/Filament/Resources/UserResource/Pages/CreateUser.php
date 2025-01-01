@@ -11,18 +11,18 @@ class CreateUser extends CreateRecord
 {
     protected static string $resource = UserResource::class;
 
-    protected function handleRecordCreation(array $data): User
-    {
-        $email = $data['email'];
+    // protected function handleRecordCreation(array $data): User
+    // {
+    //     $email = $data['email'];
 
-        if (User::where('email', $email)->exists()) {
-            $user = User::firstWhere('email', $email);
-        } else {
-            $user = static::getModel()::create($data);
-        }
+    //     if (User::where('email', $email)->exists()) {
+    //         $user = User::firstWhere('email', $email);
+    //     } else {
+    //         $user = static::getModel()::create($data);
+    //     }
 
-        $user->companies()->attach(Filament::getTenant()->id);
+    //     $user->companies()->attach(Filament::getTenant()->id);
 
-        return $user;
-    }
+    //     return $user;
+    // }
 }
