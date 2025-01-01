@@ -24,7 +24,7 @@ trait WithRateLimiting
 
         $component ??= static::class;
 
-        return 'livewire-rate-limiter:'.sha1($component.'|'.$method.'|'.request()->ip());
+        return sha1($component.'|'.$method.'|'.request()->ip());
     }
 
     protected function hitRateLimiter($method = null, $decaySeconds = 60, $component = null)

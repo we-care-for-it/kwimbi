@@ -217,9 +217,9 @@
             'dev_requirement' => false,
         ),
         'danharrin/livewire-rate-limiting' => array(
-            'pretty_version' => 'v2.0.0',
-            'version' => '2.0.0.0',
-            'reference' => '0d9c1890174b3d1857dba6ce76de7c178fe20283',
+            'pretty_version' => 'v1.3.1',
+            'version' => '1.3.1.0',
+            'reference' => '1a1b299e20de61f88ed6e94ea0bbcfc33aab1ddb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../danharrin/livewire-rate-limiting',
             'aliases' => array(),
@@ -1008,6 +1008,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'marjose123/filament-lockscreen' => array(
+            'pretty_version' => 'v2.3',
+            'version' => '2.3.0.0',
+            'reference' => 'bb87a9a6c88316f27fb8f0cd1d973ee6a7435ba4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../marjose123/filament-lockscreen',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'markbaker/complex' => array(
             'pretty_version' => '3.0.2',
             'version' => '3.0.2.0',
@@ -1401,8 +1410,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(

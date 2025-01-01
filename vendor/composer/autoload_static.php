@@ -69,6 +69,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
             'pxlrbt\\FilamentExcel\\' => 21,
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'l' => 
+        array (
+            'lockscreen\\FilamentLockscreen\\' => 30,
+        ),
         'Z' => 
         array (
             'ZipStream\\' => 10,
@@ -346,6 +350,10 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'lockscreen\\FilamentLockscreen\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src',
         ),
         'ZipStream\\' => 
         array (
@@ -791,8 +799,8 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         ),
         'League\\Glide\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/glide-symfony/src',
-            1 => __DIR__ . '/..' . '/league/glide/src',
+            0 => __DIR__ . '/..' . '/league/glide/src',
+            1 => __DIR__ . '/..' . '/league/glide-symfony/src',
         ),
         'League\\Flysystem\\Local\\' => 
         array (
@@ -1402,11 +1410,9 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'App\\Models\\ObjectFeatures' => __DIR__ . '/../..' . '/app/Models/ObjectFeatures.php',
         'App\\Models\\ObjectIncident' => __DIR__ . '/../..' . '/app/Models/ObjectIncident.php',
         'App\\Models\\ObjectInspection' => __DIR__ . '/../..' . '/app/Models/ObjectInspection.php',
-        'App\\Models\\ObjectInspectionCompany' => __DIR__ . '/../..' . '/app/Models/ObjectInspectionCompany.php',
         'App\\Models\\ObjectInspectionData' => __DIR__ . '/../..' . '/app/Models/ObjectInspectionData.php',
         'App\\Models\\ObjectInspectionZincode' => __DIR__ . '/../..' . '/app/Models/ObjectInspectionZincode.php',
         'App\\Models\\ObjectLocation' => __DIR__ . '/../..' . '/app/Models/ObjectLocation.php',
-        'App\\Models\\ObjectMaintenanceCompany' => __DIR__ . '/../..' . '/app/Models/ObjectMaintenanceCompany.php',
         'App\\Models\\ObjectMaintenanceContract' => __DIR__ . '/../..' . '/app/Models/ObjectMaintenanceContract.php',
         'App\\Models\\ObjectMaintenanceVisits' => __DIR__ . '/../..' . '/app/Models/ObjectMaintenanceVisits.php',
         'App\\Models\\ObjectMaintenances' => __DIR__ . '/../..' . '/app/Models/ObjectMaintenances.php',
@@ -11593,6 +11599,13 @@ class ComposerStaticInit5781b243d8c0c38fa94fb975ee7a565f
         'ZipStream\\Zip64\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zip64/ExtendedInformationExtraField.php',
         'ZipStream\\ZipStream' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/ZipStream.php',
         'ZipStream\\Zs\\ExtendedInformationExtraField' => __DIR__ . '/..' . '/maennchen/zipstream-php/src/Zs/ExtendedInformationExtraField.php',
+        'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/FilamentLockscreenServiceProvider.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Livewire\\LockerScreen' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Livewire/LockerScreen.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Livewire\\LockerScreenLoginPage' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Livewire/LockerScreenLoginPage.php',
+        'lockscreen\\FilamentLockscreen\\Http\\LockscreenSessionController' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/LockscreenSessionController.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Middleware\\Locker' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Middleware/Locker.php',
+        'lockscreen\\FilamentLockscreen\\Http\\Middleware\\LockerTimer' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Http/Middleware/LockerTimer.php',
+        'lockscreen\\FilamentLockscreen\\Lockscreen' => __DIR__ . '/..' . '/marjose123/filament-lockscreen/src/Lockscreen.php',
         'phpDocumentor\\Reflection\\Element' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/Element.php',
         'phpDocumentor\\Reflection\\File' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/File.php',
         'phpDocumentor\\Reflection\\Fqsen' => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src/Fqsen.php',
