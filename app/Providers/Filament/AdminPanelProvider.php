@@ -27,7 +27,7 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\FontProviders\GoogleFontProvider;
 use Awcodes\LightSwitch\LightSwitchPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
- use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use lockscreen\FilamentLockscreen\Lockscreen;
 // use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
 // use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
@@ -59,7 +59,7 @@ class AdminPanelProvider extends PanelProvider
            // ->plugin(new Lockscreen())
 
             ->plugins([
-                FilamentAuthenticationLogPlugin::make(),
+            //    FilamentAuthenticationLogPlugin::make(),
                 FilamentEditProfilePlugin::make()
                 ->shouldRegisterNavigation(false)
             ])
@@ -77,12 +77,12 @@ class AdminPanelProvider extends PanelProvider
                         ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
                 ),
             ])       
-            ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
-            )  
-            ->plugin(
-               \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-                   ->allowShield()
-            )
+            // ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
+            // )  
+            // ->plugin(
+            //    \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+            //        ->allowShield()
+            // )
             ->maxContentWidth(MaxWidth::Full)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

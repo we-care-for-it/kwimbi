@@ -1,3 +1,4 @@
+@ -1,138 +1,142 @@
  
 .fi-header-heading,
 .fi-wi-stats-overview-stat-icon,
@@ -24,7 +25,8 @@
     font-weight: normal!important;
   
     }
- 
+  
+
   
 
 .fi-header-heading{
@@ -32,29 +34,24 @@
 
 }
 .fi-topbar .bg-white {
-  background-color:#5788FF!important;
+  background-color:rgb(139,217,144)
 }
 
- 
+
 .fi-sidebar-header  {
-  background-color:#5788FF!important;
+  background-color:rgb(125,196,129)!important
+}
+
+.fi-sidebar-header  {
+  background-color:rgb(125,196,129)!important
+}
+
+.fi-sidebar-header .fi-icon-btn-icon  {
+  color: white!important
 }
 
 
 
-
-
-
- 
-.fi-input-wrp-prefix{
-  background-color: white!important;
-}
-
-.fi-btn{
-  color:white!important;
-  padding: 10px!important;
-  margin: 10px!important;
-}
 
 .fi-btn-label{
   font-weight: normal!important;
@@ -63,17 +60,14 @@
   background-color: white!important;
   border-radius: 2px!important;
 }
-.fi-input{
-  background-color: white!important;
-  border-radius: 2px!important;
-}
+
 
 .fi-ac{
   float: right;
 }
 .fi-ac-btn-action{
-  border-radius: 0px!important;;
-  padding: 4px;
+  border-radius: 5px;
+  padding: 10px;
  
 }
 
@@ -105,46 +99,30 @@
 
 .fi-dropdown-panel{
   background-color: white!important;;
-}
- 
-.fi-layout{
+}.fi-layout{
      background-color: white!important;;
  }
 
  .fi-global-search-result-group{
-  
-  background-color: #7ce377!important;
-}
-
-.fi-global-search-no-results-message{
-  
-  background-color: white!important;
+  background-color: white!important;;
 }
 
 
 
+.fi-section-header-heading{
+
+}
 
 
-.fi-ac-btn-action{
-  padding: 6px!important;
-  border-radius: 4px!important;
-  
-  background-color: #5788FF!important;
-}  
 
- 
+
 .fi-global-search-result
 {
   background-color:rgb(139,217,144)
 }
- .fi-topbar .bg-white {
+.fi-topbar .bg-white {
   background-color:rgb(139,217,144)
 }
-/* 
-
-
-
-
 
 .fi-sidebar-header  {
     background-color:rgb(125,196,129)!important
@@ -153,7 +131,13 @@
 .fi-sidebar-header  {
     background-color:rgb(125,196,129)!important
 }
+.fi-ac-btn-action{
+  padding: 12px!important;
+  border-radius: 5px!important;
+  min-width:120px!important;
+  background-color: #7DC481!important;
+}
 
 .widget_dasboard{
   background-color:rgb(125,196,129)!important
-} */
+}
