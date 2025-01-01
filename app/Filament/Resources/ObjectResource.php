@@ -268,7 +268,8 @@ class ObjectResource extends Resource
                     ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
                 SelectFilter::make('maintenance_company_id')
                     ->label('Onderhoudspartij')
-                    ->options(ObjectMaintenanceCompany::pluck('name', 'id')),
+                    ->options(Company::where('type_id',1)->pluck("name", "id")),
+
                 SelectFilter::make('status_id')
                     ->label("Status")
                     ->options(ElevatorStatus::class) ,
