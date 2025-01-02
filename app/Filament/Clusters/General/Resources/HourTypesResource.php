@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Clusters\ProjectSettings\Resources;
+namespace App\Filament\Clusters\General\Resources;
 
-use App\Filament\Clusters\ProjectSettings;
-use App\Filament\Clusters\ProjectSettings\Resources\HourTypesResource\Pages;
-use App\Filament\Clusters\ProjectSettings\Resources\HourTypesResource\RelationManagers;
+use App\Filament\Clusters\General;
+use App\Filament\Clusters\General\Resources\HourTypesResource\Pages;
+use App\Filament\Clusters\General\Resources\HourTypesResource\RelationManagers;
 use App\Models\ProjectHourTypes;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -32,10 +32,10 @@ class HourTypesResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Uursoorten';
-    protected static ? string $navigationGroup = 'Basisgegevens';
+    protected static ? string $navigationGroup = 'Projecten';
 
 
-    protected static ?string $cluster = ProjectSettings::class;
+    protected static ?string $cluster = General::class;
 
     public static function form(Form $form): Form
     {

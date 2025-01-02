@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Clusters\ProjectSettings\Resources;
+namespace App\Filament\Clusters\General\Resources;
 
-use App\Filament\Clusters\ProjectSettings;
-use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\Pages;
-use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\RelationManagers;
+use App\Filament\Clusters\General;
+use App\Filament\Clusters\General\Resources\ProjectStatusesResource\Pages;
+use App\Filament\Clusters\General\Resources\ProjectStatusesResource\RelationManagers;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -34,14 +34,14 @@ class ProjectStatusesResource extends Resource
 {
     protected static ?string $model = Statuses::class;
     protected static ?string $navigationLabel = 'Statussen';
-    protected static ? string $navigationGroup = 'Basisgegevens';
+    protected static ? string $navigationGroup = 'Projecten';
     protected static ?string $recordTitleAttribute = 'name';
 
 
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $cluster = ProjectSettings::class;
+    protected static ?string $cluster = General::class;
 
 
     public static function getEloquentQuery(): Builder

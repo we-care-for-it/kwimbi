@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource\Pages;
+namespace App\Filament\Clusters\General\Resources\ProjectStatusesResource\Pages;
 
-use App\Filament\Clusters\ProjectSettings\Resources\ProjectStatusesResource;
+use App\Filament\Clusters\General\Resources\ProjectStatusesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Filament\Support\Enums\MaxWidth;
@@ -16,11 +16,8 @@ class ManageProjectStatuses extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('back')
-            ->url(route('filament.admin.resources.projects.index'))
-            ->label('Terug naar projecten')
-            ->link()
-            ->color('gray'),
+     
+             
             Actions\CreateAction::make()  ->modalHeading('Toevoegen')->icon('heroicon-m-plus')->label('Toevoegen')->modalWidth(MaxWidth::ExtraLarge)->mutateFormDataUsing(function (array $data): array {
 
                 $data['model'] = "Project";

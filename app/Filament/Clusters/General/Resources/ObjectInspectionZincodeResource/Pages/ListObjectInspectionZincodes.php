@@ -17,6 +17,7 @@ class ListObjectInspectionZincodes extends ListRecords
             \EightyNine\ExcelImport\ExcelImportAction::make()
                 ->color("success")
                 ->link()
+                ->color('primary')
                 ->label('Importeren')
                 ->modalHeading('Selecteer een excel bestand'),
              Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),

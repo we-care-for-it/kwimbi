@@ -18,6 +18,7 @@ class ListObjectBuildingTypes extends ListRecords
                 ->link()
                 ->color("success")
                 ->label('Importeren')
+                ->color('primary')
                 ->modalHeading('Selecteer een excel bestand'),
             Actions\CreateAction::make()->label('Toevoegen')
                 ->modalHeading('Toevoegen')

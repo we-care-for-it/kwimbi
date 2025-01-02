@@ -19,7 +19,7 @@ class ManageUploadsTypes extends ManageRecords
             ->label('Importeren')
             ->outlined()
             ->link()
-   
+            ->color('primary') 
          ->modalHeading('Selecteer een excel bestand'),
                 Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen')->modalWidth(MaxWidth::ExtraLarge),
  
