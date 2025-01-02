@@ -15,7 +15,7 @@ class ObjectInspectionZincodePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_object::inspecections::zincodes');
+        return $user->can('view_any_object::inspection::zincode');
     }
 
     /**
@@ -23,7 +23,7 @@ class ObjectInspectionZincodePolicy
      */
     public function view(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('view_object::inspecections::zincodes');
+        return $user->can('view_object::inspection::zincode');
     }
 
     /**
@@ -31,7 +31,7 @@ class ObjectInspectionZincodePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_object::inspecections::zincodes');
+        return $user->can('create_object::inspection::zincode');
     }
 
     /**
@@ -39,7 +39,7 @@ class ObjectInspectionZincodePolicy
      */
     public function update(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('update_object::inspecections::zincodes');
+        return $user->can('update_object::inspection::zincode');
     }
 
     /**
@@ -47,7 +47,7 @@ class ObjectInspectionZincodePolicy
      */
     public function delete(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('delete_object::inspecections::zincodes');
+        return $user->can('delete_object::inspection::zincode');
     }
 
     /**
@@ -55,7 +55,7 @@ class ObjectInspectionZincodePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_object::inspecections::zincodes');
+        return $user->can('delete_any_object::inspection::zincode');
     }
 
     /**
@@ -63,7 +63,7 @@ class ObjectInspectionZincodePolicy
      */
     public function forceDelete(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('force_delete_object::inspecections::zincodes');
+        return $user->can('force_delete_object::inspection::zincode');
     }
 
     /**
@@ -71,7 +71,7 @@ class ObjectInspectionZincodePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_object::inspecections::zincodes');
+        return $user->can('force_delete_any_object::inspection::zincode');
     }
 
     /**
@@ -79,7 +79,7 @@ class ObjectInspectionZincodePolicy
      */
     public function restore(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('restore_object::inspecections::zincodes');
+        return $user->can('restore_object::inspection::zincode');
     }
 
     /**
@@ -87,7 +87,7 @@ class ObjectInspectionZincodePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_object::inspecections::zincodes');
+        return $user->can('restore_any_object::inspection::zincode');
     }
 
     /**
@@ -95,7 +95,7 @@ class ObjectInspectionZincodePolicy
      */
     public function replicate(User $user, ObjectInspectionZincode $objectInspectionZincode): bool
     {
-        return $user->can('replicate_object::inspecections::zincodes');
+        return $user->can('replicate_object::inspection::zincode');
     }
 
     /**
@@ -103,6 +103,6 @@ class ObjectInspectionZincodePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_object::inspecections::zincodes');
+        return $user->can('reorder_object::inspection::zincode');
     }
 }

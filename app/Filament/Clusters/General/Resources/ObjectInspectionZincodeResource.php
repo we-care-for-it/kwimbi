@@ -14,39 +14,74 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
+
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+
+
 class ObjectInspectionZincodeResource extends Resource
 {
     protected static ?string $model = ObjectInspectionZincode::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $cluster = General::class;
+    protected static ? string $navigationGroup = 'Keuringen';
+    protected static ? string $navigationLabel = 'Zin Codes';
 
+    
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+
+            Forms\Components\TextInput::make('code')
+            ->label('Code')
+            ->columnSpan('full') ,
+
+            Forms\Components\Textarea::make('description')
+            ->label('Omschrijving')
+            ->columnSpan('full') 
+
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        ->columns([
+ 
+                             
+
+
+
+    TextColumn::make('code')->searchable()
+       
+            ->width(100) ,  
+
+            TextColumn::make('description')->searchable()
+            ->label('Omschrijving')   ->wrap()
+          
+      
+        ])
+        ->filters([
+            Tables\Filters\TrashedFilter::make(), 
+
+        ])
+        ->actions([
+           // Tables\Actions\EditAction::make()->modalHeading('Wijzigen'),
+        //   Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij'),
+        ])
+        ->bulkActions([
+           Tables\Actions\BulkActionGroup::make([
+         //     Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+   
+          ]),
+        ])      
+         ->emptyState(view('partials.empty-state')) ;
+        ;
     }
 
     public static function getRelations(): array

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\Pages;
+namespace App\Filament\Clusters\General\Resources\ElevatorsTypesResource\Pages;
 
-use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource;
+use App\Filament\Clusters\General\Resources\ElevatorsTypesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 

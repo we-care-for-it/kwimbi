@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\ObjectType;
+use App\Models\companyType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ObjectTypePolicy
+class companyTypePolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class ObjectTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_object::type');
+        return $user->can('view_any_company::categories');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ObjectType $objectType): bool
+    public function view(User $user, companyType $companyType): bool
     {
-        return $user->can('view_object::type');
+        return $user->can('view_company::categories');
     }
 
     /**
@@ -31,23 +31,23 @@ class ObjectTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_object::type');
+        return $user->can('create_company::categories');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ObjectType $objectType): bool
+    public function update(User $user, companyType $companyType): bool
     {
-        return $user->can('update_object::type');
+        return $user->can('update_company::categories');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ObjectType $objectType): bool
+    public function delete(User $user, companyType $companyType): bool
     {
-        return $user->can('delete_object::type');
+        return $user->can('delete_company::categories');
     }
 
     /**
@@ -55,15 +55,15 @@ class ObjectTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_object::type');
+        return $user->can('delete_any_company::categories');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, ObjectType $objectType): bool
+    public function forceDelete(User $user, companyType $companyType): bool
     {
-        return $user->can('force_delete_object::type');
+        return $user->can('force_delete_company::categories');
     }
 
     /**
@@ -71,15 +71,15 @@ class ObjectTypePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_object::type');
+        return $user->can('force_delete_any_company::categories');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, ObjectType $objectType): bool
+    public function restore(User $user, companyType $companyType): bool
     {
-        return $user->can('restore_object::type');
+        return $user->can('restore_company::categories');
     }
 
     /**
@@ -87,15 +87,15 @@ class ObjectTypePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_object::type');
+        return $user->can('restore_any_company::categories');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, ObjectType $objectType): bool
+    public function replicate(User $user, companyType $companyType): bool
     {
-        return $user->can('replicate_object::type');
+        return $user->can('replicate_company::categories');
     }
 
     /**
@@ -103,6 +103,6 @@ class ObjectTypePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_object::type');
+        return $user->can('reorder_company::categories');
     }
 }

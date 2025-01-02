@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypeResource\Pages;
+namespace App\Filament\Clusters\General\Resources\ObjectBuildingTypeResource\Pages;
 
-use App\Filament\Clusters\ElevatorsSettings\Resources\ObjectBuildingTypeResource;
+use App\Filament\Clusters\General\Resources\ObjectBuildingTypeResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Clusters\ElevatorsSettings\Resources;
+namespace App\Filament\Clusters\General\Resources;
 
-use App\Filament\Clusters\ElevatorsSettings;
-use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\Pages;
-use App\Filament\Clusters\ElevatorsSettings\Resources\ElevatorsTypesResource\RelationManagers;
+use App\Filament\Clusters\General;
+use App\Filament\Clusters\General\Resources\ElevatorsTypesResource\Pages;
+use App\Filament\Clusters\General\Resources\ElevatorsTypesResource\RelationManagers;
 use App\Models\ObjectType;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -28,11 +28,11 @@ class ElevatorsTypesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $cluster = ElevatorsSettings::class;
+    protected static ?string $cluster = General::class;
 
     protected static ?string $title = 'Object - Types';
 
-    protected static ? string $navigationGroup = 'Basisgegevens';
+    protected static ? string $navigationGroup = 'Objecten';
     protected static ? string $navigationLabel = 'Types';
 
     public static function form(Form $form): Form

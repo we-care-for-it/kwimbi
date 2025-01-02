@@ -8,12 +8,19 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListObjectInspectionZincodes extends ListRecords
 {
+    protected static ?string $title = 'Objecten - ZIN Codes';
     protected static string $resource = ObjectInspectionZincodeResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->color("success")
+                ->link()
+                ->label('Importeren')
+                ->modalHeading('Selecteer een excel bestand'),
+             Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
+
         ];
     }
 }
