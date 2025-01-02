@@ -18,15 +18,17 @@ class ListCompanies extends ListRecords
     {
         return [
 
-            
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->label('Importeren')
+                ->link()
+                ->color("primary"),
             Actions\CreateAction::make()
             ->icon('heroicon-m-plus')
             ->label('Toevoegen')
             ->modalHeading('Bedrijf toevoegen')
             ->slideOver(),
 
-            \EightyNine\ExcelImport\ExcelImportAction::make()->label('Importeren')
-            ->color("primary"),
+         
 
             
         ];

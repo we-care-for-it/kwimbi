@@ -20,6 +20,12 @@ class ManageHourTypes extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
+            \EightyNine\ExcelImport\ExcelImportAction::make()
+                ->link()
+                ->color("success")
+                ->label('Importeren')
+                ->color('primary')
+                ->modalHeading('Selecteer een excel bestand'),
             Actions\CreateAction::make() ->icon('heroicon-m-plus')
                 ->modalHeading('Toevoegen')
                 ->label('Toevoegen')

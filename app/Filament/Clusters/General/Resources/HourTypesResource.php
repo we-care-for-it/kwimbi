@@ -32,7 +32,7 @@ class HourTypesResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Uursoorten';
-    protected static ? string $navigationGroup = 'Projecten';
+    protected static ? string $navigationGroup = 'Werkopdrachten';
 
 
     protected static ?string $cluster = General::class;
