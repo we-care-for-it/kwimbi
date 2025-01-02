@@ -95,8 +95,8 @@ class ObjectInspectionZincodeResource extends Resource
     {
         return [
             'index' => Pages\ListObjectInspectionZincodes::route('/'),
-            'create' => Pages\CreateObjectInspectionZincode::route('/create'),
-            'edit' => Pages\EditObjectInspectionZincode::route('/{record}/edit'),
+          //  'create' => Pages\CreateObjectInspectionZincode::route('/create'),
+          //  'edit' => Pages\EditObjectInspectionZincode::route('/{record}/edit'),
         ];
     }
 }
