@@ -59,8 +59,7 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 3 ||
                             $record?->id == 4 ||
                             $record?->id == 5 ||
-                            $record?->id == 6 ||
-                            $record?->id == 7
+                            $record?->id == 6
                         ) {
                             return "Systeem standaard";
                         } else {
@@ -74,8 +73,7 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 3 ||
                             $record?->id == 4 ||
                             $record?->id == 5 ||
-                            $record?->id == 6 ||
-                            $record?->id == 7
+                            $record?->id == 6
                         ) {
                             return "danger";
                         } else {
@@ -101,8 +99,7 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 3 ||
                             $record?->id == 4 ||
                             $record?->id == 5 ||
-                            $record?->id == 6 ||
-                            $record?->id == 7
+                            $record?->id == 6
                         ) {
                             return false;
                         } else {
@@ -122,8 +119,7 @@ class CompanyCategoriesResource extends Resource
                             $record?->id == 3 ||
                             $record?->id == 4 ||
                             $record?->id == 5 ||
-                            $record?->id == 6 ||
-                            $record?->id == 7
+                            $record?->id == 6
                         ) {
                             return false;
                         } else {
