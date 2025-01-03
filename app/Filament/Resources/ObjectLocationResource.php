@@ -64,7 +64,11 @@ class ObjectLocationResource extends Resource
 
     public static function infolist(Infolist $infolist) : Infolist
     {
-        return $infolist->schema([Section::make()->schema([Components\Split::make([Components\Grid::make(4)->schema([TextEntry::make("address")
+        return $infolist->schema([Section::make()->schema([Components\Split::make([
+            
+            Components\Grid::make(4)->schema([
+                
+                TextEntry::make("address")
 
             ->label("Adres")->getStateUsing(function (ObjectLocation $record) : ? string
         {
@@ -251,7 +255,9 @@ class ObjectLocationResource extends Resource
                             [
                                 
                                 Tables\Columns\TextColumn::make("address")
-                        ->toggleable()->getStateUsing(function (ObjectLocation $record) : ? string
+                        ->toggleable()
+                        
+                        ->getStateUsing(function (ObjectLocation $record) : ? string
                     {
                         $housenumber = "";
                         $complexnumber = "";
@@ -261,35 +267,43 @@ class ObjectLocationResource extends Resource
                             $housenumber = " " . $record->housenumber;
                         }
 
-                        if ($record ?->name or $record ?->complexnumber)
-                        {
-                            if ($record ?->complexnumber)
-                            {
-                                $complexnumber = $record ?->complexnumber;
-                            }
+                        // if ($record ?->name or $record ?->complexnumber)
+                        // {
+                    
 
-                            if ($record ?->name)
-                            {
-                                $name = $record ?->name;
-                            }
+                           
 
-                            return $record ?->name . " " . $complexnumber;
-                        }
-                        else
-                        {
+                        //     return $record ?->name . " " . $complexnumber;
+                        // }
+                        // else
+                        // {
                             return $record->address . " " . $housenumber . " - " . $record->zipcode . " - " . $record->place;
-                        }
+                       // }
                     })
                         ->searchable()
                         ->label("Adres")->description(function (ObjectLocation $record)
                     {
-                        $housenumber = "";
-                        if ($record->housenumber)
+                        
+                        $complexnumber = NULL;
+                        if ($record ?->complexnumber)
                         {
-                            $housenumber = " " . $record->housenumber;
+                            $complexnumber = $record ?->complexnumber;
                         }
 
-                        return $record->address . " " . $housenumber . " - " . $record->zipcode . "  " . $record->place;
+                        $name = NULL;
+                        if ($record ?->name)
+                        {
+                            $name = $record ?->name;
+                        }   
+                    
+                        return $name . " " . $complexnumber;
+           
+                    
+                    
+                    
+                    
+                    
+                    
                     }) ,
 
                     Tables\Columns\TextColumn::make("zipcode")
@@ -336,8 +350,7 @@ class ObjectLocationResource extends Resource
                         ->toggleable()
                         ->sortable()->url(function (ObjectLocation $record)
                     {
-                        return "/admin/elevators-settings/object-management-companies/" . $record->management_id . "";
-                    })
+                        return "/admin/companies/" . $record->management_id . "";        })
 
                         ->label("Beheerder")
                         ->placeholder("Geen beheer gekoppeld")
