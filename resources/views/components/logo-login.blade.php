@@ -1,4 +1,4 @@
 <center>
-    <img   src = "/images/logo.png">
+    <img  style = "height: 80px;" src = "/images/logo.png">
 
 </center>
