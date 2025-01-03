@@ -69,7 +69,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             //->plugin(\TomatoPHP\FilamentLogger\FilamentLoggerPlugin::make())
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-            ->brandLogo(fn() => view('components.logo'))
+  
             ->darkMode(false)
             ->plugins([
                 FilamentBackgroundsPlugin::make()->imageProvider(
