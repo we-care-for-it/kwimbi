@@ -105,7 +105,6 @@ class ObjectLocationResource extends Resource
 
         TextEntry::make("buildingtype.name")
             ->label("Gebouwtype")
-            ->preloaded()
             ->badge()
             ->placeholder("Niet opgegeven") ,
 
