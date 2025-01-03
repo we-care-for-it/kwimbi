@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\ObjectInspection;
+
+
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Enums\ElevatorStatus;
 /**
@@ -43,6 +46,16 @@ class Elevator extends Model implements Auditable
     protected $fillable = [
         'status_id', 'energy_label','customer_id', 'management_id','inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no'
     ];
+
+
+    public function latestInspection()
+    {
+    return  $this->hasOne(ObjectInspection::class, 'elevator_id');
+ 
+ 
+    }
+
+
 
     public function location()
     {
@@ -89,16 +102,10 @@ class Elevator extends Model implements Auditable
         return Elevator::where('address_id', $this->attributes["address_id"])->get();
     }
 
-    public function latestinspections()
-    {
+ 
 
 
 
-        
-        return $this->hasOne(ObjectInspection::class, 'elevator_id', 'id')->orderBy('executed_datetime','desc');   
-    
-    
-    }
 
     public function inspections()
     {
