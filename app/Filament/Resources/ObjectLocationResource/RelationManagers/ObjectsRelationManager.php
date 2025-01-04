@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Elevator;
-use App\Models\ObjectMaintenanceCompany;
+use App\Models\Company;
 use App\Models\ObjectType;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -71,8 +71,8 @@ class ObjectsRelationManager extends RelationManager
 
                         Select::make('maintenance_company_id')
                             ->label('Onderhoudspartij')
-                            ->options(ObjectMaintenanceCompany::
-                            pluck('name', 'id')),
+                            ->options(Company::where('type_id',1)->pluck("name", "id")),
+
 
                             Select::make('status_id')
                             ->label("Status")->required()
