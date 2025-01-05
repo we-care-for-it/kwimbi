@@ -239,7 +239,7 @@ class ObjectResource extends Resource
                     ->label("Plaats")
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make("customer.name")
+                Tables\Columns\TextColumn::make("location.customer.name")
                     ->toggleable()
                     ->searchable()
                     ->label("Relatie")
@@ -278,7 +278,7 @@ class ObjectResource extends Resource
             ->actions([
                 ActionGroup::make([
                     EditAction::make()
-                        ->modalHeading('Bedrijf snel bewerken')
+                        ->modalHeading('Object bewerken')
                         ->modalIcon('heroicon-o-pencil')
                         ->label('Snel bewerken')
                         ->slideOver(),
