@@ -60,7 +60,7 @@ class ObjectLocationResource extends Resource
     protected static ? string $navigationIcon = "heroicon-o-building-office-2";
     protected static ? string $navigationLabel = "Locaties";
 
-    protected static ? string $recordTitleAttribute = "name";
+
 
     public static function infolist(Infolist $infolist) : Infolist
     {
@@ -130,9 +130,19 @@ class ObjectLocationResource extends Resource
         return ["name", "address"];
     }
 
+
+    
     public static function getGlobalSearchResultDetails($record) : array
     {
-        return ["Adres" => $record->address . " , " . $record->place];
+
+        
+        return [
+            'Naam' => $record->address . "   " . $record?->housenumber .  " " . $record?->place,
+            'Beheerder' => $record?->managementcompany->name ?? "-",
+        ];
+
+
+        
     }
 
     public static function form(Form $form) : Form
@@ -386,7 +396,8 @@ class ObjectLocationResource extends Resource
                         ->options(ObjectLocation::whereNotNull("place")
                         ->pluck("place", "place"))
                         ->searchable() ,
-                        Tables\Filters\TrashedFilter::make() , ], layout : FiltersLayout::AboveContent)
+                        Tables\Filters\TrashedFilter::make() , ], //layout : FiltersLayout::AboveContent
+                        )
 
                         ->actions([ActionGroup::make([
  
@@ -435,7 +446,6 @@ class ObjectLocationResource extends Resource
                 {
                     return "Locatie";
                 }
-
-          
+             
             }
             

@@ -30,7 +30,8 @@ class ContactResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationLabel = "Contactpersonen";
     protected static ?string $title = "Contactpersonen";
-
+    protected static ?string $recordTitleAttribute = 'Contactpersoon';
+    protected static ?string $pluralModelLabel = 'Contactpersonen';
 
     public static function form(Form $form): Form
     {
@@ -198,4 +199,33 @@ class ContactResource extends Resource
             //'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
+
+
+    public static function getGloballySearchableAttributes() : array
+    {
+        return ["first_name", "company.name","last_name"];
+    }
+
+    public static function getGlobalSearchResultDetails($record) : array
+    {
+
+        return [
+            'Naam' => $record?->first_name . "  " . $record?->last_name,
+            'Emailadres' => $record?->email,
+            'Bedrijf' => $record?->company->name,
+            'Telefoonnummer' => $record?->phone_number,
+        ];
+
+
+ 
+ 
+}
+
+    public static function getModelLabel() : string
+    {
+        return "Contactpersoon";
+    }
+   
+  
+
 }

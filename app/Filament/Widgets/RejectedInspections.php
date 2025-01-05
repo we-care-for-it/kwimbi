@@ -27,7 +27,7 @@ class RejectedInspections extends BaseWidget
         return $table
 
         ->query(  
-            Elevator::query()->where('latestInspection', function ($query) {
+            Elevator::query()->with('latestInspection', function ($query) {
                     $query->where('status_id','=','3');
             } 
        )       ) 

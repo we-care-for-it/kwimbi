@@ -129,13 +129,13 @@ class IncidentsRelationManager extends RelationManager
                 ->emptyState(view('partials.empty-state-small'))
                     ->headerActions([Tables\Actions\CreateAction::make()
 
-                    ->mutateFormDataUsing(function (array $data): array {
-                   dd($data['standing_still']);
+                //     ->mutateFormDataUsing(function (array $data): array {
+                //    dd($data['standing_still']);
  
-                        Elevator::where('id', $this->ownerRecord->id)
-                        ->update(['standing_still' => $data->standing_still]);
+                //         Elevator::where('id', $this->ownerRecord->id)
+                //         ->update(['standing_still' => $data->standing_still]);
 
-                    })
+                //     })
                     
                     ->label('Toevoegen') , ])->actions([Tables\Actions\Action::make('seeDetails')
                     ->label('Toon details')

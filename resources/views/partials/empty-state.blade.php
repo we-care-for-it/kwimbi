@@ -1,16 +1,16 @@
  
+ <div class="text-center">
+  <center>
+  <img class="w-40 h-40" src="/images/emptysmallpng.png" alt="">
+  </center>
+  <h3 class="mt-2 text-sm font-semibold text-gray-900">Geen gegevens gevonden</h3>
+  <p class="mt-1 text-sm text-gray-500">Voeg nieuwe gegevens toe of pas de zoek / selectie filters aan</p>
+  <div class="mt-6">
  
-<div class="content flex py-2 "  style = "width:100%">
-            <img class="w-48 h-48" src="/images/emptysmallpng.png" alt="">
-            <div class="item-body px-2 " style = "width:100%">
-            
-          Er zijn geen gegevens gevonden in deze weergaven..
-          <br><br><hr style = "width:100%" ><br>
-          <b>Mogelijke oplossingen</b>
-          <ol>
-  <li>* Voeg nieuwe gegevens toe</li>
-  <li>* Pas de huidige filters aan</li>
-  <li>* Zoek op een ander trefwoord</li>
-</ol></div>
-          </div>
-        
+  </div>
+</div
+
+
+
+ 
+ 

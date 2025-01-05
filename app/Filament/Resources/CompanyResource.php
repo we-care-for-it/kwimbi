@@ -58,7 +58,9 @@ class CompanyResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-building-library';
     protected static ? string $navigationLabel = "Bedrijven";
-
+    protected static ?string $pluralModelLabel = 'Bedrijven';
+    protected static ?string $recordTitleAttribute = 'name';
+  
     public static function form(Form $form) : Form
     {
         return $form->schema([
@@ -228,5 +230,27 @@ class CompanyResource extends Resource
             'view' => Pages\ViewCompany::route('/{record}') ,
         ];
     }
+
+
+    public static function getGloballySearchableAttributes() : array
+    {
+        return ["name","type.name"];
+    }
+
+    public static function getGlobalSearchResultDetails($record) : array
+    {
+
+        return [
+            'Type' => $record?->type->name,
+        ];
+
+
+ 
+ 
+}
+ 
+   
+
+
 }
 

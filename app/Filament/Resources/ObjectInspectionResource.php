@@ -226,7 +226,7 @@ class ObjectInspectionResource extends Resource
             ->toggleable()
             ->wrap() ,
 
-        Tables\Columns\TextColumn::make('elevator.location')
+        Tables\Columns\TextColumn::make('elevator.location.address')
             ->label('Adres')
             ->searchable()
             ->sortable()
