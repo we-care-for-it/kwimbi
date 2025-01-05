@@ -201,6 +201,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'charrafimed/global-search-modal' => array(
+            'pretty_version' => 'v3.4.6',
+            'version' => '3.4.6.0',
+            'reference' => '6a7dff328dd57a196c67efccc934961ec1e5ea59',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../charrafimed/global-search-modal',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'composer/semver' => array(
             'pretty_version' => '3.4.3',
             'version' => '3.4.3.0',

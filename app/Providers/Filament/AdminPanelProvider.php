@@ -32,7 +32,7 @@ use lockscreen\FilamentLockscreen\Lockscreen;
 // use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
 // use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 
- 
+use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
 
@@ -56,6 +56,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 \Hasnayeen\Themes\ThemesPlugin::make()
             )
+
+            ->plugins([
+                GlobalSearchModalPlugin::make()
+            ])
            // ->plugin(new Lockscreen())
 
             ->plugins([
