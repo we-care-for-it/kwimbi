@@ -195,7 +195,7 @@ class ContactResource extends Resource
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-           // 'create' => Pages\CreateContact::route('/create'),
+// 'create' => Pages\CreateContact::route('/create'),
             //'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
@@ -212,7 +212,7 @@ class ContactResource extends Resource
         return [
             'Naam' => $record?->first_name . "  " . $record?->last_name,
             'Emailadres' => $record?->email,
-            'Bedrijf' => $record?->company->name,
+            'Bedrijf' => $record?->companyname,
             'Telefoonnummer' => $record?->phone_number,
         ];
 
