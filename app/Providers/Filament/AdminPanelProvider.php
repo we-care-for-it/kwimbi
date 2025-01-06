@@ -49,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
              ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
-            ->breadcrumbs(false)
+            ->breadcrumbs(true)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -73,12 +73,15 @@ class AdminPanelProvider extends PanelProvider
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->brandLogo(fn() => view('components.logo'))
             ->darkMode(false)
-            ->plugins([
-                FilamentBackgroundsPlugin::make()->imageProvider(
-                    MyImages::make()
-                        ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
-                ),
-            ])       
+            // ->plugins([
+            //     FilamentBackgroundsPlugin::make()->imageProvider(
+            //         MyImages::make()
+            //             ->directory('images/swisnl/filament-backgrounds/curated-by-swis'),
+            //     ),
+            // ])       
+
+
+            
             // ->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make()
             // )  
             ->plugin(

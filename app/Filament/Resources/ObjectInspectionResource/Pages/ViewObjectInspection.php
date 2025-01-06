@@ -16,8 +16,9 @@ use Filament\Forms\Components\Select;
 class ViewObjectInspection extends ViewRecord
 {
     protected static string $resource = ObjectInspectionResource::class;
-    protected static ?string $title = 'Keuringsrapportage';
-  
+    protected static ?string $navigationLabel = "Keuringen";
+    protected static ? string $navigationIcon = 'heroicon-m-check-badge';
+ 
 
     protected function getHeaderActions(): array
     {

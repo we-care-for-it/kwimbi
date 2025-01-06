@@ -45,6 +45,8 @@ class ObjectInspectionResource extends Resource
     protected static ?string $navigationLabel = "Keuringen";
     protected static ? string $navigationIcon = 'heroicon-m-check-badge';
  
+    protected static ?string $modelLabel = 'Keuring';
+    protected static ?string $pluralModelLabel = 'Keuringen';
 
     public static function infolist(Infolist $infolist) : Infolist
     {

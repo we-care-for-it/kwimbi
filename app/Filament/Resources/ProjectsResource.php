@@ -33,7 +33,11 @@ class ProjectsResource extends Resource
     protected static ?string $navigationLabel = "Projecten";
     protected static ?string $navigationIcon = "heroicon-o-archive-box";
     protected static bool $isLazy = false;
-    protected static ?string $recordTitleAttribute = "name";
+ 
+
+
+ 
+    protected static ?string $pluralModelLabel = 'Projecten';
 
     // public static function getGlobalSearchResultDetails(Model $record): array
     // {
