@@ -474,6 +474,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'flowframe/laravel-trend' => array(
+            'pretty_version' => 'v0.3.0',
+            'version' => '0.3.0.0',
+            'reference' => '391849c27a1d4791efae930746a51d982820bd3a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../flowframe/laravel-trend',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'fruitcake/php-cors' => array(
             'pretty_version' => 'v1.3.0',
             'version' => '1.3.0.0',

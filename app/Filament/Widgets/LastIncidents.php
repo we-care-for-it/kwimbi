@@ -10,10 +10,12 @@ use Filament\Support\Enums\Alignment;
 class LastIncidents extends BaseWidget
 {
  
-    protected static ?int $sort = 2;
+    protected static ?int $sort = 15;
     protected static ?string $heading = "Nieuwste storingen";
     protected ?string $description = 'An overview of some analytics.';
-    protected int | string | array $columnSpan = '6';
+    protected int | string | array $columnSpan = '4';
+    protected static bool $isLazy = false;
+
     public function table(Table $table): Table
     {
         return $table
