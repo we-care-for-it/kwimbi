@@ -21,6 +21,7 @@
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-google-fonts-plugin": "^3.2",
+        "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
         "illuminate/contracts": "*",
         "joaopaulolndev/filament-edit-profile": "^1.0",

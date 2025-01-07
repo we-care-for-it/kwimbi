@@ -12,10 +12,10 @@ use App\Enums\InspectionStatus;
 use DB;
 class RejectedInspections extends BaseWidget
 {
-    protected static ?int $sort = 3;
+    protected static ?int $sort =2;
     protected static ?string $heading = "Afgekeurde objecten";
-    protected int | string | array $columnSpan = '12';
-
+    protected int | string | array $columnSpan = '9';
+    protected static bool $isLazy = false;
     public function table(Table $table): Table
     {
         return $table
