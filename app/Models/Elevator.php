@@ -50,12 +50,8 @@ class Elevator extends Model implements Auditable
 
     public function latestInspection()
     {
-    return  $this->hasOne(ObjectInspection::class, 'elevator_id');
- 
- 
+    return  $this->hasOne(ObjectInspection::class, 'elevator_id')->latest('executed_datetime');
     }
-
-
 
     public function location()
     {

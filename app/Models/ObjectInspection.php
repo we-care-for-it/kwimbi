@@ -22,7 +22,6 @@ class ObjectInspection extends Model
     {
         return [
             'status_id' => InspectionStatus::class,
-             
         ];
     }
 

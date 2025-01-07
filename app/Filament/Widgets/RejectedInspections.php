@@ -8,36 +8,31 @@ use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables\Filters\SelectFilter;
-
 use App\Enums\InspectionStatus;
-
+use DB;
 class RejectedInspections extends BaseWidget
 {
- 
-    
     protected static ?int $sort = 3;
     protected static ?string $heading = "Afgekeurde objecten";
-    protected ?string $description = 'An overview of some analytics.';
-    protected int | string | array $columnSpan = '6';
+    protected int | string | array $columnSpan = '12';
+
     public function table(Table $table): Table
     {
-
-  
-      
         return $table
-
-        ->query(  
-            Elevator::query()->with('latestInspection', function ($query) {
-                    $query->where('status_id','=','3');
-            } 
-       )       ) 
-
-
-       
- 
-     
-          
+            ->query(  
+                Elevator::query()
+                ->whereHas('latestInspection', fn ($subQuery) => $subQuery
+                    ->where('status_id', InspectionStatus::REJECTED)
+                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY executed_datetime DESC LIMIT 1)'))
+                )
+            )
             ->columns([
+
+                Tables\Columns\TextColumn::make("nobo_no")
+                ->label("NOBO Nr")
+                ->placeholder("Geen NOBO Nummer"),
+
+
                 Tables\Columns\TextColumn::make("location")
                     ->getStateUsing(function (Elevator $record): ?string {
                         if ($record?->location->name) {
@@ -64,30 +59,44 @@ class RejectedInspections extends BaseWidget
                     }),
 
                     Tables\Columns\TextColumn::make("latestInspection.status_id")
-                    ->label("Status")
+                    ->label("Status")       ->badge()
                     ,
 
-                    Tables\Columns\TextColumn::make("latestInspection")
-                    ->label("Liftid"),
+                    Tables\Columns\TextColumn::make("type.name")
+                    ->label("Type")
+                    ->badge()
+                    ->sortable()
+                    ->color('secondary')
+                    ->toggleable(),
+
+                    
+                    Tables\Columns\TextColumn::make("name")
+                    ->label("Naam")
+                    ->placeholder('-'),
+
+
 
                 Tables\Columns\TextColumn::make("location.customer.name")
-                ->label("Relatie"),
+                ->label("Relatie")->Url(function (object $record)
+                {
+                    return "/admin/customers/" . $record->customer_id . "";
+                })
+                    ->icon("heroicon-c-link")
+                    ->placeholder("Niet opgegeven") ,
+                Tables\Columns\TextColumn::make("status_id")
+                ->label("Status")
+                ->badge()
+                ->sortable(),
+               
 
-     
-
-                    Tables\Columns\TextColumn::make("latestInspection.remark")
-                    ->label("Opmerking")
-                    ,
 
                 Tables\Columns\TextColumn::make("type.name")
                     ->label("Type")
                     ->sortable()
                     ->badge()
                     ->color("primary"),
-                Tables\Columns\TextColumn::make("unit_no")
-                    ->label("Unit nummer")
-                    ->placeholder("Geen unitnummer"),
-            ])
+               
+            ])         ->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
                 return "admin/objects/" .
                     $record->id .
