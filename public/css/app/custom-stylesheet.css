@@ -108,6 +108,24 @@
 }
 
 
+.fi-global-search-result-group:hover{
+  background-color: white!important;
+}
+.fi-global-search-no-results-message{
+  background-color: white!important;;
+}
+
+.fi-global-search-result-link{
+  background-color: white!important;;
+}
+
+
+
+
+
+
+
+ 
 
 .fi-section-header{
   background-color: #F9FAFC!important;;

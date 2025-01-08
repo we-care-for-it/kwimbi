@@ -212,7 +212,7 @@ class ContactResource extends Resource
         return [
             'Naam' => $record?->first_name . "  " . $record?->last_name,
             'Emailadres' => $record?->email,
-            'Bedrijf' => $record?->companyname,
+            'Bedrijf' => $record?->company?->name,
             'Telefoonnummer' => $record?->phone_number,
         ];
 
