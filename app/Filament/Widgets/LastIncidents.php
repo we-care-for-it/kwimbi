@@ -11,9 +11,9 @@ class LastIncidents extends BaseWidget
 {
  
     protected static ?int $sort = 15;
-    protected static ?string $heading = "Nieuwste storingen";
-    protected ?string $description = 'An overview of some analytics.';
-    protected int | string | array $columnSpan = '4';
+    protected int | string | array $columnSpan = '6';
+    protected static ?string $maxHeight = '300px';
+    protected static ?string $heading = "Laatste storingen";
     protected static bool $isLazy = false;
 
     public function table(Table $table): Table

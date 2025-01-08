@@ -27,12 +27,7 @@ class StandStill extends BaseWidget
 
         
         ->query(
-            Elevator::with(['inspections' => function ($query) use ($status_id) {
-                 
-                        $query->where('status_id',31);
-                   
-                    
-                }])
+            Elevator::has("incident_stand_still")->latest()
                 ->limit(10)
         )
 
