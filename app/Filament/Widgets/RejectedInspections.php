@@ -14,8 +14,10 @@ class RejectedInspections extends BaseWidget
 {
     protected static ?int $sort =2;
     protected static ?string $heading = "Afgekeurde objecten";
-    protected int | string | array $columnSpan = '9';
+    protected int | string | array $columnSpan = '12';
     protected static bool $isLazy = false;
+    protected static ?string $maxHeight = '600px';
+
     public function table(Table $table): Table
     {
         return $table

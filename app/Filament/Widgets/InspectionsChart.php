@@ -13,8 +13,8 @@ class InspectionsChart extends ChartWidget
     protected static ?string $heading = 'Keuringen 2025';
  
         protected static ?int $sort =1;
-    protected int | string | array $columnSpan = '3';
-    protected static ?string $maxHeight = '300px';
+    protected int | string | array $columnSpan = '4';
+    protected static ?string $maxHeight = '160px';
     protected static bool $isLazy = false;
 
     protected function getData(): array
@@ -60,12 +60,7 @@ class InspectionsChart extends ChartWidget
         
         return [
             'datasets' => [
-                [
-                    'label' =>' Goedgekeurd',
-                    'backgroundColor'=> 'rgb(133, 202, 143)',
-                    'borderColor'=> 'rgb(135, 184, 142)',
-                    'data' => $data->map(fn (TrendValue $value) => round($value->aggregate)),
-                ],
+         
 
                 [
                     'label' => 'Afgekeurd',
@@ -75,11 +70,19 @@ class InspectionsChart extends ChartWidget
                 ],
 
                 [
-                    'label' => 'Met acties',
-                    'backgroundColor'=> 'rgb(228, 204, 116)',
-                    'borderColor'=> 'rgb(224, 193, 79)',    
-                    'data' => $dataApprovedRepeat->map(fn (TrendValue $value) => round($value->aggregate)),
+                    'label' =>' Goedgekeurd',
+                    'backgroundColor'=> 'rgb(133, 202, 143)',
+                    'borderColor'=> 'rgb(135, 184, 142)',
+                    'data' => $data->map(fn (TrendValue $value) => round($value->aggregate)),
                 ],
+                
+
+                // [
+                //     'label' => 'Met acties',
+                //     'backgroundColor'=> 'rgb(228, 204, 116)',
+                //     'borderColor'=> 'rgb(224, 193, 79)',    
+                //     'data' => $dataApprovedRepeat->map(fn (TrendValue $value) => round($value->aggregate)),
+                // ],
  
             ],
             'labels' => $data->map(fn (TrendValue $value) => date('m', strtotime($value->date)))
@@ -90,12 +93,12 @@ class InspectionsChart extends ChartWidget
 
 //     protected function getFilters(): ?array
 // {
-//     // return [
-//     //     'today' => 'Today',
-//     //     'week' => 'Last week',
-//     //     'month' => 'Last month',
-//     //     'year' => 'This year',
-//     // ];
+//     return [
+//         'today' => 'Today',
+//         'week' => 'Last week',
+//         'month' => 'Last month',
+//         'year' => 'This year',
+//     ];
 // }
 
 
