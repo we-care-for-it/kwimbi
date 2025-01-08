@@ -34,6 +34,9 @@ use Filament\Infolists\Components\ViewEntry;
 
 use Filament\Resources\RelationManagers\RelationGroup;
 
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\RestoreBulkAction;
+
 use Filament\Forms\Components\Section;
 
 use App\Enums\CompanyTypes;
@@ -208,11 +211,19 @@ class CompanyResource extends Resource
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->modalHeading('Bedrijf verwijderen')
-                    ->color('danger') , ]) , ])
+                    ->color('danger') ,
+                    
+                    RestoreAction::make(),
+                    ]) , ])
                     ->bulkActions([
                         Tables\Actions\BulkActionGroup::make(
+
                             [Tables\Actions\DeleteBulkAction::make()
+                            
                     ->modalHeading('Verwijderen van alle geselecteerde rijen') ,
+
+                    RestoreBulkAction::make(),
+
 
         ]) , ])
             ->emptyState(view('partials.empty-state'));

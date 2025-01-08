@@ -176,6 +176,10 @@ class ObjectLocationResource extends Resource
 
                     Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
                         ->label("Postcode")
+
+                  
+
+
                         ->maxLength(255)->suffixAction(Action::make("searchAddressByZipcode")
                         ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set)
                     {
@@ -191,6 +195,7 @@ class ObjectLocationResource extends Resource
                         }
                         else
                         {
+
                             $set("place", $data ?->municipality);
                             $set("gps_lat", $data ?->lat);
                             $set("gps_lon", $data ?->lng);
@@ -198,11 +203,26 @@ class ObjectLocationResource extends Resource
                             $set("municipality", $data ?->municipality);
                             $set("province", $data ?->province);
                             $set("place", $data ?->settlement);
-                            $set("building_type", $data ?->purposes[0]);
+    
                             $set("construction_year", $data ?->constructionYear);
                             $set("surface", $data ?->surfaceArea);
+                            
+                            //check building type ifexist
+                            $buildTypeExist = ObjectBuildingType::where('name', '=', $data?->purposes[0])->first();
+                            if ($buildTypeExist === null) {
+                                $buildingTypeId = ObjectBuildingType::insertGetId(['name'=>ucfirst($data?->purposes[0])]);
+                              
+                         
+                            }else{
+                                $buildingTypeId  =  $buildTypeExist->id;
+                            }
+
+                            $set("building_type_id", $buildingTypeId);
+                    
+
                         }
-                    })) ,
+                    }))->reactive(),     
+
 
                     Forms\Components\TextInput::make("address")
                         ->label("Straatnaam")
@@ -214,9 +234,11 @@ class ObjectLocationResource extends Resource
                         ->label("Plaats") , Forms\Components\TextInput::make("province")
                         ->label("Provincie") , Forms\Components\TextInput::make("gps_lat")
                         ->label("GPS latitude")
+
                         ->columnSpan(1)
                         ->hidden() , Forms\Components\TextInput::make("gps_lon")
                         ->label("GPS longitude")
+                        ->hidden()
                         ->columnSpan(1) ,
                     ]) , ])
                         ->columns(2)
@@ -235,8 +257,11 @@ class ObjectLocationResource extends Resource
 
                     Select::make("building_type_id")
                         ->options(ObjectBuildingType::pluck("name", "id"))
-                        ->preload()
+                  
+                        ->reactive()
                         ->searchable()
+                    
+
                         ->label("Gebouwtype")
                         ->columnSpan(3) ,
 
