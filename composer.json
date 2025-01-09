@@ -26,6 +26,7 @@
         "illuminate/contracts": "*",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "joaopaulolndev/filament-pdf-viewer": "^1.0",
+        "justijndepover/teamleader-api": "^0.8.0",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "marjose123/filament-lockscreen": "^2.0",

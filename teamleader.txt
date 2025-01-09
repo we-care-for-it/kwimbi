@@ -1,0 +1,21 @@
+
+   Justijndepover\Teamleader\Exceptions\UnauthorizedException 
+
+  Error 401: Missing authorization header
+
+  at vendor\justijndepover\teamleader-api\src\Exceptions\UnauthorizedException.php:11
+      7▕ class UnauthorizedException extends Exception
+      8▕ {
+      9▕     public static function make(string $code, string $message): self
+     10▕     {
+  ➜  11▕         return new static("Error $code: $message", $code);
+     12▕     }
+     13▕ }
+     14▕
+
+  1   app\Services\TeamleaderService.php:349
+      Justijndepover\Teamleader\Exceptions\UnauthorizedException::make("401", "Missing authorization header")
+
+  2   app\Services\TeamleaderService.php:256
+      App\Services\TeamleaderService::parseExceptionForErrorMessages(Object(GuzzleHttp\Exception\ClientException))
+
