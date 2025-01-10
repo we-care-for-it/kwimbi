@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('companies', function (Blueprint $table) {
-            //
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('api_uuid')->nullable();
+            $table->string('api_url')->nullable();
+            $table->string('source')->nullable();
+            $table->string('bic')->nullable();
+            $table->string('iban')->nullable();
+            $table->string('language')->nullable();
+            $table->string('country')->nullable();
+            $table->boolean('is_active')->nullable()->default('1');
         });
     }
 

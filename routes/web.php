@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 use Psr\SimpleCache\InvalidArgumentException;
 use App\Services\TeamleaderService;
 
+use App\Models\ExternalConnection;
 use App\Models\Company;
+use App\Models\Customer;
 
 Route::get('/', function () {
     return redirect()->to('/admin');
@@ -42,23 +44,63 @@ Route::get('/teamleader.callback', function (Request $request) {
     $teamleader->connect();
 
     if (!cache('teamLeaderRefreshToken')) {
-      cache()->set('teamLeaderAccessToken', $teamleader->getAccessToken(), 500);
-      cache()->set('teamLeaderRefreshToken', $teamleader->getRefreshToken(), 500);
-      cache()->set('teamLeaderExpiresAt ', $teamleader->getTokenExpiresAt(), 500);
-      cache()->set('teamLeaderCode', $request->code, 500);
-
+        ExternalConnection::updateOrCreate(
+            ['name' => 'teamleader'],
+            [
+                'token1' => $teamleader->getAccessToken(),
+                'token2' => $teamleader->getRefreshToken(),
+                'token3' => $request->code,
+                'token_expired' => $teamleader->getTokenExpiresAt(),
+                'last_action_datetime' => date("Y-m-d H:i:s")
+            ]
+        );
     }
 });
 
 
 Route::get('/teamleader.dothing', function (Request $request) {
     $teamleader = new TeamleaderService(config('services.teamleader.client_id'), config('services.teamleader.client_secret'), config('services.teamleader.redirect_url'), config('services.teamleader.state'));
-    $teamleader->setAuthorizationCode(cache()->get('teamLeaderCode'));
-  
-    $teamleader->setAccessToken(cache()->get('teamLeaderAccessToken'));
-    $teamleader->setRefreshToken(cache()->get('teamLeaderRefreshToken'));
-    $teamleader->setTokenExpiresAt(cache()->get('teamLeaderExpiresAt'));
-    $teamleader->shouldRefreshToken();
-    dd($teamleader->get('companies.list')); 
+
+    $token_from_db = ExternalConnection::get()
+        ->where('name', 'teamleader')
+        ->first();
+    $teamleader->setAccessToken($token_from_db->token1);
+    $teamleader->setRefreshToken($token_from_db->token2);
+    $teamleader->setAuthorizationCode($token_from_db->token3);
+    $teamleader->setTokenExpiresAt($token_from_db->token_expired);
+
+ 
+    $customers = $teamleader->get('companies.list');
+
+
+
+    //Sync 
+    if($customers){
+        foreach($customers['data'] as $customer){
+            Customer::updateOrCreate(
+                ['api_uuid' => $customer['id']],
+                [
+                    'name'          => $customer['name'] ?? null,
+                    'address'       => $customer['primary_address']['line_1'] ?? null,
+                    'place'         => $customer['primary_address']['city'] ?? null,
+                    'zipcode'       => $customer['primary_address']['postal_code'] ?? null,
+                    'api_url'       => $customer['web_url'] ?? null,
+                    'emailaddress'  => $customer['emails'][0]['email'] ?? null,
+                    'phonenumber'   => $customer['emails'][0]['number'] ?? null,
+                    'updated_at'    => date("Y-m-d H:i:s"),
+                    'source'        => 'teamleader',
+                ]
+            );
+        }
+    }
+
+
+
+    // you should always store your tokens at the end of a call
+    $accessToken = $teamleader->getAccessToken();
+    $refreshToken = $teamleader->getRefreshToken();
+    $expiresAt = $teamleader->getTokenExpiresAt();
+
+
 });
 
