@@ -238,6 +238,9 @@ final class TeamleaderService
         }
     }
 
+
+ 
+
     public function setTokenUpdateCallback(callable $callback): void
     {
         $this->tokenUpdateCallback = $callback;
