@@ -82,7 +82,7 @@ class ViewObjectInspection extends ViewRecord
     public function getSubheading(): ?string
     {  
         if ($this->getRecord()->schedule_run_token) {
-            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
+            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()?->inspectioncompany?->name ;
         } else {
             return "";
         }

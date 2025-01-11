@@ -120,6 +120,15 @@ class InspectionsRelationManager extends RelationManager
                     ->label("Geldig tot")
                     ->sortable(),
 
+
+                    Tables\Columns\TextColumn::make('itemdata_count')
+                    ->counts('itemdata')
+                    ->label("Aantal punten")
+                    ->alignment('center')
+                    ->toggleable()
+                    ->badge() ,
+
+
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),
@@ -131,7 +140,9 @@ class InspectionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\Action::make("DownloadCertificate")
+
+                Tables\Actions\Action::make("DownloadCertificate"),
+                //
                 //     ->label("Download certificaat")
                 //     ->icon("heroicon-o-document-arrow-down")
                 //     ->fillForm(

@@ -1,1 +1,110 @@
-^C
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'elevator_id' cannot be null (Connection: mysql, SQL: insert into `object_inspections` (`external_uuid`, `status_id`, `inspection_company_id`, `type`, `nobo_number`, `elevator_id`, `executed_datetime`, `if_match`, `end_date`, `schedule_run_token`, `updated_at`, `created_at`) values (66840, 4, 2, Periodieke keuring, 1021491, ?, 2025-01-06T00:00:00, 0, 2024-10-18T11:24:49.38, 77Ly8nBxxbpPGykz, 2025-01-10 20:11:49, 2025-01-10 20:11:49))
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOException::("SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'elevator_id' cannot be null")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOStatement::execute()
+
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`digilevel`.`object_inspections`, CONSTRAINT `object_inspections_elevator_id_foreign` FOREIGN KEY (`elevator_id`) REFERENCES `elevators` (`id`)) (Connection: mysql, SQL: insert into `object_inspections` (`external_uuid`, `status_id`, `inspection_company_id`, `type`, `nobo_number`, `elevator_id`, `executed_datetime`, `if_match`, `end_date`, `schedule_run_token`, `updated_at`, `created_at`) values (66840, 4, 2, Periodieke keuring, 1021491, 0, 2025-01-06T00:00:00, 0, 2024-10-18T11:24:49.38, k0EJ4NqGLBJ0lk2i, 2025-01-10 20:12:31, 2025-01-10 20:12:31))
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:825
+    821▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822▕                 );
+    823▕             }
+    824▕ 
+  ➜ 825▕             throw new QueryException(
+    826▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827▕             );
+    828▕         }
+    829▕     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOException::("SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`digilevel`.`object_inspections`, CONSTRAINT `object_inspections_elevator_id_foreign` FOREIGN KEY (`elevator_id`) REFERENCES `elevators` (`id`))")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:53
+      PDOStatement::execute()
+
+
+   ErrorException 
+
+  Undefined variable $return_null
+
+  at app\Console\Commands\ImportChex.php:74
+     70▕                     "status_id"              => $status_id,
+     71▕                     "inspection_company_id"  => config("services.chex.company_id"),
+     72▕                     "type"                   => $item->inspectionType,
+     73▕                     "nobo_number"            => $item->objectId,
+  ➜  74▕                     "elevator_id"            => $return_null(),
+     75▕                     "executed_datetime"      => $item->inspectionDate,
+     76▕                     "if_match"               => isset($elevator_information->id) ? 1 : 0,
+     77▕                     "end_date"               => $item->expiryDate,
+     78▕                     "schedule_run_token"     => $schedule_run_token
+
+  1   app\Console\Commands\ImportChex.php:74
+      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}("Undefined variable $return_null", "D:\LTS-Software\Digilevel\app\Console\Commands\ImportChex.php")
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+
+   ErrorException 
+
+  Undefined variable $return_null
+
+  at app\Console\Commands\ImportChex.php:74
+     70▕                     "status_id"              => $status_id,
+     71▕                     "inspection_company_id"  => config("services.chex.company_id"),
+     72▕                     "type"                   => $item->inspectionType,
+     73▕                     "nobo_number"            => $item->objectId,
+  ➜  74▕                     "elevator_id"            => $return_null(),
+     75▕                     "executed_datetime"      => $item->inspectionDate,
+     76▕                     "if_match"               => isset($elevator_information->id) ? 1 : 0,
+     77▕                     "end_date"               => $item->expiryDate,
+     78▕                     "schedule_run_token"     => $schedule_run_token
+
+  1   app\Console\Commands\ImportChex.php:74
+      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}("Undefined variable $return_null", "D:\LTS-Software\Digilevel\app\Console\Commands\ImportChex.php")
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+
+
+   ErrorException 
+
+  Undefined variable $return_null
+
+  at app\Console\Commands\ImportChex.php:74
+     70▕                     "status_id"              => $status_id,
+     71▕                     "inspection_company_id"  => config("services.chex.company_id"),
+     72▕                     "type"                   => $item->inspectionType,
+     73▕                     "nobo_number"            => $item->objectId,
+  ➜  74▕                     "elevator_id"            => $return_null(),
+     75▕                     "executed_datetime"      => $item->inspectionDate,
+     76▕                     "if_match"               => isset($elevator_information->id) ? 1 : 0,
+     77▕                     "end_date"               => $item->expiryDate,
+     78▕                     "schedule_run_token"     => $schedule_run_token
+
+  1   app\Console\Commands\ImportChex.php:74
+      Illuminate\Foundation\Bootstrap\HandleExceptions::Illuminate\Foundation\Bootstrap\{closure}("Undefined variable $return_null", "D:\LTS-Software\Digilevel\app\Console\Commands\ImportChex.php")
+
+  2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
+      App\Console\Commands\ImportChex::handle()
+

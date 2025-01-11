@@ -28,7 +28,7 @@ class ObjectInspection extends Model
 
     public function elevator()
     {
-        return $this->belongsTo(Elevator::class);
+        return $this->belongsTo(Elevator::class,'nobo_number','nobo_no' );
     }
 
     public function itemdata()

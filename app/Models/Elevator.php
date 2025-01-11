@@ -105,7 +105,7 @@ class Elevator extends Model implements Auditable
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id');
+        return $this->hasMany(ObjectInspection::class, 'nobo_number','nobo_no' );
     }
 
     public function inspection()

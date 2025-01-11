@@ -59,6 +59,6 @@ Route::get('/teamleader.dothing', function (Request $request) {
     $teamleader->setRefreshToken(cache()->get('teamLeaderRefreshToken'));
     $teamleader->setTokenExpiresAt(cache()->get('teamLeaderExpiresAt'));
     $teamleader->shouldRefreshToken();
-    dd($teamleader->get('companies.list')); 
+    dd($teamleader->get('contacts.list')); 
 });
 

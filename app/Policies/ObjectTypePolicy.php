@@ -15,7 +15,7 @@ class ObjectTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_object::type');
+        return $user->can('view_any_elevators::types');
     }
 
     /**
@@ -23,7 +23,7 @@ class ObjectTypePolicy
      */
     public function view(User $user, ObjectType $objectType): bool
     {
-        return $user->can('view_object::type');
+        return $user->can('view_elevators::types');
     }
 
     /**
@@ -31,7 +31,7 @@ class ObjectTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_object::type');
+        return $user->can('create_elevators::types');
     }
 
     /**
@@ -39,7 +39,7 @@ class ObjectTypePolicy
      */
     public function update(User $user, ObjectType $objectType): bool
     {
-        return $user->can('update_object::type');
+        return $user->can('update_elevators::types');
     }
 
     /**
@@ -47,7 +47,7 @@ class ObjectTypePolicy
      */
     public function delete(User $user, ObjectType $objectType): bool
     {
-        return $user->can('delete_object::type');
+        return $user->can('delete_elevators::types');
     }
 
     /**
@@ -55,7 +55,7 @@ class ObjectTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_object::type');
+        return $user->can('delete_any_elevators::types');
     }
 
     /**
@@ -63,7 +63,7 @@ class ObjectTypePolicy
      */
     public function forceDelete(User $user, ObjectType $objectType): bool
     {
-        return $user->can('force_delete_object::type');
+        return $user->can('force_delete_elevators::types');
     }
 
     /**
@@ -71,7 +71,7 @@ class ObjectTypePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_object::type');
+        return $user->can('force_delete_any_elevators::types');
     }
 
     /**
@@ -79,7 +79,7 @@ class ObjectTypePolicy
      */
     public function restore(User $user, ObjectType $objectType): bool
     {
-        return $user->can('restore_object::type');
+        return $user->can('restore_elevators::types');
     }
 
     /**
@@ -87,7 +87,7 @@ class ObjectTypePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_object::type');
+        return $user->can('restore_any_elevators::types');
     }
 
     /**
@@ -95,7 +95,7 @@ class ObjectTypePolicy
      */
     public function replicate(User $user, ObjectType $objectType): bool
     {
-        return $user->can('replicate_object::type');
+        return $user->can('replicate_elevators::types');
     }
 
     /**
@@ -103,6 +103,6 @@ class ObjectTypePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_object::type');
+        return $user->can('reorder_elevators::types');
     }
 }

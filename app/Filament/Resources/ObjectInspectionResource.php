@@ -72,7 +72,7 @@ class ObjectInspectionResource extends Resource
 
         ,
 
-        Components\TextEntry::make('elevator.nobo_no')
+        Components\TextEntry::make('nobo_number')
             ->label("NOBO Nummer") , 
  
             Components\TextEntry::make('type')
