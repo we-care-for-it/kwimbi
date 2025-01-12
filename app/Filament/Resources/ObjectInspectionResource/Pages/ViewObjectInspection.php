@@ -73,6 +73,7 @@ class ViewObjectInspection extends ViewRecord
         Actions\EditAction::make('cancel_top')
         ->icon('heroicon-o-pencil')
         ->label('Wijzig')
+        ->hidden(fn($record) => $record->external_uuid)
         
       //  ->hidden(fn($record) => $record?->schedule_run_token &&  $record?->if_match <> 0)
         ];

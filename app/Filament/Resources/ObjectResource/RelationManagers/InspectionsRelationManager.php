@@ -140,8 +140,7 @@ class InspectionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-
-                Tables\Actions\Action::make("DownloadCertificate"),
+    
                 //
                 //     ->label("Download certificaat")
                 //     ->icon("heroicon-o-document-arrow-down")
@@ -232,7 +231,7 @@ class InspectionsRelationManager extends RelationManager
                             } else {
                                 return "";
                             }
-                        }) 
+                        })
 
                         ,Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')

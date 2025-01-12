@@ -315,7 +315,9 @@ class ObjectInspectionResource extends Resource
                 EditAction::make()
                     ->modalHeading('Snel bewerken')
                     ->modalIcon('heroicon-o-pencil')
+                    ->hidden(fn($record) => $record->external_uuid)
                     ->label('Snel bewerken')
+                    
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
@@ -333,7 +335,10 @@ class ObjectInspectionResource extends Resource
 
     public static function getRelations() : array
     {
-        return [RelationManagers\ItemdataRelationManager::class ,
+        return [
+            
+            RelationManagers\ItemdataRelationManager::class ,
+            RelationManagers\ActionsRelationManager::class ,
 
         ];
     }

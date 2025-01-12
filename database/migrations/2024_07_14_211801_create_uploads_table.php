@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();   
             $table->integer('module_id')->nullable();
             $table->integer('upload_type_id')->nullable();
-	    $table->integer('item_id')->nullable();     
+	        $table->integer('item_id')->nullable();     
             $table->integer('add_by_user')->nullable();     
             $table->string('directory')->nullable();  
             $table->string('filename')->nullable();   
