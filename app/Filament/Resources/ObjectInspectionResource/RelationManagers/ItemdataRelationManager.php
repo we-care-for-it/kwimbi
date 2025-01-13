@@ -2,53 +2,44 @@
 
 namespace App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 
-use Filament\Resources\RelationManagers\RelationManager;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Support\Enums\MaxWidth;
+use App\Models\ObjectInspection;
+use App\Models\ObjectInspectionZincode;
+use App\Models\systemAction;
 use Filament\Actions;
- 
-use Filament\Tables\Actions\BulkAction;
-//Form
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
+//Form
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Notifications\Notification;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
- 
- 
-//Tables
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+
+//Tables
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Table;
 
 //Models
-use App\Models\ObjectInspectionZincode;
-use App\Models\ObjectInspectionData;
-use App\Models\systemAction;
-use App\Models\ObjectInspection;
-;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+
 class ItemdataRelationManager extends RelationManager
 {
     protected static string $relationship = "itemdata";
     protected static ?string $title = "Keuringspunten";
     public $action_id;
 
-
     protected static bool $isLazy = false;
-    public static function getBadge(Model $ownerRecord, string $pageClass) : ? string
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
- 
-        return count($ownerRecord?->itemdata);
-   
-    }
 
+        return count($ownerRecord?->itemdata);
+
+    }
 
     public function form(Form $form): Form
     {
@@ -56,34 +47,35 @@ class ItemdataRelationManager extends RelationManager
             ->schema([
                 Grid::make(3)->schema([
                     Forms\Components\TextInput::make("zin_code")
-                    ->suffixAction(
-                        Action::make("searchZinCode")
-                            ->icon("heroicon-m-magnifying-glass")
-                            ->action(function (Get $get, Set $set) {
-                                $data = ObjectInspectionZincode::where(
-                                    "code",
-                                    $get("zin_code")
-                                )
-                                    ->select("description")
-                                    ->get();
+                        ->suffixAction(
+                            Action::make("searchZinCode")
 
-                                if (count($data) != 0) {
-                                    $set("comment", $data[0]->description);
-                                }else{
-                                    Notification::make()
-                                    ->title('Geen ZIN Code gevonden in de database')
-                                    ->danger()
-                                    ->send();
-                                }
-                            })
-                    ),
+                                ->icon("heroicon-m-magnifying-glass")
+                                ->action(function (Get $get, Set $set) {
+                                    $data = ObjectInspectionZincode::where(
+                                        "code",
+                                        $get("zin_code")
+                                    )
+                                        ->select("description")
+                                        ->get();
+
+                                    if (count($data) != 0) {
+                                        $set("comment", $data[0]->description);
+                                    } else {
+                                        Notification::make()
+                                            ->title('Geen ZIN Code gevonden in de database')
+                                            ->danger()
+                                            ->send();
+                                    }
+                                })
+                        ),
 
                     Select::make("type")->options([
-                        "Technisch"     => "Technisch",
+                        "Technisch" => "Technisch",
                         "Arbotechnisch" => "Arbotechnisch",
-                        "Bouwkundig"    => "Bouwkundig",
+                        "Bouwkundig" => "Bouwkundig",
                     ]),
-                    
+
                     Select::make("status")->options([
                         "Herhaling" => "Herhaling",
                         "Afkeur" => "Afkeur",
@@ -105,12 +97,12 @@ class ItemdataRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute("name")
             ->columns([
-              //  Tables\Columns\TextColumn::make("id")->label("#"),
+                //  Tables\Columns\TextColumn::make("id")->label("#"),
                 Tables\Columns\TextColumn::make("zin_code")->label("Code"),
 
                 Tables\Columns\TextColumn::make("comment")
-                ->label("Opmerking")
-                ->wrap(),
+                    ->label("Opmerking")
+                    ->wrap(),
                 Tables\Columns\TextColumn::make("type")->label("Type"),
                 Tables\Columns\TextColumn::make("status")
                     ->label("Status")
@@ -118,23 +110,22 @@ class ItemdataRelationManager extends RelationManager
                     ->placeholder("-")
                     ->color("warning"),
 
-                    Tables\Columns\TextColumn::make("action_id")
+                Tables\Columns\TextColumn::make("action_id")
                     ->label("Status")
                     ->badge()
-                   
+
                     ->getStateUsing(function (Model $record): ?string {
                         if ($record?->action_id) {
                             return "Actie aangemaakt";
-                        }  else{
+                        } else {
                             return false;
                         }
-                      
+
                     })
                     ->placeholder("-"),
 
-
             ])
-         
+
             ->paginated(false)
             ->filters([
                 //
@@ -146,74 +137,56 @@ class ItemdataRelationManager extends RelationManager
                     ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid)
 
                 //    ->hidden(->schedule_run_token)
-              
-                        ->modalHeading("Keuringspunt toevoegen"),
+
+                    ->modalHeading("Keuringspunt toevoegen"),
             ])
             ->actions([
+
                 Tables\Actions\EditAction::make()
                     ->iconbutton()
                     ->modalHeading("Wijzig keuringspunt")
                     ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid),
                 Tables\Actions\DeleteAction::make()->iconbutton()
-                ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid),
-                
-            ])
+                    ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid),
 
-            ->headerActions([
-          
-    
             ])
-
 
             ->bulkActions([
 
                 BulkAction::make('delete')
-                ->requiresConfirmation()
-                ->label('Actie aanmaken')
-                ->modalHeading("Actie aanmaken")
-                ->modalDescription(
-                    "Hiermee voeg je de keuringspunten toe aan een actie"
-                )
-   
-             
-                ->action(function (ObjectInspection $record, Collection $selectedRecords, Get $get) {
-                    
+                    ->requiresConfirmation()
+                    ->label('Actie aanmaken')
+                    ->modalHeading("Actie aanmaken")
+                    ->modalDescription(
+                        "Hiermee voeg je de keuringspunten toe aan een actie"
+                    )
 
-                    $action_id = systemAction::insertGetId([
-                        'title' =>  "Keuringspunten oplossen",
-                        'model' => "ObjectInspection",
-                        'created_at' => date("Y-m-d H:i:s"),
-                        'item_id' => $this->ownerRecord->id,
-                        'create_by_user_id' => auth()->id()
-                    ]);
+                    ->action(function (ObjectInspection $record, Collection $selectedRecords, Get $get) {
 
+                        $action_id = systemAction::insertGetId([
+                            'title' => "Keuringspunten oplossen",
+                            'model' => "ObjectInspection",
+                            'type_id' => 2,
+                            'created_at' => date("Y-m-d H:i:s"),
+                            'item_id' => $this->ownerRecord->id,
+                            'create_by_user_id' => auth()->id(),
+                        ]);
 
-                    $selectedRecords->each(
-                        fn (Model $selectedRecord) => $selectedRecord->update([
-                            'action_id' =>  $action_id
-                        ]),
-                    );
+                        $selectedRecords->each(
+                            fn(Model $selectedRecord) => $selectedRecord->update([
+                                'action_id' => $action_id,
+                            ]),
+                        );
 
-                    
-            
-                    
-          
-                  
-                   
-                })
-                
- 
-                ->deselectRecordsAfterCompletion(),
+                    })
 
+                    ->deselectRecordsAfterCompletion(),
 
+                //  ->action(function ($data, $record) {
+                //     $action+Action->create
 
+                // })
 
-                    //  ->action(function ($data, $record) {
-                    //     $action+Action->create
-                       
-                    // })
-               
-      
-            ])->emptyState(view('partials.empty-state-small')) ;
+            ])->emptyState(view('partials.empty-state-small'));
     }
 }

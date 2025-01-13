@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\QuoteTypes;
 use App\Filament\Resources\QuoteResource\Pages;
-use App\Filament\Resources\QuoteResource\RelationManagers;
 use App\Models\Quote;
 use App\Models\Statuses;
 use App\Models\Supplier;
@@ -29,10 +28,9 @@ class QuoteResource extends Resource
     protected static ?string $title = 'Offertes';
     protected static ?string $navigationIcon = 'heroicon-o-currency-euro';
     protected static ?string $SearchResultTitle = "Offertes";
- 
+
     protected static ?string $navigationLabel = "Offertes";
     protected static bool $isLazy = false;
-
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
@@ -43,94 +41,91 @@ class QuoteResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema(
-            
+
             [
                 Section::make()
-            ->schema([
+                    ->schema([
 
-                Select::make("type_id")
-                    ->label("Type")
-                    ->required()
-                    ->reactive()
-                    ->options(QuoteTypes::class)
-                    ->columnSpan("full")
-                    ->default('1'),
+                        Select::make("type_id")
+                            ->label("Type")
+                            ->required()
+                            ->reactive()
+                            ->options(QuoteTypes::class)
+                            ->columnSpan("full")
+                            ->default('1'),
 
-                Select::make("company_id")
-                    ->relationship(name: 'supplier', titleAttribute: 'name')
-                    ->options(Supplier::all()
-                        ->pluck("name", "id"))->createOptionForm([
-                        Forms\Components\TextInput::make('name')
+                        Select::make("company_id")
+                            ->relationship(name: 'supplier', titleAttribute: 'name')
+                            ->options(Supplier::all()
+                                    ->pluck("name", "id"))->createOptionForm([
+                            Forms\Components\TextInput::make('name'),
 
+                        ])->columnSpan("full"),
+                        TextInput::make("number")
+                            ->label("Nummer")
+                            ->placeholder('-'),
 
-                    ])->columnSpan("full"),
-                TextInput::make("number")
-                    ->label("Nummer")
-                    ->placeholder('-'),
+                        TextInput::make("Price")
+                            ->label("Prijs")
+                            ->placeholder('-')
+                            ->numeric()
+                            ->prefix('€'),
 
+                    ])
+                    ->columns(2)
+                    ->columnSpan(1),
 
-                TextInput::make("Price")
-                    ->label("Prijs")
-                    ->placeholder('-')
-                    ->numeric()
-                    ->prefix('€')
+                Section::make()
+                    ->schema([
 
+                        DatePicker::make("request_date")
+                            ->default(now())
+                            ->label("Aanvraagdatum")
+                            ->required(),
 
-            ])
-            ->columns(2)
-            ->columnSpan(1),
+                        DatePicker::make("remembered_at")
+                            ->label("Herindering op")
+                            ->placeholder('-'),
 
-            Section::make()
-                ->schema([
+                        DatePicker::make("accepted_at")
+                            ->label("Geaccpteerd op")
+                            ->placeholder('-'),
 
-                    DatePicker::make("request_date")
-                        ->default(now())
-                        ->label("Aanvraagdatum")
-                        ->required(),
+                        DatePicker::make("end_date")
+                            ->label("Einddatum"),
 
-                    DatePicker::make("remembered_at")
-                        ->label("Herindering op")
-                        ->placeholder('-'),
+                        Select::make("status_id")
+                            ->label("Status")
+                            ->required()
+                            ->reactive()
+                            ->options(Statuses::where("model", "ProjectQuotes")
+                                    ->pluck("name", "id"))
+                            ->columnSpan("full"),
 
-                    DatePicker::make("accepted_at")
-                        ->label("Geaccpteerd op")
-                        ->placeholder('-'),
+                    ])
+                    ->columns(2)
+                    ->columnSpan(1),
 
-                    DatePicker::make("end_date")
-                        ->label("Einddatum"),
+                Section::make()
+                    ->schema([Forms\Components\TextInput::make("remark")
+                            ->label("Opmerking")
+                            ->maxLength(255)
+                            ->columnSpan("full"),
+                    ])
+                    ->columns(2)
+                    ->columnSpan(2),
 
-                    Select::make("status_id")
-                        ->label("Status")
-                        ->required()
-                        ->reactive()
-                        ->options(Statuses::where("model", "ProjectQuotes")
-                            ->pluck("name", "id"))
-                        ->columnSpan("full"),
+                Section::make()->schema([FileUpload::make('attachment')
+                        ->label('Bijlage')
+                        ->columnSpan(3)
+                        ->preserveFilenames()
+                        ->visibility('private')->directory(function () {
+                        $parent_id = $this->getOwnerRecord()->id;
+                        return '/uploads/project/' . $parent_id . '/quotes';
+                    })])->columns(2)
+                    ->columnSpan(2),
 
-                ])
-                ->columns(2)
-                ->columnSpan(1),
-
-            Section::make()
-                ->schema([Forms\Components\TextInput::make("remark")
-                    ->label("Opmerking")
-                    ->maxLength(255)
-                    ->columnSpan("full"),
-                ])
-                ->columns(2)
-                ->columnSpan(2),
-
-            Section::make()->schema([FileUpload::make('attachment')
-                ->label('Bijlage')
-                ->columnSpan(3)
-                ->preserveFilenames()
-                ->visibility('private')->directory(function () {
-                    $parent_id = $this->getOwnerRecord()->id;
-                    return '/uploads/project/' . $parent_id . '/quotes';
-                })])->columns(2)
-                ->columnSpan(2),
-
-        ]);
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -149,7 +144,6 @@ class QuoteResource extends Resource
                     ->badge()
                     ->placeholder('-')
                     ->sortable()->searchable(),
-
 
                 Tables\Columns\TextColumn::make("number")->sortable()
                     ->label('Datum / nummer')->sortable()->searchable()
@@ -181,7 +175,6 @@ class QuoteResource extends Resource
                     })
                 ,
 
-
                 Tables\Columns\TextColumn::make("price")
                     ->label("Prijs")
                     ->prefix('€')
@@ -202,11 +195,9 @@ class QuoteResource extends Resource
                     ->dateTime("d-m-Y")
                     ->placeholder('-')->sortable(),
 
-
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
                     ->badge()->sortable(),
-
 
             ])
             ->filters([
@@ -222,13 +213,11 @@ class QuoteResource extends Resource
                     ->searchable()
                     ->preload(),
 
-
                 SelectFilter::make("company_id")
                     ->label("Leverancier")
                     ->relationship('supplier', 'name')
                     ->searchable()
                     ->preload(),
-
 
             ])->filtersFormColumns(3)
             ->actions([

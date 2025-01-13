@@ -2,14 +2,12 @@
 
 namespace App\Enums;
 
-
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum ActioNStatus: string implements HasLabel,HasColor
-{
-    case OPEN = '1';
-    case CLOSED = '2';
+enum ActionStatus: string implements HasLabel, HasColor {
+    case OPEN = "1";
+    case CLOSED = "2";
 
     public function getlabel(): string
     {
@@ -36,4 +34,3 @@ enum ActioNStatus: string implements HasLabel,HasColor
         };
     }
 }
-
