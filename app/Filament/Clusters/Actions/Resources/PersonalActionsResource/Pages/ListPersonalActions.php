@@ -15,7 +15,11 @@ class ListPersonalActions extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Actie toevoegen'),
+                ->label('Actie toevoegen')
+                ->modalHeading('Actie toevoegen')
+                ->modalDescription('Voor een actie toe voor je zelf of een andere medewerker')
+                ->modalSubmitActionLabel('Opslaan')
+            ,
         ];
     }
 }

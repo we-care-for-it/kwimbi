@@ -32,6 +32,11 @@ enum ActionTypes: string implements HasLabel {
         };
     }
 
+    public static function values(): array
+    {
+        return array_column(self::cases(), 'name', 'value');
+    }
+
     // public function getIcon(): ?string
     // {
     //     return match ($this) {
