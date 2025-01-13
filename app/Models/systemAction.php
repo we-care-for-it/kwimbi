@@ -4,8 +4,12 @@ namespace App\Models;
 
 use App\Enums\ActionStatus;
 use App\Enums\ActionTypes;
+use App\Mail\ActionToUser;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class systemAction extends Model implements Auditable
@@ -25,6 +29,15 @@ class systemAction extends Model implements Auditable
             'type_id' => ActionTypes::class,
 
         ];
+    }
+
+    public function getTypeAttribute($value)
+    {
+
+        return $this->type_id->getLabel();
+
+        //ActionTypes::values()[$this->attributes['type_id']]->label();
+
     }
 
     public function itemdata()
@@ -50,6 +63,25 @@ class systemAction extends Model implements Auditable
     public function customer()
     {
         return $this->hasOne(Customer::class, 'id', 'relation_id');
+    }
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->create_by_user_id = $user = auth()->id();;
+
+        });
+
+        static::saved(function (self $request) {
+
+            $user = User::where('id', $request->for_user_id)->first();
+
+            if ($user->id != Auth::id()) {
+                Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
+            }
+        });
+
     }
 
 }

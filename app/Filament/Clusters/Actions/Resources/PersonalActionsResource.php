@@ -7,7 +7,7 @@ use App\Filament\Clusters\Actions\Resources\PersonalActionsResource\Pages;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\SystemAction;
-use App\Models\user;
+use App\Models\User;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
@@ -51,14 +51,27 @@ class PersonalActionsResource extends Resource
                 TextInput::make("title")
                     ->columnSpan('full')
                     ->required()
-                    ->label("Titel / Omschrijving"),
+                    ->label("Titel / Omschrijving")
+                    ->helperText(str('De titel van de actie')->inlineMarkdown()->toHtmlString())
+                ,
 
                 Textarea::make('body')
                     ->rows(3)
                     ->label('Uitgebreide omschrijving')
+                    ->helperText(str('Beschrijf de actie of taak ')->inlineMarkdown()->toHtmlString())
 
                     ->columnSpan('full')
                     ->autosize(),
+
+                Select::make('type_id')
+                    ->options([
+                        '1' => 'Terugbelnotitie',
+                        '3' => 'Te doen',
+
+                    ])
+                    ->searchable()
+                    ->default(3)
+                    ->label('Type'),
 
                 ToggleButtons::make('private_action')
                     ->label('Prive actie')
@@ -66,19 +79,15 @@ class PersonalActionsResource extends Resource
                     ->boolean()
                     ->grouped(),
 
-                Select::make('type_id')
-                    ->options([
-                        '1' => 'Terugbel notitie',
-                        '2' => 'Te doen',
-
-                    ])
-                    ->searchable()
-                    ->default(1)
-                    ->label('Type'),
-
                 Section::make('Toewijzing')
                     ->schema([
                         Split::make([
+
+                            Select::make('for_user_id')
+                                ->options(User::pluck('name', 'id'))
+                                ->searchable()
+                                ->default(Auth::id())
+                                ->label('Medewerker'),
 
                             Select::make('relation_id')
                                 ->options(Customer::pluck('name', 'id'))
@@ -95,10 +104,14 @@ class PersonalActionsResource extends Resource
                     ]),
 
                 Section::make('Planning')
+                    ->collapsed()
+                    ->icon('heroicon-o-calendar-date-range')
+                    ->collapsible()
                     ->schema([
                         Split::make([
 
                             DatePicker::make('plan_date')
+
                                 ->label('Datum'),
 
                             TimePicker::make('plan_time')
@@ -109,13 +122,6 @@ class PersonalActionsResource extends Resource
 
                     ]),
 
-                Split::make([
-                    Select::make('for_user_id')
-                        ->options(User::pluck('name', 'id'))
-                        ->searchable()
-                        ->default(Auth::id())
-                        ->label('Medewerker'),
-                ])->columns(3),
             ]);
     }
 
@@ -192,17 +198,14 @@ class PersonalActionsResource extends Resource
                     ->label('Soort')
                     ->options([
                         '1' => 'Terugbel notitie',
-                        '2' => 'Te doen',
+                        '3' => 'Te doen',
 
                     ]),
 
                 Tables\Filters\TrashedFilter::make(),
             ])
-            ->headerActions([
-                //  Tables\Actions\CreateAction::make(),
-            ])
             ->actions([
-                //  ActionGroup::make([
+
                 EditAction::make()
                     ->modalHeading('Snel bewerken')
                     ->modalIcon('heroicon-o-pencil')
@@ -221,15 +224,6 @@ class PersonalActionsResource extends Resource
                     ->color('danger')
                     ->label('Sluiten'),
                 RestoreAction::make(),
-                // ->action(function () {
-
-                //     ObjectInspectionData::where('action_id', $this->ownerRecord->id)->update([
-                //         'action_id' => null,
-
-                //     ]);
-
-                // })
-
             ])
 
             ->actions([
