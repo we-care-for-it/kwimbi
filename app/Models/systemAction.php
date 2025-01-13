@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Enums\ActionStatus;
 use App\Enums\ActionTypes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class systemAction extends Model implements Auditable
 {
-    //  use SoftDeletes;
+    use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     public $table = "actions";
 

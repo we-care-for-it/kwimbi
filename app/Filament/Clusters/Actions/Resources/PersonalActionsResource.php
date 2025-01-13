@@ -2,7 +2,6 @@
 
 namespace App\Filament\Clusters\Actions\Resources;
 
-use App\Enums\ActionTypes;
 use App\Filament\Clusters\Actions;
 use App\Filament\Clusters\Actions\Resources\PersonalActionsResource\Pages;
 use App\Models\Company;
@@ -23,6 +22,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +67,11 @@ class PersonalActionsResource extends Resource
                     ->grouped(),
 
                 Select::make('type_id')
-                    ->options(ActionTypes::class)
+                    ->options([
+                        '1' => 'Terugbel notitie',
+                        '2' => 'Te doen',
+
+                    ])
                     ->searchable()
                     ->default(1)
                     ->label('Type'),
@@ -105,13 +111,11 @@ class PersonalActionsResource extends Resource
 
                 Split::make([
                     Select::make('for_user_id')
-
                         ->options(User::pluck('name', 'id'))
                         ->searchable()
                         ->default(Auth::id())
-                        ->label('Verplaatst naar medewerker'),
+                        ->label('Medewerker'),
                 ])->columns(3),
-
             ]);
     }
 
@@ -121,7 +125,7 @@ class PersonalActionsResource extends Resource
 
             ->modifyQueryUsing(function (Builder $query) {
 
-                return $query->where('for_user_id', 1);
+                return $query->where('for_user_id', Auth::id());
 
             })->columns([
 
@@ -142,14 +146,18 @@ class PersonalActionsResource extends Resource
             Tables\Columns\TextColumn::make('plan_date')
                 ->label('Plandatum')
                 ->placeholder('Geen')
+                ->toggleable()
+                ->sortable()
                 ->dateTime("d-m-Y")
                 ->sortable()
                 ->description(function ($record): ?string {
                     return $record->plan_time
-                    ? "Plan tijd: " . date("H:i", strtotime($record?->plan_time)) : "nodate";
+                    ? "Tijd: " . date("H:i", strtotime($record?->plan_time)) : "nodate";
                 }),
 
             Tables\Columns\TextColumn::make('title')
+                ->searchable()
+                ->sortable()
                 ->wrap()
                 ->label('Titel')
                 ->description(function ($record): ?string {
@@ -158,20 +166,37 @@ class PersonalActionsResource extends Resource
 
             Tables\Columns\TextColumn::make('type_id')
                 ->badge()
+                ->sortable()
+                ->toggleable()
                 ->label('Type'),
 
             Tables\Columns\TextColumn::make('customer.name')
+                ->toggleable()
+                ->sortable()
+                ->searchable()
                 ->placeholder("Geen")
                 ->label('Relatie'),
 
             Tables\Columns\TextColumn::make('company.name')
+                ->toggleable()
+                ->sortable()
+                ->searchable()
                 ->placeholder("Geen")
                 ->label('Bedrijf'),
 
         ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+
+                SelectFilter::make('type_id')
+                    ->label('Soort')
+                    ->options([
+                        '1' => 'Terugbel notitie',
+                        '2' => 'Te doen',
+
+                    ]),
+
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
                 //  Tables\Actions\CreateAction::make(),
@@ -195,7 +220,7 @@ class PersonalActionsResource extends Resource
                     ->modalHeading('Actie voltooien')
                     ->color('danger')
                     ->label('Sluiten'),
-
+                RestoreAction::make(),
                 // ->action(function () {
 
                 //     ObjectInspectionData::where('action_id', $this->ownerRecord->id)->update([
@@ -207,9 +232,6 @@ class PersonalActionsResource extends Resource
 
             ])
 
-            ->filters([
-                //
-            ])
             ->actions([
                 DeleteAction::make()
 
@@ -222,11 +244,20 @@ class PersonalActionsResource extends Resource
                     ->color('danger')
                     ->label('Sluiten'),
 
+                RestoreAction::make()
+                    ->color("danger")
+                    ->modalHeading('Actie terug plaatsen')
+                    ->modalDescription(
+                        "Weet je zeker dat je deze actie wilt activeren"
+                    ),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
+
             ])->emptyState(view("partials.empty-state"));
     }
 

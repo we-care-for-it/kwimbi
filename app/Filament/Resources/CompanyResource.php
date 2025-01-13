@@ -165,7 +165,9 @@ class CompanyResource extends Resource
                 SelectFilter::make('type_id')
                     ->label('Categorie')
                     ->options(companyType::where('is_active', 1)
-                            ->pluck('name', 'id')), Tables\Filters\TrashedFilter::make(),
+                            ->pluck('name', 'id')),
+
+                Tables\Filters\TrashedFilter::make(),
 
             ],
             )
