@@ -4,7 +4,7 @@ namespace App\Filament\Clusters\Actions\Resources;
 
 use App\Filament\Clusters\Actions;
 use App\Filament\Clusters\Actions\Resources\CheckActionsResource\Pages;
-use App\Models\SystemAction;
+use App\Models\systemAction;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 
 class CheckActionsResource extends Resource
 {
-    protected static ?string $model = SystemAction::class;
+    protected static ?string $model = systemAction::class;
 
     protected static ?string $navigationLabel = 'Keuringacties';
     protected static ?string $title = 'Keuringacties';
