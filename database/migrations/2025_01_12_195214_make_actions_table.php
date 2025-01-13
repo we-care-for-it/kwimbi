@@ -19,6 +19,8 @@ return new class extends Migration
             $table->longtext('body')->nullable();
             $table->integer('priority')->nullable();  
             $table->integer('item_id')->nullable();    
+            $table->integer('company_id')->nullable();    
+            $table->integer('status_id')->default(1)->nullable();    
             $table->string('model')->nullable();    
             $table->timestamps();
     });

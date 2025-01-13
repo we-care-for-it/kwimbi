@@ -129,6 +129,15 @@ class InspectionsRelationManager extends RelationManager
                     ->badge() ,
 
 
+                    
+                    Tables\Columns\TextColumn::make("actions_count")
+                ->counts("actions")
+                ->label("Acties")
+                ->badge()
+                ->alignment('center')
+                ->color("success"),
+
+
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),

@@ -178,23 +178,27 @@ class ItemdataRelationManager extends RelationManager
              
                 ->action(function (ObjectInspection $record, Collection $selectedRecords, Get $get) {
                     
+
                     $action_id = systemAction::insertGetId([
                         'title' =>  "Keuringspunten oplossen",
                         'model' => "ObjectInspection",
+                        'created_at' => date("Y-m-d H:i:s"),
                         'item_id' => $this->ownerRecord->id,
                         'create_by_user_id' => auth()->id()
                     ]);
 
+
+                    $selectedRecords->each(
+                        fn (Model $selectedRecord) => $selectedRecord->update([
+                            'action_id' =>  $action_id
+                        ]),
+                    );
+
+                    
+            
                     
           
-                        
-                        
-                    $selectedRecords->update([
-                            'action_id'     =>  $action_id,
-                    
-    
-                    ]);
-                        
+                  
                    
                 })
                 

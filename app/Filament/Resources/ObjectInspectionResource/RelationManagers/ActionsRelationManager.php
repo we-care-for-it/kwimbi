@@ -16,8 +16,16 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Support\Enums\Alignment;
 use App\Models\ObjectInspectionData;
-
-
+use App\Models\Company;
+use App\Models\User;
+use App\Enums\ActionStatus;
+use App\Enums\systemAction;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Grid;
 
 class ActionsRelationManager extends RelationManager
 {
@@ -38,14 +46,47 @@ class ActionsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+
+                Forms\Components\TextInput::make("title")
+                ->columnSpan('full')
+                ->label("Titel / Omschrijving") ,
+
+
+                Textarea::make('body')
+                ->rows(3)
+                ->label('Uitgebreide omschrijving')
                 
-                    Forms\Components\TextInput::make('itemdata')
-                    ->required()
-                    ->label('sad')
-                    ->maxLength(255),
+                ->columnSpan('full')
+                ->autosize() ,
+
+                
+
+                Select::make('for_user_id')
+ 
+                    ->options(User::pluck('name', 'id'))
+         ->searchable()
+                    ->label('Medewerker')
+            
+                
+              ,
+                    Select::make('company_id')
+ 
+              ->options(Company::pluck('name', 'id'))
+       
+              ->searchable()
+              ->label('Bedrijf'),
+
+              Select::make('status_id')
+ 
+              ->options(ActionStatus::class)
+              ->searchable()
+              ->label('Bedrijf')
+       
+        
+       
+        
+
+
 
 
             ]);
@@ -58,8 +99,48 @@ class ActionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+
+
+                
+                Tables\Columns\TextColumn::make('id')
+                ->label('#')
+                ->getStateUsing(function ($record): ?string {
+                    return  sprintf('%06d', $record?->id);
+                }),
+
+                Tables\Columns\TextColumn::make('created_at')
+                ->label('Aanmaakdatum')
+        
+                ->dateTime("d-m-Y H:m"),
+
+                Tables\Columns\TextColumn::make('title')
+                ->wrap()
+                ->label('Titel')
+                
+    ->description(function( $record) : ? string
+    {
+       
+            return $record?->body;
+ 
+    }),
                
+
+         
+
+                Tables\Columns\TextColumn::make('create_by_user.name')
+                ->label('Gemaakt door'),
+                Tables\Columns\TextColumn::make('for_user.name')
+                ->placeholder('Niet toegekend')
+                ->label('Voor medewerker'),
+
+                Tables\Columns\TextColumn::make('company.name')
+                ->placeholder('Niet toegekend')
+                ->label('Bedrijf'),
+
+                Tables\Columns\TextColumn::make('status_id')
+                ->badge()
+                ->label('Status'),
+
                 TextColumn::make("itemdata_count")
                         ->counts("itemdata")
                         ->label("Punten")
@@ -75,7 +156,7 @@ class ActionsRelationManager extends RelationManager
               //  Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                ActionGroup::make([
+              //  ActionGroup::make([
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
@@ -93,6 +174,7 @@ class ActionsRelationManager extends RelationManager
                         ->modalIcon('heroicon-o-trash')
                         ->modalHeading('Keuring verwijderen')
                         ->color('danger')
+                        ->label('')
                         
                         ->action(function () {
                                        
@@ -101,7 +183,7 @@ class ActionsRelationManager extends RelationManager
                      
                    
                         
-                    ]);
+                 ]);
                     
                     
                         })
@@ -110,7 +192,7 @@ class ActionsRelationManager extends RelationManager
                             
                             
                             ,
-                ]),
+             
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

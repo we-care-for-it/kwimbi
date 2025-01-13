@@ -62,13 +62,13 @@ class ObjectInspectionResource extends Resource
             ->label("Liftadres")->getStateUsing(function ($record) : ? string
         {
 
-            if($record?->elevator_id){
+            if($record?->nobo_number){
                 return $record ?->elevator ?->location ?->address . " " . $record ?->elevator ?->location ?->zipcode . " " . $record ?->elevator ?->location ?->place;
             }else{
                 return "Niet gekoppeld";
             }
             
-        })
+        })->placeholder('Geen object gevonden')
 
         ,
 
@@ -310,15 +310,15 @@ class ObjectInspectionResource extends Resource
 
         ->actions([
 
-
+            EditAction::make()
+            ->modalHeading('Snel bewerken')
+            ->modalIcon('heroicon-o-pencil')
+            ->hidden(fn($record) => $record->external_uuid)
+            ->label('Snel bewerken')
+            ->slideOver(),
             ActionGroup::make([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->hidden(fn($record) => $record->external_uuid)
-                    ->label('Snel bewerken')
-                    
-                    ->slideOver(),
+           
+      
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->modalHeading('Keuring verwijderen')

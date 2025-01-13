@@ -28,9 +28,10 @@ class ViewObjectInspection extends ViewRecord
             ->color('gray')
             ->label('Naar object')
             ->link()
+            ->visible(fn($record) => $record->elevator->id ?? false)
             ->icon('heroicon-o-arrow-uturn-left')
             ->url(function ($record) {
-                return "/admin/objects/".$record->elevator_id."?activeRelationManager=3";      
+                return "/admin/objects/".$record->elevator->id."?activeRelationManager=3";      
             }),
 
             Actions\Action::make("Downloaddocument")->color("warning")  
