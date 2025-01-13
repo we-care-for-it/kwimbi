@@ -62,17 +62,17 @@ class ObjectInspectionResource extends Resource
             ->label("Liftadres")->getStateUsing(function ($record) : ? string
         {
 
-            if($record?->elevator_id){
+            if($record?->nobo_number){
                 return $record ?->elevator ?->location ?->address . " " . $record ?->elevator ?->location ?->zipcode . " " . $record ?->elevator ?->location ?->place;
             }else{
                 return "Niet gekoppeld";
             }
             
-        })
+        })->placeholder('Geen object gevonden')
 
         ,
 
-        Components\TextEntry::make('elevator.nobo_no')
+        Components\TextEntry::make('nobo_number')
             ->label("NOBO Nummer") , 
  
             Components\TextEntry::make('type')
@@ -310,13 +310,15 @@ class ObjectInspectionResource extends Resource
 
         ->actions([
 
-
+            EditAction::make()
+            ->modalHeading('Snel bewerken')
+            ->modalIcon('heroicon-o-pencil')
+            ->hidden(fn($record) => $record->external_uuid)
+            ->label('Snel bewerken')
+            ->slideOver(),
             ActionGroup::make([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
-                    ->slideOver(),
+           
+      
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->modalHeading('Keuring verwijderen')
@@ -333,7 +335,10 @@ class ObjectInspectionResource extends Resource
 
     public static function getRelations() : array
     {
-        return [RelationManagers\ItemdataRelationManager::class ,
+        return [
+            
+            RelationManagers\ItemdataRelationManager::class ,
+            RelationManagers\ActionsRelationManager::class ,
 
         ];
     }

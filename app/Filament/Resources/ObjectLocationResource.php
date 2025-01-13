@@ -349,7 +349,9 @@ class ObjectLocationResource extends Resource
                         ->label("Plaats")
                         ->searchable()
                         ->toggleable()
-                        ->hidden(true) , TextColumn::make("objects_count")
+                        ->hidden(true) , 
+                        
+                        TextColumn::make("objects_count")
                         ->counts("objects")
                         ->label("Objecten")
                         ->toggleable()

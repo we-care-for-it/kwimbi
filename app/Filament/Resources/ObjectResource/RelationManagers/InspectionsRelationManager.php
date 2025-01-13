@@ -120,6 +120,24 @@ class InspectionsRelationManager extends RelationManager
                     ->label("Geldig tot")
                     ->sortable(),
 
+
+                    Tables\Columns\TextColumn::make('itemdata_count')
+                    ->counts('itemdata')
+                    ->label("Aantal punten")
+                    ->alignment('center')
+                    ->toggleable()
+                    ->badge() ,
+
+
+                    
+                    Tables\Columns\TextColumn::make("actions_count")
+                ->counts("actions")
+                ->label("Acties")
+                ->badge()
+                ->alignment('center')
+                ->color("success"),
+
+
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),
@@ -131,7 +149,8 @@ class InspectionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\Action::make("DownloadCertificate")
+    
+                //
                 //     ->label("Download certificaat")
                 //     ->icon("heroicon-o-document-arrow-down")
                 //     ->fillForm(
@@ -221,7 +240,7 @@ class InspectionsRelationManager extends RelationManager
                             } else {
                                 return "";
                             }
-                        }) 
+                        })
 
                         ,Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')

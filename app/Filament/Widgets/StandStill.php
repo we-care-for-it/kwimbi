@@ -13,10 +13,8 @@ class StandStill extends BaseWidget
 
     protected static ?int $sort =12;
     protected static ?string $heading = "Stilstaande liften";
-
     protected int | string | array $columnSpan = '6';
     protected static ?string $maxHeight = '300px';
-    protected ?string $description = 'An overview of some analytics.';
     protected static bool $isLazy = false;
 
     public function table(Table $table): Table

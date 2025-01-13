@@ -28,9 +28,10 @@ class ViewObjectInspection extends ViewRecord
             ->color('gray')
             ->label('Naar object')
             ->link()
+            ->visible(fn($record) => $record->elevator->id ?? false)
             ->icon('heroicon-o-arrow-uturn-left')
             ->url(function ($record) {
-                return "/admin/objects/".$record->elevator_id."?activeRelationManager=3";      
+                return "/admin/objects/".$record->elevator->id."?activeRelationManager=3";      
             }),
 
             Actions\Action::make("Downloaddocument")->color("warning")  
@@ -73,6 +74,7 @@ class ViewObjectInspection extends ViewRecord
         Actions\EditAction::make('cancel_top')
         ->icon('heroicon-o-pencil')
         ->label('Wijzig')
+        ->hidden(fn($record) => $record->external_uuid)
         
       //  ->hidden(fn($record) => $record?->schedule_run_token &&  $record?->if_match <> 0)
         ];
@@ -82,7 +84,7 @@ class ViewObjectInspection extends ViewRecord
     public function getSubheading(): ?string
     {  
         if ($this->getRecord()->schedule_run_token) {
-            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()->inspectioncompany->name ;
+            return  "Geimporteerd vanuit de koppeling met " . $this->getRecord()?->inspectioncompany?->name ;
         } else {
             return "";
         }

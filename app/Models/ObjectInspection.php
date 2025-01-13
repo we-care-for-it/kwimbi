@@ -28,13 +28,20 @@ class ObjectInspection extends Model
 
     public function elevator()
     {
-        return $this->belongsTo(Elevator::class);
+        return $this->belongsTo(Elevator::class,'nobo_number','nobo_no' );
     }
 
     public function itemdata()
     {
         return $this->hasMany(ObjectInspectionData::class,'inspection_id','id');
     }
+
+
+    public function actions()
+    {
+        return $this->hasMany(systemAction::class,'item_id','id')->where('model','ObjectInspection');
+    }
+
 
     public function inspectioncompany()
     {

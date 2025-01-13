@@ -6,9 +6,9 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Support\Enums\MaxWidth;
-
-use Filament\Notifications\Notification;
-
+use Filament\Actions;
+ 
+use Filament\Tables\Actions\BulkAction;
 //Form
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -19,7 +19,11 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
-
+use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+ 
+ 
 //Tables
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -27,11 +31,24 @@ use Filament\Tables\Table;
 //Models
 use App\Models\ObjectInspectionZincode;
 use App\Models\ObjectInspectionData;
-
+use App\Models\systemAction;
+use App\Models\ObjectInspection;
+;
 class ItemdataRelationManager extends RelationManager
 {
     protected static string $relationship = "itemdata";
     protected static ?string $title = "Keuringspunten";
+    public $action_id;
+
+
+    protected static bool $isLazy = false;
+    public static function getBadge(Model $ownerRecord, string $pageClass) : ? string
+    {
+ 
+        return count($ownerRecord?->itemdata);
+   
+    }
+
 
     public function form(Form $form): Form
     {
@@ -88,7 +105,9 @@ class ItemdataRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute("name")
             ->columns([
+              //  Tables\Columns\TextColumn::make("id")->label("#"),
                 Tables\Columns\TextColumn::make("zin_code")->label("Code"),
+
                 Tables\Columns\TextColumn::make("comment")
                 ->label("Opmerking")
                 ->wrap(),
@@ -98,6 +117,22 @@ class ItemdataRelationManager extends RelationManager
                     ->badge()
                     ->placeholder("-")
                     ->color("warning"),
+
+                    Tables\Columns\TextColumn::make("action_id")
+                    ->label("Status")
+                    ->badge()
+                   
+                    ->getStateUsing(function (Model $record): ?string {
+                        if ($record?->action_id) {
+                            return "Actie aangemaakt";
+                        }  else{
+                            return false;
+                        }
+                      
+                    })
+                    ->placeholder("-"),
+
+
             ])
          
             ->paginated(false)
@@ -107,20 +142,78 @@ class ItemdataRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->label("Toevoegen")
-                //    ->hidden($this->getOwnerRecord()->schedule_run_token)
+
+                    ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid)
+
+                //    ->hidden(->schedule_run_token)
               
                         ->modalHeading("Keuringspunt toevoegen"),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->iconbutton()
-                    ->modalHeading("Wijzig keuringspunt"),
-                Tables\Actions\DeleteAction::make()->iconbutton(),
+                    ->modalHeading("Wijzig keuringspunt")
+                    ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid),
+                Tables\Actions\DeleteAction::make()->iconbutton()
+                ->hidden(fn($record) => $this->getOwnerRecord()->external_uuid),
+                
             ])
+
+            ->headerActions([
+          
+    
+            ])
+
+
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+
+                BulkAction::make('delete')
+                ->requiresConfirmation()
+                ->label('Actie aanmaken')
+                ->modalHeading("Actie aanmaken")
+                ->modalDescription(
+                    "Hiermee voeg je de keuringspunten toe aan een actie"
+                )
+   
+             
+                ->action(function (ObjectInspection $record, Collection $selectedRecords, Get $get) {
+                    
+
+                    $action_id = systemAction::insertGetId([
+                        'title' =>  "Keuringspunten oplossen",
+                        'model' => "ObjectInspection",
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'item_id' => $this->ownerRecord->id,
+                        'create_by_user_id' => auth()->id()
+                    ]);
+
+
+                    $selectedRecords->each(
+                        fn (Model $selectedRecord) => $selectedRecord->update([
+                            'action_id' =>  $action_id
+                        ]),
+                    );
+
+                    
+            
+                    
+          
+                  
+                   
+                })
+                
+ 
+                ->deselectRecordsAfterCompletion(),
+
+
+
+
+                    //  ->action(function ($data, $record) {
+                    //     $action+Action->create
+                       
+                    // })
+               
+      
             ])->emptyState(view('partials.empty-state-small')) ;
     }
 }

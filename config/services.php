@@ -49,4 +49,12 @@ return [
     ],
 
 
+    //API integrations
+    'teamleader' => [
+    'client_id' => env('TEAMLEADER_CLIENT_ID'),
+    'client_secret' => env('TEAMLEADER_CLIENT_SECRET'),
+    'redirect_url' => env('TEAMLEADER_REDIRECT_URL'),
+    'state' => env('TEAMLEADER_STATE', 'FtvPC1SE2h3LVPEJZIsrfaVWTwwn7T0R'),
+] 
+
 ];
