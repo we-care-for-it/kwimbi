@@ -108,12 +108,12 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 //SetTheme::class,
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
-             LockerTimer::class 
+            // LockerTimer::class 
  
              ])
             ->authMiddleware([
                 Authenticate::class,
-               Locker::class, // <- Add this
+              // Locker::class, // <- Add this
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),

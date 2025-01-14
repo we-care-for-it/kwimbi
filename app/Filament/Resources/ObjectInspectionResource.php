@@ -1,355 +1,445 @@
 <?php
 namespace App\Filament\Resources;
- 
+
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
-use App\Models\ObjectInspection;
-use App\Models\ObjectLocation;
-use App\Models\Project;
 use App\Models\Company;
 use App\Models\Elevator;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Table;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use Filament\Tables\Grouping\Group;
-use Filament\Tables\Columns\Layout\Panel;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Actions\Exports\ExportColumn;
-use Filament\Forms\Components\Section;
+use App\Models\ObjectInspection;
+use DB;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Grid;
-use Filament\Tables\Actions\ActionGroup;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Actions;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Support\Enums\MaxWidth;
-
-use Filament\Infolists\Components\TextEntry;
-
-use Filament\Infolists\Components\RepeatableEntry;
-
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+
 class ObjectInspectionResource extends Resource
 {
-    protected static ? string $model = ObjectInspection::class;
+    protected static ?string $model           = ObjectInspection::class;
     protected static ?string $navigationLabel = "Keuringen";
-    protected static ? string $navigationIcon = 'heroicon-m-check-badge';
- 
-    protected static ?string $modelLabel = 'Keuring';
+    protected static ?string $navigationIcon  = 'heroicon-m-check-badge';
+
+    protected static ?string $modelLabel       = 'Keuring';
     protected static ?string $pluralModelLabel = 'Keuringen';
 
-    public static function infolist(Infolist $infolist) : Infolist
+    public static function infolist(Infolist $infolist): Infolist
     {
 
         return $infolist->schema([
-        
-        Components\Section::make()->schema(
-            [
-                
-                Components\Split::make([Components\Grid::make(4)->schema([
 
-        Components\TextEntry::make('elevator.address')
-            ->label("Liftadres")->getStateUsing(function ($record) : ? string
-        {
+            Components\Section::make()->schema(
+                [
 
-            if($record?->nobo_number){
-                return $record ?->elevator ?->location ?->address . " " . $record ?->elevator ?->location ?->zipcode . " " . $record ?->elevator ?->location ?->place;
-            }else{
-                return "Niet gekoppeld";
-            }
-            
-        })->placeholder('Geen object gevonden')
+                    Components\Split::make([Components\Grid::make(4)->schema([
 
-        ,
+                        Components\TextEntry::make('elevator.address')
+                            ->label("Liftadres")->getStateUsing(function ($record): ?string {
 
-        Components\TextEntry::make('nobo_number')
-            ->label("NOBO Nummer") , 
- 
-            Components\TextEntry::make('type')
-            ->badge()
-            ->label("Type") ,
-       
+                            if ($record?->elevator->nobo_no) {
+                                return $record?->elevator?->location?->address . " " . $record?->elevator?->location?->zipcode . " " . $record?->elevator?->location?->place;
+                            } else {
+                                return "Niet gekoppeld";
+                            }
 
-            Components\TextEntry::make('executed_datetime')
-            ->label("Uitvoerdatum")
-    
-            ->dateTime("d-m-Y") , 
-            
-            Components\TextEntry::make('maintenance_company.name')
-            ->label("Onderhoudspartij")
-            ->placeholder("Niet opgegeven") ,
+                        })->placeholder('Geen object gevonden')
 
-  
-    
-            Components\TextEntry::make('inspectioncompany.name')
-            ->label("Keuringsinstantie")
-            ->placeholder("Niet opgegeven"),
-            Components\TextEntry::make('management_company.name')
-            ->label("Beheerder")
-            ->placeholder("Niet opgegeven") ,
-     
-            
-            Components\TextEntry::make('end_date')
-            ->label("Einddatum")
-            ->dateTime("d-m-Y") , 
-     
- 
-            Components\TextEntry::make('status_id')
-            ->badge()
-            ->label("Status")  
+                        ,
 
-            , ]) ,
+                        Components\TextEntry::make('nobo_number')
+                            ->label("NOBO Nummer"),
 
-        ])
-            ->from('lg') , ]) ,
+                        Components\TextEntry::make('type')
+                            ->badge()
+                            ->label("Type"),
 
-       
+                        Components\TextEntry::make('executed_datetime')
+                            ->label("Uitvoerdatum")
 
+                            ->dateTime("d-m-Y"),
 
+                        Components\TextEntry::make('maintenance_company.name')
+                            ->label("Onderhoudspartij")
+                            ->placeholder("Niet opgegeven"),
 
-        Components\Section::make()->schema(
-            [
-                
-                Components\Split::make([
-                    
-       
-               
+                        Components\TextEntry::make('inspectioncompany.name')
+                            ->label("Keuringsinstantie")
+                            ->placeholder("Niet opgegeven"),
+                        Components\TextEntry::make('management_company.name')
+                            ->label("Beheerder")
+                            ->placeholder("Niet opgegeven"),
+
+                        Components\TextEntry::make('end_date')
+                            ->label("Einddatum")
+                            ->dateTime("d-m-Y"),
+
+                        Components\TextEntry::make('status_id')
+                            ->badge()
+                            ->label("Status"),
+
+                    ]),
+
+                    ])
+                        ->from('lg')]),
+
+            Components\Section::make()->schema(
+                [
+
+                    Components\Split::make([
+
                         Components\TextEntry::make('remark')
-                  
-                        ->label("Opmerking")  ->placeholder("Geen opmerking")
-                        ])
-                  
-                      
-                    ]) 
-                
-                ]);
+
+                            ->label("Opmerking")->placeholder("Geen opmerking"),
+                    ]),
+
+                ]),
+
+        ]);
 
     }
 
-    public static function form(Form $form) : Form
+    public static function form(Form $form): Form
     {
         return $form->schema([
 
-        Grid::make(4)
-            ->schema([DatePicker::make("executed_datetime")
-            ->label("Uitvoerdatum")
-            ->required() ,
+            Grid::make(4)
+                ->schema([DatePicker::make("executed_datetime")
+                        ->label("Uitvoerdatum")
+                        ->required(),
 
-        DatePicker::make("end_date")
-            ->label("Einddatum")
+                    DatePicker::make("end_date")
+                        ->label("Einddatum")
 
-            ->required() ,
+                        ->required(),
 
+                    Select::make("status_id")
+                        ->label("Status")
+                        ->required()
 
-        Select::make("status_id")
-            ->label("Status")
-            ->required()
+                        ->options(InspectionStatus::class),
 
-            ->options(InspectionStatus::class) ,
+                    Select::make("type")
+                        ->label("Type keuring")
+                        ->required()
 
-        Select::make("type")
-            ->label("Type keuring")
-            ->required()
+                        ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring"]),
 
-            ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring", ]) ,
+                ]),
 
-        ]) ,
+            Grid::make(4)
+                ->schema([
 
-        Grid::make(4)
-            ->schema([
+                    Select::make("elevator_id")
+                        ->label("NoBo Nummer")
+                        ->required()
+                        ->options(Elevator::whereNot('nobo_no', null)->pluck('nobo_no', 'id'))
+                        ->searchable(),
 
- 
+                    Select::make("inspection_company_id")
+                        ->label("Keuringsinstantie")
+                        ->required()
+                        ->options(Company::where('type_id', 3)->pluck("name", "id")),
+                ]),
 
+            Grid::make(2)
+                ->schema([FileUpload::make('document')
+                        ->columnSpan(1)
 
+                        ->label('Rapportage')
 
-        Select::make("elevator_id")
-            ->label("NoBo Nummer")
-            ->required()
-            ->options(Elevator::whereNot('nobo_no',NULL)->pluck('nobo_no', 'id'))
-            ->searchable(),
-             
-        Select::make("inspection_company_id")
-            ->label("Keuringsinstantie")
-            ->required()
-            ->options(Company::where('type_id',3)->pluck("name", "id")),
-        ]) ,
+                    ,
 
-        Grid::make(2)
-            ->schema([FileUpload::make('document')
-            ->columnSpan(1)
+                    Textarea::make('remark')
+                        ->rows(3)
+                        ->label('Opmerking')
 
-            ->label('Rapportage')
+                        ->columnSpan(1)
+                        ->autosize()]),
 
-        ,
-
-        Textarea::make('remark')
-            ->rows(3)
-            ->label('Opmerking')
-            
-            ->columnSpan(1)
-            ->autosize() ])
-
-        ]) ;
+        ]);
 
     }
 
-
-    public static function table(Table $table) : Table
+    public static function table(Table $table): Table
     {
         return $table
+            ->query(
 
-    // ->groups([Group::make('status_id')
-    //         ->label('Status') ,
+                Elevator::query()
+                    ->whereHas('latestInspection', fn($subQuery) => $subQuery
 
-    //     Group::make('elevator.location.customer.id')
-    //         ->label('Relatie') ,
+                            ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                    )
+            )
 
-    //     Group::make('elevator.maintenance_company_id')
-    //         ->label('Onderhoudspartij'),
-    //     ])
-    ->columns([
+            // ->groups([Group::make('status_id')
+            //         ->label('Status') ,
 
+            //     Tables\Columns\TextColumn::make('elevator.location.address')
+            //         ->label('Adres')
+            //         ->searchable()
+            //         ->sortable()
+            //         ->toggleable()
+            //         ->wrap()
+            //         ->placeholder("Geen object")
+            //         ->getStateUsing(function (ObjectInspection $record): ?string {
+            //             if ($record?->elevator_id) {
+            //                 return $record?->elevator?->location?->address . "," . $record?->elevator?->location?->zipcode . "," . $record?->elevator?->location?->place;
+            //             } else {
+            //                 return "-";
+            //             }
+            //         })
 
+            //         ->description(function (ObjectInspection $record): ?string {
 
-        Tables\Columns\TextColumn::make("elevator.nobo_no")
-            ->label("Object")
-            ->placeholder("Geen object")
-            ->sortable()
-            ->toggleable()
-            ->wrap() ,
+            //             return $record?->elevator?->location?->zipcode . "   " . $record?->elevator?->location?->place;
 
-        Tables\Columns\TextColumn::make('elevator.location.address')
-            ->label('Adres')
-            ->searchable()
-            ->sortable()
-            ->toggleable()
-            ->wrap()
-            ->placeholder("Geen object")
-            ->getStateUsing(function (ObjectInspection $record) : ? string
-                {
-                    if($record?->elevator_id){
-                        return $record ?->elevator ?->location ?->address . "," . $record ?->elevator ?->location ?->zipcode . "," . $record ?->elevator ?->location ?->place;
-                    }else{
-                        return "-";
-                    }
+            //         }),
+
+            //         ->sortable(),
+
+            //     Tables\Columns\TextColumn::make("status_id")
+            //         ->label("Status")
+            //         ->badge()
+            //         ->toggleable()
+            //         ->sortable(),
+
+            // ])
+
+            ->columns([
+
+                Tables\Columns\TextColumn::make("latestInspection.elevator.nobo_no")
+                    ->label("Object")
+                    ->placeholder("Geen nobo nummer")
+                    ->sortable()
+                    ->toggleable()
+                    ->wrap(),
+
+                Tables\Columns\TextColumn::make("location")
+                    ->getStateUsing(function (Elevator $record): ?string {
+                        if ($record?->location->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record->location->address .
+                            " - " .
+                            $record->location->zipcode .
+                            " " .
+                            $record->location->place;
+                        }
+                    })
+                    ->label("Locatie")
+                    ->description(function (Elevator $record) {
+                        if (! $record?->location->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record->location->address .
+                            " - " .
+                            $record->location->zipcode .
+                            " " .
+                            $record->location->place;
+                        }
+                    }),
+
+                Tables\Columns\TextColumn::make("latestInspection.inspectioncompany.name")
+                    ->label("Onderhoudspartij")
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make("latestInspection.type")
+                    ->label("Type keuring")
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make("latestInspection.status_id")
+                    ->label("Status")->badge(),
+                Tables\Columns\TextColumn::make("latestInspection.executed_datetime")
+                    ->dateTime("d-m-Y")
+                    ->label("Begindatum")
+                    ->toggleable(),
+                //     ->sortable(),
+                // TextColumn::make("sasd")
+                //     ->counts("latestInspection.itemdata")
+                //     ->label("Punten")
+                //     ->badge()
+                //     ->alignment('center')
+                //     ->color("success"),
+                Tables\Columns\TextColumn::make("latestInspection.end_date")
+                    ->dateTime("d-m-Y")
+                    ->toggleable()
+                    ->label("Einddatum"),
+
+                Tables\Columns\TextColumn::make("location.customer.name")
+                    ->label("Relatie")->Url(function (object $record) {
+                    return "/admin/customers/" . $record->customer_id . "";
                 })
+                    ->icon("heroicon-c-link")
+                    ->placeholder("Niet opgegeven"),
 
+            ])->recordUrl(function ($record) {
+            return "/admin/object-inspections/" . $record->latestInspection->id;
+        })
 
-    ->description(function (ObjectInspection $record) : ? string
-        {
-           
-                return $record ?->elevator ?->location ?->zipcode . "   " . $record ?->elevator ?->location ?->place;
-     
-        }),
-    
+            ->filters([
 
-        Tables\Columns\TextColumn::make("executed_datetime")
-            ->dateTime("d-m-Y")
-            ->label("Begindatum")
-            ->toggleable()
-            ->sortable(),
+                Filter::make('statusFilter')
+                    ->form([
 
-        Tables\Columns\TextColumn::make("end_date")
-            ->dateTime("d-m-Y")
-            ->toggleable()
-            ->label("Einddatum")
-            ->sortable(),
+                        ToggleButtons::make('status_id')
+                            ->label('Filer op status')
+                            ->multiple()
+                            ->default(0)
 
-        Tables\Columns\TextColumn::make("type")
-            ->label("Type keuring")
-            ->sortable() ,
+                            ->grouped()
+                            ->options(InspectionStatus::class),
 
-        Tables\Columns\TextColumn::make('itemdata_count')
-            ->counts('itemdata')
-            ->label("Aantal punten")
-            ->alignment('center')
-            ->toggleable()
-            ->badge() ,
+                    ])->query(function (Builder $query, array $data): Builder {
+                    return $query
+                        ->when(
+                            $data['status_id'],
+                            fn(Builder $query, $status_id): Builder =>
+                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                                    ->whereIn('status_id', $status_id)
+                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                            )
 
-        Tables\Columns\TextColumn::make("inspectioncompany.name")
-            ->label("Onderhoudspartij")
-            ->toggleable()
-            ->sortable(),
+                        );
 
-        Tables\Columns\TextColumn::make("status_id")
-            ->label("Status")
-            ->badge()
-            ->toggleable()
-            ->sortable() ,
+                }),
 
-        ])
-    
-        ->filters([
+                // Filter::make('customerFilter')
+                //     ->form([
+                //         Select::make('customer_id')
+                //             ->options(Customer::all()
+                //                     ->pluck("name", "id")),
+                //     ])->query(function (Builder $query, array $data): Builder {
+                //     return $query
+                //         ->when(
+                //             $data['customer_id'],
+                //             fn(Builder $query, $customer_id): Builder =>
+                //             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //                     ->where('elevator.location.customer_id', $customer_id)
+                //                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                //             )
 
-        SelectFilter::make('status_id')
-            ->options(InspectionStatus::class)
-            ->label("Status") ,
-        
+                //         );
 
-        ])
-            ->filtersFormColumns(2)
+                // }),
+
+                // SelectFilter::make('latestInspection.status_id')
+                //     ->label("Status")
+
+                //     -
+                //     ->attribute('latestInspection.status_id'),
+
+                // SelectFilter::make("customer_id")
+                //     ->options(Customer::all()
+                //             ->pluck("name", "id"))
+                //     ->label("Relatie")
+
+                //     ->Searchable(),
+
+            ], layout: FiltersLayout::AboveContent)
+
             //->actions([
 
-        // Tables\Actions\EditAction::make()
-        //     ->label("Meer details") ])
+            // Tables\Actions\EditAction::make()
+            //     ->label("Meer details") ])
 
-        //     ->recordUrl(function ($record) {
-        //         return "/admin/object-inspections/" . $record->id;
-        //     })
+            ->actions([
 
+                // EditAction::make()
+                //     ->modalHeading('Snel bewerken')
+                //     ->modalIcon('heroicon-o-pencil')
+                //     ->hidden(fn($record) => $record->external_uuid)
+                //     ->label('Bewerken')
+                //     ->slideOver(),
 
-        ->actions([
+                // Actions\Action::make("Downloaddocument")->color("warning")
+                //     ->label("Download rapport")
+                //     ->icon("heroicon-o-document-arrow-down")
+                //     ->link()
+                //     ->fillForm(
+                //         fn($record): array=> [
+                //             "filename" =>
+                //             $record->status_id->getlabel() .
+                //             " - Report - " .
+                //             $record?->elevator?->location?->address .
+                //             ", " .
+                //             $record?->elevator?->location?->place,
+                //         ]
+                //     )->action(function ($data, $record) {
+                //     $contents = base64_decode($record->document);
+                //     $path     = public_path($data["filename"] . ".pdf");
 
-            EditAction::make()
-            ->modalHeading('Snel bewerken')
-            ->modalIcon('heroicon-o-pencil')
-            ->hidden(fn($record) => $record->external_uuid)
-            ->label('Snel bewerken')
-            ->slideOver(),
-            ActionGroup::make([
-           
-      
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->modalHeading('Keuring verwijderen')
-                    ->color('danger'),
-            ]),
-        ])
+                //     file_put_contents($path, $contents);
 
+                //     return response()
+                //         ->download($path)
+                //         ->deleteFileAfterSend(true);
+                // }),
 
-            
-            ->bulkActions([Tables\Actions\BulkActionGroup::make([
-        //  ExportBulkAction::make(),
-        ]) , ])        ->emptyState(view('partials.empty-state'));
+                ActionGroup::make([
+                    Actions\Action::make('cancel_top')
+
+                        ->color('gray')
+                        ->label('Naar object')
+
+                        ->icon('heroicon-o-arrow-uturn-left')
+                        ->url(function ($record) {
+                            return "/admin/objects/" . $record->id . "?activeRelationManager=3";
+                        }),
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->modalHeading('Keuring verwijderen')
+                        ->color('danger'),
+                ]),
+
+            ])
+
+            ->bulkActions([
+
+                //    ExportBulkAction::make()
+                //     ->exports([
+                //         ExcelExport::make()
+                //             ->fromTable()
+                //         // ->askForFilename()
+                //         //->askForWriterType()
+
+                //             ->withFilename(date("m-d-Y H:i") . " - objecten export")])
+
+            ])
+            ->emptyState(view('partials.empty-state'));
     }
 
-    public static function getRelations() : array
+    public static function getRelations(): array
     {
         return [
-            
-            RelationManagers\ItemdataRelationManager::class ,
-            RelationManagers\ActionsRelationManager::class ,
+
+            RelationManagers\ItemdataRelationManager::class,
+            RelationManagers\ActionsRelationManager::class,
 
         ];
     }
 
-    public static function getPages() : array
+    public static function getPages(): array
     {
-        return ['index' => Pages\ListObjectInspections::route('/') , 
-        'create' => Pages\CreateObjectInspection::route('/create') , 
-        //'edit' => Pages\EditObjectInspection::route('/{record}/edit') , 
-        
-        'view' => Pages\ViewObjectInspection::route('/{record}') , ];
+        return ['index' => Pages\ListObjectInspections::route('/'),
+            'create'        => Pages\CreateObjectInspection::route('/create'),
+            //'edit' => Pages\EditObjectInspection::route('/{record}/edit') ,
+
+            'view'          => Pages\ViewObjectInspection::route('/{record}')];
     }
 }
-

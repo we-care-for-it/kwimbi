@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 
 use App\Enums\ActionStatus;
@@ -21,7 +20,7 @@ use Filament\Tables\Table;
 class ActionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'actions';
-    protected static ?string $title = "Acties";
+    protected static ?string $title       = "Acties";
 
     protected static bool $isLazy = false;
     public static function getBadge($ownerRecord, string $pageClass): ?string
@@ -65,7 +64,7 @@ class ActionsRelationManager extends RelationManager
 
                     ->options(ActionStatus::class)
                     ->searchable()
-                    ->label('Bedrijf'),
+                    ->label('Status'),
 
             ]);
     }
@@ -85,7 +84,7 @@ class ActionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Aanmaakdatum')
 
-                    ->dateTime("d-m-Y H:m"),
+                    ->dateTime("d-m-Y H:i"),
 
                 Tables\Columns\TextColumn::make('title')
                     ->wrap()
