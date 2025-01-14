@@ -29,8 +29,8 @@ use Awcodes\LightSwitch\LightSwitchPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use lockscreen\FilamentLockscreen\Lockscreen;
-// use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-// use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+  use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+ use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 
  
  
@@ -108,12 +108,12 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 //SetTheme::class,
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-            //    LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+             LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
  
              ])
             ->authMiddleware([
-               // Authenticate::class,
-               // Locker::class, // <- Add this
+                Authenticate::class,
+               Locker::class, // <- Add this
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
