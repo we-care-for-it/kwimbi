@@ -5,6 +5,7 @@ use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Elevator;
 use App\Models\ObjectInspection;
 use DB;
@@ -254,7 +255,7 @@ class ObjectInspectionResource extends Resource
                         }
                     }),
 
-                Tables\Columns\TextColumn::make("latestInspection.inspectioncompany.name")
+                Tables\Columns\TextColumn::make("maintenance_company.name")
                     ->label("Onderhoudspartij")
                     ->toggleable()
                     ->sortable(),
@@ -301,9 +302,18 @@ class ObjectInspectionResource extends Resource
                             ->label('Filer op status')
                             ->multiple()
                             ->default(0)
-
                             ->grouped()
-                            ->options(InspectionStatus::class),
+
+                            ->options(InspectionStatus::class)
+                        ,
+
+                        Select::make('maintenance_company_id')
+                            ->label("Onderhoudspartij")
+
+                            ->options(Company::where('type_id', 1)->pluck("name", "id"))->columnSpan(3),
+                        Select::make('customer_id')->columnSpan('full')
+                            ->label("Relatie")
+                            ->options(Customer::all()->pluck("name", "id"))->columnSpan(3),
 
                     ])->query(function (Builder $query, array $data): Builder {
                     return $query
@@ -315,43 +325,35 @@ class ObjectInspectionResource extends Resource
                                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                             )
 
+                        )
+
+                        ->when(
+                            $data['maintenance_company_id'],
+                            fn(Builder $query, $maintenance_company_id): Builder =>
+                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                                    ->where('maintenance_company_id', $maintenance_company_id)
+                            )
+
+                        )
+
+                        ->when(
+                            $data['customer_id'],
+                            fn(Builder $query, $customer_id): Builder =>
+                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                                    ->whereHas('elevator', fn($subQuery) => $subQuery
+                                            ->whereHas('location', fn($subQuery) => $subQuery
+                                                    ->where('customer_id', $customer_id)
+                                            )
+
+                                    )
+
+                            )
+
                         );
 
-                }),
+                    ;
 
-                // Filter::make('customerFilter')
-                //     ->form([
-                //         Select::make('customer_id')
-                //             ->options(Customer::all()
-                //                     ->pluck("name", "id")),
-                //     ])->query(function (Builder $query, array $data): Builder {
-                //     return $query
-                //         ->when(
-                //             $data['customer_id'],
-                //             fn(Builder $query, $customer_id): Builder =>
-                //             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                //                     ->where('elevator.location.customer_id', $customer_id)
-                //                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
-                //             )
-
-                //         );
-
-                // }),
-
-                // SelectFilter::make('latestInspection.status_id')
-                //     ->label("Status")
-
-                //     -
-                //     ->attribute('latestInspection.status_id'),
-
-                // SelectFilter::make("customer_id")
-                //     ->options(Customer::all()
-                //             ->pluck("name", "id"))
-                //     ->label("Relatie")
-
-                //     ->Searchable(),
-
-            ], layout: FiltersLayout::AboveContent)
+                })], layout: FiltersLayout::AboveContent)
 
             //->actions([
 
