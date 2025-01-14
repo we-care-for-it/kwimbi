@@ -48,18 +48,10 @@ class PersonalActionsResource extends Resource
         return $form
             ->schema([
 
-                TextInput::make("title")
-                    ->columnSpan('full')
-                    ->required()
-                    ->label("Titel / Omschrijving")
-                    ->helperText(str('De titel van de actie')->inlineMarkdown()->toHtmlString())
-                ,
-
                 Textarea::make('body')
                     ->rows(3)
                     ->label('Uitgebreide omschrijving')
                     ->helperText(str('Beschrijf de actie of taak ')->inlineMarkdown()->toHtmlString())
-
                     ->columnSpan('full')
                     ->autosize(),
 
@@ -73,7 +65,7 @@ class PersonalActionsResource extends Resource
                     ->default(3)
                     ->label('Type'),
 
-                ToggleButtons::make('private_action')
+                ToggleButtons::make('private')
                     ->label('Prive actie')
                     ->default(1)
                     ->boolean()
@@ -137,7 +129,7 @@ class PersonalActionsResource extends Resource
 
             Tables\Columns\TextColumn::make('id')
                 ->description(function ($record): ?string {
-                    if ($record?->private_action) {
+                    if ($record?->private) {
                         return "Priveactie";
                     } else {
                         return false;
@@ -161,14 +153,12 @@ class PersonalActionsResource extends Resource
                     ? "Tijd: " . date("H:i", strtotime($record?->plan_time)) : "nodate";
                 }),
 
-            Tables\Columns\TextColumn::make('title')
+            Tables\Columns\TextColumn::make('body')
                 ->searchable()
                 ->sortable()
                 ->wrap()
-                ->label('Titel')
-                ->description(function ($record): ?string {
-                    return $record?->body;
-                }),
+                ->label('Omschrijving'),
+              
 
             Tables\Columns\TextColumn::make('type_id')
                 ->badge()

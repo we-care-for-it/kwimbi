@@ -20,6 +20,7 @@ class systemAction extends Model implements Auditable
 
     protected $fillable = [
         'elevator_id',
+        'private_action'
     ];
 
     protected function casts(): array

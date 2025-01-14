@@ -113,6 +113,7 @@ use \App\Enums\ActionTypes;
                   @endif
                </table>
                <br>
+            
                @if($action?->body)
                <b>Uitgebreide omschrijving:</b><br>
                {{$action?->body ?? "<small>Niet opgegeven</small>"}}
