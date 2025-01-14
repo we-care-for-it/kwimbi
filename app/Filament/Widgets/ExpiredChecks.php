@@ -10,7 +10,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class ExpiredChecks extends BaseWidget
 {
-    protected static ?int $sort                = 2;
+    protected static ?int $sort                = 90;
     protected static ?string $heading          = "Verlopen keuringen";
     protected int|string|array $columnSpan = '12';
     protected static bool $isLazy              = false;

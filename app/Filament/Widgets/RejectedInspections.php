@@ -10,7 +10,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class RejectedInspections extends BaseWidget
 {
-    protected static ?int $sort                = 2;
+    protected static ?int $sort                = 80;
     protected static ?string $heading          = "Afgekeurde objecten";
     protected int|string|array $columnSpan = '12';
     protected static bool $isLazy              = false;
