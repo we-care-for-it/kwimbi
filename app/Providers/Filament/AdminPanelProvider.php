@@ -66,7 +66,7 @@ class AdminPanelProvider extends PanelProvider
                 ->shouldRegisterNavigation(false)
             ])
             ->plugins([
-              FilamentAuthenticationLogPlugin::make()
+            //  FilamentAuthenticationLogPlugin::make()
                     // ->panelName('admin') // Optional: specify the panel name if needed
             ])
             //->plugin(\TomatoPHP\FilamentLogger\FilamentLoggerPlugin::make())
@@ -112,7 +112,7 @@ class AdminPanelProvider extends PanelProvider
  
              ])
             ->authMiddleware([
-                Authenticate::class,
+               // Authenticate::class,
                // Locker::class, // <- Add this
             ])
             ->plugins([
