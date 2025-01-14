@@ -1,34 +1,26 @@
 <?php
-
 namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Http\Response;
-use Filament\Support\Enums\MaxWidth;
-use App\Models\ObjectInspection;
-use App\Models\Company;
 use App\Enums\InspectionStatus;
-use Filament\Forms\Components\Grid;
- 
-
-use Filament\Forms\Components\Section;
+use App\Models\Company;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Http\Response;
 
 class InspectionsRelationManager extends RelationManager
 {
     protected static string $relationship = "inspections";
-    protected static ?string $title = "Keuringen";
-    protected static bool $isLazy = false;
+    protected static ?string $title       = "Keuringen";
+    protected static bool $isLazy         = false;
     public function getContentTabIcon(): ?string
     {
         return 'heroicon-m-cog';
@@ -58,15 +50,15 @@ class InspectionsRelationManager extends RelationManager
                 ->label("Type keuring")
                 ->required()
                 ->options([
-                    "Periodieke keuring" => "Periodieke keuring",
+                    "Periodieke keuring"    => "Periodieke keuring",
                     "Modernisering keuring" => "Modernisering keuring",
-                    "Opleveringskeuring" => "Oplever keuring",
+                    "Opleveringskeuring"    => "Oplever keuring",
                 ]),
 
             Select::make("inspection_company_id")
                 ->label("Keuringsinstantie")
                 ->required()
-                ->options(Company::where('type_id',3)->pluck("name", "id")),
+                ->options(Company::where('type_id', 3)->pluck("name", "id")),
 
             Grid::make(2)->schema([
                 FileUpload::make("document")
@@ -120,23 +112,19 @@ class InspectionsRelationManager extends RelationManager
                     ->label("Geldig tot")
                     ->sortable(),
 
-
-                    Tables\Columns\TextColumn::make('itemdata_count')
+                Tables\Columns\TextColumn::make('itemdata_count')
                     ->counts('itemdata')
                     ->label("Aantal punten")
                     ->alignment('center')
                     ->toggleable()
-                    ->badge() ,
+                    ->badge(),
 
-
-                    
-                    Tables\Columns\TextColumn::make("actions_count")
-                ->counts("actions")
-                ->label("Acties")
-                ->badge()
-                ->alignment('center')
-                ->color("success"),
-
+                Tables\Columns\TextColumn::make("actions_count")
+                    ->counts("actions")
+                    ->label("Acties")
+                    ->badge()
+                    ->alignment('center')
+                    ->color("success"),
 
                 Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
@@ -149,7 +137,7 @@ class InspectionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-    
+
                 //
                 //     ->label("Download certificaat")
                 //     ->icon("heroicon-o-document-arrow-down")
@@ -187,7 +175,7 @@ class InspectionsRelationManager extends RelationManager
                 //     ->visible(fn($record) => $record?->certification ?? true),
 
                 Tables\Actions\CreateAction::make()->label("Keuring toevoegen")->modalHeading("Keuring toevoegen")
-                  ->modalDescription("Geef alle gegevens op van de keuring om te keuring opteslaan in de database")
+                    ->modalDescription("Geef alle gegevens op van de keuring om te keuring opteslaan in de database"),
             ])
 
             ->actions([
@@ -195,18 +183,18 @@ class InspectionsRelationManager extends RelationManager
                     ->label("Rapportage")
                     ->icon("heroicon-o-document-arrow-down")
                     ->fillForm(
-                        fn($record): array => [
+                        fn($record): array=> [
                             "filename" =>
-                                $record->status_id->getlabel() .
-                                " - Rapportage - " .
-                                $record?->elevator?->location?->address .
-                                ", " .
-                                $record?->elevator?->location?->place,
+                            $record->status_id->getlabel() .
+                            " - Rapportage - " .
+                            $record?->elevator?->location?->address .
+                            ", " .
+                            $record?->elevator?->location?->place,
                         ]
                     )
                     ->action(function ($data, $record) {
                         $contents = base64_decode($record->document);
-                        $path = public_path($data["filename"] . ".pdf");
+                        $path     = public_path($data["filename"] . ".pdf");
 
                         file_put_contents($path, $contents);
 
@@ -227,14 +215,10 @@ class InspectionsRelationManager extends RelationManager
                     ])
                     ->visible(fn($record) => $record->document),
 
-         
-
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make()
                         ->modalHeading("Keuring wijzigen")
-                        ->url(function ($record) {
-                            return "/admin/object-inspections/" . $record->id . "/edit";
-                        })->modalDescription(function ($record): ?string {
+                        ->modalDescription(function ($record): ?string {
                             if ($record->if_match) {
                                 return "Let op! Deze keuring is geimporteerd vanuit de koppeling met de keuringsinstantie.";
                             } else {
@@ -242,14 +226,13 @@ class InspectionsRelationManager extends RelationManager
                             }
                         })
 
-                        ,Tables\Actions\Action::make('seeDetails')
+                    , Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
                             return "/admin/object-inspections/" .
-                                $record->id ;
+                            $record->id;
                         }),
 
-                        
                     Tables\Actions\DeleteAction::make(),
                 ]),
             ])
