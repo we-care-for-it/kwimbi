@@ -107,8 +107,8 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 //SetTheme::class,
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-             LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
+             LockerTimer::class 
  
              ])
             ->authMiddleware([
