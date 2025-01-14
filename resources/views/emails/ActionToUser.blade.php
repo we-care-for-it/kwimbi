@@ -117,7 +117,7 @@ use \App\Enums\ActionTypes;
                <b>Uitgebreide omschrijving:</b><br>
                {{$action?->body ?? "<small>Niet opgegeven</small>"}}
                @endif
-               <br>
+               <br>    <br>
                Met vriendelijke groet, <br>
                Digilevel mailer
                </p>
