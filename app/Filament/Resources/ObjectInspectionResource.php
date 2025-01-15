@@ -14,7 +14,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
@@ -255,8 +254,23 @@ class ObjectInspectionResource extends Resource
                         }
                     }),
 
+                Tables\Columns\TextColumn::make("zipcode")
+                    ->label("Postcode")
+                    ->searchable()
+                    ->hidden(true),
+                Tables\Columns\TextColumn::make("place")
+                    ->label("Plaats")
+                    ->searchable()
+                    ->hidden(true),
+                Tables\Columns\TextColumn::make("address")
+                    ->label("Adres")
+                    ->searchable()
+
+                    ->hidden(true),
+
                 Tables\Columns\TextColumn::make("maintenance_company.name")
                     ->label("Onderhoudspartij")
+                    ->searchable()
                     ->toggleable()
                     ->sortable(),
 
@@ -265,7 +279,8 @@ class ObjectInspectionResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make("latestInspection.status_id")
-                    ->label("Status")->badge(),
+                    ->label("Status")
+                    ->badge(),
                 Tables\Columns\TextColumn::make("latestInspection.executed_datetime")
                     ->dateTime("d-m-Y")
                     ->label("Begindatum")
@@ -283,6 +298,7 @@ class ObjectInspectionResource extends Resource
                     ->label("Einddatum"),
 
                 Tables\Columns\TextColumn::make("location.customer.name")
+                    ->searchable()
                     ->label("Relatie")->Url(function (object $record) {
                     return "/admin/customers/" . $record->customer_id . "";
                 })
@@ -293,39 +309,65 @@ class ObjectInspectionResource extends Resource
             return "/admin/object-inspections/" . $record->latestInspection->id;
         })
 
+            // ToggleButtons::make('status_id')
+            //     ->label('Sorteer op status')
+            //     ->multiple()
+            //     ->default(0)
+            //     ->grouped()
+
+            //     ->options(InspectionStatus::class)
+
             ->filters([
 
                 Filter::make('statusFilter')
                     ->form([
-
-                        ToggleButtons::make('status_id')
-                            ->label('Filer op status')
-                            ->multiple()
-                            ->default(0)
-                            ->grouped()
-
-                            ->options(InspectionStatus::class)
-                        ,
-
-                        Select::make('maintenance_company_id')
-                            ->label("Onderhoudspartij")
-
-                            ->options(Company::where('type_id', 1)->pluck("name", "id"))->columnSpan(3),
-                        Select::make('customer_id')->columnSpan('full')
-                            ->label("Relatie")
-                            ->options(Customer::all()->pluck("name", "id"))->columnSpan(3),
+                        Select::make('status_id')
+                            ->label("Status")
+                            ->options(InspectionStatus::class),
 
                     ])->query(function (Builder $query, array $data): Builder {
                     return $query
+
                         ->when(
                             $data['status_id'],
                             fn(Builder $query, $status_id): Builder =>
                             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                                    ->whereIn('status_id', $status_id)
-                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                                    ->where('status_id', $status_id)
                             )
 
-                        )
+                        );
+
+                }),
+
+                // Filter::make('TypeFilter')
+                //     ->form([
+                //         Select::make('status_id')
+                //             ->label("Type")
+                //             ->options(InspectionTypes::class),
+
+                //     ])->query(function (Builder $query, array $data): Builder {
+                //     return $query
+
+                //         ->when(
+                //             $data['status_id'],
+                //             fn(Builder $query, $status_id): Builder =>
+                //             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //                     ->where('status_id', $status_id)
+                //             )
+
+                //         );
+
+                // }),
+
+                Filter::make('MaintenanceFilter')
+                    ->form([
+
+                        Select::make("maintenance_company_id")
+                            ->label("Onderhoudspartij")
+                            ->options(Company::where('type_id', 1)->pluck("name", "id")),
+
+                    ])->query(function (Builder $query, array $data): Builder {
+                    return $query
 
                         ->when(
                             $data['maintenance_company_id'],
@@ -335,6 +377,31 @@ class ObjectInspectionResource extends Resource
                             )
 
                         )
+
+                        // ->when(
+                        //     $data['maintenance_company_id'],
+                        //     fn(Builder $query, $maintenance_company_id): Builder =>
+                        //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                        //             ->where('maintenance_company_id', $maintenance_company_id)
+                        //     )
+
+                        // )
+
+                    ;
+
+                    ;
+
+                }),
+
+                Filter::make('CustomerFilter')
+                    ->form([
+
+                        Select::make('customer_id')->columnSpan('full')
+                            ->label("Relatie")
+                            ->options(Customer::all()->pluck("name", "id")),
+
+                    ])->query(function (Builder $query, array $data): Builder {
+                    return $query
 
                         ->when(
                             $data['customer_id'],
@@ -353,7 +420,9 @@ class ObjectInspectionResource extends Resource
 
                     ;
 
-                })], layout: FiltersLayout::AboveContent)
+                }
+
+                )], layout: FiltersLayout::AboveContent)->filtersFormColumns(6)
 
             //->actions([
 
@@ -444,4 +513,5 @@ class ObjectInspectionResource extends Resource
 
             'view'          => Pages\ViewObjectInspection::route('/{record}')];
     }
+
 }
