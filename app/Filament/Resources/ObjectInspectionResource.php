@@ -127,6 +127,7 @@ class ObjectInspectionResource extends Resource
                         ->required(),
 
                     Select::make("status_id")
+                        ->searchable()
                         ->label("Status")
                         ->required()
 
@@ -134,8 +135,7 @@ class ObjectInspectionResource extends Resource
 
                     Select::make("type")
                         ->label("Type keuring")
-                        ->required()
-
+                        ->searchable()
                         ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring"]),
 
                 ]),
@@ -183,6 +183,7 @@ class ObjectInspectionResource extends Resource
                     ->whereHas('latestInspection', fn($subQuery) => $subQuery
 
                             ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+
                     )
             )
 
@@ -309,15 +310,18 @@ class ObjectInspectionResource extends Resource
             return "/admin/object-inspections/" . $record->latestInspection->id;
         })
 
-            // ToggleButtons::make('status_id')
-            //     ->label('Sorteer op status')
-            //     ->multiple()
-            //     ->default(0)
-            //     ->grouped()
-
-            //     ->options(InspectionStatus::class)
-
             ->filters([
+
+                // Filter::make('statusToogleFilter')
+                //     ->form([
+
+                //         ToggleButtons::make('status_id')
+                //             ->label('Sorteer op status')
+                //             ->multiple()
+                //             ->default(0)
+                //             ->grouped()
+                //             ->options(InspectionStatus::class),
+                //     ]),
 
                 Filter::make('statusFilter')
                     ->form([
@@ -332,6 +336,7 @@ class ObjectInspectionResource extends Resource
                             $data['status_id'],
                             fn(Builder $query, $status_id): Builder =>
                             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                                     ->where('status_id', $status_id)
                             )
 
@@ -359,11 +364,47 @@ class ObjectInspectionResource extends Resource
 
                 // }),
 
+                Filter::make('TypeFilter')
+                    ->form([
+                        Select::make("type_id")
+                            ->label("Type keuring")
+                            ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring"]),
+
+                    ])->query(function (Builder $query, array $data): Builder {
+                    return $query
+
+                        ->when(
+                            $data['type_id'],
+                            fn(Builder $query, $type_id): Builder =>
+                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                                    ->where('type', $type_id)
+                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+
+                            )
+
+                        )
+
+                        // ->when(
+                        //     $data['maintenance_company_id'],
+                        //     fn(Builder $query, $maintenance_company_id): Builder =>
+                        //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                        //             ->where('maintenance_company_id', $maintenance_company_id)
+                        //     )
+
+                        // )
+
+                    ;
+
+                    ;
+
+                }),
+
                 Filter::make('MaintenanceFilter')
                     ->form([
 
                         Select::make("maintenance_company_id")
                             ->label("Onderhoudspartij")
+                            ->searchable()
                             ->options(Company::where('type_id', 1)->pluck("name", "id")),
 
                     ])->query(function (Builder $query, array $data): Builder {
@@ -374,6 +415,8 @@ class ObjectInspectionResource extends Resource
                             fn(Builder $query, $maintenance_company_id): Builder =>
                             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
                                     ->where('maintenance_company_id', $maintenance_company_id)
+                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+
                             )
 
                         )
@@ -398,6 +441,7 @@ class ObjectInspectionResource extends Resource
 
                         Select::make('customer_id')->columnSpan('full')
                             ->label("Relatie")
+                            ->searchable()
                             ->options(Customer::all()->pluck("name", "id")),
 
                     ])->query(function (Builder $query, array $data): Builder {
