@@ -176,3 +176,9 @@
 .widget_dasboard {
   background-color: rgb(125, 196, 129) !important
 }
+
+.toggleStatus {
+  border-bottom: 10px solid red;
+  position: static;
+  /* collapse WS, preserve LB */
+}
