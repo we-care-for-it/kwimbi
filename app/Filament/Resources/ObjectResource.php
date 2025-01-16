@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Enums\Customer;
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectResource\Pages;
@@ -149,12 +150,18 @@ class ObjectResource extends Resource
                     ->placeholder('-')
                     ->badge(),
 
-                Tables\Columns\TextColumn::make("type.name")
-                    ->label("Type")
-                    ->badge()
+                Tables\Columns\TextColumn::make("current_inspection_end_date")
+                    ->label("Keuringsdatum")
+                    ->placeholder('-')
                     ->sortable()
-                    ->color('secondary')
-                    ->toggleable(),
+                    ->date('m-d-y'),
+
+                // Tables\Columns\TextColumn::make("type.name")
+                //     ->label("Type")
+                //     ->badge()
+                //     ->sortable()
+                //     ->color('secondary')
+                //     ->toggleable(),
 
                 Tables\Columns\TextColumn::make("location.address")
 
@@ -191,7 +198,6 @@ class ObjectResource extends Resource
                             $record?->location?->place;
                         }
                     })
-                    ->toggleable()
                     ->label("Locatie")
                     ->description(function (Elevator $record) {
                         if (! $record?->location?->name) {
@@ -243,11 +249,12 @@ class ObjectResource extends Resource
                 SelectFilter::make('maintenance_company_id')
                     ->label('Onderhoudspartij')
                     ->options(Company::where('type_id', 1)->pluck("name", "id")),
-
                 SelectFilter::make('status_id')
                     ->label("Status")
                     ->options(ElevatorStatus::class),
-
+                SelectFilter::make('customer_id')
+                    ->options(Customer::all()
+                            ->pluck("name", "id")),
                 SelectFilter::make("current_inspection_status_id")
                     ->searchable()
                     ->label("Keuringstatus")
