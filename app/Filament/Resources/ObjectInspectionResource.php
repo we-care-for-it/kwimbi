@@ -5,10 +5,8 @@ use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 use App\Models\Company;
-use App\Models\Customer;
 use App\Models\Elevator;
 use App\Models\ObjectInspection;
-use DB;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -23,10 +21,9 @@ use Filament\Tables\Actions;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 
 class ObjectInspectionResource extends Resource
 {
@@ -176,51 +173,46 @@ class ObjectInspectionResource extends Resource
 
     public static function table(Table $table): Table
     {
+
+        // ->query(
+
+        //     Elevator::query()
+        // )
+
+        // ->groups([Group::make('status_id')
+        //         ->label('Status') ,
+
+        //     Tables\Columns\TextColumn::make('elevator.location.address')
+        //         ->label('Adres')
+        //         ->searchable()
+        //         ->sortable()
+        //         ->toggleable()
+        //         ->wrap()
+        //         ->placeholder("Geen object")
+        //         ->getStateUsing(function (ObjectInspection $record): ?string {
+        //             if ($record?->elevator_id) {
+        //                 return $record?->elevator?->location?->address . "," . $record?->elevator?->location?->zipcode . "," . $record?->elevator?->location?->place;
+        //             } else {
+        //                 return "-";
+        //             }
+        //         })
+
+        //         ->description(function (ObjectInspection $record): ?string {
+
+        //             return $record?->elevator?->location?->zipcode . "   " . $record?->elevator?->location?->place;
+
+        //         }),
+
+        //         ->sortable(),
+
+        //     Tables\Columns\TextColumn::make("status_id")
+        //         ->label("Status")
+        //         ->badge()
+        //         ->toggleable()
+        //         ->sortable(),
+
+        // ])
         return $table
-            ->query(
-
-                Elevator::query()
-                    ->whereHas('latestInspection', fn($subQuery) => $subQuery
-
-                            ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
-
-                    )
-            )
-
-            // ->groups([Group::make('status_id')
-            //         ->label('Status') ,
-
-            //     Tables\Columns\TextColumn::make('elevator.location.address')
-            //         ->label('Adres')
-            //         ->searchable()
-            //         ->sortable()
-            //         ->toggleable()
-            //         ->wrap()
-            //         ->placeholder("Geen object")
-            //         ->getStateUsing(function (ObjectInspection $record): ?string {
-            //             if ($record?->elevator_id) {
-            //                 return $record?->elevator?->location?->address . "," . $record?->elevator?->location?->zipcode . "," . $record?->elevator?->location?->place;
-            //             } else {
-            //                 return "-";
-            //             }
-            //         })
-
-            //         ->description(function (ObjectInspection $record): ?string {
-
-            //             return $record?->elevator?->location?->zipcode . "   " . $record?->elevator?->location?->place;
-
-            //         }),
-
-            //         ->sortable(),
-
-            //     Tables\Columns\TextColumn::make("status_id")
-            //         ->label("Status")
-            //         ->badge()
-            //         ->toggleable()
-            //         ->sortable(),
-
-            // ])
-
             ->columns([
 
                 Tables\Columns\TextColumn::make("latestInspection.elevator.nobo_no")
@@ -230,30 +222,30 @@ class ObjectInspectionResource extends Resource
                     ->toggleable()
                     ->wrap(),
 
-                Tables\Columns\TextColumn::make("location")
-                    ->getStateUsing(function (Elevator $record): ?string {
-                        if ($record?->location->name) {
-                            return $record?->location->name;
-                        } else {
-                            return $record->location->address .
-                            " - " .
-                            $record->location->zipcode .
-                            " " .
-                            $record->location->place;
-                        }
-                    })
-                    ->label("Locatie")
-                    ->description(function (Elevator $record) {
-                        if (! $record?->location->name) {
-                            return $record?->location->name;
-                        } else {
-                            return $record->location->address .
-                            " - " .
-                            $record->location->zipcode .
-                            " " .
-                            $record->location->place;
-                        }
-                    }),
+                // Tables\Columns\TextColumn::make("location")
+                //     ->getStateUsing(function (Elevator $record): ?string {
+                //         if ($record?->location->name) {
+                //             return $record?->location->name;
+                //         } else {
+                //             return $record->location->address .
+                //             " - " .
+                //             $record->location->zipcode .
+                //             " " .
+                //             $record->location->place;
+                //         }
+                //     })
+                //     ->label("Locatie")
+                //     ->description(function (Elevator $record) {
+                //         if (! $record?->location->name) {
+                //             return $record?->location->name;
+                //         } else {
+                //             return $record->location->address .
+                //             " - " .
+                //             $record->location->zipcode .
+                //             " " .
+                //             $record->location->place;
+                //         }
+                //     }),
 
                 Tables\Columns\TextColumn::make("zipcode")
                     ->label("Postcode")
@@ -275,14 +267,14 @@ class ObjectInspectionResource extends Resource
                     ->toggleable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make("latestInspection.type")
+                Tables\Columns\TextColumn::make("type")
                     ->label("Type keuring")
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make("latestInspection.status_id")
+                Tables\Columns\TextColumn::make("status_id")
                     ->label("Status")
                     ->badge(),
-                Tables\Columns\TextColumn::make("latestInspection.executed_datetime")
+                Tables\Columns\TextColumn::make("executed_datetime")
                     ->dateTime("d-m-Y")
                     ->label("Begindatum")
                     ->toggleable(),
@@ -293,7 +285,7 @@ class ObjectInspectionResource extends Resource
                 //     ->badge()
                 //     ->alignment('center')
                 //     ->color("success"),
-                Tables\Columns\TextColumn::make("latestInspection.end_date")
+                Tables\Columns\TextColumn::make("end_date")
                     ->dateTime("d-m-Y")
                     ->toggleable()
                     ->label("Einddatum"),
@@ -305,44 +297,24 @@ class ObjectInspectionResource extends Resource
                 })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
-
-            ])->recordUrl(function ($record) {
-            return "/admin/object-inspections/" . $record->latestInspection->id;
-        })
+            ])
+            //     ->recordUrl(function ($record) {
+            //     return "/admin/object-inspections/" . $record->id;
+            // }
 
             ->filters([
 
-                // Filter::make('statusToogleFilter')
-                //     ->form([
+                //     ToggleButtons::make('status_id')
+                //         ->label('Sorteer op status')
+                //         ->multiple()
+                //         ->default(0)
+                //         ->grouped()
+                //         ->options(InspectionStatus::class),
+                // ]),
 
-                //         ToggleButtons::make('status_id')
-                //             ->label('Sorteer op status')
-                //             ->multiple()
-                //             ->default(0)
-                //             ->grouped()
-                //             ->options(InspectionStatus::class),
-                //     ]),
-
-                Filter::make('statusFilter')
-                    ->form([
-                        Select::make('status_id')
-                            ->label("Status")
-                            ->options(InspectionStatus::class),
-
-                    ])->query(function (Builder $query, array $data): Builder {
-                    return $query
-
-                        ->when(
-                            $data['status_id'],
-                            fn(Builder $query, $status_id): Builder =>
-                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
-                                    ->where('status_id', $status_id)
-                            )
-
-                        );
-
-                }),
+                SelectFilter::make('status_id')
+                    ->label("Status")
+                    ->options(InspectionStatus::class),
 
                 // Filter::make('TypeFilter')
                 //     ->form([
@@ -364,109 +336,79 @@ class ObjectInspectionResource extends Resource
 
                 // }),
 
-                Filter::make('TypeFilter')
-                    ->form([
-                        Select::make("type_id")
-                            ->label("Type keuring")
-                            ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring"]),
+                // Filter::make('TypeFilter')
+                //     ->form([
+                //         Select::make("type_id")
+                //             ->label("Type keuring")
+                //             ->options(["Periodieke keuring" => "Periodieke keuring", "Modernisering keuring" => "Modernisering keuring", "Oplever keuring" => "Oplever keuring"]),
 
-                    ])->query(function (Builder $query, array $data): Builder {
-                    return $query
+                //     ])->query(function (Builder $query, array $data): Builder {
+                //     return $query
 
-                        ->when(
-                            $data['type_id'],
-                            fn(Builder $query, $type_id): Builder =>
-                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                                    ->where('type', $type_id)
-                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                //         ->when(
+                //             $data['type_id'],
+                //             fn(Builder $query, $type_id): Builder =>
+                //             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //                     ->where('type', $type_id)
+                //                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
 
-                            )
+                //             )
 
-                        )
+                //         )
 
-                        // ->when(
-                        //     $data['maintenance_company_id'],
-                        //     fn(Builder $query, $maintenance_company_id): Builder =>
-                        //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        //             ->where('maintenance_company_id', $maintenance_company_id)
-                        //     )
+                //         // ->when(
+                //         //     $data['maintenance_company_id'],
+                //         //     fn(Builder $query, $maintenance_company_id): Builder =>
+                //         //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //         //             ->where('maintenance_company_id', $maintenance_company_id)
+                //         //     )
 
-                        // )
+                //         // )
 
-                    ;
+                //     ;
 
-                    ;
+                //     ;
 
-                }),
+                //   }),
 
-                Filter::make('MaintenanceFilter')
-                    ->form([
+                // Filter::make('MaintenanceFilter')
+                //     ->form([
 
-                        Select::make("maintenance_company_id")
-                            ->label("Onderhoudspartij")
-                            ->searchable()
-                            ->options(Company::where('type_id', 1)->pluck("name", "id")),
+                //         Select::make("maintenance_company_id")
+                //             ->label("Onderhoudspartij")
+                //             ->searchable()
+                //             ->options(Company::where('type_id', 1)->pluck("name", "id")),
 
-                    ])->query(function (Builder $query, array $data): Builder {
-                    return $query
+                //     ])->query(function (Builder $query, array $data): Builder {
+                //     return $query
 
-                        ->when(
-                            $data['maintenance_company_id'],
-                            fn(Builder $query, $maintenance_company_id): Builder =>
-                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                                    ->where('maintenance_company_id', $maintenance_company_id)
-                                    ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                //         ->when(
+                //             $data['maintenance_company_id'],
+                //             fn(Builder $query, $maintenance_company_id): Builder =>
+                //             $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //                     ->where('maintenance_company_id', $maintenance_company_id)
+                //                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
 
-                            )
+                //             )
 
-                        )
+                //         )
 
-                        // ->when(
-                        //     $data['maintenance_company_id'],
-                        //     fn(Builder $query, $maintenance_company_id): Builder =>
-                        //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        //             ->where('maintenance_company_id', $maintenance_company_id)
-                        //     )
+                //         // ->when(
+                //         //     $data['maintenance_company_id'],
+                //         //     fn(Builder $query, $maintenance_company_id): Builder =>
+                //         //     $query->whereHas('latestInspection', fn($subQuery) => $subQuery
+                //         //             ->where('maintenance_company_id', $maintenance_company_id)
+                //         //     )
 
-                        // )
+                //         // )
 
-                    ;
+                //     ;
 
-                    ;
+                //     ;
 
-                }),
+                // }),
 
-                Filter::make('CustomerFilter')
-                    ->form([
-
-                        Select::make('customer_id')->columnSpan('full')
-                            ->label("Relatie")
-                            ->searchable()
-                            ->options(Customer::all()->pluck("name", "id")),
-
-                    ])->query(function (Builder $query, array $data): Builder {
-                    return $query
-
-                        ->when(
-                            $data['customer_id'],
-                            fn(Builder $query, $customer_id): Builder =>
-                            $query->whereHas('latestInspection', fn($subQuery) => $subQuery
-                                    ->whereHas('elevator', fn($subQuery) => $subQuery
-                                            ->whereHas('location', fn($subQuery) => $subQuery
-                                                    ->where('customer_id', $customer_id)
-                                            )
-
-                                    )
-
-                            )
-
-                        );
-
-                    ;
-
-                }
-
-                )], layout: FiltersLayout::AboveContent)->filtersFormColumns(6)
+            ], layout: FiltersLayout::AboveContent)->filtersFormColumns(6)
 
             //->actions([
 
