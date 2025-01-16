@@ -214,7 +214,6 @@ class ObjectInspectionResource extends Resource
         // ])
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make("latestInspection.elevator.nobo_no")
                     ->label("Object")
                     ->placeholder("Geen nobo nummer")
@@ -495,8 +494,6 @@ class ObjectInspectionResource extends Resource
     {
         return ['index' => Pages\ListObjectInspections::route('/'),
             'create'        => Pages\CreateObjectInspection::route('/create'),
-            //'edit' => Pages\EditObjectInspection::route('/{record}/edit') ,
-
             'view'          => Pages\ViewObjectInspection::route('/{record}')];
     }
 
