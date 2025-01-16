@@ -55,7 +55,6 @@ class ObjectInspection extends Model
                 'current_inspection_status_id' => $latestinspection->status_id ?? null,
             ]);
 
-            dd($request->status_id);
         });
 
     }
