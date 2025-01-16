@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\ElevatorStatus;
+use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -33,7 +34,8 @@ class Elevator extends Model implements Auditable
     protected function casts(): array
     {
         return [
-            'status_id' => ElevatorStatus::class,
+            'status_id'                    => ElevatorStatus::class,
+            'current_inspection_status_id' => InspectionStatus::class,
 
         ];
     }

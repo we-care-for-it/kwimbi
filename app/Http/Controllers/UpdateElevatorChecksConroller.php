@@ -34,14 +34,20 @@ class UpdateElevatorChecksConroller extends Controller
                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
             )->get();
 
+        $i = 0;
+
         foreach ($elevators as $elevator) {
 
             Elevator::where('id', $elevator->id)->update([
                 'current_inspection_end_date'  => $elevator->latestInspection->end_date ?? null,
                 'current_inspection_status_id' => $elevator->latestInspection->status_id ?? null,
             ]);
+
+            $i = $i + 1;
+
         }
 
+        echo $i;
     }
 
 }

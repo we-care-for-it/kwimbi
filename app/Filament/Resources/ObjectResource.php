@@ -1,79 +1,57 @@
 <?php
-
 namespace App\Filament\Resources;
 
+use App\Enums\Customer;
+use App\Enums\ElevatorStatus;
+use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
-use App\Models\Elevator;
-use App\Models\ObjectMaintenanceCompany;
-use App\Models\ObjectInspectionCompany;
-use App\Models\ObjectSupplier;
-use App\Models\Customer;
-use Filament\Tables\Enums\FiltersLayout;
-use App\Enums\ElevatorStatus;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use App\Models\ObjectType;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Awcodes\FilamentBadgeableColumn\Components\Badge;
-use Awcodes\FilamentBadgeableColumn\Components\BadgeableColumn;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationGroup;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
-use Filament\Support\Enums\Alignment;
-//Form
-
- 
 use App\Models\Company;
- 
-use pxlrbt\FilamentExcel\Columns\Column;
-use Filament\Actions\Exports\Models\Export;
-
-
-use Filament\Forms\Components\Select;
-use Filament\Infolists\Components\Split;
-
-//Form
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-
+use App\Models\Elevator;
+use App\Models\ObjectType;
+use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
-use Filament\Tables\Filters\SelectFilter;
-
-
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
 use Filament\Infolists\Components;
-use Filament\Infolists\Infolist;
 use Filament\Infolists\Components\ViewEntry;
+//Form
 
- 
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
+use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\DeleteAction;
 
+//Form
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ObjectResource extends Resource
 {
     protected static ?string $model = Elevator::class;
 
-    protected static ?string $navigationIcon = "heroicon-c-arrows-up-down";
-    protected static ?string $navigationLabel = "Objecten";
+    protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
+    protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';
 
-    
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
     }
 
-
     public static function form(Form $form): Form
     {
         return $form->schema([
-
 
             Grid::make(4)->schema([
                 TextInput::make("nobo_no")
@@ -106,10 +84,13 @@ class ObjectResource extends Resource
                 Select::make("status_id")
                     ->label("Status")
                     ->options(ElevatorStatus::class),
+                Select::make("status_id")
+                    ->label("Status")
+                    ->options(ElevatorStatus::class),
 
                 Select::make("supplier_id")
                     ->label("Leverancier")
-                    ->options(Company::where('type_id',4)->pluck("name", "id")),
+                    ->options(Company::where('type_id', 4)->pluck("name", "id")),
 
                 TextInput::make("stopping_places")
                     ->label("Stoppplaatsen")
@@ -121,25 +102,25 @@ class ObjectResource extends Resource
 
                 Select::make("maintenance_company_id")
                     ->label("Onderhoudspartij")
-                    ->options(Company::where('type_id',1)->pluck("name", "id")),
+                    ->options(Company::where('type_id', 1)->pluck("name", "id")),
 
                 Select::make("inspection_company_id")
                     ->label("Keuringsinstantie")
                     ->live()
-                    ->options(Company::where('type_id',3)->pluck("name", "id")),
+                    ->options(Company::where('type_id', 3)->pluck("name", "id")),
 
                 TextInput::make("name")->label("Naam"),
             ]),
 
             Grid::make(2)->schema([
                 Textarea::make("remark")
-                ->rows(7)
-                ->label('Notitie')
-                ->columnSpan(3)
-                ->autosize()
-                ->hint(fn ($state, $component) => "Aantal karakters: ". $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
-                ->maxlength(255)
-                ->reactive()
+                    ->rows(7)
+                    ->label('Notitie')
+                    ->columnSpan(3)
+                    ->autosize()
+                    ->hint(fn($state, $component) => "Aantal karakters: " . $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                    ->maxlength(255)
+                    ->reactive(),
             ]),
         ]);
     }
@@ -154,28 +135,35 @@ class ObjectResource extends Resource
                     ->placeholder("Geen unitnummer")
                     ->toggleable(),
 
-                    Tables\Columns\TextColumn::make("name")
+                Tables\Columns\TextColumn::make("name")
                     ->label("Naam")
                     ->placeholder("-")
                     ->toggleable(),
 
-
-                Tables\Columns\TextColumn::make("status_id")
+                // Tables\Columns\TextColumn::make("status_id")
+                //     ->label("Status")
+                //     ->badge()
+                //     ->sortable()
+                //     ->toggleable(),
+                Tables\Columns\TextColumn::make("current_inspection_status_id")
                     ->label("Status")
-                    ->badge()
+                    ->placeholder('-')
+                    ->badge(),
+
+                Tables\Columns\TextColumn::make("current_inspection_end_date")
+                    ->label("Keuringsdatum")
+                    ->placeholder('-')
                     ->sortable()
-                    ->toggleable(),
+                    ->date('m-d-y'),
 
+                // Tables\Columns\TextColumn::make("type.name")
+                //     ->label("Type")
+                //     ->badge()
+                //     ->sortable()
+                //     ->color('secondary')
+                //     ->toggleable(),
 
-                    Tables\Columns\TextColumn::make("type.name")
-                    ->label("Type")
-                    ->badge()
-                    ->sortable()
-                    ->color('secondary')
-                    ->toggleable(),
-
-
-                    Tables\Columns\TextColumn::make("location.address")
+                Tables\Columns\TextColumn::make("location.address")
 
                     ->label("Adres")
 
@@ -183,17 +171,13 @@ class ObjectResource extends Resource
                     ->sortable()
                     ->hidden(true),
 
-
-
-                    Tables\Columns\TextColumn::make("incidents_count")
-                        ->toggleable()
-                        ->counts("incidents")
-                        ->label("Storingen")
-                        ->alignment(Alignment::Center)
-                        ->sortable()
-                        ->badge(),
-
-                        
+                Tables\Columns\TextColumn::make("incidents_count")
+                    ->toggleable()
+                    ->counts("incidents")
+                    ->label("Storingen")
+                    ->alignment(Alignment::Center)
+                    ->sortable()
+                    ->badge(),
 
                 Tables\Columns\TextColumn::make("nobo_no")
                     ->toggleable()
@@ -208,26 +192,24 @@ class ObjectResource extends Resource
                             return $record?->location->name;
                         } else {
                             return $record?->location?->address .
-                                " - " .
-                                $record?->location?->zipcode .
-                                " " .
-                                $record?->location?->place;
+                            " - " .
+                            $record?->location?->zipcode .
+                            " " .
+                            $record?->location?->place;
                         }
                     })
-                    ->toggleable()
                     ->label("Locatie")
                     ->description(function (Elevator $record) {
-                        if (!$record?->location?->name) {
+                        if (! $record?->location?->name) {
                             return $record?->location?->name;
                         } else {
                             return $record->location->address .
-                                " - " .
-                                $record->location->zipcode .
-                                " " .
-                                $record->location->place;
+                            " - " .
+                            $record->location->zipcode .
+                            " " .
+                            $record->location->place;
                         }
                     }),
-
 
                 Tables\Columns\TextColumn::make("location.zipcode")
                     ->label("Postcode")
@@ -259,8 +241,6 @@ class ObjectResource extends Resource
                     ->sortable()
                     ->label("Onderhoudspartij"),
 
-
-                    
             ])
             ->filters([
                 SelectFilter::make('object_type_id')
@@ -268,13 +248,19 @@ class ObjectResource extends Resource
                     ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
                 SelectFilter::make('maintenance_company_id')
                     ->label('Onderhoudspartij')
-                    ->options(Company::where('type_id',1)->pluck("name", "id")),
-
+                    ->options(Company::where('type_id', 1)->pluck("name", "id")),
                 SelectFilter::make('status_id')
                     ->label("Status")
-                    ->options(ElevatorStatus::class) ,
+                    ->options(ElevatorStatus::class),
+                SelectFilter::make('customer_id')
+                    ->options(Customer::all()
+                            ->pluck("name", "id")),
+                SelectFilter::make("current_inspection_status_id")
+                    ->searchable()
+                    ->label("Keuringstatus")
+                    ->options(InspectionStatus::class),
 
-            ],layout : FiltersLayout::AboveContent)
+            ], layout: FiltersLayout::AboveContent)
             ->actions([
                 ActionGroup::make([
                     EditAction::make()
@@ -289,58 +275,52 @@ class ObjectResource extends Resource
                 ]),
             ])
             ->bulkActions([ExportBulkAction::make()
-            ->exports([
-                ExcelExport::make()
-            ->fromTable()
-            ->askForFilename()
-            ->askForWriterType()
-            ->withColumns([
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->askForFilename()
+                            ->askForWriterType()
+                            ->withColumns([
 
-                Column::make("customer.name")->heading("Relatie") , 
-                Column::make("type.name")->heading("Type"), 
-                Column::make("unit_no")->heading("Unit no") ,
-                Column::make("nobo_no")->heading("Nobo no") ,
-                Column::make("energy_label")->heading("Energielael") ,
-                Column::make("install_date")->heading("Installatie datum") , 
-                Column::make("status_id")->heading("Status") , 
-                Column::make("supplier.name")->heading("Leverancier") , 
-                Column::make("stopping_places")->heading("Stopplaatsen"),
-                Column::make("inspectioncompany.name")->heading("Keuringsinstantie"),
-                Column::make("name")->heading("Naam"),
-                Column::make("management_company.name")->heading("Beheerder"),
-                Column::make("remark")->heading("Opmerking")
+                                Column::make("customer.name")->heading("Relatie"),
+                                Column::make("type.name")->heading("Type"),
+                                Column::make("unit_no")->heading("Unit no"),
+                                Column::make("nobo_no")->heading("Nobo no"),
+                                Column::make("energy_label")->heading("Energielael"),
+                                Column::make("install_date")->heading("Installatie datum"),
+                                Column::make("status_id")->heading("Status"),
+                                Column::make("supplier.name")->heading("Leverancier"),
+                                Column::make("stopping_places")->heading("Stopplaatsen"),
+                                Column::make("inspectioncompany.name")->heading("Keuringsinstantie"),
+                                Column::make("name")->heading("Naam"),
+                                Column::make("management_company.name")->heading("Beheerder"),
+                                Column::make("remark")->heading("Opmerking"),
 
-                     , ])
-            ->withFilename(date("m-d-Y H:i") . " - objecten export") , ]) , ])
+                            ])
+                            ->withFilename(date("m-d-Y H:i") . " - objecten export")])])
             ->emptyState(view("partials.empty-state"));
-  
-            
+
     }
 
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
 
-
-    
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
 
                         Components\TextEntry::make("address")
 
-            ->label("Adres")->getStateUsing(function ($record) : ? string
-        {
-            $housenumber = "";
-            if ($record->location->housenumber)
-            {
-                $housenumber = " " . $record?->location?->housenumber;
-            }
+                            ->label("Adres")->getStateUsing(function ($record): ?string {
+                            $housenumber = "";
+                            if ($record->location->housenumber) {
+                                $housenumber = " " . $record?->location?->housenumber;
+                            }
 
-            return $record?->location?->address . " " . $housenumber . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
-        })
-            ->placeholder("Niet opgegeven"),
-
+                            return $record?->location?->address . " " . $housenumber . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
+                        })
+                            ->placeholder("Niet opgegeven"),
 
                         Components\TextEntry::make("nobo_no")
                             ->label("NOBO Nummer")
@@ -367,7 +347,7 @@ class ObjectResource extends Resource
                             ->placeholder("Niet opgegeven"),
 
                         Components\TextEntry::make("status_id")
-                            ->label("Status")
+                            ->label("Keuringstatus")
                             ->badge()
                             ->placeholder("Niet opgegeven"),
 
@@ -375,19 +355,17 @@ class ObjectResource extends Resource
                             ->label("Leverancier")
                             ->placeholder("Niet opgegeven"),
 
-                            Components\TextEntry::make("customer.name")
-                            ->label("Relatie")->Url(function (object $record)
-                        {
+                        Components\TextEntry::make("customer.name")
+                            ->label("Relatie")->Url(function (object $record) {
                             return "/admin/customers/" . $record->customer_id . "";
                         })
                             ->icon("heroicon-c-link")
-                            ->placeholder("Niet opgegeven") ,
+                            ->placeholder("Niet opgegeven"),
 
                         Components\TextEntry::make("stopping_places")
                             ->label("Stoppplaatsen")
                             ->placeholder("Niet opgegeven"),
 
-     
                         Components\TextEntry::make("name")
                             ->label("Naam")
                             ->placeholder("Niet opgegeven"),
@@ -395,19 +373,17 @@ class ObjectResource extends Resource
                 ])->from("lg"),
             ]),
 
-            
-    
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
                         Components\TextEntry::make("maintenance_company.name")
                             ->label("Onderhoudspartij")
                             ->placeholder("Niet opgegeven"),
-            
+
                         Components\TextEntry::make("location.managementcompany.name")
                             ->label("Beheerder")
                             ->placeholder("Niet opgegeven"),
-                     
+
                         Components\TextEntry::make("inspectioncompany.name")
                             ->label("Keuringinstantie")
                             ->placeholder("Niet opgegeven"),
@@ -415,12 +391,10 @@ class ObjectResource extends Resource
                         Components\TextEntry::make("remark")
                             ->label("Opmerking")
                             ->placeholder("Geen opmerking"),
-                    ])
-                    ])
+                    ]),
                 ]),
+            ]),
 
-
-             
         ]);
     }
 
@@ -428,13 +402,13 @@ class ObjectResource extends Resource
     {
         return [
             //RelationManagers\FeatureRelationManager::class,
-                RelationManagers\IncidentsRelationManager::class,
-             //   RelationGroup::make('Onderhoud', [
-                    RelationManagers\MaintenanceContractsRelationManager::class,
-                    RelationManagers\MaintenanceVisitsRelationManager::class,
-              //  ]),
-                 RelationManagers\inspectionsRelationManager::class,
-                RelationManagers\AttachmentRelationManager::class,
+            RelationManagers\IncidentsRelationManager::class,
+            //   RelationGroup::make('Onderhoud', [
+            RelationManagers\MaintenanceContractsRelationManager::class,
+            RelationManagers\MaintenanceVisitsRelationManager::class,
+            //  ]),
+            RelationManagers\inspectionsRelationManager::class,
+            RelationManagers\AttachmentRelationManager::class,
         ];
     }
 
@@ -444,7 +418,7 @@ class ObjectResource extends Resource
             "index" => Pages\ListObjects::route("/"),
             //   'create' => Pages\CreateObject::route('/create'),
             //  'edit' => Pages\EditObject::route('/{record}/edit'),
-            "view" => Pages\ViewObject::route("/{record}"),
+            "view"  => Pages\ViewObject::route("/{record}"),
         ];
     }
 }
