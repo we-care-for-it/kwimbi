@@ -58,7 +58,7 @@ class ObjectResource extends Resource
                     ->label("NOBO Nummer")
                     ->placeholder("Niet opgegeven"),
 
-                Select::make("object_type_id")
+                Select::make("type_id")
                     ->label("Type")
                     ->options(
                         ObjectType::where("is_active", 1)->pluck("name", "id")
@@ -154,7 +154,7 @@ class ObjectResource extends Resource
                     ->label("Keuringsdatum")
                     ->placeholder('-')
                     ->sortable()
-                    ->date('m-d-y'),
+                    ->date('d-m-Y'),
 
                 // Tables\Columns\TextColumn::make("type.name")
                 //     ->label("Type")
@@ -243,7 +243,7 @@ class ObjectResource extends Resource
 
             ])
             ->filters([
-                SelectFilter::make('object_type_id')
+                SelectFilter::make('type_id')
                     ->label('Type')
                     ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
                 SelectFilter::make('maintenance_company_id')
@@ -253,6 +253,7 @@ class ObjectResource extends Resource
                     ->label("Status")
                     ->options(ElevatorStatus::class),
                 SelectFilter::make('customer_id')
+                    ->label('Relatie')
                     ->options(Customer::all()
                             ->pluck("name", "id")),
                 SelectFilter::make("current_inspection_status_id")
@@ -387,6 +388,11 @@ class ObjectResource extends Resource
                         Components\TextEntry::make("inspectioncompany.name")
                             ->label("Keuringinstantie")
                             ->placeholder("Niet opgegeven"),
+
+                        Components\TextEntry::make("latestInspection.status_id")
+                            ->label("Keuringsstatus")
+                            ->badge()
+                            ->placeholder("Onbekend"),
 
                         Components\TextEntry::make("remark")
                             ->label("Opmerking")

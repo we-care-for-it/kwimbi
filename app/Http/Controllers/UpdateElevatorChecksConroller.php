@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Elevator;
-use Carbon\Carbon;
 use DB;
 
 class UpdateElevatorChecksConroller extends Controller
@@ -28,9 +27,14 @@ class UpdateElevatorChecksConroller extends Controller
     public function update()
     {
 
+        Elevator::query()->update([
+            'current_inspection_end_date'  => null,
+            'current_inspection_status_id' => null,
+        ]);
+
         $elevators = Elevator::query()
             ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                    ->where('end_date', '<', Carbon::today())
+                    ->where('status_id', 3)
                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
             )->get();
 
