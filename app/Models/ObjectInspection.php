@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Enums\InspectionStatus;
 use App\Models\Elevator;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -45,7 +46,7 @@ class ObjectInspection extends Model
 
             $latestinspection = Elevator::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        ->where('status_id', 3)
+                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                         ->where('elevator_id', $request->elevator_id)
                 )->first();
 
@@ -53,6 +54,8 @@ class ObjectInspection extends Model
                 'current_inspection_end_date'  => $latestinspection->end_date ?? null,
                 'current_inspection_status_id' => $latestinspection->status_id ?? null,
             ]);
+
+            dd($request->status_id);
         });
 
     }

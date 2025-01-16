@@ -34,7 +34,7 @@ class UpdateElevatorChecksConroller extends Controller
 
         $elevators = Elevator::query()
             ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                    ->where('status_id', 3)
+                //->where('status_id', 3)
                     ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
             )->get();
 
