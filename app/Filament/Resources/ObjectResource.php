@@ -347,11 +347,6 @@ class ObjectResource extends Resource
                             ->date("m-d-Y")
                             ->placeholder("Niet opgegeven"),
 
-                        Components\TextEntry::make("status_id")
-                            ->label("Keuringstatus")
-                            ->badge()
-                            ->placeholder("Niet opgegeven"),
-
                         Components\TextEntry::make("supplier.name")
                             ->label("Leverancier")
                             ->placeholder("Niet opgegeven"),
@@ -396,6 +391,7 @@ class ObjectResource extends Resource
 
                         Components\TextEntry::make("remark")
                             ->label("Opmerking")
+                            ->columnSpan("full")
                             ->placeholder("Geen opmerking"),
                     ]),
                 ]),

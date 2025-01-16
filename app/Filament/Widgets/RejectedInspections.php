@@ -3,7 +3,6 @@ namespace App\Filament\Widgets;
 
 use App\Enums\InspectionStatus;
 use App\Models\Elevator;
-use DB;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -20,11 +19,7 @@ class RejectedInspections extends BaseWidget
     {
         return $table
             ->query(
-                Elevator::query()
-                    ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                            ->where('status_id', InspectionStatus::REJECTED)
-                            ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
-                    )->limit(10)
+                Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->limit(10)
             )
             ->columns([
 
