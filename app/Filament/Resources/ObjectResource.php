@@ -1,12 +1,12 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Enums\Customer;
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Elevator;
 use App\Models\ObjectType;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
