@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Clusters\Actions\Resources\AllActionsResource\Pages;
 
 use App\Filament\Clusters\Actions\Resources\AllActionsResource;
@@ -15,7 +14,13 @@ class ListAllActions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Actie toevoegen')
+                ->slideOver()
+                ->modalHeading('Actie toevoegen')
+                ->modalDescription('Voor een actie toe voor je zelf of een andere medewerker')
+                ->modalSubmitActionLabel('Opslaan')
+            ,
         ];
     }
 }
