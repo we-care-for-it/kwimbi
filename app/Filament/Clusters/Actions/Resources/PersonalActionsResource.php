@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Clusters\Actions\Resources;
 
 use App\Filament\Clusters\Actions;
@@ -14,7 +13,6 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
@@ -31,12 +29,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalActionsResource extends Resource
 {
-    protected static ?string $model = SystemAction::class;
-    protected static ?string $navigationLabel = 'Persoonlijke acties';
-    protected static ?string $title = 'Persoonlijke acties';
-    protected static ?int $navigationSort = 1;
-
-    protected static ?string $cluster = Actions::class;
+    protected static ?string $model            = SystemAction::class;
+    protected static ?string $navigationLabel  = 'Mijn acties';
+    protected static ?string $title            = 'Mijn acties';
+    protected static ?int $navigationSort      = 1;
+    protected static ?string $pluralModelLabel = 'Mijn acties';
+    protected static ?string $cluster          = Actions::class;
 
     public static function getNavigationBadge(): ?string
     {
@@ -96,9 +94,7 @@ class PersonalActionsResource extends Resource
                     ]),
 
                 Section::make('Planning')
-                    ->collapsed()
                     ->icon('heroicon-o-calendar-date-range')
-                    ->collapsible()
                     ->schema([
                         Split::make([
 
@@ -143,7 +139,7 @@ class PersonalActionsResource extends Resource
 
             Tables\Columns\TextColumn::make('plan_date')
                 ->label('Plandatum')
-                ->placeholder('Geen')
+                ->placeholder('-')
                 ->toggleable()
                 ->sortable()
                 ->dateTime("d-m-Y")
@@ -158,7 +154,6 @@ class PersonalActionsResource extends Resource
                 ->sortable()
                 ->wrap()
                 ->label('Omschrijving'),
-              
 
             Tables\Columns\TextColumn::make('type_id')
                 ->badge()
@@ -170,14 +165,14 @@ class PersonalActionsResource extends Resource
                 ->toggleable()
                 ->sortable()
                 ->searchable()
-                ->placeholder("Geen")
+                ->placeholder("-")
                 ->label('Relatie'),
 
             Tables\Columns\TextColumn::make('company.name')
                 ->toggleable()
                 ->sortable()
                 ->searchable()
-                ->placeholder("Geen")
+                ->placeholder("-")
                 ->label('Bedrijf'),
 
         ])
@@ -212,7 +207,7 @@ class PersonalActionsResource extends Resource
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
                     ->color('danger')
-                    ->label('Sluiten'),
+                    ->label('Voltooien'),
                 RestoreAction::make(),
             ])
 
@@ -226,7 +221,7 @@ class PersonalActionsResource extends Resource
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
                     ->color('danger')
-                    ->label('Sluiten'),
+                    ->label('Voltooien'),
 
                 RestoreAction::make()
                     ->color("danger")
