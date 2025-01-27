@@ -117,9 +117,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
-   QuickCreatePlugin::make()
-                    ->createAnother(false)
-                    ->slideOver(),
+  // QuickCreatePlugin::make()
+                  //  ->createAnother(false)
+   //  ->alwaysShowModal()
+                    //->slideOver(),
             ])
             ->plugin(
                ThemesPlugin::make()
