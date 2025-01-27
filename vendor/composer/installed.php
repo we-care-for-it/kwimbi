@@ -64,6 +64,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'awcodes/filament-quick-create' => array(
+            'pretty_version' => 'v3.6.1',
+            'version' => '3.6.1.0',
+            'reference' => 'ff0c4214a71f0dd13aa87d62754b62f65aa3cd02',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../awcodes/filament-quick-create',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'awcodes/light-switch' => array(
             'pretty_version' => 'v1.0.3',
             'version' => '1.0.3.0',

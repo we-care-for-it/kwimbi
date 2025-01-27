@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Enums\ActionStatus;
@@ -20,14 +19,14 @@ class systemAction extends Model implements Auditable
 
     protected $fillable = [
         'elevator_id',
-        'private_action'
+        'private_action',
     ];
 
     protected function casts(): array
     {
         return [
             'status_id' => ActionStatus::class,
-            'type_id' => ActionTypes::class,
+            'type_id'   => ActionTypes::class,
 
         ];
     }
@@ -76,10 +75,15 @@ class systemAction extends Model implements Auditable
 
         static::saved(function (self $request) {
 
-            $user = User::where('id', $request->for_user_id)->first();
+            //IF NOT DIRETY
+            if ($request->isDirty()) {
 
-            if ($user->id != Auth::id()) {
-                Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
+                $user = User::where('id', $request->for_user_id)->first();
+
+                if ($user->id != Auth::id()) {
+                    Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
+                }
+
             }
         });
 

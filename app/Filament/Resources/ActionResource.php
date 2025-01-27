@@ -1,13 +1,11 @@
 <?php
-namespace App\Filament\Clusters\Actions\Resources;
+namespace App\Filament\Resources;
 
-use App\Filament\Clusters\Actions;
-use App\Filament\Clusters\Actions\Resources\PersonalActionsResource\Pages;
+use App\Filament\Resources\ActionResource\Pages;
 use App\Models\Company;
 use App\Models\Customer;
-use App\Models\SystemAction;
+use App\Models\systemAction;
 use App\Models\User;
-use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -24,21 +22,20 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-class PersonalActionsResource extends Resource
+class ActionResource extends Resource
 {
-    protected static ?string $model            = SystemAction::class;
-    protected static ?string $navigationLabel  = 'Mijn acties';
-    protected static ?string $title            = 'Mijn acties';
-    protected static ?int $navigationSort      = 1;
-    protected static ?string $pluralModelLabel = 'Mijn acties';
-    protected static ?string $cluster          = Actions::class;
+    protected static ?string $model            = systemAction::class;
+    protected static ?string $navigationLabel  = 'Acties';
+    protected static ?string $pluralModelLabel = 'Acties';
+    protected static ?string $title            = 'Acties';
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('for_user_id', Auth::id())->count();
+        return static::getModel()::count();
     }
 
     public static function form(Form $form): Form
@@ -72,7 +69,6 @@ class PersonalActionsResource extends Resource
                 Section::make('Toewijzing')
                     ->schema([
                         Split::make([
-
                             Select::make('for_user_id')
                                 ->options(User::pluck('name', 'id'))
                                 ->searchable()
@@ -104,7 +100,7 @@ class PersonalActionsResource extends Resource
 
                             TimePicker::make('plan_time')
                                 ->label('Tijd')
-                                ->displayFormat('H:m'),
+                                ->seconds(false),
 
                         ]),
 
@@ -117,65 +113,73 @@ class PersonalActionsResource extends Resource
     {
         return $table
 
-            ->modifyQueryUsing(function (Builder $query) {
+        // ->modifyQueryUsing(function (Builder $query) {
 
-                return $query->where('for_user_id', Auth::id());
+        //     return $query->where('private', 0);
 
-            })->columns([
+        // })
+            ->columns([
 
-            Tables\Columns\TextColumn::make('id')
-                ->description(function ($record): ?string {
-                    if ($record?->private) {
-                        return "Priveactie";
-                    } else {
-                        return false;
-                    }
-                })
-                ->label('#')
-                ->sortable()
-                ->getStateUsing(function ($record): ?string {
-                    return sprintf('%06d', $record?->id);
-                }),
+                Tables\Columns\TextColumn::make('id')
+                    ->description(function ($record): ?string {
+                        if ($record?->private) {
+                            return "Priveactie";
+                        } else {
+                            return false;
+                        }
+                    })
+                    ->label('#')
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        return sprintf('%06d', $record?->id);
+                    }),
 
-            Tables\Columns\TextColumn::make('plan_date')
-                ->label('Plandatum')
-                ->placeholder('-')
-                ->toggleable()
-                ->sortable()
-                ->dateTime("d-m-Y")
-                ->sortable()
-                ->description(function ($record): ?string {
-                    return $record->plan_time
-                    ? "Tijd: " . date("H:i", strtotime($record?->plan_time)) : "nodate";
-                }),
+                Tables\Columns\TextColumn::make('plan_date')
+                    ->label('Plandatum')
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->sortable()
+                    ->dateTime("d-m-Y")
+                    ->sortable()
+                    ->description(function ($record): ?string {
+                        return $record->plan_time
+                        ? "Tijd: " . date("H:i", strtotime($record?->plan_time)) : "nodate";
+                    }),
 
-            Tables\Columns\TextColumn::make('body')
-                ->searchable()
-                ->sortable()
-                ->wrap()
-                ->label('Omschrijving'),
+                Tables\Columns\TextColumn::make('body')
+                    ->searchable()
+                    ->sortable()
+                    ->wrap()
+                    ->label('Omschrijving'),
 
-            Tables\Columns\TextColumn::make('type_id')
-                ->badge()
-                ->sortable()
-                ->toggleable()
-                ->label('Type'),
+                Tables\Columns\TextColumn::make('type_id')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Type'),
 
-            Tables\Columns\TextColumn::make('customer.name')
-                ->toggleable()
-                ->sortable()
-                ->searchable()
-                ->placeholder("-")
-                ->label('Relatie'),
+                Tables\Columns\TextColumn::make('customer.name')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable()
+                    ->placeholder("-")
+                    ->label('Relatie'),
 
-            Tables\Columns\TextColumn::make('company.name')
-                ->toggleable()
-                ->sortable()
-                ->searchable()
-                ->placeholder("-")
-                ->label('Bedrijf'),
+                Tables\Columns\TextColumn::make('company.name')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable()
+                    ->placeholder("-")
+                    ->label('Bedrijf'),
 
-        ])
+                Tables\Columns\TextColumn::make('for_user.name')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable()
+                    ->placeholder("Geen")
+                    ->label('Gebruiker'),
+
+            ])
             ->defaultSort('created_at', 'desc')
             ->filters([
 
@@ -239,7 +243,6 @@ class PersonalActionsResource extends Resource
 
             ])->emptyState(view("partials.empty-state"));
     }
-
     public static function getRelations(): array
     {
         return [
@@ -250,9 +253,9 @@ class PersonalActionsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPersonalActions::route('/'),
-            //  'create' => Pages\CreatePersonalActions::route('/create'),
-            //  'edit' => Pages\EditPersonalActions::route('/{record}/edit'),
+            'index' => Pages\ListActions::route('/'),
+            //'create' => Pages\CreateAction::route('/create'),
+            // 'edit'   => Pages\EditAction::route('/{record}/edit'),
         ];
     }
 }
