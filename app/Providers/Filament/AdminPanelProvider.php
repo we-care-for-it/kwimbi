@@ -31,7 +31,7 @@ use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use lockscreen\FilamentLockscreen\Lockscreen;
   use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
  use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
-
+use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
  
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
@@ -117,6 +117,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make(),
+  // QuickCreatePlugin::make()
+                  //  ->createAnother(false)
+   //  ->alwaysShowModal()
+                    //->slideOver(),
             ])
             ->plugin(
                ThemesPlugin::make()
