@@ -1,13 +1,14 @@
 <?php
-namespace App\Filament\Resources\ActionResource\Pages;
 
-use App\Filament\Resources\ActionResource;
+namespace App\Filament\Resources\TaskResource\Pages;
+
+use App\Filament\Resources\TaskResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditAction extends EditRecord
+class EditTask extends EditRecord
 {
-    protected static string $resource = ActionResource::class;
+    protected static string $resource = TaskResource::class;
 
     protected function getHeaderActions(): array
     {

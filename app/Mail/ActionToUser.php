@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Mail;
 
-use App\Models\systemAction;
+use App\Models\Task;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -16,7 +15,7 @@ class ActionToUser extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public readonly systemAction $action)
+    public function __construct(public readonly Task $action)
     {
         //
     }

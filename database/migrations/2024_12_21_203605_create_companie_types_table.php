@@ -13,12 +13,12 @@ return new class extends Migration
     {
 
         Schema::create('companies_types', function (Blueprint $table) {
-        $table->id();
-        $table->timestamps();
-        $table->softDeletes(); 
-        $table->string('name')->nullable();
-        $table->boolean('is_active')->nullable()->default('1');
-    });
+            $table->id();
+            $table->timestamps();
+            $table->softDeletes();
+            $table->string('name')->nullable();
+            $table->boolean('is_active')->nullable()->default('1');
+        });
     }
 
     /**

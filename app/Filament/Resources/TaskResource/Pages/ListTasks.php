@@ -1,0 +1,24 @@
+<?php
+namespace App\Filament\Resources\TaskResource\Pages;
+
+use App\Filament\Resources\TaskResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListTasks extends ListRecords
+{
+    protected static string $resource = TaskResource::class;
+    protected static ?string $title   = 'Alle acties';
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+                ->label('Actie toevoegen')
+                ->slideOver()
+                ->modalHeading('Actie toevoegen')
+                ->modalDescription('Voor een actie toe voor je zelf of een andere medewerker')
+                ->modalSubmitActionLabel('Opslaan')
+            ,
+        ];
+    }
+}
