@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\GPSTrackingService;
 use App\Services\TeamleaderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,13 @@ Route::get('update/elevators', [App\Http\Controllers\UpdateElevatorChecksConroll
 
 Route::get('/teamleader.access', function () {
     $teamleader = new TeamleaderService(config('services.teamleader.client_id'), config('services.teamleader.client_secret'), config('services.teamleader.redirect_url'), config('services.teamleader.state'));
+    //header("Location: {$teamleader->redirectForAuthorizationUrl()));
+    exit;
+});
+
+Route::get('/gpstest', function () {
+    $test = (new GPSTrackingService())->GetObjects();
+    dd($test);
     //header("Location: {$teamleader->redirectForAuthorizationUrl()));
     exit;
 });

@@ -14,7 +14,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -135,11 +134,11 @@ class TaskResource extends Resource
 
                     ->label('Einddatum'),
 
-                ToggleButtons::make('private')
-                    ->label('Prive actie')
-                    ->default(1)
-                    ->boolean()
-                    ->grouped(),
+                // ToggleButtons::make('private')
+                //     ->label('Prive actie')
+                //     ->default(1)
+                //     ->boolean()
+                //     ->grouped(),
 
                 Select::make('type_id')
                     ->options([
@@ -158,16 +157,19 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(
+                Task::where('employee_id', Auth::id())
+            )
             ->columns([
 
                 Tables\Columns\TextColumn::make('id')
-                    ->description(function ($record): ?string {
-                        if ($record?->private) {
-                            return "Priveactie";
-                        } else {
-                            return false;
-                        }
-                    })
+                // ->description(function ($record): ?string {
+                //     if ($record?->private) {
+                //         return "Priveactie";
+                //     } else {
+                //         return false;
+                //     }
+                // })
                     ->label('#')
                     ->sortable()
                     ->getStateUsing(function ($record): ?string {
