@@ -18,12 +18,6 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'chex'       => [
-        'token'      => env('CHEX_TOKEN'),
-        'url'        => env('CHEX_URL'),
-        'company_id' => env('CHEX_COMPANY_ID'),
-    ],
-
     'ses'        => [
         'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
@@ -41,17 +35,23 @@ return [
         ],
     ],
 
+    //API integrations
+
+    'rdw'        => [
+        'url'   => env('RDW_URL', 'https://opendata.rdw.nl/resource'),
+        'token' => env('RDW_TOKEN'),
+    ],
+
     'pro6pp'     => [
-        'url'   => env('3PRO6PP_HOST'),
+        'url'   => env('3PRO6PP_HOST', 'https://api.pro6pp.nl'),
         'token' => env('3PRO6PP_TOKEN'),
     ],
 
     'cargps'     => [
         'token' => env('GPS_TRACKING_KEY', '222'),
-        'url'   => env('GPS_TRACKING_URL'),
+        'url'   => env('GPS_TRACKING_URL', 'https://portaallovetracking.com/api_po/'),
     ],
 
-    //API integrations
     'teamleader' => [
         'client_id'     => env('TEAMLEADER_CLIENT_ID'),
         'client_secret' => env('TEAMLEADER_CLIENT_SECRET'),
@@ -59,4 +59,12 @@ return [
         'state'         => env('TEAMLEADER_STATE', 'FtvPC1SE2h3LVPEJZIsrfaVWTwwn7T0R'),
     ],
 
+    'chex'       => [
+        'token'      => env('CHEX_TOKEN'),
+        'url'        => env('CHEX_URL', 'https://api.chex.nl/api/v1'),
+        'company_id' => env('CHEX_COMPANY_ID'),
+    ],
+
 ];
+
+//ek8t0q4zzqagmmale1uq5yukp

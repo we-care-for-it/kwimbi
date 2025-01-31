@@ -1,6 +1,7 @@
 <?php
 
 use App\Services\GPSTrackingService;
+use App\Services\RDWService;
 use App\Services\TeamleaderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,15 @@ Route::get('/teamleader.access', function () {
     exit;
 });
 
-Route::get('/gpstest', function () {
-    $test = (new GPSTrackingService())->GetObjects();
+Route::get('/rdwtest', function () {
+    $test = (new RDWService())->GetVehilcle('sx-177-g');
+    dd($test);
+    //header("Location: {$teamleader->redirectForAuthorizationUrl()));
+    exit;
+});
+Route::get('/gpstest2', function () {
+
+    $test = (new GPSTrackingService())->GetObjectsData();
     dd($test);
     //header("Location: {$teamleader->redirectForAuthorizationUrl()));
     exit;
