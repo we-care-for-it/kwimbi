@@ -108,3 +108,4 @@
   2   vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php:36
       App\Console\Commands\ImportChex::handle()
 
+^C

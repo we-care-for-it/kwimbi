@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\GPSTrackingService;
+use App\Services\RDWService;
 use App\Services\TeamleaderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +14,20 @@ Route::get('update/elevators', [App\Http\Controllers\UpdateElevatorChecksConroll
 
 Route::get('/teamleader.access', function () {
     $teamleader = new TeamleaderService(config('services.teamleader.client_id'), config('services.teamleader.client_secret'), config('services.teamleader.redirect_url'), config('services.teamleader.state'));
+    //header("Location: {$teamleader->redirectForAuthorizationUrl()));
+    exit;
+});
+
+Route::get('/rdwtest', function () {
+    $test = (new RDWService())->GetVehilcle('sx-177-g');
+    dd($test);
+    //header("Location: {$teamleader->redirectForAuthorizationUrl()));
+    exit;
+});
+Route::get('/gpstest2', function () {
+
+    $test = (new GPSTrackingService())->GetObjectsData();
+    dd($test);
     //header("Location: {$teamleader->redirectForAuthorizationUrl()));
     exit;
 });
