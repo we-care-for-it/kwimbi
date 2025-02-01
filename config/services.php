@@ -52,6 +52,11 @@ return [
         'url'   => env('GPS_TRACKING_URL', 'https://portaallovetracking.com/api_po/'),
     ],
 
+    'tomtom'     => [
+        'token' => env('TOMTOM_TOKEN', '222'),
+        'url'   => env('TOMTOM_URL', 'https://api.tomtom.com/search/2'),
+    ],
+
     'teamleader' => [
         'client_id'     => env('TEAMLEADER_CLIENT_ID'),
         'client_secret' => env('TEAMLEADER_CLIENT_SECRET'),

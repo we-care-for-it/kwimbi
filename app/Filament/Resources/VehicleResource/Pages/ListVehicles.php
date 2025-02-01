@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\VehicleResource\Pages;
 
 use App\Filament\Resources\VehicleResource;
@@ -13,7 +12,12 @@ class ListVehicles extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Voertuig toevoegen')
+                ->slideOver()
+                ->modalHeading('Voortuig toevoegen')
+                ->modalDescription('Vul een kenteken in om de gegevens op te halen')
+                ->modalSubmitActionLabel('Opslaan'),
         ];
     }
 }
