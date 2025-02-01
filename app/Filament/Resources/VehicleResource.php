@@ -2,18 +2,24 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
+use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
+use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 
 class VehicleResource extends Resource
@@ -22,9 +28,107 @@ class VehicleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel  = 'Voortuigen';
-    protected static ?string $pluralModelLabel = 'Voortuigen';
-    protected static ?string $title            = 'Voortuigen';
+    protected static ?string $navigationLabel  = 'Voertuigen';
+    protected static ?string $pluralModelLabel = 'Voertuigen';
+    protected static ?string $title            = 'Voertuigen';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ["kenteken"];
+    }
+
+    public static function getModelLabel(): string
+    {
+        return "Voertuig";
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+
+        return [
+            'Voortuig' => $record->voertuigsoort . " . $record->handelsbenaming  " . $record?->model,
+            'Kleur'    => $record->eerste_kleur,
+            'type'     => $record->inrichting,
+            //      'Bestuurder' => $record?->managementcompany->name ?? "-",
+        ];
+
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist->schema([
+
+            Section::make()
+                ->collapsible()
+                ->description('Live voortuig locatie')
+                ->extraAttributes(['class' => 'flush'])
+                ->compact()
+                ->icon('heroicon-o-map-pin')
+                ->schema([
+                    ViewEntry::make("imei")
+                        ->view("filament.infolists.entries.gpsframe")
+                        ->hiddenLabel()
+                        ->placeholder("Niet opgegeven"),
+                ])
+            ,
+
+            Tabs::make('Tabs')
+                ->tabs([
+                    Tabs\Tab::make('Algemeen')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            // ...
+                        ]),
+                    Tabs\Tab::make('Datums')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+                        ])->columns(3),
+                    Tabs\Tab::make('Mileu & Moter')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+                            TextEntry::make('title'), TextEntry::make('title'),
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+                        ])->columns(3),
+                ]),
+            Tabs::make('Tabs')
+                ->tabs([
+                    Tabs\Tab::make('Opmerking')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            // ...
+                        ]),
+                    Tabs\Tab::make('Gebruiker')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+
+                        ]),
+                    Tabs\Tab::make('Tankpas')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+
+                        ]),
+                    Tabs\Tab::make('Lease maatschappij')
+                        ->icon('heroicon-m-bell')
+                        ->schema([
+                            TextEntry::make('title'),
+                            TextEntry::make('title'),
+
+                        ]),
+
+                ]),
+
+        ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -94,11 +198,6 @@ class VehicleResource extends Resource
 
             ]);
 
-        Section::make()
-            ->schema([
-                // ...
-            ]);
-
     }
 
     public static function table(Table $table): Table
@@ -154,24 +253,35 @@ class VehicleResource extends Resource
                     ->toggleable()
                     ->label('Vervaldatum APK'),
 
+                Tables\Columns\TextColumn::make('gps_imei')
+                    ->sortable()
+                    ->toggleable()
+                    ->badge()
+                    ->label('Tracker'),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make()
+                    ->modalHeading('Voortuig snel bewerken')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->label('Snel bewerken')
+                    ->slideOver(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view("partials.empty-state"));
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\GpsDataRelationManager::class,
         ];
     }
 
@@ -179,8 +289,8 @@ class VehicleResource extends Resource
     {
         return [
             'index' => Pages\ListVehicles::route('/'),
-            //  'create' => Pages\CreateVehicle::route('/create'),
-            'edit'  => Pages\EditVehicle::route('/{record}/edit'),
+            "view"  => Pages\ViewVehicle::route("/{record}"),
         ];
     }
+
 }

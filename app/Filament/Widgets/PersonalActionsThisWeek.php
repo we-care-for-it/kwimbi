@@ -1,37 +1,34 @@
 <?php
-
 namespace App\Filament\Widgets;
 
-use App\Models\Elevator;
+use App\Models\Task;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use App\Models\SystemAction;
 use Illuminate\Support\Facades\Auth;
-use Filament\Tables\Actions\DeleteAction;
+
 class PersonalActionsThisWeek extends BaseWidget
 {
 
-    protected static ?string $heading = "Mijn acties";
+    protected static ?string $heading          = "Mijn acties";
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
-    protected static bool $isLazy = false;
-    protected static ?int $sort = 7;
-
-
+    protected static ?string $maxHeight        = '300px';
+    protected static bool $isLazy              = false;
+    protected static ?int $sort                = 7;
 
     public function table(Table $table): Table
     {
 
         $status_id = null;
-         
-                return $table
 
-                ->query(
-                    SystemAction::where('for_user_id', Auth::id()   )              ->limit(10)
-                )->columns([
+        return $table
 
-    
+            ->query(
+                Task::where('employee_id', Auth::id())
+                    ->limit(10)
+            )->columns([
+
             Tables\Columns\TextColumn::make('private')
                 ->label('Plandatum')
                 ->placeholder('Geen')
@@ -39,11 +36,10 @@ class PersonalActionsThisWeek extends BaseWidget
                 ->dateTime("d-m-Y")
                 ->sortable(),
 
-                Tables\Columns\TextColumn::make('body')
+            Tables\Columns\TextColumn::make('title')
                 ->sortable()
                 ->wrap()
                 ->label('Omschrijving'),
-                
 
             Tables\Columns\TextColumn::make('type_id')
                 ->badge()
@@ -52,7 +48,7 @@ class PersonalActionsThisWeek extends BaseWidget
 
             // Tables\Columns\TextColumn::make('customer.name')
             //     ->sortable()
-           
+
             //     ->placeholder("Geen")
             //     ->label('Relatie'),
 
@@ -62,16 +58,16 @@ class PersonalActionsThisWeek extends BaseWidget
             //     ->label('Bedrijf'),
 
         ])->actions(
-            [       DeleteAction::make()
+            [DeleteAction::make()
 
-            ->modalDescription(
-                "Weet je zeker dat je deze actie wilt voltooien ?"
-            )
+                    ->modalDescription(
+                        "Weet je zeker dat je deze actie wilt voltooien ?"
+                    )
 
-            ->modalIcon('heroicon-o-check')
-            ->modalHeading('Actie voltooien')
-            ->color('danger')
-            ->label('Voltooien'),]
+                    ->modalIcon('heroicon-o-check')
+                    ->modalHeading('Actie voltooien')
+                    ->color('danger')
+                    ->label('Voltooien')]
         )
             ->defaultSort('created_at', 'desc')
             ->emptyState(view("partials.empty-state"))

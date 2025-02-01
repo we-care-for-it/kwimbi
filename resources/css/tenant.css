@@ -182,3 +182,8 @@
   position: static;
   /* collapse WS, preserve LB */
 }
+
+.flush {
+  padding: 0;
+
+}
