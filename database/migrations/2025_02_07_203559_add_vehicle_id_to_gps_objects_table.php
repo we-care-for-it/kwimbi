@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->string('gps_object_id')->nullable();
+        Schema::table('gps_objects', function (Blueprint $table) {
+            $table->string('vehicle_id')->nullable();
         });
+
+        Schema::table('gps_object_data', function (Blueprint $table) {
+            $table->string('vehicle_id')->nullable();
+        });
+
     }
 
     /**
@@ -21,8 +26,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->string('imei')->nullable();
+        Schema::table('gps_objects', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -14,7 +14,7 @@ if (env('CHEX_TOKEN')) {
 if (env('GPS_TRACKING_KEY')) {
     Schedule::call(function () {
         $objects = (new GPSTrackingService())->GetObjects();
-    })->dailyAt('13:00');
+    })->everyMinute('13:00');
 
     Schedule::call(function () {
         $objectsData = (new GPSTrackingService())->GetObjectsData();
