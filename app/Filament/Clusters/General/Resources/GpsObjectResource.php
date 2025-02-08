@@ -3,7 +3,7 @@ namespace App\Filament\Clusters\General\Resources;
 
 use App\Filament\Clusters\General;
 use App\Filament\Clusters\General\Resources\GpsObjectResource\Pages;
-use App\Models\GpsObject;
+use App\Models\gpsObject;
 use App\Models\Vehicle;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GpsObjectResource extends Resource
 {
-    protected static ?string $model = GpsObject::class;
+    protected static ?string $model = gpsObject::class;
 
     protected static ?string $navigationIcon       = 'heroicon-o-rectangle-stack';
     protected static ?string $cluster              = General::class;
