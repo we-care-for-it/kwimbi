@@ -3,10 +3,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
+use App\Models\gpsObject;
 use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -194,6 +196,11 @@ class VehicleResource extends Resource
                             ->label("Vervaldatum APK")
                         ,
 
+                        Select::make('gps_object_id')
+                            ->label('GPS Tracker')
+                            ->options(gpsObject::pluck('imei', 'id'))
+                            ->searchable(),
+
                     ]),
 
             ]);
@@ -253,7 +260,7 @@ class VehicleResource extends Resource
                     ->toggleable()
                     ->label('Vervaldatum APK'),
 
-                Tables\Columns\TextColumn::make('gps_imei')
+                Tables\Columns\TextColumn::make('GPSObject.imei')
                     ->sortable()
                     ->toggleable()
                     ->badge()

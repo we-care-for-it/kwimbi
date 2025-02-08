@@ -43,10 +43,13 @@ final class GPSTrackingService
 
         foreach ($request->json() as $data) {
 
+            //Search
+
             gpsObject::updateOrCreate([
                 'imei' => $data['imei'],
             ], [
                 'active'           => $data['active'],
+
                 'object_expire'    => $data['object_expire'],
                 'model'            => 'vehicle',
                 'object_expire_dt' => $data['object_expire_dt'],
@@ -70,29 +73,40 @@ final class GPSTrackingService
 
         foreach ($request->json() as $imei => $data) {
 
+            $gpsobject    = gpsObject::where('imei', $imei)->first();
+            $response     = (new TomTomService())->GetAddressByCoordinates($data['lat'], $data['lng']);
+            $address_data = json_decode($response);
+
             gpsObjectData::
                 updateOrCreate(
                 [
                     'dt_server' => $data['dt_server'],
                     'imei'      => $imei,
-
                 ], [
 
-                    'dt_server'     => $data['dt_server'],
-                    'dt_tracker'    => $data['dt_tracker'],
-                    'lat'           => $data['lat'],
-                    'lng'           => $data['lng'],
-                    'altitude'      => $data['altitude'] ?? '',
-                    'angle'         => $data['angle'] ?? '',
-                    'speed'         => $data['speed'] ?? '',
-                    'params_gpslev' => $data['params']['gpslev'] ?? '',
-                    'params_pump'   => $data['params']['pump'] ?? '',
-                    'params_track'  => $data['params']['track'] ?? '',
-                    'params_bats'   => $data['params']['bats'] ?? '',
-                    'params_acc'    => $data['params']['acc'] ?? '',
-                    'params_batl'   => $data['params']['batl'] ?? '',
-                    'loc_valid'     => $data['loc_valid'] ?? '',
-                    'imei'          => $imei ?? '',
+                    'dt_server'               => $data['dt_server'],
+                    'dt_tracker'              => $data['dt_tracker'],
+                    'vehicle_id'              => $gpsobject->vehicle_id,
+                    'lat'                     => $data['lat'],
+                    'lng'                     => $data['lng'],
+                    'altitude'                => $data['altitude'] ?? '',
+                    'angle'                   => $data['angle'] ?? '',
+                    'speed'                   => $data['speed'] ?? '',
+                    'params_gpslev'           => $data['params']['gpslev'] ?? '',
+                    'params_pump'             => $data['params']['pump'] ?? '',
+                    'params_track'            => $data['params']['track'] ?? '',
+                    'params_bats'             => $data['params']['bats'] ?? '',
+                    'params_acc'              => $data['params']['acc'] ?? '',
+                    'params_batl'             => $data['params']['batl'] ?? '',
+                    'loc_valid'               => $data['loc_valid'] ?? '',
+                    'imei'                    => $imei ?? '',
+                    'streetNameAndNumber'     => $data?->streetNameAndNumber ?? null,
+                    'countryCode'             => $data?->countryCode ?? null,
+                    'municipalitySubdivision' => $data?->municipality ?? null,
+                    'countryCodeISO3'         => $data?->countryCodeISO3 ?? null,
+                    'countrySubdivisionName'  => $data?->countrySubdivisionName ?? null,
+                    'countrySubdivisionCode'  => $data?->countrySubdivisionCode ?? null,
+                    'zipcode'                 => $data?->extendedPostalCode ?? null,
                 ]);
 
         }

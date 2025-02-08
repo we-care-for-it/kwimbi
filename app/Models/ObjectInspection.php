@@ -44,15 +44,15 @@ class ObjectInspection extends Model
 
         static::saved(function (self $request) {
 
-            $latestinspection = Elevator::query()
+            $elevator_data = Elevator::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
                         ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                         ->where('elevator_id', $request->elevator_id)
                 )->first();
 
             Elevator::where('id', $request->elevator_id)->update([
-                'current_inspection_end_date'  => $latestinspection->end_date ?? null,
-                'current_inspection_status_id' => $latestinspection->status_id ?? null,
+                'current_inspection_end_date'  => $elevator_data->latestInspection->end_date ?? null,
+                'current_inspection_status_id' => $elevator_data->latestInspection->status_id ?? null,
             ]);
 
         });

@@ -47,7 +47,7 @@ class ObjectInspectionResource extends Resource
                         Components\TextEntry::make('elevator.address')
                             ->label("Liftadres")->getStateUsing(function ($record): ?string {
 
-                            if ($record?->elevator->nobo_no) {
+                            if ($record?->elevator?->nobo_no) {
                                 return $record?->elevator?->location?->address . " " . $record?->elevator?->location?->zipcode . " " . $record?->elevator?->location?->place;
                             } else {
                                 return "Niet gekoppeld";

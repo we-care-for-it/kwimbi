@@ -20,12 +20,17 @@ class Vehicle extends Model implements Auditable
 
     public function GpsData()
     {
-        return $this->hasMany(gpsObjectData::class, 'imei', 'gps_imei')->where('params_acc', 0)->orderby('created_at', 'desc');
+        return $this->hasMany(gpsObjectData::class)->where('params_acc', 0)->orderby('created_at', 'desc');
     }
 
     public function GpsDataLatestLocation()
     {
-        return $this->hasOne(gpsObjectData::class, 'imei', 'gps_imei')->where('params_acc', 0)->latest();
+        return $this->hasOne(gpsObjectData::class)->where('params_acc', 0)->latest();
+    }
+
+    public function GPSObject()
+    {
+        return $this->hasOne(gpsObject::class);
     }
 
 }

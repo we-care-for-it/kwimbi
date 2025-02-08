@@ -70,11 +70,11 @@ class GpsDataRelationManager extends RelationManager
 
                     ->label("lng"),
 
-                Forms\Components\TextInput::make("params_acc")
+                // Forms\Components\TextInput::make("params_acc")
 
-                    ->formatStateUsing(fn($record) => $record?->params_acc ?? '0')
+                //     ->formatStateUsing(fn($record) => $record?->params_acc ?? '0')
 
-                ,
+                // ,
 
                 Forms\Components\TextInput::make('km_start')
                     ->label('Begin KM stand')
@@ -83,16 +83,15 @@ class GpsDataRelationManager extends RelationManager
                             ->action(
                                 function (Get $get, Set $set) {
                                     $last_km = gpsObjectData::where(
-                                        "imei",
-                                        $this->getOwnerRecord()->gps_imei
+                                        "vehicle_id",
+                                        $this->getOwnerRecord()->id
                                     )->max('km_end');
-
                                     $set("km_start", $last_km);
 
                                 }))->reactive(),
 
                 Forms\Components\TextInput::make('km_end')
-                    ->label('Eind KM standr')
+                    ->label('Eind KM stand')
                     ->maxLength(255),
 
             ]);
