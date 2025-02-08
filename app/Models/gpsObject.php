@@ -10,4 +10,9 @@ class gpsObject extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
+    public function vehicle()
+    {
+        return $this->hasOne(Vehicle::class);
+    }
+
 }
