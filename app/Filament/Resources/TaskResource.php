@@ -271,7 +271,7 @@ class TaskResource extends Resource
 
                                 break;
                             default:
-                                //code block
+                                return false;
                         }
                     })
 

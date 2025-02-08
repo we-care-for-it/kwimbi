@@ -13,7 +13,6 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 //Form
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 //tables
 use Illuminate\Database\Eloquent\Builder;
@@ -51,12 +50,6 @@ class GpsObjectResource extends Resource
     {
         return $table
             ->columns([
-                ToggleColumn::make('is_active')
-                    ->label('Actief')
-                    ->onColor('success')
-                    ->offColor('danger')
-                    ->width(100),
-
                 TextColumn::make('imei')
                     ->label('imei')
                     ->searchable(),

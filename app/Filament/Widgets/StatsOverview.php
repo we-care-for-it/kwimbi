@@ -86,12 +86,20 @@ class StatsOverview extends BaseWidget
             Stat::make('Goedgekeurd met acties', Elevator::where('current_inspection_status_id', InspectionStatus::APPROVED_ACTIONS)->count())
                 ->chart($inspectionApporovedActionsChart)
                 ->color('warning'),
-
-            Stat::make('Afgekeurd', Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count())
+            Stat::make('Afgekeurd dit jaar', Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count())
                 ->chart($inspectionApporovedActionsChart)
                 ->color('danger'),
+
+            Stat::make('Afgekeurd dit jaar', Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count())
+
+            //   ->description(Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count() * 100 . '%')
+
+                ->color('danger'),
+
             // ->chart($inspectionRejected),
 
         ];
     }
 }
+
+//                    {{count($elevators->where('current_inspection_status_id', 3)->where('management_elevator',1)) /$cnt_managment_elevators * 100}}%
