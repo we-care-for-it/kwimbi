@@ -8,7 +8,7 @@ use Flowframe\Trend\TrendValue;
 
 class ExpiredInspections extends ChartWidget
 {
-    protected static ?string $heading = 'Verlopen keuringen';
+    protected static ?string $heading = 'Verlopen keuringen 2025';
 
     protected static ?int $sort                = 2;
     protected int|string|array $columnSpan = '6';
@@ -21,6 +21,16 @@ class ExpiredInspections extends ChartWidget
         $data = Trend::query(ObjectInspection::where('deleted_at', null))
 
             ->dateColumn('end_date')
+            ->between(
+                start: now()->startOfYear(),
+                end: now()->endOfYear(),
+            )
+            ->perMonth()
+            ->count();
+
+        $data_begin = Trend::query(ObjectInspection::where('deleted_at', null))
+
+            ->dateColumn('executed_datetime')
             ->between(
                 start: now()->startOfYear(),
                 end: now()->endOfYear(),
@@ -54,18 +64,18 @@ class ExpiredInspections extends ChartWidget
             'datasets' => [
 
                 [
-                    'label'           => 'Afgekeurd',
+                    'label'           => 'Verlopen',
                     'backgroundColor' => 'rgb(249, 183, 196)',
                     'borderColor'     => 'rgb(249, 161, 178)',
                     'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),
                 ],
 
-                // [
-                //     'label'           => ' Goedgekeurd',
-                //     'backgroundColor' => 'rgb(133, 202, 143)',
-                //     'borderColor'     => 'rgb(135, 184, 142)',
-                //     'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),
-                // ],
+                [
+                    'label'           => ' Keuringen',
+                    'backgroundColor' => 'rgb(133, 202, 143)',
+                    'borderColor'     => 'rgb(135, 184, 142)',
+                    'data'            => $data_begin->map(fn(TrendValue $value) => round($value->aggregate)),
+                ],
 
                 // [
                 //     'label'           => 'Met acties',
@@ -95,7 +105,7 @@ class ExpiredInspections extends ChartWidget
         return [
             'plugins' => [
                 'legend' => [
-                    'display' => false,
+                    'display' => true,
                 ],
             ],
             'scale'   => [

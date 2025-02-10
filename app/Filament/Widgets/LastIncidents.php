@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Widgets;
 
 use App\Models\ObjectIncident;
@@ -10,11 +9,11 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class LastIncidents extends BaseWidget
 {
 
-    protected static ?int $sort = 15;
+    protected static ?int $sort                = 15;
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
-    protected static ?string $heading = "Laatste storingen";
-    protected static bool $isLazy = false;
+    protected static ?string $maxHeight        = '300px';
+    protected static ?string $heading          = "Laatste storingen";
+    protected static bool $isLazy              = false;
 
     public function table(Table $table): Table
     {
@@ -42,7 +41,7 @@ class LastIncidents extends BaseWidget
                     ->badge(),
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (ObjectIncident $record) {
-                return "admin/objects/" .
+                return "app/objects/" .
                 $record->elevator_id .
                     "?activeRelationManager=1";
             })

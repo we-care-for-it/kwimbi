@@ -75,14 +75,14 @@ class ExpiredChecks extends BaseWidget
 
                 Tables\Columns\TextColumn::make("location.customer.name")
                     ->label("Relatie")->Url(function (object $record) {
-                    return "/admin/customers/" . $record->customer_id . "";
+                    return "/app/customers/" . $record->customer_id . "";
                 })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
 
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
-                return "admin/objects/" .
+                return "app/objects/" .
                 $record->id;
             })
             ->paginated(false);

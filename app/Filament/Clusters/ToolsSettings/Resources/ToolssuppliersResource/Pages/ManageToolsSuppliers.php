@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Filament\Clusters\ToolsSettings\Resources\ToolsSuppliersResource\Pages;
 
 use App\Filament\Clusters\ToolsSettings\Resources\ToolsSuppliersResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ManageRecords;
 use Filament\Actions\Action;
+use Filament\Resources\Pages\ManageRecords;
 
 class ManageToolsSuppliers extends ManageRecords
 {
@@ -17,10 +16,10 @@ class ManageToolsSuppliers extends ManageRecords
     {
         return [
             Action::make('back')
-            ->url(route('filament.admin.resources.tools.index'))
-            ->label('Terug naar gereedschappen') 
-            ->link()
-            ->color('gray'),
+                ->url(route('filament.app.resources.tools.index'))
+                ->label('Terug naar gereedschappen')
+                ->link()
+                ->color('gray'),
             Actions\CreateAction::make()->label('Toevoegen')->modalHeading('Toevoegen'),
         ];
     }

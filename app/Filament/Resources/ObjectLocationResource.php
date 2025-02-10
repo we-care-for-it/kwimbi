@@ -77,7 +77,7 @@ class ObjectLocationResource extends Resource
 
                 TextEntry::make("customer.name")
                     ->label("Relatie")->Url(function (object $record) {
-                    return "/admin/customers/" . $record->customer_id . "";
+                    return "/app/customers/" . $record->customer_id . "";
                 })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
@@ -325,13 +325,13 @@ class ObjectLocationResource extends Resource
                     ->label("Relatie")
                     ->placeholder("Geen relatie gekoppeld")
                     ->searchable()->url(function (ObjectLocation $record) {
-                    return "/admin/customers/" . $record->customer_id . "/edit";
+                    return "/app/customers/" . $record->customer_id . "/edit";
                 }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
                     ->toggleable()
                     ->sortable()->url(function (ObjectLocation $record) {
-                    return "/admin/companies/" . $record->management_id . "";
+                    return "/app/companies/" . $record->management_id . "";
                 })
 
                     ->label("Beheerder")

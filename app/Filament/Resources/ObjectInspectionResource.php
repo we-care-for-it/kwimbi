@@ -292,7 +292,7 @@ class ObjectInspectionResource extends Resource
                 Tables\Columns\TextColumn::make("location.customer.name")
                     ->searchable()
                     ->label("Relatie")->Url(function (object $record) {
-                    return "/admin/customers/" . $record->customer_id . "";
+                    return "/app/customers/" . $record->customer_id . "";
                 })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
@@ -455,7 +455,7 @@ class ObjectInspectionResource extends Resource
 
                         ->icon('heroicon-o-arrow-uturn-left')
                         ->url(function ($record) {
-                            return "/admin/objects/" . $record->id . "?activeRelationManager=3";
+                            return "/app/objects/" . $record->id . "?activeRelationManager=3";
                         }),
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')

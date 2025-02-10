@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Filament\Resources\CustomerResource\RelationManagers;
 
-use App\Models\Customer;
 use App\Models\ObjectLocation;
 use App\Models\ObjectManagementCompany;
 use App\Services\AddressService;
@@ -10,7 +8,6 @@ use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -21,9 +18,6 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Storage;
 
 class LocationsRelationManager extends RelationManager
 {
@@ -35,7 +29,6 @@ class LocationsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\Section::make()->schema([
 
-
                     Grid::make(4)->schema([
                         Forms\Components\TextInput::make("name")->label("Naam"),
                         Forms\Components\TextInput::make("Complexnumber")->label("complexnumber"),
@@ -44,7 +37,7 @@ class LocationsRelationManager extends RelationManager
                             ->searchable()
                             ->label('Beheerder')
                             ->options(ObjectManagementCompany::all()
-                                ->pluck('name', 'id'))
+                                    ->pluck('name', 'id'))
                             ->columnSpan(2),
 //
 //                        Select::make('customer_id')
@@ -53,9 +46,7 @@ class LocationsRelationManager extends RelationManager
 //                            ->options(Customer::all()
 //                                ->pluck('name', 'id')),
 
-
                     ]),
-
 
                     // ...
                 ]),
@@ -70,7 +61,6 @@ class LocationsRelationManager extends RelationManager
                                     Action::make("searchAddressByZipcode")
                                         ->icon("heroicon-m-magnifying-glass")
                                         ->action(function (Get $get, Set $set) {
-
 
                                             $data = (new AddressService())->GetAddress(
                                                 $get("zipcode"),
@@ -104,7 +94,6 @@ class LocationsRelationManager extends RelationManager
                                             }
                                         })
                                 ),
-
 
                             Forms\Components\TextInput::make("address")
                                 ->label("Straatnaam")
@@ -160,8 +149,6 @@ class LocationsRelationManager extends RelationManager
             ])
             ->columns(3);
 
-
-
     }
 
     public function table(Table $table): Table
@@ -169,98 +156,86 @@ class LocationsRelationManager extends RelationManager
         return $table
 
             ->columns([
-        Tables\Columns\TextColumn::make('address')
-            ->getStateUsing(function (ObjectLocation $record): ?string {
+                Tables\Columns\TextColumn::make('address')
+                    ->getStateUsing(function (ObjectLocation $record): ?string {
 
+                        if ($record?->name) {
+                            return $record?->name;
+                        } else {
+                            return $record->address . " - " . $record->zipcode . " - " . $record->place;
+                        }
+                    })
+                    ->searchable()
+                    ->label('Adres')
+                    ->description(function (ObjectLocation $record) {
 
-                if ($record?->name) {
-                    return $record?->name;
-                } else {
-                    return $record->address . " - " . $record->zipcode . " - " . $record->place;
-                }
-            })
-            ->searchable()
-            ->label('Adres')
-            ->description(function (ObjectLocation $record) {
+                        if (! $record?->name) {
+                            return $record?->name;
+                        } else {
+                            return $record->address . " - " . $record->zipcode . "  " . $record->place;
+                        }
 
-                if (!$record?->name) {
-                    return $record?->name;
-                } else {
-                    return $record->address . " - " . $record->zipcode . "  " . $record->place;
-                }
+                    }
+                    ),
 
+                Tables\Columns\TextColumn::make('zipcode')
+                    ->label('Postcode')->searchable()->hidden(true),
 
-            }
-            ),
+                Tables\Columns\TextColumn::make('place')
+                    ->label('Plaats')->searchable()->hidden(true),
 
+                TextColumn::make('objects_count')->counts('objects')->label('Objecten')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
+                TextColumn::make('notes_count')->counts('notes')->label('Notites')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
+                TextColumn::make('attachments_count')->counts('attachments')->label('Bijlages')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
 
-        Tables\Columns\TextColumn::make('zipcode')
-            ->label('Postcode')->searchable()->hidden(true),
+                Tables\Columns\TextColumn::make("managementcompany.name")->sortable()
+                    ->label("Beheerder")->placeholder('Geen beheer gekoppeld')
+                    ->searchable(),
 
-        Tables\Columns\TextColumn::make('place')
-            ->label('Plaats')->searchable()->hidden(true),
+                Tables\Columns\TextColumn::make("building_type")->sortable()
+                    ->label("Gebouwtype")
+                    ->badge()
+                    ->searchable()
+                    ->placeholder('Onbekend'),
+                // Tables\Columns\TextColumn::make('phonenumber')
+                // ->label('Telefoonnummer')
+                // ->searchable()
+                // ->sortable(),
 
+            ])
+            ->filters([
 
-        TextColumn::make('objects_count')->counts('objects')->label('Objecten')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
-        TextColumn::make('notes_count')->counts('notes')->label('Notites')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
-        TextColumn::make('attachments_count')->counts('attachments')->label('Bijlages')->sortable()->badge()->alignment(Alignment::Center)->color('success'),
-
-
-
-        Tables\Columns\TextColumn::make("managementcompany.name")->sortable()
-            ->label("Beheerder")->placeholder('Geen beheer gekoppeld')
-            ->searchable(),
-
-        Tables\Columns\TextColumn::make("building_type")->sortable()
-            ->label("Gebouwtype")
-            ->badge()
-            ->searchable()
-            ->placeholder('Onbekend'),
-        // Tables\Columns\TextColumn::make('phonenumber')
-        // ->label('Telefoonnummer')
-        // ->searchable()
-        // ->sortable(),
-
-
-    ])
-        ->filters(array(
-
-
-
-            Tables\Filters\TrashedFilter::make(),
-        ))->filtersFormColumns(3)
+                Tables\Filters\TrashedFilter::make(),
+            ])->filtersFormColumns(3)
 
             ->headerActions([Tables\Actions\CreateAction::make()
-                ->label("Toevoegen")
-                ->modalWidth(MaxWidth::SixExtraLarge),])
+                    ->label("Toevoegen")
+                    ->modalWidth(MaxWidth::SixExtraLarge)])
 
             // layout: FiltersLayout::AboveContent
-        ->actions([
-
+            ->actions([
 
                 Tables\Actions\Action::make('Download')
                     ->label('Open locatie')->color('success')->icon('heroicon-m-eye')
-            ->url(function (ObjectLocation $record) {
-                return "/admin/object-locations/" .
-                    $record->id;
-            }),
+                    ->url(function (ObjectLocation $record) {
+                        return "/app/object-locations/" .
+                        $record->id;
+                    }),
 
-            Tables\Actions\EditAction::make()  ->modalWidth(MaxWidth::SixExtraLarge),
-            Tables\Actions\DeleteAction::make()
-                ->label(""),
+                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::SixExtraLarge),
+                Tables\Actions\DeleteAction::make()
+                    ->label(""),
 
-        ])
-        ->bulkActions([
-            Tables\Actions\BulkActionGroup::make([
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
 
-                //    ExportBulkAction::make(),
+                    //    ExportBulkAction::make(),
 
-
-                //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
-            ]),
-        ])
-        ->emptyState(view("partials.empty-state"));
-
+                    //      Tables\Actions\DeleteBulkAction::make()->modalHeading('Verwijderen van alle geselecteerde rijen'),
+                ]),
+            ])
+            ->emptyState(view("partials.empty-state"));
 
     }
 }
