@@ -59,7 +59,6 @@ class VehicleResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
-
             Section::make()
                 ->collapsible()
                 ->description('Live voortuig locatie')
@@ -71,31 +70,43 @@ class VehicleResource extends Resource
                         ->view("filament.infolists.entries.gpsframe")
                         ->hiddenLabel()
                         ->placeholder("Niet opgegeven"),
-                ])
-            ,
-
+                ]),
             Tabs::make('Tabs')
                 ->tabs([
                     Tabs\Tab::make('Algemeen')
                         ->icon('heroicon-m-bell')
                         ->schema([
-                            // ...
+                            TextEntry::make('kenteken')->label('Kenteken'),
+                            TextEntry::make('merk')->label('Merk'),
+                            TextEntry::make('handelsbenaming')->label('Handelsbenaming'),
+                            TextEntry::make('inrichting')->label('Inrichting'),
+                            TextEntry::make('eerste_kleur')->label('Eerste Kleur'),
+                            TextEntry::make('tweede_kleur')->label('Tweede Kleur'),
+                            TextEntry::make('variant')->label('Variant'),
+                            TextEntry::make('aantal_deuren')->label('Aantal Deuren'),
+                            TextEntry::make('aantal_wielen')->label('Aantal Wielen'),
+                            TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen'),
+                            TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen'),
                         ]),
                     Tabs\Tab::make('Datums')
                         ->icon('heroicon-m-bell')
                         ->schema([
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
+                            TextEntry::make('vervaldatum_apk')->label('Vervaldatum APK'),
+                            TextEntry::make('datum_tenaamstelling')->label('Datum Tenaamstelling'),
+                            TextEntry::make('datum_eerste_toelating')->label('Datum Eerste Toelating'),
+                            TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Eerste Tenaamstelling in Nederland'),
+                            TextEntry::make('jaar_laatste_registratie_tellerstand')->label('Jaar Laatste Registratie Tellerstand'),
                         ])->columns(3),
                     Tabs\Tab::make('Mileu & Moter')
                         ->icon('heroicon-m-bell')
                         ->schema([
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
-                            TextEntry::make('title'), TextEntry::make('title'),
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
+                            TextEntry::make('aantal_cilinders')->label('Aantal Cilinders'),
+                            TextEntry::make('cilinderinhoud')->label('Cilinderinhoud'),
+                            TextEntry::make('massa_ledig_voortuig')->label('Massa Ledig Voertuig'),
+                            TextEntry::make('toegestane_maxium_massa_voortuig')->label('Toegestane Maximum Massa Voertuig'),
+                            TextEntry::make('maximum_massa_trekken_ongeremd')->label('Maximum Massa Trekken Ongeremd'),
+                            TextEntry::make('maximum_massa_trekken_geremd')->label('Maximum Massa Trekken Geremd'),
+                            TextEntry::make('technische_max_massa_voertuig')->label('Technische Max Massa Voertuig'),
                         ])->columns(3),
                 ]),
             Tabs::make('Tabs')
@@ -110,27 +121,23 @@ class VehicleResource extends Resource
                         ->schema([
                             TextEntry::make('title'),
                             TextEntry::make('title'),
-
                         ]),
                     Tabs\Tab::make('Tankpas')
                         ->icon('heroicon-m-bell')
                         ->schema([
                             TextEntry::make('title'),
                             TextEntry::make('title'),
-
                         ]),
                     Tabs\Tab::make('Lease maatschappij')
                         ->icon('heroicon-m-bell')
                         ->schema([
                             TextEntry::make('title'),
                             TextEntry::make('title'),
-
                         ]),
-
                 ]),
-
         ]);
     }
+    
 
     public static function form(Form $form): Form
     {
