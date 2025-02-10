@@ -16,6 +16,15 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('name');
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+            $table->string('zipcode')->nullable();
+            $table->string('place')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('type_id')->nullable();
+            $table->string('phonenumber')->nullable();
+            
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->softDeletes();
             $table->timestamps();
         });

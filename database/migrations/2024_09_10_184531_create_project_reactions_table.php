@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('project_reactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->SoftDeletes();
             $table->integer('project_id')->nullable();
             $table->longtext('reaction')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('status_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->SoftDeletes();
         });
     }
 

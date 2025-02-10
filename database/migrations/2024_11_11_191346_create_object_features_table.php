@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('object_features', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
-            $table->timestamps();
+
             $table->integer('feature_id')->nullable();
             $table->integer('object_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->string('is_active')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

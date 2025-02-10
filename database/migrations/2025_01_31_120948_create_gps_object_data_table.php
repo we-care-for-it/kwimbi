@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('gps_object_data', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->dateTime('dt_server')->nullable();
             $table->dateTime('dt_tracker')->nullable();
             $table->string('lat')->nullable();
@@ -30,6 +28,24 @@ return new class extends Migration
             $table->string('params_batl')->nullable();
             $table->string('loc_valid')->nullable();
             $table->string('imei')->nullable();
+
+            $table->string('streetNameAndNumber')->nullable();
+            $table->string('countryCode')->nullable();
+            $table->string('municipalitySubdivision')->nullable();
+            $table->string('countryCodeISO3')->nullable();
+            $table->string('countrySubdivisionName')->nullable();
+            $table->string('countrySubdivisionCode')->nullable();
+
+            $table->string('zipcode')->nullable();
+            $table->string('km_start')->nullable();
+            $table->string('km_end')->nullable();
+            $table->string('customer_id')->nullable();
+
+            $table->string('vehicle_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('tools_categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable();
-
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

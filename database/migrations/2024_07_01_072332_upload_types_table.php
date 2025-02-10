@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('upload_types', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
             $table->string('name')->nullable();
             $table->longtext('image')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
@@ -27,6 +25,11 @@ return new class extends Migration
             $table->boolean('visible_object_management_companies')->nullable()->default('0');
             $table->boolean('visible_object_suppliers')->nullable()->default('0');
             $table->boolean('visible_object_maintenance_companies')->nullable()->default('0');
+            $table->boolean('visible_object_attachments')->nullable()->default('0');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes(); 
         });
     }
 

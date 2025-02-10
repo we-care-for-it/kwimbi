@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('wielbasis')->nullable();
             $table->string('aantal_deuren')->nullable();
             $table->string('aantal_wielen')->nullable();
@@ -55,6 +53,9 @@ return new class extends Migration
             $table->date('datum_tenaamstelling_dt')->nullable();
             $table->date('datum_eerste_toelating_dt')->nullable();
             $table->date('vervaldatum_apk_dt')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('elevators', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
-
             $table->string('name')->nullable();
             $table->string('construction_year')->nullable();
             $table->string('unit_no')->nullable();
             $table->string('remark')->nullable();
             $table->string('install_date')->nullable();
-
+            
+            $table->string('type_id')->nullable();
             $table->integer('nobo_no')->nullable();
             $table->integer('address_id')->nullable();
             $table->integer('customer_id')->nullable();
@@ -45,10 +43,12 @@ return new class extends Migration
             $table->string('energy_label')->nullable();
             $table->integer('status_id')->nullable();
             
+            $table->date('current_inspection_end_date')->nullable();
+            $table->integer('current_inspection_status_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             
-
-
-
+            $table->timestamps();
+            $table->softDeletes();
 
         });
     }

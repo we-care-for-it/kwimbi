@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sub_warehouses', function (Blueprint $table) {
-          $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
-          $table->integer('warehouse_id')->nullable();
+            $table->id();
+            $table->integer('warehouse_id')->nullable();
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes(); 
 
         });
     }

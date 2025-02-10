@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('name')->nullable();   
             $table->integer('module_id')->nullable();
             $table->integer('upload_type_id')->nullable();
@@ -22,7 +20,11 @@ return new class extends Migration
             $table->integer('add_by_user')->nullable();     
             $table->string('directory')->nullable();  
             $table->string('filename')->nullable();   
-            $table->string('description')->nullable();   
+            $table->string('description')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes();   
         });
     }
 

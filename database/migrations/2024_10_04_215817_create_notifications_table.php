@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->morphs('notifiable');
             $table->text('data');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

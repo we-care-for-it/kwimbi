@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
+            $table->id(); 
             $table->dateTime('last_edit_at')->nullable();
             $table->integer('last_edit_by')->nullable();
             $table->string('name')->nullable();
@@ -26,6 +24,19 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
+
+            $table->string('api_uuid')->nullable();
+            $table->string('api_url')->nullable();
+            $table->string('source')->nullable();
+            $table->string('bic')->nullable();
+            $table->string('iban')->nullable();
+            $table->string('language')->nullable();
+            $table->string('country')->nullable();
+            $table->boolean('is_active')->nullable()->default('1');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

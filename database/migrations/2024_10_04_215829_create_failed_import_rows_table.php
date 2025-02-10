@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('data');
             $table->foreignId('import_id')->constrained()->cascadeOnDelete();
             $table->text('validation_error')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamps();
         });
     }

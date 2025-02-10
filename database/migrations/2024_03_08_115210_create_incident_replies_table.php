@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('incident_replies', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->longtext('message')->nullable();
             $table->integer('status_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('incident_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
          
         });
     }

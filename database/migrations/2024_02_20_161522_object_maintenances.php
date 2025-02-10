@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('object_maintenances', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->date('plan_date')->nullable();
             $table->integer('status_id')->nullable();
             $table->date('execution_date')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
             $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

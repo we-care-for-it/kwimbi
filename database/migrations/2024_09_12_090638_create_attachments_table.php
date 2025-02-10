@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('model');
             $table->string('filename');
             $table->string('original_filename')->nullable();
@@ -23,6 +21,9 @@ return new class extends Migration
             $table->string('size')->nullable();         
             $table->string('user_id');
             $table->integer('item_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

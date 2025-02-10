@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('object_inspection_data', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('action_id')->nullable();
             $table->integer('inspection_id')->nullable();
             $table->string('zin_code')->nullable();
             $table->longtext('comment')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
+            $table->string('schedule_run_token')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('logout_at')->nullable();
             $table->boolean('cleared_by_user')->default(false);
             $table->json('location')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
         });
     }
 

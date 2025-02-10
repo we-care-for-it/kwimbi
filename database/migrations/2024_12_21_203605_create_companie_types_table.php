@@ -18,6 +18,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
         });
     }
 
