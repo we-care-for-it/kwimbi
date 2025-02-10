@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('name')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('place')->nullable();
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

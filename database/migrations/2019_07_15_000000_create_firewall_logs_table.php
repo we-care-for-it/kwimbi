@@ -20,11 +20,12 @@ class CreateFirewallLogsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->text('url')->nullable();
             $table->string('referrer')->nullable();
-            $table->text('request')->nullable();
+            $table->text('request')->nullable();            
+            $table->index('ip');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            
             $table->timestamps();
             $table->softDeletes();
-
-            $table->index('ip');
         });
     }
 

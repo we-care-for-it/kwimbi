@@ -14,8 +14,14 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('name');
+
+            $table->string('zipcode')->nullable();
+            $table->string('place')->nullable();
+            $table->string('address')->nullable();
+            $table->integer('type_id')->nullable();
+            $table->string('phonenumber')->nullable();
+            
             $table->softDeletes();
             $table->timestamps();
         });

@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('work_types', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
+            $table->id(); 
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

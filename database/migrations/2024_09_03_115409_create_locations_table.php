@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
             $table->string('name');
             $table->string('street')->nullable();
             $table->string('house_number')->nullable();
@@ -22,6 +21,8 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('phone_number')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
             $table->softDeletes();
             $table->timestamps();
         });

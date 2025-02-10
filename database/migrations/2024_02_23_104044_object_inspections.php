@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('object_inspections', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->date('executed_datetime')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('status_id')->nullable();
@@ -22,6 +20,16 @@ return new class extends Migration
             $table->longtext('document')->nullable();
             $table->longtext('certification')->nullable();
             $table->integer('elevator_id')->references('id')->on('elevators')->nullable();
+            $table->string('inspection_company_id')->nullable();
+            $table->string('nobo_number')->nullable();
+            $table->string('if_match')->nullable();
+            $table->string('type')->nullable();
+            $table->string('external_uuid')->nullable();
+            $table->string('schedule_run_token')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

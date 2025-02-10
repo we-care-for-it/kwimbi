@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tools_inspection_companies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
+            $table->id(); 
             $table->string('name')->nullable();
             $table->string('zipcode')->nullable();     
             $table->string('place')->nullable();
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
-       
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

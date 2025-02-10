@@ -28,9 +28,11 @@ return new class extends Migration
             $table->bigIncrements('id'); // permission id
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->unique(['name', 'guard_name']);
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            
             $table->timestamps();
 
-            $table->unique(['name', 'guard_name']);
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
@@ -47,6 +49,9 @@ return new class extends Migration
             } else {
                 $table->unique(['name', 'guard_name']);
             }
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $pivotPermission, $teams) {
@@ -70,6 +75,7 @@ return new class extends Migration
                 $table->primary([$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
                     'model_has_permissions_permission_model_type_primary');
             }
+            $table->foreignId('company_id')->nullable()->constrained('companies');
 
         });
 
@@ -94,6 +100,8 @@ return new class extends Migration
                 $table->primary([$pivotRole, $columnNames['model_morph_key'], 'model_type'],
                     'model_has_roles_role_model_type_primary');
             }
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
         });
 
         Schema::create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames, $pivotRole, $pivotPermission) {
@@ -111,6 +119,8 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             $table->primary([$pivotPermission, $pivotRole], 'role_has_permissions_permission_id_role_id_primary');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
         });
 
         app('cache')

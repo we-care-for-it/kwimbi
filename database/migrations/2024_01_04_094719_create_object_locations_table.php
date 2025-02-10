@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('object_locations', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('name')->nullable();
-$table->longtext('image')->nullable();
+            $table->longtext('image')->nullable();
 
             $table->string('zipcode')->nullable();     
             $table->string('place')->nullable();
@@ -31,7 +29,7 @@ $table->longtext('image')->nullable();
             $table->integer('access_type_id')->nullable();
             $table->longtext('remark')->nullable();
 
- $table->string('access_code')->nullable();
+            $table->string('access_code')->nullable();
             $table->string('gps_lat')->nullable();
             $table->string('gps_lon')->nullable();
             $table->string('levels')->nullable();
@@ -44,9 +42,10 @@ $table->longtext('image')->nullable();
             $table->string('housenumber')->nullable();
             $table->string('construction_year')->nullable();
             $table->string('building_access_type_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             
-            
-
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

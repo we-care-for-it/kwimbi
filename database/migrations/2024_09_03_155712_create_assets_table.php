@@ -22,7 +22,7 @@ return new class extends Migration
 
         Schema::create('asset_brands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->string('name');
             $table->timestamps();
         });
@@ -34,12 +34,14 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', total: 12, places: 2)->nullable();
             $table->json('metadata')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
             $table->timestamps();
         });
 
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->foreignId('category_id')->nullable()->constrained('asset_categories');
             $table->foreignId('model_id')->nullable()->constrained('asset_models');
             $table->foreignId('location_id')->nullable()->constrained('locations');

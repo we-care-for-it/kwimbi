@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('upload_type_modules', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->integer('module_id')->nullable();
             $table->integer('upload_type_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

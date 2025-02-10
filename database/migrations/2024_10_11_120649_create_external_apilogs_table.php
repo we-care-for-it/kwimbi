@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('external_apilogs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('model')->nullable();
             $table->string('logitem')->nullable();
             $table->string('model_sub')->nullable();
             $table->string('schedule_run_token')->nullable();
             $table->string('status_id')->nullable();
-            
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+
         });
     }
 

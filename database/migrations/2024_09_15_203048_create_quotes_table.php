@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('external_uuid')->nullable();
             $table->string('number')->nullable();
             $table->string('type_id')->nullable();
@@ -28,6 +26,9 @@ return new class extends Migration
             $table->integer('project_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

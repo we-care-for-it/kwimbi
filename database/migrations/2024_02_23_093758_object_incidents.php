@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('object_incidents', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
             $table->string('subject')->nullable();
             $table->longtext('description')->nullable();
@@ -27,6 +25,10 @@ return new class extends Migration
 
             $table->integer('type_id')->nullable();
             $table->dateTime('report_date_time')->nullable();
+            
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

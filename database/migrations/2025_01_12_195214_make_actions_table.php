@@ -20,8 +20,18 @@ return new class extends Migration
             $table->integer('priority')->nullable();  
             $table->integer('item_id')->nullable();    
             $table->integer('company_id')->nullable();    
-            $table->integer('status_id')->default(1)->nullable();    
-            $table->string('model')->nullable();    
+            $table->integer('status_id')->default(1)->nullable();
+            $table->integer('type_id')->default(3)->nullable();
+            $table->integer('relation_id')->nullable();    
+            $table->string('model')->nullable();
+
+            $table->date('plan_date')->nullable();
+            $table->time('plan_time')->nullable();
+            $table->integer('private')->nullable();   
+            $table->time('private_action')->default(0)->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            
+            $table->softDeletes();  
             $table->timestamps();
     });
     }

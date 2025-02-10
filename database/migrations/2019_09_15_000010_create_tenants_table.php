@@ -33,6 +33,8 @@ class CreateTenantsTable extends Migration
 
             $table->json('data')->nullable();
 
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            
             $table->timestamps();
         });
     }

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +16,24 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->date('date_of_birth')->nullable();
+            $table->string('private_email')->nullable();
+            $table->string('private_phone')->nullable();
+            $table->string('private_street')->nullable();
+            $table->string('private_house_number')->nullable();
+            $table->string('private_house_number_addition')->nullable();
+            $table->string('private_postal_code')->nullable();
+            $table->string('private_city')->nullable();
+            $table->string('private_country')->nullable();
+
+            $table->integer('customer_id')->nullable();
+            $table->string('theme')->nullable()->default('default');
+            $table->string('theme_color')->nullable();
+            $table->json('custom_fields')->nullable();
+            $table->string(config('filament-edit-profile.avatar_column', 'avatar_url'))->nullable();
+
+            // $table->foreignId('company_id')->nullable()->constrained('companies');
+            
             $table->rememberToken();
             $table->timestamps();
         });
@@ -25,6 +42,7 @@ return new class extends Migration
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
+            // $table->foreignId('company_id')->nullable()->constrained('companies');
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -34,6 +52,7 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+            // $table->foreignId('company_id')->nullable()->constrained('companies');
         });
     }
 

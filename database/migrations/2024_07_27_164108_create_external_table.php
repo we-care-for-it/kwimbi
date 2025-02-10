@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('external', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes(); 
             $table->string('name')->nullable();
             $table->dateTime('last_connection')->nullable();
             $table->string('last_status')->nullable();
             $table->string('last_message')->nullable();
             $table->integer('module_id')->nullable();
- 	   $table->boolean('is_active')->nullable()->default('1');
-      $table->string('token_1')->nullable();
-      $table->string('token_2')->nullable();
-	    $table->string('password')->nullable();
+ 	        $table->boolean('is_active')->nullable()->default('1');
+            $table->string('token_1')->nullable();
+            $table->string('token_2')->nullable();
+	        $table->string('password')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
+            $table->timestamps();
+            $table->softDeletes(); 
 
 
 

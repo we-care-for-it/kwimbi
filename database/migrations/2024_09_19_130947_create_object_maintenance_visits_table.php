@@ -12,8 +12,6 @@ return new class extends Migration {
     {
         Schema::create('object_maintenance_visits', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->softDeletes();
             $table->date('planning_date')->nullable();
             $table->date('execution_date')->nullable();
             $table->integer('status_id')->nullable();
@@ -22,8 +20,9 @@ return new class extends Migration {
             $table->integer('elevator_id')->nullable();
             $table->longText('remark')->nullable();
 	        $table->longText('document')->nullable();
-
-
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
