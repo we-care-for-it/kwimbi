@@ -10,23 +10,23 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   
+    {
         Schema::create('contacts', function (Blueprint $table) {
-        $table->longtext('image')->nullable();
-        $table->id();
-        $table->string('first_name');
-        $table->string('last_name');
-        $table->string('email')->nullable();
-        $table->string('department')->nullable();
-        $table->integer('company_id')->nullable();
-        $table->string('function')->nullable();
-        $table->string('linkedin')->nullable();
-        $table->string('phone_number', 15)->nullable(); 
-        $table->string('mobile_number', 15)->nullable();
-        $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->longtext('image')->nullable();
+            $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->nullable();
+            $table->string('department')->nullable();
+            $table->integer('company')->nullable();
+            $table->string('function')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('phone_number', 15)->nullable();
+            $table->string('mobile_number', 15)->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
 
-        $table->timestamps();
-    });
+            $table->timestamps();
+        });
     }
 
     /**
