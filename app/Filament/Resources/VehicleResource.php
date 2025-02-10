@@ -71,72 +71,78 @@ class VehicleResource extends Resource
                         ->hiddenLabel()
                         ->placeholder("Niet opgegeven"),
                 ]),
-            Tabs::make('Tabs')
-                ->tabs([
-                    Tabs\Tab::make('Algemeen')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('kenteken')->label('Kenteken'),
-                            TextEntry::make('merk')->label('Merk'),
-                            TextEntry::make('handelsbenaming')->label('Handelsbenaming'),
-                            TextEntry::make('inrichting')->label('Inrichting'),
-                            TextEntry::make('eerste_kleur')->label('Eerste Kleur'),
-                            TextEntry::make('tweede_kleur')->label('Tweede Kleur'),
-                            TextEntry::make('variant')->label('Variant'),
-                            TextEntry::make('aantal_deuren')->label('Aantal Deuren'),
-                            TextEntry::make('aantal_wielen')->label('Aantal Wielen'),
-                            TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen'),
-                            TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen'),
-                        ]),
-                    Tabs\Tab::make('Datums')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('vervaldatum_apk')->label('Vervaldatum APK'),
-                            TextEntry::make('datum_tenaamstelling')->label('Datum Tenaamstelling'),
-                            TextEntry::make('datum_eerste_toelating')->label('Datum Eerste Toelating'),
-                            TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Eerste Tenaamstelling in Nederland'),
-                            TextEntry::make('jaar_laatste_registratie_tellerstand')->label('Jaar Laatste Registratie Tellerstand'),
-                        ])->columns(3),
-                    Tabs\Tab::make('Mileu & Moter')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('aantal_cilinders')->label('Aantal Cilinders'),
-                            TextEntry::make('cilinderinhoud')->label('Cilinderinhoud'),
-                            TextEntry::make('massa_ledig_voortuig')->label('Massa Ledig Voertuig'),
-                            TextEntry::make('toegestane_maxium_massa_voortuig')->label('Toegestane Maximum Massa Voertuig'),
-                            TextEntry::make('maximum_massa_trekken_ongeremd')->label('Maximum Massa Trekken Ongeremd'),
-                            TextEntry::make('maximum_massa_trekken_geremd')->label('Maximum Massa Trekken Geremd'),
-                            TextEntry::make('technische_max_massa_voertuig')->label('Technische Max Massa Voertuig'),
-                        ])->columns(3),
-                ]),
-            Tabs::make('Tabs')
-                ->tabs([
-                    Tabs\Tab::make('Opmerking')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            // ...
-                        ]),
-                    Tabs\Tab::make('Gebruiker')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
-                        ]),
-                    Tabs\Tab::make('Tankpas')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
-                        ]),
-                    Tabs\Tab::make('Lease maatschappij')
-                        ->icon('heroicon-m-bell')
-                        ->schema([
-                            TextEntry::make('title'),
-                            TextEntry::make('title'),
-                        ]),
-                ]),
+    
+            Tabs::make('Tabs')->tabs([
+                Tabs\Tab::make('Algemeen')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('kenteken')->label('Kenteken')->placeholder('-'),
+                        TextEntry::make('merk')->label('Merk')->placeholder('-'),
+                        TextEntry::make('handelsbenaming')->label('Handelsbenaming')->placeholder('-'),
+                        TextEntry::make('inrichting')->label('Inrichting')->placeholder('-'),
+                        TextEntry::make('eerste_kleur')->label('Eerste Kleur')->placeholder('-'),
+                        TextEntry::make('tweede_kleur')->label('Tweede Kleur')->placeholder('-'),
+                        TextEntry::make('variant')->label('Variant')->placeholder('-'),
+                        TextEntry::make('aantal_deuren')->label('Aantal Deuren')->placeholder('-'),
+                        TextEntry::make('aantal_wielen')->label('Aantal Wielen')->placeholder('-'),
+                        TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen')->placeholder('-'),
+                        TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen')->placeholder('-'),
+                    ])->columns(3),
+    
+                Tabs\Tab::make('Datums')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('vervaldatum_apk')->label('Vervaldatum APK')->placeholder('-'),
+                        TextEntry::make('datum_tenaamstelling')->label('Datum Tenaamstelling')->placeholder('-'),
+                        TextEntry::make('datum_eerste_toelating')->label('Datum Eerste Toelating')->placeholder('-'),
+                        TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Eerste Tenaamstelling in Nederland')->placeholder('-'),
+                        TextEntry::make('jaar_laatste_registratie_tellerstand')->label('Jaar Laatste Registratie Tellerstand')->placeholder('-'),
+                    ])->columns(3),
+    
+                Tabs\Tab::make('Mileu & Moter')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('aantal_cilinders')->label('Aantal Cilinders')->placeholder('-'),
+                        TextEntry::make('cilinderinhoud')->label('Cilinderinhoud')->placeholder('-'),
+                        TextEntry::make('massa_ledig_voortuig')->label('Massa Ledig Voertuig')->placeholder('-'),
+                        TextEntry::make('toegestane_maxium_massa_voortuig')->label('Toegestane Maximum Massa Voertuig')->placeholder('-'),
+                        TextEntry::make('maximum_massa_trekken_ongeremd')->label('Maximum Massa Trekken Ongeremd')->placeholder('-'),
+                        TextEntry::make('maximum_massa_trekken_geremd')->label('Maximum Massa Trekken Geremd')->placeholder('-'),
+                        TextEntry::make('technische_max_massa_voertuig')->label('Technische Max Massa Voertuig')->placeholder('-'),
+                    ])->columns(3),
+            ]),
+    
+            Tabs::make('Tabs')->tabs([
+                Tabs\Tab::make('Opmerking')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        // ...
+                    ]),
+    
+                Tabs\Tab::make('Gebruiker')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('title')->placeholder('-'),
+                        TextEntry::make('title')->placeholder('-'),
+                    ]),
+    
+                Tabs\Tab::make('Tankpas')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('title')->placeholder('-'),
+                        TextEntry::make('title')->placeholder('-'),
+                    ]),
+    
+                Tabs\Tab::make('Lease maatschappij')
+                    ->icon('heroicon-m-bell')
+                    ->schema([
+                        TextEntry::make('title')->placeholder('-'),
+                        TextEntry::make('title')->placeholder('-'),
+                    ]),
+            ]),
         ]);
     }
+    
     
 
     public static function form(Form $form): Form
