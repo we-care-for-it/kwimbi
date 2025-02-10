@@ -353,7 +353,7 @@ class ObjectResource extends Resource
 
                         Components\TextEntry::make("customer.name")
                             ->label("Relatie")->Url(function (object $record) {
-                            return "/admin/customers/" . $record->customer_id . "";
+                            return "/app/customers/" . $record->customer_id . "";
                         })
                             ->icon("heroicon-c-link")
                             ->placeholder("Niet opgegeven"),

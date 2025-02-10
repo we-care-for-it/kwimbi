@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\ToolsResource\Pages;
 
 use App\Filament\Resources\ToolsResource;
@@ -10,7 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditTools extends EditRecord
 {
     protected static string $resource = ToolsResource::class;
-    protected static ?string $title = 'Gereedschap - Wijzigen';
+    protected static ?string $title   = 'Gereedschap - Wijzigen';
 
     public function getRelationManagers(): array
     {
@@ -22,7 +21,7 @@ class EditTools extends EditRecord
         return [
 
             Action::make('back')
-                ->url(route('filament.admin.resources.tools.index'))
+                ->url(route('filament.app.resources.tools.index'))
                 ->label('Afbreken')
                 ->link()
                 ->color('gray'),
@@ -34,7 +33,6 @@ class EditTools extends EditRecord
     {
         return $this->previousUrl ?? $this->getResource()::getUrl('index');
     }
-
 
 //    public function getHeading(): string
 //    {

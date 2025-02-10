@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectsResource\Pages;
@@ -23,20 +22,16 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-
 class ProjectsResource extends Resource
 {
-    protected static ?string $model = Project::class;
-    protected static ?string $title = "Projecten";
+    protected static ?string $model             = Project::class;
+    protected static ?string $title             = "Projecten";
     protected static ?string $SearchResultTitle = "Projecten";
- 
+
     protected static ?string $navigationLabel = "Projecten";
-    protected static ?string $navigationIcon = "heroicon-o-archive-box";
-    protected static bool $isLazy = false;
- 
+    protected static ?string $navigationIcon  = "heroicon-o-archive-box";
+    protected static bool $isLazy             = false;
 
-
- 
     protected static ?string $pluralModelLabel = 'Projecten';
 
     // public static function getGlobalSearchResultDetails(Model $record): array
@@ -59,16 +54,15 @@ class ProjectsResource extends Resource
         return $form
             ->schema([
 
-
                 Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
-                            "sm" => 2,
-                            "md" => 2,
-                            "lg" => 2,
-                            "xl" => 2,
-                            "2xl" => 2,
+                            "sm"      => 2,
+                            "md"      => 2,
+                            "lg"      => 2,
+                            "xl"      => 2,
+                            "2xl"     => 2,
                         ])->schema([
                             Forms\Components\TextInput::make("name")
                                 ->label("Omschrijving")
@@ -78,21 +72,20 @@ class ProjectsResource extends Resource
 
                             TextInput::make("description")
                                 ->label("Opmerking")
-                                ->columnSpan("full")
+                                ->columnSpan("full"),
                         ]),
                     ])
                     ->columnSpan(["lg" => 2]),
-
 
                 Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
-                            "sm" => 2,
-                            "md" => 2,
-                            "lg" => 2,
-                            "xl" => 2,
-                            "2xl" => 2,
+                            "sm"      => 2,
+                            "md"      => 2,
+                            "lg"      => 2,
+                            "xl"      => 2,
+                            "2xl"     => 2,
                         ])->schema([
                             DatePicker::make("requestdate")->label(
                                 "Aanvraagdatum"
@@ -112,11 +105,11 @@ class ProjectsResource extends Resource
                     ->schema([
                         Grid::make([
                             "default" => 2,
-                            "sm" => 2,
-                            "md" => 2,
-                            "lg" => 2,
-                            "xl" => 2,
-                            "2xl" => 2,
+                            "sm"      => 2,
+                            "md"      => 2,
+                            "lg"      => 2,
+                            "xl"      => 2,
+                            "2xl"     => 2,
                         ])->schema(
                             components: [
                                 TextInput::make("budget_costs")
@@ -135,9 +128,8 @@ class ProjectsResource extends Resource
                                         )->pluck("name", "id")
                                     )->columnSpan("full"),
                             ]
-                        )
+                        ),
                     ])->columnSpan(1),
-
 
                 Section::make()
                     ->schema([
@@ -189,7 +181,7 @@ class ProjectsResource extends Resource
                     ->wrap()
 
                     ->description(function (Project $record) {
-                        if (!$record?->description) {
+                        if (! $record?->description) {
                             return false;
                         } else {
                             return $record->description;
@@ -201,8 +193,8 @@ class ProjectsResource extends Resource
                         return $record?->customer->name;
                     })
                     ->url(function (Project $record) {
-                        return "/admin/customers/" .
-                            $record->customer_id .
+                        return "/app/customers/" .
+                        $record->customer_id .
                             "/edit";
                     })
                     ->searchable()
@@ -210,14 +202,14 @@ class ProjectsResource extends Resource
                     ->verticalAlignment(VerticalAlignment::Start)
                     ->label("Adres")
                     ->description(function (Project $record) {
-                        if (!$record?->location_id) {
+                        if (! $record?->location_id) {
                             return "Geen locatie gekoppeld";
                         } else {
                             return $record->location?->address .
-                                " - " .
-                                $record->location?->zipcode .
-                                "  " .
-                                $record->location?->place;
+                            " - " .
+                            $record->location?->zipcode .
+                            "  " .
+                            $record->location?->place;
                         }
                     }),
 
@@ -225,11 +217,11 @@ class ProjectsResource extends Resource
                     ->label("Looptijd")
                     ->getStateUsing(function (Project $record): ?string {
                         $startdate = $record->startdate
-                            ? date("d-m-Y", strtotime($record?->startdate))
-                            : "nodate";
+                        ? date("d-m-Y", strtotime($record?->startdate))
+                        : "nodate";
                         $enddate = $record->enddate
-                            ? date("d-m-Y", strtotime($record?->enddate))
-                            : "nodate";
+                        ? date("d-m-Y", strtotime($record?->enddate))
+                        : "nodate";
 
                         if ($record->enddate || $record->$startdate) {
                             return $startdate . " - " . $enddate;
@@ -257,8 +249,8 @@ class ProjectsResource extends Resource
                     ->color(
                         fn($record) => strtotime($record?->date_of_execution) <
                         time()
-                            ? "danger"
-                            : "success"
+                        ? "danger"
+                        : "success"
                     ),
 
                 Tables\Columns\TextColumn::make("status.name")
@@ -279,7 +271,6 @@ class ProjectsResource extends Resource
                     ->label("Reacties")
                     ->alignment('center'),
 
-
             ])
             ->filters([
                 SelectFilter::make("status_id")
@@ -296,10 +287,9 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->preload(),
 
-
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Open details')
+                Tables\Actions\EditAction::make()->label('Open details'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -314,17 +304,17 @@ class ProjectsResource extends Resource
         return [
             RelationManagers\ReactionsRelationManager::class,
             //RelationManagers\UploadsRelationManager::class,
-            RelationManagers\QuotesRelationManager::class
+            RelationManagers\QuotesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            "index" => Pages\ListProjects::route("/"),
+            "index"  => Pages\ListProjects::route("/"),
             "create" => Pages\CreateProjects::route("/create"),
             //  'view' => Pages\ViewProjects::route('/{record}') ,
-            "edit" => Pages\EditProjects::route("/{record}/edit"),
+            "edit"   => Pages\EditProjects::route("/{record}/edit"),
         ];
     }
 }

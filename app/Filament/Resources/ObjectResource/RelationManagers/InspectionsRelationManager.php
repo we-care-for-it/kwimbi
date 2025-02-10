@@ -229,7 +229,7 @@ class InspectionsRelationManager extends RelationManager
                     , Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
-                            return "/admin/object-inspections/" .
+                            return "/app/object-inspections/" .
                             $record->id;
                         }),
 
@@ -238,7 +238,7 @@ class InspectionsRelationManager extends RelationManager
             ])
 
             ->recordUrl(function ($record) {
-                return "/admin/object-inspections/" . $record->id;
+                return "/app/object-inspections/" . $record->id;
             })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

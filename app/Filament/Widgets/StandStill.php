@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Widgets;
 
 use App\Models\Elevator;
@@ -10,11 +9,11 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class StandStill extends BaseWidget
 {
 
-    protected static ?int $sort = 12;
-    protected static ?string $heading = "Stilstaande liften";
+    protected static ?int $sort                = 12;
+    protected static ?string $heading          = "Stilstaande liften";
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
-    protected static bool $isLazy = false;
+    protected static ?string $maxHeight        = '300px';
+    protected static bool $isLazy              = false;
 
     public function table(Table $table): Table
     {
@@ -57,7 +56,7 @@ class StandStill extends BaseWidget
                     ->placeholder("Geen unitnummer"),
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
-                return "admin/objects/" .
+                return "app/objects/" .
                 $record->id .
                     "?activeRelationManager=1";
             })

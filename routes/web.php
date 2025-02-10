@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->to('/admin');
+    return redirect()->to('/app');
 });
 
 Route::get('update/elevators', [App\Http\Controllers\UpdateElevatorChecksConroller::class, 'update']);

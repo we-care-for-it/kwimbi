@@ -1,28 +1,26 @@
 <?php
-
 namespace App\Filament\Resources\ToolsResource\Pages;
 
 use App\Filament\Resources\ToolsResource;
 use Filament\Actions;
-use Filament\Resources\Pages\ViewRecord;
 use Filament\Actions\Action;
+use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Enums\MaxWidth;
- 
+
 class ViewTools extends ViewRecord
 {
     protected static string $resource = ToolsResource::class;
 
     protected function getHeaderActions():
-    array
-    {
+    array {
         return [
             Action::make('back')
-            ->url(route('filament.admin.resources.tools.index'))
-            ->label('Terug naar overzicht') 
-            ->link()
-            ->color('gray'),
-            Actions\EditAction::make()->icon('heroicon-m-pencil-square')  ->modalWidth(MaxWidth::SevenExtraLarge),
-            Actions\DeleteAction::make()->icon('heroicon-m-trash')
+                ->url(route('filament.app.resources.tools.index'))
+                ->label('Terug naar overzicht')
+                ->link()
+                ->color('gray'),
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')->modalWidth(MaxWidth::SevenExtraLarge),
+            Actions\DeleteAction::make()->icon('heroicon-m-trash'),
         ];
     }
     public function getHeading(): string
@@ -33,9 +31,5 @@ class ViewTools extends ViewRecord
     {
         return $this->getRecord()->name;
     }
-
-
-
-
 
 }

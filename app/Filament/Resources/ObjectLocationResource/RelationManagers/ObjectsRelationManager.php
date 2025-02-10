@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
-use App\Models\Elevator;
+use App\Enums\ElevatorStatus;
 use App\Models\Company;
 use App\Models\ObjectType;
 use Filament\Forms;
@@ -12,28 +11,25 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
-use App\Enums\ElevatorStatus;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+
 //Form
 
 //Table
 
-
 class ObjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'Objects';
-    protected static ?string $title = 'Objecten';
+    protected static ?string $title       = 'Objecten';
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
         return $ownerRecord->objects->count();
-
 
     }
 
@@ -42,13 +38,11 @@ class ObjectsRelationManager extends RelationManager
         return $form
             ->schema([
 
-
                 Grid::make([
                     'default' => 2,
 
                 ])
                     ->schema([
-
 
                         Forms\Components\TextInput::make("name")
                             ->label("Naam"),
@@ -59,31 +53,25 @@ class ObjectsRelationManager extends RelationManager
                             ->maxLength(255),
 
                         Forms\Components\TextInput::make('nobo_no')
-                        ->required()
+                            ->required()
                             ->numeric()
                             ->maxLength(255),
-
 
                         Select::make('object_type_id')
                             ->label('Type')
                             ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
 
-
                         Select::make('maintenance_company_id')
                             ->label('Onderhoudspartij')
-                            ->options(Company::where('type_id',1)->pluck("name", "id")),
+                            ->options(Company::where('type_id', 1)->pluck("name", "id")),
 
-
-                            Select::make('status_id')
+                        Select::make('status_id')
                             ->label("Status")->required()
-                            ->options(ElevatorStatus::class) ,
-        
+                            ->options(ElevatorStatus::class),
 
-                    ])
-
+                    ]),
 
             ]);
-
 
     }
 
@@ -96,13 +84,12 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Nummer')->searchable()->sortable()
                     ->placeholder('Geen unitnummer'),
 
-                Tables\Columns\TextColumn::make('name') 
+                Tables\Columns\TextColumn::make('name')
                     ->label('Naam')->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('nobo_no')
                     ->label('Nobonummer')->searchable()
                     ->placeholder('Geen Nobonummer'),
-
 
                 TextColumn::make('inspections_count')->counts('inspections')
                     ->label('Keuringen')
@@ -110,19 +97,16 @@ class ObjectsRelationManager extends RelationManager
                     ->badge()
                     ->alignment(Alignment::Center),
 
-
                 TextColumn::make('maintenance_count')->counts('maintenance')
                     ->label('Onderhoudsbeurten')
                     ->sortable()
                     ->badge()
                     ->alignment(Alignment::Center),
 
-
                 Tables\Columns\TextColumn::make('type.name')
                     ->label('Type')->searchable()
                     ->badge()
                     ->placeholder('Onbekend'),
-
 
 //                Tables\Columns\TextColumn::make('location.managementcompany.name')
 //                    ->searchable()
@@ -132,7 +116,6 @@ class ObjectsRelationManager extends RelationManager
                     ->searchable()->placeholder('Geen onderhoudspartij')
                     ->sortable()
                     ->label('Onderhoudspartij'),
-
 
             ])->emptyState(view('partials.empty-state-small'))
             ->filters([
@@ -145,29 +128,29 @@ class ObjectsRelationManager extends RelationManager
                 ,
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record){
-                    return "/admin/objects/".$record->id."";
+                Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record) {
+                    return "/app/objects/" . $record->id . "";
 
                 })->icon('heroicon-c-link'),
-          
-                    ActionGroup::make([
-                       
-                        EditAction::make(),
-                        DeleteAction::make(),
-                    ]),
-        
-                    //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
-                    //->openUrlInNewTab()
-            //    Tables\Actions\DeleteAction::make(),
+
+                ActionGroup::make([
+
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ]),
+
+                //->url(fn (Object $record): string => route('filament.resources.object.edit', $record))
+                //->openUrlInNewTab()
+                //    Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([
 //                    Tables\Actions\DeleteBulkAction::make(),
 //                ]),
-            ]) ->recordUrl(
-                function (Object $record){
-                    return "/admin/objects/".$record->id."";
+            ])->recordUrl(
+            function (Object $record) {
+                return "/app/objects/" . $record->id . "";
 
-                }            );;
+            });
     }
 }
