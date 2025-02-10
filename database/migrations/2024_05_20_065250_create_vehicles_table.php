@@ -53,6 +53,7 @@ return new class extends Migration
             $table->date('datum_tenaamstelling_dt')->nullable();
             $table->date('datum_eerste_toelating_dt')->nullable();
             $table->date('vervaldatum_apk_dt')->nullable();
+            $table->foreignId('gps_object_id')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
