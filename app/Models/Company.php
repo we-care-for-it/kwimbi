@@ -1,34 +1,30 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Enums\CompanyTypes;
 
 class Company extends Model
 {
-
-
-
     use HasFactory;
-    use SoftDeletes;
 
-   
+    protected $fillable = [
+        'name',
+    ];
 
-    public function type()
+    public function departments(): HasMany
     {
-        return $this->belongsTo(companyType::class);
+        return $this->hasMany(Department::class);
     }
 
-    
-    public function contacts()
+    public function users(): HasMany
     {
-        return $this->hasMany(Contact::class);
+        return $this->hasMany(User::class);
     }
 
-
-
+    public function vehicles(): HasMany
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 }
