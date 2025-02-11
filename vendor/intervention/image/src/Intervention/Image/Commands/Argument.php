@@ -191,7 +191,7 @@ class Argument
     }
 
     /**
-     * Determines that current argument must be under a maxiumum value
+     * Determines that current argument must be under a maximum value
      *
      * @return \Intervention\Image\Commands\Argument
      */

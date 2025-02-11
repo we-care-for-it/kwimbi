@@ -39,7 +39,7 @@ class GpsObjectResource extends Resource
                     ->required(),
 
                 Select::make('vehicle_id')
-                    ->label('Voortuig')
+                    ->label('Voertuig')
                     ->options(Vehicle::pluck('kenteken', 'id'))
                     ->searchable(),
 
@@ -80,7 +80,7 @@ class GpsObjectResource extends Resource
                         }
                     })
 
-                    ->label('Voortuig')
+                    ->label('Voertuig')
                     ->placeholder('Niet gekoppeld')
                     ->searchable(),
 
