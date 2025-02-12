@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ShieldSeeder::class);
         $this->command->call('shield:generate', ['--panel' => 'Admin', '--all' => 'true']);
         $this->command->call('shield:super-admin', ['--user' => $superAdmin->id, '--panel' => 'Admin']);
+        $this->call(CompanySeeder::class);
+
     }
 }

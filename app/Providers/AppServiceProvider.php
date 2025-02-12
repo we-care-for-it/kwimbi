@@ -26,18 +26,18 @@ class AppServiceProvider extends ServiceProvider
         ]);
         Filament::serving(function () {
             Filament::registerUserMenuItems([
-                UserMenuItem::make()
-                    ->label('Instellingen')
-                    ->url(route('filament.app.general'))
-                    ->icon('heroicon-s-cog'),
-                UserMenuItem::make()
-                    ->label('Logboek')
-                    ->url(route('filament.app.logs'))
-                    ->icon('heroicon-m-clipboard-document-list'),
-                UserMenuItem::make()
-                    ->label('Mijn profiel')
-                    ->url('/admin/edit-profile')
-                    ->icon('heroicon-o-user'),
+              //  UserMenuItem::make()
+                //    ->label('Instellingen')
+                 //   ->url(route('filament.app.general'))
+                 //   ->icon('heroicon-s-cog'),
+              //  UserMenuItem::make()
+                 //   ->label('Logboek')
+                 //   ->url(route('filament.app.logs'))
+                //    ->icon('heroicon-m-clipboard-document-list'),
+             //   UserMenuItem::make()
+                  //  ->label('Mijn profiel')
+                 //   ->url('/admin/edit-profile')
+                  //  ->icon('heroicon-o-user'),
 
             ]);
         });

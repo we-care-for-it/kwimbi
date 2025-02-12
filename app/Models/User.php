@@ -1,7 +1,8 @@
 <?php
-
 namespace App\Models;
 
+use Auth;
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,12 +11,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
-use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements  FilamentUser, HasTenants
-
+class User extends Authenticatable implements FilamentUser, HasTenants
 {
     use HasFactory;
     use HasRoles;
@@ -33,11 +32,18 @@ class User extends Authenticatable implements  FilamentUser, HasTenants
         'password',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
+    public function canAccessPanel(\Filament\Panel $panel): bool
     {
-        return true;
-    }
+        $user = Auth::user();
+        if (str_ends_with($this->email, '@ltssoftware') && $panel->getId() === 'admin') {
+            return true;
+        }
 
+        if ($panel->getId() === 'app') {
+            return true;
+        }
+
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -57,16 +63,11 @@ class User extends Authenticatable implements  FilamentUser, HasTenants
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
-    public function companies(): BelongsToMany
-    {
-        return $this->belongsToMany(Company::class);
-    }
-
-    public function getTenants(Panel $panel): array|Collection
+    public function getTenants(Panel $panel): array | Collection
     {
         return $this->companies;
     }
@@ -76,19 +77,24 @@ class User extends Authenticatable implements  FilamentUser, HasTenants
         return $this->companies()->whereKey($tenant)->exists();
     }
 
-
     public function customer()
     {
         return $this->BelongsTo(Customer::class);
     }
 
-    
     public function managementCompany()
     {
-        return $this->BelongsTo(ObjectManagementCompany::class,'management_id','id');
+        return $this->BelongsTo(ObjectManagementCompany::class, 'management_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
-
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class);
+    }
 
 }
