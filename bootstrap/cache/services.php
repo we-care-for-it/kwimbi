@@ -45,9 +45,11 @@
     41 => 'Termwind\\Laravel\\TermwindServiceProvider',
     42 => 'OwenIt\\Auditing\\AuditingServiceProvider',
     43 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    44 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    45 => 'App\\Providers\\AppServiceProvider',
-    46 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    44 => 'Sentry\\Laravel\\ServiceProvider',
+    45 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
+    46 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    47 => 'App\\Providers\\AppServiceProvider',
+    48 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'eager' => 
   array (
@@ -80,9 +82,11 @@
     26 => 'Termwind\\Laravel\\TermwindServiceProvider',
     27 => 'OwenIt\\Auditing\\AuditingServiceProvider',
     28 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    29 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    30 => 'App\\Providers\\AppServiceProvider',
-    31 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    29 => 'Sentry\\Laravel\\ServiceProvider',
+    30 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
+    31 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'deferred' => 
   array (
