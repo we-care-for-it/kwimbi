@@ -71,7 +71,7 @@ class VehicleResource extends Resource
                         ->hiddenLabel()
                         ->placeholder("Niet opgegeven"),
                 ]),
-    
+
             Tabs::make('Tabs')->tabs([
                 Tabs\Tab::make('Algemeen')
                     ->icon('heroicon-m-bell')
@@ -88,7 +88,7 @@ class VehicleResource extends Resource
                         TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen')->placeholder('-'),
                         TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen')->placeholder('-'),
                     ])->columns(3),
-    
+
                 Tabs\Tab::make('Datums')
                     ->icon('heroicon-m-bell')
                     ->schema([
@@ -98,7 +98,7 @@ class VehicleResource extends Resource
                         TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Eerste Tenaamstelling in Nederland')->placeholder('-'),
                         TextEntry::make('jaar_laatste_registratie_tellerstand')->label('Jaar Laatste Registratie Tellerstand')->placeholder('-'),
                     ])->columns(3),
-    
+
                 Tabs\Tab::make('Mileu & Moter')
                     ->icon('heroicon-m-bell')
                     ->schema([
@@ -111,28 +111,28 @@ class VehicleResource extends Resource
                         TextEntry::make('technische_max_massa_voertuig')->label('Technische Max Massa Voertuig')->placeholder('-'),
                     ])->columns(3),
             ]),
-    
+
             Tabs::make('Tabs')->tabs([
                 Tabs\Tab::make('Opmerking')
                     ->icon('heroicon-m-bell')
                     ->schema([
                         // ...
                     ]),
-    
+
                 Tabs\Tab::make('Gebruiker')
                     ->icon('heroicon-m-bell')
                     ->schema([
                         TextEntry::make('title')->placeholder('-'),
                         TextEntry::make('title')->placeholder('-'),
                     ]),
-    
+
                 Tabs\Tab::make('Tankpas')
                     ->icon('heroicon-m-bell')
                     ->schema([
                         TextEntry::make('title')->placeholder('-'),
                         TextEntry::make('title')->placeholder('-'),
                     ]),
-    
+
                 Tabs\Tab::make('Lease maatschappij')
                     ->icon('heroicon-m-bell')
                     ->schema([
@@ -142,8 +142,6 @@ class VehicleResource extends Resource
             ]),
         ]);
     }
-    
-    
 
     public static function form(Form $form): Form
     {

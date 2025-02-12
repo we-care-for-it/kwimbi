@@ -33,6 +33,14 @@ class Task extends Model
     {
         parent::boot();
 
+        // static::addGlobalScope('company', function (Builder $query) {
+        //     if (auth()->hasUser()) {
+        //         $query->where('company_id', auth()->user()->company_id);
+        //         // or with a `team` relationship defined:
+        //         $query->whereBelongsTo(auth()->user()->company_id);
+        //     }
+        // });
+
         static::creating(function ($model) {
             $model->make_by_employee_id = $user = auth()->id();;
 
@@ -82,6 +90,11 @@ class Task extends Model
                 //code block
         }
 
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 
 }

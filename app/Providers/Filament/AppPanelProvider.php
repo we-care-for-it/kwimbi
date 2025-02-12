@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+//use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -32,7 +32,7 @@ use lockscreen\FilamentLockscreen\Lockscreen;
   use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
  use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 use Awcodes\FilamentQuickCreate\QuickCreatePlugin;
- 
+ use App\Models\Company;
  
 //use TomatoPHP\FilamentTenancy\FilamentTenancyAppPlugin;
 
@@ -44,6 +44,12 @@ class AppPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+   	    ->tenant(Company::class)
+
+ ->tenantMiddleware([
+ //BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant::class,
+            ApplyTenantScopes::class,
+        ], isPersistent: true)
             ->id('app')
             ->path('app')
             ->login()
@@ -53,9 +59,9 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->plugin(
-                \Hasnayeen\Themes\ThemesPlugin::make()
-            )
+          //  ->plugin(
+          //      \Hasnayeen\Themes\ThemesPlugin::make()
+         //   )
 
             
            // ->plugin(new Lockscreen())
@@ -107,7 +113,7 @@ class AppPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 //SetTheme::class,
-                \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
+              //  \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
             // LockerTimer::class 
  
              ])
@@ -116,14 +122,14 @@ class AppPanelProvider extends PanelProvider
               // Locker::class, // <- Add this
             ])
             ->plugins([
-                FilamentShieldPlugin::make(),
+               // FilamentShieldPlugin::make(),
   // QuickCreatePlugin::make()
                   //  ->createAnother(false)
    //  ->alwaysShowModal()
                     //->slideOver(),
-            ])
-            ->plugin(
-               ThemesPlugin::make()
-            );
+            ]);
+          //  ->plugin(
+           //    ThemesPlugin::make()
+          //  );
     }
 }
