@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->unsignedTinyInteger('attempts');
             $table->unsignedInteger('reserved_at')->nullable();
             $table->unsignedInteger('available_at');
@@ -30,7 +29,6 @@ return new class extends Migration
             $table->integer('failed_jobs');
             $table->longText('failed_job_ids');
             $table->mediumText('options')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->integer('cancelled_at')->nullable();
             $table->integer('created_at');
             $table->integer('finished_at')->nullable();
@@ -42,8 +40,7 @@ return new class extends Migration
             $table->text('connection');
             $table->text('queue');
             $table->longText('payload');
-            $table->longText('exception');            
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->longText('exception');
             $table->timestamp('failed_at')->useCurrent();
         });
     }
