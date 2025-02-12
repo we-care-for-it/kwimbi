@@ -19,11 +19,13 @@ class DatabaseSeeder extends Seeder
         $superAdmin = User::create([
             'name' => 'Super Admin',
             'email' => 'superAdmin@digilevel.nl',
-            'password' => bcrypt('M9kKhE2tl7'),
+            'password' => bcrypt('password'),
         ]);
 
         $this->call(ShieldSeeder::class);
         $this->command->call('shield:generate', ['--panel' => 'Admin', '--all' => 'true',  ]);
         $this->command->call('shield:super-admin', ['--user' => $superAdmin->id, '--panel' => 'Admin']);
+        $this->call(CompanySeeder::class);
+
     }
 }
