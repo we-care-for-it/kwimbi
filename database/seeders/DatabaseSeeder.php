@@ -5,6 +5,7 @@ use App\Models\User;
 
 //use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $superAdmin = User::create([
             'name'     => 'Super Admin',
             'email'    => 'superAdmin@digilevel.nl',
-            'password' => bcrypt('M9kKhE2tl7'),
+            'password' => Hash::make("M9kKhE2tl7"),
         ]);
 
         $this->call(ShieldSeeder::class);
