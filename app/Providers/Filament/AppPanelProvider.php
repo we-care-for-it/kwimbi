@@ -48,7 +48,7 @@ class AppPanelProvider extends PanelProvider
 
  ->tenantMiddleware([
  //BezhanSalleh\FilamentShield\Middleware\SyncShieldTenant::class,
-            ApplyTenantScopes::class,
+         //   ApplyTenantScopes::class,
         ], isPersistent: true)
             ->id('app')
             ->path('app')
