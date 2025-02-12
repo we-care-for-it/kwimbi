@@ -23,7 +23,7 @@ return [
         //     'wsHost' => env('VITE_PUSHER_HOST'),
         //     'wsPort' => env('VITE_PUSHER_PORT'),
         //     'wssPort' => env('VITE_PUSHER_PORT'),
-        //     'authEndpoint' => '/broadcasting/auth',
+        //     'authEndpoint' => '/api/v1/broadcasting/auth',
         //     'disableStats' => true,
         //     'encrypted' => true,
         //     'forceTLS' => true,
@@ -40,6 +40,8 @@ return [
     | any of the disks defined in the `config/filesystems.php`.
     |
     */
+
+
 
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
 
@@ -83,7 +85,6 @@ return [
     | Livewire's standard 200ms delay.
     |
     */
-
-    'livewire_loading_delay' => 'default',
+   'livewire_loading_delay' => 'none',
 
 ];
