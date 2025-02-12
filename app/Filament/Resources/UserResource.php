@@ -4,198 +4,90 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
-
-use App\Models\Customer;
-use App\Models\ObjectManagementCompany;
-
-use Filament\Facades\Filament;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\CheckboxList;
-use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
-
-
-
-
-
-
-
+use App\Filament\Resources\UserResource\Pages\EditUser;
+use App\Filament\Resources\UserResource\Pages\ListUsers;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Grouping\Group;
-use Illuminate\Support\Facades\Hash;
-use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-    
-    protected static ?string $title = "Gebruikers";
-    protected static ?string $SearchResultTitle = "Gebruikers";
-    protected static ?string $navigationGroup = "Systeembeheer";
-    protected static ?string $navigationLabel = "Gebruikers";
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-
-    public static function getEloquentQuery(): Builder
-{
-    return static::getModel()::query()->whereNot('email', 'superadmin@digilevel.nl');
-}
-
+    protected static ?string $tenantOwnershipRelationshipName = 'companies';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema(components: [
-                Section::make()
-                    ->columns(3)
-                    ->schema([
-              
-                        TextInput::make('name')
-                            ->label("Naam")
-                            ->required(),
-                        
-                        TextInput::make('password')
-                            ->password()
-                            ->revealable()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->required(fn (string $context): bool => $context === 'create')
+        return $form->schema([
+            TextInput::make('name')
+                ->label('Naam')
+                ->required()
+                ->maxLength(255),
 
-                            ,TextInput::make('email')
-                            ->label('E-mailadres')
- 
-                            ->email()
-                            ->unique(ignoreRecord: true)
-                            ->required(),
+           TextInput::make('email')
+                ->label('E-mail')
+                ->email()
+                ->required()
+                ->unique(User::class, 'email'),
 
-                            CheckboxList::make('roles')
-                        
-                            ->relationship('roles', 'name')
-                            ->searchable(),
-
-             
-
-                            
-                    ]),
-              
-                    
-            ])
-            ->columns(12);
+            TextInput::make('password')
+                ->label('Wachtwoord')
+                ->password()
+                ->required()
+                ->minLength(8),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
+        return $table->columns([
+            TextColumn::make('id')
+                ->label('ID')
+                ->sortable(),
 
-        ->groups([
-            Group::make('customer_id')
-            ->getTitleFromRecordUsing(fn ( $record): string => ucfirst($record?->customer?->name ?? 'Geen'))
-  
-                ->label('Relatie'),
+            TextColumn::make('name')
+                ->label('Naam')
+                ->searchable()
+                ->sortable(),
 
-                Group::make('management_id')
-                
+            TextColumn::make('email')
+                ->label('E-mail')
+                ->searchable()
+                ->sortable(),
 
-
-                ->getTitleFromRecordUsing(fn ( $record): string => ucfirst($record?->managementCompany?->name ?? 'Geen'))
- 
-                ->label('Beheerder')
-                //->titlePrefixedWithLabel(false),
+            TextColumn::make('created_at')
+                ->label('Aangemaakt op')
+                ->dateTime('d-m-Y H:i')
+                ->sortable(),
         ])
-            // ->modifyQueryUsing(fn (Builder $query) => $query
-            //     ->whereHas('companies', fn ($query) => $query
-            //         ->where('companies.id', Filament::getTenant()->id)
-            //     )
-            // )
-            ->columns([
- 
-                TextColumn::make('name')
-                    ->label('Naam')
-                    ->searchable()
-                    ->sortable(),
-
-                TextColumn::make('email')
-                    ->label('E-mailadres')
-                    ->searchable()
-                    ->sortable(),
-
-
-                TextColumn::make('customer.name')
-                    ->label('Relatie')
-                    ->searchable()
-                    ->sortable(),
-
-                    TextColumn::make('managementCompany.name')
-                    ->label('Beheerder')
-                    ->searchable()
-                    ->sortable(),
-
-
-
-
-
-                TextColumn::make('last_login_at')
-                    ->label('Laatst ingelogd')
-                    ->dateTime('d-m-Y H:i')
-                    ->searchable()
-                    ->sortable(),
-              
-
-            ])
-            ->filters([
-                
-                // SelectFilter::make('customer_id')
-                // ->searchable()
-                // ->options(Customer::all()->pluck('name', 'id'))
-                // ->label('Relatie'),
-                
-                // SelectFilter::make('management_id')
-                // ->searchable()
-                // ->options(ObjectManagementCompany::all()->pluck('name', 'id'))
-                // ->label('Beheerder'),
-                         
-
-            ], layout: FiltersLayout::AboveContent)
-        
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Impersonate::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyState(view("partials.empty-state"));
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-                AuthenticationLogsRelationManager::class,
-        ];
+        ->filters([
+            Filter::make('recent')
+                ->label('Nieuwste eerst')
+                ->query(fn (Builder $query) => $query->latest()),
+        ])
+        ->actions([
+            EditAction::make(),
+        ])
+        ->bulkActions([
+            DeleteBulkAction::make(),
+        ]);
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'edit' => EditUser::route('/{record}/edit'),
         ];
     }
-
-  
 }
