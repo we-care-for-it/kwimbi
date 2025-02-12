@@ -17,7 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use Filament\Support\Enums\MaxWidth;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -27,12 +27,19 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
    	    ->tenant(Company::class)
+            ->maxContentWidth(MaxWidth::Full)
+  ->sidebarCollapsibleOnDesktop()
+            ->unsavedChangesAlerts()
+            ->breadcrumbs(true)
+    ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
 	    ->tenantRegistration(RegisterCompany::class)
             ->login()
+     ->brandLogo(fn() => view('components.logo'))
             ->colors([
                 'primary' => Color::Amber,
-            ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ])      ->plugin(
+            \Hasnayeen\Themes\ThemesPlugin::make()
+        )    ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
@@ -51,8 +58,11 @@ class AdminPanelProvider extends PanelProvider
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
+ 
                 DispatchServingFilamentEvent::class,
-            ])
+            ])   ->tenantMiddleware([
+                      \Hasnayeen\Themes\Http\Middleware\SetTheme::class
+        ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
