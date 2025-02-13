@@ -1,23 +1,24 @@
 <?php
 
-    use App\Livewire\Forms\LoginForm;
-    use function Livewire\Volt\form;
-    use function Livewire\Volt\layout;
-    use Illuminate\Support\Facades\Session;
+use App\Livewire\Forms\LoginForm;
+use Illuminate\Support\Facades\Session;
 
-    layout('layouts.guest');
+use function Livewire\Volt\form;
+use function Livewire\Volt\layout;
 
-    form(LoginForm::class);
+layout('layouts.guest');
 
-    $login = function () {
-        $this->validate();
+form(LoginForm::class);
 
-        $this->form->authenticate();
+$login = function () {
+    $this->validate();
 
-        Session::regenerate();
+    $this->form->authenticate();
 
-        $this->redirectIntended(default:route('dashboard', absolute: false), navigate: true);
-    };
+    Session::regenerate();
+
+    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+};
 
 ?>
 

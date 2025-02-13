@@ -3,10 +3,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ObjectLocationResource\Pages;
 use App\Filament\Resources\ObjectLocationResource\RelationManagers;
-use App\Models\Company;
-use App\Models\Customer;
 use App\Models\ObjectBuildingType;
 use App\Models\ObjectLocation;
+use App\Models\Relation;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -31,9 +30,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use pxlrbt\FilamentExcel\Columns\Column;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ObjectLocationResource extends Resource
 {
@@ -128,20 +124,22 @@ class ObjectLocationResource extends Resource
                             // Select::make("management_id")
                             //     ->options(Company::where('type_id', 2)->pluck("name", "id"))
 
-                                // ->searchable()
-                                // ->label("Beheerder")
-                                // ->preload(),
+                            // ->searchable()
+                            // ->label("Beheerder")
+                            // ->preload(),
 
                             Select::make("customer_id")
                                 ->searchable()
                                 ->label("Relatie")
                                 ->preload()
                                 ->required()
-                                ->createOptionForm([Forms\Components\TextInput::make("name")
-                                        ->required()
-                                        ->label("Naam van de relatie")])
+                            // ->createOptionForm([
+                            //     Forms\Components\TextInput::make("type_id"),
+                            //     Forms\Components\TextInput::make("name")
+                            //         ->required()
+                            //         ->label("Naam van de relatie")])
                                 ->relationship(name:
-                                    "customer", titleAttribute:
+                                    "relation", titleAttribute:
                                     "name")])]),
 
             Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
@@ -319,7 +317,7 @@ class ObjectLocationResource extends Resource
                     ->badge()
                     ->alignment(Alignment::Center)
                     ->toggleable()
-                    ->color("success"), Tables\Columns\TextColumn::make("customer.name")
+                    ->color("success"), Tables\Columns\TextColumn::make("relation.name")
                     ->toggleable()
                     ->sortable()
                     ->label("Relatie")
@@ -347,7 +345,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Onbekend")])
 
             ->filters([SelectFilter::make("customer_id")
-                    ->options(Customer::all()
+                    ->options(Relation::all()
                             ->pluck("name", "id"))
                     ->label("Relatie")
 
@@ -379,7 +377,7 @@ class ObjectLocationResource extends Resource
                     ->label('Snel bewerken')
                     ->slideOver(), DeleteAction::make()])])
             // ->bulkActions([
-                
+
             //     ExportBulkAction::make()
             //         ->exports([
             //             ExcelExport::make()

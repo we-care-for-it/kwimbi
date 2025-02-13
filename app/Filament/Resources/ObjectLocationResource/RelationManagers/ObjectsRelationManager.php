@@ -2,8 +2,8 @@
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Enums\ElevatorStatus;
-use App\Models\Company;
 use App\Models\ObjectType;
+use App\Models\Relation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -63,7 +63,7 @@ class ObjectsRelationManager extends RelationManager
 
                         Select::make('maintenance_company_id')
                             ->label('Onderhoudspartij')
-                            ->options(Company::where('type_id', 1)->pluck("name", "id")),
+                            ->options(Relation::where('type_id', 1)->pluck("name", "id")),
 
                         Select::make('status_id')
                             ->label("Status")->required()

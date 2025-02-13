@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('relations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('zipcode')->nullable();     
+            $table->string('zipcode')->nullable();
             $table->string('place')->nullable();
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
             $table->integer('type_id')->nullable();
+            $table->foreignId('company_id')->nullable()->constrained('companies');
+
             $table->timestamps();
         });
 
-        
     }
 
     /**
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        
+
     }
 };
