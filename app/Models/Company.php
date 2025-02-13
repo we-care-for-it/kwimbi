@@ -28,4 +28,10 @@ class Company extends Model
         return $this->hasMany(Vehicle::class);
     }
 
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
+
 }
