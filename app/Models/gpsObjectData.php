@@ -24,8 +24,8 @@ class gpsObjectData extends Model implements Auditable
         parent::boot();
 
         static::saving(function ($model) {
-                $model->company_id = Filament::getTenant()->id;
-           
+            $model->company_id = Filament::getTenant()->id;
+            $model->params_acc = 0;
         });
 
     }
