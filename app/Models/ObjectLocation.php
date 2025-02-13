@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * Class location
  *
@@ -108,6 +108,15 @@ class ObjectLocation extends Model implements Auditable
     {
         return $this->hasMany(Project::class,'location_id', 'id');
     }
+
+ 
+public function company(): BelongsTo
+{
+    return $this->belongsTo(Company::class);
+}
+
+
+
 
 
 
