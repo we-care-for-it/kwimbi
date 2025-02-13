@@ -33,7 +33,6 @@ class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
     ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-	    ->tenantRegistration(RegisterCompany::class)
             ->login()
      ->brandLogo(fn() => view('components.logo'))
             ->colors([

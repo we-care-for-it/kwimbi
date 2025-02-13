@@ -63,18 +63,10 @@ class GpsDataRelationManager extends RelationManager
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("lat")
-
                     ->label("lat"),
 
                 Forms\Components\TextInput::make("lng")
-
                     ->label("lng"),
-
-                // Forms\Components\TextInput::make("params_acc")
-
-                //     ->formatStateUsing(fn($record) => $record?->params_acc ?? '0')
-
-                // ,
 
                 Forms\Components\TextInput::make('km_start')
                     ->label('Begin KM stand')
@@ -118,7 +110,7 @@ class GpsDataRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label("registratie toevoegen"),
+                Tables\Actions\CreateAction::make()->label("Registratie toevoegen"),
             ])
             ->actions([
 
