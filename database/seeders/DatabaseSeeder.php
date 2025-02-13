@@ -20,10 +20,22 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("M9kKhE2tl7"),
         ]);
 
+<<<<<<< Updated upstream
        // $this->call(ShieldSeeder::class);
        // $this->command->call('shield:generate', ['--panel' => 'Admin', '--all' => 'true']);
       //  $this->command->call('shield:super-admin', ['--user' => $superAdmin->id, '--panel' => 'Admin']);
       //  $this->call(CompanySeeder::class);
+=======
+        $this->call(ShieldSeeder::class);
+        $this->command->call('shield:generate', ['--panel' => 'Admin', '--all' => 'true',  ]);
+        $this->command->call('shield:super-admin', ['--user' => $superAdmin->id, '--panel' => 'Admin']);
+        $this->call([
+            CompanySeeder::class,
+            UserSeeder::class,
+            CompanyUserSeeder::class,
+        ]);
+        
+>>>>>>> Stashed changes
 
     }
 }
