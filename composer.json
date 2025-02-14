@@ -16,7 +16,9 @@
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "owen-it/laravel-auditing": "^13.6",
+        "owenvoke/blade-fontawesome": "^2.8",
         "sentry/sentry-laravel": "^4.12",
+        "socialiteproviders/microsoft-azure": "^5.2",
         "spatie/laravel-activitylog": "^4.10"
     },
     "require-dev": {

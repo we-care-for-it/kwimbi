@@ -46,12 +46,14 @@
     42 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     43 => 'Termwind\\Laravel\\TermwindServiceProvider',
     44 => 'OwenIt\\Auditing\\AuditingServiceProvider',
-    45 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    46 => 'Sentry\\Laravel\\ServiceProvider',
-    47 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
-    48 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    49 => 'App\\Providers\\AppServiceProvider',
-    50 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    45 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
+    46 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    47 => 'Sentry\\Laravel\\ServiceProvider',
+    48 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
+    49 => 'SocialiteProviders\\Manager\\ServiceProvider',
+    50 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    51 => 'App\\Providers\\AppServiceProvider',
+    52 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'eager' => 
   array (
@@ -84,12 +86,13 @@
     26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     27 => 'Termwind\\Laravel\\TermwindServiceProvider',
     28 => 'OwenIt\\Auditing\\AuditingServiceProvider',
-    29 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
-    30 => 'Sentry\\Laravel\\ServiceProvider',
-    31 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
-    32 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
-    33 => 'App\\Providers\\AppServiceProvider',
-    34 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    29 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
+    30 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
+    31 => 'Sentry\\Laravel\\ServiceProvider',
+    32 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
+    33 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    34 => 'App\\Providers\\AppServiceProvider',
+    35 => 'App\\Providers\\Filament\\AdminPanelProvider',
   ),
   'deferred' => 
   array (
@@ -244,7 +247,7 @@
     'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
     'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
-    'Laravel\\Socialite\\Contracts\\Factory' => 'Laravel\\Socialite\\SocialiteServiceProvider',
+    'Laravel\\Socialite\\Contracts\\Factory' => 'SocialiteProviders\\Manager\\ServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
   ),
   'when' => 
@@ -295,6 +298,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'SocialiteProviders\\Manager\\ServiceProvider' => 
     array (
     ),
   ),

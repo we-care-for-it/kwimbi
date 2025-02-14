@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+ use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
+use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
 class AdminPanelProvider extends PanelProvider
 {
@@ -32,6 +34,22 @@ class AdminPanelProvider extends PanelProvider
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
+->plugins([
+              
+                FilamentSocialitePlugin::make()
+                    ->providers([
+                        Provider::make('azure')
+     ->icon('fab-microsoft'),
+                    ])
+                    ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
+                        'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
+ 
+                        'email' => $oauthUser->getEmail(),
+                    ]))
+                    ->registration(false)            ])
+
+
+
     ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->login()
      ->brandLogo(fn() => view('components.logo'))

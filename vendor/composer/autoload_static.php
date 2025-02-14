@@ -42,9 +42,9 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         '9720327d09ed9a4ba00c9b5071b71c7d' => __DIR__ . '/..' . '/danharrin/date-format-converter/src/standards.php',
         '2ad94ea6f6f6013119e9abcf4e302a08' => __DIR__ . '/..' . '/filament/forms/src/helpers.php',
         'b69d5f1f95cd1ed438c038b6cbcc45b5' => __DIR__ . '/..' . '/filament/notifications/src/Testing/Autoload.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '89e9938b64b06cc502d7ceca69a380fe' => __DIR__ . '/..' . '/filament/filament/src/global_helpers.php',
         'ebb446bb6d02e998480945fbbb73dc64' => __DIR__ . '/..' . '/filament/filament/src/helpers.php',
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'fb4ca2d97fe7ba6af750497425204e70' => __DIR__ . '/..' . '/sentry/sentry/src/functions.php',
@@ -116,6 +116,8 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
             'Spatie\\Invade\\' => 14,
             'Spatie\\Color\\' => 13,
             'Spatie\\Activitylog\\' => 19,
+            'SocialiteProviders\\Manager\\' => 27,
+            'SocialiteProviders\\Azure\\' => 25,
             'Sentry\\' => 7,
         ),
         'R' => 
@@ -142,6 +144,7 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         ),
         'O' => 
         array (
+            'OwenVoke\\BladeFontAwesome\\' => 26,
             'OwenIt\\Auditing\\' => 16,
             'OpenSpout\\' => 10,
         ),
@@ -426,6 +429,14 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-activitylog/src',
         ),
+        'SocialiteProviders\\Manager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/socialiteproviders/manager/src',
+        ),
+        'SocialiteProviders\\Azure\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/socialiteproviders/microsoft-azure',
+        ),
         'Sentry\\' => 
         array (
             0 => __DIR__ . '/..' . '/sentry/sentry/src',
@@ -494,6 +505,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'ParagonIE\\ConstantTime\\' => 
         array (
             0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
+        ),
+        'OwenVoke\\BladeFontAwesome\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src',
         ),
         'OwenIt\\Auditing\\' => 
         array (
@@ -5927,6 +5942,9 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'OwenIt\\Auditing\\Resolvers\\UrlResolver' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Resolvers/UrlResolver.php',
         'OwenIt\\Auditing\\Resolvers\\UserAgentResolver' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Resolvers/UserAgentResolver.php',
         'OwenIt\\Auditing\\Resolvers\\UserResolver' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Resolvers/UserResolver.php',
+        'OwenVoke\\BladeFontAwesome\\Actions\\CompileSvgsAction' => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src/Actions/CompileSvgsAction.php',
+        'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider' => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src/BladeFontAwesomeServiceProvider.php',
+        'OwenVoke\\BladeFontAwesome\\Commands\\SyncIconsCommand' => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src/Commands/SyncIconsCommand.php',
         'PHPUnit\\Event\\Application\\Finished' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/Finished.php',
         'PHPUnit\\Event\\Application\\FinishedSubscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/FinishedSubscriber.php',
         'PHPUnit\\Event\\Application\\Started' => __DIR__ . '/..' . '/phpunit/phpunit/src/Event/Events/Application/Started.php',
@@ -7958,6 +7976,25 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Sentry\\Util\\PHPVersion' => __DIR__ . '/..' . '/sentry/sentry/src/Util/PHPVersion.php',
         'Sentry\\Util\\PrefixStripper' => __DIR__ . '/..' . '/sentry/sentry/src/Util/PrefixStripper.php',
         'Sentry\\Util\\SentryUid' => __DIR__ . '/..' . '/sentry/sentry/src/Util/SentryUid.php',
+        'SocialiteProviders\\Azure\\AzureExtendSocialite' => __DIR__ . '/..' . '/socialiteproviders/microsoft-azure/AzureExtendSocialite.php',
+        'SocialiteProviders\\Azure\\Provider' => __DIR__ . '/..' . '/socialiteproviders/microsoft-azure/Provider.php',
+        'SocialiteProviders\\Azure\\User' => __DIR__ . '/..' . '/socialiteproviders/microsoft-azure/User.php',
+        'SocialiteProviders\\Manager\\Config' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Config.php',
+        'SocialiteProviders\\Manager\\ConfigTrait' => __DIR__ . '/..' . '/socialiteproviders/manager/src/ConfigTrait.php',
+        'SocialiteProviders\\Manager\\Contracts\\ConfigInterface' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Contracts/ConfigInterface.php',
+        'SocialiteProviders\\Manager\\Contracts\\Helpers\\ConfigRetrieverInterface' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Contracts/Helpers/ConfigRetrieverInterface.php',
+        'SocialiteProviders\\Manager\\Contracts\\OAuth1\\ProviderInterface' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Contracts/OAuth1/ProviderInterface.php',
+        'SocialiteProviders\\Manager\\Contracts\\OAuth2\\ProviderInterface' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Contracts/OAuth2/ProviderInterface.php',
+        'SocialiteProviders\\Manager\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Exception/InvalidArgumentException.php',
+        'SocialiteProviders\\Manager\\Exception\\MissingConfigException' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Exception/MissingConfigException.php',
+        'SocialiteProviders\\Manager\\Helpers\\ConfigRetriever' => __DIR__ . '/..' . '/socialiteproviders/manager/src/Helpers/ConfigRetriever.php',
+        'SocialiteProviders\\Manager\\OAuth1\\AbstractProvider' => __DIR__ . '/..' . '/socialiteproviders/manager/src/OAuth1/AbstractProvider.php',
+        'SocialiteProviders\\Manager\\OAuth1\\Server' => __DIR__ . '/..' . '/socialiteproviders/manager/src/OAuth1/Server.php',
+        'SocialiteProviders\\Manager\\OAuth1\\User' => __DIR__ . '/..' . '/socialiteproviders/manager/src/OAuth1/User.php',
+        'SocialiteProviders\\Manager\\OAuth2\\AbstractProvider' => __DIR__ . '/..' . '/socialiteproviders/manager/src/OAuth2/AbstractProvider.php',
+        'SocialiteProviders\\Manager\\OAuth2\\User' => __DIR__ . '/..' . '/socialiteproviders/manager/src/OAuth2/User.php',
+        'SocialiteProviders\\Manager\\ServiceProvider' => __DIR__ . '/..' . '/socialiteproviders/manager/src/ServiceProvider.php',
+        'SocialiteProviders\\Manager\\SocialiteWasCalled' => __DIR__ . '/..' . '/socialiteproviders/manager/src/SocialiteWasCalled.php',
         'Spatie\\Activitylog\\ActivityLogStatus' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivityLogStatus.php',
         'Spatie\\Activitylog\\ActivityLogger' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivityLogger.php',
         'Spatie\\Activitylog\\ActivitylogServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/ActivitylogServiceProvider.php',
