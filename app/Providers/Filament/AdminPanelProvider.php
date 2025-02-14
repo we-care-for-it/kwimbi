@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers\Filament;
 use App\Models\Company;
+
 use App\Filament\Pages\Tenancy\RegisterCompany;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -32,7 +33,6 @@ class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
     ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
-	    ->tenantRegistration(RegisterCompany::class)
             ->login()
      ->brandLogo(fn() => view('components.logo'))
             ->colors([
@@ -62,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])   ->tenantMiddleware([
                       \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-        ])
+        ], isPersistent: true)
             ->authMiddleware([
                 Authenticate::class,
             ]);

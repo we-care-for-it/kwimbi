@@ -1,10 +1,12 @@
 <?php
 namespace App\Models;
+
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-
 
 /**
  * Class location
@@ -32,7 +34,6 @@ class ObjectLocation extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
-
     // Validation rules for this model
     static $rules = [];
 
@@ -49,7 +50,7 @@ class ObjectLocation extends Model implements Auditable
         , 'location_id', 'customer_id'
         , 'access_contact'
         , 'location_key_lock'
-        , 'province',  'complexnumber',
+        , 'province', 'complexnumber',
         'management_company_id'
         , 'municipality'
         , 'housenumber',
@@ -57,9 +58,11 @@ class ObjectLocation extends Model implements Auditable
 
         'building_type_id', 'building_access_type_id', 'remark', 'building_type_id', 'name', 'zipcode', 'place', 'address', 'slug', 'complexnumber', 'management_id'];
 
-    public function customer()
+    public function relation()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Relation::class, 'customer_id', 'id')
+            ->where('company_id', auth()->user()->company_id)
+            ->where('type_id', \App\Enums\RelationTypes::CUSTOMERS);
     }
 
     public function objectbuildingtype()
@@ -69,12 +72,12 @@ class ObjectLocation extends Model implements Auditable
 
     public function buildingtype()
     {
-       return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
+        return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
     }
 
     public function managementcompany()
     {
-        return $this->hasOne(Company::class, 'id', 'management_id');
+        return $this->hasOne(Relation::class, 'id', 'management_id');
     }
 
     public function objects()
@@ -83,7 +86,7 @@ class ObjectLocation extends Model implements Auditable
     }
 
     public function objects_same_complex()
-    {       
+    {
         return Elevator::whereHas('locations', function ($query) {
             return $query->where('complexnumber', '=', 1);
         })->get();
@@ -91,7 +94,7 @@ class ObjectLocation extends Model implements Auditable
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation');
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id)->where('model', 'ObjectLocation');
     }
 
     public function attachments()
@@ -106,9 +109,12 @@ class ObjectLocation extends Model implements Auditable
 
     public function projects()
     {
-        return $this->hasMany(Project::class,'location_id', 'id');
+        return $this->hasMany(Project::class, 'location_id', 'id');
     }
 
-
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
 }

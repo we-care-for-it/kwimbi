@@ -43,6 +43,10 @@ class Contact extends Model
         return $this->belongsTo(Company::class);
     }
 
+    
+
+
+
     public function claimer(): MorphTo
     {
         return $this->morphTo();
