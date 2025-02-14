@@ -20,6 +20,17 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
+  'dutchcodingcompany/filament-socialite' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentSocialite' => 'DutchCodingCompany\\FilamentSocialite\\Facades\\FilamentSocialite',
+    ),
+    'providers' => 
+    array (
+      0 => 'DutchCodingCompany\\FilamentSocialite\\FilamentSocialiteServiceProvider',
+    ),
+  ),
   'filament/actions' => 
   array (
     'providers' => 
@@ -102,6 +113,17 @@
     'providers' => 
     array (
       0 => 'Laravel\\Sail\\SailServiceProvider',
+    ),
+  ),
+  'laravel/socialite' => 
+  array (
+    'aliases' => 
+    array (
+      'Socialite' => 'Laravel\\Socialite\\Facades\\Socialite',
+    ),
+    'providers' => 
+    array (
+      0 => 'Laravel\\Socialite\\SocialiteServiceProvider',
     ),
   ),
   'laravel/tinker' => 
