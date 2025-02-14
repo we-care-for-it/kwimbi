@@ -172,6 +172,13 @@
       0 => 'OwenIt\\Auditing\\AuditingServiceProvider',
     ),
   ),
+  'owenvoke/blade-fontawesome' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'aliases' => 
@@ -193,6 +200,13 @@
     array (
       0 => 'Sentry\\Laravel\\ServiceProvider',
       1 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
+    ),
+  ),
+  'socialiteproviders/manager' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SocialiteProviders\\Manager\\ServiceProvider',
     ),
   ),
   'spatie/laravel-activitylog' => 
