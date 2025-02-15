@@ -40,13 +40,18 @@ class AppPanelProvider extends PanelProvider
                 FilamentSocialitePlugin::make()
                     ->providers([
                         Provider::make('azure')
-     ->icon('fab-microsoft'),
-                    ])
+     ->icon('fab-microsoft')
+  ->color(Color::hex('#5E5E5E'))
+       ->outlined(false)            
+                    ])->slug('app')
+
+   
                     ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
                         'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
  
                         'email' => $oauthUser->getEmail(),
                     ]))
+
                     ->registration(false)            ])
 
 
