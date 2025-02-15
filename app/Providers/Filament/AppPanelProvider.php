@@ -21,14 +21,14 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
  use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
-class AdminPanelProvider extends PanelProvider
+class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('app')
+            ->path('app')
    	    ->tenant(Company::class)
             ->maxContentWidth(MaxWidth::Full)
   ->sidebarCollapsibleOnDesktop()

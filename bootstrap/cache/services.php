@@ -53,7 +53,7 @@
     49 => 'SocialiteProviders\\Manager\\ServiceProvider',
     50 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     51 => 'App\\Providers\\AppServiceProvider',
-    52 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    52 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'eager' => 
   array (
@@ -92,7 +92,7 @@
     32 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
     33 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     34 => 'App\\Providers\\AppServiceProvider',
-    35 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    35 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'deferred' => 
   array (
