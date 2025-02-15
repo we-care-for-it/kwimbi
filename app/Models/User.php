@@ -18,7 +18,13 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        if ($panel->getId() === 'admin') {
+            return str_ends_with($this->email, '@ltssoftware.nl');
+        }
+
+        if ($panel->getId() === 'app') {
+            return true;
+        }
     }
 
     public function getCurrentTenantLabel(): string
