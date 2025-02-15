@@ -26,7 +26,8 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
+       
+->darkMode(false)
             ->id('app')
             ->path('')
    	    ->tenant(Company::class)
