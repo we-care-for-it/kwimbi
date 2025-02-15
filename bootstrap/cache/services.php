@@ -54,6 +54,7 @@
     50 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     51 => 'App\\Providers\\AppServiceProvider',
     52 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    53 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'eager' => 
   array (
@@ -93,6 +94,7 @@
     33 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     34 => 'App\\Providers\\AppServiceProvider',
     35 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    36 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'deferred' => 
   array (
