@@ -27,6 +27,17 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         }
     }
 
+    public function canImpersonate()
+    {
+        return true;
+    }
+
+    public function canBeImpersonated()
+    {
+
+        return ! Str::endsWith($this->email, '@ltssoftware.nl');
+    }
+
     public function getCurrentTenantLabel(): string
     {
         return 'Active team';
