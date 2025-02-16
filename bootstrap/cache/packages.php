@@ -101,6 +101,13 @@
       0 => 'Kirschbaum\\PowerJoins\\PowerJoinsServiceProvider',
     ),
   ),
+  'lab404/laravel-impersonate' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Lab404\\Impersonate\\ImpersonateServiceProvider',
+    ),
+  ),
   'laravel/pail' => 
   array (
     'providers' => 
@@ -214,6 +221,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
+    ),
+  ),
+  'stechstudio/filament-impersonate' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'STS\\FilamentImpersonate\\FilamentImpersonateServiceProvider',
     ),
   ),
 );
