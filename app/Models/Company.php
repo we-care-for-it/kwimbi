@@ -62,6 +62,11 @@ class Company extends Model
         return $this->hasMany(gpsObject::class);
     }
 
+    public function relations()
+    {
+        return $this->hasMany(Relation::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
