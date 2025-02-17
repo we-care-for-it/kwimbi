@@ -23,6 +23,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
+use Illuminate\Validation\Rule;
 
 class VehicleResource extends Resource
 {
@@ -76,7 +77,9 @@ class VehicleResource extends Resource
                 Tabs\Tab::make('Algemeen')
                     ->icon('heroicon-m-bell')
                     ->schema([
-                        TextEntry::make('kenteken')->label('Kenteken')->placeholder('-'),
+                        TextEntry::make('kenteken')
+                        ->label('Kenteken')
+                        ->placeholder('-'),
                         TextEntry::make('merk')->label('Merk')->placeholder('-'),
                         TextEntry::make('handelsbenaming')->label('Handelsbenaming')->placeholder('-'),
                         TextEntry::make('inrichting')->label('Inrichting')->placeholder('-'),
@@ -150,6 +153,7 @@ class VehicleResource extends Resource
             ->schema([
 
                 TextInput::make("kenteken")
+                    ->unique(Vehicle::class, 'kenteken')
                     ->label("Kenteken")
                     ->required()
                     ->maxlength(10)
