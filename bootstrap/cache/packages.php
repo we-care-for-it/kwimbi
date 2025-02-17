@@ -186,6 +186,13 @@
       0 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
     ),
   ),
+  'pxlrbt/filament-activity-log' => 
+  array (
+    'providers' => 
+    array (
+      0 => '\\pxlrbt\\FilamentActivityLog\\FilamentActivityLogServiceProvider',
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'aliases' => 

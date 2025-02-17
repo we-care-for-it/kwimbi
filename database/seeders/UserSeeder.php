@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => Hash::make('password123'), // Standaard wachtwoord
+                'password' => bcrypt('password123'), // Standaard wachtwoord
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
