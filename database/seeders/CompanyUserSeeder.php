@@ -14,19 +14,12 @@ class CompanyUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = Company::all();
-        $users = User::all();
-
-        foreach ($users as $user) {
-            // Willekeurig een bedrijf toewijzen
-            $company = $companies->random();
-
             DB::table('company_user')->insert([
-                'company_id' => $company->id,
-                'user_id' => $user->id,
+                'company_id' => 1,
+                'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
     }
-}
+

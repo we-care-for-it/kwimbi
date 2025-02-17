@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
+class ComposerStaticInitac4c06658c22ee2867173c3f2d76d476
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -42,18 +42,18 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         '9720327d09ed9a4ba00c9b5071b71c7d' => __DIR__ . '/..' . '/danharrin/date-format-converter/src/standards.php',
         '2ad94ea6f6f6013119e9abcf4e302a08' => __DIR__ . '/..' . '/filament/forms/src/helpers.php',
         'b69d5f1f95cd1ed438c038b6cbcc45b5' => __DIR__ . '/..' . '/filament/notifications/src/Testing/Autoload.php',
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '89e9938b64b06cc502d7ceca69a380fe' => __DIR__ . '/..' . '/filament/filament/src/global_helpers.php',
         'ebb446bb6d02e998480945fbbb73dc64' => __DIR__ . '/..' . '/filament/filament/src/helpers.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '507d7a825db0ba8319f9dd335c46057a' => __DIR__ . '/..' . '/lab404/laravel-impersonate/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'fb4ca2d97fe7ba6af750497425204e70' => __DIR__ . '/..' . '/sentry/sentry/src/functions.php',
+        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
-        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -63,6 +63,7 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         ),
         'p' => 
         array (
+            'pxlrbt\\FilamentActivityLog\\' => 27,
             'phpseclib3\\' => 11,
         ),
         'W' => 
@@ -263,6 +264,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'pxlrbt\\FilamentActivityLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pxlrbt/filament-activity-log/src',
         ),
         'phpseclib3\\' => 
         array (
@@ -822,6 +827,18 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'App\\Enums\\InspectionTypes' => __DIR__ . '/../..' . '/app/Enums/InspectionTypes.php',
         'App\\Enums\\QuoteTypes' => __DIR__ . '/../..' . '/app/Enums/QuoteTypes.php',
         'App\\Enums\\RelationTypes' => __DIR__ . '/../..' . '/app/Enums/RelationTypes.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\Pages\\CreateCompany' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/Pages/CreateCompany.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\Pages\\EditCompany' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/Pages/EditCompany.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\Pages\\ListCompanies' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/Pages/ListCompanies.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\Pages\\ListCompanyActivities' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/Pages/ListCompanyActivities.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\RelationManagers\\GpsObjectsRelationManager' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/RelationManagers/GpsObjectsRelationManager.php',
+        'App\\Filament\\Admin\\Resources\\CompanyResource\\RelationManagers\\UsersRelationManager' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/CompanyResource/RelationManagers/UsersRelationManager.php',
+        'App\\Filament\\Admin\\Resources\\UserResource' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/UserResource.php',
+        'App\\Filament\\Admin\\Resources\\UserResource\\Pages\\CreateUser' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/UserResource/Pages/CreateUser.php',
+        'App\\Filament\\Admin\\Resources\\UserResource\\Pages\\EditUser' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/UserResource/Pages/EditUser.php',
+        'App\\Filament\\Admin\\Resources\\UserResource\\Pages\\ListUserActivities' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/UserResource/Pages/ListUserActivities.php',
+        'App\\Filament\\Admin\\Resources\\UserResource\\Pages\\ListUsers' => __DIR__ . '/../..' . '/app/Filament/Admin/Resources/UserResource/Pages/ListUsers.php',
         'App\\Filament\\Exports\\InspectionExporter' => __DIR__ . '/../..' . '/app/Filament/Exports/InspectionExporter.php',
         'App\\Filament\\Exports\\LocationExporter' => __DIR__ . '/../..' . '/app/Filament/Exports/LocationExporter.php',
         'App\\Filament\\Pages\\Dashboard' => __DIR__ . '/../..' . '/app/Filament/Pages/Dashboard.php',
@@ -9508,6 +9525,8 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'phpseclib3\\System\\SSH\\Agent' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent.php',
         'phpseclib3\\System\\SSH\\Agent\\Identity' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/System/SSH/Agent/Identity.php',
         'phpseclib3\\System\\SSH\\Common\\Traits\\ReadBytes' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/System/SSH/Common/Traits/ReadBytes.php',
+        'pxlrbt\\FilamentActivityLog\\FilamentActivityLogServiceProvider' => __DIR__ . '/..' . '/pxlrbt/filament-activity-log/src/FilamentActivityLogServiceProvider.php',
+        'pxlrbt\\FilamentActivityLog\\Pages\\ListActivities' => __DIR__ . '/..' . '/pxlrbt/filament-activity-log/src/Pages/ListActivities.php',
         'staabm\\SideEffectsDetector\\SideEffect' => __DIR__ . '/..' . '/staabm/side-effects-detector/lib/SideEffect.php',
         'staabm\\SideEffectsDetector\\SideEffectsDetector' => __DIR__ . '/..' . '/staabm/side-effects-detector/lib/SideEffectsDetector.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
@@ -9516,10 +9535,10 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitac4c06658c22ee2867173c3f2d76d476::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitac4c06658c22ee2867173c3f2d76d476::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitac4c06658c22ee2867173c3f2d76d476::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitac4c06658c22ee2867173c3f2d76d476::$classMap;
 
         }, null, ClassLoader::class);
     }

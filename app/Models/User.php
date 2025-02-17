@@ -10,11 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Activity;
 
 class User extends Authenticatable implements FilamentUser, HasTenants
 {
-    use HasFactory;
-    use Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
+
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -32,11 +35,12 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         return true;
     }
 
-    public function canBeImpersonated()
-    {
+    // public function canBeImpersonated()
+    // {
 
-        return ! Str::endsWith($this->email, '@ltssoftware.nl');
-    }
+    //     return true;
+    //     // return str_ends_with($this->email, '@ltssoftware.nl');
+    // }
 
     public function getCurrentTenantLabel(): string
     {
@@ -75,6 +79,19 @@ class User extends Authenticatable implements FilamentUser, HasTenants
             'email_verified_at' => 'datetime',
             'password'          => 'hashed',
         ];
+    }
+
+    public function activities()
+    {
+        return $this->morphMany(Activity::class, 'causer'); // ✅ Corrected
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name'])
+            ->logOnlyDirty()
+            ->useLogName('user');
     }
 
     public function company(): BelongsTo
