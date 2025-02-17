@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -55,13 +56,13 @@ class Project extends Model implements Auditable
         return $this->hasMany(Quote::class,'project_id','id');
     }
 
-
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     public function locations()
     {
         return $this->hasMany(ProjectLocation::class,'project_id','location_id');
     }
-
- 
-
 }

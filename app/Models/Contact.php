@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Filament\Facades\Filament;
 
 class Contact extends Model
 {
@@ -43,9 +44,15 @@ class Contact extends Model
         return $this->belongsTo(Company::class);
     }
 
-    
+    protected static function boot(): void
+    {
+        parent::boot();
 
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
 
+    }
 
     public function claimer(): MorphTo
     {
