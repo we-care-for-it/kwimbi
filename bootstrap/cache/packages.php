@@ -151,6 +151,17 @@
       0 => 'Livewire\\LivewireServiceProvider',
     ),
   ),
+  'maatwebsite/excel' => 
+  array (
+    'aliases' => 
+    array (
+      'Excel' => 'Maatwebsite\\Excel\\Facades\\Excel',
+    ),
+    'providers' => 
+    array (
+      0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
@@ -191,6 +202,13 @@
     'providers' => 
     array (
       0 => '\\pxlrbt\\FilamentActivityLog\\FilamentActivityLogServiceProvider',
+    ),
+  ),
+  'pxlrbt/filament-excel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'pxlrbt\\FilamentExcel\\FilamentExcelServiceProvider',
     ),
   ),
   'ryangjchandler/blade-capture-directive' => 
