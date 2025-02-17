@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,8 +20,19 @@ class Tools extends Model implements Auditable
    'description','serial_number',  'employee_id', 'warehouse_id','inspection_interval', 'name','brand_id','category_id','supplier_id','type_id','image','inspection_company_id','inspection_method'
     ];
 
+    protected static function boot(): void
+    {
+        parent::boot();
 
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
 
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 
    public function brand(){
         return $this->belongsTo(toolsBrand::class);

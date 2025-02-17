@@ -47,6 +47,11 @@ class Company extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function tools(): HasMany
+    {
+        return $this->hasMany(Tools::class);
+    }
+
     public function objectLocations(): HasMany
     {
         return $this->hasMany(Task::class);
