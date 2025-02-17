@@ -66,6 +66,8 @@ class UsersRelationManager extends RelationManager
                 Action::make('Attach')
                     ->form([
                         Forms\Components\Select::make('user_id')
+                        ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} {$record->email}")
+
                             ->options(User::pluck('name', 'id')),
                     ])
                     ->action(function (array $data) {
