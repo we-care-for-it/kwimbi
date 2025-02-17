@@ -1,10 +1,7 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -26,14 +23,14 @@ class UserSeeder extends Seeder
             ['name' => 'Jack Taylor', 'email' => 'jack@example.com'],
         ];
 
-        foreach ($users as $user) {
-            User::create([
-                'name' => $user['name'],
-                'email' => $user['email'],
-                'password' => bcrypt('password123'), // Standaard wachtwoord
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        // foreach ($users as $user) {
+        //     User::create([
+        //         'name' => $user['name'],
+        //         'email' => $user['email'],
+        //         'password' => bcrypt('password123'), // Standaard wachtwoord
+        //         'created_at' => now(),
+        //         'updated_at' => now(),
+        //     ]);
+        // }
     }
 }

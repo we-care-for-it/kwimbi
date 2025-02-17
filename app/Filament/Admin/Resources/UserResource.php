@@ -15,16 +15,13 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Hash;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
-
-
 
 class UserResource extends Resource
 {
     protected static bool $isScopedToTenant = false;
 
-    protected static ?string $model = User::class;
+    protected static ?string $model           = User::class;
     protected static ?string $navigationIcon  = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Main';
 
@@ -40,13 +37,11 @@ class UserResource extends Resource
                 ->label('Email Address')
                 ->email()
                 ->required()
-                ->unique(User::class, 'email', ignoreRecord: true), // ✅ Fixes the issue
+                ->unique(User::class, 'email', ignoreRecord: true),
 
             TextInput::make('password')
                 ->label('Password')
                 ->password()
-                ->dehydrateStateUsing(fn($state) => bcrypt($state))
-                ->required(fn(string $context) => $context === 'create')
                 ->maxLength(255),
 
             DatePicker::make('date_of_birth')
