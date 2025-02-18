@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
 
-        Schema::create('companies_types', function (Blueprint $table) {
+        Schema::create('relation_types', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->softDeletes();
