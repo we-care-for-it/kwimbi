@@ -31,6 +31,17 @@
       0 => 'DutchCodingCompany\\FilamentSocialite\\FilamentSocialiteServiceProvider',
     ),
   ),
+  'eightynine/filament-excel-import' => 
+  array (
+    'aliases' => 
+    array (
+      'ExcelImportAction' => 'EightyNine\\ExcelImport\\Facades\\ExcelImportAction',
+    ),
+    'providers' => 
+    array (
+      0 => 'EightyNine\\ExcelImport\\ExcelImportServiceProvider',
+    ),
+  ),
   'filament/actions' => 
   array (
     'providers' => 

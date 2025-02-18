@@ -175,6 +175,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'eightynine/filament-excel-import' => array(
+            'pretty_version' => '3.1.8',
+            'version' => '3.1.8.0',
+            'reference' => '81caaa06c1dce55f6b976961d286de13f9f9e3e2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../eightynine/filament-excel-import',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'ezyang/htmlpurifier' => array(
             'pretty_version' => 'v4.18.0',
             'version' => '4.18.0.0',
