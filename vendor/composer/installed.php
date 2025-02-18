@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '79333d944ed98b2addcb5adc4ac7e54fd4a1a659',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -611,9 +611,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '79333d944ed98b2addcb5adc4ac7e54fd4a1a659',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1407,9 +1407,9 @@
             'dev_requirement' => false,
         ),
         'sentry/sentry-laravel' => array(
-            'pretty_version' => '4.12.0',
-            'version' => '4.12.0.0',
-            'reference' => 'da1ee3417dfb3576a6aaa0f8b25892ebdb98fdb0',
+            'pretty_version' => '4.13.0',
+            'version' => '4.13.0.0',
+            'reference' => 'd232ac494258e0d50a77c575a5af5f1a426d3f87',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sentry/sentry-laravel',
             'aliases' => array(),

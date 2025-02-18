@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
+            Css::make('error', __DIR__ . '/../../resources/css/error.css'),
         ]);
 
         FilamentColor::register([
