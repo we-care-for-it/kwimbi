@@ -20,6 +20,18 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
+  'croustibat/filament-jobs-monitor' => 
+  array (
+    'aliases' => 
+    array (
+      'QueueMonitor' => 'Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider\\Facade',
+    ),
+    'providers' => 
+    array (
+      0 => 'Croustibat\\FilamentJobsMonitor\\FilamentJobsMonitorServiceProvider',
+      1 => 'Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-socialite' => 
   array (
     'aliases' => 
@@ -119,6 +131,28 @@
       0 => 'Hasnayeen\\Themes\\ThemesServiceProvider',
     ),
   ),
+  'jenssegers/agent' => 
+  array (
+    'aliases' => 
+    array (
+      'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
+    ),
+    'providers' => 
+    array (
+      0 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    ),
+  ),
+  'joaopaulolndev/filament-edit-profile' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentEditProfile' => 'Joaopaulolndev\\FilamentEditProfile\\Facades\\FilamentEditProfile',
+    ),
+    'providers' => 
+    array (
+      0 => 'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfileServiceProvider',
+    ),
+  ),
   'kirschbaum-development/eloquent-power-joins' => 
   array (
     'providers' => 
@@ -187,11 +221,25 @@
       0 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     ),
   ),
+  'marjose123/filament-lockscreen' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
     array (
       0 => 'Carbon\\Laravel\\ServiceProvider',
+    ),
+  ),
+  'niladam/filament-auto-logout' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Niladam\\FilamentAutoLogout\\AutoLogoutServiceProvider',
     ),
   ),
   'nunomaduro/collision' => 
@@ -259,6 +307,13 @@
       1 => 'Sentry\\Laravel\\Tracing\\ServiceProvider',
     ),
   ),
+  'shuvroroy/filament-spatie-laravel-backup' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'ShuvroRoy\\FilamentSpatieLaravelBackup\\FilamentSpatieLaravelBackupServiceProvider',
+    ),
+  ),
   'socialiteproviders/manager' => 
   array (
     'providers' => 
@@ -273,11 +328,29 @@
       0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     ),
   ),
+  'spatie/laravel-backup' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Backup\\BackupServiceProvider',
+    ),
+  ),
   'spatie/laravel-settings' => 
   array (
     'providers' => 
     array (
       0 => 'Spatie\\LaravelSettings\\LaravelSettingsServiceProvider',
+    ),
+  ),
+  'spatie/laravel-signal-aware-command' => 
+  array (
+    'aliases' => 
+    array (
+      'Signal' => 'Spatie\\SignalAwareCommand\\Facades\\Signal',
+    ),
+    'providers' => 
+    array (
+      0 => 'Spatie\\SignalAwareCommand\\SignalAwareCommandServiceProvider',
     ),
   ),
   'spatie/laravel-sitemap' => 
@@ -292,6 +365,23 @@
     'providers' => 
     array (
       0 => 'STS\\FilamentImpersonate\\FilamentImpersonateServiceProvider',
+    ),
+  ),
+  'stephenjude/filament-two-factor-authentication' => 
+  array (
+    'aliases' => 
+    array (
+    ),
+    'providers' => 
+    array (
+      0 => 'Stephenjude\\FilamentTwoFactorAuthentication\\TwoFactorAuthenticationServiceProvider',
+    ),
+  ),
+  'swisnl/filament-backgrounds' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Swis\\Filament\\Backgrounds\\FilamentBackgroundsServiceProvider',
     ),
   ),
   'tomatophp/console-helpers' => 

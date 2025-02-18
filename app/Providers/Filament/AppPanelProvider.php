@@ -21,7 +21,15 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
  use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
-
+use Carbon\Carbon;
+use Niladam\FilamentAutoLogout\AutoLogoutPlugin;
+ use lockscreen\FilamentLockscreen\Lockscreen;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
+ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -31,7 +39,48 @@ class AppPanelProvider extends PanelProvider
 ->darkMode(false)
 ->default()
             ->id('app')
-->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
+->plugins([
+ FilamentEditProfilePlugin::make()
+        ->slug('my-profile')
+        ->setTitle('Mijn profiel')
+        ->setNavigationLabel('My Profile')
+        ->setNavigationGroup('Group Profile')
+        ->setIcon('heroicon-o-user')
+        ->setSort(10)
+        ->shouldRegisterNavigation(false)
+        ->shouldShowDeleteAccountForm(false)
+        ->shouldShowBrowserSessionsForm(true)
+        ->shouldShowAvatarForm()
+        ])
+
+ ->plugins([
+        AutoLogoutPlugin::make()
+            ->color(Color::Emerald)                         // Set the color. Defaults to Zinc
+            ->disableIf(fn () => auth()->id() === 1)        // Disable the user with ID 1
+            ->logoutAfter(Carbon::SECONDS_PER_MINUTE * 5)   // Logout the user after 5 minutes
+            ->withoutWarning()                              // Disable the warning before logging out
+            ->withoutTimeLeft()                             // Disable the time left
+            ->timeLeftText('Je word straks automatiche uitgelogd')      // Change the time left text
+            ->timeLeftText('')                              // Remove the time left text (displays only countdown)
+    ])
+
+  // ->plugins([
+         //   TwoFactorAuthenticationPlugin::make()
+                 //   ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
+
+      //  ])
+ //->plugin(new Lockscreen())   // <- Add this
+
+
+ //->plugins([
+          //  FilamentBackgroundsPlugin::make()
+            //    ->imageProvider(
+               //     MyImages::make()
+                //        ->directory('images/backgrounds')
+               // ),
+     //   ])
+
+ //->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
             ->path('')
    	    ->tenant(Company::class)
             ->maxContentWidth(MaxWidth::Full)
@@ -85,9 +134,16 @@ class AppPanelProvider extends PanelProvider
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
+       //
+              LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+
  
                 DispatchServingFilamentEvent::class,
-            ])   ->tenantMiddleware([
+            ])   ->authMiddleware([
+                // ...
+                 Locker::class, // <- Add this
+            ])
+ ->tenantMiddleware([
                       \Hasnayeen\Themes\Http\Middleware\SetTheme::class
         ], isPersistent: true)
             ->authMiddleware([

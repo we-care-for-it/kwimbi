@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers;
 
+use Filament\Facades\Filament;
+use Filament\Navigation\UserMenuItem;
 use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentAsset;
@@ -8,6 +10,7 @@ use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        Filament::serving(function () {
+            Filament::registerUserMenuItems([
+                UserMenuItem::make()
+                    ->label('Mijn profiel')
+                    ->url(fn(): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-m-user-circle'),
+                // ...
+            ]);
+        });
+
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
