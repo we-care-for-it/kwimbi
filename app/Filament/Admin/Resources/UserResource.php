@@ -41,6 +41,7 @@ class UserResource extends Resource
 
             TextInput::make('password')
                 ->label('Password')
+                ->required()
                 ->password()
                 ->maxLength(255),
 
