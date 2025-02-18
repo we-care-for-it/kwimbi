@@ -64,8 +64,12 @@
 
 .fi-ac-btn-action {
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
 
+}
+
+.leading-6{
+  font-weight: normal!important;
 }
 
 .fi-ta-header {

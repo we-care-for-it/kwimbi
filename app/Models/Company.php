@@ -74,7 +74,7 @@ class Company extends Model
 
     public function mailboxes()
     {
-        return $this->hasMany(Relation::class);
+        return $this->hasMany(Mailbox::class);
     }
 
     public function getActivitylogOptions(): LogOptions
