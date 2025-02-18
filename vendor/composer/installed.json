@@ -3153,17 +3153,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.42.1",
-            "version_normalized": "11.42.1.0",
+            "version": "v11.43.0",
+            "version_normalized": "11.43.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8"
+                "reference": "70760d976486310b11d8e487e873077db069e77a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ff392f42f6c55cc774ce75553a11c6b031da67f8",
-                "reference": "ff392f42f6c55cc774ce75553a11c6b031da67f8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/70760d976486310b11d8e487e873077db069e77a",
+                "reference": "70760d976486310b11d8e487e873077db069e77a",
                 "shasum": ""
             },
             "require": {
@@ -3319,7 +3319,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^7.0).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^7.0)."
             },
-            "time": "2025-02-12T20:58:18+00:00",
+            "time": "2025-02-18T15:37:56+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -6029,17 +6029,17 @@
         },
         {
             "name": "owen-it/laravel-auditing",
-            "version": "v13.7.0",
-            "version_normalized": "13.7.0.0",
+            "version": "v13.7.1",
+            "version_normalized": "13.7.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owen-it/laravel-auditing.git",
-                "reference": "7339563cca50aeac6c322e8654cff803a081d91c"
+                "reference": "627a7b7ddd2aa2d026be328595efa31301ad7d02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/7339563cca50aeac6c322e8654cff803a081d91c",
-                "reference": "7339563cca50aeac6c322e8654cff803a081d91c",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/627a7b7ddd2aa2d026be328595efa31301ad7d02",
+                "reference": "627a7b7ddd2aa2d026be328595efa31301ad7d02",
                 "shasum": ""
             },
             "require": {
@@ -6058,7 +6058,7 @@
             "suggest": {
                 "irazasyed/larasupport": "Needed to publish the package configuration in Lumen"
             },
-            "time": "2025-02-17T13:40:51+00:00",
+            "time": "2025-02-18T16:00:52+00:00",
             "type": "package",
             "extra": {
                 "laravel": {

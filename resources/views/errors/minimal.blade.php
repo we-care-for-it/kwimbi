@@ -25,7 +25,7 @@
                         Vraag de beheerder om je account toe te voegen of login met een andere account
                     </div>
 
-                    <a class = "pt-5" href = "">>Loguit</a>
+                    <a class = "pt-5" href = "/app">>Loguit</a>
                 </p>
             @endif
             <div class="w-full text-stone-300  fixed bottom-0 pb-7" >
