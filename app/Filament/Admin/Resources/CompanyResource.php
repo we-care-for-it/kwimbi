@@ -11,9 +11,11 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\Action;
 use Filament\Support\Enums\IconPosition;
+use Filament\Support\Enums\Alignment;
 use App\Filament\Admin\Resources\CompanyResource\RelationManagers\UsersRelationManager;
 use App\Filament\Admin\Resources\CompanyResource\RelationManagers\GpsObjectsRelationManager;
 use App\Filament\Admin\Resources\CompanyResource\RelationManagers\MailboxRelationManager;
@@ -41,6 +43,7 @@ class CompanyResource extends Resource
         return $table->columns([
             TextColumn::make('id')->sortable(),
             TextColumn::make('name')->sortable()->searchable(),
+            TextColumn::make('company_users_count')->counts('companyUsers')->badge()->alignment(Alignment::Center),
             TextColumn::make('created_at')->dateTime()->sortable(),
         ])
         ->actions([
@@ -53,9 +56,12 @@ class CompanyResource extends Resource
                 ->iconPosition(IconPosition::Before)
                 ->color('#C0C0C0')
                 ->url(fn ($record) => CompanyResource::getUrl('activities', ['record' => $record])),
+                
+            DeleteAction::make(),
+
         ])
         ->bulkActions([
-            DeleteBulkAction::make(),
+
         ]);
         
     }
