@@ -31,6 +31,7 @@ class AppPanelProvider extends PanelProvider
 ->darkMode(false)
 ->default()
             ->id('app')
+->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
             ->path('')
    	    ->tenant(Company::class)
             ->maxContentWidth(MaxWidth::Full)

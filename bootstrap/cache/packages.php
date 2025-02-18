@@ -77,6 +77,13 @@
       0 => 'Filament\\Notifications\\NotificationsServiceProvider',
     ),
   ),
+  'filament/spatie-laravel-settings-plugin' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Filament\\SpatieLaravelSettingsPluginServiceProvider',
+    ),
+  ),
   'filament/support' => 
   array (
     'providers' => 
@@ -96,6 +103,13 @@
     'providers' => 
     array (
       0 => 'Filament\\Widgets\\WidgetsServiceProvider',
+    ),
+  ),
+  'genealabs/laravel-model-caching' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'GeneaLabs\\LaravelModelCaching\\Providers\\Service',
     ),
   ),
   'hasnayeen/themes' => 
@@ -259,11 +273,46 @@
       0 => 'Spatie\\Activitylog\\ActivitylogServiceProvider',
     ),
   ),
+  'spatie/laravel-settings' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\LaravelSettings\\LaravelSettingsServiceProvider',
+    ),
+  ),
+  'spatie/laravel-sitemap' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Sitemap\\SitemapServiceProvider',
+    ),
+  ),
   'stechstudio/filament-impersonate' => 
   array (
     'providers' => 
     array (
       0 => 'STS\\FilamentImpersonate\\FilamentImpersonateServiceProvider',
+    ),
+  ),
+  'tomatophp/console-helpers' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-pwa' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentPWA\\FilamentPwaServiceProvider',
+    ),
+  ),
+  'tomatophp/filament-settings-hub' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TomatoPHP\\FilamentSettingsHub\\FilamentSettingsHubServiceProvider',
     ),
   ),
 );
