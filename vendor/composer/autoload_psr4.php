@@ -120,6 +120,8 @@ return array(
     'Filament\\Actions\\' => array($vendorDir . '/filament/actions/src'),
     'Filament\\' => array($vendorDir . '/filament/filament/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
+    'EightyNine\\ExcelImport\\Database\\Factories\\' => array($vendorDir . '/eightynine/filament-excel-import/database/factories'),
+    'EightyNine\\ExcelImport\\' => array($vendorDir . '/eightynine/filament-excel-import/src'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
     'DutchCodingCompany\\FilamentSocialite\\Tests\\' => array($vendorDir . '/dutchcodingcompany/filament-socialite/tests'),
     'DutchCodingCompany\\FilamentSocialite\\Database\\Factories\\' => array($vendorDir . '/dutchcodingcompany/filament-socialite/database/factories'),
