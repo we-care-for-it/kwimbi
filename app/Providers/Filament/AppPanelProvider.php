@@ -21,6 +21,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
  use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
+
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
