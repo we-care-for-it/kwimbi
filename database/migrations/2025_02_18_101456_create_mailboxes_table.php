@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mailbox', function (Blueprint $table) {
+        Schema::create('mailboxes', function (Blueprint $table) {
             $table->id();
             $table->string('server');
             $table->string('email');
@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('portnumber'); 
             $table->string('security_protocol');
             $table->foreignId('company_id'); 
-            $table->datetime('last_success_at'); 
-            $table->datetime('last_error_at');
+            $table->datetime('last_success_at')->nullable();; 
+            $table->datetime('last_error_at')->nullable();;
             $table->string('last_error_message')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mailbox');
+        Schema::dropIfExists('mailboxes');
     }
 };
