@@ -16,8 +16,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Support\Enums\IconPosition;
 use App\Filament\Admin\Resources\CompanyResource\RelationManagers\UsersRelationManager;
 use App\Filament\Admin\Resources\CompanyResource\RelationManagers\GpsObjectsRelationManager;
-
-
+use App\Filament\Admin\Resources\CompanyResource\RelationManagers\MailboxRelationManager;
 
 
 class CompanyResource extends Resource
@@ -64,7 +63,8 @@ class CompanyResource extends Resource
     {
         return [
             UsersRelationManager::class,
-            GpsObjectsRelationManager::class, // Register the relation manager
+            GpsObjectsRelationManager::class,
+            MailboxRelationManager::class,
 
         ];
     }
