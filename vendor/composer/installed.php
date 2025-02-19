@@ -193,6 +193,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'dutchcodingcompany/filament-developer-logins' => array(
+            'pretty_version' => '1.6.0',
+            'version' => '1.6.0.0',
+            'reference' => 'ed425d4955a6a5a37ad92028f725502b132250a6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../dutchcodingcompany/filament-developer-logins',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'dutchcodingcompany/filament-socialite' => array(
             'pretty_version' => '2.3.1',
             'version' => '2.3.1.0',

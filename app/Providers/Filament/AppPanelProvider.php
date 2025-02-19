@@ -28,8 +28,10 @@ use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
 use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
- use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
+
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -50,7 +52,13 @@ class AppPanelProvider extends PanelProvider
         ->shouldRegisterNavigation(false)
         ->shouldShowDeleteAccountForm(false)
         ->shouldShowBrowserSessionsForm(true)
-        ->shouldShowAvatarForm()
+        ->shouldShowAvatarForm(),
+        FilamentDeveloperLoginsPlugin::make()
+        ->enabled(app()->environment('local'))
+        ->switchable(false)
+        ->users([
+            'Admin' => 'superAdmin@ltssoftware.nl',
+        ]),
         ])
 
  ->plugins([

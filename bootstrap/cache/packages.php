@@ -32,6 +32,13 @@
       1 => 'Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider',
     ),
   ),
+  'dutchcodingcompany/filament-developer-logins' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'DutchCodingCompany\\FilamentDeveloperLogins\\FilamentDeveloperLoginsServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-socialite' => 
   array (
     'aliases' => 

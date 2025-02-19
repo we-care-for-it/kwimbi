@@ -273,6 +273,9 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
             'DutchCodingCompany\\FilamentSocialite\\Tests\\' => 43,
             'DutchCodingCompany\\FilamentSocialite\\Database\\Factories\\' => 56,
             'DutchCodingCompany\\FilamentSocialite\\' => 37,
+            'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\' => 49,
+            'DutchCodingCompany\\FilamentDeveloperLogins\\Database\\Factories\\' => 62,
+            'DutchCodingCompany\\FilamentDeveloperLogins\\' => 43,
             'Dotenv\\' => 7,
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Deprecations\\' => 22,
@@ -913,6 +916,18 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         array (
             0 => __DIR__ . '/..' . '/dutchcodingcompany/filament-socialite/src',
         ),
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/tests',
+        ),
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/database/factories',
+        ),
+        'DutchCodingCompany\\FilamentDeveloperLogins\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
@@ -1172,6 +1187,7 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'App\\Filament\\Resources\\VehicleResource\\Pages\\ViewVehicle' => __DIR__ . '/../..' . '/app/Filament/Resources/VehicleResource/Pages/ViewVehicle.php',
         'App\\Filament\\Resources\\VehicleResource\\RelationManagers\\GpsDataRelationManager' => __DIR__ . '/../..' . '/app/Filament/Resources/VehicleResource/RelationManagers/GpsDataRelationManager.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Responses\\LogoutResponse' => __DIR__ . '/../..' . '/app/Http/Responses/LogoutResponse.php',
         'App\\Infolists\\Components\\Energylabel' => __DIR__ . '/../..' . '/app/Infolists/Components/Energylabel.php',
         'App\\Models\\Asset' => __DIR__ . '/../..' . '/app/Models/Asset.php',
         'App\\Models\\AssetCategory' => __DIR__ . '/../..' . '/app/Models/AssetCategory.php',
@@ -1955,6 +1971,20 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'Dotenv\\Util\\Regex' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Util/Regex.php',
         'Dotenv\\Util\\Str' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Util/Str.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Database\\Factories\\TestUserFactory' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/database/factories/TestUserFactory.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Exceptions\\ImplementationException' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/Exceptions/ImplementationException.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Facades\\FilamentDevelopersLogin' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/Facades/FilamentDevelopersLogin.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\FilamentDeveloperLoginsPlugin' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/FilamentDeveloperLoginsPlugin.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\FilamentDeveloperLoginsServiceProvider' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/FilamentDeveloperLoginsServiceProvider.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\FilamentDevelopersLogin' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/FilamentDevelopersLogin.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Http\\Controllers\\DeveloperLoginsController' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/Http/Controllers/DeveloperLoginsController.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Http\\Requests\\LoginAsRequest' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/Http/Requests/LoginAsRequest.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Livewire\\MenuLogins' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/Livewire/MenuLogins.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\Feature\\DeveloperLoginsControllerTest' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/tests/Feature/DeveloperLoginsControllerTest.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\Feature\\MenuLoginsTest' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/tests/Feature/MenuLoginsTest.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\Fixtures\\TestUser' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/tests/Fixtures/TestUser.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\Tests\\TestCase' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/tests/TestCase.php',
+        'DutchCodingCompany\\FilamentDeveloperLogins\\View\\Components\\DeveloperLogins' => __DIR__ . '/..' . '/dutchcodingcompany/filament-developer-logins/src/View/Components/DeveloperLogins.php',
         'DutchCodingCompany\\FilamentSocialite\\Events\\InvalidState' => __DIR__ . '/..' . '/dutchcodingcompany/filament-socialite/src/Events/InvalidState.php',
         'DutchCodingCompany\\FilamentSocialite\\Events\\Login' => __DIR__ . '/..' . '/dutchcodingcompany/filament-socialite/src/Events/Login.php',
         'DutchCodingCompany\\FilamentSocialite\\Events\\Registered' => __DIR__ . '/..' . '/dutchcodingcompany/filament-socialite/src/Events/Registered.php',
