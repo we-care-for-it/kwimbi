@@ -3,7 +3,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
-use App\Models\gpsObject;
 use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms\Components\Actions\Action;
@@ -219,9 +218,8 @@ class VehicleResource extends Resource
                         ,
 
                         Select::make('gps_object_id')
-                            ->label('GPS Tracker')
-                            ->options(gpsObject::pluck('imei', 'id'))
-                            ->searchable(),
+
+                            ->relationship('GPSObjectsForThisTenant', 'imei'),
 
                     ]),
 
