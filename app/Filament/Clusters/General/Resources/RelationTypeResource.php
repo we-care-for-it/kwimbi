@@ -1,19 +1,15 @@
 <?php
-
 namespace App\Filament\Clusters\General\Resources;
 
 use App\Filament\Clusters\General;
 use App\Filament\Clusters\General\Resources\RelationTypeResource\Pages;
-use App\Filament\Clusters\General\Resources\RelationTypeResource\RelationManagers;
 use App\Models\relationType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RelationTypeResource extends Resource
 {
@@ -28,9 +24,9 @@ class RelationTypeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make("name")
-                ->label("Type")
-                ->required()
-                ->maxLength(255),
+                    ->label("Type")
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -65,9 +61,9 @@ class RelationTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRelationTypes::route('/'),
+            'index'  => Pages\ListRelationTypes::route('/'),
             'create' => Pages\CreateRelationType::route('/create'),
-            'edit' => Pages\EditRelationType::route('/{record}/edit'),
+            'edit'   => Pages\EditRelationType::route('/{record}/edit'),
         ];
     }
 }
