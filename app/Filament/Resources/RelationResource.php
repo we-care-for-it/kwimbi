@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Enums\RelationTypes;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
@@ -23,9 +24,8 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Actions\ViewAction;
-//Form
-
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 //Form
@@ -82,7 +82,7 @@ class RelationResource extends Resource
                     Forms\Components\Select::make("type_id")
                         ->required()
                         ->label("Categorie")
-                        ->options(relationType::pluck('name', 'id'))
+                        ->options(RelationTypes::class)
                         ->columnSpan(2),
 
                 ])])
@@ -123,14 +123,14 @@ class RelationResource extends Resource
     {
         return
 
-        // $table->groups([Group::make("type.name")
-        //         ->titlePrefixedWithLabel(false)
-        //         ->label("Categorie"),
+        $table->groups([Group::make("type_id")
+                ->titlePrefixedWithLabel(false)
+                ->label("Categorie"),
 
-        // ])
-        //     ->defaultGroup('type.name')->
+        ])
+            ->defaultGroup('type_id')->
 
-        $table->columns([
+            columns([
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
