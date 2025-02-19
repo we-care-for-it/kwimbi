@@ -28,6 +28,7 @@ use Illuminate\Validation\Rule;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Infolists\Components\ImageEntry;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 
 class VehicleResource extends Resource
@@ -235,6 +236,7 @@ class VehicleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->columns([
                 // Tables\Columns\TextColumn::make('id')
                 //     ->label('#')
@@ -243,7 +245,8 @@ class VehicleResource extends Resource
                 //         return sprintf('%06d', $record?->id);
                 //     }),
                 ImageColumn::make('attachments')
-                ->label('Afbeelding'),
+                ->label('Afbeelding')
+                ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
@@ -295,9 +298,11 @@ class VehicleResource extends Resource
 
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
                 EditAction::make()
                     ->modalHeading('Voertuig snel bewerken')
                     ->modalIcon('heroicon-o-pencil')
@@ -308,6 +313,8 @@ class VehicleResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])->emptyState(view("partials.empty-state"));
     }
