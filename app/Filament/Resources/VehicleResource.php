@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
@@ -8,12 +7,14 @@ use App\Models\gpsObject;
 use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
@@ -23,13 +24,8 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Table;
-use Illuminate\Validation\Rule;
-use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Infolists\Components\ImageEntry;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Table;
 
 class VehicleResource extends Resource
 {
@@ -84,8 +80,8 @@ class VehicleResource extends Resource
                     ->icon('heroicon-m-bell')
                     ->schema([
                         TextEntry::make('kenteken')
-                        ->label('Kenteken')
-                        ->placeholder('-'),
+                            ->label('Kenteken')
+                            ->placeholder('-'),
                         TextEntry::make('merk')->label('Merk')->placeholder('-'),
                         TextEntry::make('handelsbenaming')->label('Handelsbenaming')->placeholder('-'),
                         TextEntry::make('inrichting')->label('Inrichting')->placeholder('-'),
@@ -194,7 +190,7 @@ class VehicleResource extends Resource
 
                 Grid::make(3)
                     ->schema([
-                        
+
                         FileUpload::make('attachments')
                             ->directory('vehicles'),
 
@@ -245,8 +241,8 @@ class VehicleResource extends Resource
                 //         return sprintf('%06d', $record?->id);
                 //     }),
                 ImageColumn::make('attachments')
-                ->label('Afbeelding')
-                ->placeholder('-'),
+                    ->label('Afbeelding')
+                    ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
@@ -293,6 +289,7 @@ class VehicleResource extends Resource
                 Tables\Columns\TextColumn::make('GPSObject.imei')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('Geen tracker gekoppeld')
                     ->badge()
                     ->label('Tracker'),
 
