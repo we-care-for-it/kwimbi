@@ -139,6 +139,8 @@ return array(
     'GeneaLabs\\LaravelPivotEvents\\' => array($vendorDir . '/genealabs/laravel-pivot-events/src'),
     'GeneaLabs\\LaravelModelCaching\\' => array($vendorDir . '/genealabs/laravel-model-caching/src'),
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/php-cors/src'),
+    'Flowframe\\Trend\\Database\\Factories\\' => array($vendorDir . '/flowframe/laravel-trend/database/factories'),
+    'Flowframe\\Trend\\' => array($vendorDir . '/flowframe/laravel-trend/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Filament\\Widgets\\' => array($vendorDir . '/filament/widgets/src'),
     'Filament\\Tables\\' => array($vendorDir . '/filament/tables/src'),

@@ -251,6 +251,8 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
+            'Flowframe\\Trend\\Database\\Factories\\' => 35,
+            'Flowframe\\Trend\\' => 16,
             'Firebase\\JWT\\' => 13,
             'Filament\\Widgets\\' => 17,
             'Filament\\Tables\\' => 16,
@@ -851,6 +853,14 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
+        'Flowframe\\Trend\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/flowframe/laravel-trend/database/factories',
+        ),
+        'Flowframe\\Trend\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/flowframe/laravel-trend/src',
+        ),
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
@@ -1186,6 +1196,14 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'App\\Filament\\Resources\\VehicleResource\\Pages\\ListVehicles' => __DIR__ . '/../..' . '/app/Filament/Resources/VehicleResource/Pages/ListVehicles.php',
         'App\\Filament\\Resources\\VehicleResource\\Pages\\ViewVehicle' => __DIR__ . '/../..' . '/app/Filament/Resources/VehicleResource/Pages/ViewVehicle.php',
         'App\\Filament\\Resources\\VehicleResource\\RelationManagers\\GpsDataRelationManager' => __DIR__ . '/../..' . '/app/Filament/Resources/VehicleResource/RelationManagers/GpsDataRelationManager.php',
+        'App\\Filament\\Widgets\\ExpiredChecks' => __DIR__ . '/../..' . '/app/Filament/Widgets/ExpiredChecks.php',
+        'App\\Filament\\Widgets\\ExpiredInspections' => __DIR__ . '/../..' . '/app/Filament/Widgets/ExpiredInspections.php',
+        'App\\Filament\\Widgets\\IncidentChart' => __DIR__ . '/../..' . '/app/Filament/Widgets/IncidentChart.php',
+        'App\\Filament\\Widgets\\InspectionsChart' => __DIR__ . '/../..' . '/app/Filament/Widgets/InspectionsChart.php',
+        'App\\Filament\\Widgets\\LastIncidents' => __DIR__ . '/../..' . '/app/Filament/Widgets/LastIncidents.php',
+        'App\\Filament\\Widgets\\RejectedInspections' => __DIR__ . '/../..' . '/app/Filament/Widgets/RejectedInspections.php',
+        'App\\Filament\\Widgets\\StandStill' => __DIR__ . '/../..' . '/app/Filament/Widgets/StandStill.php',
+        'App\\Filament\\Widgets\\StatsOverview' => __DIR__ . '/../..' . '/app/Filament/Widgets/StatsOverview.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Responses\\LogoutResponse' => __DIR__ . '/../..' . '/app/Http/Responses/LogoutResponse.php',
         'App\\Infolists\\Components\\Energylabel' => __DIR__ . '/../..' . '/app/Infolists/Components/Energylabel.php',
@@ -2684,6 +2702,7 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'Filament\\Actions\\Exports\\Downloaders\\Contracts\\Downloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/Contracts/Downloader.php',
         'Filament\\Actions\\Exports\\Downloaders\\CsvDownloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/CsvDownloader.php',
         'Filament\\Actions\\Exports\\Downloaders\\XlsxDownloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/XlsxDownloader.php',
+        'Filament\\Actions\\Exports\\Enums\\Contracts\\ExportFormat' => __DIR__ . '/..' . '/filament/actions/src/Exports/Enums/Contracts/ExportFormat.php',
         'Filament\\Actions\\Exports\\Enums\\ExportFormat' => __DIR__ . '/..' . '/filament/actions/src/Exports/Enums/ExportFormat.php',
         'Filament\\Actions\\Exports\\ExportColumn' => __DIR__ . '/..' . '/filament/actions/src/Exports/ExportColumn.php',
         'Filament\\Actions\\Exports\\Exporter' => __DIR__ . '/..' . '/filament/actions/src/Exports/Exporter.php',
@@ -3523,6 +3542,13 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'Firebase\\JWT\\JWTExceptionWithPayloadInterface' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWTExceptionWithPayloadInterface.php',
         'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
         'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
+        'Flowframe\\Trend\\Adapters\\AbstractAdapter' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/Adapters/AbstractAdapter.php',
+        'Flowframe\\Trend\\Adapters\\MySqlAdapter' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/Adapters/MySqlAdapter.php',
+        'Flowframe\\Trend\\Adapters\\PgsqlAdapter' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/Adapters/PgsqlAdapter.php',
+        'Flowframe\\Trend\\Adapters\\SqliteAdapter' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/Adapters/SqliteAdapter.php',
+        'Flowframe\\Trend\\Trend' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/Trend.php',
+        'Flowframe\\Trend\\TrendServiceProvider' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/TrendServiceProvider.php',
+        'Flowframe\\Trend\\TrendValue' => __DIR__ . '/..' . '/flowframe/laravel-trend/src/TrendValue.php',
         'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
         'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
         'GeneaLabs\\LaravelModelCaching\\CacheKey' => __DIR__ . '/..' . '/genealabs/laravel-model-caching/src/CacheKey.php',
