@@ -30,31 +30,39 @@ class ContactResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('first_name')
                     ->label('Voornaam')
+                    ->placeholder('-')
                     ->required()
                     ->maxLength(255),
+
                 Forms\Components\TextInput::make('last_name')
                     ->label('Achternaam')
+                    ->placeholder('-')
                     ->required()
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('email')
                     ->label('E-mailadres')
+                    ->placeholder('-')
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('department')
                     ->label('Afdeling')
+                    ->placeholder('-')
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('function')
                     ->label('Functie')
+                    ->placeholder('-')
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('phone_number')
                     ->label('Telefoonnummer')
+                    ->placeholder('-')
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('mobile_number')
                     ->label('Intern telefoonnummer')
+                    ->placeholder('-')
                     ->maxLength(255),
 
             ]);
