@@ -11,9 +11,11 @@
     "require": {
         "php": "^8.2",
         "croustibat/filament-jobs-monitor": "^2.5",
+        "dutchcodingcompany/filament-developer-logins": "^1.6",
         "dutchcodingcompany/filament-socialite": "^2.3",
         "eightynine/filament-excel-import": "^3.1",
         "filament/filament": "^3.2",
+        "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "laravel/framework": "^11.31",

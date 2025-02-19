@@ -32,6 +32,13 @@
       1 => 'Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider',
     ),
   ),
+  'dutchcodingcompany/filament-developer-logins' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'DutchCodingCompany\\FilamentDeveloperLogins\\FilamentDeveloperLoginsServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-socialite' => 
   array (
     'aliases' => 
@@ -115,6 +122,17 @@
     'providers' => 
     array (
       0 => 'Filament\\Widgets\\WidgetsServiceProvider',
+    ),
+  ),
+  'flowframe/laravel-trend' => 
+  array (
+    'aliases' => 
+    array (
+      'Trend' => 'Flowframe\\Trend\\TrendFacade',
+    ),
+    'providers' => 
+    array (
+      0 => 'Flowframe\\Trend\\TrendServiceProvider',
     ),
   ),
   'genealabs/laravel-model-caching' => 

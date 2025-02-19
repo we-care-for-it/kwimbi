@@ -10,7 +10,7 @@ class relationType extends Model implements Auditable
     use SoftDeletes;
 
     use \OwenIt\Auditing\Auditable;
-    public $table = "companies_types";
+    public $table = "relation_types";
 
     protected $fillable = [
         'name',

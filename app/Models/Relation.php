@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\RelationTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,6 +15,13 @@ class Relation extends Model
     protected $fillable = [
         'name',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'type_id' => RelationTypes::class,
+        ];
+    }
 
     public function departments(): HasMany
     {

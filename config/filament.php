@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'broadcasting' => [
+    'broadcasting'            => [
 
         // 'echo' => [
         //     'broadcaster' => 'pusher',
@@ -41,7 +41,13 @@ return [
     |
     */
 
-
+    'widgets'                 => [
+        // ...
+        'default' => [
+            'account' => false, // Disables the account widget.
+            'info'    => false, // Disables the info widget.
+        ],
+    ],
 
     'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
 
@@ -57,7 +63,7 @@ return [
     |
     */
 
-    'assets_path' => null,
+    'assets_path'             => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +77,7 @@ return [
     |
     */
 
-    'cache_path' => base_path('bootstrap/cache/filament'),
+    'cache_path'              => base_path('bootstrap/cache/filament'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,6 +91,6 @@ return [
     | Livewire's standard 200ms delay.
     |
     */
-   'livewire_loading_delay' => 'none',
+    'livewire_loading_delay'  => 'none',
 
 ];

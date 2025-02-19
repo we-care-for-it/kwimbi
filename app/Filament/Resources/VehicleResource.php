@@ -3,16 +3,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
-use App\Models\gpsObject;
 use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
@@ -22,14 +23,14 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
-use Illuminate\Validation\Rule;
 
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     protected static ?string $navigationLabel  = 'Voertuigen';
     protected static ?string $pluralModelLabel = 'Voertuigen';
@@ -78,8 +79,8 @@ class VehicleResource extends Resource
                     ->icon('heroicon-m-bell')
                     ->schema([
                         TextEntry::make('kenteken')
-                        ->label('Kenteken')
-                        ->placeholder('-'),
+                            ->label('Kenteken')
+                            ->placeholder('-'),
                         TextEntry::make('merk')->label('Merk')->placeholder('-'),
                         TextEntry::make('handelsbenaming')->label('Handelsbenaming')->placeholder('-'),
                         TextEntry::make('inrichting')->label('Inrichting')->placeholder('-'),
@@ -90,6 +91,7 @@ class VehicleResource extends Resource
                         TextEntry::make('aantal_wielen')->label('Aantal Wielen')->placeholder('-'),
                         TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen')->placeholder('-'),
                         TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen')->placeholder('-'),
+                        ImageEntry::make('attachments')->label('Afbeelding')->placeholder('-'),
                     ])->columns(3),
 
                 Tabs\Tab::make('Datums')
@@ -153,7 +155,7 @@ class VehicleResource extends Resource
             ->schema([
 
                 TextInput::make("kenteken")
-                    ->unique(Vehicle::class, 'kenteken')
+                    ->unique(Vehicle::class, 'kenteken', ignoreRecord: true)
                     ->label("Kenteken")
                     ->required()
                     ->maxlength(10)
@@ -163,7 +165,7 @@ class VehicleResource extends Resource
                         Action::make("searchDataByLicenceplate")
 
                             ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {
-                            $data = (new RDWService())->GetVehilcle($get("kenteken"));
+                            $data = (new RDWService())->GetVehicle($get("kenteken"));
                             $data = json_decode($data);
 
                             if ($data == null) {
@@ -172,14 +174,14 @@ class VehicleResource extends Resource
                                     ->title("Geen resultaten")
                                     ->body("Helaas er zijn geen gegevens gevonden bij de kenteken <b>" . $get("licenceplate") . "</b> Controleer het kenteken en probeer opnieuw.")->send();
                             } else {
-                                $set("voertuigsoort", $data[0]?->voertuigsoort);
-                                $set("handelsbenaming", $data[0]?->handelsbenaming);
-                                $set("inrichting", $data[0]?->inrichting);
-                                $set("variant", $data[0]?->variant);
-                                $set("datum_eerste_toelating_dt", $data[0]?->datum_eerste_toelating_dt);
-                                $set("eerste_kleur", $data[0]?->eerste_kleur);
-                                $set("vervaldatum_apk", date("d-m-Y", strtotime($data[0]?->vervaldatum_apk_dt)));
-                                $set("merk", $data[0]?->merk);
+                                $set("voertuigsoort", $data[0]?->voertuigsoort ?? 'Onbekend');
+                                $set("handelsbenaming", $data[0]?->handelsbenaming ?? 'Onbekend');
+                                $set("inrichting", $data[0]?->inrichting ?? 'Onbekend');
+                                $set("variant", $data[0]?->variant ?? 'Onbekend');
+                                $set("datum_eerste_toelating_dt", $data[0]?->datum_eerste_toelating_dt ?? 'Onbekend');
+                                $set("eerste_kleur", $data[0]?->eerste_kleur ?? 'Onbekend');
+                                $set("vervaldatum_apk", date("d-m-Y", strtotime($data[0]?->vervaldatum_apk_dt ?? 'Onbekend')));
+                                $set("merk", $data[0]?->merk ?? 'Onbekend');
 
                             }
 
@@ -187,6 +189,10 @@ class VehicleResource extends Resource
 
                 Grid::make(3)
                     ->schema([
+
+                        FileUpload::make('attachments')
+                            ->directory('vehicles'),
+
                         TextInput::make("voertuigsoort")
                             ->label("Voertuigsoort"),
 
@@ -208,13 +214,11 @@ class VehicleResource extends Resource
                             ->label("Variant"),
 
                         TextInput::make("vervaldatum_apk")
-                            ->label("Vervaldatum APK")
-                        ,
+                            ->label("Vervaldatum APK"),
 
                         Select::make('gps_object_id')
                             ->label('GPS Tracker')
-                            ->options(gpsObject::pluck('imei', 'id'))
-                            ->searchable(),
+                            ->relationship('GPSObjectsForThisTenant', 'imei'),
 
                     ]),
 
@@ -225,43 +229,53 @@ class VehicleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('#')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        return sprintf('%06d', $record?->id);
-                    }),
+                // Tables\Columns\TextColumn::make('id')
+                //     ->label('#')
+                //     ->sortable()
+                //     ->getStateUsing(function ($record): ?string {
+                //         return sprintf('%06d', $record?->id);
+                //     }),
+                ImageColumn::make('attachments')
+                    ->label('Afbeelding')
+                    ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('Kenteken'),
 
                 Tables\Columns\TextColumn::make('merk')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
                     ->label('Merk'),
 
                 Tables\Columns\TextColumn::make('handelsbenaming')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('handelsbenaming'),
 
                 Tables\Columns\TextColumn::make('variant')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('variant'),
 
                 Tables\Columns\TextColumn::make('inrichting')
                     ->sortable()
                     ->toggleable()
-                    ->label('inrichting'),
+                    ->placeholder('-')
+                    ->label('Inrichting'),
 
                 Tables\Columns\TextColumn::make('eerste_kleur')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
-                    ->label('kleur'),
+                    ->label('Kleur'),
 
                 Tables\Columns\TextColumn::make('vervaldatum_apk')
                     ->color(
@@ -272,20 +286,24 @@ class VehicleResource extends Resource
                     )
                     ->date('d-m-Y')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
                     ->label('Vervaldatum APK'),
 
                 Tables\Columns\TextColumn::make('GPSObject.imei')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('Geen tracker gekoppeld')
                     ->badge()
                     ->label('Tracker'),
 
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
                 EditAction::make()
                     ->modalHeading('Voertuig snel bewerken')
                     ->modalIcon('heroicon-o-pencil')
@@ -296,6 +314,8 @@ class VehicleResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])->emptyState(view("partials.empty-state"));
     }

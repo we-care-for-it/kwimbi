@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
-use App\Models\companyType;
+use App\Models\relationType;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -26,7 +26,6 @@ use Filament\Tables\Actions\ViewAction;
 //Form
 
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 //Form
@@ -35,9 +34,9 @@ class RelationResource extends Resource
 {
     protected static ?string $model = Relation::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-building-library';
-    protected static ?string $navigationLabel = "Relaties";
-    protected static ?string $pluralModelLabel = 'Relaties';
+    protected static ?string $navigationIcon       = 'heroicon-s-building-library';
+    protected static ?string $navigationLabel      = "Relaties";
+    protected static ?string $pluralModelLabel     = 'Relaties';
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
@@ -83,8 +82,7 @@ class RelationResource extends Resource
                     Forms\Components\Select::make("type_id")
                         ->required()
                         ->label("Categorie")
-                        ->options(companyType::where('is_active', 1)
-                                ->pluck('name', 'id'))
+                        ->options(relationType::pluck('name', 'id'))
                         ->columnSpan(2),
 
                 ])])
@@ -123,8 +121,8 @@ class RelationResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return 
-        
+        return
+
         // $table->groups([Group::make("type.name")
         //         ->titlePrefixedWithLabel(false)
         //         ->label("Categorie"),
@@ -132,7 +130,7 @@ class RelationResource extends Resource
         // ])
         //     ->defaultGroup('type.name')->
 
-$table->            columns([
+        $table->columns([
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
@@ -154,7 +152,7 @@ $table->            columns([
                 return $rec->zipcode . " " . $rec->place;
             }),
 
-            Tables\Columns\TextColumn::make('type.name')
+            Tables\Columns\TextColumn::make('type_id')
                 ->label('Categorie')
                 ->badge()
                 ->placeholder('-')
@@ -166,7 +164,7 @@ $table->            columns([
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(companyType::where('is_active', 1)
+                    ->options(relationType::where('is_active', 1)
                             ->pluck('name', 'id')),
 
                 Tables\Filters\TrashedFilter::make(),
@@ -211,7 +209,7 @@ $table->            columns([
     {
         return [
             'index' => Pages\ListRelations::route('/'),
-            'view' => Pages\ViewRelation::route('/{record}'),
+            'view'  => Pages\ViewRelation::route('/{record}'),
         ];
     }
 

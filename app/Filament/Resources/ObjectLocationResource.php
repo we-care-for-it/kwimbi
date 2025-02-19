@@ -133,14 +133,10 @@ class ObjectLocationResource extends Resource
                                 ->label("Relatie")
                                 ->preload()
                                 ->required()
-                            // ->createOptionForm([
-                            //     Forms\Components\TextInput::make("type_id"),
-                            //     Forms\Components\TextInput::make("name")
-                            //         ->required()
-                            //         ->label("Naam van de relatie")])
-                                ->relationship(name:
-                                    "relation", titleAttribute:
-                                    "name")])]),
+                                ->options(Relation::all()->pluck('name','id')
+                                // ->where('company_id', auth()->user()->company_id)
+                                ->where('type_id', \App\Enums\RelationTypes::CUSTOMERS))
+                        ])]),
 
             Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
                     ->label("Postcode")

@@ -23,13 +23,15 @@ use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
 use Carbon\Carbon;
 use Niladam\FilamentAutoLogout\AutoLogoutPlugin;
- use lockscreen\FilamentLockscreen\Lockscreen;
-use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+ //use lockscreen\FilamentLockscreen\Lockscreen;
+//use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+//use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
- use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
+
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -38,7 +40,9 @@ class AppPanelProvider extends PanelProvider
        
 ->darkMode(false)
 ->default()
+
             ->id('app')
+
 ->plugins([
  FilamentEditProfilePlugin::make()
         ->slug('my-profile')
@@ -50,7 +54,14 @@ class AppPanelProvider extends PanelProvider
         ->shouldRegisterNavigation(false)
         ->shouldShowDeleteAccountForm(false)
         ->shouldShowBrowserSessionsForm(true)
-        ->shouldShowAvatarForm()
+        ->shouldShowAvatarForm(),
+        FilamentDeveloperLoginsPlugin::make()
+        ->enabled(app()->environment('local'))
+        ->switchable(false)
+
+        ->users([
+            'Admin' => 'superAdmin@ltssoftware.nl',
+        ]),
         ])
 
  ->plugins([
@@ -118,12 +129,11 @@ class AppPanelProvider extends PanelProvider
         )    ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+              
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -135,13 +145,13 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
        //
-              LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+              
 
  
                 DispatchServingFilamentEvent::class,
             ])   ->authMiddleware([
                 // ...
-                 Locker::class, // <- Add this
+               //  Locker::class, // <- Add this
             ])
  ->tenantMiddleware([
                       \Hasnayeen\Themes\Http\Middleware\SetTheme::class
