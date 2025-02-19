@@ -23,9 +23,9 @@ use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
 use Carbon\Carbon;
 use Niladam\FilamentAutoLogout\AutoLogoutPlugin;
- use lockscreen\FilamentLockscreen\Lockscreen;
-use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+ //use lockscreen\FilamentLockscreen\Lockscreen;
+//use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+//use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
@@ -145,13 +145,13 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
        //
-              LockerTimer::class, // <- Add this (this is an optional, if you want to lock the request after 30 minutes idle)
+              
 
  
                 DispatchServingFilamentEvent::class,
             ])   ->authMiddleware([
                 // ...
-                 Locker::class, // <- Add this
+               //  Locker::class, // <- Add this
             ])
  ->tenantMiddleware([
                       \Hasnayeen\Themes\Http\Middleware\SetTheme::class
