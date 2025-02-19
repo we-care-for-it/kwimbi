@@ -2702,7 +2702,6 @@ class ComposerStaticInitf8f76f13525debd227568f9ff6fa79ce
         'Filament\\Actions\\Exports\\Downloaders\\Contracts\\Downloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/Contracts/Downloader.php',
         'Filament\\Actions\\Exports\\Downloaders\\CsvDownloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/CsvDownloader.php',
         'Filament\\Actions\\Exports\\Downloaders\\XlsxDownloader' => __DIR__ . '/..' . '/filament/actions/src/Exports/Downloaders/XlsxDownloader.php',
-        'Filament\\Actions\\Exports\\Enums\\Contracts\\ExportFormat' => __DIR__ . '/..' . '/filament/actions/src/Exports/Enums/Contracts/ExportFormat.php',
         'Filament\\Actions\\Exports\\Enums\\ExportFormat' => __DIR__ . '/..' . '/filament/actions/src/Exports/Enums/ExportFormat.php',
         'Filament\\Actions\\Exports\\ExportColumn' => __DIR__ . '/..' . '/filament/actions/src/Exports/ExportColumn.php',
         'Filament\\Actions\\Exports\\Exporter' => __DIR__ . '/..' . '/filament/actions/src/Exports/Exporter.php',

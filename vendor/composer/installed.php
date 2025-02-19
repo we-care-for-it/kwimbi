@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'fecce382dfccb9ba30ae93cdb96415330ef7db20',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -56,9 +56,9 @@
             'dev_requirement' => false,
         ),
         'calebporzio/sushi' => array(
-            'pretty_version' => 'v2.4.5',
-            'version' => '2.4.5.0',
-            'reference' => '932d09781bff75c812541d2d269400fd7d730bab',
+            'pretty_version' => 'v2.5.3',
+            'version' => '2.5.3.0',
+            'reference' => 'bf184973f943216b2aaa8dbc79631ea806038bb1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../calebporzio/sushi',
             'aliases' => array(),
@@ -719,9 +719,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'fecce382dfccb9ba30ae93cdb96415330ef7db20',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

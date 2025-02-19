@@ -1640,7 +1640,6 @@ return array(
     'Filament\\Actions\\Exports\\Downloaders\\Contracts\\Downloader' => $vendorDir . '/filament/actions/src/Exports/Downloaders/Contracts/Downloader.php',
     'Filament\\Actions\\Exports\\Downloaders\\CsvDownloader' => $vendorDir . '/filament/actions/src/Exports/Downloaders/CsvDownloader.php',
     'Filament\\Actions\\Exports\\Downloaders\\XlsxDownloader' => $vendorDir . '/filament/actions/src/Exports/Downloaders/XlsxDownloader.php',
-    'Filament\\Actions\\Exports\\Enums\\Contracts\\ExportFormat' => $vendorDir . '/filament/actions/src/Exports/Enums/Contracts/ExportFormat.php',
     'Filament\\Actions\\Exports\\Enums\\ExportFormat' => $vendorDir . '/filament/actions/src/Exports/Enums/ExportFormat.php',
     'Filament\\Actions\\Exports\\ExportColumn' => $vendorDir . '/filament/actions/src/Exports/ExportColumn.php',
     'Filament\\Actions\\Exports\\Exporter' => $vendorDir . '/filament/actions/src/Exports/Exporter.php',

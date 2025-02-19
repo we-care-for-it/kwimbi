@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\VehicleResource\Pages;
@@ -24,12 +25,16 @@ use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Table;
 use Illuminate\Validation\Rule;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Infolists\Components\ImageEntry;
+
 
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-truck';
 
     protected static ?string $navigationLabel  = 'Voertuigen';
     protected static ?string $pluralModelLabel = 'Voertuigen';
@@ -90,6 +95,7 @@ class VehicleResource extends Resource
                         TextEntry::make('aantal_wielen')->label('Aantal Wielen')->placeholder('-'),
                         TextEntry::make('aantal_zitplaatsen')->label('Aantal Zitplaatsen')->placeholder('-'),
                         TextEntry::make('aantal_rolstoelplaatsen')->label('Aantal Rolstoelplaatsen')->placeholder('-'),
+                        ImageEntry::make('attachments')->label('Afbeelding')->placeholder('-'),
                     ])->columns(3),
 
                 Tabs\Tab::make('Datums')
@@ -187,6 +193,10 @@ class VehicleResource extends Resource
 
                 Grid::make(3)
                     ->schema([
+                        
+                        FileUpload::make('attachments')
+                            ->directory('vehicles'),
+
                         TextInput::make("voertuigsoort")
                             ->label("Voertuigsoort"),
 
@@ -226,12 +236,14 @@ class VehicleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('#')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        return sprintf('%06d', $record?->id);
-                    }),
+                // Tables\Columns\TextColumn::make('id')
+                //     ->label('#')
+                //     ->sortable()
+                //     ->getStateUsing(function ($record): ?string {
+                //         return sprintf('%06d', $record?->id);
+                //     }),
+                ImageColumn::make('attachments')
+                ->label('Afbeelding'),
 
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
@@ -256,12 +268,12 @@ class VehicleResource extends Resource
                 Tables\Columns\TextColumn::make('inrichting')
                     ->sortable()
                     ->toggleable()
-                    ->label('inrichting'),
+                    ->label('Inrichting'),
 
                 Tables\Columns\TextColumn::make('eerste_kleur')
                     ->sortable()
                     ->toggleable()
-                    ->label('kleur'),
+                    ->label('Kleur'),
 
                 Tables\Columns\TextColumn::make('vervaldatum_apk')
                     ->color(
