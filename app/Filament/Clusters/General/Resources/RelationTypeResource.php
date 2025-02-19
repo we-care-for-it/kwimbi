@@ -5,10 +5,11 @@ namespace App\Filament\Clusters\General\Resources;
 use App\Filament\Clusters\General;
 use App\Filament\Clusters\General\Resources\RelationTypeResource\Pages;
 use App\Filament\Clusters\General\Resources\RelationTypeResource\RelationManagers;
-use App\Models\RelationType;
+use App\Models\relationType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RelationTypeResource extends Resource
 {
-    protected static ?string $model = RelationType::class;
+    protected static ?string $model = relationType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -26,7 +27,10 @@ class RelationTypeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make("name")
+                ->label("Type")
+                ->required()
+                ->maxLength(255),
             ]);
     }
 
@@ -34,7 +38,9 @@ class RelationTypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Type')
+                    ->sortable(),
             ])
             ->filters([
                 //

@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
-use App\Models\companyType;
+use App\Models\relationType;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -83,7 +83,7 @@ class RelationResource extends Resource
                     Forms\Components\Select::make("type_id")
                         ->required()
                         ->label("Categorie")
-                        ->options(companyType::where('is_active', 1)
+                        ->options(relationType::where('is_active', 1)
                                 ->pluck('name', 'id'))
                         ->columnSpan(2),
 
@@ -166,7 +166,7 @@ $table->            columns([
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(companyType::where('is_active', 1)
+                    ->options(relationType::where('is_active', 1)
                             ->pluck('name', 'id')),
 
                 Tables\Filters\TrashedFilter::make(),
