@@ -18,6 +18,7 @@ class RelationTypeSeeder extends Seeder
             ['id' => '3', 'name' => 'Keuringsinstantie', 'is_active' => '1'],
             ['id' => '4', 'name' => 'Leverancier', 'is_active' => '1'],
             ['id' => '5', 'name' => 'Klanten', 'is_active' => '1'],
+            ['id' => '6', 'name' => 'Adviesbureau', 'is_active' => '1'],
         ];
 
         foreach ($RelationTypes as $RelationType) {

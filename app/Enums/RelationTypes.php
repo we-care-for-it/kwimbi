@@ -9,6 +9,7 @@ enum RelationTypes: string implements HasLabel {
     case INSPECTION  = '3';
     case SUPPLIER    = '4';
     case CUSTOMERS   = '5';
+    case ADVISOR     = '5';
 
     public function getlabel(): string
     {
@@ -18,6 +19,7 @@ enum RelationTypes: string implements HasLabel {
             self::INSPECTION => 'Keuringsinstantie',
             self::SUPPLIER => 'Leverancier',
             self::CUSTOMERS => 'Klant',
+            self::ADVISOR => 'Adviseur',
 
         };
     }
