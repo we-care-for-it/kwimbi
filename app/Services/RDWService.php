@@ -20,7 +20,7 @@ final class RDWService
         return $response;
     }
 
-    public function GetVehilcle(string $licenseplate): string
+    public function GetVehicle(string $licenseplate): string
     {
         $licenseplate = strtoupper(preg_replace('/[^a-z0-9 ]/i', '', $licenseplate));
         $request      = $this->call(method: 'get', url: '/m9d7-ebf2.json', payload: [

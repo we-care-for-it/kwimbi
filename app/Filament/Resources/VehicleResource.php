@@ -163,7 +163,7 @@ class VehicleResource extends Resource
                         Action::make("searchDataByLicenceplate")
 
                             ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {
-                            $data = (new RDWService())->GetVehilcle($get("kenteken"));
+                            $data = (new RDWService())->GetVehicle($get("kenteken"));
                             $data = json_decode($data);
 
                             if ($data == null) {
