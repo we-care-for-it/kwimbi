@@ -14,6 +14,7 @@ class Vehicle extends Model implements Auditable
 
     protected $fillable = [
         'kenteken',
+        'gps_object_id',
 
     ];
 
@@ -31,7 +32,7 @@ class Vehicle extends Model implements Auditable
 
     public function GPSObject()
     {
-        return $this->hasOne(gpsObject::class);
+        return $this->hasOne(gpsObject::class, 'id', 'gps_object_id');
     }
     public function GPSObjectsForThisTenant()
     {

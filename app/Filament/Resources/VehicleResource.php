@@ -155,7 +155,7 @@ class VehicleResource extends Resource
             ->schema([
 
                 TextInput::make("kenteken")
-                    ->unique(Vehicle::class, 'kenteken')
+                    ->unique(Vehicle::class, 'kenteken', ignoreRecord: true)
                     ->label("Kenteken")
                     ->required()
                     ->maxlength(10)
@@ -214,11 +214,10 @@ class VehicleResource extends Resource
                             ->label("Variant"),
 
                         TextInput::make("vervaldatum_apk")
-                            ->label("Vervaldatum APK")
-                        ,
+                            ->label("Vervaldatum APK"),
 
                         Select::make('gps_object_id')
-
+                            ->label('GPS Tracker')
                             ->relationship('GPSObjectsForThisTenant', 'imei'),
 
                     ]),
@@ -245,30 +244,36 @@ class VehicleResource extends Resource
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('Kenteken'),
 
                 Tables\Columns\TextColumn::make('merk')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
                     ->label('Merk'),
 
                 Tables\Columns\TextColumn::make('handelsbenaming')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('handelsbenaming'),
 
                 Tables\Columns\TextColumn::make('variant')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('variant'),
 
                 Tables\Columns\TextColumn::make('inrichting')
                     ->sortable()
                     ->toggleable()
+                    ->placeholder('-')
                     ->label('Inrichting'),
 
                 Tables\Columns\TextColumn::make('eerste_kleur')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
                     ->label('Kleur'),
 
@@ -281,6 +286,7 @@ class VehicleResource extends Resource
                     )
                     ->date('d-m-Y')
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable()
                     ->label('Vervaldatum APK'),
 
