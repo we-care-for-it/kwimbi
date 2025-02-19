@@ -172,14 +172,14 @@ class VehicleResource extends Resource
                                     ->title("Geen resultaten")
                                     ->body("Helaas er zijn geen gegevens gevonden bij de kenteken <b>" . $get("licenceplate") . "</b> Controleer het kenteken en probeer opnieuw.")->send();
                             } else {
-                                $set("voertuigsoort", $data[0]?->voertuigsoort);
-                                $set("handelsbenaming", $data[0]?->handelsbenaming);
-                                $set("inrichting", $data[0]?->inrichting);
-                                $set("variant", $data[0]?->variant);
-                                $set("datum_eerste_toelating_dt", $data[0]?->datum_eerste_toelating_dt);
-                                $set("eerste_kleur", $data[0]?->eerste_kleur);
-                                $set("vervaldatum_apk", date("d-m-Y", strtotime($data[0]?->vervaldatum_apk_dt)));
-                                $set("merk", $data[0]?->merk);
+                                $set("voertuigsoort", $data[0]?->voertuigsoort ?? 'Onbekend');
+                                $set("handelsbenaming", $data[0]?->handelsbenaming ?? 'Onbekend');
+                                $set("inrichting", $data[0]?->inrichting ?? 'Onbekend');
+                                $set("variant", $data[0]?->variant ?? 'Onbekend');
+                                $set("datum_eerste_toelating_dt", $data[0]?->datum_eerste_toelating_dt ?? 'Onbekend');
+                                $set("eerste_kleur", $data[0]?->eerste_kleur ?? 'Onbekend');
+                                $set("vervaldatum_apk", date("d-m-Y", strtotime($data[0]?->vervaldatum_apk_dt ?? 'Onbekend')));
+                                $set("merk", $data[0]?->merk ?? 'Onbekend');
 
                             }
 
