@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
+use Filament\Panel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -22,12 +23,14 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\Split;
 use App\Models\Contact;
 use App\Models\ContactObject;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Facades\Filament;
 
 class ContactsRelationManager extends RelationManager
 {
     protected static string $relationship = 'contactsObject';
-    protected static ?string $title = 'Contact Personen';
+    protected static ?string $title = 'Contactpersonen';
 
     public function form(Form $form): Form
     {
@@ -70,14 +73,30 @@ class ContactsRelationManager extends RelationManager
         return $table
 
             ->columns([
+                ImageColumn::make('image')
+                    ->label('Profielfoto')
+                    ->circular()
+                    ->defaultImageUrl(url('/images/noavatar.jpg')),
+
                 TextColumn::make('contact.first_name')
-                ->label('Naam')
-                ->getStateUsing(fn ($record): ?string => "{$record->first_name} {$record->last_name}"),
+                    ->label('Naam')
+                    ->placeholder('-')
+                    ->getStateUsing(fn ($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
             
-                TextColumn::make('contact.email'),
-                TextColumn::make('contact.department')->label('Afdeling'),
-                TextColumn::make('contact.function')->label('Functie'),
+                TextColumn::make('contact.email')
+                    ->placeholder('-')
+                    ->label('Email'),
+
+                TextColumn::make('contact.department')
+                    ->placeholder('-')
+                    ->label('Afdeling'),
+
+                TextColumn::make('contact.function')
+                    ->placeholder('-')
+                    ->label('Functie'),
+
                 TextColumn::make('contact.phone_number')
+                    ->placeholder('-')
                     ->label('Telefoonnummers')
                     ->description(fn ($record): ?string => $record?->mobile_number ?? null),
             ])
@@ -88,11 +107,16 @@ class ContactsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Action::make('Attach')
+                ->modalWidth(MaxWidth::Medium)
+                ->modalHeading('Selecteer Contactpersoon')
+                ->label('Koppel')
                     ->form([
                         Forms\Components\Select::make('contact_id')
                         ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->last_name}")
 
-                            ->options(Contact::pluck('first_name', 'id')),
+                            ->options(Contact::where('company_id', Filament::getTenant()->id
+
+                            )->pluck('first_name', 'id')),
                     ])
                     ->action(function (array $data) {
                         ContactObject::create(
@@ -107,6 +131,7 @@ class ContactsRelationManager extends RelationManager
             ->actions([
 
                 Action::make('Detach')
+                    ->label('Ontkoppel')
                     ->requiresConfirmation()
                     ->action(function (array $data, $record): void {
                         $record->delete();

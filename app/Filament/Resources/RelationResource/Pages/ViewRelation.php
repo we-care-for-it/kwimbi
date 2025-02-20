@@ -9,4 +9,10 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewRelation extends ViewRecord
 {
     protected static string $resource = RelationResource::class;
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\EditAction::make()->label('Wijzigen')->slideOver() 
+        ];
+    }
 }

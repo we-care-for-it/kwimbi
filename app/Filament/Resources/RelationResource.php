@@ -102,7 +102,7 @@ class RelationResource extends Resource
                 ->label("Bedrijfsnaam")
                 ->placeholder("Niet opgegeven"),
 
-            Components\TextEntry::make('type.name')
+            Components\TextEntry::make('type_id')
                 ->label("Categorie")
                 ->badge()
                 ->placeholder("Niet opgegeven"),
@@ -164,8 +164,7 @@ class RelationResource extends Resource
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(relationType::where('is_active', 1)
-                            ->pluck('name', 'id')),
+                    ->options(RelationTypes::class),
 
                 Tables\Filters\TrashedFilter::make(),
 
@@ -209,6 +208,7 @@ class RelationResource extends Resource
     {
         return [
             'index' => Pages\ListRelations::route('/'),
+            // 'edit' => Pages\EditRelation::route('/{record}/edit'),
             'view'  => Pages\ViewRelation::route('/{record}'),
         ];
     }

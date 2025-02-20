@@ -113,9 +113,8 @@ class ContactResource extends Resource
                 ImageColumn::make('image')
                     ->label('Profielfoto')
                     ->circular()
-                    ->defaultImageUrl(url('/images/noavatar.jpg'))
-                    ->grow(true),
-
+                    ->defaultImageUrl(url('/images/noavatar.jpg')),
+                    
                 TextColumn::make('first_name')
                     ->label('Naam')
                     ->searchable()
