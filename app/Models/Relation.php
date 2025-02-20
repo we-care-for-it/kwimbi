@@ -53,4 +53,10 @@ class Relation extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function contactsObject(): HasMany
+    {
+        return $this->hasMany(ContactObject::class,'model_id','id');
+    }
+
+    
 }
