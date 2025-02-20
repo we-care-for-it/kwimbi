@@ -19,4 +19,5 @@ class ContactObject extends Model
     {
         return $this->hasOne(Relation::class, 'id', 'model_id');
     }
+    
 }

@@ -55,6 +55,8 @@ class Relation extends Model
 
     public function contactsObject(): HasMany
     {
-        return $this->hasMany(ContactObject::class,'model_id','id');    
+        return $this->hasMany(ContactObject::class,'model_id','id');
     }
+
+    
 }
