@@ -70,12 +70,14 @@ class ContactsRelationManager extends RelationManager
         return $table
 
             ->columns([
-                TextColumn::make('naam')
-                    ->getStateUsing(fn ($record): ?string => $record?->first_name . " " . $record?->last_name),
-                TextColumn::make('email'),
-                TextColumn::make('department')->label('Afdeling'),
-                TextColumn::make('function')->label('Functie'),
-                TextColumn::make('phone_number')
+                TextColumn::make('contact.first_name')
+                ->label('Naam')
+                ->getStateUsing(fn ($record): ?string => "{$record->first_name} {$record->last_name}"),
+            
+                TextColumn::make('contact.email'),
+                TextColumn::make('contact.department')->label('Afdeling'),
+                TextColumn::make('contact.function')->label('Functie'),
+                TextColumn::make('contact.phone_number')
                     ->label('Telefoonnummers')
                     ->description(fn ($record): ?string => $record?->mobile_number ?? null),
             ])
@@ -85,8 +87,6 @@ class ContactsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\AttachAction::make(),
-
                 Action::make('Attach')
                     ->form([
                         Forms\Components\Select::make('contact_id')
@@ -105,7 +105,6 @@ class ContactsRelationManager extends RelationManager
                     }),
             ])
             ->actions([
-                // Tables\Actions\DetachAction::make(),
 
                 Action::make('Detach')
                     ->requiresConfirmation()
@@ -114,9 +113,7 @@ class ContactsRelationManager extends RelationManager
                     }),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+
             ]);
     }
 }
