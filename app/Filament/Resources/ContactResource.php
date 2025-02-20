@@ -7,6 +7,9 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\AttachAction;
+use Filament\Tables\Actions\DetachAction;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
@@ -131,6 +134,7 @@ class ContactResource extends Resource
                 // ->preload(),
             ])
             ->actions([
+                CreateAction::make(),
 
                 ActionGroup::make([
                     EditAction::make()
@@ -160,8 +164,8 @@ class ContactResource extends Resource
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-// 'create' => Pages\CreateContact::route('/create'),
-            //'edit' => Pages\EditContact::route('/{record}/edit'),
+            'create' => Pages\CreateContact::route('/create'),
+            'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 

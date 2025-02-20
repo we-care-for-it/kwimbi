@@ -42,7 +42,7 @@ class Contact extends Model
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Company::class);
-    }
+    }    
 
     protected static function boot(): void
     {

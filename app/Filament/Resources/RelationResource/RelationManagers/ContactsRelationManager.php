@@ -11,18 +11,22 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\AttachAction;
+use Filament\Tables\Actions\DetachAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\Split;
- 
+use App\Models\Contact;
+use App\Models\ContactObject;
 use Filament\Tables\Columns\TextColumn;
 
 class ContactsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'contacts';
+    protected static string $relationship = 'contactsObject';
     protected static ?string $title = 'Contactpersonen';
     public function form(Form $form): Form
     {
@@ -57,8 +61,6 @@ class ContactsRelationManager extends RelationManager
                     Forms\Components\TextInput::make('mobile_number')
                     ->label('Intern telefoonnummer')
                     ->maxLength(255),
-
-
             ]);
     }
 
@@ -118,22 +120,32 @@ class ContactsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
-                    ->label('Toevoegen')
-                    ->slideOver(),
+                // Tables\Actions\AttachAction::make(),
+
+                // Action::make('Attach')
+                //     ->form([
+                //         Forms\Components\Select::make('contact_id')
+                //         ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->email}")
+
+                //             ->options(Contact::pluck('first_name', 'id')),
+                //     ])
+                //     ->action(function (array $data) {
+                //         ContactObject::create(
+                //             [
+                //                 'model_id' => $this->ownerRecord->id,
+                //                 'contact_id' => $data['contact_id']
+                //             ]
+                //         );
+                //     }),
             ])
             ->actions([
-                ActionGroup::make([
-                    EditAction::make()
-                        ->modalHeading('Snel bewerken')
-                        ->modalIcon('heroicon-o-pencil')
-                        ->label('Snel bewerken')
-                        ->slideOver(),
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Object verwijderen')
-                        ->color('danger'),
-                ]),
+                // Tables\Actions\DetachAction::make(),
+
+                // Action::make('Detach')
+                //     ->requiresConfirmation()
+                //     ->action(function (array $data, $record): void {
+                //         $record->delete();
+                //     }),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
