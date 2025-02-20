@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\RelationResource\RelationManagers;
+namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -9,20 +9,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\AttachAction;
-use Filament\Tables\Actions\DetachAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Notifications\Notification;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Columns\Layout\Split;
-use App\Models\Contact;
-use App\Models\ContactObject;
-use Filament\Tables\Columns\TextColumn;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -32,43 +18,43 @@ class ContactsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('first_name')
-                    ->label('Voornaam')
-                    ->required()
-                    ->maxLength(255),
+        ->schema([
+            Forms\Components\TextInput::make('first_name')
+                ->label('Voornaam')
+                ->required()
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('last_name')
-                    ->label('Achternaam')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('last_name')
+                ->label('Achternaam')
+                ->required()
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('email')
-                    ->label('E-mailadres')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                ->label('E-mailadres')
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('department')
-                    ->label('Afdeling')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('department')
+                ->label('Afdeling')
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('function')
-                    ->label('Functie')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('function')
+                ->label('Functie')
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('phone_number')
-                    ->label('Telefoonnummer')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone_number')
+                ->label('Telefoonnummer')
+                ->maxLength(255),
 
-                    Forms\Components\TextInput::make('mobile_number')
-                    ->label('Intern telefoonnummer')
-                    ->maxLength(255),
-            ]);
+                Forms\Components\TextInput::make('mobile_number')
+                ->label('Intern telefoonnummer')
+                ->maxLength(255),
+        ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-
+            ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('contact.first_name')
                 ->label('Naam')
@@ -82,7 +68,6 @@ class ContactsRelationManager extends RelationManager
                     ->description(fn ($record): ?string => $record?->mobile_number ?? null),
             ])
             ->emptyState(view('partials.empty-state-small'))
-    
             ->filters([
                 //
             ])
@@ -113,7 +98,9 @@ class ContactsRelationManager extends RelationManager
                     }),
             ])
             ->bulkActions([
-
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

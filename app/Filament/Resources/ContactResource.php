@@ -7,10 +7,14 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\AttachAction;
+use Filament\Tables\Actions\DetachAction;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
@@ -28,10 +32,17 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\FileUpload::make('image')
+                    ->label('Profielfoto')
+                    ->image()
+                    ->nullable()
+                    ->directory('contacts'),
+
                 Forms\Components\TextInput::make('first_name')
                     ->label('Voornaam')
                     ->required()
                     ->maxLength(255),
+
                 Forms\Components\TextInput::make('last_name')
                     ->label('Achternaam')
                     ->required()
@@ -51,87 +62,142 @@ class ContactResource extends Resource
 
                 Forms\Components\TextInput::make('phone_number')
                     ->label('Telefoonnummer')
-                    ->maxLength(255),
+                    ->maxLength(15),
 
                 Forms\Components\TextInput::make('mobile_number')
                     ->label('Intern telefoonnummer')
+                    ->maxLength(15),
+
+                Forms\Components\TextInput::make('intern_number')
+                    ->label('Intern Nummer')
+                    ->maxLength(15),
+
+                Forms\Components\TextInput::make('linkedin')
+                    ->label('LinkedIn')
                     ->maxLength(255),
 
+                Forms\Components\TextInput::make('twitter')
+                    ->label('Twitter')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('facebook')
+                    ->label('Facebook')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('street')
+                    ->label('Straat')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('city')
+                    ->label('Stad')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('postal_code')
+                    ->label('Postcode')
+                    ->maxLength(10),
+
+                Forms\Components\TextInput::make('country')
+                    ->label('Land')
+                    ->maxLength(255),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-
             ->groups([
                 Group::make('company.name')
                     ->label('Bedrijf'),
             ])
-
             ->columns([
-
-                // ImageColumn::make('avatar')->label("")
-                // ->defaultImageUrl(url('/images/noavatar.jpg'))
-                //     ->circular()
-                //     ->grow(true),
-                TextColumn::make('last_name')
-                    ->hidden()
-                    ->searchable(),
+                ImageColumn::make('image')
+                    ->label('Profielfoto')
+                    ->circular()
+                    ->defaultImageUrl(url('/images/noavatar.jpg'))
+                    ->grow(true),
 
                 TextColumn::make('first_name')
                     ->label('Naam')
                     ->searchable()
-                    ->getStateUsing(function ($record): ?string {
-
-                        return $record?->first_name . " " . $record?->last_name;
-                    }),
+                    ->getStateUsing(fn($record) => $record?->first_name . " " . $record?->last_name)
+                    ->placeholder("-"),
 
                 TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->placeholder("-"),
 
-                Tables\Columns\TextColumn::make("company.name")
-                    ->url(function ($record) {
-                        return "/app/companies/" .
-                        $record->company_id;
-                    })
+                TextColumn::make("company.name")
+                    ->url(fn($record) => "/app/companies/" . $record->company_id)
                     ->label("Bedrijfsnaam")
                     ->placeholder("-")
                     ->toggleable(),
 
-                Tables\Columns\TextColumn::make("department")
+                TextColumn::make("department")
                     ->label("Afdeling")
-                    ->toggleable()
                     ->placeholder("-")
-                    ->description(function ($record): ?string {
-                        return $record?->function ?? null;
-                    }),
+                    ->toggleable(),
 
-                Tables\Columns\TextColumn::make("phone_number")
-                    ->label("Telefoonnummers")
-                    ->description(function ($record): ?string {
-                        return $record?->mobile_number ?? null;
-                    })->toggleable(),
+                TextColumn::make("function")
+                    ->label("Functie")
+                    ->placeholder("-")
+                    ->toggleable(),
 
-                Tables\Columns\TextColumn::make('company.type.name')
+                TextColumn::make("phone_number")
+                    ->label("Telefoonnummer")
+                    ->placeholder("-"),
+
+                TextColumn::make("mobile_number")
+                    ->label("Intern Telefoonnummer")
+                    ->placeholder("-"),
+
+                TextColumn::make("intern_number")
+                    ->label("Intern Nummer")
+                    ->placeholder("-"),
+
+                // TextColumn::make("linkedin")
+                //     ->label("LinkedIn")
+                //     ->url(fn($record) => $record?->linkedin)
+                //     ->placeholder("-"),
+
+                // TextColumn::make("twitter")
+                //     ->label("Twitter")
+                //     ->url(fn($record) => $record?->twitter)
+                //     ->placeholder("-"),
+
+                // TextColumn::make("facebook")
+                //     ->label("Facebook")
+                //     ->url(fn($record) => $record?->facebook)
+                //     ->placeholder("-"),
+
+                TextColumn::make("street")
+                    ->label("Straat")
+                    ->placeholder("-"),
+
+                TextColumn::make("city")
+                    ->label("Stad")
+                    ->placeholder("-"),
+
+                TextColumn::make("postal_code")
+                    ->label("Postcode")
+                    ->placeholder("-"),
+
+                TextColumn::make("country")
+                    ->label("Land")
+                    ->placeholder("-"),
+
+                TextColumn::make('company.type.name')
                     ->label('Categorie')
                     ->badge()
                     ->searchable()
                     ->placeholder('-')
                     ->toggleable()
                     ->sortable(),
-
             ])
-            ->filters([
-                // SelectFilter::make("company.type_id")
-                // ->label("Categorie")
-                // ->relationship('company', 'type.name')
-
-                // ->searchable()
-                // ->preload(),
+            ->filters([])
+            ->headerActions([
+                CreateAction::make(),
             ])
             ->actions([
-
                 ActionGroup::make([
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
@@ -144,47 +210,16 @@ class ContactResource extends Resource
                         ->color('danger'),
                 ]),
             ])
-            ->bulkActions([
-
-            ])->emptyState(view('partials.empty-state'));
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+            ->bulkActions([])
+            ->emptyState(view('partials.empty-state'));
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListContacts::route('/'),
-// 'create' => Pages\CreateContact::route('/create'),
-            //'edit' => Pages\EditContact::route('/{record}/edit'),
+            'create' => Pages\CreateContact::route('/create'),
+            'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
-
-    public static function getGloballySearchableAttributes(): array
-    {
-        return ["first_name", "company.name", "last_name"];
-    }
-
-    public static function getGlobalSearchResultDetails($record): array
-    {
-
-        return [
-            'Naam'           => $record?->first_name . "  " . $record?->last_name,
-            'Emailadres'     => $record?->email,
-            'Bedrijf'        => $record?->company?->name,
-            'Telefoonnummer' => $record?->phone_number,
-        ];
-
-    }
-
-    public static function getModelLabel(): string
-    {
-        return "Contactpersoon";
-    }
-
 }
