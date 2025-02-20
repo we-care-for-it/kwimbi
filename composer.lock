@@ -1303,16 +1303,16 @@
         },
         {
             "name": "dutchcodingcompany/filament-developer-logins",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DutchCodingCompany/filament-developer-logins.git",
-                "reference": "ed425d4955a6a5a37ad92028f725502b132250a6"
+                "reference": "feee48936d5cf95b3139df73e3a3d2bf737c13cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DutchCodingCompany/filament-developer-logins/zipball/ed425d4955a6a5a37ad92028f725502b132250a6",
-                "reference": "ed425d4955a6a5a37ad92028f725502b132250a6",
+                "url": "https://api.github.com/repos/DutchCodingCompany/filament-developer-logins/zipball/feee48936d5cf95b3139df73e3a3d2bf737c13cd",
+                "reference": "feee48936d5cf95b3139df73e3a3d2bf737c13cd",
                 "shasum": ""
             },
             "require": {
@@ -1366,7 +1366,7 @@
                 "issues": "https://github.com/dutchcodingcompany/filament-developer-logins/issues",
                 "source": "https://github.com/dutchcodingcompany/filament-developer-logins"
             },
-            "time": "2025-01-06T09:19:24+00:00"
+            "time": "2025-02-19T19:51:11+00:00"
         },
         {
             "name": "dutchcodingcompany/filament-socialite",
@@ -3420,16 +3420,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.43.1",
+            "version": "v11.43.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "053f26afb699c845945e7380b407dd019a0a2c74"
+                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/053f26afb699c845945e7380b407dd019a0a2c74",
-                "reference": "053f26afb699c845945e7380b407dd019a0a2c74",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/99d1573698abc42222f04d25fcd5b213d0eedf21",
+                "reference": "99d1573698abc42222f04d25fcd5b213d0eedf21",
                 "shasum": ""
             },
             "require": {
@@ -3631,7 +3631,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-02-19T16:06:03+00:00"
+            "time": "2025-02-19T21:53:48+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -14447,5 +14447,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
