@@ -72,7 +72,7 @@ class ContactsRelationManager extends RelationManager
             ->columns([
                 TextColumn::make('contact.first_name')
                 ->label('Naam')
-                ->getStateUsing(fn ($record): ?string => "{$record->first_name} {$record->last_name}"),
+                ->getStateUsing(fn ($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
             
                 TextColumn::make('contact.email'),
                 TextColumn::make('contact.department')->label('Afdeling'),

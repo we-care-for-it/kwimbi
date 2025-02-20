@@ -30,7 +30,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-
+use Filament\Facades\Filament;
 class ObjectLocationResource extends Resource
 {
     protected static ?string $model           = ObjectLocation::class;
@@ -71,7 +71,7 @@ class ObjectLocationResource extends Resource
                     ->label("Bouwjaar")
                     ->placeholder("Niet opgegeven"),
 
-                TextEntry::make("customer.name")
+                TextEntry::make("relation.name")
                     ->label("Relatie")->Url(function (object $record) {
                     return "/app/customers/" . $record->customer_id . "";
                 })
@@ -131,11 +131,19 @@ class ObjectLocationResource extends Resource
                             Select::make("customer_id")
                                 ->searchable()
                                 ->label("Relatie")
+
+                                ->required()
+                                ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name','id')),
+
+                                Select::make("management_id")
+                                ->searchable()
+                                ->label("Beheerder")
                                 ->preload()
                                 ->required()
-                                ->options(Relation::all()->pluck('name','id')
-                                // ->where('company_id', auth()->user()->company_id)
-                                ->where('type_id', \App\Enums\RelationTypes::CUSTOMERS))
+                                ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name','id'))
+          
+
+
                         ])]),
 
             Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
@@ -236,7 +244,7 @@ class ObjectLocationResource extends Resource
         return $table
             ->groups([Group::make("complexnumber")
                     ->label("Complex"), Group::make("customer_id")
-                    ->label("Relatie"), Group::make("buildingtype.name")
+                    // ->label("Relatie"), Group::make("buildingtype.name")
                     ->label("Gebouwtype"), Group::make("management_id")
                     ->label("Beheerder")])->columns(
 
@@ -313,7 +321,10 @@ class ObjectLocationResource extends Resource
                     ->badge()
                     ->alignment(Alignment::Center)
                     ->toggleable()
-                    ->color("success"), Tables\Columns\TextColumn::make("relation.name")
+                    ->color("success"), 
+                    
+                    
+                    Tables\Columns\TextColumn::make("relation.name")
                     ->toggleable()
                     ->sortable()
                     ->label("Relatie")
@@ -340,7 +351,7 @@ class ObjectLocationResource extends Resource
                     ->searchable()
                     ->placeholder("Onbekend")])
 
-            ->filters([SelectFilter::make("customer_id")
+            ->filters([SelectFilter::make("relation_id")
                     ->options(Relation::all()
                             ->pluck("name", "id"))
                     ->label("Relatie")
