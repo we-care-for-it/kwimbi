@@ -19,6 +19,8 @@ class Contact extends Model
         'metadata' => 'collection',
     ];
 
+    protected $fillable = ['first_name', 'last_name', 'email', 'department', 'function', 'phone_number', 'mobile_number'];
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -57,5 +59,10 @@ class Contact extends Model
     public function claimer(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function contactsObject()
+    {
+        return $this->belongsToMany(ContactObject::class, 'contacts_for_objects', 'contact_id', 'object_id');
     }
 }

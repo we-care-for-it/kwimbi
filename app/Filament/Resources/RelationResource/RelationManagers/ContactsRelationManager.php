@@ -28,6 +28,7 @@ class ContactsRelationManager extends RelationManager
 {
     protected static string $relationship = 'contactsObject';
     protected static ?string $title = 'Contactpersonen';
+
     public function form(Form $form): Form
     {
         return $form
@@ -36,6 +37,7 @@ class ContactsRelationManager extends RelationManager
                     ->label('Voornaam')
                     ->required()
                     ->maxLength(255),
+
                     Forms\Components\TextInput::make('last_name')
                     ->label('Achternaam')
                     ->required()
@@ -57,7 +59,6 @@ class ContactsRelationManager extends RelationManager
                     ->label('Telefoonnummer')
                     ->maxLength(255),
 
-
                     Forms\Components\TextInput::make('mobile_number')
                     ->label('Intern telefoonnummer')
                     ->maxLength(255),
@@ -67,85 +68,50 @@ class ContactsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-             
+
             ->columns([
-
-    TextColumn::make('name')
-    ->getStateUsing(function ($record) : ? string
-                {
-                 
-
-
-        
-                    return $record?->first_name . " " . $record?->last_name;
-                }) ,
- 
-        
-      
-    TextColumn::make('email'),
-
-    Tables\Columns\TextColumn::make("department")
-    ->label("Afdeling"),
- 
-    Tables\Columns\TextColumn::make("function")
-    ->label("Functie"),
-    Tables\Columns\TextColumn::make("phone_number")
-    ->label("Telefoonnummers")
-    ->description(function ($record) : ? string
-    {
-           return $record?->mobile_number ?? NULL;
-    }),
-
-
-
-
- 
-
-                // Tables\Columns\TextColumn::make('first_name')   ->label("Naam")
-                
-                // ,
-
-                // Tables\Columns\TextColumn::make("email")
-                // ->label("E-mailadres"),
-
-  
-
-            
- 
-
-
-
-                ])->emptyState(view('partials.empty-state-small'))
+                TextColumn::make('naam')
+                    ->getStateUsing(fn ($record): ?string => $record?->first_name . " " . $record?->last_name),
+                TextColumn::make('email'),
+                TextColumn::make('department')->label('Afdeling'),
+                TextColumn::make('function')->label('Functie'),
+                TextColumn::make('phone_number')
+                    ->label('Telefoonnummers')
+                    ->description(fn ($record): ?string => $record?->mobile_number ?? null),
+            ])
+            ->emptyState(view('partials.empty-state-small'))
+    
             ->filters([
                 //
             ])
             ->headerActions([
                 // Tables\Actions\AttachAction::make(),
 
-                // Action::make('Attach')
-                //     ->form([
-                //         Forms\Components\Select::make('contact_id')
-                //         ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->email}")
+                Action::make('Attach')
+                    ->form([
+                        Forms\Components\Select::make('contact_id')
+                        ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->last_name}")
 
-                //             ->options(Contact::pluck('first_name', 'id')),
-                //     ])
-                //     ->action(function (array $data) {
-                //         ContactObject::create(
-                //             [
-                //                 'model_id' => $this->ownerRecord->id,
-                //                 'contact_id' => $data['contact_id']
-                //             ]
-                //         );
-                //     }),
+                            ->options(Contact::pluck('first_name', 'id')),
+                    ])
+                    ->action(function (array $data) {
+                        ContactObject::create(
+                            [
+                                'model_id' => $this->ownerRecord->id,
+                                'model' => 'relation',
+                                'contact_id' => $data['contact_id']
+                            ]
+                        );
+                    }),
             ])
             ->actions([
                 // Tables\Actions\DetachAction::make(),
 
-                // Action::make('Detach')
-                //     ->requiresConfirmation()
-                //     ->action(function (array $data, $record): void {
-                //         $record->delete();
-                //     }),
+                Action::make('Detach')
+                    ->requiresConfirmation()
+                    ->action(function (array $data, $record): void {
+                        $record->delete();
+                    }),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
