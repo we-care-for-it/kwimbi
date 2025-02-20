@@ -60,7 +60,7 @@ class ObjectLocation extends Model implements Auditable
 
     public function relation()
     {
-        return $this->hasOne(Relation::class, 'id', 'customer_id');
+        return $this->hasOne(Relation::class, 'id', 'customer_id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function objectbuildingtype()

@@ -82,7 +82,7 @@ class Elevator extends Model implements Auditable
 
     public function maintenance_company()
     {
-        return $this->hasOne(Company::class, 'id', 'maintenance_company_id');
+        return $this->hasOne(Relation::class, 'id', 'maintenance_company_id');
     }
 
     public function inspectioncompany()

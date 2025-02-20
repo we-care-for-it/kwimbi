@@ -351,8 +351,8 @@ class ObjectLocationResource extends Resource
                     ->searchable()
                     ->placeholder("Onbekend")])
 
-            ->filters([SelectFilter::make("relation_id")
-                    ->options(Relation::all()
+            ->filters([SelectFilter::make("customer_id")
+                    ->options(Relation::where('type_id', 5)
                             ->pluck("name", "id"))
                     ->label("Relatie")
 
