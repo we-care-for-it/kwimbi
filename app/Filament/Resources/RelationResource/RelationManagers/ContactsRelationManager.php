@@ -72,28 +72,26 @@ class ContactsRelationManager extends RelationManager
 
     TextColumn::make('name')
     ->getStateUsing(function ($record) : ? string
-                {
-                 
-
-
-        
-                    return $record?->first_name . " " . $record?->last_name;
+                {       
+                    return $record?->contact?->first_name . " " . $record?->contact?->last_name;
                 }) ,
  
         
       
     TextColumn::make('email'),
 
-    Tables\Columns\TextColumn::make("department")
-    ->label("Afdeling"),
+    Tables\Columns\TextColumn::make("contact.department")
+    ->label("Afdeling")    ->placeholder('-'),
  
-    Tables\Columns\TextColumn::make("function")
-    ->label("Functie"),
-    Tables\Columns\TextColumn::make("phone_number")
+    Tables\Columns\TextColumn::make("contact.function")
+    ->label("Functie")
+    ->placeholder('-'),
+    Tables\Columns\TextColumn::make("contact.phone_number")
     ->label("Telefoonnummers")
+    ->placeholder('-')
     ->description(function ($record) : ? string
     {
-           return $record?->mobile_number ?? NULL;
+           return $record?->contact?->mobile_number ?? NULL;
     }),
 
 
@@ -101,14 +99,7 @@ class ContactsRelationManager extends RelationManager
 
  
 
-                // Tables\Columns\TextColumn::make('first_name')   ->label("Naam")
-                
-                // ,
-
-                // Tables\Columns\TextColumn::make("email")
-                // ->label("E-mailadres"),
-
-  
+           
 
             
  
@@ -120,23 +111,22 @@ class ContactsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                // Tables\Actions\AttachAction::make(),
-
-                // Action::make('Attach')
-                //     ->form([
-                //         Forms\Components\Select::make('contact_id')
-                //         ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->email}")
-
-                //             ->options(Contact::pluck('first_name', 'id')),
-                //     ])
-                //     ->action(function (array $data) {
-                //         ContactObject::create(
-                //             [
-                //                 'model_id' => $this->ownerRecord->id,
-                //                 'contact_id' => $data['contact_id']
-                //             ]
-                //         );
-                //     }),
+//                Tables\Actions\AttachAction::make(),
+                Action::make('Attach')
+                    ->form([
+                        Forms\Components\Select::make('contact_id')
+                        ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->first_name} {$record->email}")
+                            ->options(Contact::pluck('first_name', 'id')),
+                    ])
+                    ->action(function (array $data) {
+                        ContactObject::create(
+                            [
+                                'model_id'   => $this->ownerRecord->id,
+                                'model'      => "relation",
+                                'contact_id' => $data['contact_id']
+                            ]
+                        );
+                    }),
             ])
             ->actions([
                 // Tables\Actions\DetachAction::make(),
