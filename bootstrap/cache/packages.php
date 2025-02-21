@@ -185,6 +185,17 @@
       0 => 'Lab404\\Impersonate\\ImpersonateServiceProvider',
     ),
   ),
+  'lara-zeus/tiles' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaraZeus\\Tiles\\TilesServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Tiles' => 'LaraZeus\\Tiles\\Facades\\Tiles',
+    ),
+  ),
   'laravel/pail' => 
   array (
     'providers' => 

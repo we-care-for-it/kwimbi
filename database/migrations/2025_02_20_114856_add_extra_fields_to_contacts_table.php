@@ -35,18 +35,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('contacts', function (Blueprint $table) {
-            $table->dropColumn([
-                'instagram',
-                'twitter',
-                'facebook',
-                'intern_number',
-                'street',
-                'city',
-                'postal_code',
-                'country',
-                'image'
-            ]);
+        Schema::table('relations', function (Blueprint $table) {
+
         });
     }
 };

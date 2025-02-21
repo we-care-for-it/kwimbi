@@ -19,6 +19,7 @@
         "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
         "joaopaulolndev/filament-edit-profile": "^1.0",
+        "lara-zeus/tiles": "*",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "marjose123/filament-lockscreen": "^2.4",
@@ -84,6 +85,12 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.larazeus.com"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
