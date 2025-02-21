@@ -7,6 +7,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -58,23 +59,18 @@ class ContactsRelationManager extends RelationManager
     {
         return $table
 
+            ->recordUrl(
+                function (Object $record) {
+                    return "contacts/" . $record->contact_id . "/edit";
+
+                }
+            )
+
             ->columns([
 
                 TileColumn::make('contact.name')
-
                     ->description(fn($record) => $record->contact->email)
                     ->image(fn($record) => $record->contact->avatar),
-                //     ->image(fn(User $record) => $record->profile_photo_url),
-
-                TextColumn::make('contact.first_name')
-                    ->label('Naam')
-                    ->placeholder('-')
-
-                    ->getStateUsing(fn($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
-
-                TextColumn::make('contact.email')
-                    ->placeholder('-')
-                    ->label('Email'),
 
                 TextColumn::make('contact.department')
                     ->placeholder('-')
@@ -125,6 +121,7 @@ class ContactsRelationManager extends RelationManager
                             ]
                         );
                     }),
+
             ])
             ->actions([
 
@@ -136,7 +133,7 @@ class ContactsRelationManager extends RelationManager
                     }),
             ])
             ->bulkActions([
-
+                Tables\Actions\BulkActionGroup::make([]),
             ]);
     }
 }
