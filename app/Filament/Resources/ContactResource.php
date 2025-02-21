@@ -6,15 +6,13 @@ use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Actions\AttachAction;
-use Filament\Tables\Actions\DetachAction;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
@@ -68,9 +66,9 @@ class ContactResource extends Resource
                     ->label('Intern telefoonnummer')
                     ->maxLength(15),
 
-                Forms\Components\TextInput::make('intern_number')
-                    ->label('Intern Nummer')
-                    ->maxLength(15),
+                // Forms\Components\TextInput::make('intern_number')
+                //     ->label('Intern Nummer')
+                //     ->maxLength(15),
 
                 Forms\Components\TextInput::make('linkedin')
                     ->label('LinkedIn')
@@ -110,20 +108,20 @@ class ContactResource extends Resource
                     ->label('Bedrijf'),
             ])
             ->columns([
+
                 ImageColumn::make('image')
                     ->label('Profielfoto')
                     ->circular()
-                    ->defaultImageUrl(url('/images/noavatar.jpg')),
-                    
-                TextColumn::make('first_name')
-                    ->label('Naam')
-                    ->searchable()
-                    ->getStateUsing(fn($record) => $record?->first_name . " " . $record?->last_name)
-                    ->placeholder("-"),
+                    ->wrap()
+                    ->defaultImageUrl(url('/images/noavatar.jpg'))
+                    ->grow(false),
 
-                TextColumn::make('email')
+                TextColumn::make('first_name')
+                    ->weight(FontWeight::Bold)
+                    ->getStateUsing(fn($record) => $record?->first_name . " " . $record?->last_name)
                     ->searchable()
-                    ->placeholder("-"),
+                    ->sortable(),
+                TextColumn::make('email'),
 
                 TextColumn::make("company.name")
                     ->url(fn($record) => "/app/companies/" . $record->company_id)
@@ -147,41 +145,6 @@ class ContactResource extends Resource
 
                 TextColumn::make("mobile_number")
                     ->label("Intern Telefoonnummer")
-                    ->placeholder("-"),
-
-                TextColumn::make("intern_number")
-                    ->label("Intern Nummer")
-                    ->placeholder("-"),
-
-                // TextColumn::make("linkedin")
-                //     ->label("LinkedIn")
-                //     ->url(fn($record) => $record?->linkedin)
-                //     ->placeholder("-"),
-
-                // TextColumn::make("twitter")
-                //     ->label("Twitter")
-                //     ->url(fn($record) => $record?->twitter)
-                //     ->placeholder("-"),
-
-                // TextColumn::make("facebook")
-                //     ->label("Facebook")
-                //     ->url(fn($record) => $record?->facebook)
-                //     ->placeholder("-"),
-
-                TextColumn::make("street")
-                    ->label("Straat")
-                    ->placeholder("-"),
-
-                TextColumn::make("city")
-                    ->label("Stad")
-                    ->placeholder("-"),
-
-                TextColumn::make("postal_code")
-                    ->label("Postcode")
-                    ->placeholder("-"),
-
-                TextColumn::make("country")
-                    ->label("Land")
                     ->placeholder("-"),
 
                 TextColumn::make('company.type.name')
@@ -216,9 +179,9 @@ class ContactResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListContacts::route('/'),
+            'index'  => Pages\ListContacts::route('/'),
             'create' => Pages\CreateContact::route('/create'),
-            'edit' => Pages\EditContact::route('/{record}/edit'),
+            'edit'   => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }
