@@ -6,15 +6,14 @@ use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactResource extends Resource
 {
@@ -109,25 +108,9 @@ class ContactResource extends Resource
             ])
             ->columns([
 
-                ImageColumn::make('image')
-                    ->label('Profielfoto')
-                    ->circular()
-                    ->wrap()
-                    ->defaultImageUrl(url('/images/noavatar.jpg'))
-                    ->grow(false),
-
-                TextColumn::make('first_name')
-                    ->weight(FontWeight::Bold)
-                    ->getStateUsing(fn($record) => $record?->first_name . " " . $record?->last_name)
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('email'),
-
-                TextColumn::make("company.name")
-                    ->url(fn($record) => "/app/companies/" . $record->company_id)
-                    ->label("Bedrijfsnaam")
-                    ->placeholder("-")
-                    ->toggleable(),
+                TileColumn::make('name')
+                    ->description(fn($record) => $record->email)
+                    ->image(fn($record) => $record->avatar),
 
                 TextColumn::make("department")
                     ->label("Afdeling")
