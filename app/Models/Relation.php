@@ -53,10 +53,18 @@ class Relation extends Model
         return $this->belongsTo(Company::class);
     }
 
+<<<<<<< Updated upstream
     public function contactsObject(): HasMany
     {
         return $this->hasMany(ContactObject::class,'model_id','id');
     }
 
     
+=======
+    public function locations()
+    {
+        return $this->hasMany(ObjectLocation::class);
+    }
+
+>>>>>>> Stashed changes
 }
