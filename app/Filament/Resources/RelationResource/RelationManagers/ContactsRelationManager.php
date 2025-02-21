@@ -7,8 +7,6 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
-use Filament\Tables;
-<<<<<<< Updated upstream
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -20,18 +18,6 @@ class ContactsRelationManager extends RelationManager
     protected static string $relationship = 'contactsObject';
     protected static ?string $title       = 'Contactpersonen';
 
-=======
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
-
-class ContactsRelationManager extends RelationManager
-{
-    protected static string $relationship = 'contacts';
-    protected static ?string $title       = 'Contactpersonen';
->>>>>>> Stashed changes
     public function form(Form $form): Form
     {
         return $form
@@ -40,10 +26,7 @@ class ContactsRelationManager extends RelationManager
                     ->label('Voornaam')
                     ->required()
                     ->maxLength(255),
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
                 Forms\Components\TextInput::make('last_name')
                     ->label('Achternaam')
                     ->required()
@@ -68,10 +51,6 @@ class ContactsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('mobile_number')
                     ->label('Intern telefoonnummer')
                     ->maxLength(255),
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
             ]);
     }
 
@@ -79,19 +58,23 @@ class ContactsRelationManager extends RelationManager
     {
         return $table
 
-<<<<<<< Updated upstream
-            ->recordUrl(
-                function (Object $record) {
-                    return "contacts/" . $record->contact_id . "/edit";
-
-                }
-            )
-
             ->columns([
 
                 TileColumn::make('contact.name')
+
                     ->description(fn($record) => $record->contact->email)
                     ->image(fn($record) => $record->contact->avatar),
+                //     ->image(fn(User $record) => $record->profile_photo_url),
+
+                TextColumn::make('contact.first_name')
+                    ->label('Naam')
+                    ->placeholder('-')
+
+                    ->getStateUsing(fn($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
+
+                TextColumn::make('contact.email')
+                    ->placeholder('-')
+                    ->label('Email'),
 
                 TextColumn::make('contact.department')
                     ->placeholder('-')
@@ -108,37 +91,6 @@ class ContactsRelationManager extends RelationManager
             ])
             ->emptyState(view('partials.empty-state-small'))
 
-=======
-            ->columns([
-
-                TextColumn::make('name')
-                    ->getStateUsing(function ($record): ?string {
-
-                        return $record?->first_name . " " . $record?->last_name;
-                    }),
-
-                TextColumn::make('email'),
-
-                Tables\Columns\TextColumn::make("department")
-                    ->label("Afdeling"),
-
-                Tables\Columns\TextColumn::make("function")
-                    ->label("Functie"),
-                Tables\Columns\TextColumn::make("phone_number")
-                    ->label("Telefoonnummers")
-                    ->description(function ($record): ?string {
-                        return $record?->mobile_number ?? null;
-                    }),
-
-                // Tables\Columns\TextColumn::make('first_name')   ->label("Naam")
-
-                // ,
-
-                // Tables\Columns\TextColumn::make("email")
-                // ->label("E-mailadres"),
-
-            ])->emptyState(view('partials.empty-state-small'))
->>>>>>> Stashed changes
             ->filters([
                 //
             ])
@@ -173,7 +125,6 @@ class ContactsRelationManager extends RelationManager
                             ]
                         );
                     }),
-
             ])
             ->actions([
 
@@ -185,7 +136,7 @@ class ContactsRelationManager extends RelationManager
                     }),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([]),
+
             ]);
     }
 }
