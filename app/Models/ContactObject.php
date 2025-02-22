@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactObject extends Model
 {
     public $table = 'contacts_for_objects';
-    
+
     protected $fillable = ['model_id'];
 
     public function contact()
@@ -19,5 +18,5 @@ class ContactObject extends Model
     {
         return $this->hasOne(Relation::class, 'id', 'model_id');
     }
-    
+
 }

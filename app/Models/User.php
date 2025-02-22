@@ -90,6 +90,15 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasAvata
         ];
     }
 
+    public function getAvatarAttribute($value)
+    {
+        if ($this->image) {
+            return $this->image;
+        } else {
+            return '/images/noavatar.jpg';
+        }
+    }
+
     public function activities()
     {
         return $this->morphMany(Activity::class, 'causer'); // ✅ Corrected

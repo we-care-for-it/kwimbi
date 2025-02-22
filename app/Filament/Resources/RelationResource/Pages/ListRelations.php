@@ -15,6 +15,8 @@ class ListRelations extends ListRecords
         return [
             \EightyNine\ExcelImport\ExcelImportAction::make()
                 ->color("primary")
+                ->label('')
+                ->color('secondary')
                 ->slideOver()
                 ->link()
                 ->beforeImport(function ($data, $livewire, $excelImportAction) {
@@ -23,8 +25,12 @@ class ListRelations extends ListRecords
                     ]);
                 }),
 
-            Actions\CreateAction::make(),
-
+            Actions\CreateAction::make()
+                ->label('Toevoegen')->slideOver()
+                ->modalHeading('Relatie toevoegen')
+                ->modalDescription('Vul de onderstaande gegevens in om de relatie aan te maken in het systeem')
+                ->modalSubmitActionLabel('Opslaan')
+                ->modalIcon('heroicon-o-plus'),
         ];
     }
 }

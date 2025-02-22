@@ -5,7 +5,6 @@ use App\Enums\RelationTypes;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
-use App\Models\relationType;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -172,7 +171,7 @@ class RelationResource extends Resource
             )
             ->actions([ActionGroup::make([
                 EditAction::make()
-                    ->modalHeading("Bedrijf bewerken")
+                    ->modalHeading("Relalatie bewerken")
                     ->modalIcon('heroicon-o-pencil')
                     ->label('Snel bewerken')
                     ->slideOver(),
