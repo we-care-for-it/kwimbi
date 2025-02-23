@@ -5771,16 +5771,16 @@
         },
         {
             "name": "niladam/filament-auto-logout",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/niladam/filament-auto-logout.git",
-                "reference": "920b6d6bfa955c74657aefa8c4c0075f44830b55"
+                "reference": "10db0b5c597dfae2c047e13b33da7d1eac0cb4f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/niladam/filament-auto-logout/zipball/920b6d6bfa955c74657aefa8c4c0075f44830b55",
-                "reference": "920b6d6bfa955c74657aefa8c4c0075f44830b55",
+                "url": "https://api.github.com/repos/niladam/filament-auto-logout/zipball/10db0b5c597dfae2c047e13b33da7d1eac0cb4f0",
+                "reference": "10db0b5c597dfae2c047e13b33da7d1eac0cb4f0",
                 "shasum": ""
             },
             "require": {
@@ -5837,7 +5837,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-14T06:20:45+00:00"
+            "time": "2025-02-22T16:14:41+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -6099,16 +6099,16 @@
         },
         {
             "name": "owen-it/laravel-auditing",
-            "version": "v13.7.1",
+            "version": "v13.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/owen-it/laravel-auditing.git",
-                "reference": "627a7b7ddd2aa2d026be328595efa31301ad7d02"
+                "reference": "4f72181622683bc667bbdd2e5fa09cd376329af4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/627a7b7ddd2aa2d026be328595efa31301ad7d02",
-                "reference": "627a7b7ddd2aa2d026be328595efa31301ad7d02",
+                "url": "https://api.github.com/repos/owen-it/laravel-auditing/zipball/4f72181622683bc667bbdd2e5fa09cd376329af4",
+                "reference": "4f72181622683bc667bbdd2e5fa09cd376329af4",
                 "shasum": ""
             },
             "require": {
@@ -6183,7 +6183,7 @@
                 "issues": "https://github.com/owen-it/laravel-auditing/issues",
                 "source": "https://github.com/owen-it/laravel-auditing"
             },
-            "time": "2025-02-18T16:00:52+00:00"
+            "time": "2025-02-21T14:58:02+00:00"
         },
         {
             "name": "owenvoke/blade-fontawesome",

@@ -7,6 +7,7 @@ use App\Models\ObjectBuildingType;
 use App\Models\ObjectLocation;
 use App\Models\Relation;
 use App\Services\AddressService;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
@@ -30,7 +31,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Filament\Facades\Filament;
+
 class ObjectLocationResource extends Resource
 {
     protected static ?string $model           = ObjectLocation::class;
@@ -73,7 +74,7 @@ class ObjectLocationResource extends Resource
 
                 TextEntry::make("relation.name")
                     ->label("Relatie")->Url(function (object $record) {
-                    return "/app/customers/" . $record->customer_id . "";
+                    return "/customers/" . $record->customer_id . "";
                 })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
@@ -133,16 +134,14 @@ class ObjectLocationResource extends Resource
                                 ->label("Relatie")
 
                                 ->required()
-                                ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name','id')),
+                                ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
 
-                                Select::make("management_id")
+                            Select::make("management_id")
                                 ->searchable()
                                 ->label("Beheerder")
                                 ->preload()
                                 ->required()
-                                ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name','id'))
-          
-
+                                ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
 
                         ])]),
 
@@ -244,7 +243,7 @@ class ObjectLocationResource extends Resource
         return $table
             ->groups([Group::make("complexnumber")
                     ->label("Complex"), Group::make("customer_id")
-                    // ->label("Relatie"), Group::make("buildingtype.name")
+                // ->label("Relatie"), Group::make("buildingtype.name")
                     ->label("Gebouwtype"), Group::make("management_id")
                     ->label("Beheerder")])->columns(
 
@@ -321,10 +320,9 @@ class ObjectLocationResource extends Resource
                     ->badge()
                     ->alignment(Alignment::Center)
                     ->toggleable()
-                    ->color("success"), 
-                    
-                    
-                    Tables\Columns\TextColumn::make("relation.name")
+                    ->color("success"),
+
+                Tables\Columns\TextColumn::make("relation.name")
                     ->toggleable()
                     ->sortable()
                     ->label("Relatie")
@@ -408,6 +406,7 @@ class ObjectLocationResource extends Resource
     {
         return [
             RelationManagers\ObjectsRelationManager::class,
+            //  RelationManagers\ContactsRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class];

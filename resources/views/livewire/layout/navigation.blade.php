@@ -1,12 +1,12 @@
 <?php
 
-use App\Livewire\Actions\Logout;
+    use App\Livewire\Actions\Logout;
 
-$logout = function (Logout $logout) {
-    $logout();
+    $logout = function (Logout $logout) {
+        $logout();
 
-    $this->redirect('/', navigate: true);
-};
+        $this->redirect('/', navigate: true);
+    };
 
 ?>
 

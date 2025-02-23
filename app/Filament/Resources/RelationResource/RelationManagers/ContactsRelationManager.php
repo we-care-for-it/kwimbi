@@ -15,8 +15,9 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'contactsObject';
-    protected static ?string $title       = 'Contactpersonen';
+    protected static bool $isScopedToTenant = false;
+    protected static string $relationship   = 'contactsObject';
+    protected static ?string $title         = 'Contactpersonen';
 
     public function form(Form $form): Form
     {
@@ -102,19 +103,15 @@ class ContactsRelationManager extends RelationManager
                     ->form([
 
                         TileSelect::make('contact_id')
+                            ->searchable(['first_name', 'last_name', 'email'])
                             ->model(Contact::class)
-                            ->searchable()
-                            ->titleKey('first_name')
+                            ->titleKey('name')
                             ->imageKey('avatar')
                             ->descriptionKey('email')
-                            ->label('Contactpersoon'),
+                            ->label('Contactname')
 
-                        // Forms\Components\Select::make('contact_id')
-                        //     ->getOptionLabelFromRecordUsing(fn(Model $record) => "{$record->first_name} {$record->last_name}")
+                        ,
 
-                        //     ->options(Contact::where('company_id', Filament::getTenant()->id
-
-                        //     )->pluck('first_name', 'id')),
                     ])
                     ->action(function (array $data) {
                         ContactObject::create(
