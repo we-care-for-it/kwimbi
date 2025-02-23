@@ -28,6 +28,7 @@
         "owenvoke/blade-fontawesome": "^2.8",
         "pxlrbt/filament-activity-log": "^1.1",
         "pxlrbt/filament-excel": "^2.4",
+        "rupadana/filament-api-service": "^3.4",
         "sentry/sentry-laravel": "^4.12",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
         "socialiteproviders/microsoft-azure": "^5.2",

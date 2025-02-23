@@ -32,6 +32,13 @@
       1 => 'Croustibat\\FilamentJobsMonitor\\QueueMonitorProvider',
     ),
   ),
+  'dedoc/scramble' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Dedoc\\Scramble\\ScrambleServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-developer-logins' => 
   array (
     'providers' => 
@@ -210,6 +217,13 @@
       0 => 'Laravel\\Sail\\SailServiceProvider',
     ),
   ),
+  'laravel/sanctum' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    ),
+  ),
   'laravel/socialite' => 
   array (
     'aliases' => 
@@ -313,6 +327,18 @@
       0 => 'pxlrbt\\FilamentExcel\\FilamentExcelServiceProvider',
     ),
   ),
+  'rupadana/filament-api-service' => 
+  array (
+    'aliases' => 
+    array (
+      'ApiService' => 'Rupadana\\ApiService\\Facades\\ApiService',
+    ),
+    'providers' => 
+    array (
+      0 => 'Rupadana\\ApiService\\ApiServiceServiceProvider',
+      1 => 'Rupadana\\ApiService\\AuthServiceProvider',
+    ),
+  ),
   'ryangjchandler/blade-capture-directive' => 
   array (
     'aliases' => 
@@ -362,6 +388,20 @@
     'providers' => 
     array (
       0 => 'Spatie\\Backup\\BackupServiceProvider',
+    ),
+  ),
+  'spatie/laravel-permission' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Permission\\PermissionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-query-builder' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\QueryBuilder\\QueryBuilderServiceProvider',
     ),
   ),
   'spatie/laravel-settings' => 
