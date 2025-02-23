@@ -44,23 +44,13 @@ class NotesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
 
-                // TileColumn::make('user.name')
+                Tables\Columns\TextColumn::make('note')->label('Notitie')->wrap(),
+                // ->description(function ($record) {
 
-                //     ->columnSpanFull()
-                //     ->image(fn($record) => $record->user->avatar)
+                //     return "Toegevoegd door: " . $record->user->name . " " . date("d-m-Y", strtotime($record?->created_at)) . " om " . date("H:i", strtotime($record?->updated_at));
 
-                // Tables\Columns\TextColumn::make('created_at')
-                //     ->label('Datum / tijd')->columnSpanFull()
-                //     ->sortable()
-
-                //     ->dateTime("d-m-Y H:i"),
-                Tables\Columns\TextColumn::make('note')->label('Notitie')->wrap()
-                    ->description(function ($record) {
-
-                        return "Geplaats door: " . $record->user->name . " " . date("d-m-Y", strtotime($record?->created_at)) . " om " . date("H:i", strtotime($record?->updated_at));
-
-                    }
-                    ),
+                // }
+                // ),
 
             ])->emptyState(view('partials.empty-state-small'))
 
