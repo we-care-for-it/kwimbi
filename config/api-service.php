@@ -1,30 +1,24 @@
-<?php
-
+<?PHP
 return [
-    'navigation'                       => [
+    'navigation' => [
         'token' => [
             'cluster' => null,
-            'group'   => 'User Token',
+            'group'   => 'User',
             'sort'    => -1,
             'icon'    => 'heroicon-o-key',
         ],
     ],
-    'models'                           => [
+    'models'     => [
         'token' => [
             'enable_policy' => false,
         ],
     ],
-    'route'                            => [
-        'panel_prefix'             => true,
+    'route'      => [
+        'panel_prefix'             => false,
         'use_resource_middlewares' => false,
     ],
-    'tenancy'                          => [
+    'tenancy'    => [
         'enabled'   => true,
         'awareness' => false,
     ],
-    'login-rules'                      => [
-        'email'    => 'required|email',
-        'password' => 'required',
-    ],
-    'use-spatie-permission-middleware' => true,
 ];

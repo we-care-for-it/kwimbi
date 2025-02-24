@@ -41,13 +41,10 @@ class AdminPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-->plugins([
-    ApiServicePlugin::make()
-])
-
-            ->plugins([ // Consolidate all plugins here
+           ->plugins([ // Consolidate all plugins here
                 FilamentJobsMonitorPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make(),
+		ApiServicePlugin::make()
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
