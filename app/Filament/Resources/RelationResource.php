@@ -2,6 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\RelationTypes;
+use App\Filament\Resources\RelationResource\Api\Transformers\RelationTransformer;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
@@ -37,6 +38,11 @@ class RelationResource extends Resource
     protected static ?string $navigationLabel      = "Relaties";
     protected static ?string $pluralModelLabel     = 'Relaties';
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getApiTransformer()
+    {
+        return RelationTransformer::class;
+    }
 
     public static function form(Form $form): Form
     {

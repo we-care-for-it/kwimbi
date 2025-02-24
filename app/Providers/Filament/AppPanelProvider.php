@@ -30,6 +30,8 @@ use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Rupadana\ApiService\ApiServicePlugin;
+
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 
 class AppPanelProvider extends PanelProvider
@@ -42,8 +44,11 @@ class AppPanelProvider extends PanelProvider
 ->default()
 
             ->id('app')
-
 ->plugins([
+    ApiServicePlugin::make()
+])
+->plugins([
+
  FilamentEditProfilePlugin::make()
         ->slug('my-profile')
         ->setTitle('Mijn profiel')
@@ -66,6 +71,7 @@ class AppPanelProvider extends PanelProvider
 
  ->plugins([
         AutoLogoutPlugin::make()
+
             ->color(Color::Emerald)                         // Set the color. Defaults to Zinc
             ->disableIf(fn () => auth()->id() === 1)        // Disable the user with ID 1
             ->logoutAfter(Carbon::SECONDS_PER_MINUTE * 5)   // Logout the user after 5 minutes

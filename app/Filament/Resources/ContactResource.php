@@ -91,6 +91,7 @@ class ContactResource extends Resource
 
                 Forms\Components\TextInput::make('postal_code')
                     ->label('Postcode')
+                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
                     ->maxLength(10),
 
                 Forms\Components\TextInput::make('country')
