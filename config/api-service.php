@@ -1,6 +1,6 @@
 <?PHP
 return [
-    'navigation' => [
+    'navigation'                       => [
         'token' => [
             'cluster' => null,
             'group'   => 'User',
@@ -8,17 +8,18 @@ return [
             'icon'    => 'heroicon-o-key',
         ],
     ],
-    'models'     => [
+    'models'                           => [
         'token' => [
             'enable_policy' => false,
         ],
     ],
-    'route'      => [
+    'route'                            => [
         'panel_prefix'             => true,
         'use_resource_middlewares' => false,
     ],
-    'tenancy'    => [
+    'tenancy'                          => [
         'enabled'   => true,
         'awareness' => true,
     ],
+    'use-spatie-permission-middleware' => false,
 ];
