@@ -30,7 +30,7 @@ use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-
+use Rupadana\ApiService\ApiServicePlugin;
 
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 
@@ -44,7 +44,9 @@ class AppPanelProvider extends PanelProvider
 ->default()
 
             ->id('app')
-
+->plugins([
+    ApiServicePlugin::make()
+])
 ->plugins([
 
  FilamentEditProfilePlugin::make()
