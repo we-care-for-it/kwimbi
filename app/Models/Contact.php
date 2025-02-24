@@ -39,11 +39,11 @@ class Contact extends Model
 
     public function getAvatarAttribute($value)
     {
-        if ($this->image) {
-            return $this->image;
-        } else {
-            return '/images/noavatar.jpg';
-        }
+        // if ($this->image) {
+        //    return $this->image;
+        //  } else {
+        return '/images/noavatar.jpg';
+        //  }
     }
 
     public function getNameAttribute()
