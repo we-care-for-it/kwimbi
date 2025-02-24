@@ -20,7 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Enums\MaxWidth;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Croustibat\FilamentJobsMonitor\FilamentJobsMonitorPlugin;
-use Rupadana\ApiService\ApiServicePlugin;
+ 
 
 
 class AdminPanelProvider extends PanelProvider
@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
            ->plugins([ // Consolidate all plugins here
                 FilamentJobsMonitorPlugin::make(),
                 FilamentSpatieLaravelBackupPlugin::make(),
-		ApiServicePlugin::make()
+ 
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
             ->widgets([
