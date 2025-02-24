@@ -41,6 +41,7 @@ class ToolsInspectionCompaniesResource extends Resource
                     Forms\Components\TextInput::make('zipcode')
                      
                         ->label('Postcode')
+                        ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
                         ->maxLength(255),
                       
 

@@ -169,6 +169,7 @@ class ObjectLocationResource extends Resource
 
             Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
                     ->label("Postcode")
+                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
 
                     ->maxLength(255)->suffixAction(Action::make("searchAddressByZipcode")
                         ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {

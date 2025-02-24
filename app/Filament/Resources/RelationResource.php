@@ -147,6 +147,7 @@ class RelationResource extends Resource
 
             Tables\Columns\TextColumn::make('zipcode')
                 ->placeholder('-')
+                ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
                 ->label('Postcode')->state(function (Relation $rec) {
                 return $rec->zipcode . " " . $rec->place;
             }),

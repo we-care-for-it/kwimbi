@@ -29,7 +29,7 @@ class GpsDataRelationManager extends RelationManager
 
                 Forms\Components\TextInput::make("zipcode")
                     ->label("Postcode")
-
+                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
                     ->maxLength(255)->suffixAction(Forms\Components\Actions\Action::make("searchAddressByZipcode")
                         ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {
                         $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
