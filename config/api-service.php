@@ -19,7 +19,7 @@ return [
     ],
     'tenancy'                          => [
         'enabled'   => true,
-        'awareness' => true,
+        'awareness' => false,
     ],
     'use-spatie-permission-middleware' => false,
 ];
