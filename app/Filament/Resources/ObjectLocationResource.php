@@ -130,17 +130,39 @@ class ObjectLocationResource extends Resource
                             // ->preload(),
 
                             Select::make("customer_id")
-                                ->searchable()
-                                ->label("Relatie")
-
-                                ->required()
-                                ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+                            ->searchable()
+                            ->label("Relatie")
+                            ->required()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name'),
+                            ])
+                            ->createOptionUsing(function (array $data) {
+                                return Relation::create([
+                                    'name' => $data['name'],
+                                    'type_id' => 5,
+                                    'company_id' => Filament::getTenant()->id,
+                                ])->id;
+                            })
+                            ->options(Relation::where('type_id', 5)
+                                ->where('company_id', Filament::getTenant()->id)
+                                ->pluck('name', 'id')),
+                        
 
                             Select::make("management_id")
                                 ->searchable()
                                 ->label("Beheerder")
                                 ->preload()
                                 ->required()
+                                ->createOptionForm([
+                                    Forms\Components\TextInput::make('name'),
+                                ])
+                                ->createOptionUsing(function (array $data) {
+                                    return Relation::create([
+                                        'name' => $data['name'],
+                                        'type_id' => 2,
+                                        'company_id' => Filament::getTenant()->id,
+                                    ])->id;
+                                })
                                 ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
 
                         ])]),
