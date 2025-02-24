@@ -11,7 +11,6 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Forms\Components\TileSelect;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -61,17 +60,17 @@ class ContactsRelationManager extends RelationManager
 
             ->columns([
 
-                TileColumn::make('contact.name')
+                //  TileColumn::make('contact.name')
 
-                    ->description(fn($record) => $record->contact->email)
-                    ->image(fn($record) => $record->contact->avatar),
+                //->description(fn($record) => $record->contact->email)
+                //   ->image(fn($record) => $record->contact->avatar),
                 //     ->image(fn(User $record) => $record->profile_photo_url),
 
-                TextColumn::make('contact.first_name')
-                    ->label('Naam')
-                    ->placeholder('-')
+                // TextColumn::make('contact.first_name')
+                //     ->label('Naam')
+                //     ->placeholder('-')
 
-                    ->getStateUsing(fn($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
+                //     ->getStateUsing(fn($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
 
                 TextColumn::make('contact.email')
                     ->placeholder('-')
@@ -105,7 +104,7 @@ class ContactsRelationManager extends RelationManager
                         TileSelect::make('contact_id')
                             ->searchable(['first_name', 'last_name', 'email'])
                             ->model(Contact::class)
-                            ->titleKey('name')
+                            ->titleKey('first_name')
                             ->imageKey('avatar')
                             ->descriptionKey('email')
                             ->label('Contactname')
