@@ -273,6 +273,8 @@ class ObjectLocationResource extends Resource
                     SpatieMediaLibraryFileUpload::make('buildingimage')
                         ->responsiveImages()
                         ->image()
+                        ->hiddenlabel()
+                        ->panelLayout('grid')
                         ->maxFiles(8)
                         ->label('Afbeeldingen')
                         ->multiple()
@@ -449,6 +451,7 @@ class ObjectLocationResource extends Resource
                     ->Searchable(),
 
                 SelectFilter::make("building_type")
+
                     ->options(ObjectBuildingType::pluck("name", "id"))
                     ->label("Gebouwtype")
                     ->preload()
