@@ -3,7 +3,9 @@ namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\ContactObject;
+use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
@@ -11,6 +13,7 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Forms\Components\TileSelect;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
 {
@@ -21,36 +24,9 @@ class ContactsRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
+
             ->schema([
-                Forms\Components\TextInput::make('first_name')
-                    ->label('Voornaam')
-                    ->required()
-                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('last_name')
-                    ->label('Achternaam')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('email')
-                    ->label('E-mailadres')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('department')
-                    ->label('Afdeling')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('function')
-                    ->label('Functie')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('phone_number')
-                    ->label('Telefoonnummer')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('mobile_number')
-                    ->label('Intern telefoonnummer')
-                    ->maxLength(255),
             ]);
     }
 
@@ -60,17 +36,9 @@ class ContactsRelationManager extends RelationManager
 
             ->columns([
 
-                //  TileColumn::make('contact.name')
-
-                //->description(fn($record) => $record->contact->email)
-                //   ->image(fn($record) => $record->contact->avatar),
-                //     ->image(fn(User $record) => $record->profile_photo_url),
-
-                // TextColumn::make('contact.first_name')
-                //     ->label('Naam')
-                //     ->placeholder('-')
-
-                //     ->getStateUsing(fn($record): ?string => "{$record->contact->first_name} {$record->contact->last_name}"),
+                TileColumn::make('contact.name')
+                    ->description(fn($record) => $record->contact->email)
+                    ->image(fn($record) => $record->contact->avatar),
 
                 TextColumn::make('contact.email')
                     ->placeholder('-')
@@ -89,16 +57,86 @@ class ContactsRelationManager extends RelationManager
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
+
+            // ->recordUrl(Contact::getUrl('edit', ['record' => auth()->user()])
+
+            //  route('filament.resources.contacts.edit', ['tenant' => filament()->getTenant()])
+            //   )
+
             ->emptyState(view('partials.empty-state-small'))
 
             ->filters([
                 //
             ])
             ->headerActions([
+
+                Action::make('createContact')
+                    ->label('Toevoegen')
+                    ->modalHeading('Contactpersoon toevoegen')
+                    ->form([
+                        Grid::make(2)
+                            ->schema([
+                                Forms\Components\TextInput::make('first_name')
+                                    ->label('Voornaam')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('last_name')
+                                    ->label('Achternaam')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('email')
+                                    ->label('E-mailadres')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('department')
+                                    ->label('Afdeling')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('function')
+                                    ->label('Functie')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('phone_number')
+                                    ->label('Telefoonnummer')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('mobile_number')
+                                    ->label('Intern telefoonnummer')
+                                    ->maxLength(255),
+                            ]),
+
+                    ])
+                    ->mutateFormDataUsing(function (array $data): array {
+                        //Maak de contactpersoon aan
+                        $contact_id = Contact::insertGetId([
+                            'first_name'    => $data['first_name'],
+                            'company_id'    => Filament::getTenant()->id,
+                            'last_name'     => $data['last_name'],
+                            'department'    => $data['department'],
+                            'email'         => $data['email'],
+                            'function'      => $data['function'],
+                            'phone_number'  => $data['phone_number'],
+                            'mobile_number' => $data['mobile_number'],
+                        ]);
+
+                        ContactObject::create([
+                            'model'      => 'location',
+                            'contact_id' => $contact_id,
+                            'model_id'   => $this->getOwnerRecord()->id,
+                        ]);
+
+                        return $data;
+                    })
+
+                ,
+
                 Action::make('Attach')
-                    ->modalWidth(MaxWidth::Medium)
-                    ->modalHeading('Selecteer Contactpersoons')
-                    ->label('Koppel')
+                    ->modalWidth(MaxWidth::Large)
+                    ->modalHeading('Contactpersoon toevoegen')
+                    ->modalDescription('Koppel een bestaand')
+                    ->label('Koppel bestaand contact')
                     ->form([
 
                         TileSelect::make('contact_id')

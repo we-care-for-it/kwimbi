@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Enums\ActionTypes;
 use App\Mail\ActionToUser;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,13 @@ class Task extends Model
             'type_id'   => ActionTypes::class,
 
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(function ($query) {
+            $query->where('company_id', Filament::getTenant()->id);
+        });
     }
 
     protected static function boot(): void
