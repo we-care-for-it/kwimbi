@@ -429,7 +429,7 @@ class ObjectLocationResource extends Resource
     {
         return [
             RelationManagers\ObjectsRelationManager::class,
-            //  RelationManagers\ContactsRelationManager::class,
+            RelationManagers\ContactsRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class];

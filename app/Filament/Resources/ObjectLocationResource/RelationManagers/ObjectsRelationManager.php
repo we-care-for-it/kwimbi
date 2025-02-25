@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
+use Filament\Facades\Filament;
 use App\Enums\ElevatorStatus;
 use App\Models\ObjectType;
 use App\Models\Relation;
@@ -63,6 +64,16 @@ class ObjectsRelationManager extends RelationManager
 
                         Select::make('maintenance_company_id')
                             ->label('Onderhoudspartij')
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name'),
+                            ])
+                            ->createOptionUsing(function (array $data) {
+                                return Relation::create([
+                                    'name' => $data['name'],
+                                    'type_id' => 1,
+                                    'company_id' => Filament::getTenant()->id,
+                                ])->id;
+                            })
                             ->options(Relation::where('type_id', 1)->pluck("name", "id")),
 
                         Select::make('status_id')
