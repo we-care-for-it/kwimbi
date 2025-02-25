@@ -16,6 +16,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactResource extends Resource
 {

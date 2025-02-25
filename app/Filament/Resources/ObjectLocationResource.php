@@ -432,7 +432,9 @@ class ObjectLocationResource extends Resource
             RelationManagers\ContactsRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
-            RelationManagers\AttachmentsRelationManager::class];
+            RelationManagers\AttachmentsRelationManager::class,
+            RelationManagers\TasksRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

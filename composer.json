@@ -21,7 +21,7 @@
         "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
         "joaopaulolndev/filament-edit-profile": "^1.0",
-        "lara-zeus/tiles": "*",
+        "lara-zeus/tiles": "^1.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3352497a94d373f0d883d2b8f88c8a59",
+    "content-hash": "760bee2e5b0963eba2b4eb50f9519df3",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3631,17 +3631,17 @@
         },
         {
             "name": "lara-zeus/tiles",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:lara-zeus/tiles.git",
-                "reference": "fcb4d9a0547fb850648c966f8ed4171e29c9f97a"
+                "reference": "79874d5eb808c8bf80c00358d613af1ee42726f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://composer.larazeus.com/dist/lara-zeus/tiles/lara-zeus-tiles-fcb4d9a0547fb850648c966f8ed4171e29c9f97a-zip-dc4bbd.zip",
-                "reference": "fcb4d9a0547fb850648c966f8ed4171e29c9f97a",
-                "shasum": "6d506de4f05155a9c3b6d1f5f41a6c2285a127e9"
+                "url": "https://composer.larazeus.com/dist/lara-zeus/tiles/lara-zeus-tiles-79874d5eb808c8bf80c00358d613af1ee42726f2-zip-db7751.zip",
+                "reference": "79874d5eb808c8bf80c00358d613af1ee42726f2",
+                "shasum": "050506ad1ebd0592fecd26144dcb352befee3eb3"
             },
             "require": {
                 "filament/filament": "^3.0",
@@ -3714,7 +3714,7 @@
                 "contact": "https://larazeus.com/contact-us",
                 "docs": "https://larazeus.com/tiles",
                 "email": "info@larazeus.com",
-                "source": "https://github.com/lara-zeus/tiles/tree/v1.0.2",
+                "source": "https://github.com/lara-zeus/tiles/tree/v1.0.3",
                 "issues": "https://github.com/lara-zeus/tiles/issues"
             },
             "funding": [
@@ -3727,7 +3727,7 @@
                     "url": "https://www.buymeacoffee.com/larazeus"
                 }
             ],
-            "time": "2024-10-19T09:06:24+00:00"
+            "time": "2025-02-25T12:55:49+00:00"
         },
         {
             "name": "laravel/framework",
@@ -15055,12 +15055,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

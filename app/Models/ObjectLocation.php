@@ -120,6 +120,11 @@ class ObjectLocation extends Model implements Auditable
         return $this->hasMany(Project::class, 'location_id', 'id');
     }
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'model_id', 'id');
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
