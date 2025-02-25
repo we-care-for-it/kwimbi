@@ -12,12 +12,14 @@ use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
@@ -27,6 +29,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
@@ -99,7 +102,26 @@ class ObjectLocationResource extends Resource
                     ->Url(function (object $record) {
                         return "/" . Filament::getTenant()->id . "/relations/" . $record->management_id . "";
                     }),
-            ])])])]);
+
+                // SpatieMediaLibraryImageEntry::make('images')
+                //     ->label('Afbeelding')
+
+                //     ->collection('images'),
+
+            ]),
+
+        ]),
+
+        ]), Section::make('Afbeeldingen')
+                ->schema([
+                    SpatieMediaLibraryImageEntry::make('buildingimage')
+                        ->hiddenLabel()
+                        ->height(200)
+                        ->ring(5)
+                        ->collection('buildingimages')])->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed(),
+        ]);
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -228,20 +250,56 @@ class ObjectLocationResource extends Resource
                     ->label("GPS longitude")
                     ->hidden()
                     ->columnSpan(1),
-            ])])
-                ->columns(2)
-                ->columnSpan(3),
+            ])]),
+
+            // Forms\Components\Section::make("Afbeeldingen gegevens")->collapsible()->schema([Grid::make(4)->schema([
+
+            //     SpatieMediaLibraryFileUpload::make('image')
+            //         ->multiple()
+            //         ->reorderable()
+            //         ->collection('images')
+            //         ->responsiveImages(),
+
+            // ])])
+
+            //     ->columns(2)
+            //     ->columnSpan(2),
+
+            Forms\Components\Section::make("Afbeeldingen")
+                ->description('Afbeeldingen van het gebouw')
+                ->compact()
+                ->schema([
+
+                    SpatieMediaLibraryFileUpload::make('buildingimage')
+                        ->responsiveImages()
+                        ->image()
+                        ->maxFiles(8)
+                        ->label('Afbeeldingen')
+                        ->multiple()
+                        ->collection('buildingimages'),
+
+                ])
+                ->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed()->columns(1),
 
             Forms\Components\Section::make("Gebouwgegevens")
-                ->schema([Forms\Components\Grid::make(3)
-                        ->schema([Forms\Components\TextInput::make("construction_year")
+                ->schema([Forms\Components\Grid::make(2)
+
+                        ->schema([
+
+                            Forms\Components\TextInput::make("construction_year")
+
+                                ->columnSpan(1)
                                 ->label("Bouwjaar"),
 
                             Forms\Components\TextInput::make("levels")
+
+                                ->columnSpan(1)
                                 ->label("Verdiepingen"),
 
                             Forms\Components\TextInput::make("surface")
-                                ->label("Aantal m2"),
+                                ->label("Aantal m2")->columnStart(1),
 
                             Select::make("building_type_id")
                                 ->options(ObjectBuildingType::pluck("name", "id"))
@@ -250,15 +308,16 @@ class ObjectLocationResource extends Resource
                                 ->searchable()
 
                                 ->label("Gebouwtype")
-                                ->columnSpan(3),
 
-                            // ,
+                                ->columnSpan(1),
+
                         ])])
-                ->columnSpan(["lg" => 2])])
+                ->columnSpan(["lg" => 3])])
             ->columns(3);
 
         Section::make()
-            ->schema([Textarea::make("remark")
+            ->schema([
+                Textarea::make("remark")
                     ->rows(7)
                     ->label("Opmerking")
                     ->columnSpan(3)
@@ -278,7 +337,6 @@ class ObjectLocationResource extends Resource
 
                 Tables\Columns\TextColumn::make("address")
                     ->toggleable()
-
                     ->getStateUsing(function (ObjectLocation $record): ?string {
                         $housenumber   = "";
                         $complexnumber = "";
@@ -313,6 +371,12 @@ class ObjectLocationResource extends Resource
                     return $name . " " . $complexnumber;
 
                 }),
+
+                SpatieMediaLibraryImageColumn::make('buildingimage')
+                    ->label('Afbeelding')
+                    ->toggleable()
+                    ->limit(2)
+                    ->collection('buildingimages'),
 
                 Tables\Columns\TextColumn::make("zipcode")
                     ->label("Postcode")
