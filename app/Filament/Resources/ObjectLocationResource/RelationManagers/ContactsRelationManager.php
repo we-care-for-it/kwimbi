@@ -37,12 +37,16 @@ class ContactsRelationManager extends RelationManager
             ->columns([
 
                 TileColumn::make('contact.name')
-                    ->description(fn($record) => $record->contact->email)
+                    ->description(fn($record) => $record->contact->function)
+
                     ->image(fn($record) => $record->contact->avatar),
 
                 TextColumn::make('contact.email')
                     ->placeholder('-')
-                    ->label('Email'),
+                    ->Url(function (object $record) {
+                        return "mailto:" . $record?->contact->email;
+                    })
+                    ->label('Emailadres'),
 
                 TextColumn::make('contact.department')
                     ->placeholder('-')
@@ -54,6 +58,9 @@ class ContactsRelationManager extends RelationManager
 
                 TextColumn::make('contact.phone_number')
                     ->placeholder('-')
+                    ->Url(function (object $record) {
+                        return "mailto:" . $record?->contact->phone_number;
+                    })
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
@@ -88,6 +95,7 @@ class ContactsRelationManager extends RelationManager
 
                                 Forms\Components\TextInput::make('email')
                                     ->label('E-mailadres')
+                                    ->email()
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('department')
