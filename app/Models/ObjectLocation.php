@@ -31,7 +31,6 @@ class ObjectLocation extends Model implements Auditable
 {
     use SoftDeletes;
 
-    use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
     // Validation rules for this model
@@ -103,6 +102,10 @@ class ObjectLocation extends Model implements Auditable
     public function contacts()
     {
         return $this->hasMany(Contact::class, 'location_id', 'id');
+    }
+    public function contactsObject()
+    {
+        return $this->hasMany(ContactObject::class, 'model_id', 'id');
     }
 
     public function projects()
