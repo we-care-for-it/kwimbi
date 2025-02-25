@@ -57,6 +57,13 @@ class ObjectLocation extends Model implements Auditable
 
         'building_type_id', 'building_access_type_id', 'remark', 'building_type_id', 'name', 'zipcode', 'place', 'address', 'slug', 'complexnumber', 'management_id'];
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope(function ($query) {
+            $query->where('company_id', Filament::getTenant()->id);
+        });
+    }
+
     public function relation()
     {
         return $this->hasOne(Relation::class, 'id', 'customer_id')->where('company_id', Filament::getTenant()->id);

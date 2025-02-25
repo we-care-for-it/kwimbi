@@ -3,10 +3,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
-use App\Models\Customer;
-use App\Models\Elevator;
 use App\Models\ObjectLocation;
 use App\Models\Project;
+use App\Models\Relation;
 use App\Models\Task;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
@@ -57,9 +56,9 @@ class TaskResource extends Resource
                 Select::make('model')
                     ->options([
                         'relation'      => 'Relatie',
-                        'project'       => 'Project',
+                        //  'project'       => 'Project',
                         'contactperson' => 'Contactpersoon',
-                        'object'        => 'Object',
+                        //  'object'        => 'Object',
                         'location'      => 'Locatie',
                     ])
                     ->searchable()
@@ -67,7 +66,7 @@ class TaskResource extends Resource
                     ->label('Koppel aan'),
 
                 Select::make('model_id')
-                    ->options(Customer::pluck('name', 'id'))
+                    ->options(Relation::where('type_id', 5)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
@@ -90,13 +89,13 @@ class TaskResource extends Resource
                     })
                     ->label('Contactpersoon'),
 
-                Select::make('model_id')
-                    ->options(Elevator::pluck('nobo_no', 'id'))
-                    ->searchable()
-                    ->visible(function (Get $get, Set $set) {
-                        return $get('model') == 'object' ?? false;
-                    })
-                    ->label('Object'),
+                // Select::make('model_id')
+                //     ->options(Elevator::pluck('nobo_no', 'id'))
+                //     ->searchable()
+                //     ->visible(function (Get $get, Set $set) {
+                //         return $get('model') == 'object' ?? false;
+                //     })
+                //     ->label('Object'),
 
                 Select::make('model_id')
                     ->options(ObjectLocation::pluck('name', 'id'))

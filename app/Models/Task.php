@@ -72,7 +72,7 @@ class Task extends Model
 
         switch ($this->model) {
             case 'relation':
-                return Customer::whereId($this->model_id)->first();
+                return Relation::whereId($this->model_id)->first();
                 break;
             case 'project':
                 return Project::whereId($this->model_id)->first();
@@ -95,6 +95,11 @@ class Task extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function relations()
+    {
+        return $this->belongsTo(Relation::class);
     }
 
 }

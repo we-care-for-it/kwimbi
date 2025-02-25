@@ -10,10 +10,21 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+<<<<<<< Updated upstream
+=======
+use Filament\Tables\Actions\ViewAction;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components;
+use Filament\Tables\Actions\Action;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 class ContactResource extends Resource
 {
@@ -99,10 +110,33 @@ class ContactResource extends Resource
                     ->maxLength(255),
             ]);
     }
-
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Components\TextEntry::make('name')
+                    ->label('Name'),
+                Components\TextEntry::make('email')
+                    ->label('Email'),
+                Components\TextEntry::make('phone_number')
+                    ->label('Phone Number'),
+                Components\TextEntry::make('mobile_number')
+                    ->label('Mobile Number'),
+                Components\TextEntry::make('department')
+                    ->label('Department'),
+                Components\TextEntry::make('function')
+                    ->label('Function'),
+                Components\TextEntry::make('company.name')
+                    ->label('Company'),
+            ]);
+    }
+    
     public static function table(Table $table): Table
     {
         return $table
+        ->recordUrl(
+            fn (Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
+        )
             ->groups([
                 Group::make('company.name')
                     ->label('Bedrijf'),
@@ -145,6 +179,21 @@ class ContactResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+                    ViewAction::make()->label('ddd'),
+=======
+=======
+>>>>>>> Stashed changes
+                    Action::make('view') // Custom action for row click
+                    ->icon('heroicon-o-eye')
+                    ->action(fn ($record) => static::infolist($record))
+                    ->modalHeading('Contact Details')
+                    ->modalContent(fn ($record) => static::infolist($record)),
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
@@ -163,6 +212,7 @@ class ContactResource extends Resource
     public static function getPages(): array
     {
         return [
+            'view'   => Pages\ViewContact::route('/{record}'), // Ensure this is defined
             'index'  => Pages\ListContacts::route('/'),
             'create' => Pages\CreateContact::route('/create'),
             'edit'   => Pages\EditContact::route('/{record}/edit'),
