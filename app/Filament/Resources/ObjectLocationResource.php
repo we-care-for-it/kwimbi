@@ -73,9 +73,10 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Niet opgegeven"),
 
                 TextEntry::make("relation.name")
-                    ->label("Relatie")->Url(function (object $record) {
-                    return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id . "";
-                })
+                    ->label("Relatie")
+                    ->Url(function (object $record) {
+                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id . "";
+                    })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
 
@@ -94,7 +95,11 @@ class ObjectLocationResource extends Resource
 
                 TextEntry::make("managementcompany.name")
                     ->label("Beheerder")
-                    ->placeholder("Niet opgegeven")])])])]);
+                    ->placeholder("Niet opgegeven")
+                    ->Url(function (object $record) {
+                        return "/" . Filament::getTenant()->id . "/relations/" . $record->management_id . "";
+                    }),
+            ])])])]);
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -349,9 +354,10 @@ class ObjectLocationResource extends Resource
                     ->sortable()
                     ->label("Relatie")
                     ->placeholder("Geen relatie gekoppeld")
-                    ->searchable()->url(function (ObjectLocation $record) {
-                    return "/app/customers/" . $record->customer_id . "/edit";
-                }),
+                    ->searchable()
+                    ->url(function (ObjectLocation $record) {
+                        return "/app/customers/" . $record->customer_id . "/edit";
+                    }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
                     ->toggleable()
@@ -427,12 +433,15 @@ class ObjectLocationResource extends Resource
     public static function getRelations(): array
     {
         return [
+
+            //   RelationGroup::make('Contacts', [
             RelationManagers\ObjectsRelationManager::class,
             RelationManagers\ContactsRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
+            // ]),
         ];
     }
 

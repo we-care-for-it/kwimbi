@@ -147,9 +147,10 @@ class RelationResource extends Resource
 
             Tables\Columns\TextColumn::make('zipcode')
                 ->placeholder('-')
-                ->label('Postcode')->state(function (Relation $rec) {
-                return $rec->zipcode . " " . $rec->place;
-            }),
+                ->label('Postcode')
+                ->state(function (Relation $rec) {
+                    return $rec->zipcode . " " . $rec->place;
+                }),
 
             Tables\Columns\TextColumn::make('type_id')
                 ->label('Categorie')
