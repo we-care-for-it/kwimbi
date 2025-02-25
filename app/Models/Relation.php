@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\RelationTypes;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -21,6 +22,15 @@ class Relation extends Model
         return [
             'type_id' => RelationTypes::class,
         ];
+    }
+
+    protected static function booted(): void
+    {
+
+        static::addGlobalScope(function ($query) {
+
+            $query->where('company_id', Filament::getTenant()->id);
+        });
     }
 
     public function departments(): HasMany

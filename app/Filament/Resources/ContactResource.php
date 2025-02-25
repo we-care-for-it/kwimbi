@@ -10,11 +10,11 @@ use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-use Filament\Tables\Actions\ViewAction;
 
 class ContactResource extends Resource
 {
@@ -146,7 +146,7 @@ class ContactResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
-                    ViewAction::make(),
+                    ViewAction::make()->label('ddd'),
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
                         ->modalIcon('heroicon-o-pencil')

@@ -27,6 +27,13 @@ class Contact extends Model
         return $this->belongsTo(Company::class);
     }
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope(function ($query) {
+            $query->where('company_id', Filament::getTenant()->id);
+        });
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(AssetCategory::class);
