@@ -21,6 +21,9 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components;
 use Filament\Tables\Actions\Action;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 class ContactResource extends Resource
@@ -177,13 +180,19 @@ class ContactResource extends Resource
             ->actions([
                 ActionGroup::make([
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     ViewAction::make()->label('ddd'),
 =======
+=======
+>>>>>>> Stashed changes
                     Action::make('view') // Custom action for row click
                     ->icon('heroicon-o-eye')
                     ->action(fn ($record) => static::infolist($record))
                     ->modalHeading('Contact Details')
                     ->modalContent(fn ($record) => static::infolist($record)),
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
