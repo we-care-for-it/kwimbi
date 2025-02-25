@@ -1,9 +1,5 @@
 <?php
-
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
-
-use App\Models\Attachment;
-use App\Models\ObjectMaintenanceContract;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
@@ -18,10 +14,10 @@ class AttachmentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'attachments';
     //protected static ?string $badge = 'new';
-    protected static ? string $title = 'Bijlages';
+    protected static ?string $title = 'Bijlages';
 //'model', '','model','filename','original_filename','extention','description','size','user_id','item_id'];
     protected static bool $isLazy = false;
-    public static function getBadge(Model $ownerRecord, string $pageClass) : ? string
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
         return $ownerRecord
@@ -47,10 +43,9 @@ class AttachmentsRelationManager extends RelationManager
                     ->required()
                     ->visibility('private')
                     ->directory(function () {
-                        $parent_id = $this->getOwnerRecord()->id;  // Assuming you've set up relationships with eloquent
+                        $parent_id = $this->getOwnerRecord()->id; // Assuming you've set up relationships with eloquent
                         return '/uploads/location/' . $parent_id . '/attachments';
-                    })
-
+                    }),
 
             ]);
     }
@@ -63,17 +58,13 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('user.name')->label('Medewerker')
                 ,
 
-
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Datum / tijd')
                     ->sortable()
                     ->dateTime("d-m-Y H:i"),
 
-                Tables\Columns\TextColumn::make('description')->grow(true)->label('Omschrijvinf')
+                Tables\Columns\TextColumn::make('description')->grow(true)->label('Omschrijving')
                 ,
-
-
 
             ])->emptyState(view('partials.empty-state-small'))
             ->filters([
@@ -81,32 +72,30 @@ class AttachmentsRelationManager extends RelationManager
             ])
             ->headerActions([
 
-
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id'] = auth()->id();
-                    $data['model'] = "ObjectLocation";
+                    $data['model']   = "ObjectLocation";
                     return $data;
-                })->label('Bijlage toevoegen')
+                })->label('Bijlage toevoegen'),
             ])
             ->actions([
 
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
                     ->action(fn($record) => Storage::disk('private')
-                        ->download($record->filename))
+                            ->download($record->filename))
                     ->icon('heroicon-o-document-arrow-down'),
 
                 Tables\Actions\ActionGroup::make([
 
-                Tables\Actions\EditAction::make() ->modalHeading('Wijzig bijlage') ,
-                Tables\Actions\DeleteAction::make()  ,
-            ])  ])
+                    Tables\Actions\EditAction::make()->modalHeading('Wijzig bijlage'),
+                    Tables\Actions\DeleteAction::make(),
+                ])])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
-
 
 }
