@@ -37,12 +37,16 @@ class ContactsRelationManager extends RelationManager
             ->columns([
 
                 TileColumn::make('contact.name')
-                    ->description(fn($record) => $record->contact->email)
-                    ->image(fn($record) => $record->contact->avatar),
+                    ->description(fn($record) => $record->contact?->function)
+
+                    ->image(fn($record) => $record->contact?->avatar),
 
                 TextColumn::make('contact.email')
                     ->placeholder('-')
-                    ->label('Email'),
+                    ->Url(function (object $record) {
+                        return "mailto:" . $record?->contact?->email;
+                    })
+                    ->label('Emailadres'),
 
                 TextColumn::make('contact.department')
                     ->placeholder('-')
@@ -54,6 +58,9 @@ class ContactsRelationManager extends RelationManager
 
                 TextColumn::make('contact.phone_number')
                     ->placeholder('-')
+                    ->Url(function (object $record) {
+                        return "tel:" . $record?->contact?->phone_number;
+                    })
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
@@ -88,6 +95,7 @@ class ContactsRelationManager extends RelationManager
 
                                 Forms\Components\TextInput::make('email')
                                     ->label('E-mailadres')
+                                    ->email()
                                     ->maxLength(255),
 
                                 Forms\Components\TextInput::make('department')
@@ -102,23 +110,19 @@ class ContactsRelationManager extends RelationManager
                                     ->label('Telefoonnummer')
                                     ->maxLength(255),
 
-                                Forms\Components\TextInput::make('mobile_number')
-                                    ->label('Intern telefoonnummer')
-                                    ->maxLength(255),
                             ]),
 
                     ])
                     ->mutateFormDataUsing(function (array $data): array {
                         //Maak de contactpersoon aan
                         $contact_id = Contact::insertGetId([
-                            'first_name'    => $data['first_name'],
-                            'company_id'    => Filament::getTenant()->id,
-                            'last_name'     => $data['last_name'],
-                            'department'    => $data['department'],
-                            'email'         => $data['email'],
-                            'function'      => $data['function'],
-                            'phone_number'  => $data['phone_number'],
-                            'mobile_number' => $data['mobile_number'],
+                            'first_name'   => $data['first_name'],
+                            'company_id'   => Filament::getTenant()->id,
+                            'last_name'    => $data['last_name'],
+                            'department'   => $data['department'],
+                            'email'        => $data['email'],
+                            'function'     => $data['function'],
+                            'phone_number' => $data['phone_number'],
                         ]);
 
                         ContactObject::create([
@@ -159,8 +163,26 @@ class ContactsRelationManager extends RelationManager
                             ]
                         );
                     }),
-            ])
+
+                // Action::make('openContact')->label('Open Contact')
+                //     ->url(function ($record) {
+                //         return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
+
+                //     })->icon('heroicon-s-user'),
+
+            ])->recordUrl(function (object $record) {
+            return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
+        })
+
             ->actions([
+
+                Action::make('openCOntact')
+                    ->label('Open contact')
+                    ->url(function ($record) {
+                        return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
+
+                    })->icon('heroicon-s-credit-card')
+                    ->color('warning'),
 
                 Action::make('Detach')
                     ->label('Ontkoppel')
@@ -168,6 +190,7 @@ class ContactsRelationManager extends RelationManager
                     ->action(function (array $data, $record): void {
                         $record->delete();
                     }),
+
             ])
             ->bulkActions([
 

@@ -2,13 +2,11 @@
 namespace App\Models;
 
 use App\Enums\ActionTypes;
-use App\Mail\ActionToUser;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Mail;
 
 class Task extends Model
 {
@@ -56,16 +54,16 @@ class Task extends Model
 
         static::saved(function (self $request) {
 
-            //IF NOT DIRETY
-            if ($request->isDirty()) {
+            // IF NOT DIRETY
+            // if ($request->isDirty()) {
 
-                $user = User::where('id', $request->employee_id)->first();
+            //     $user = User::where('id', $request->employee_id)->first();
 
-                if ($user->id != Auth::id()) {
-                    Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
-                }
+            //     if ($user->id != Auth::id()) {
+            //         Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
+            //     }
 
-            }
+            // }
         });
 
     }

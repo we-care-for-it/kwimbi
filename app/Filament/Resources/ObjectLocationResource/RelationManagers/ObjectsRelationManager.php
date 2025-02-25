@@ -141,7 +141,9 @@ class ObjectsRelationManager extends RelationManager
                 ,
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Open object')->url(function (Object $record) {
+                Tables\Actions\EditAction::make()
+                    ->color('warning')
+                    ->label('Open object')->url(function (Object $record) {
                     return "/app/objects/" . $record->id . "";
 
                 })->icon('heroicon-c-link'),

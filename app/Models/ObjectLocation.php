@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class location
@@ -27,10 +29,10 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @package App
  * @mixin Builder
  */
-class ObjectLocation extends Model implements Auditable
+class ObjectLocation extends Model implements Auditable, HasMedia
 {
     use SoftDeletes;
-
+    use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
 
     // Validation rules for this model
@@ -118,6 +120,11 @@ class ObjectLocation extends Model implements Auditable
     public function projects()
     {
         return $this->hasMany(Project::class, 'location_id', 'id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location');
     }
 
     public function company(): BelongsTo

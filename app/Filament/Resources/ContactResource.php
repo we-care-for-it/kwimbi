@@ -16,16 +16,17 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon       = 'heroicon-o-user-group';
-    protected static ?string $navigationLabel      = "Contactpersonen";
-    protected static ?string $title                = "Contactpersonen";
-    protected static ?string $recordTitleAttribute = 'Contactpersoon';
-    protected static ?string $pluralModelLabel     = 'Contactpersonen';
+    protected static ?string $navigationIcon  = 'heroicon-o-user-group';
+    protected static ?string $navigationLabel = "Contactpersonen";
+    protected static ?string $title           = "Contactpersonen";
+
+    protected static ?string $pluralModelLabel = 'Contactpersonen';
 
     public static function form(Form $form): Form
     {
@@ -156,13 +157,6 @@ class ContactResource extends Resource
                     ->label("Intern Telefoonnummer")
                     ->placeholder("-"),
 
-                TextColumn::make('company.type.name')
-                    ->label('Categorie')
-                    ->badge()
-                    ->searchable()
-                    ->placeholder('-')
-                    ->toggleable()
-                    ->sortable(),
             ])
             ->filters([])
             ->headerActions([
