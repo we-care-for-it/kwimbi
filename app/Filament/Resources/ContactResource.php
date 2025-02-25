@@ -5,26 +5,17 @@ use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
-<<<<<<< Updated upstream
-=======
-use Filament\Tables\Actions\ViewAction;
-use Filament\Infolists\Infolist;
-use Filament\Infolists\Components;
-use Filament\Tables\Actions\Action;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 class ContactResource extends Resource
 {
@@ -130,13 +121,13 @@ class ContactResource extends Resource
                     ->label('Company'),
             ]);
     }
-    
+
     public static function table(Table $table): Table
     {
         return $table
-        ->recordUrl(
-            fn (Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
-        )
+            ->recordUrl(
+                fn(Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
+            )
             ->groups([
                 Group::make('company.name')
                     ->label('Bedrijf'),
@@ -179,21 +170,13 @@ class ContactResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                    ViewAction::make()->label('ddd'),
-=======
-=======
->>>>>>> Stashed changes
+
                     Action::make('view') // Custom action for row click
-                    ->icon('heroicon-o-eye')
-                    ->action(fn ($record) => static::infolist($record))
-                    ->modalHeading('Contact Details')
-                    ->modalContent(fn ($record) => static::infolist($record)),
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+                        ->icon('heroicon-o-eye')
+                        ->action(fn($record) => static::infolist($record))
+                        ->modalHeading('Contact Details')
+                        ->modalContent(fn($record) => static::infolist($record)),
+
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
