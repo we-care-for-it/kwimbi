@@ -14,6 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+use Filament\Tables\Actions\ViewAction;
 
 class ContactResource extends Resource
 {
@@ -145,6 +146,7 @@ class ContactResource extends Resource
             ])
             ->actions([
                 ActionGroup::make([
+                    ViewAction::make(),
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
                         ->modalIcon('heroicon-o-pencil')
