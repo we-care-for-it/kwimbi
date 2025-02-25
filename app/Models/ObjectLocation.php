@@ -122,7 +122,7 @@ class ObjectLocation extends Model implements Auditable
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'model_id', 'id');
+        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location');
     }
 
     public function company(): BelongsTo

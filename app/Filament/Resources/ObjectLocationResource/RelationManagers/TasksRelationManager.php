@@ -1,19 +1,17 @@
 <?php
-
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
-    protected static ?string $title = 'Taken';
+    protected static ?string $title       = 'Taken';
 
     public function form(Form $form): Form
     {
@@ -59,9 +57,11 @@ class TasksRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
-                        // Ensure the parent model's ID is set when creating a new task
-                        $data['model_id'] = $this->ownerRecord->id;
-                        $data['model'] = 'ObjectLocation'; // Adjust this to match your model name
+                        $data['model_id']   = $this->ownerRecord->id;
+                        $data['model']      = 'location';
+                        $data['model_id']   = $this->getOwnerRecord()->id;
+                        $data['company_id'] = Filament::getTenant()->id;
+
                         return $data;
                     }),
             ])
