@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('external', function (Blueprint $table) {
-            $table->foreignId('relation_id')->nullable()->constrained('relations');
+            //  $table->foreignId('relation_id')->nullable()->constrained('relations');
             $table->date('from_date')->nullable();
         });
 
         Schema::table('external_apilogs', function (Blueprint $table) {
-            $table->interger('external_id')->nullable();
+            $table->integer('external_id')->nullable();
             $table->date('from_date')->nullable();
         });
     }
