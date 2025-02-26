@@ -178,7 +178,6 @@ class ObjectLocationResource extends Resource
                                 ->searchable()
                                 ->label("Beheerder")
                                 ->preload()
-                                ->required()
                                 ->createOptionForm([
                                     Forms\Components\TextInput::make('name'),
                                 ])
@@ -515,7 +514,9 @@ class ObjectLocationResource extends Resource
     public static function getPages(): array
     {
         return
-            ["index" => Pages\ListObjectLocations::route("/"),
+            [
+            "index"  => Pages\ListObjectLocations::route("/"),
+            "create" => Pages\CreateObjectLocation::route("/create"),
             "view"   => Pages\ViewObjectLocation::route("/{record}")];
     }
 
