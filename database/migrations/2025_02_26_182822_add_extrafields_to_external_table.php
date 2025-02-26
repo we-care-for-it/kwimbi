@@ -17,7 +17,7 @@ return new class extends Migration
         });
 
         Schema::table('external_apilogs', function (Blueprint $table) {
-            $table->int('external_id')->nullable();
+            $table->interger('external_id')->nullable();
             $table->date('from_date')->nullable();
         });
     }
