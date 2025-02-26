@@ -11,25 +11,27 @@ use Filament\Tables\Table;
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
-    protected static ?string $title       = 'Taken';
+    protected static ?string $title = 'Taken';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label('Titel')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description'),
-                Forms\Components\TextInput::make('employee_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('make_by_employee_id')
-                    ->numeric(),
+                Forms\Components\Textarea::make('description')
+                    ->label('Beschrijving'),
                 Forms\Components\TextInput::make('priority')
+                    ->label('Prioriteit')
                     ->maxLength(255),
-                Forms\Components\DatePicker::make('deadline'),
-                Forms\Components\TimePicker::make('end_time'),
-                Forms\Components\TimePicker::make('begin_time'),
+                Forms\Components\DatePicker::make('deadline')
+                    ->label('Deadline'),
+                Forms\Components\TimePicker::make('end_time')
+                    ->label('Eindtijd'),
+                Forms\Components\TimePicker::make('begin_time')
+                    ->label('Starttijd'),
             ]);
     }
 
@@ -39,16 +41,22 @@ class TasksRelationManager extends RelationManager
             ->recordTitleAttribute('title')
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Titel')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
+                    ->label('Beschrijving')
                     ->limit(50),
-                Tables\Columns\TextColumn::make('priority'),
+                Tables\Columns\TextColumn::make('priority')
+                    ->label('Prioriteit'),
                 Tables\Columns\TextColumn::make('deadline')
+                    ->label('Deadline')
                     ->date(),
                 Tables\Columns\TextColumn::make('end_time')
+                    ->label('Eindtijd')
                     ->time(),
                 Tables\Columns\TextColumn::make('begin_time')
+                    ->label('Starttijd')
                     ->time(),
             ])
             ->filters([
@@ -56,6 +64,7 @@ class TasksRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->label('Taak toevoegen')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id']   = $this->ownerRecord->id;
                         $data['model']      = 'location';
@@ -66,12 +75,15 @@ class TasksRelationManager extends RelationManager
                     }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Bewerken'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Verwijderen'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Geselecteerde verwijderen'),
                 ]),
             ]);
     }
