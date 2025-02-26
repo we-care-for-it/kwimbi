@@ -26,9 +26,7 @@ class Relation extends Model
 
     protected static function booted(): void
     {
-
         static::addGlobalScope(function ($query) {
-
             $query->where('company_id', Filament::getTenant()->id);
         });
     }

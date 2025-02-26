@@ -5,9 +5,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
-
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Company extends Model
 {
@@ -52,11 +51,6 @@ class Company extends Model
         return $this->hasMany(Tools::class);
     }
 
-    public function objectLocations(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
-
     public function activities()
     {
         return $this->morphMany(Activity::class, 'causer'); // ✅ Corrected
@@ -75,6 +69,11 @@ class Company extends Model
     public function mailboxes()
     {
         return $this->hasMany(Mailbox::class);
+    }
+
+    public function elevators()
+    {
+        return $this->hasMany(Elevator::class);
     }
 
     public function getActivitylogOptions(): LogOptions

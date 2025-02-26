@@ -2,11 +2,14 @@
 namespace App\Models;
 
 use App\Enums\ElevatorStatus;
+use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class ManagementCompany
@@ -27,14 +30,17 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @package App
  * @mixin Builder
  */
-class Elevator extends Model implements Auditable
+class Elevator extends Model implements Auditable, HasMedia
 {
-    use SoftDeletes;
+
+    public $table = "elevators";
+    use InteractsWithMedia;
+    // use SoftDeletes;
     protected function casts(): array
     {
         return [
-            'status_id' => ElevatorStatus::class,
-            //   'current_inspection_status_id' => InspectionStatus::class,
+            'status_id'                    => ElevatorStatus::class,
+            'current_inspection_status_id' => InspectionStatus::class,
 
         ];
     }
@@ -75,9 +81,9 @@ class Elevator extends Model implements Auditable
         return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
     }
 
-    public function company()
+    public function company(): BelongsTo
     {
-        return $this->hasOne(Company::class, 'id', 'maintenance_company_id');
+        return $this->belongsTo(Company::class);
     }
 
     public function maintenance_company()
