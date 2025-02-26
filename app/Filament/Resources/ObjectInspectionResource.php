@@ -17,10 +17,12 @@ use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -254,6 +256,25 @@ class ObjectInspectionResource extends Resource
                     ->label("Plaats")
                     ->searchable()
                     ->hidden(true),
+
+                TextColumn::make("itemdata_count")
+                    ->counts("itemdata")
+                    ->label("Punten")
+                    ->toggleable()
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center)
+                    ->color("success"),
+
+                TextColumn::make("actions_count")
+                    ->counts("actions")
+                    ->label("Acties")
+                    ->toggleable()
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center)
+                    ->color("success"),
+
                 Tables\Columns\TextColumn::make("address")
                     ->label("Adres")
                     ->searchable()

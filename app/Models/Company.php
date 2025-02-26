@@ -76,6 +76,11 @@ class Company extends Model
         return $this->hasMany(Elevator::class);
     }
 
+    public function externalConnection()
+    {
+        return $this->hasMany(ExternalConnection::class);
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
