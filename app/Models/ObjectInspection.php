@@ -4,7 +4,9 @@ namespace App\Models;
 use App\Enums\InspectionStatus;
 use App\Models\Elevator;
 use DB;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ObjectInspection extends Model
@@ -18,6 +20,13 @@ class ObjectInspection extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope(function ($query) {
+            $query->where('company_id', Filament::getTenant()->id);
+        });
+    }
+
     public function elevator()
     {
         return $this->belongsTo(Elevator::class, 'elevator_id', 'id');
@@ -25,22 +34,26 @@ class ObjectInspection extends Model
 
     public function itemdata()
     {
-        return $this->hasMany(ObjectInspectionData::class, 'inspection_id', 'id');
+        return $this->hasMany(ObjectInspectionData::class, 'inspection_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function actions()
     {
-        return $this->hasMany(systemAction::class, 'item_id', 'id')->where('model', 'ObjectInspection');
+        return $this->hasMany(systemAction::class, 'item_id', 'id')->where('model', 'ObjectInspection')->where('company_id', Filament::getTenant()->id);
     }
 
     public function inspectioncompany()
     {
-        return $this->belongsTo(Company::class, 'inspection_company_id', 'id')->withTrashed();
+        return $this->belongsTo(Relation::class, 'inspection_company_id', 'id')->withTrashed();
     }
 
     protected static function boot(): void
     {
         parent::boot();
+
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
 
         static::saved(function (self $request) {
 
@@ -58,7 +71,10 @@ class ObjectInspection extends Model
         });
 
     }
-
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(ObjectInspection::class);
+    }
     //     static::saved(function (self $request) {
 
     //         $elevators = Elevator::query()
