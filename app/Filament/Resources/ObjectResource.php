@@ -87,9 +87,6 @@ class ObjectResource extends Resource
                 Select::make("status_id")
                     ->label("Status")
                     ->options(ElevatorStatus::class),
-                Select::make("status_id")
-                    ->label("Status")
-                    ->options(ElevatorStatus::class),
 
                 Select::make("supplier_id")
                     ->label("Leverancier")
@@ -442,6 +439,7 @@ class ObjectResource extends Resource
                 ->schema([
                     SpatieMediaLibraryImageEntry::make('objectimage')
                         ->hiddenLabel()
+                        ->placeholder('Geen afbeeldingen')
                         ->height(200)
                         ->ring(5)
                         ->collection('objectimages')])->collapsible()

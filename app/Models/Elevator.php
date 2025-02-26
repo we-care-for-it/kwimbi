@@ -2,11 +2,12 @@
 namespace App\Models;
 
 use App\Enums\ElevatorStatus;
-use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -35,12 +36,11 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public $table = "elevators";
     use InteractsWithMedia;
-    // use SoftDeletes;
+    use SoftDeletes;
     protected function casts(): array
     {
         return [
-            'status_id'                    => ElevatorStatus::class,
-            'current_inspection_status_id' => InspectionStatus::class,
+            'status_id' => ElevatorStatus::class,
 
         ];
     }
@@ -103,12 +103,22 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id');
+        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function inspection()
     {
         return $this->hasOne(ObjectInspection::class, 'id', 'elevator_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
+
     }
 
     public function features()
@@ -123,12 +133,12 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function uploads()
     {
-        return $this->hasMany(Upload::class, 'item_id', 'id');
+        return $this->hasMany(Upload::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function incidents()
     {
-        return $this->hasMany(ObjectIncident::class);
+        return $this->hasMany(ObjectIncident::class)->where('company_id', Filament::getTenant()->id);
     }
 
     public function incident_stand_still()
@@ -143,11 +153,11 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function maintenance_contracts()
     {
-        return $this->hasMany(ObjectMaintenanceContract::class);
+        return $this->hasMany(ObjectMaintenanceContract::class)->where('company_id', Filament::getTenant()->id);
     }
 
     public function maintenance_visits()
     {
-        return $this->hasMany(ObjectMaintenanceVisits::class);
+        return $this->hasMany(ObjectMaintenanceVisits::class)->where('company_id', Filament::getTenant()->id);
     }
 }

@@ -2,7 +2,8 @@
 namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
 use App\Enums\InspectionStatus;
-use App\Models\Company;
+use App\Models\Relation;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -58,7 +59,7 @@ class InspectionsRelationManager extends RelationManager
             Select::make("inspection_company_id")
                 ->label("Keuringsinstantie")
                 ->required()
-                ->options(Company::where('type_id', 3)->pluck("name", "id")),
+                ->options(Relation::where('type_id', 3)->pluck("name", "id")),
 
             Grid::make(2)->schema([
                 FileUpload::make("document")
@@ -238,7 +239,7 @@ class InspectionsRelationManager extends RelationManager
             ])
 
             ->recordUrl(function ($record) {
-                return "/app/object-inspections/" . $record->id;
+                return "/" . Filament::getTenant()->id . "/object-inspections/" . $record->id;
             })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

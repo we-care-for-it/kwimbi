@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
- 
 
-class Upload extends Model  implements Auditable
+class Upload extends Model implements Auditable
 {
     use HasFactory;
     use \OwenIt\Auditing\Auditable;
@@ -21,14 +20,21 @@ class Upload extends Model  implements Auditable
         'type_id',
         'path',
         'group_id',
-        'title'
+        'title',
     ];
 
-
-    public function type(){
-        return $this->hasOne(uploadType::class,'id','upload_type_id');
+    public function type()
+    {
+        return $this->hasOne(uploadType::class, 'id', 'upload_type_id');
     }
 
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
 
+    }
 
 }
