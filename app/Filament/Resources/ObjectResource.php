@@ -184,7 +184,7 @@ class ObjectResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make("current_inspection_status_id")
-                    ->label("Keuring Status")
+                    ->label("KeuringStatus")
                     ->placeholder('-')
                     ->badge(),
 

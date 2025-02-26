@@ -394,7 +394,9 @@ class ObjectLocationResource extends Resource
                     ->sortable()
                     ->badge()
                     ->alignment(Alignment::Center)
-                    ->color("success"), TextColumn::make("notes_count")
+                    ->color("success"),
+
+                TextColumn::make("notes_count")
                     ->toggleable()
                     ->counts("notes")
                     ->label("Notites")

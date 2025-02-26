@@ -16,15 +16,16 @@ class ObjectInspection extends Model
     protected function casts(): array
     {
         return [
-            'status_id' => InspectionStatus::class,
+            'status_id'        => InspectionStatus::class,
+            'latestInspection' => InspectionStatus::class,
         ];
     }
 
     protected static function booted(): void
     {
-        static::addGlobalScope(function ($query) {
-            $query->where('company_id', Filament::getTenant()->id);
-        });
+        // static::addGlobalScope(function ($query) {
+        //     $query->where('company_id', Filament::getTenant()->id);
+        // });
     }
 
     public function elevator()
@@ -52,7 +53,7 @@ class ObjectInspection extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            //     $model->company_id = Filament::getTenant()->id;
         });
 
         static::saved(function (self $request) {
