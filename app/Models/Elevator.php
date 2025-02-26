@@ -111,6 +111,16 @@ class Elevator extends Model implements Auditable, HasMedia
         return $this->hasOne(ObjectInspection::class, 'id', 'elevator_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
     }
 
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $model->company_id = Filament::getTenant()->id;
+        });
+
+    }
+
     public function features()
     {
         return $this->hasMany(ObjectFeatures::class, 'object_id', 'id');

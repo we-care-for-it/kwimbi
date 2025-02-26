@@ -162,7 +162,8 @@ class ObjectsRelationManager extends RelationManager
 //                    Tables\Actions\DeleteBulkAction::make(),
 //                ]),
             ])->recordUrl(function (object $record) {
-            return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
+            return "/" . Filament::getTenant()->id . "/objects/" . $record->id;
+
         });
     }
 }
