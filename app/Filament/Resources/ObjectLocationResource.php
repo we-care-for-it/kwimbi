@@ -103,11 +103,6 @@ class ObjectLocationResource extends Resource
                         return "/" . Filament::getTenant()->id . "/relations/" . $record->management_id . "";
                     }),
 
-                // SpatieMediaLibraryImageEntry::make('images')
-                //     ->label('Afbeelding')
-
-                //     ->collection('images'),
-
             ]),
 
         ]),
@@ -118,6 +113,7 @@ class ObjectLocationResource extends Resource
                         ->hiddenLabel()
                         ->height(200)
                         ->ring(5)
+                        ->placeholder('Geen afbeeldingen')
                         ->collection('buildingimages')])->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed(),
@@ -282,7 +278,8 @@ class ObjectLocationResource extends Resource
                 ])
                 ->collapsible()
                 ->collapsed(false)
-                ->persistCollapsed()->columns(1),
+                ->persistCollapsed()
+                ->columns(1),
 
             Forms\Components\Section::make("Gebouwgegevens")
                 ->schema([Forms\Components\Grid::make(2)
