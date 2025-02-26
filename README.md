@@ -26,3 +26,8 @@ Status
 ##Elevator statussen 
 AFDGEKEURD 
 BUITEN BEDRIJ
+
+
+API
+
+php artisan make:filament-api-service BlogResource

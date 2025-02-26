@@ -83,12 +83,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function managementcompany()
     {
-        return $this->hasOne(Relation::class, 'id', 'management_id');
+        return $this->hasOne(Relation::class, 'id', 'management_id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id');
+        return $this->hasMany(Elevator::class, 'address_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function objects_same_complex()
@@ -105,12 +105,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation');
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation')->where('company_id', Filament::getTenant()->id);
     }
 
     public function contacts()
     {
-        return $this->hasMany(Contact::class, 'location_id', 'id');
+        return $this->hasMany(Contact::class, 'location_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
     public function contactsObject()
     {
@@ -119,12 +119,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function projects()
     {
-        return $this->hasMany(Project::class, 'location_id', 'id');
+        return $this->hasMany(Project::class, 'location_id', 'id')->where('company_id', Filament::getTenant()->id);
     }
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location');
+        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location')->where('company_id', Filament::getTenant()->id);
     }
 
     public function company(): BelongsTo
