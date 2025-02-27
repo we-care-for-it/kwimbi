@@ -41,7 +41,7 @@ class ExternalTokenRelationManager extends RelationManager
                             '302' => 'Google Geo',
                             '302' => 'GAB Register',
                         ],
-                        'Voortuigen'                => [
+                        'Voertuigen'                => [
                             '401' => 'RDW',
                         ],
                     ])

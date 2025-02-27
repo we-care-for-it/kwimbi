@@ -15,7 +15,7 @@ class ListVehicles extends ListRecords
             Actions\CreateAction::make()
                 ->label('Voertuig toevoegen')
                 ->slideOver()
-                ->modalHeading('Voortuig toevoegen')
+                ->modalHeading('Voertuig toevoegen')
                 ->modalDescription('Vul een kenteken in om de gegevens op te halen')
                 ->modalSubmitActionLabel('Opslaan'),
         ];

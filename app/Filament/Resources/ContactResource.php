@@ -2,6 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
+use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -187,12 +188,23 @@ class ContactResource extends Resource
             ->emptyState(view('partials.empty-state'));
     }
 
+    
+    public static function getRelations(): array
+    {
+        return [
+
+            RelationManagers\RelationRelationManager::class,
+
+        ];
+    }
+
+
     public static function getPages(): array
     {
         return [
             'view'   => Pages\ViewContact::route('/{record}'), // Ensure this is defined
             'index'  => Pages\ListContacts::route('/'),
-            'create' => Pages\CreateContact::route('/create'),
+            // 'create' => Pages\CreateContact::route('/create'),
             'edit'   => Pages\EditContact::route('/{record}/edit'),
         ];
     }
