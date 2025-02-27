@@ -18,6 +18,7 @@ class ListObjectLocations extends ListRecords
                 ->modalHeading('Locatie toevoegen')
                 ->modalDescription('Voeg een nieuwe locatie toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
+                ->slideOver()
                 ->label('Locatie toevoegen'),
         ];
     }
