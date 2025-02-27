@@ -5,16 +5,17 @@ use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
 use App\Services\RDWService;
+use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
@@ -23,11 +24,8 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Tables\Table;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Table;
 
 class VehicleResource extends Resource
 {
@@ -76,6 +74,17 @@ class VehicleResource extends Resource
                         ->hiddenLabel()
                         ->placeholder("Niet opgegeven"),
                 ]),
+
+            Section::make('Afbeeldingen')
+                ->schema([
+                    SpatieMediaLibraryImageEntry::make('vehicleimage')
+                        ->hiddenLabel()
+                        ->height(200)
+                        ->ring(5)
+                        ->placeholder('Geen afbeeldingen')
+                        ->collection('vehicleimages')])->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed(),
 
             Tabs::make('Tabs')->tabs([
                 Tabs\Tab::make('Algemeen')
@@ -148,6 +157,7 @@ class VehicleResource extends Resource
                         TextEntry::make('title')->placeholder('-'),
                     ]),
             ]),
+
         ]);
     }
 
@@ -218,29 +228,25 @@ class VehicleResource extends Resource
 
                         TextInput::make("vervaldatum_apk")
                             ->label("Vervaldatum APK"),
-                            
-                        Forms\Components\Section::make("Afbeeldingen")
-                            ->description('Afbeeldingen van het gebouw')
-                            ->compact()
-                            ->schema([
-            
-                                SpatieMediaLibraryFileUpload::make('buildingimage')
-                                    ->responsiveImages()
-                                    ->image()
-                                    ->hiddenlabel()
-                                    ->panelLayout('grid')
-                                    ->maxFiles(8)
-                                    ->label('Afbeeldingen')
-                                    ->multiple()
-                                    ->collection('buildingimages'),
-            
-                            ])
-                            ->collapsible()
-                            ->collapsed(false)
-                            ->persistCollapsed()
-                            ->columns(1),
+
                     ]),
-                    
+
+                Forms\Components\Section::make()
+
+                    ->description('Afbeeldingen van het voertuig')
+                    ->compact()
+                    ->schema([
+
+                        SpatieMediaLibraryFileUpload::make('vehicleimage')
+                            ->responsiveImages()
+                            ->image()
+                            ->hiddenlabel()
+                            ->panelLayout('grid')
+                            ->maxFiles(8)
+                            ->label('Afbeeldingen')
+                            ->multiple()
+                            ->collection('vehicleimages'),
+                    ]),
             ]);
 
     }
@@ -256,15 +262,19 @@ class VehicleResource extends Resource
                 //     ->getStateUsing(function ($record): ?string {
                 //         return sprintf('%06d', $record?->id);
                 //     }),
-                ImageColumn::make('attachments')
-                    ->label('Afbeelding')
-                    ->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('kenteken')
                     ->sortable()
                     ->toggleable()
                     ->placeholder('-')
                     ->label('Kenteken'),
+
+                SpatieMediaLibraryImageColumn::make('vehicleimage')
+                    ->label('Afbeelding')
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->limit(2)
+                    ->collection('vehicleimages'),
 
                 Tables\Columns\TextColumn::make('merk')
                     ->sortable()

@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Vehicle extends Model implements Auditable
+class Vehicle extends Model implements Auditable, HasMedia
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-
+    use InteractsWithMedia;
     protected $fillable = [
         'kenteken',
         'gps_object_id',
