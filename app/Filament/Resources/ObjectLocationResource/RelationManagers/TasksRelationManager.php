@@ -38,6 +38,7 @@ class TasksRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->emptyState(view('partials.empty-state'))
             ->recordTitleAttribute('title')
             ->columns([
                 Tables\Columns\TextColumn::make('title')

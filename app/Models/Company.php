@@ -76,6 +76,11 @@ class Company extends Model
         return $this->hasMany(Elevator::class);
     }
 
+    public function objectLocations()
+    {
+        return $this->hasMany(ObjectLocation::class);
+    }
+
     public function externalConnection()
     {
         return $this->hasMany(ExternalConnection::class);
