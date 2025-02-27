@@ -2,17 +2,19 @@
 namespace App\Filament\Resources\VehicleResource\Pages;
 
 use App\Filament\Resources\VehicleResource;
+use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewVehicle extends ViewRecord
 {
     protected static string $resource = VehicleResource::class;
 
-    // public static function getWidgets(): array
-    // {
-    //     return [
-    //         VehicleResource\Widgets\TrackFrame::class,
-    //     ];
-    // }
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\EditAction::make()->label('Wijzigen')->slideOver(),
+            Actions\DeleteAction::make(),
+        ];
+    }
 
 }

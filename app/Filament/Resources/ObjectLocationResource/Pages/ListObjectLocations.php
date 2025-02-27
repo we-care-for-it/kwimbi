@@ -6,6 +6,7 @@ use App\Filament\Resources\ObjectLocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+
 class ListObjectLocations extends ListRecords
 {
     protected static string $resource = ObjectLocationResource::class;
@@ -18,6 +19,7 @@ class ListObjectLocations extends ListRecords
                 ->modalHeading('Locatie toevoegen')
                 ->modalDescription('Voeg een nieuwe locatie toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
+                ->slideOver()
                 ->label('Locatie toevoegen'),
         ];
     }

@@ -515,7 +515,7 @@ class ObjectLocationResource extends Resource
         return
             [
             "index"  => Pages\ListObjectLocations::route("/"),
-            "create" => Pages\CreateObjectLocation::route("/create"),
+            // "create" => Pages\CreateObjectLocation::route("/create"),
             "view"   => Pages\ViewObjectLocation::route("/{record}")];
     }
 

@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Relation;
 use App\Models\Task;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -66,7 +67,7 @@ class TaskResource extends Resource
                     ->label('Koppel aan'),
 
                 Select::make('model_id')
-                    ->options(Relation::where('type_id', 5)->pluck('name', 'id'))
+                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
@@ -82,7 +83,7 @@ class TaskResource extends Resource
                     ->label('Project'),
 
                 Select::make('model_id')
-                    ->options(Contact::pluck('first_name', 'id'))
+                    ->options(Contact::where('company_id', Filament::getTenant()->id)->pluck('first_name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'contactperson' ?? false;
@@ -98,7 +99,7 @@ class TaskResource extends Resource
                 //     ->label('Object'),
 
                 Select::make('model_id')
-                    ->options(ObjectLocation::pluck('name', 'id'))
+                    ->options(ObjectLocation::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'location' ?? false;

@@ -105,7 +105,7 @@ class Task extends Model
 
     public function relations()
     {
-        return $this->belongsTo(Relation::class);
+        return $this->belongsTo(Relation::class)->where('company_id', Filament::getTenant()->id);
     }
 
 }
