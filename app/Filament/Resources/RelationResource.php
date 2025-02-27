@@ -203,6 +203,7 @@ class RelationResource extends Resource
     {
         return [
             RelationManagers\ContactsRelationManager::class,
+            RelationManagers\TasksRelationManager::class,
             //    RelationManagers\LocationsRelationManager::class
         ];
     }
