@@ -25,6 +25,9 @@ use Filament\Tables;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 
 class VehicleResource extends Resource
 {
@@ -190,8 +193,8 @@ class VehicleResource extends Resource
                 Grid::make(3)
                     ->schema([
 
-                        FileUpload::make('attachments')
-                            ->directory('vehicles'),
+                        // FileUpload::make('attachments')
+                        //     ->directory('vehicles'),
 
                         TextInput::make("voertuigsoort")
                             ->label("Voertuigsoort"),
@@ -215,13 +218,29 @@ class VehicleResource extends Resource
 
                         TextInput::make("vervaldatum_apk")
                             ->label("Vervaldatum APK"),
-
-                        Select::make('gps_object_id')
-                            ->label('GPS Tracker')
-                            ->relationship('GPSObjectsForThisTenant', 'imei'),
-
+                            
+                        Forms\Components\Section::make("Afbeeldingen")
+                            ->description('Afbeeldingen van het gebouw')
+                            ->compact()
+                            ->schema([
+            
+                                SpatieMediaLibraryFileUpload::make('buildingimage')
+                                    ->responsiveImages()
+                                    ->image()
+                                    ->hiddenlabel()
+                                    ->panelLayout('grid')
+                                    ->maxFiles(8)
+                                    ->label('Afbeeldingen')
+                                    ->multiple()
+                                    ->collection('buildingimages'),
+            
+                            ])
+                            ->collapsible()
+                            ->collapsed(false)
+                            ->persistCollapsed()
+                            ->columns(1),
                     ]),
-
+                    
             ]);
 
     }

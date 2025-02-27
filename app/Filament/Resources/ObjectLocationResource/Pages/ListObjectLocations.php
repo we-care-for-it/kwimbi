@@ -6,6 +6,7 @@ use App\Filament\Resources\ObjectLocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+
 class ListObjectLocations extends ListRecords
 {
     protected static string $resource = ObjectLocationResource::class;
