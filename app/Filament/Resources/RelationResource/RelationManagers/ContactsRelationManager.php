@@ -146,7 +146,7 @@ class ContactsRelationManager extends RelationManager
                         TileSelect::make('contact_id')
                             ->searchable(['first_name', 'last_name', 'email'])
                             ->model(Contact::class)
-                            ->titleKey('first_name')
+                            ->titleKey('name')
                             ->imageKey('avatar')
                             ->descriptionKey('email')
                             ->label('Contactname')

@@ -9,6 +9,7 @@ use App\Models\ObjectInspectionData;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use DB;
 
 class ImportChex extends Command
 {
@@ -18,7 +19,7 @@ class ImportChex extends Command
     public function handle()
     {
 
-        $importsdata = externalConnection::where('is_active', 1)->get();
+        $importsdata = DB::table('external')->where('is_active', 1)->get();
 
         foreach ($importsdata as $data) {
 
@@ -56,7 +57,7 @@ class ImportChex extends Command
                         $item->objectId
                     )->first();
 
-                    $inspection_data_from_db = ObjectInspection::updateOrCreate(
+                    $inspection_insert = DB::table('object_inspections')->updateOrInsert(
                         ["external_uuid" => $item->inspectionId],
 
                         [
@@ -74,6 +75,20 @@ class ImportChex extends Command
                         ]
                     );
 
+
+                    $inspection_data_from_db =     DB::table('object_inspections')
+                    ->where('status_id',$status_id)
+                    ->where('nobo_number',$item->objectId)
+                    ->where('elevator_id',$elevator_information?->id)
+                    ->where('schedule_run_token',$schedule_run_token)
+                   
+
+    ->first();
+
+
+                    //get last info 
+                    
+
                     $url = config("services.chex.url") . "/inspections/" . $item->inspectionId;
 
                     $response = Http::withoutVerifying()->withHeaders([
@@ -81,7 +96,7 @@ class ImportChex extends Command
                     ])->get($url);
 
                     $records       = json_decode($response->getBody())->result;
-                    $inspection_id = ObjectInspection::where(
+                    $inspection_id = DB::table('object_inspections')->where(
                         "external_uuid",
                         $item->inspectionId
                     )->update([
@@ -91,18 +106,18 @@ class ImportChex extends Command
 
                     //Check of of er goedgekeurd is met acties
                     if ($records->comments && $status_id == 1) {
-                        ObjectInspection::where('external_uuid', $item->inspectionId)->update(['status_id' => 2]);
+                        DB::table('object_inspections')->where('external_uuid', $item->inspectionId)->update(['status_id' => 2]);
                     }
 
                     foreach ($records->comments as $item) {
                         if ($item->status == "Herhaling") {
-                            ObjectInspection::where(
+                            DB::table('object_inspections')->where(
                                 "external_uuid",
                                 $inspection_data_from_db->external_uuid
                             )->update(["status_id" => 6]);
                         }
 
-                        ObjectInspectionData::updateOrCreate(
+                        DB::table('object_inspection_data')->updateOrInsert(
                             [
                                 "inspection_id" => $inspection_data_from_db->id,
                                 "zin_code"      => $item->code,
@@ -127,11 +142,11 @@ class ImportChex extends Command
 
             }
 
-            externalConnection::where('id', $data->id)->update([
+            DB::table('external')->where('id', $data->id)->update([
                 'from_date' => date('Y-m-d'),
             ]);
 
-            ExternalApiLog::Create(
+            ExternalApiLog::insert(
                 [
                     "model"              => "ObjectInspection",
                     "logitem"            => $logitem,

@@ -38,7 +38,7 @@ class AdminPanelProvider extends PanelProvider
 ->plugins([
     ApiServicePlugin::make()
 ])
-
+->plugin(\Mvenghaus\FilamentScheduleMonitor\FilamentPlugin::make())
             ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')

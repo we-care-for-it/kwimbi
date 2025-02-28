@@ -6,6 +6,7 @@ use App\Models\ObjectInspection;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
+use Filament\Facades\Filament;
 
 class InspectionsChart extends ChartWidget
 {
@@ -19,7 +20,7 @@ class InspectionsChart extends ChartWidget
     protected function getData(): array
     {
 
-        $data = Trend::query(ObjectInspection::where('status_id', InspectionStatus::REJECTED))
+        $dataRejected = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::REJECTED))
 
             ->dateColumn('end_date')
             ->between(
@@ -29,7 +30,7 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $dataRejected = Trend::query(ObjectInspection::where('status_id', InspectionStatus::APPROVED)
+        $dataApproved = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::APPROVED)
         )
 
             ->dateColumn('end_date')
@@ -40,7 +41,7 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $dataApprovedRepeat = Trend::query(ObjectInspection::where('status_id', InspectionStatus::APPROVED_REPEAT)
+        $dataApprovedRepeat = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::APPROVED_REPEAT)
         )
 
             ->dateColumn('end_date')
@@ -65,7 +66,7 @@ class InspectionsChart extends ChartWidget
                     'label'           => ' Goedgekeurd',
                     'backgroundColor' => 'rgb(133, 202, 143)',
                     'borderColor'     => 'rgb(135, 184, 142)',
-                    'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),
+                    'data'            => $dataApproved->map(fn(TrendValue $value) => round($value->aggregate)),
                 ],
 
                 [
@@ -76,7 +77,7 @@ class InspectionsChart extends ChartWidget
                 ],
 
             ],
-            'labels'   => $data->map(fn(TrendValue $value) => date('m', strtotime($value->date))),
+            'labels'   => $dataApproved->map(fn(TrendValue $value) => date('m', strtotime($value->date))),
 
         ];
     }

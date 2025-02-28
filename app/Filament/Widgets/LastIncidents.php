@@ -6,7 +6,7 @@ use App\Models\ObjectIncident;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-
+use Filament\Facades\Filament;
 class LastIncidents extends BaseWidget
 {
 
@@ -42,9 +42,8 @@ class LastIncidents extends BaseWidget
                     ->badge(),
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (ObjectIncident $record) {
-                return "admin/objects/" .
-                $record->elevator_id .
-                    "?activeRelationManager=1";
+                return "/" . Filament::getTenant()->id . "/objects/" . $record->id."?activeRelationManager=1";
+      
             })
             ->paginated(false);
     }

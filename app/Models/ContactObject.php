@@ -14,6 +14,11 @@ class ContactObject extends Model
         return $this->hasOne(Contact::class, 'id', 'contact_id');
     }
 
+    public function relation()
+    {
+        return $this->hasOne(Relation::class, 'id', 'model_id');
+    }
+
     public function models()
     {
         return $this->hasOne(Relation::class, 'id', 'model_id');

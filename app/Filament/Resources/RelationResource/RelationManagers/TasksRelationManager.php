@@ -24,9 +24,7 @@ class TasksRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->label('Beschrijving'),
-                Forms\Components\TextInput::make('priority')
-                    ->label('Prioriteit')
-                    ->maxLength(255),
+  
                 Forms\Components\DatePicker::make('deadline')
                     ->label('Deadline'),
                 Forms\Components\TimePicker::make('end_time')
@@ -45,21 +43,25 @@ class TasksRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
                     ->searchable()
+                    ->placeholder('-')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Beschrijving')
+                    ->placeholder('-')
                     ->limit(50),
-                Tables\Columns\TextColumn::make('priority')
-                    ->label('Prioriteit'),
-                Tables\Columns\TextColumn::make('deadline')
+                 Tables\Columns\TextColumn::make('deadline')
                     ->label('Deadline')
+                    ->placeholder('-')
                     ->date(),
-                Tables\Columns\TextColumn::make('end_time')
-                    ->label('Eindtijd')
-                    ->time(),
                 Tables\Columns\TextColumn::make('begin_time')
                     ->label('Starttijd')
+                    ->placeholder('-')
                     ->time(),
+                Tables\Columns\TextColumn::make('end_time')
+                    ->placeholder('-')
+                    ->label('Eindtijd')
+                    ->time(),
+         
             ])
             ->filters([
                 //
@@ -78,9 +80,9 @@ class TasksRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->label('Bewerken'),
+                    ->label('Bewerken')->color('success'),
                 Tables\Actions\DeleteAction::make()
-                    ->label('Verwijderen'),
+                    ->label('Voltooi taak'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

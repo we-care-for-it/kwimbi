@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\ElevatorStatus;
+use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,6 +42,7 @@ class Elevator extends Model implements Auditable, HasMedia
     {
         return [
             'status_id' => ElevatorStatus::class,
+            'current_inspection_status_id' => InspectionStatus::class,
 
         ];
     }
@@ -53,7 +55,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function latestInspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'elevator_id')->latest('end_date');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id')->where('company_id', Filament::getTenant()->id)->latest('end_date');
     }
 
     public function location()
@@ -103,7 +105,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id)->orderby('end_date','desc');
     }
 
     public function inspection()
