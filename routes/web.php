@@ -18,4 +18,4 @@
 
 use App\Http\Controllers\webhook\Mailersend;
 
-Route::post('/webhook/mailersend', [Mailersend::class, 'handle']);
+Route::middleware('apilogger')->post('/webhook/mailersend', [Mailersend::class, 'handle']);

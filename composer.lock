@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6775ef46a6707d7bbf209e5e5173ce35",
+    "content-hash": "2b1e7a077690e808b396e9bbd8fea591",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -71,6 +71,55 @@
                 "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.29"
             },
             "time": "2025-02-25T05:18:46+00:00"
+        },
+        {
+            "name": "awt/apilogger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aungwinthant/apilogger.git",
+                "reference": "558119656dccd34220edc82f22a57ff56de495f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aungwinthant/apilogger/zipball/558119656dccd34220edc82f22a57ff56de495f5",
+                "reference": "558119656dccd34220edc82f22a57ff56de495f5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-libxml": "*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AWT\\Providers\\ApiLogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AWT\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aung win thant",
+                    "email": "agwinthant@gmail.com"
+                }
+            ],
+            "description": "Small laravel package for viewing api logs which can be used in debugging.",
+            "support": {
+                "issues": "https://github.com/aungwinthant/apilogger/issues",
+                "source": "https://github.com/aungwinthant/apilogger/tree/master"
+            },
+            "time": "2022-10-02T08:13:48+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -15521,7 +15570,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "awt/apilogger": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
