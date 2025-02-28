@@ -11,12 +11,12 @@ class Mailersend extends Controller
         //Token from mailsender webhook configurations
         $token = $request->bearerToken();
 
-        if ($token == 'mHrLWwv2JlyYEQJy8xer6qVfErkdYSSU') {
-            return response()->json(['success' => true]);
-        } else {
-            http_response_code(403);
-            die('Forbidden');
-        }
+        //   if ($token == 'mHrLWwv2JlyYEQJy8xer6qVfErkdYSSU') {
         return response()->json(['success' => true]);
+        //   } else {
+        //     http_response_code(403);
+        //      die('Forbidden');
+        //   }
+
     }
 }
