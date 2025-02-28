@@ -24,7 +24,7 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-
+use LaraZeus\Tiles\Forms\Components\TileSelect;
 class TaskResource extends Resource
 {
     protected static ?string $model            = Task::class;
@@ -65,14 +65,15 @@ class TaskResource extends Resource
                     ->searchable()
                     ->live()
                     ->label('Koppel aan'),
-
-                Select::make('model_id')
+                    Select::make('model_id')
+                    ->label('Relatie')
                     ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
-                    })
-                    ->label('Relatie'),
+                    }),
+
+ 
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))

@@ -7,6 +7,8 @@ use DB;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
+use Filament\Facades\Filament;
+
 
 class ExpiredChecks extends BaseWidget
 {
@@ -35,8 +37,8 @@ class ExpiredChecks extends BaseWidget
 
                 Tables\Columns\TextColumn::make("location")
                     ->getStateUsing(function (Elevator $record): ?string {
-                        if ($record?->location->name) {
-                            return $record?->location->name;
+                        if ($record?->location?->name) {
+                            return $record?->location?->name;
                         } else {
                             return $record->location->address .
                             " - " .
@@ -47,8 +49,8 @@ class ExpiredChecks extends BaseWidget
                     })
                     ->label("Locatie")
                     ->description(function (Elevator $record) {
-                        if (! $record?->location->name) {
-                            return $record?->location->name;
+                        if (! $record?->location?->name) {
+                            return $record?->location?->name;
                         } else {
                             return $record->location->address .
                             " - " .
@@ -57,22 +59,11 @@ class ExpiredChecks extends BaseWidget
                             $record->location->place;
                         }
                     }),
-
-                // Tables\Columns\TextColumn::make("latestInspection.status_id")
-                //     ->label("Status")
-                //     ->badge()
-                //     ->sortable()
-                // ,
-
                 Tables\Columns\TextColumn::make("latestInspection.end_date")
                     ->label("Verlopen op")
                     ->dateTime("d-m-Y"),
 
-                // Tables\Columns\TextColumn::make("name")
-                //     ->label("Naam")
-                //     ->sortable()
-                //     ->placeholder('-'),
-
+             
                 Tables\Columns\TextColumn::make("location.customer.name")
                     ->label("Relatie")->Url(function (object $record) {
                     return "/admin/customers/" . $record->customer_id . "";
@@ -82,8 +73,9 @@ class ExpiredChecks extends BaseWidget
 
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
-                return "admin/objects/" .
-                $record->id;
+           
+                return "/" . Filament::getTenant()->id . "/objects/" . $record->id;
+             
             })
             ->paginated(false);
 

@@ -5,7 +5,7 @@ use App\Models\ObjectInspection;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
-
+use Filament\Facades\Filament;
 class ExpiredInspections extends ChartWidget
 {
     protected static ?string $heading = 'Verlopen keuringen';
@@ -18,7 +18,7 @@ class ExpiredInspections extends ChartWidget
     protected function getData(): array
     {
 
-        $data = Trend::query(ObjectInspection::where('deleted_at', null))
+        $data = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('deleted_at', null))
 
             ->dateColumn('end_date')
             ->between(
@@ -54,7 +54,7 @@ class ExpiredInspections extends ChartWidget
             'datasets' => [
 
                 [
-                    'label'           => 'Afgekeurd',
+                    'label'           => 'Verlopen',
                     'backgroundColor' => 'rgb(249, 183, 196)',
                     'borderColor'     => 'rgb(249, 161, 178)',
                     'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),
