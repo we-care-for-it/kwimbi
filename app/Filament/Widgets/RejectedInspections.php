@@ -29,8 +29,8 @@ class RejectedInspections extends BaseWidget
 
                 Tables\Columns\TextColumn::make("location")
                     ->getStateUsing(function (Elevator $record): ?string {
-                        if ($record?->location->name) {
-                            return $record?->location->name;
+                        if ($record?->location?->name) {
+                            return $record?->location?->name;
                         } else {
                             return $record->location->address .
                             " - " .
@@ -41,8 +41,8 @@ class RejectedInspections extends BaseWidget
                     })
                     ->label("Locatie")
                     ->description(function (Elevator $record) {
-                        if (! $record?->location->name) {
-                            return $record?->location->name;
+                        if (! $record?->location?->name) {
+                            return $record?->location?->name;
                         } else {
                             return $record->location->address .
                             " - " .

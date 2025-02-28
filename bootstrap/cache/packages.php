@@ -422,6 +422,13 @@
       0 => 'Spatie\\QueryBuilder\\QueryBuilderServiceProvider',
     ),
   ),
+  'spatie/laravel-schedule-monitor' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\ScheduleMonitor\\ScheduleMonitorServiceProvider',
+    ),
+  ),
   'spatie/laravel-settings' => 
   array (
     'providers' => 
