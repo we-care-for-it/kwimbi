@@ -18,4 +18,4 @@
 
 use App\Http\Controllers\webhook\Mailersend;
 
-Route::get('/webhook/mailersend', [Mailersend::class, 'handle']);
+Route::post('/webhook/mailersend', [Mailersend::class, 'handle']);
