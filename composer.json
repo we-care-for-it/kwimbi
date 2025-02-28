@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awt/apilogger": "dev-master",
         "bezhansalleh/filament-shield": "^3.3",
         "croustibat/filament-jobs-monitor": "^2.5",
         "dedoc/scramble": "^0.11.33",
