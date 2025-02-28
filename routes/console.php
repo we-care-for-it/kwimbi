@@ -1,5 +1,5 @@
 <?php
 
 Schedule::command('app:import-chex')
-    ->everyHourly()
+    ->hourly()
     ->between('8:00', '20:00');
