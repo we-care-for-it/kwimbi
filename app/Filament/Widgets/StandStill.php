@@ -6,7 +6,7 @@ use App\Models\Elevator;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-
+use Filament\Facades\Filament;
 class StandStill extends BaseWidget
 {
 
@@ -57,9 +57,8 @@ class StandStill extends BaseWidget
                     ->placeholder("Geen unitnummer"),
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
-                return "admin/objects/" .
-                $record->id .
-                    "?activeRelationManager=1";
+                return "/" . Filament::getTenant()->id . "/objects/" . $record->id."?activeRelationManager=1";
+      
             })
 
             ->paginated(false);

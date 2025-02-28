@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
+
 class ObjectInspection extends Model
 {
     use SoftDeletes;
@@ -21,12 +23,10 @@ class ObjectInspection extends Model
         ];
     }
 
-    protected static function booted(): void
-    {
-        // static::addGlobalScope(function ($query) {
-        //     $query->where('company_id', Filament::getTenant()->id);
-        // });
-    }
+
+ 
+
+ 
 
     public function elevator()
     {
@@ -53,15 +53,16 @@ class ObjectInspection extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            //     $model->company_id = Filament::getTenant()->id;
+         $model->company_id = Filament::getTenant()->id;
         });
 
         static::saved(function (self $request) {
 
             $elevator_data = Elevator::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE   company_id = '. Filament::getTenant()->id .' AND  object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                         ->where('elevator_id', $request->elevator_id)
+                        ->where('company_id', Filament::getTenant()->id)
                 )->first();
 
             Elevator::where('id', $request->elevator_id)->update([

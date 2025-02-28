@@ -17,6 +17,8 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
+use Filament\Facades\Filament;
+
 
 class User extends Authenticatable implements FilamentUser, HasTenants, HasAvatar
 {
@@ -51,10 +53,20 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasAvata
         return $this->$avatarColumn ? Storage::url("$this->$avatarColumn") : null;
     }
 
-    public function getCurrentTenantLabel(): string
+    public function getTenantIdLabel(): string
+    {
+        return Filament::getTenant()->id;
+    }
+
+    
+    public function getCurrentId(): string
     {
         return 'Active team';
     }
+
+
+
+
 
     /**
      * The attributes that are mass assignable.
