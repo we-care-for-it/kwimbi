@@ -1,5 +1,5 @@
 <?php
 
-Schedule::command('app:import-chex')->everyHourly()
-
-    ->sendOutputTo('CHECK ERRRO.txt');
+Schedule::command('app:import-chex')
+    ->everyHourly()
+    ->between('8:00', '20:00');
