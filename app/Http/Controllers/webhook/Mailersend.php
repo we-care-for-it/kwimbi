@@ -9,7 +9,8 @@ class Mailersend extends Controller
     public function handle(Request $request)
     {
         //Token from mailsender webhook configurations
-        $token = $request->bearerToken();
+        $token = $request->token;
+
         if ($token == 'blRFkyBkRctKJiViaMG52pjhMJ636Avz') {
             return response()->json(['success' => true]);
         } else {
