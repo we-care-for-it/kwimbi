@@ -282,6 +282,13 @@
       0 => 'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider',
     ),
   ),
+  'mvenghaus/filament-plugin-schedule-monitor' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mvenghaus\\FilamentScheduleMonitor\\ServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 
