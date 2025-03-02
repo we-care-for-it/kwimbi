@@ -2,10 +2,11 @@
 namespace App\Filament\Widgets;
 
 use App\Models\ObjectInspection;
+use Filament\Facades\Filament;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
-use Filament\Facades\Filament;
+
 class ExpiredInspections extends ChartWidget
 {
     protected static ?string $heading = 'Verlopen keuringen';
@@ -14,6 +15,11 @@ class ExpiredInspections extends ChartWidget
     protected int|string|array $columnSpan = '6';
     protected static ?string $maxHeight        = '100%';
     protected static bool $isLazy              = false;
+
+    public function getDescription(): ?string
+    {
+        return 'Aankomende keuringen die gaan verlopen in ' . date('Y');
+    }
 
     protected function getData(): array
     {
@@ -54,7 +60,8 @@ class ExpiredInspections extends ChartWidget
             'datasets' => [
 
                 [
-                    'label'           => 'Verlopen',
+                    'label'           => 'Verlopen keuringen',
+
                     'backgroundColor' => 'rgb(249, 183, 196)',
                     'borderColor'     => 'rgb(249, 161, 178)',
                     'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),

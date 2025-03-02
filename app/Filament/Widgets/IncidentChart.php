@@ -12,13 +12,14 @@ class IncidentChart extends ChartWidget
 
     protected static ?int $sort                = 2;
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight        = '160px';
-    protected static bool $isLazy              = false;
+
+    protected static bool $isLazy       = false;
+    protected static ?string $maxHeight = '245px';
 
     protected function getData(): array
     {
 
-        $data = Trend::query(ObjectIncident::whereYear('report_date_time', 2025))
+        $data = Trend::query(ObjectIncident::whereYear('report_date_time', date('Y')))
 
             ->dateColumn('report_date_time')
             ->between(
@@ -53,7 +54,7 @@ class IncidentChart extends ChartWidget
             'datasets' => [
 
                 [
-                    'label'           => '2025',
+                    'label'           => 'Opgelost',
                     'backgroundColor' => '#7DC481',
                     'borderColor'     => '#7DC481',
                     'data'            => $data->map(fn(TrendValue $value) => round($value->aggregate)),
@@ -80,7 +81,7 @@ class IncidentChart extends ChartWidget
         return [
             'plugins' => [
                 'legend' => [
-                    'display' => false,
+                    'display' => true,
                 ],
             ],
             'scale'   => [
