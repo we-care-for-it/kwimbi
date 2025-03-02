@@ -2,10 +2,8 @@
 namespace App\Filament\Widgets;
 
 use App\Enums\ElevatorStatus;
-use App\Enums\InspectionStatus;
 use App\Models\Elevator;
 use App\Models\ObjectIncident;
-use App\Models\ObjectInspection;
 use DB;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -14,7 +12,7 @@ class StatsOverview extends BaseWidget
 {
 
     protected static ?int $sort                = 0;
-    protected int|string|array $columnSpan = '8';
+    protected int|string|array $columnSpan = '12';
     protected static bool $isLazy              = false;
 
     protected function getColumns(): int
@@ -38,26 +36,26 @@ class StatsOverview extends BaseWidget
             ->pluck('total', 'month')
             ->toArray();
 
-        $inspectionApporovedChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
-            ->whereYear('executed_datetime', '2025')
-            ->where('status_id', InspectionStatus::APPROVED)
-            ->groupBy(DB::raw('MONTH(executed_datetime)'))
-            ->pluck('total', 'month')
-            ->toArray();
+        // $inspectionApporovedChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
+        //     ->whereYear('executed_datetime', '2025')
+        //     ->where('status_id', InspectionStatus::APPROVED)
+        //     ->groupBy(DB::raw('MONTH(executed_datetime)'))
+        //     ->pluck('total', 'month')
+        //     ->toArray();
 
-        $inspectionApporovedActionsChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
-            ->whereYear('executed_datetime', '2025')
-            ->where('status_id', InspectionStatus::APPROVED_ACTIONS)
-            ->groupBy(DB::raw('MONTH(executed_datetime)'))
-            ->pluck('total', 'month')
-            ->toArray();
+        // $inspectionApporovedActionsChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
+        //     ->whereYear('executed_datetime', '2025')
+        //     ->where('status_id', InspectionStatus::APPROVED_ACTIONS)
+        //     ->groupBy(DB::raw('MONTH(executed_datetime)'))
+        //     ->pluck('total', 'month')
+        //     ->toArray();
 
-        $inspectionRejectedChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
-            ->whereYear('executed_datetime', '2025')
-            ->where('status_id', InspectionStatus::REJECTED)
-            ->groupBy(DB::raw('MONTH(executed_datetime)'))
-            ->pluck('total', 'month')
-            ->toArray();
+        // $inspectionRejectedChart = ObjectInspection::select(DB::raw('MONTH(executed_datetime) as month'), DB::raw('count(*) as total'))
+        //     ->whereYear('executed_datetime', '2025')
+        //     ->where('status_id', InspectionStatus::REJECTED)
+        //     ->groupBy(DB::raw('MONTH(executed_datetime)'))
+        //     ->pluck('total', 'month')
+        //     ->toArray();
 
         // $inspectionRejected = Trend::query(Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED))
 
@@ -71,8 +69,8 @@ class StatsOverview extends BaseWidget
         // dd($inspectionRejected);
 
         return [
-            Stat::make('Stilstaande objecten', Elevator::has("incident_stand_still")->latest()->count())
-                ->chart($inspectionRejectedChart),
+            Stat::make('Stilstaande objecten', Elevator::has("incident_stand_still")->latest()->count()),
+            //  ->chart($inspectionRejectedChart),
             Stat::make('Storingen', ObjectIncident::count())
                 ->color('success')
                 ->chart($incidentChart),
@@ -81,16 +79,14 @@ class StatsOverview extends BaseWidget
                 ->color('danger'),
             Stat::make('Objecten buitenbedrijf', Elevator::where('status_id', ElevatorStatus::TURNEDOFF)->count())
                 ->color('danger'),
-            Stat::make('Goedgekeurd', Elevator::where('current_inspection_status_id', InspectionStatus::APPROVED)->count())
-                ->chart($inspectionApporovedChart),
-            Stat::make('Goedgekeurd met acties', Elevator::where('current_inspection_status_id', InspectionStatus::APPROVED_ACTIONS)->count())
-                ->chart($inspectionApporovedActionsChart)
-                ->color('warning'),
-            Stat::make('Afgekeurd', Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count())
-                ->chart($inspectionApporovedActionsChart)
-                ->color('danger'),
-
-           
+            // Stat::make('Goedgekeurd', Elevator::where('current_inspection_status_id', InspectionStatus::APPROVED)->count())
+            //     ->chart($inspectionApporovedChart),
+            // Stat::make('Goedgekeurd met acties', Elevator::where('current_inspection_status_id', InspectionStatus::APPROVED_ACTIONS)->count())
+            //     ->chart($inspectionApporovedActionsChart)
+            //     ->color('warning'),
+            // Stat::make('Afgekeurd', Elevator::where('current_inspection_status_id', InspectionStatus::REJECTED)->count())
+            //     ->chart($inspectionApporovedActionsChart)
+            //     ->color('danger'),
 
         ];
     }

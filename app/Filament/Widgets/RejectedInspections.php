@@ -3,10 +3,11 @@ namespace App\Filament\Widgets;
 
 use App\Enums\InspectionStatus;
 use App\Models\Elevator;
+use Filament\Facades\Filament;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Filament\Facades\Filament;
+
 class RejectedInspections extends BaseWidget
 {
     protected static ?int $sort                = 80;
@@ -19,7 +20,7 @@ class RejectedInspections extends BaseWidget
     {
         return $table
             ->query(
-                Elevator::where('company_id', Filament::getTenant()->id)->where('current_inspection_status_id', InspectionStatus::REJECTED)->limit(10)
+                Elevator::whereYear('current_inspection_end_date', date('Y'))->where('company_id', Filament::getTenant()->id)->where('current_inspection_status_id', InspectionStatus::REJECTED)->limit(10)
             )
             ->columns([
 
@@ -77,7 +78,7 @@ class RejectedInspections extends BaseWidget
             ])->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
                 return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "?activeRelationManager=1";;
-       
+
             })
             ->paginated(false);
 
