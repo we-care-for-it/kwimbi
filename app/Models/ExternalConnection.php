@@ -9,6 +9,20 @@ class externalConnection extends Model
     use HasFactory;
     public $table = "external";
 
+    // Attributes that should be mass-assignable
+    protected $fillable = ['module_id',
+        'token_1',
+        'token_2',
+        'token_3'
+        , 'token_4'
+        , 'last_success_datetime'
+        , 'last_error_datetime', 'last_action_datetime'
+        , 'status_id'
+        , 'company_id'
+        , 'from_date'
+        , 'relation_id',
+    ];
+
     // protected static function booted(): void
     // {
     //     static::addGlobalScope(function ($query) {

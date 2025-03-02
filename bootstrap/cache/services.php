@@ -90,6 +90,8 @@
     86 => 'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider',
     87 => 'TomatoPHP\\FilamentPWA\\FilamentPwaServiceProvider',
     88 => 'TomatoPHP\\FilamentSettingsHub\\FilamentSettingsHubServiceProvider',
+    89 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    90 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'eager' => 
   array (
@@ -165,6 +167,8 @@
     69 => 'TomatoPHP\\ConsoleHelpers\\ConsoleHelpersServiceProvider',
     70 => 'TomatoPHP\\FilamentPWA\\FilamentPwaServiceProvider',
     71 => 'TomatoPHP\\FilamentSettingsHub\\FilamentSettingsHubServiceProvider',
+    72 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    73 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'deferred' => 
   array (
