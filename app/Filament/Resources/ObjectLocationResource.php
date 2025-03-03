@@ -25,6 +25,7 @@ use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
+use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
@@ -473,7 +474,15 @@ class ObjectLocationResource extends Resource
                     ->modalHeading('Locatie snel bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->label('Snel bewerken')
-                    ->slideOver(), DeleteAction::make()])])
+                    ->slideOver(), 
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->modalHeading('Locatie verwijderen')
+                    ->color('danger'),
+                RestoreAction::make(),
+
+                    ])])
+                    
             // ->bulkActions([
 
             //     ExportBulkAction::make()
