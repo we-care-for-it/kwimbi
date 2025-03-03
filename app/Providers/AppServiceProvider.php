@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Providers;
 
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Filament\Support\Assets\Css;
+use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentAsset;
+use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Filament\Support\Colors\Color;
-use Filament\Support\Facades\FilamentColor;
- 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,24 +26,21 @@ class AppServiceProvider extends ServiceProvider
         ]);
         Filament::serving(function () {
             Filament::registerUserMenuItems([
-                UserMenuItem::make()
-                    ->label('Instellingen')
-                    ->url(route('filament.admin.general'))
-                    ->icon('heroicon-s-cog'),
-                UserMenuItem::make()
-                    ->label('Logboek')
-                    ->url(route('filament.admin.logs'))
-                    ->icon('heroicon-m-clipboard-document-list'),
+                // UserMenuItem::make()
+                //     ->label('Instellingen')
+                //     ->url(route('filament.admin.general'))
+                //     ->icon('heroicon-s-cog'),
+                // UserMenuItem::make()
+                //     ->label('Logboek')
+                //     ->url(route('filament.admin.logs'))
+                //     ->icon('heroicon-m-clipboard-document-list'),
                 UserMenuItem::make()
                     ->label('Mijn profiel')
                     ->url('/admin/edit-profile')
                     ->icon('heroicon-o-user'),
- 
-
 
             ]);
         });
-
 
         Model::unguard();
     }
@@ -57,10 +53,3 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
-
-
-
-
-
-
-
