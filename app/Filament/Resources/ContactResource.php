@@ -15,6 +15,8 @@ use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
@@ -104,27 +106,49 @@ class ContactResource extends Resource
                     ->maxLength(255),
             ]);
     }
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
             ->schema([
-                Components\TextEntry::make('name')
-                    ->label('Name'),
-                Components\TextEntry::make('email')
-                    ->label('Email'),
-                Components\TextEntry::make('phone_number')
-                    ->label('Phone Number'),
-                Components\TextEntry::make('mobile_number')
-                    ->label('Mobile Number'),
-                Components\TextEntry::make('department')
-                    ->label('Department'),
-                Components\TextEntry::make('function')
-                    ->label('Function'),
-                Components\TextEntry::make('company.name')
-                    ->label('Company'),
+                Tabs::make('Contact Informatie') // Hoofd-tab component
+                    ->columnSpan('full')
+                    ->tabs([
+                        Tabs\Tab::make('Contactgegevens')
+                            ->icon('heroicon-o-user')
+                            ->schema([
+                                TextEntry::make('name')->label('Naam')->placeholder('-'),
+                                TextEntry::make('department')->label('Afdeling')->placeholder('-'),
+                                TextEntry::make('function')->label('Functie')->placeholder('-'),
+                                TextEntry::make('company.name')->label('Bedrijf')->placeholder('-'),
+                                TextEntry::make('email')->label('E-mail')->placeholder('-'),
+                                TextEntry::make('phone_number')->label('Telefoon')->placeholder('-'),
+                                TextEntry::make('mobile_number')->label('Intern Tel')->placeholder('-'),
+                            ])->columns(3),
+    
+                        Tabs\Tab::make('Social Media')
+                            ->icon('heroicon-o-share') 
+                            ->schema([
+                                TextEntry::make('linkedin')->label('LinkedIn')->placeholder('-'),
+                                TextEntry::make('twitter')->label('Twitter')->placeholder('-'),
+                                TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
+                            ])->columns(3),
+    
+                        Tabs\Tab::make('Adres')
+                            ->icon('heroicon-o-map')
+                            ->schema([
+                                TextEntry::make('street')->label('Straat')->placeholder('-'),
+                                TextEntry::make('city')->label('Stad')->placeholder('-'),
+                                TextEntry::make('postal_code')->label('Postcode')->placeholder('-'),
+                                TextEntry::make('country')->label('Land')->placeholder('-'),
+                            ])->columns(3),
+                    ]),
             ]);
     }
-
+    
+    
+    
+    
     public static function table(Table $table): Table
     {
         return $table
