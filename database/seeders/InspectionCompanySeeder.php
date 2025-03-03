@@ -11,7 +11,7 @@ class InspectionCompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $relation = [
+        $relations = [
             [
                 'name'         => 'Aboma Inspections B.V.',
                 'zipcode'      => '6716 BX',
