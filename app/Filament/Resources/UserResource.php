@@ -18,10 +18,9 @@ use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
 {
-    protected static ?string $model                           = User::class;
-    protected static ?string $tenantOwnershipRelationshipName = 'companies';
-    protected static ?string $navigationIcon                  = 'heroicon-o-users';
-
+    protected static ?string $model           = User::class;
+    protected static ?string $navigationIcon  = 'heroicon-o-users';
+    protected static ?string $navigationLabel = "Gebruikers";
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -88,4 +87,10 @@ class UserResource extends Resource
             'edit'   => EditUser::route('/{record}/edit'),
         ];
     }
+
+    public static function getModelLabel(): string
+    {
+        return "Gebruikers";
+    }
+
 }
