@@ -86,14 +86,14 @@ class InspectionsChart extends ChartWidget
                 ],
 
                 [
-                    'label'           => '  Herhaal punten',
+                    'label'           => 'Goedgekeurd (Herhaal punten)',
                     'backgroundColor' => 'rgb(255,251,235)',
                     'borderColor'     => 'rgb(251,237,212)',
                     'data'            => $dataApprovedActions->map(fn(TrendValue $value) => round($value->aggregate)),
                 ],
 
                 [
-                    'label'           => 'Met acties',
+                    'label'           => 'Goed gekeurd (Met acties)',
                     'backgroundColor' => 'rgb(194, 227, 243)',
                     'borderColor'     => 'rgb(172, 212, 233)',
                     'data'            => $dataApprovedRepeat->map(fn(TrendValue $value) => round($value->aggregate)),

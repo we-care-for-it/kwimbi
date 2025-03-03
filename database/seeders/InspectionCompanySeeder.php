@@ -11,7 +11,7 @@ class InspectionCompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $relation = [
+        $relations = [
             [
                 'name'         => 'Aboma Inspections B.V.',
                 'zipcode'      => '6716 BX',
@@ -77,7 +77,7 @@ class InspectionCompanySeeder extends Seeder
 
         foreach ($relations as $relation) {
             Relation::create([
-                'naam'         => $relation['naam'],
+                'name'         => $relation['name'],
                 'zipcode'      => $relation['zipcode'],
                 'address'      => $relation['address'],
                 'place'        => $relation['place'],
