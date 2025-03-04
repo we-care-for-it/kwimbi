@@ -9,6 +9,8 @@ use Filament\Resources\Pages\EditRecord;
 class EditUser extends EditRecord
 {
     protected static bool $isScopedToTenant = false;
+    protected ?string $heading = 'Gebruiker bewerken';
+
 
     protected static string $resource = UserResource::class;
 
