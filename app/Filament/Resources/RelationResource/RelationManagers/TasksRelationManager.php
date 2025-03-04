@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use Filament\Facades\Filament;
@@ -12,7 +11,7 @@ use Filament\Tables\Table;
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
-    protected static ?string $title = 'Taken';
+    protected static ?string $title       = 'Taken';
 
     public function form(Form $form): Form
     {
@@ -26,14 +25,14 @@ class TasksRelationManager extends RelationManager
                 Forms\Components\Textarea::make('description')
                     ->columnSpan('full')
                     ->label('Beschrijving'),
-  
-       
-                Forms\Components\TimePicker::make('end_time')
-                    ->label('Eindtijd'),
+
                 Forms\Components\TimePicker::make('begin_time')
                     ->label('Starttijd'),
-                    Forms\Components\DatePicker::make('deadline')
-                    ->label('Deadline'),
+                Forms\Components\TimePicker::make('end_time')
+                    ->label('Eindtijd'),
+
+                // Forms\Components\DatePicker::make('deadline')
+                // ->label('Deadline'),
             ]);
     }
 
@@ -52,10 +51,10 @@ class TasksRelationManager extends RelationManager
                     ->label('Beschrijving')
                     ->placeholder('-')
                     ->limit(50),
-                 Tables\Columns\TextColumn::make('deadline')
-                    ->label('Deadline')
-                    ->placeholder('-')
-                    ->date(),
+                //  Tables\Columns\TextColumn::make('deadline')
+                //     ->label('Deadline')
+                //     ->placeholder('-')
+                //     ->date(),
                 Tables\Columns\TextColumn::make('begin_time')
                     ->label('Starttijd')
                     ->placeholder('-')
@@ -64,7 +63,7 @@ class TasksRelationManager extends RelationManager
                     ->placeholder('-')
                     ->label('Eindtijd')
                     ->time(),
-         
+
             ])
             ->filters([
                 //

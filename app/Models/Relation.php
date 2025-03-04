@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Models;
 
-use Filament\Facades\Filament;
 use App\Enums\RelationTypes;
+use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,10 +56,14 @@ class Relation extends Model
         return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'relation')->where('company_id', Filament::getTenant()->id);
     }
 
-
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id)->where('model', 'Relation');
     }
 
     public function contactsObject(): HasMany

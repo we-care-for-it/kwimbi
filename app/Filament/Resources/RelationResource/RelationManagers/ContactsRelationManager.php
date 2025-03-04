@@ -139,7 +139,7 @@ class ContactsRelationManager extends RelationManager
                 Action::make('Attach')
                     ->modalWidth(MaxWidth::Large)
                     ->modalHeading('Contactpersoon toevoegen')
-                    ->modalDescription('Koppel een bestaand')
+                    ->modalDescription('Koppel een bestaand contactpersoon aan deze relatie ')
                     ->label('Koppel bestaand contact')
                     ->form([
 
