@@ -8,11 +8,10 @@ use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
@@ -136,33 +135,33 @@ class ContactsRelationManager extends RelationManager
 
                 ,
 
-                Action::make('Attach')
-                    ->modalWidth(MaxWidth::Large)
-                    ->modalHeading('Contactpersoon toevoegen')
-                    ->modalDescription('Koppel een bestaand contactpersoon aan deze relatie ')
-                    ->label('Koppel bestaand contact')
-                    ->form([
+                // Action::make('Attach')
+                //     ->modalWidth(MaxWidth::Large)
+                //     ->modalHeading('Contactpersoon toevoegen')
+                //     ->modalDescription('Koppel een bestaand contactpersoon aan deze relatie ')
+                //     ->label('Koppel bestaand contact')
+                //     ->form([
 
-                        TileSelect::make('contact_id')
-                            ->searchable(['first_name', 'last_name', 'email'])
-                            ->model(Contact::class)
-                            ->titleKey('name')
-                            ->imageKey('avatar')
-                            ->descriptionKey('email')
-                            ->label('Contactpersoon')
+                //         TileSelect::make('contact_id')
+                //             ->searchable(['first_name', 'last_name', 'email'])
+                //             ->model(Contact::class)
+                //             ->titleKey('name')
+                //             ->imageKey('avatar')
+                //             ->descriptionKey('email')
+                //             ->label('Contactpersoon')
 
-                        ,
+                //         ,
 
-                    ])
-                    ->action(function (array $data) {
-                        ContactObject::create(
-                            [
-                                'model_id'   => $this->ownerRecord->id,
-                                'model'      => 'relation',
-                                'contact_id' => $data['contact_id'],
-                            ]
-                        );
-                    }),
+                //     ])
+                //     ->action(function (array $data) {
+                //         ContactObject::create(
+                //             [
+                //                 'model_id'   => $this->ownerRecord->id,
+                //                 'model'      => 'relation',
+                //                 'contact_id' => $data['contact_id'],
+                //             ]
+                //         );
+                //     }),
 
                 // Action::make('openContact')->label('Open Contact')
                 //     ->url(function ($record) {
@@ -184,12 +183,12 @@ class ContactsRelationManager extends RelationManager
                     })->icon('heroicon-s-credit-card')
                     ->color('warning'),
 
-                Action::make('Detach')
-                    ->label('Ontkoppel')
-                    ->requiresConfirmation()
-                    ->action(function (array $data, $record): void {
-                        $record->delete();
-                    }),
+                DeleteAction::make('Detach')
+                    ->label('Verwijderen')
+                    ->requiresConfirmation(),
+                // ->action(function (array $data, $record): void {
+                //     $record->delete();
+                // }),
 
             ])
             ->bulkActions([
