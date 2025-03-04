@@ -20,6 +20,7 @@ class ProjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'projects';
     protected static bool $isLazy         = false;
+    protected static ?string $icon        = 'heroicon-o-archive-box';
     protected static ?string $title       = 'Projecten';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string

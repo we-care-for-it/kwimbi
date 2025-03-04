@@ -27,6 +27,8 @@ class ObjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'Objects';
     protected static ?string $title       = 'Objecten';
+    protected static ?string $icon        = 'heroicon-o-arrows-up-down';
+
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
