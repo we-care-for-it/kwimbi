@@ -24,7 +24,7 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
+
 class TaskResource extends Resource
 {
     protected static ?string $model            = Task::class;
@@ -35,7 +35,7 @@ class TaskResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::where('company_id', Filament::getTenant()->id)->count();
     }
     public static function form(Form $form): Form
     {
@@ -65,15 +65,13 @@ class TaskResource extends Resource
                     ->searchable()
                     ->live()
                     ->label('Koppel aan'),
-                    Select::make('model_id')
+                Select::make('model_id')
                     ->label('Relatie')
                     ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
                     }),
-
- 
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))
@@ -108,7 +106,7 @@ class TaskResource extends Resource
                     ->label('Locatie'),
 
                 Select::make('employee_id')
-                    ->options(User::pluck('name', 'id'))
+                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->default(Auth::id())
                     ->label('Medewerker'),
@@ -132,7 +130,6 @@ class TaskResource extends Resource
                     ->seconds(false),
 
                 DatePicker::make('deadline')
-
                     ->label('Einddatum'),
 
                 // ToggleButtons::make('private')
@@ -159,7 +156,7 @@ class TaskResource extends Resource
     {
         return $table
             ->query(
-                Task::where('employee_id', Auth::id())
+                Task::where('company_id', Filament::getTenant()->id)
             )
             ->columns([
 

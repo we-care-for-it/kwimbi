@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
- 
-class companyUsers extends Model 
- 
+
+class companyUsers extends Model
 {
     public $table = 'company_user';
 
@@ -14,4 +11,5 @@ class companyUsers extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
 }
