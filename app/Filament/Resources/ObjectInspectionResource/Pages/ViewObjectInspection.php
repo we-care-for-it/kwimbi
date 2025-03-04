@@ -47,14 +47,25 @@ class ViewObjectInspection extends ViewRecord
                 )
 
                 ->action(function ($data, $record) {
-                    $contents = base64_decode($record->document);
-                    $path     = public_path($data["filename"] . ".pdf");
+                    if ($record->schedule_run_token) {
+                        //    $contents = base64_decode($record->document);
 
-                    file_put_contents($path, $contents);
+                        $contents = base64_decode($record->document);
+                        $path     = public_path($data["filename"] . ".pdf");
 
-                    return response()
-                        ->download($path)
-                        ->deleteFileAfterSend(true);
+                        file_put_contents($path, $contents);
+                        return response()
+                            ->download($path)
+                            ->deleteFileAfterSend(true);
+                    } else {
+
+                        $path = "storage/" . $record["document"];
+
+                        return response()
+                            ->download($path);
+
+                    }
+
                 })
                 ->modalWidth(MaxWidth::Large)
                 ->modalHeading("Bestand downloaden")
