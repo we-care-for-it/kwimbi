@@ -1,12 +1,14 @@
 <?php
 namespace App\Models;
 
+use Filament\Facades\Filament;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,8 +19,6 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
-use Filament\Facades\Filament;
-
 
 class User extends Authenticatable implements FilamentUser, HasTenants, HasAvatar
 {
@@ -58,15 +58,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasAvata
         return Filament::getTenant()->id;
     }
 
-    
     public function getCurrentId(): string
     {
         return 'Active team';
     }
-
-
-
-
 
     /**
      * The attributes that are mass assignable.
@@ -125,14 +120,14 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasAvata
             ->useLogName('user');
     }
 
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
-
     public function companies(): BelongsToMany
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 
     public function getTenants(Panel $panel): array | Collection
