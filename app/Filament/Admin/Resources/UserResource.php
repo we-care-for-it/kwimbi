@@ -3,6 +3,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -24,33 +25,36 @@ class UserResource extends Resource
     protected static ?string $model           = User::class;
     protected static ?string $navigationIcon  = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Main';
+    protected static ?string $navigationLabel = "Gebruikers";
+    protected static ?string $pluralModelLabel = 'Gebruikers';
+
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             TextInput::make('name')
-                ->label('Full Name')
+                ->label('Naam')
                 ->required()
                 ->maxLength(255),
 
             TextInput::make('email')
-                ->label('Email Address')
+                ->label('E-mail')
                 ->email()
                 ->required()
                 ->unique(User::class, 'email', ignoreRecord: true),
 
             TextInput::make('password')
-                ->label('Password')
+                ->label('Wachtwoord')
                 ->required()
                 ->password()
                 ->maxLength(255),
 
             DatePicker::make('date_of_birth')
-                ->label('Date of Birth')
+                ->label('Geboortedatum')
                 ->nullable(),
 
             Select::make('companies')
-                ->label('Company')
+                ->label('Bedrijven')
                 ->relationship('companies', 'name') // 👈 User belongs to Companies
                 ->multiple()
                 ->preload(),
@@ -62,36 +66,37 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Full Name')
+                    ->label('Naam')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label('E-mail')
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('companies.name')
-                    ->label('Company')
+                    ->label('Bedrijf')
                     ->sortable()
                     ->searchable()
                     ->badge(),
 
                 TextColumn::make('created_at')
-                    ->label('Created At')
+                    ->label('Aangemaakt op')
                     ->dateTime()
                     ->sortable(),
             ])
-            ->actions([
+            ->actions([ActionGroup::make([
+
                 ViewAction::make(),
                 EditAction::make(),
                 Impersonate::make(),
                 Action::make('activities')
-                    ->label('Activities')
+                    ->label('Activiteiten')
                     ->icon('heroicon-o-newspaper')
                     ->iconPosition('before')
                     ->color('#C0C0C0')
-                    ->url(fn($record) => UserResource::getUrl('activities', ['record' => $record])),
+                    ->url(fn($record) => UserResource::getUrl('activities', ['record' => $record])),])
             ])
 
             ->bulkActions([

@@ -9,6 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateUser extends CreateRecord
 {
     protected static bool $isScopedToTenant = false;
-
+    protected ?string $heading = 'Gebruiker aanmaken';
     protected static string $resource = UserResource::class;
 }
