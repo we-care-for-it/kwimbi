@@ -7,11 +7,19 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
+    protected static ?string $icon        = 'heroicon-o-rectangle-stack';
     protected static ?string $title = 'Taken';
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        // $ownerModel is of actual type Job
+        return $ownerRecord->tasks->count();
+    }
 
     public function form(Form $form): Form
     {

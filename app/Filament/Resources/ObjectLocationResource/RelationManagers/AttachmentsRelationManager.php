@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 class AttachmentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'attachments';
+    protected static ?string $icon        = 'heroicon-o-link';
+
     //protected static ?string $badge = 'new';
     protected static ?string $title = 'Bijlages';
 //'model', '','model','filename','original_filename','extention','description','size','user_id','item_id'];
