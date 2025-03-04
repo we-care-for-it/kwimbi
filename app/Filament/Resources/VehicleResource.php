@@ -165,66 +165,73 @@ class VehicleResource extends Resource
         return $form
             ->schema([
                 TextInput::make("kenteken")
-                    ->unique(Vehicle::class, 'kenteken', ignoreRecord: true)
-                    ->label("Kenteken")
-                    ->required()
-                    ->maxlength(10)
-                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
-                    ->suffixAction(
-                        Action::make("searchDataByLicenceplate")
-                            ->icon("heroicon-m-magnifying-glass")
-                            ->action(function (Get $get, Set $set) {
-                                $data = (new RDWService())->GetVehicle($get("kenteken"));
-                                $data = json_decode($data);
-    
-                                if ($data == null) {
-                                    Notification::make()
-                                        ->warning()
-                                        ->title("Geen resultaten")
-                                        ->body("Helaas er zijn geen gegevens gevonden bij het kenteken <b>" . $get("kenteken") . "</b> Controleer het kenteken en probeer opnieuw.")->send();
-                                } else {
-                                    $set("voertuigsoort", $data[0]?->voertuigsoort ?? 'Onbekend');
-                                    $set("handelsbenaming", $data[0]?->handelsbenaming ?? 'Onbekend');
-                                    $set("inrichting", $data[0]?->inrichting ?? 'Onbekend');
-                                    $set("variant", $data[0]?->variant ?? 'Onbekend');
-                                    $set("eerste_kleur", $data[0]?->eerste_kleur ?? 'Onbekend');
-                                    $set("vervaldatum_apk", date("Y-m-d", strtotime($data[0]?->vervaldatum_apk_dt ?? 'Onbekend')));
-                                    $set("merk", $data[0]?->merk ?? 'Onbekend');
-                                    $set("wielbasis", $data[0]?->wielbasis ?? 'Onbekend');
-                                    $set("aantal_deuren", $data[0]?->aantal_deuren ?? 'Onbekend');
-                                    $set("aantal_wielen", $data[0]?->aantal_wielen ?? 'Onbekend');
-                                    $set("lengte", $data[0]?->lengte ?? 'Onbekend');
-                                    $set("breedte", $data[0]?->breedte ?? 'Onbekend');
-                                    $set("type", $data[0]?->type ?? 'Onbekend');
-                                    $set("uitvoering", $data[0]?->uitvoering ?? 'Onbekend');
-                                    $set("catalogusprijs", $data[0]?->catalogusprijs ?? 'Onbekend');
-                                    $set("aantal_zitplaatsen", $data[0]?->aantal_zitplaatsen ?? 'Onbekend');
-                                    $set("aantal_rolstoelplaatsen", $data[0]?->aantal_rolstoelplaatsen ?? 'Onbekend');
-                                    $set("image", $data[0]?->image ?? 'Onbekend');
-                                    $set("tweede_kleur", $data[0]?->tweede_kleur ?? 'Onbekend');
-                                    $set("bruto_bpm", $data[0]?->bruto_bpm ?? 'Onbekend');
-                                    $set("datum_tenaamstelling", $data[0]?->datum_tenaamstelling ?? 'Onbekend');
-                                    $set("aantal_cilinders", $data[0]?->aantal_cilinders ?? 'Onbekend');
-                                    $set("cilinderinhoud", $data[0]?->cilinderinhoud ?? 'Onbekend');
-                                    $set("massa_ledig_voertuig", $data[0]?->massa_ledig_voertuig ?? 'Onbekend');
-                                    $set("toegestane_maximum_massa_voertuig", $data[0]?->toegestane_maximum_massa_voertuig ?? 'Onbekend');
-                                    $set("maximum_massa_trekken_ongeremd", $data[0]?->maximum_massa_trekken_ongeremd ?? 'Onbekend');
-                                    $set("maximum_massa_trekken_geremd", $data[0]?->maximum_massa_trekken_geremd ?? 'Onbekend');
-                                    $set("technische_max_massa_voertuig", $data[0]?->technische_max_massa_voertuig ?? 'Onbekend');
-                                    $set("wacht_op_keuren", $data[0]?->wacht_op_keuren ?? 'Onbekend');
-                                    $set("typegoedkeuringsnummer", $data[0]?->typegoedkeuringsnummer ?? 'Onbekend');
-                                    $set("openstaande_terugroepactie_indicator", $data[0]?->openstaande_terugroepactie_indicator ?? 'Onbekend');
-                                    $set("maximum_ondersteunende_snelheid", $data[0]?->maximum_ondersteunende_snelheid ?? 'Onbekend');
-                                    $set("jaar_laatste_registratie_tellerstand", $data[0]?->jaar_laatste_registratie_tellerstand ?? 'Onbekend');
-                                    $set("zuinigheidclassificatie", $data[0]?->zuinigheidclassificatie ?? 'Onbekend');
-                                    $set("datum_eerste_toelating_dt", date("Y-m-d", strtotime($data[0]?->datum_eerste_toelating_dt ?? 'Onbekend')));
-                                    $set("datum_eerste_tenaamstelling_in_nederland", date("Y-m-d", strtotime($data[0]?->datum_eerste_tenaamstelling_in_nederland ?? 'Onbekend')));
-                                    $set("datum_tenaamstelling_dt", date("Y-m-d", strtotime($data[0]?->datum_tenaamstelling_dt ?? 'Onbekend')));
-                                    $set("vervaldatum_apk_dt", $data[0]?->vervaldatum_apk_dt ?? 'Onbekend');
-                                }
-                            })
-                    ),
-    
+                ->unique(Vehicle::class, 'kenteken', ignoreRecord: true)
+                ->label("Kenteken")
+                ->required()
+                ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+                ->maxlength(10)
+                ->suffixAction(
+                    Action::make("searchDataByLicenceplate")
+                        ->icon("heroicon-m-magnifying-glass")
+                        ->action(function (Get $get, Set $set) {
+                            // Format the license plate before searching
+                            $formattedLicensePlate = Vehicle::formatLicensePlate($get("kenteken"));
+            
+                            // Search using the formatted license plate
+                            $data = (new RDWService())->GetVehicle($formattedLicensePlate);
+                            $data = json_decode($data);
+            
+                            if ($data == null) {
+                                Notification::make()
+                                    ->warning()
+                                    ->title("Geen resultaten")
+                                    ->body("Helaas er zijn geen gegevens gevonden bij het kenteken <b>" . $formattedLicensePlate . "</b> Controleer het kenteken en probeer opnieuw.")->send();
+                            } else {
+                                // Set the formatted license plate
+                                $set("kenteken", $formattedLicensePlate);
+            
+                                // Set other fields
+                                $set("voertuigsoort", $data[0]?->voertuigsoort ?? 'Onbekend');
+                                $set("handelsbenaming", $data[0]?->handelsbenaming ?? 'Onbekend');
+                                $set("inrichting", $data[0]?->inrichting ?? 'Onbekend');
+                                $set("variant", $data[0]?->variant ?? 'Onbekend');
+                                $set("eerste_kleur", $data[0]?->eerste_kleur ?? 'Onbekend');
+                                $set("vervaldatum_apk", date("Y-m-d", strtotime($data[0]?->vervaldatum_apk_dt ?? 'Onbekend')));
+                                $set("merk", $data[0]?->merk ?? 'Onbekend');
+                                $set("wielbasis", $data[0]?->wielbasis ?? 'Onbekend');
+                                $set("aantal_deuren", $data[0]?->aantal_deuren ?? 'Onbekend');
+                                $set("aantal_wielen", $data[0]?->aantal_wielen ?? 'Onbekend');
+                                $set("lengte", $data[0]?->lengte ?? 'Onbekend');
+                                $set("breedte", $data[0]?->breedte ?? 'Onbekend');
+                                $set("type", $data[0]?->type ?? 'Onbekend');
+                                $set("uitvoering", $data[0]?->uitvoering ?? 'Onbekend');
+                                $set("catalogusprijs", $data[0]?->catalogusprijs ?? 'Onbekend');
+                                $set("aantal_zitplaatsen", $data[0]?->aantal_zitplaatsen ?? 'Onbekend');
+                                $set("aantal_rolstoelplaatsen", $data[0]?->aantal_rolstoelplaatsen ?? 'Onbekend');
+                                $set("image", $data[0]?->image ?? 'Onbekend');
+                                $set("tweede_kleur", $data[0]?->tweede_kleur ?? 'Onbekend');
+                                $set("bruto_bpm", $data[0]?->bruto_bpm ?? 'Onbekend');
+                                $set("datum_tenaamstelling", $data[0]?->datum_tenaamstelling ?? 'Onbekend');
+                                $set("aantal_cilinders", $data[0]?->aantal_cilinders ?? 'Onbekend');
+                                $set("cilinderinhoud", $data[0]?->cilinderinhoud ?? 'Onbekend');
+                                $set("massa_ledig_voertuig", $data[0]?->massa_ledig_voertuig ?? 'Onbekend');
+                                $set("toegestane_maximum_massa_voertuig", $data[0]?->toegestane_maximum_massa_voertuig ?? 'Onbekend');
+                                $set("maximum_massa_trekken_ongeremd", $data[0]?->maximum_massa_trekken_ongeremd ?? 'Onbekend');
+                                $set("maximum_massa_trekken_geremd", $data[0]?->maximum_massa_trekken_geremd ?? 'Onbekend');
+                                $set("technische_max_massa_voertuig", $data[0]?->technische_max_massa_voertuig ?? 'Onbekend');
+                                $set("wacht_op_keuren", $data[0]?->wacht_op_keuren ?? 'Onbekend');
+                                $set("typegoedkeuringsnummer", $data[0]?->typegoedkeuringsnummer ?? 'Onbekend');
+                                $set("openstaande_terugroepactie_indicator", $data[0]?->openstaande_terugroepactie_indicator ?? 'Onbekend');
+                                $set("maximum_ondersteunende_snelheid", $data[0]?->maximum_ondersteunende_snelheid ?? 'Onbekend');
+                                $set("jaar_laatste_registratie_tellerstand", $data[0]?->jaar_laatste_registratie_tellerstand ?? 'Onbekend');
+                                $set("zuinigheidclassificatie", $data[0]?->zuinigheidclassificatie ?? 'Onbekend');
+                                $set("datum_eerste_toelating_dt", date("Y-m-d", strtotime($data[0]?->datum_eerste_toelating_dt ?? 'Onbekend')));
+                                $set("datum_eerste_tenaamstelling_in_nederland", date("Y-m-d", strtotime($data[0]?->datum_eerste_tenaamstelling_in_nederland ?? 'Onbekend')));
+                                $set("datum_tenaamstelling_dt", date("Y-m-d", strtotime($data[0]?->datum_tenaamstelling_dt ?? 'Onbekend')));
+                                $set("vervaldatum_apk_dt", $data[0]?->vervaldatum_apk_dt ?? 'Onbekend');
+                            }
+                        })
+                ),
                 Grid::make(3)
                     ->schema([
                         TextInput::make("voertuigsoort")
