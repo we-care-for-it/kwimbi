@@ -20,17 +20,20 @@ class TasksRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->label('Titel')
+                    ->columnSpan('full')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
+                    ->columnSpan('full')
                     ->label('Beschrijving'),
   
-                Forms\Components\DatePicker::make('deadline')
-                    ->label('Deadline'),
+       
                 Forms\Components\TimePicker::make('end_time')
                     ->label('Eindtijd'),
                 Forms\Components\TimePicker::make('begin_time')
                     ->label('Starttijd'),
+                    Forms\Components\DatePicker::make('deadline')
+                    ->label('Deadline'),
             ]);
     }
 

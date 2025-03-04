@@ -180,6 +180,7 @@ class ObjectResource extends Resource
 
                 Tables\Columns\TextColumn::make("status_id")
                     ->label("Status")
+                    ->default(0)
                     ->badge()
                     ->sortable()
                     ->toggleable(),

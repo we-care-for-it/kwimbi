@@ -107,11 +107,11 @@ class TaskResource extends Resource
                     })
                     ->label('Locatie'),
 
-                Select::make('employee_id')
-                    ->options(User::pluck('name', 'id'))
-                    ->searchable()
-                    ->default(Auth::id())
-                    ->label('Medewerker'),
+                // Select::make('employee_id')
+                //     ->options(User::pluck('name', 'id'))
+                //     ->searchable()
+                //     ->default(Auth::id())
+                //     ->label('Medewerker'),
 
                 Select::make('priority')
                     ->options([
@@ -132,7 +132,6 @@ class TaskResource extends Resource
                     ->seconds(false),
 
                 DatePicker::make('deadline')
-
                     ->label('Einddatum'),
 
                 // ToggleButtons::make('private')

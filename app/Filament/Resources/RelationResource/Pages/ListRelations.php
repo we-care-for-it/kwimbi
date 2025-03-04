@@ -13,17 +13,17 @@ class ListRelations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \EightyNine\ExcelImport\ExcelImportAction::make()
-                ->color("primary")
-                ->label('')
-                ->color('secondary')
-                ->slideOver()
-                ->link()
-                ->beforeImport(function ($data, $livewire, $excelImportAction) {
-                    $excelImportAction->additionalData([
-                        'company_id' => Filament::getTenant()->id,
-                    ]);
-                }),
+            // \EightyNine\ExcelImport\ExcelImportAction::make()
+            //     ->color("primary")
+            //     ->label('')
+            //     ->color('secondary')
+            //     ->slideOver()
+            //     ->link()
+            //     ->beforeImport(function ($data, $livewire, $excelImportAction) {
+            //         $excelImportAction->additionalData([
+            //             'company_id' => Filament::getTenant()->id,
+            //         ]);
+            //     }),
 
             Actions\CreateAction::make()
                 ->label('Toevoegen')->slideOver()

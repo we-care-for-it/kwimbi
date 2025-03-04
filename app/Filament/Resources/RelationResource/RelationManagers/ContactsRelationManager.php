@@ -149,7 +149,7 @@ class ContactsRelationManager extends RelationManager
                             ->titleKey('name')
                             ->imageKey('avatar')
                             ->descriptionKey('email')
-                            ->label('Contactname')
+                            ->label('Contactpersoon')
 
                         ,
 
