@@ -27,7 +27,7 @@ class ViewObjectInspection extends ViewRecord
                 ->visible(fn($record) => $record->elevator->id ?? false)
                 ->icon('heroicon-o-arrow-uturn-left')
                 ->url(function ($record) {
-                    return "/" . Filament::getTenant()->id . "/objects/" . $record->elevator->id . "/?activeRelationManager=3";
+                    return "/" . Filament::getTenant()->id . "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
 
                 }),
 

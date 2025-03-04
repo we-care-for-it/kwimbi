@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Widgets;
+namespace App\Filament\Resources\ObjectInspectionResource\Widgets;
 
 use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
@@ -8,19 +8,11 @@ use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class InspectionsChart extends ChartWidget
+class InspectionCharts extends ChartWidget
 {
-    protected static ?string $heading = 'Keuringen 2025';
 
-    protected static ?int $sort = 1;
-
-    protected static ?string $maxHeight = '10';
-    protected static bool $isLazy       = false;
-
-    public function getDescription(): ?string
-    {
-        return 'Het verloop van de keuringen van het huidige jaar';
-    }
+    protected static ?string $maxHeight = '200px';
+    protected static ?string $heading   = 'Verloop keuringen 2025';
 
     protected function getData(): array
     {
@@ -68,6 +60,16 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
+        $dataExpired = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('deleted_at', null))
+
+            ->dateColumn('end_date')
+            ->between(
+                start: now()->startOfYear(),
+                end: now()->endOfYear(),
+            )
+            ->perMonth()
+            ->count();
+
         return [
             'datasets' => [
 
@@ -99,21 +101,30 @@ class InspectionsChart extends ChartWidget
                     'data'            => $dataApprovedRepeat->map(fn(TrendValue $value) => round($value->aggregate)),
                 ],
 
+                [
+                    'label'           => 'Verlopen keuringen',
+
+                    'backgroundColor' => 'rgb(249, 183, 196)',
+                    'borderColor'     => 'rgb(249, 161, 178)',
+                    'data'            => $dataExpired->map(fn(TrendValue $value) => round($value->aggregate)),
+                ],
+
             ],
             'labels'   => $dataApproved->map(fn(TrendValue $value) => date('m', strtotime($value->date))),
 
         ];
+
     }
 
-    // protected function getFilters(): ?array
-    // {
-    //     return [
-    //         'today' => 'Today',
-    //         'week'  => 'Last week',
-    //         'month' => 'Last month',
-    //         'year'  => 'This year',
-    //     ];
-    // }
+// protected function getFilters(): ?array
+// {
+//     return [
+//         'today' => 'Today',
+//         'week'  => 'Last week',
+//         'month' => 'Last month',
+//         'year'  => 'This year',
+//     ];
+// }
 
     protected function getOptions(): array
     {
