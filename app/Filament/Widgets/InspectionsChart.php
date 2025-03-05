@@ -12,10 +12,10 @@ class InspectionsChart extends ChartWidget
 {
     protected static ?string $heading = 'Keuringen 2025';
 
-    protected static ?int $sort = 1;
-
-    protected static ?string $maxHeight = '10';
-    protected static bool $isLazy       = false;
+    protected static ?int $sort                = 1;
+    protected int|string|array $columnSpan = '6';
+    protected static ?string $maxHeight        = '100%';
+    protected static bool $isLazy              = false;
 
     public function getDescription(): ?string
     {

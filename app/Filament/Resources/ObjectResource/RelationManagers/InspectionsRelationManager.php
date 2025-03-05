@@ -63,7 +63,7 @@ class InspectionsRelationManager extends RelationManager
 
             Grid::make(2)->schema([
                 FileUpload::make("document")
-                    ->directory($this->ownerRecord->id . "/inspections/reports")
+                    ->directory("objects/" . $this->ownerRecord->id . "/inspections/reports")
                     ->columnSpan(1)
                     ->label("Rapportage"),
 
