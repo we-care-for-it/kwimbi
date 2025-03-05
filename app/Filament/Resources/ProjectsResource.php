@@ -150,7 +150,8 @@ class ProjectsResource extends Resource
                     ->columns(2)
                     ->columnSpan(1),
             ])
-            ->columns(5);
+            // ->columns(5)
+            ;
     }
 
     public static function table(Table $table): Table
@@ -312,9 +313,9 @@ class ProjectsResource extends Resource
     {
         return [
             "index"  => Pages\ListProjects::route("/"),
-            "create" => Pages\CreateProjects::route("/create"),
+            // "create" => Pages\CreateProjects::route("/create"),
             //  'view' => Pages\ViewProjects::route('/{record}') ,
-            "edit"   => Pages\EditProjects::route("/{record}/edit"),
+            // "edit"   => Pages\EditProjects::route("/{record}/edit"),
         ];
     }
 }

@@ -35,6 +35,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Filament\Support\Enums\ActionSize;
 
 class ObjectLocationResource extends Resource
 {
@@ -468,20 +469,24 @@ class ObjectLocationResource extends Resource
                 Tables\Filters\TrashedFilter::make()], //layout : FiltersLayout::AboveContent
             )
 
-            ->actions([ActionGroup::make([
-
+            ->actions([
                 EditAction::make()
-                    ->modalHeading('Locatie snel bewerken')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
-                    ->slideOver(), 
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->modalHeading('Locatie verwijderen')
-                    ->color('danger'),
-                RestoreAction::make(),
+                ->modalHeading('Snel bewerken')
+                ->tooltip('Bewerken')
+                ->label('')
+                ->size(ActionSize::Medium)
+                ->modalIcon('heroicon-o-pencil')
+                ->slideOver(),
+            DeleteAction::make()
+                ->modalIcon('heroicon-o-trash')
+                ->tooltip('Verwijderen')
+                ->label('')
+                ->size(ActionSize::Medium)
+                ->modalHeading('Contactpersoon verwijderen')
+                ->color('danger'),
 
-                    ])])
+                RestoreAction::make(),
+                ])
                     
             // ->bulkActions([
 

@@ -20,7 +20,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-
+use Filament\Support\Enums\ActionSize;
 
 class ContactResource extends Resource
 {
@@ -186,28 +186,23 @@ class ContactResource extends Resource
             ])
             ->filters([])
             ->headerActions([
-                CreateAction::make(),
             ])
             ->actions([
-                ActionGroup::make([
-
-                    Action::make('view') // Custom action for row click
-                        ->icon('heroicon-o-eye')
-                        ->action(fn($record) => static::infolist($record))
-                        ->modalHeading('Contact Details')
-                        ->modalContent(fn($record) => static::infolist($record)),
-
                     EditAction::make()
                         ->modalHeading('Snel bewerken')
+                        ->tooltip('Bewerken')
+                        ->label('')
+                        ->size(ActionSize::Medium)
                         ->modalIcon('heroicon-o-pencil')
-                        ->label('Snel bewerken')
                         ->slideOver(),
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->label('')
+                        ->size(ActionSize::Medium)
                         ->modalHeading('Contactpersoon verwijderen')
                         ->color('danger'),
-                ]),
-            ])
+                ])
             ->bulkActions([])
             ->emptyState(view('partials.empty-state'));
     }
@@ -229,7 +224,7 @@ class ContactResource extends Resource
             'view'   => Pages\ViewContact::route('/{record}'), // Ensure this is defined
             'index'  => Pages\ListContacts::route('/'),
             // 'create' => Pages\CreateContact::route('/create'),
-            'edit'   => Pages\EditContact::route('/{record}/edit'),
+            // 'edit'   => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }

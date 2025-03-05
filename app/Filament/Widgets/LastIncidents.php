@@ -7,9 +7,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Filament\Facades\Filament;
+use Filament\Tables\Actions\Action;
+
 class LastIncidents extends BaseWidget
 {
-
     protected static ?int $sort = 15;
     protected int|string|array $columnSpan = '6';
     protected static ?string $maxHeight = '300px';
@@ -40,11 +41,19 @@ class LastIncidents extends BaseWidget
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
                     ->badge(),
-            ])->emptyState(view("partials.empty-state"))
+            ])
+            ->emptyState(view("partials.empty-state"))
             ->recordUrl(function (ObjectIncident $record) {
                 return "/" . Filament::getTenant()->id . "/objects/" . $record->id."?activeRelationManager=1";
-      
             })
-            ->paginated(false);
+            ->paginated(false)
+            ->headerActions([
+                Action::make('viewAllIncidents')
+                    ->label('Bekijk alle storingen')
+                    ->url(fn () => '/' . Filament::getTenant()->id . '/incidents') // Adjust the URL as needed
+                    ->button()
+                    ->link()
+                    ->color('primary'),
+            ]);
     }
 }
