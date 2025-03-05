@@ -124,7 +124,7 @@ class ObjectResource extends Resource
             ]),
 
             Section::make("Afbeeldingen")
-                ->description('Afbeeldingen van het osssbject')
+                ->description('Afbeeldingen van het object')
                 ->compact()
                 ->schema([
 
