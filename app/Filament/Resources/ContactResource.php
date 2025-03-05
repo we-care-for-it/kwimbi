@@ -21,6 +21,9 @@ use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Support\Enums\ActionSize;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 
 class ContactResource extends Resource
 {
@@ -31,79 +34,102 @@ class ContactResource extends Resource
     protected static ?string $title           = "Contactpersonen";
 
     protected static ?string $pluralModelLabel = 'Contactpersonen';
-
+    
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
-                    ->label('Profielfoto')
-                    ->image()
-                    ->nullable()
-                    ->directory('contacts'),
+                // Profiel Sectie
+                Section::make('Contactgegevens')
+                    ->schema([
+                        FileUpload::make('image')
+                            ->label('Profielfoto')
+                            ->image()
+                            ->nullable()
+                            ->directory('contacts')
+                            ->columnSpanFull(),
+    
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                TextInput::make('first_name')
+                                    ->label('Voornaam')
+                                    ->required()
+                                    ->maxLength(255),
+    
+                                TextInput::make('last_name')
+                                    ->label('Achternaam')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]),
 
-                Forms\Components\TextInput::make('first_name')
-                    ->label('Voornaam')
-                    ->required()
-                    ->maxLength(255),
+                            Forms\Components\Grid::make(2)
+                            ->schema([
+                                TextInput::make('email')
+                                    ->label('E-mailadres')
+                                    ->maxLength(255),
+    
+                                TextInput::make('phone_number')
+                                    ->label('Telefoonnummer')
+                                    ->maxLength(15),
+    
+                                TextInput::make('mobile_number')
+                                    ->label('Intern telefoonnummer')
+                                    ->maxLength(15),
+    
+                                TextInput::make('department')
+                                    ->label('Afdeling')
+                                    ->maxLength(255),
+    
+                                TextInput::make('function')
+                                    ->label('Functie')
+                                    ->maxLength(255),
+                            ]),
+                    
+                    ])
+                    ->collapsible(),
+    
+                Section::make('Adresgegevens')
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                TextInput::make('street')
+                                    ->label('Straat')
+                                    ->maxLength(255),
+    
+                                TextInput::make('city')
+                                    ->label('Stad')
+                                    ->maxLength(255),
+    
+                                TextInput::make('postal_code')
+                                    ->label('Postcode')
+                                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+                                    ->maxLength(10),
+    
+                                TextInput::make('country')
+                                    ->label('Land')
+                                    ->maxLength(255),
+                            ]),
+                    ])
+                    ->collapsible(), // Maakt deze sectie inklapbaar
 
-                Forms\Components\TextInput::make('last_name')
-                    ->label('Achternaam')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('email')
-                    ->label('E-mailadres')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('department')
-                    ->label('Afdeling')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('function')
-                    ->label('Functie')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('phone_number')
-                    ->label('Telefoonnummer')
-                    ->maxLength(15),
-
-                Forms\Components\TextInput::make('mobile_number')
-                    ->label('Intern telefoonnummer')
-                    ->maxLength(15),
-
-                // Forms\Components\TextInput::make('intern_number')
-                //     ->label('Intern Nummer')
-                //     ->maxLength(15),
-
-                Forms\Components\TextInput::make('linkedin')
-                    ->label('LinkedIn')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('twitter')
-                    ->label('Twitter')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('facebook')
-                    ->label('Facebook')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('street')
-                    ->label('Straat')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('city')
-                    ->label('Stad')
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('postal_code')
-                    ->label('Postcode')
-                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
-                    ->maxLength(10),
-
-                Forms\Components\TextInput::make('country')
-                    ->label('Land')
-                    ->maxLength(255),
+                    Section::make('Social Media')
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                TextInput::make('linkedin')
+                                    ->label('LinkedIn')
+                                    ->maxLength(255),
+    
+                                TextInput::make('twitter')
+                                    ->label('Twitter')
+                                    ->maxLength(255),
+    
+                                TextInput::make('facebook')
+                                    ->label('Facebook')
+                                    ->maxLength(255),
+                            ]),
+                    ])
+                    ->collapsible(),
             ]);
     }
 
@@ -134,7 +160,7 @@ class ContactResource extends Resource
                                 TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
                             ])->columns(3),
     
-                        Tabs\Tab::make('Adres')
+                        Tabs\Tab::make('Adresgegevens')
                             ->icon('heroicon-o-map')
                             ->schema([
                                 TextEntry::make('street')->label('Straat')->placeholder('-'),

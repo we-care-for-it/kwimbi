@@ -27,8 +27,6 @@ class ListContacts extends ListRecords
     }
     public function getHeading(): string
     {
-      
         return "Contact - Overzicht";
-       
     }
 }
