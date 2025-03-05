@@ -18,11 +18,12 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
 
 class User extends Authenticatable implements FilamentUser, HasTenants, HasAvatar
 {
-    use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens;
+    use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles;
 
     public function canAccessPanel(Panel $panel): bool
     {

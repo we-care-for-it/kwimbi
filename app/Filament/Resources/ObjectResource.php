@@ -124,11 +124,14 @@ class ObjectResource extends Resource
             ]),
 
             Section::make("Afbeeldingen")
-                ->description('Afbeeldingen van het object')
+                ->description('Afbeeldingen van het osssbject')
                 ->compact()
                 ->schema([
 
                     SpatieMediaLibraryFileUpload::make('objectimage')
+                        ->directory("objects/images/"
+                        )
+
                         ->responsiveImages()
                         ->image()
                         ->hiddenlabel()
@@ -184,7 +187,6 @@ class ObjectResource extends Resource
                     ->badge()
                     ->sortable()
                     ->toggleable(),
-
 
                 Tables\Columns\TextColumn::make("current_inspection_status_id")
                     ->label("KeuringStatus")
@@ -445,7 +447,8 @@ class ObjectResource extends Resource
                         ->placeholder('Geen afbeeldingen')
                         ->height(200)
                         ->ring(5)
-                        ->collection('objectimages')])->collapsible()
+                        ->collection('objectimages')])
+                ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed(),
 

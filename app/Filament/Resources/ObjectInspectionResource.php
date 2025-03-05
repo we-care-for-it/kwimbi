@@ -216,7 +216,7 @@ class ObjectInspectionResource extends Resource
         // ])
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make("latestInspection.elevator.nobo_no")
+                Tables\Columns\TextColumn::make("elevator.nobo_no")
                     ->label("Object")
                     ->placeholder("Geen nobo nummer")
                     ->sortable()
@@ -281,8 +281,14 @@ class ObjectInspectionResource extends Resource
 
                     ->hidden(true),
 
-                Tables\Columns\TextColumn::make("maintenance_company.name")
+                Tables\Columns\TextColumn::make("elevator.maintenance_company.name")
                     ->label("Onderhoudspartij")
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make("inspectioncompany.name")
+                    ->label("Instantie")
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -324,17 +330,19 @@ class ObjectInspectionResource extends Resource
 
             ->filters([
 
-                //     ToggleButtons::make('status_id')
-                //         ->label('Sorteer op status')
-                //         ->multiple()
-                //         ->default(0)
-                //         ->grouped()
-                //         ->options(InspectionStatus::class),
-                // ]),
-
                 SelectFilter::make('status_id')
                     ->label("Status")
                     ->options(InspectionStatus::class),
+
+                SelectFilter::make('inspection_company_id')
+                    ->label('Keuringinstantie')
+                    ->multiple()
+                    ->options(Relation::where('type_id', 3)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+
+                // SelectFilter::make('elevator.maintenance_company_id')
+                //     ->label('Onderhoudspartij')
+                //     ->multiple()
+                //     ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
 
                 // Filter::make('TypeFilter')
                 //     ->form([
