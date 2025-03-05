@@ -13,12 +13,20 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+use Illuminate\Database\Eloquent\Model;
 
 class ContactsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
     protected static string $relationship   = 'contactsObject';
+    protected static ?string $icon        = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        // $ownerModel is of actual type Job
+        return $ownerRecord->contactsObject->count();
+    }
 
     public function form(Form $form): Form
     {

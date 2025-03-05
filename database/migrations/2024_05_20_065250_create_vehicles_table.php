@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('aantal_cilinders')->nullable();
             $table->string('cilinderinhoud')->nullable();
             $table->string('massa_ledig_voertuig')->nullable();
-            $table->string('toegestane_maxium_massa_voertuig')->nullable();
+            $table->string('toegestane_maximum_massa_voertuig')->nullable();
             $table->string('maximum_massa_trekken_ongeremd')->nullable();
             $table->string('maximum_massa_trekken_geremd')->nullable();
             $table->string('technische_max_massa_voertuig')->nullable();

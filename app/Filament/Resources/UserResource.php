@@ -5,6 +5,7 @@ use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -40,6 +41,16 @@ class UserResource extends Resource
                 ->password()
                 ->required()
                 ->minLength(8),
+
+            Select::make('roles')
+                ->relationship('roles', 'name')
+                ->saveRelationshipsUsing(function ($record, $state) {
+                    $record->roles()->syncWithPivotValues($state, [config('permission.column_names.team_foreign_key') => getPermissionsTeamId()]);
+                })
+                ->multiple()
+                ->preload()
+                ->searchable(),
+
         ]);
     }
 
