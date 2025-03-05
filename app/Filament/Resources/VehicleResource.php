@@ -36,6 +36,7 @@ class VehicleResource extends Resource
     protected static ?string $navigationLabel  = 'Voertuigen';
     protected static ?string $pluralModelLabel = 'Voertuigen';
     protected static ?string $title            = 'Voertuigen';
+    protected static ?string $navigationGroup = 'Beheer';
 
     public static function getGloballySearchableAttributes(): array
     {

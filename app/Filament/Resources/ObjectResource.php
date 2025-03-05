@@ -46,6 +46,8 @@ class ObjectResource extends Resource
     protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
     protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 2;
 
     public static function getNavigationBadge(): ?string
     {
@@ -124,7 +126,7 @@ class ObjectResource extends Resource
             ]),
 
             Section::make("Afbeeldingen")
-                ->description('Afbeeldingen van het osssbject')
+                ->description('Afbeeldingen van het object')
                 ->compact()
                 ->schema([
 

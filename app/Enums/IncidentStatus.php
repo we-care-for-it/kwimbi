@@ -22,7 +22,7 @@ enum IncidentStatus: string implements HasLabel,HasColor
         {
             self::STATUS01 => 'Nieuw',
             self::STATUS02 => 'Wacht op klant',
-            self::STATUS03 => 'Wacht op leveranier',
+            self::STATUS03 => 'Wacht op leverancier',
             self::STATUS04 => 'Gesloten',
         };
     }
@@ -32,7 +32,7 @@ enum IncidentStatus: string implements HasLabel,HasColor
         return match ($this) {
             self::STATUS01 => 'Nieuw',
             self::STATUS02 => 'Wacht op klant',
-            self::STATUS03 => 'Wacht op leveranier',
+            self::STATUS03 => 'Wacht op leverancier',
             self::STATUS04 => 'Gesloten'
         };
     }

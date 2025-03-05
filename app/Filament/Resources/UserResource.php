@@ -16,14 +16,18 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Filament\Facades\Filament;
 
 class UserResource extends Resource
 {
     protected static ?string $model           = User::class;
     protected static ?string $navigationIcon  = 'heroicon-o-users';
     protected static ?string $navigationLabel = "Gebruikers";
+    protected static ?string $navigationGroup = 'Beheer';
+
     public static function form(Form $form): Form
     {
+        
         return $form->schema([
             TextInput::make('name')
                 ->label('Naam')
@@ -94,8 +98,8 @@ class UserResource extends Resource
     {
         return [
             'index'  => ListUsers::route('/'),
-            'create' => CreateUser::route('/create'),
-            'edit'   => EditUser::route('/{record}/edit'),
+            // 'create' => CreateUser::route('/create'),
+            // 'edit'   => EditUser::route('/{record}/edit'),
         ];
     }
 

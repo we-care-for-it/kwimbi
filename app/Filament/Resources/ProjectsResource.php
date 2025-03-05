@@ -31,6 +31,7 @@ class ProjectsResource extends Resource
     protected static ?string $navigationLabel = "Projecten";
     protected static ?string $navigationIcon  = "heroicon-o-archive-box";
     protected static bool $isLazy             = false;
+    protected static ?int $navigationSort     = 90;
 
     protected static ?string $pluralModelLabel = 'Projecten';
 
@@ -150,7 +151,8 @@ class ProjectsResource extends Resource
                     ->columns(2)
                     ->columnSpan(1),
             ])
-            ->columns(5);
+            // ->columns(5)
+        ;
     }
 
     public static function table(Table $table): Table
@@ -311,10 +313,10 @@ class ProjectsResource extends Resource
     public static function getPages(): array
     {
         return [
-            "index"  => Pages\ListProjects::route("/"),
-            "create" => Pages\CreateProjects::route("/create"),
+            "index" => Pages\ListProjects::route("/"),
+            // "create" => Pages\CreateProjects::route("/create"),
             //  'view' => Pages\ViewProjects::route('/{record}') ,
-            "edit"   => Pages\EditProjects::route("/{record}/edit"),
+            // "edit"   => Pages\EditProjects::route("/{record}/edit"),
         ];
     }
 }

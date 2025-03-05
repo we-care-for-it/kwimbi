@@ -1,29 +1,21 @@
 <?php
-
 namespace App\Filament\Resources\ContactResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\ContactObject;
 use Filament\Facades\Filament;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Actions\Action;
-use Filament\Support\Enums\MaxWidth;
-use Filament\Forms\Components\Grid;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class RelationRelationManager extends RelationManager
 {
 
-    protected static string $relationship   = 'relationsObject';
-    protected static ?string $title         = 'Relaties';
+    protected static string $relationship = 'relationsObject';
+    protected static ?string $title       = 'Relaties';
 
     public function form(Form $form): Form
     {
@@ -40,15 +32,14 @@ class RelationRelationManager extends RelationManager
 
             ->columns([
 
-     
                 TextColumn::make('relation.name')
                     ->placeholder('-')
                     ->label('Afdeling'),
-                    Tables\Columns\TextColumn::make('relation.zipcode')
+                Tables\Columns\TextColumn::make('relation.zipcode')
                     ->placeholder('-')
                     ->label('Postcode')
                     ->state(function (ContactObject $rec) {
-                        return $rec->relation->zipcode . " " . $rec?->relation?->place;
+                        return $rec->relation?->zipcode . " " . $rec?->relation?->place;
                     }),
 
                 TextColumn::make('relation.address')
@@ -57,7 +48,7 @@ class RelationRelationManager extends RelationManager
                     ->weight('medium')
                     ->placeholder('-')
                     ->alignLeft(),
-                    
+
                 TextColumn::make('contact.phone_number')
                     ->placeholder('-')
                     ->Url(function (object $record) {
@@ -65,7 +56,6 @@ class RelationRelationManager extends RelationManager
                     })
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
-
 
                 TextColumn::make('relation.type_id')
                     ->label('Categorie')
@@ -76,7 +66,7 @@ class RelationRelationManager extends RelationManager
             ])
             ->emptyState(view('partials.empty-state-small'))
             ->recordUrl(function (object $record) {
-            return "/" . Filament::getTenant()->id . "/relations/" . $record->model_id;
+                return "/" . Filament::getTenant()->id . "/relations/" . $record->model_id;
             })
 
             ->actions([

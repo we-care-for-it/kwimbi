@@ -3,7 +3,7 @@ return [
     'navigation'                       => [
         'token' => [
             'cluster' => null,
-            'group'   => 'User',
+            'group'   => 'Beheer',
             'sort'    => -1,
             'icon'    => 'heroicon-o-key',
         ],

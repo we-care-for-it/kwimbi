@@ -5,32 +5,26 @@ use App\Filament\Resources\RelationResource;
 use Filament\Actions;
 use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListRelations extends ListRecords
 {
     protected static string $resource = RelationResource::class;
-
     protected function getHeaderActions(): array
     {
         return [
-            // \EightyNine\ExcelImport\ExcelImportAction::make()
-            //     ->color("primary")
-            //     ->label('')
-            //     ->color('secondary')
-            //     ->slideOver()
-            //     ->link()
-            //     ->beforeImport(function ($data, $livewire, $excelImportAction) {
-            //         $excelImportAction->additionalData([
-            //             'company_id' => Filament::getTenant()->id,
-            //         ]);
-            //     }),
-
             Actions\CreateAction::make()
-                ->label('Toevoegen')->slideOver()
+                ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Relatie toevoegen')
-                ->modalDescription('Vul de onderstaande gegevens in om de relatie aan te maken in het systeem')
-                ->modalSubmitActionLabel('Opslaan')
-                ->modalIcon('heroicon-o-plus'),
+                ->modalDescription('Voeg een nieuwe relatie toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver()
+                ->label('Relatie toevoegen'),
         ];
+    }
+    public function getHeading(): string
+    {
+        return "Relatie - Overzicht";
     }
 }
