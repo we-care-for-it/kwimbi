@@ -46,9 +46,8 @@ class ObjectResource extends Resource
     protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
     protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 1;
-
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 2;
 
     public static function getNavigationBadge(): ?string
     {

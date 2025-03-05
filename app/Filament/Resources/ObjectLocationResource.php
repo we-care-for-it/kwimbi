@@ -24,18 +24,17 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\Alignment;
-use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Filament\Support\Enums\ActionSize;
 
 class ObjectLocationResource extends Resource
 {
@@ -43,7 +42,7 @@ class ObjectLocationResource extends Resource
     protected static ?string $navigationIcon  = "heroicon-o-building-office-2";
     protected static ?string $navigationLabel = "Locaties";
     protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort     = 1;
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -473,23 +472,23 @@ class ObjectLocationResource extends Resource
 
             ->actions([
                 EditAction::make()
-                ->modalHeading('Snel bewerken')
-                ->tooltip('Bewerken')
-                ->label('')
-                ->size(ActionSize::Medium)
-                ->modalIcon('heroicon-o-pencil')
-                ->slideOver(),
-            DeleteAction::make()
-                ->modalIcon('heroicon-o-trash')
-                ->tooltip('Verwijderen')
-                ->label('')
-                ->size(ActionSize::Medium)
-                ->modalHeading('Contactpersoon verwijderen')
-                ->color('danger'),
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->size(ActionSize::Medium)
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->size(ActionSize::Medium)
+                    ->modalHeading('Contactpersoon verwijderen')
+                    ->color('danger'),
 
                 RestoreAction::make(),
-                ])
-                    
+            ])
+
             // ->bulkActions([
 
             //     ExportBulkAction::make()
@@ -530,9 +529,9 @@ class ObjectLocationResource extends Resource
     {
         return
             [
-            "index"  => Pages\ListObjectLocations::route("/"),
+            "index" => Pages\ListObjectLocations::route("/"),
             // "create" => Pages\CreateObjectLocation::route("/create"),
-            "view"   => Pages\ViewObjectLocation::route("/{record}")];
+            "view"  => Pages\ViewObjectLocation::route("/{record}")];
     }
 
     public static function getModelLabel(): string

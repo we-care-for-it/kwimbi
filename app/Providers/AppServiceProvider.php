@@ -23,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
             return in_array($user->email, ['superadmin@ltssoftware.nl']);
         });
 
+        Filament::registerNavigationGroups([
+            'Objecten',
+            'Blog',
+            'Settings',
+        ]);
+
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
