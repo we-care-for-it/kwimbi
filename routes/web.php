@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ObjectMonitoringController;
+
 // Route::get('/', function () {
 //     return redirect()->to('/app');
 // });
@@ -19,3 +21,5 @@
 use App\Http\Controllers\webhook\Mailersend;
 
 Route::middleware('apilogger')->post('/webhook/mailersend', [Mailersend::class, 'handle']);
+
+Route::get('/monitoring/retrieveInfo', [ObjectMonitoringController::class, 'retrieveInfo']);

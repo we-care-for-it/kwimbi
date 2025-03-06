@@ -8,6 +8,8 @@ use App\Models\ObjectLocation;
 use App\Models\Project;
 use App\Models\Statuses;
 use Filament\Forms;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -87,30 +89,6 @@ class ProjectsResource extends Resource
                             "lg"      => 2,
                             "xl"      => 2,
                             "2xl"     => 2,
-                        ])->schema([
-                            DatePicker::make("requestdate")->label(
-                                "Aanvraagdatum"
-                            ),
-
-                            DatePicker::make("date_of_execution")
-                                ->label("Plandatum")
-                                ->placeholder('Onbekend'),
-
-                            DatePicker::make("startdate")->label("Startdatum"),
-                            DatePicker::make("enddate")->label("Einddatum"),
-                        ]),
-                    ])
-                    ->columnSpan(["lg" => 1]),
-
-                Section::make()
-                    ->schema([
-                        Grid::make([
-                            "default" => 2,
-                            "sm"      => 2,
-                            "md"      => 2,
-                            "lg"      => 2,
-                            "xl"      => 2,
-                            "2xl"     => 2,
                         ])->schema(
                             components: [
                                 TextInput::make("budget_costs")
@@ -150,6 +128,30 @@ class ProjectsResource extends Resource
                     ])
                     ->columns(2)
                     ->columnSpan(1),
+                
+
+                    Section::make()
+                    ->schema([
+                        Grid::make([
+                            "default" => 2,
+                            "sm"      => 2,
+                            "md"      => 2,
+                            "lg"      => 2,
+                            "xl"      => 2,
+                            "2xl"     => 2,
+                        ])->schema([
+                            DatePicker::make("requestdate")->label(
+                                "Aanvraagdatum"
+                            ),
+
+                            DatePicker::make("date_of_execution")
+                                ->label("Plandatum")
+                                ->placeholder('Onbekend'),
+
+                            DatePicker::make("startdate")->label("Startdatum"),
+                            DatePicker::make("enddate")->label("Einddatum"),
+                        ]),
+                    ]),
             ])
             // ->columns(5)
         ;
@@ -291,7 +293,18 @@ class ProjectsResource extends Resource
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Open details'),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

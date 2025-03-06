@@ -34,7 +34,7 @@ class ContactResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Section::make()
+                Forms\Components\Section::make('Persoonsgegevens')
                     ->schema([
 
                         Grid::make(2)
@@ -68,24 +68,17 @@ class ContactResource extends Resource
                                     ->label('Intern telefoonnummer')
                                     ->maxLength(15),
 
+                                Forms\Components\TextInput::make('function')
+                                    ->label('Functie')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('department')
+                                    ->label('Afdeling')
+                                    ->maxLength(255),
+
                             ])]),
 
-                Forms\Components\Section::make('Socialmedia')
-                    ->schema([
-                        Forms\Components\TextInput::make('linkedin')
-                            ->label('LinkedIn')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('twitter')
-                            ->label('Twitter')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('facebook')
-                            ->label('Facebook')
-                            ->maxLength(255),
-                    ])->collapsible(),
-
-                Forms\Components\Section::make()
+                Forms\Components\Section::make('Adresgegevens')
 
                     ->schema([
 
@@ -111,22 +104,20 @@ class ContactResource extends Resource
                             ]),
                     ]),
 
-                Forms\Components\Section::make()
-                    ->schema([
+                Forms\Components\Section::make('Social Media')
+                ->schema([
+                    Forms\Components\TextInput::make('linkedin')
+                        ->label('LinkedIn')
+                        ->maxLength(255),
 
-                        Grid::make(2)
-                            ->schema([
+                    Forms\Components\TextInput::make('twitter')
+                        ->label('Twitter')
+                        ->maxLength(255),
 
-                                Forms\Components\TextInput::make('function')
-                                    ->label('Functie')
-                                    ->maxLength(255),
-
-                                Forms\Components\TextInput::make('department')
-                                    ->label('Afdeling')
-                                    ->maxLength(255),
-
-                            ]),
-                    ]),
+                    Forms\Components\TextInput::make('facebook')
+                        ->label('Facebook')
+                        ->maxLength(255),
+                ])->collapsible(),
 
             ]);
     }
@@ -138,7 +129,7 @@ class ContactResource extends Resource
                 Tabs::make('Contact Informatie') // Hoofd-tab component
                     ->columnSpan('full')
                     ->tabs([
-                        Tabs\Tab::make('Contactgegevens')
+                        Tabs\Tab::make('Persoonsgegevens')
                             ->icon('heroicon-o-user')
                             ->schema([
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
@@ -148,7 +139,7 @@ class ContactResource extends Resource
                                 TextEntry::make('email')->label('E-mail')->placeholder('-'),
                                 TextEntry::make('phone_number')->label('Telefoon')->placeholder('-'),
                                 TextEntry::make('mobile_number')->label('Intern Tel')->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
 
                         Tabs\Tab::make('Social Media')
                             ->icon('heroicon-o-share')
@@ -156,7 +147,7 @@ class ContactResource extends Resource
                                 TextEntry::make('linkedin')->label('LinkedIn')->placeholder('-'),
                                 TextEntry::make('twitter')->label('Twitter')->placeholder('-'),
                                 TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
 
                         Tabs\Tab::make('Adresgegevens')
                             ->icon('heroicon-o-map')
@@ -165,7 +156,7 @@ class ContactResource extends Resource
                                 TextEntry::make('city')->label('Stad')->placeholder('-'),
                                 TextEntry::make('postal_code')->label('Postcode')->placeholder('-'),
                                 TextEntry::make('country')->label('Land')->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
                     ]),
             ]);
     }
@@ -213,15 +204,13 @@ class ContactResource extends Resource
                     ->modalHeading('Snel bewerken')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->size(ActionSize::Medium)
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
-                    ->size(ActionSize::Medium)
-                    ->modalHeading('Contactpersoon verwijderen')
+                    ->modalHeading('Verwijderen')
                     ->color('danger'),
             ])
             ->bulkActions([])

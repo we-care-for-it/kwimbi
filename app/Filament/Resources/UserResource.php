@@ -11,6 +11,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
@@ -86,8 +87,19 @@ class UserResource extends Resource
                     ->query(fn(Builder $query) => $query->latest()),
             ])
             ->actions([
-                EditAction::make(),
-                Impersonate::make(), // <---
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
+                Impersonate::make(),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),

@@ -13,6 +13,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
@@ -478,23 +479,23 @@ class ObjectInspectionResource extends Resource
                 //         ->deleteFileAfterSend(true);
                 // }),
 
-                ActionGroup::make([
                     Actions\Action::make('cancel_top')
 
                         ->color('gray')
-                        ->label('Naar object')
-
-                        ->icon('heroicon-o-arrow-uturn-left')
+                        ->tooltip('Naar Object')
+                        ->label('')
+                        ->color('info')
+                        ->icon('heroicon-o-arrow-up-left')
                         ->url(function ($record) {
                             return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
 
                         }),
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Keuring verwijderen')
+                        ->tooltip('Verwijderen')
+                        ->label('')
+                        ->modalHeading('Contactpersoon verwijderen')
                         ->color('danger'),
-                ]),
-
             ])
 
             ->bulkActions([

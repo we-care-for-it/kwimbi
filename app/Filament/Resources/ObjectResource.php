@@ -308,17 +308,18 @@ class ObjectResource extends Resource
 
             ], layout: FiltersLayout::AboveContent)
             ->actions([
-                ActionGroup::make([
-                    EditAction::make()
-                        ->modalHeading('Object bewerken')
-                        ->modalIcon('heroicon-o-pencil')
-                        ->label('Snel bewerken')
-                        ->slideOver(),
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Object verwijderen')
-                        ->color('danger'),
-                ]),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([ExportBulkAction::make()
                     ->exports([

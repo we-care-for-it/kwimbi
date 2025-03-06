@@ -423,7 +423,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Geen relatie gekoppeld")
                     ->searchable()
                     ->url(function (ObjectLocation $record) {
-                        return "/app/customers/" . $record->customer_id . "/edit";
+                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id;
                     }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
@@ -475,14 +475,12 @@ class ObjectLocationResource extends Resource
                     ->modalHeading('Snel bewerken')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->size(ActionSize::Medium)
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
-                    ->size(ActionSize::Medium)
                     ->modalHeading('Contactpersoon verwijderen')
                     ->color('danger'),
 

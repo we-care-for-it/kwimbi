@@ -20,26 +20,21 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\Section;
-
-//Form
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
-
-//Table
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
-
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\FileUpload;
-
 use Hexters\HexaLite\Traits\HexAccess;
-
 use Filament\Forms\Components\Fieldset;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 
 use Filament\Tables\Grouping\Group;
 
@@ -275,31 +270,33 @@ class ToolsResource extends Resource
 
                                         TextColumn::make('name')
                                         ->searchable()
-                                        ->label('Naam'),
+                                        ->label('Naam')
+                                        ->placeholder('-'),
                                         // ->description(fn (tools $record): string => $record?->description),
 
                                         TextColumn::make('serial_number')
                                             ->searchable()
                                             ->label('Serienummer')
-
+                                            ->placeholder('-')
                                             ->searchable()
                                             ->sortable() ,
 
                                         TextColumn::make('category.name')
                                             ->searchable()
                                             ->label('Categorie')
-
+                                            ->placeholder('-')
                                             ->sortable() ,
 
                                         TextColumn::make('brand.name')
                                             ->searchable()
                                             ->label('Merk')
-
+                                            ->placeholder('-')
                                             ->sortable() ,
 
                                         TextColumn::make('type.name')
                                             ->searchable()
-                                            ->label('Type / Model') ,
+                                            ->label('Type / Model') 
+                                            ->placeholder('-'),
 
                                         // TextColumn::make('employee.name')
                                         //     ->searchable()
@@ -325,18 +322,20 @@ class ToolsResource extends Resource
                                         //     ->pluck('name', 'id')) ,
 
                                       //  ])
-                                            ->actions([
-
-                                                Tables\Actions\ViewAction::make(),
-                                                Tables\Actions\EditAction::make()
-
-                                           // ->visible(hexa()->can('access.tools.create'))
-                                            ->modalHeading('Wijzigen')
-                                            //->visible(hexa()->can('access.tools.edit'))
-                                            ->modalWidth(MaxWidth::SevenExtraLarge) ,
-                                         //   ->visible(hexa()->can('access.tools.delete')) ,
-
-                                        ])
+                                      ->actions([
+                                        EditAction::make()
+                                            ->modalHeading('Snel bewerken')
+                                            ->tooltip('Bewerken')
+                                            ->label('')
+                                            ->modalIcon('heroicon-o-pencil')
+                                            ->slideOver(),
+                                        DeleteAction::make()
+                                            ->modalIcon('heroicon-o-trash')
+                                            ->tooltip('Verwijderen')
+                                            ->label('')
+                                            ->modalHeading('Verwijderen')
+                                            ->color('danger'),
+                                    ])
                                             ->bulkActions([
                                         // Tables\Actions\BulkActionGroup::make([
                                         //     Tables\Actions\DeleteBulkAction::make(),
