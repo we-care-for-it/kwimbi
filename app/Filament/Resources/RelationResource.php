@@ -170,22 +170,21 @@ class RelationResource extends Resource
 
             ],
             )
-            ->actions([ActionGroup::make([
+            ->actions([
                 EditAction::make()
-                    ->modalHeading("Relalatie bewerken")
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
                     ->slideOver(),
-                ViewAction::make()
-                    ->modalIcon('heroicon-o-pencil')
-                    ->label('Bekijk details'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
-                    ->modalHeading('Bedrijf verwijderen')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
                     ->color('danger'),
-
                 RestoreAction::make(),
-            ])])
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
 

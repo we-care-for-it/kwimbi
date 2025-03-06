@@ -20,6 +20,7 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Table;
@@ -281,21 +282,25 @@ class TaskResource extends Resource
 
             ])
             ->filters([
-                //
+
             ])
             ->actions([
 
-                Tables\Actions\EditAction::make(),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),       
                 DeleteAction::make()
 
-                    ->modalDescription(
-                        "Weet je zeker dat je deze actie wilt voltooien ?"
-                    )
-
+                    ->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
+                    ->icon('heroicon-o-check')
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
-                    ->color('danger')
-                    ->label('Voltooien'),
+                    ->color('success')
+                    ->tooltip('Voltooien')
+                    ->label(''),
 
                 RestoreAction::make()
                     ->color("danger")

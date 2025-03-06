@@ -204,15 +204,13 @@ class ContactResource extends Resource
                     ->modalHeading('Snel bewerken')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->size(ActionSize::Medium)
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
-                    ->size(ActionSize::Medium)
-                    ->modalHeading('Contactpersoon verwijderen')
+                    ->modalHeading('Verwijderen')
                     ->color('danger'),
             ])
             ->bulkActions([])
