@@ -423,7 +423,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Geen relatie gekoppeld")
                     ->searchable()
                     ->url(function (ObjectLocation $record) {
-                        return "/app/customers/" . $record->customer_id . "/edit";
+                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id;
                     }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
