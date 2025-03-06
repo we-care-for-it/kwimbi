@@ -270,31 +270,33 @@ class ToolsResource extends Resource
 
                                         TextColumn::make('name')
                                         ->searchable()
-                                        ->label('Naam'),
+                                        ->label('Naam')
+                                        ->placeholder('-'),
                                         // ->description(fn (tools $record): string => $record?->description),
 
                                         TextColumn::make('serial_number')
                                             ->searchable()
                                             ->label('Serienummer')
-
+                                            ->placeholder('-')
                                             ->searchable()
                                             ->sortable() ,
 
                                         TextColumn::make('category.name')
                                             ->searchable()
                                             ->label('Categorie')
-
+                                            ->placeholder('-')
                                             ->sortable() ,
 
                                         TextColumn::make('brand.name')
                                             ->searchable()
                                             ->label('Merk')
-
+                                            ->placeholder('-')
                                             ->sortable() ,
 
                                         TextColumn::make('type.name')
                                             ->searchable()
-                                            ->label('Type / Model') ,
+                                            ->label('Type / Model') 
+                                            ->placeholder('-'),
 
                                         // TextColumn::make('employee.name')
                                         //     ->searchable()

@@ -243,7 +243,7 @@ class InspectionsRelationManager extends RelationManager
                     , Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
-                            return "/app/object-inspections/" .
+                            return "/" . Filament::getTenant()->id . "/object-inspections/" .
                             $record->id;
                         }),
 
