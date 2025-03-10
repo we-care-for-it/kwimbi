@@ -45,6 +45,7 @@ class NotesRelationManager extends RelationManager
             ->columns([
 
                 Tables\Columns\TextColumn::make('note')->label('Notitie')->wrap(),
+
                 // ->description(function ($record) {
 
                 //     return "Toegevoegd door: " . $record->user->name . " " . date("d-m-Y", strtotime($record?->created_at)) . " om " . date("H:i", strtotime($record?->updated_at));
@@ -64,6 +65,7 @@ class NotesRelationManager extends RelationManager
                     $data['model']      = "ObjectLocation";
                     return $data;
                 })->label('Notitie toevoegen')
+                    ->slideOver()
                     ->modalHeading('Notitie toevoegen'),
 
             ])

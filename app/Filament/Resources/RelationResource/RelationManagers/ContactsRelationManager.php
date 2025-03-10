@@ -12,14 +12,14 @@ use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Illuminate\Database\Eloquent\Model;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
     protected static string $relationship   = 'contactsObject';
-    protected static ?string $icon        = 'heroicon-o-user';
+    protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
@@ -188,8 +188,8 @@ class ContactsRelationManager extends RelationManager
                     ->url(function ($record) {
                         return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
 
-                    })->icon('heroicon-s-credit-card')
-                    ->color('warning'),
+                    })->icon('heroicon-s-eye')
+                    ->color('secondary'),
 
                 DeleteAction::make('Detach')
                     ->label('Verwijderen')
