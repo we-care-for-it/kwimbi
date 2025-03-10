@@ -76,4 +76,9 @@ class Relation extends Model
         return $this->hasMany(ObjectLocation::class);
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation')->where('company_id', Filament::getTenant()->id);
+    }
+
 }

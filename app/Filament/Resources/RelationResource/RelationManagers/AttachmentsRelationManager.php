@@ -1,6 +1,7 @@
 <?php
-namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
+namespace App\Filament\Resources\RelationResource\RelationManagers;
 
+use Filament\Facades\Filament;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -76,16 +77,16 @@ class AttachmentsRelationManager extends RelationManager
 
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id']    = auth()->id();
-                    $data['model']      = "ObjectLocation";
+                    $data['model']      = "Relation";
                     $data['company_id'] = Filament::getTenant()->id;
-
                     return $data;
-                })->label('Bijlage toevoegen'),
+                })->label('Bijlage toevoegen')->slideOver(),
             ])
             ->actions([
 
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
+
                     ->action(fn($record) => Storage::disk('private')
                             ->download($record->filename))
                     ->icon('heroicon-o-document-arrow-down'),

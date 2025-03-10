@@ -24,14 +24,14 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -445,7 +445,8 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Onbekend")])
 
             ->filters([SelectFilter::make("customer_id")
-                    ->options(Relation::where('type_id', 5)
+                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)
+
                             ->pluck("name", "id"))
                     ->label("Relatie")
 
@@ -467,22 +468,27 @@ class ObjectLocationResource extends Resource
                     ->options(ObjectLocation::whereNotNull("place")
                             ->pluck("place", "place"))
                     ->searchable(),
-                Tables\Filters\TrashedFilter::make()], //layout : FiltersLayout::AboveContent
+                Tables\Filters\TrashedFilter::make()], layout: FiltersLayout::AboveContent
             )
 
             ->actions([
+                ViewAction::make()
+                    ->tooltip('Bekijk locatie')
+                    ->label('Open locatie'),
+
                 EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Contactpersoon verwijderen')
-                    ->color('danger'),
+
+                // DeleteAction::make()
+                //     ->modalIcon('heroicon-o-trash')
+                //     ->tooltip('Verwijderen')
+                //     ->label('')
+                //     ->modalHeading('Contactpersoon verwijderen')
+                //     ->color('danger'),
 
                 RestoreAction::make(),
             ])

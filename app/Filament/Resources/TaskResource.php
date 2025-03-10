@@ -57,18 +57,19 @@ class TaskResource extends Resource
 
                 Select::make('model')
                     ->options([
-                        'relation'      => 'Relatie',
+                        'relation' => 'Relatie',
                         //  'project'       => 'Project',
-                        'contactperson' => 'Contactpersoon',
+                        //   'contactperson' => 'Contactpersoon',
                         //  'object'        => 'Object',
-                        'location'      => 'Locatie',
+                        'location' => 'Locatie',
                     ])
                     ->searchable()
                     ->live()
                     ->label('Koppel aan'),
                 Select::make('model_id')
                     ->label('Relatie')
-                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                //where('type_id', 5)->
+                    ->options(Relation::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
@@ -89,6 +90,14 @@ class TaskResource extends Resource
                         return $get('model') == 'contactperson' ?? false;
                     })
                     ->label('Contactpersoon'),
+
+                //         TileSelect::make('contact_id')
+                //             ->searchable(['first_name', 'last_name', 'email'])
+                //             ->model(Contact::class)
+                //             ->titleKey('name')
+                //             ->imageKey('avatar')
+                //             ->descriptionKey('email')
+                //             ->label('Contactpersoon')
 
                 // Select::make('model_id')
                 //     ->options(Elevator::pluck('nobo_no', 'id'))
@@ -291,7 +300,7 @@ class TaskResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
-                    ->slideOver(),       
+                    ->slideOver(),
                 DeleteAction::make()
 
                     ->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")

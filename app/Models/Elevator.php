@@ -41,7 +41,7 @@ class Elevator extends Model implements Auditable, HasMedia
     protected function casts(): array
     {
         return [
-            'status_id' => ElevatorStatus::class,
+            'status_id'                    => ElevatorStatus::class,
             'current_inspection_status_id' => InspectionStatus::class,
 
         ];
@@ -70,12 +70,12 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function customer()
     {
-        return $this->hasOne(Customer::class, 'id', 'customer_id');
+        return $this->hasOne(Relation::class, 'id', 'customer_id');
     }
 
     public function supplier()
     {
-        return $this->hasOne(Supplier::class, 'id', 'supplier_id');
+        return $this->hasOne(Relation::class, 'id', 'supplier_id');
     }
 
     public function type()
@@ -95,7 +95,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function inspectioncompany()
     {
-        return $this->hasOne(Company::class, 'id', 'inspection_company_id');
+        return $this->hasOne(Relation::class, 'id', 'inspection_company_id');
     }
 
     public function getAllElevatorOnThisAddressAttribute()
@@ -105,7 +105,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id)->orderby('end_date','desc');
+        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id)->orderby('end_date', 'desc');
     }
 
     public function inspection()
@@ -126,11 +126,6 @@ class Elevator extends Model implements Auditable, HasMedia
     public function features()
     {
         return $this->hasMany(ObjectFeatures::class, 'object_id', 'id');
-    }
-
-    public function management_company()
-    {
-        return $this->hasOne(Company::class, 'id', 'management_id');
     }
 
     public function uploads()

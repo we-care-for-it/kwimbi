@@ -12,15 +12,15 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-use Illuminate\Database\Eloquent\Model;
 
 class ContactsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
     protected static string $relationship   = 'contactsObject';
-    protected static ?string $icon        = 'heroicon-o-user';
+    protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
@@ -87,6 +87,7 @@ class ContactsRelationManager extends RelationManager
 
                 Action::make('createContact')
                     ->label('Toevoegen')
+                    ->slideOver()
                     ->modalHeading('Contactpersoon toevoegen')
                     ->form([
                         Grid::make(2)
@@ -147,7 +148,8 @@ class ContactsRelationManager extends RelationManager
                 Action::make('Attach')
                     ->modalWidth(MaxWidth::Large)
                     ->modalHeading('Contactpersoon toevoegen')
-                    ->modalDescription('Koppel een bestaand')
+                    ->modalDescription('Koppel een bestaande contactpersoon aan deze locatie')
+                    ->slideOver()
                     ->label('Koppel bestaand contact')
                     ->form([
 
@@ -157,7 +159,7 @@ class ContactsRelationManager extends RelationManager
                             ->titleKey('first_name')
                             ->imageKey('avatar')
                             ->descriptionKey('email')
-                            ->label('Contactname')
+                            ->label('Contactnaam')
 
                         ,
 
@@ -189,8 +191,8 @@ class ContactsRelationManager extends RelationManager
                     ->url(function ($record) {
                         return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
 
-                    })->icon('heroicon-s-credit-card')
-                    ->color('warning'),
+                    })
+                ,
 
                 Action::make('Detach')
                     ->label('Ontkoppel')
