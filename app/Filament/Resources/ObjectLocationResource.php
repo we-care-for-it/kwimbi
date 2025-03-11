@@ -25,13 +25,13 @@ use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
-use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -41,6 +41,8 @@ class ObjectLocationResource extends Resource
     protected static ?string $model           = ObjectLocation::class;
     protected static ?string $navigationIcon  = "heroicon-o-building-office-2";
     protected static ?string $navigationLabel = "Locaties";
+    protected static ?string $navigationGroup = 'Objecten';
+    protected static ?int $navigationSort     = 1;
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -421,7 +423,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Geen relatie gekoppeld")
                     ->searchable()
                     ->url(function (ObjectLocation $record) {
-                        return "/app/customers/" . $record->customer_id . "/edit";
+                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id;
                     }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
@@ -443,7 +445,8 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Onbekend")])
 
             ->filters([SelectFilter::make("customer_id")
-                    ->options(Relation::where('type_id', 5)
+                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)
+
                             ->pluck("name", "id"))
                     ->label("Relatie")
 
@@ -465,24 +468,31 @@ class ObjectLocationResource extends Resource
                     ->options(ObjectLocation::whereNotNull("place")
                             ->pluck("place", "place"))
                     ->searchable(),
-                Tables\Filters\TrashedFilter::make()], //layout : FiltersLayout::AboveContent
+                Tables\Filters\TrashedFilter::make()], layout: FiltersLayout::AboveContent
             )
 
-            ->actions([ActionGroup::make([
+            ->actions([
+                ViewAction::make()
+                    ->tooltip('Bekijk locatie')
+                    ->label('Open locatie'),
 
                 EditAction::make()
-                    ->modalHeading('Locatie snel bewerken')
+                    ->modalHeading('Bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
-                    ->slideOver(), 
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->modalHeading('Locatie verwijderen')
-                    ->color('danger'),
-                RestoreAction::make(),
+                    ->slideOver(),
 
-                    ])])
-                    
+                // DeleteAction::make()
+                //     ->modalIcon('heroicon-o-trash')
+                //     ->tooltip('Verwijderen')
+                //     ->label('')
+                //     ->modalHeading('Contactpersoon verwijderen')
+                //     ->color('danger'),
+
+                RestoreAction::make(),
+            ])
+
             // ->bulkActions([
 
             //     ExportBulkAction::make()
@@ -523,9 +533,9 @@ class ObjectLocationResource extends Resource
     {
         return
             [
-            "index"  => Pages\ListObjectLocations::route("/"),
+            "index" => Pages\ListObjectLocations::route("/"),
             // "create" => Pages\CreateObjectLocation::route("/create"),
-            "view"   => Pages\ViewObjectLocation::route("/{record}")];
+            "view"  => Pages\ViewObjectLocation::route("/{record}")];
     }
 
     public static function getModelLabel(): string

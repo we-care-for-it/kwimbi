@@ -5,24 +5,30 @@ use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Filament\Facades\Filament;
 
 class UserResource extends Resource
 {
     protected static ?string $model           = User::class;
     protected static ?string $navigationIcon  = 'heroicon-o-users';
     protected static ?string $navigationLabel = "Gebruikers";
+    protected static ?string $navigationGroup = 'Beheer';
+
     public static function form(Form $form): Form
     {
+        
         return $form->schema([
             TextInput::make('name')
                 ->label('Naam')
@@ -40,6 +46,16 @@ class UserResource extends Resource
                 ->password()
                 ->required()
                 ->minLength(8),
+
+            Select::make('roles')
+                ->relationship('roles', 'name')
+                ->saveRelationshipsUsing(function ($record, $state) {
+                    $record->roles()->syncWithPivotValues($state, [config('permission.column_names.team_foreign_key') => getPermissionsTeamId()]);
+                })
+                ->multiple()
+                ->preload()
+                ->searchable(),
+
         ]);
     }
 
@@ -71,8 +87,19 @@ class UserResource extends Resource
                     ->query(fn(Builder $query) => $query->latest()),
             ])
             ->actions([
-                EditAction::make(),
-                Impersonate::make(), // <---
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
+                Impersonate::make(),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
@@ -83,8 +110,8 @@ class UserResource extends Resource
     {
         return [
             'index'  => ListUsers::route('/'),
-            'create' => CreateUser::route('/create'),
-            'edit'   => EditUser::route('/{record}/edit'),
+            // 'create' => CreateUser::route('/create'),
+            // 'edit'   => EditUser::route('/{record}/edit'),
         ];
     }
 

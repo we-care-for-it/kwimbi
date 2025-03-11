@@ -6,6 +6,7 @@ use App\Enums\IncidentTypes;
 use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ObjectIncident extends Model
 {
@@ -35,5 +36,10 @@ class ObjectIncident extends Model
     protected $casts = [
         'metadata' => 'collection',
     ];
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
 }

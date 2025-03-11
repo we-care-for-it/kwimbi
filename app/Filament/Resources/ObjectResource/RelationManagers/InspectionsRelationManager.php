@@ -63,6 +63,7 @@ class InspectionsRelationManager extends RelationManager
 
             Grid::make(2)->schema([
                 FileUpload::make("document")
+                    ->directory("objects/" . $this->ownerRecord->id . "/inspections/reports")
                     ->columnSpan(1)
                     ->label("Rapportage"),
 
@@ -194,14 +195,26 @@ class InspectionsRelationManager extends RelationManager
                         ]
                     )
                     ->action(function ($data, $record) {
-                        $contents = base64_decode($record->document);
-                        $path     = public_path($data["filename"] . ".pdf");
 
-                        file_put_contents($path, $contents);
+                        if ($record->schedule_run_token) {
+                            //    $contents = base64_decode($record->document);
 
-                        return response()
-                            ->download($path)
-                            ->deleteFileAfterSend(true);
+                            $contents = base64_decode($record->document);
+                            $path     = public_path($data["filename"] . ".pdf");
+
+                            file_put_contents($path, $contents);
+                            return response()
+                                ->download($path)
+                                ->deleteFileAfterSend(true);
+                        } else {
+
+                            $path = "storage/" . $record["document"];
+
+                            return response()
+                                ->download($path);
+
+                        }
+
                     })
                     ->modalWidth(MaxWidth::Large)
                     ->modalHeading("Bestand downloaden")
@@ -230,7 +243,7 @@ class InspectionsRelationManager extends RelationManager
                     , Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
-                            return "/app/object-inspections/" .
+                            return "/" . Filament::getTenant()->id . "/object-inspections/" .
                             $record->id;
                         }),
 

@@ -23,4 +23,12 @@ class ListObjectInspections extends ListRecords
 
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            //   ObjectInspectionResource\Widgets\InspectionCharts::class,
+
+        ];
+    }
+
 }

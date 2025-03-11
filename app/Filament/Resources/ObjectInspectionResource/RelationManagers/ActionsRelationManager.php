@@ -5,6 +5,7 @@ use App\Enums\ActionStatus;
 use App\Models\Company;
 use App\Models\ObjectInspectionData;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -48,7 +49,8 @@ class ActionsRelationManager extends RelationManager
 
                 Select::make('for_user_id')
 
-                    ->options(User::pluck('name', 'id'))
+                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+
                     ->searchable()
                     ->label('Medewerker')
 

@@ -26,6 +26,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Hidden;
+use Filament\Support\Enums\ActionSize;
 
 class VehicleResource extends Resource
 {
@@ -36,6 +37,7 @@ class VehicleResource extends Resource
     protected static ?string $navigationLabel  = 'Voertuigen';
     protected static ?string $pluralModelLabel = 'Voertuigen';
     protected static ?string $title            = 'Voertuigen';
+    protected static ?string $navigationGroup = 'Beheer';
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -386,15 +388,31 @@ class VehicleResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-                EditAction::make()
-                    ->modalHeading('Voertuig snel bewerken')
+                Tables\Actions\RestoreAction::make()
+                    ->tooltip('Herstellen')
+                    ->label('')
+                    ->modalDescription(
+                        "Weet je zeker dat je dit item wilt herstellen?"
+                    ),
+                Tables\Actions\ForceDeleteAction::make()
+                    ->tooltip('Permanent Verwijderen')
+                    ->label('')
+                    ->modalDescription(
+                        "Weet je zeker dat je dit item permanent wilt verwijderen?"
+                    ),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
                     ->slideOver(),
-
-            ])
+                    Tables\Actions\DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
+                ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\TaskResource\Pages;
 use App\Filament\Resources\TaskResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListTasks extends ListRecords
 {
@@ -13,12 +14,17 @@ class ListTasks extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Actie toevoegen')
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Taak toevoegen')
+                ->modalDescription('Voeg een nieuwe taak toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
                 ->slideOver()
-                ->modalHeading('Actie toevoegen')
-                ->modalDescription('Voor een actie toe voor je zelf of een andere medewerker')
-                ->modalSubmitActionLabel('Opslaan')
-            ,
+                ->label('Taak toevoegen'),
         ];
+    }
+    public function getHeading(): string
+    {
+        return "Taak - Overzicht";
     }
 }

@@ -20,6 +20,7 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Table;
@@ -56,18 +57,19 @@ class TaskResource extends Resource
 
                 Select::make('model')
                     ->options([
-                        'relation'      => 'Relatie',
+                        'relation' => 'Relatie',
                         //  'project'       => 'Project',
-                        'contactperson' => 'Contactpersoon',
+                        //   'contactperson' => 'Contactpersoon',
                         //  'object'        => 'Object',
-                        'location'      => 'Locatie',
+                        'location' => 'Locatie',
                     ])
                     ->searchable()
                     ->live()
                     ->label('Koppel aan'),
                 Select::make('model_id')
                     ->label('Relatie')
-                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                //where('type_id', 5)->
+                    ->options(Relation::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
@@ -88,6 +90,14 @@ class TaskResource extends Resource
                         return $get('model') == 'contactperson' ?? false;
                     })
                     ->label('Contactpersoon'),
+
+                //         TileSelect::make('contact_id')
+                //             ->searchable(['first_name', 'last_name', 'email'])
+                //             ->model(Contact::class)
+                //             ->titleKey('name')
+                //             ->imageKey('avatar')
+                //             ->descriptionKey('email')
+                //             ->label('Contactpersoon')
 
                 // Select::make('model_id')
                 //     ->options(Elevator::pluck('nobo_no', 'id'))
@@ -281,21 +291,25 @@ class TaskResource extends Resource
 
             ])
             ->filters([
-                //
+
             ])
             ->actions([
 
-                Tables\Actions\EditAction::make(),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
                 DeleteAction::make()
 
-                    ->modalDescription(
-                        "Weet je zeker dat je deze actie wilt voltooien ?"
-                    )
-
+                    ->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
+                    ->icon('heroicon-o-check')
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
-                    ->color('danger')
-                    ->label('Voltooien'),
+                    ->color('success')
+                    ->tooltip('Voltooien')
+                    ->label(''),
 
                 RestoreAction::make()
                     ->color("danger")

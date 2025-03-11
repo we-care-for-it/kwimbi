@@ -13,6 +13,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
@@ -35,6 +36,8 @@ class ObjectInspectionResource extends Resource
     protected static ?string $navigationIcon   = 'heroicon-m-check-badge';
     protected static ?string $modelLabel       = 'Keuring';
     protected static ?string $pluralModelLabel = 'Keuringen';
+    protected static ?string $navigationGroup = 'Objecten';
+    protected static ?int $navigationSort = 4;
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -216,7 +219,7 @@ class ObjectInspectionResource extends Resource
         // ])
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make("latestInspection.elevator.nobo_no")
+                Tables\Columns\TextColumn::make("elevator.nobo_no")
                     ->label("Object")
                     ->placeholder("Geen nobo nummer")
                     ->sortable()
@@ -281,8 +284,14 @@ class ObjectInspectionResource extends Resource
 
                     ->hidden(true),
 
-                Tables\Columns\TextColumn::make("maintenance_company.name")
+                Tables\Columns\TextColumn::make("elevator.maintenance_company.name")
                     ->label("Onderhoudspartij")
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make("inspectioncompany.name")
+                    ->label("Instantie")
                     ->searchable()
                     ->toggleable()
                     ->sortable(),
@@ -324,17 +333,19 @@ class ObjectInspectionResource extends Resource
 
             ->filters([
 
-                //     ToggleButtons::make('status_id')
-                //         ->label('Sorteer op status')
-                //         ->multiple()
-                //         ->default(0)
-                //         ->grouped()
-                //         ->options(InspectionStatus::class),
-                // ]),
-
                 SelectFilter::make('status_id')
                     ->label("Status")
                     ->options(InspectionStatus::class),
+
+                SelectFilter::make('inspection_company_id')
+                    ->label('Keuringinstantie')
+                    ->multiple()
+                    ->options(Relation::where('type_id', 3)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+
+                // SelectFilter::make('elevator.maintenance_company_id')
+                //     ->label('Onderhoudspartij')
+                //     ->multiple()
+                //     ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
 
                 // Filter::make('TypeFilter')
                 //     ->form([
@@ -468,23 +479,23 @@ class ObjectInspectionResource extends Resource
                 //         ->deleteFileAfterSend(true);
                 // }),
 
-                ActionGroup::make([
                     Actions\Action::make('cancel_top')
 
                         ->color('gray')
-                        ->label('Naar object')
-
-                        ->icon('heroicon-o-arrow-uturn-left')
+                        ->tooltip('Naar Object')
+                        ->label('')
+                        ->color('info')
+                        ->icon('heroicon-o-arrow-up-left')
                         ->url(function ($record) {
                             return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
 
                         }),
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Keuring verwijderen')
+                        ->tooltip('Verwijderen')
+                        ->label('')
+                        ->modalHeading('Contactpersoon verwijderen')
                         ->color('danger'),
-                ]),
-
             ])
 
             ->bulkActions([

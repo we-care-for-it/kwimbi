@@ -5,22 +5,19 @@ use App\Filament\Resources\ContactResource\Pages;
 use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
-use Filament\Infolists\Components;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\CreateAction;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Infolists\Components\Tabs;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-
 
 class ContactResource extends Resource
 {
@@ -36,74 +33,92 @@ class ContactResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('image')
-                    ->label('Profielfoto')
-                    ->image()
-                    ->nullable()
-                    ->directory('contacts'),
 
-                Forms\Components\TextInput::make('first_name')
-                    ->label('Voornaam')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Section::make('Persoonsgegevens')
+                    ->schema([
 
-                Forms\Components\TextInput::make('last_name')
-                    ->label('Achternaam')
-                    ->required()
-                    ->maxLength(255),
+                        Grid::make(2)
+                            ->schema([
 
-                Forms\Components\TextInput::make('email')
-                    ->label('E-mailadres')
-                    ->maxLength(255),
+                                Forms\Components\FileUpload::make('image')
+                                    ->label('Afbeelding')
+                                    ->image()
+                                    ->nullable()
+                                    ->directory('contacts'),
 
-                Forms\Components\TextInput::make('department')
-                    ->label('Afdeling')
-                    ->maxLength(255),
+                                Forms\Components\TextInput::make('first_name')
+                                    ->label('Voornaam')
+                                    ->required()
+                                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('function')
-                    ->label('Functie')
-                    ->maxLength(255),
+                                Forms\Components\TextInput::make('last_name')
+                                    ->label('Achternaam')
+                                    ->required()
+                                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('phone_number')
-                    ->label('Telefoonnummer')
-                    ->maxLength(15),
+                                Forms\Components\TextInput::make('email')
+                                    ->label('E-mailadres')
+                                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('mobile_number')
-                    ->label('Intern telefoonnummer')
-                    ->maxLength(15),
+                                Forms\Components\TextInput::make('phone_number')
+                                    ->label('Telefoonnummer')
+                                    ->maxLength(15),
 
-                // Forms\Components\TextInput::make('intern_number')
-                //     ->label('Intern Nummer')
-                //     ->maxLength(15),
+                                Forms\Components\TextInput::make('mobile_number')
+                                    ->label('Intern telefoonnummer')
+                                    ->maxLength(15),
 
-                Forms\Components\TextInput::make('linkedin')
-                    ->label('LinkedIn')
-                    ->maxLength(255),
+                                Forms\Components\TextInput::make('function')
+                                    ->label('Functie')
+                                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('twitter')
-                    ->label('Twitter')
-                    ->maxLength(255),
+                                Forms\Components\TextInput::make('department')
+                                    ->label('Afdeling')
+                                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('facebook')
-                    ->label('Facebook')
-                    ->maxLength(255),
+                            ])]),
 
-                Forms\Components\TextInput::make('street')
-                    ->label('Straat')
-                    ->maxLength(255),
+                Forms\Components\Section::make('Adresgegevens')
 
-                Forms\Components\TextInput::make('city')
-                    ->label('Stad')
-                    ->maxLength(255),
+                    ->schema([
 
-                Forms\Components\TextInput::make('postal_code')
-                    ->label('Postcode')
-                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
-                    ->maxLength(10),
+                        Grid::make(2)
+                            ->schema([
 
-                Forms\Components\TextInput::make('country')
-                    ->label('Land')
-                    ->maxLength(255),
+                                Forms\Components\TextInput::make('street')
+                                    ->label('Straat')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('city')
+                                    ->label('Stad')
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('postal_code')
+                                    ->label('Postcode')
+                                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+                                    ->maxLength(10),
+
+                                Forms\Components\TextInput::make('country')
+                                    ->label('Land')
+                                    ->maxLength(255),
+                            ]),
+                    ]),
+
+                Forms\Components\Section::make('Social Media')
+                ->schema([
+                    Forms\Components\TextInput::make('linkedin')
+                        ->label('LinkedIn')
+                        ->maxLength(255),
+
+                    Forms\Components\TextInput::make('twitter')
+                        ->label('Twitter')
+                        ->maxLength(255),
+
+                    Forms\Components\TextInput::make('facebook')
+                        ->label('Facebook')
+                        ->maxLength(255),
+                ])->collapsible(),
+
             ]);
     }
 
@@ -114,7 +129,7 @@ class ContactResource extends Resource
                 Tabs::make('Contact Informatie') // Hoofd-tab component
                     ->columnSpan('full')
                     ->tabs([
-                        Tabs\Tab::make('Contactgegevens')
+                        Tabs\Tab::make('Persoonsgegevens')
                             ->icon('heroicon-o-user')
                             ->schema([
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
@@ -124,31 +139,28 @@ class ContactResource extends Resource
                                 TextEntry::make('email')->label('E-mail')->placeholder('-'),
                                 TextEntry::make('phone_number')->label('Telefoon')->placeholder('-'),
                                 TextEntry::make('mobile_number')->label('Intern Tel')->placeholder('-'),
-                            ])->columns(3),
-    
+                            ])->columns(4),
+
                         Tabs\Tab::make('Social Media')
-                            ->icon('heroicon-o-share') 
+                            ->icon('heroicon-o-share')
                             ->schema([
                                 TextEntry::make('linkedin')->label('LinkedIn')->placeholder('-'),
                                 TextEntry::make('twitter')->label('Twitter')->placeholder('-'),
                                 TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
-                            ])->columns(3),
-    
-                        Tabs\Tab::make('Adres')
+                            ])->columns(4),
+
+                        Tabs\Tab::make('Adresgegevens')
                             ->icon('heroicon-o-map')
                             ->schema([
                                 TextEntry::make('street')->label('Straat')->placeholder('-'),
                                 TextEntry::make('city')->label('Stad')->placeholder('-'),
                                 TextEntry::make('postal_code')->label('Postcode')->placeholder('-'),
                                 TextEntry::make('country')->label('Land')->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
                     ]),
             ]);
     }
-    
-    
-    
-    
+
     public static function table(Table $table): Table
     {
         return $table
@@ -186,33 +198,25 @@ class ContactResource extends Resource
             ])
             ->filters([])
             ->headerActions([
-                CreateAction::make(),
             ])
             ->actions([
-                ActionGroup::make([
-
-                    Action::make('view') // Custom action for row click
-                        ->icon('heroicon-o-eye')
-                        ->action(fn($record) => static::infolist($record))
-                        ->modalHeading('Contact Details')
-                        ->modalContent(fn($record) => static::infolist($record)),
-
-                    EditAction::make()
-                        ->modalHeading('Snel bewerken')
-                        ->modalIcon('heroicon-o-pencil')
-                        ->label('Snel bewerken')
-                        ->slideOver(),
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Contactpersoon verwijderen')
-                        ->color('danger'),
-                ]),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([])
             ->emptyState(view('partials.empty-state'));
     }
 
-    
     public static function getRelations(): array
     {
         return [
@@ -222,14 +226,13 @@ class ContactResource extends Resource
         ];
     }
 
-
     public static function getPages(): array
     {
         return [
-            'view'   => Pages\ViewContact::route('/{record}'), // Ensure this is defined
-            'index'  => Pages\ListContacts::route('/'),
+            'view'  => Pages\ViewContact::route('/{record}'), // Ensure this is defined
+            'index' => Pages\ListContacts::route('/'),
             // 'create' => Pages\CreateContact::route('/create'),
-            'edit'   => Pages\EditContact::route('/{record}/edit'),
+            // 'edit'   => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }

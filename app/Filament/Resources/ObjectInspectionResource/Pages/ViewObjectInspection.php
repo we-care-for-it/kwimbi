@@ -27,7 +27,7 @@ class ViewObjectInspection extends ViewRecord
                 ->visible(fn($record) => $record->elevator->id ?? false)
                 ->icon('heroicon-o-arrow-uturn-left')
                 ->url(function ($record) {
-                    return "/" . Filament::getTenant()->id . "/objects/" . $record->elevator->id . "/?activeRelationManager=3";
+                    return "/" . Filament::getTenant()->id . "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
 
                 }),
 
@@ -47,14 +47,25 @@ class ViewObjectInspection extends ViewRecord
                 )
 
                 ->action(function ($data, $record) {
-                    $contents = base64_decode($record->document);
-                    $path     = public_path($data["filename"] . ".pdf");
+                    if ($record->schedule_run_token) {
+                        //    $contents = base64_decode($record->document);
 
-                    file_put_contents($path, $contents);
+                        $contents = base64_decode($record->document);
+                        $path     = public_path($data["filename"] . ".pdf");
 
-                    return response()
-                        ->download($path)
-                        ->deleteFileAfterSend(true);
+                        file_put_contents($path, $contents);
+                        return response()
+                            ->download($path)
+                            ->deleteFileAfterSend(true);
+                    } else {
+
+                        $path = "storage/" . $record["document"];
+
+                        return response()
+                            ->download($path);
+
+                    }
+
                 })
                 ->modalWidth(MaxWidth::Large)
                 ->modalHeading("Bestand downloaden")

@@ -11,7 +11,6 @@ use App\Models\ObjectType;
 use App\Models\Relation;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -28,7 +27,6 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 //Form
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -46,6 +44,8 @@ class ObjectResource extends Resource
     protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
     protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 2;
 
     public static function getNavigationBadge(): ?string
     {
@@ -79,10 +79,6 @@ class ObjectResource extends Resource
                         "E" => "E",
                         "F" => "F",
                     ]),
-
-                DatePicker::make("install_date")
-                    ->label("Installatie datum")
-                    ->placeholder("Niet opgegeven"),
 
                 Select::make("status_id")
                     ->label("Status")
@@ -129,6 +125,9 @@ class ObjectResource extends Resource
                 ->schema([
 
                     SpatieMediaLibraryFileUpload::make('objectimage')
+                        ->directory("objects/images/"
+                        )
+
                         ->responsiveImages()
                         ->image()
                         ->hiddenlabel()
@@ -184,7 +183,6 @@ class ObjectResource extends Resource
                     ->badge()
                     ->sortable()
                     ->toggleable(),
-
 
                 Tables\Columns\TextColumn::make("current_inspection_status_id")
                     ->label("KeuringStatus")
@@ -304,17 +302,18 @@ class ObjectResource extends Resource
 
             ], layout: FiltersLayout::AboveContent)
             ->actions([
-                ActionGroup::make([
-                    EditAction::make()
-                        ->modalHeading('Object bewerken')
-                        ->modalIcon('heroicon-o-pencil')
-                        ->label('Snel bewerken')
-                        ->slideOver(),
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->modalHeading('Object verwijderen')
-                        ->color('danger'),
-                ]),
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([ExportBulkAction::make()
                     ->exports([
@@ -329,7 +328,7 @@ class ObjectResource extends Resource
                                 Column::make("unit_no")->heading("Unit no"),
                                 Column::make("nobo_no")->heading("Nobo no"),
                                 Column::make("energy_label")->heading("Energielael"),
-                                Column::make("install_date")->heading("Installatie datum"),
+                                Column::make("construction_year")->heading("Bouwjaar"),
                                 Column::make("status_id")->heading("Status"),
                                 Column::make("supplier.name")->heading("Leverancier"),
                                 Column::make("stopping_places")->heading("Stopplaatsen"),
@@ -383,19 +382,20 @@ class ObjectResource extends Resource
                             ->label("Energielabel")
                             ->placeholder("Niet opgegeven"),
 
-                        Components\TextEntry::make("install_date")
-                            ->label("Installatie datum")
-                            ->date("m-d-Y")
+                        Components\TextEntry::make("construction_year")
+                            ->label("Bouwjaar")
                             ->placeholder("Niet opgegeven"),
 
                         Components\TextEntry::make("supplier.name")
                             ->label("Leverancier")
                             ->placeholder("Niet opgegeven"),
 
-                        Components\TextEntry::make("customer.name")
+                        Components\TextEntry::make("location.relation.name")
                             ->label("Relatie")->Url(function (object $record) {
-                            return "/app/customers/" . $record->customer_id . "";
+                            return "/" . Filament::getTenant()->id . "/relations/" . $record->location->customer_id;
+
                         })
+
                             ->icon("heroicon-c-link")
                             ->placeholder("Niet opgegeven"),
 
@@ -445,7 +445,8 @@ class ObjectResource extends Resource
                         ->placeholder('Geen afbeeldingen')
                         ->height(200)
                         ->ring(5)
-                        ->collection('objectimages')])->collapsible()
+                        ->collection('objectimages')])
+                ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed(),
 

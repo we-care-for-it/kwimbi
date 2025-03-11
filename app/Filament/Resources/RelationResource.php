@@ -17,12 +17,10 @@ use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
-use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -170,22 +168,21 @@ class RelationResource extends Resource
 
             ],
             )
-            ->actions([ActionGroup::make([
+            ->actions([
                 EditAction::make()
-                    ->modalHeading("Relalatie bewerken")
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
-                    ->label('Snel bewerken')
                     ->slideOver(),
-                ViewAction::make()
-                    ->modalIcon('heroicon-o-pencil')
-                    ->label('Bekijk details'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
-                    ->modalHeading('Bedrijf verwijderen')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
                     ->color('danger'),
-
                 RestoreAction::make(),
-            ])])
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make(
 
@@ -205,6 +202,7 @@ class RelationResource extends Resource
             RelationManagers\ContactsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
             RelationManagers\NotesRelationManager::class,
+            RelationManagers\AttachmentsRelationManager::class,
 
             //    RelationManagers\LocationsRelationManager::class
         ];

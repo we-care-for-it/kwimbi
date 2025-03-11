@@ -1,19 +1,25 @@
 <?php
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
+use App\Models\User;
 use Filament\Facades\Filament;
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
     protected static ?string $icon        = 'heroicon-o-rectangle-stack';
-    protected static ?string $title = 'Taken';
+    protected static ?string $title       = 'Taken';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
@@ -25,21 +31,86 @@ class TasksRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('Titel')
+
+                TextInput::make('title')
+                    ->label('Title')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->label('Beschrijving'),
-                Forms\Components\TextInput::make('priority')
-                    ->label('Prioriteit')
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('deadline')
-                    ->label('Deadline'),
-                Forms\Components\TimePicker::make('end_time')
-                    ->label('Eindtijd'),
-                Forms\Components\TimePicker::make('begin_time')
-                    ->label('Starttijd'),
+                    ->columnSpan('full'),
+
+                Textarea::make('description')
+                    ->rows(3)
+                    ->label('Uitgebreide omschrijving')
+                    ->helperText(str('Beschrijf de actie of taak ')->inlineMarkdown()->toHtmlString())
+                    ->columnSpan('full')
+                    ->autosize(),
+
+                // Select::make('model_id')
+                //     ->options(Project::pluck('name', 'id'))
+                //     ->searchable()
+                //     ->visible(function (Get $get, Set $set) {
+                //         return $get('model') == 'project' ?? false;
+                //     })
+                //     ->label('Project'),
+
+                //         TileSelect::make('contact_id')
+                //             ->searchable(['first_name', 'last_name', 'email'])
+                //             ->model(Contact::class)
+                //             ->titleKey('name')
+                //             ->imageKey('avatar')
+                //             ->descriptionKey('email')
+                //             ->label('Contactpersoon')
+
+                // Select::make('model_id')
+                //     ->options(Elevator::pluck('nobo_no', 'id'))
+                //     ->searchable()
+                //     ->visible(function (Get $get, Set $set) {
+                //         return $get('model') == 'object' ?? false;
+                //     })
+                //     ->label('Object'),
+
+                Select::make('employee_id')
+                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->searchable()
+                    ->default(Auth::id())
+                    ->label('Medewerker'),
+
+                Select::make('priority')
+                    ->options([
+                        '1' => 'Hoog',
+                        '2' => 'Gemiddeld',
+                        '3' => 'Laag',
+
+                    ])
+                    ->searchable()
+                    ->label('Prioriteit'),
+
+                DatePicker::make('begin_date')
+
+                    ->label('Begindatum'),
+
+                TimePicker::make('begin_time')
+                    ->label('Tijd')
+                    ->seconds(false),
+
+                DatePicker::make('deadline')
+                    ->label('Einddatum'),
+
+                // ToggleButtons::make('private')
+                //     ->label('Prive actie')
+                //     ->default(1)
+                //     ->boolean()
+                //     ->grouped(),
+
+                Select::make('type_id')
+                    ->options([
+                        '1' => 'Terugbelnotitie',
+                        '3' => 'Te doen',
+
+                    ])
+                    ->searchable()
+                    ->default(3)
+                    ->label('Type'),
+
             ]);
     }
 
@@ -74,6 +145,7 @@ class TasksRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->label('Taak toevoegen')
+                    ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id']   = $this->ownerRecord->id;
                         $data['model']      = 'location';
@@ -85,8 +157,10 @@ class TasksRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
+                    ->slideOver()
                     ->label('Bewerken'),
                 Tables\Actions\DeleteAction::make()
+
                     ->label('Verwijderen'),
             ])
             ->bulkActions([

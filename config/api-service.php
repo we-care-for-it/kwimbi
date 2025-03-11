@@ -3,7 +3,7 @@ return [
     'navigation'                       => [
         'token' => [
             'cluster' => null,
-            'group'   => 'User',
+            'group'   => 'Beheer',
             'sort'    => -1,
             'icon'    => 'heroicon-o-key',
         ],
@@ -14,8 +14,8 @@ return [
         ],
     ],
     'route'                            => [
-        'panel_prefix'             => true,
-        'use_resource_middlewares' => false,
+        'panel_prefix'             => false,
+        'use_resource_middlewares' => true,
     ],
     'tenancy'                          => [
         'enabled'   => true,

@@ -3,6 +3,7 @@ namespace App\Filament\Resources\ObjectResource\Pages;
 
 use App\Filament\Resources\ObjectResource;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewObject extends ViewRecord
@@ -38,7 +39,7 @@ class ViewObject extends ViewRecord
                 ->link()
                 ->icon('heroicon-s-map-pin')
                 ->url(function ($record) {
-                    return "/app/object-locations/" . $this->getRecord()->location->id;
+                    return "/" . Filament::getTenant()->id . "/object-locations/" . $this->getRecord()->location->id;
                 }),
 
             Actions\EditAction::make('cancel_top')

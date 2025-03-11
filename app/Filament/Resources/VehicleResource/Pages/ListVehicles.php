@@ -4,6 +4,7 @@ namespace App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListVehicles extends ListRecords
 {
@@ -15,9 +16,19 @@ class ListVehicles extends ListRecords
             Actions\CreateAction::make()
                 ->label('Voertuig toevoegen')
                 ->slideOver()
+                ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Voertuig toevoegen')
                 ->modalDescription('Vul een kenteken in om de gegevens op te halen')
-                ->modalSubmitActionLabel('Opslaan'),
+                ->modalSubmitActionLabel('Opslaan')
+                ->modalIcon('heroicon-o-plus')
+                ->icon('heroicon-m-plus')
+                ->slideOver()
+                ->label('Voertuig toevoegen'),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Voertuig - Overzicht";
     }
 }
