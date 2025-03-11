@@ -8,6 +8,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Support\Enums\MaxWidth;
+
 
 class TasksRelationManager extends RelationManager
 {
@@ -78,10 +80,16 @@ class TasksRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->modalWidth(MaxWidth::FourExtraLarge)
+                    ->modalHeading('Taak toevoegen')
+                    ->modalDescription('Voeg een nieuwe taak toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
+                    ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id']   = $this->ownerRecord->id;
-                        $data['model']      = 'relation';
+                        $data['model']      = 'location';
                         $data['model_id']   = $this->getOwnerRecord()->id;
                         $data['company_id'] = Filament::getTenant()->id;
 

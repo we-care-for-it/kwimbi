@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Filament\Support\Enums\MaxWidth;
 
 class TasksRelationManager extends RelationManager
 {
@@ -74,15 +75,15 @@ class TasksRelationManager extends RelationManager
                     ->default(Auth::id())
                     ->label('Medewerker'),
 
-                Select::make('priority')
-                    ->options([
-                        '1' => 'Hoog',
-                        '2' => 'Gemiddeld',
-                        '3' => 'Laag',
+                // Select::make('priority')
+                //     ->options([
+                //         '1' => 'Hoog',
+                //         '2' => 'Gemiddeld',
+                //         '3' => 'Laag',
 
-                    ])
-                    ->searchable()
-                    ->label('Prioriteit'),
+                //     ])
+                //     ->searchable()
+                //     ->label('Prioriteit'),
 
                 DatePicker::make('begin_date')
 
@@ -144,6 +145,11 @@ class TasksRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->modalWidth(MaxWidth::FourExtraLarge)
+                    ->modalHeading('Taak toevoegen')
+                    ->modalDescription('Voeg een nieuwe taak toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
                     ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
