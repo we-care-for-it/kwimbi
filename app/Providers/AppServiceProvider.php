@@ -10,6 +10,8 @@ use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
+use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        FilamentSettingsHub::register([
+            SettingHold::make()
+                ->order(2)
+                ->label('Site Settings') // to translate label just use direct translation path like `messages.text.name`
+                ->icon('heroicon-o-globe-alt')
+                ->route('filament.admin.pages.site-settings')                    // use page / route
+                ->page(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class) // use page / route
+                ->description('Name, Logo, Site Profile')                        // to translate label just use direct translation path like `messages.text.name`
+                ->group('General'),                                              // to translate label just use direct translation path like `messages.text.name`,
+        ]);
 
         Gate::define('viewApiDocs', function (User $user) {
             return in_array($user->email, ['superadmin@ltssoftware.nl']);

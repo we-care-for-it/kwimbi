@@ -1,16 +1,17 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductCategoriesResource\Pages;
-use App\Models\ProductCategories;
+use App\Filament\Resources\AssetResource\Pages;
+use App\Models\Asset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class ProductCategoriesResource extends Resource
+class AssetResource extends Resource
 {
-    protected static ?string $model                 = ProductCategories::class;
+    protected static ?string $model = Asset::class;
+
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
 
@@ -51,9 +52,9 @@ class ProductCategoriesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListProductCategories::route('/'),
-            'create' => Pages\CreateProductCategories::route('/create'),
-            'edit'   => Pages\EditProductCategories::route('/{record}/edit'),
+            'index'  => Pages\ListAssets::route('/'),
+            'create' => Pages\CreateAsset::route('/create'),
+            'edit'   => Pages\EditAsset::route('/{record}/edit'),
         ];
     }
 }

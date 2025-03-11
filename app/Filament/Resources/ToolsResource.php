@@ -2,61 +2,34 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ToolsResource\Pages;
-use App\Filament\Resources\ToolsResource\RelationManagers;
 use App\Models\Tools;
-use App\Models\ToolsBrand;
-use App\Models\ToolsCategory;
-
-use App\Models\User;
-use App\Models\ToolsInspectionCompany;
-use App\Models\ToolsInspectionMethod;
-use Filament\Support\Enums\MaxWidth;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Filters\SelectFilter;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\FileUpload;
-use Hexters\HexaLite\Traits\HexAccess;
-use Filament\Forms\Components\Fieldset;
-use Filament\Infolists\Components\Split;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
-
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
+use Filament\Tables\Table;
 
 class ToolsResource extends Resource
 {
-    protected static ? string $model = Tools::class;
+    protected static ?string $model = Tools::class;
 
-    protected static ? string $navigationIcon = 'heroicon-o-wrench-screwdriver';
+    protected static ?string $navigationIcon        = 'heroicon-o-wrench-screwdriver';
+    protected static bool $shouldRegisterNavigation = false;
 
-
-    protected static ? string $navigationLabel = 'Gereedschap';
- 
-
-
-
-
+    protected static ?string $navigationLabel = 'Gereedschap';
 
 // protected static ?string $permissionId = 'access.tools';
 
 // protected static ?string $descriptionPermission = 'Het beheren van gereedschappen';
-
-
 
 //     protected static ?array $subPermissions = [
 //         'access.tools.index' => 'Overzicht bekijen',
@@ -72,149 +45,135 @@ class ToolsResource extends Resource
 //        // return hexa()->can('access.tools.index');
 //     }
 
-
-
-    public static function form(Form $form) : Form
+    public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Section::make()
-            ->schema([
+                ->schema([
 
-        Grid::make(4)
-            ->schema([FileUpload::make('image')
-            ->image()
-            ->label('Afbeelding / foto')
+                    Grid::make(4)
+                        ->schema([FileUpload::make('image')
+                                ->image()
+                                ->label('Afbeelding / foto')
 
-            ->imagePreviewHeight('250')
-            ->loadingIndicatorPosition('left')
-            ->panelAspectRatio('2:1')
-            ->panelLayout('integrated')
-            ->removeUploadedFileButtonPosition('right')
-            ->uploadButtonPosition('left')
-            ->uploadProgressIndicatorPosition('left')
+                                ->imagePreviewHeight('250')
+                                ->loadingIndicatorPosition('left')
+                                ->panelAspectRatio('2:1')
+                                ->panelLayout('integrated')
+                                ->removeUploadedFileButtonPosition('right')
+                                ->uploadButtonPosition('left')
+                                ->uploadProgressIndicatorPosition('left')
 
-            ->imageEditor() ,
+                                ->imageEditor(),
 
-        Textarea::make('description')
-            ->rows(7)
-            ->label('Opmerking')
-            ->columnSpan(3)
-            ->autosize() ,
+                            Textarea::make('description')
+                                ->rows(7)
+                                ->label('Opmerking')
+                                ->columnSpan(3)
+                                ->autosize(),
 
-        // ...
-        ]) ,
+                            // ...
+                        ]),
 
-        // ...
-        ]) ,
+                    // ...
+                ]),
 
-        Forms\Components\Section::make()
-            ->schema([
+            Forms\Components\Section::make()
+                ->schema([
 
-        Forms\Components\TextInput::make('name')
-            ->label('Naam') ,
+                    Forms\Components\TextInput::make('name')
+                        ->label('Naam'),
 
+                    Forms\Components\TextInput::make('serial_number')
+                        ->label('Serienummer')->required(),
 
-            Forms\Components\TextInput::make('serial_number')
-            ->label('Serienummer')->required() ,
+                    Select::make('category_id')
+                        ->label('Categorie')
 
+                        ->relationship(name: 'category', titleAttribute: 'name')
+                        ->loadingMessage('Categorieën laden...')
+                        ->createOptionForm([Forms\Components\TextInput::make('name')
+                                ->required(),
 
+                        ]),
 
-            Select::make('category_id')
-            ->label('Categorie')
+                    Select::make('brand_id')
+                        ->label('Merk')->required()
 
-            ->relationship(name : 'category', titleAttribute:'name')
-                ->loadingMessage('Categorieën laden...')
-                ->createOptionForm([Forms\Components\TextInput::make('name')
-                ->required() ,
-
-            ]) ,
-
-            Select::make('brand_id')
-                ->label('Merk')->required()
-
-                ->relationship(name:
-                'brand', titleAttribute:
-                    'name')
+                        ->relationship(name:
+                            'brand', titleAttribute:
+                            'name')
                         ->loadingMessage('Merken laden...')
                         ->createOptionForm([Forms\Components\TextInput::make('name')
-                        ->required() ,
+                                ->required(),
 
-                    ]) ,
+                        ]),
 
                     Select::make('supplier_id')
                         ->label('Leverancier')
 
                         ->relationship(name:
-                        'supplier', titleAttribute:
+                            'supplier', titleAttribute:
                             'name')
-                                ->loadingMessage('Leveranciers laden...')
-                                ->createOptionForm([Forms\Components\TextInput::make('name')
-                                ->required() ,
+                        ->loadingMessage('Leveranciers laden...')
+                        ->createOptionForm([Forms\Components\TextInput::make('name')
+                                ->required(),
 
-                            ]) ,
+                        ]),
 
-                            Select::make('type_id')
-                                ->label('Type')
+                    Select::make('type_id')
+                        ->label('Type')
 
-                                ->relationship(name:
-                                'type', titleAttribute:
-                                    'name')
-                                        ->loadingMessage('Types laden...')
-                                        ->createOptionForm([
+                        ->relationship(name:
+                            'type', titleAttribute:
+                            'name')
+                        ->loadingMessage('Types laden...')
+                        ->createOptionForm([
 
-                                    Forms\Components\TextInput::make('name')
-                                        ->required() ,
+                            Forms\Components\TextInput::make('name')
+                                ->required(),
 
-                                    ]) ,
+                        ]),
 
+                ])
+                ->columns(2)
+                ->columnSpan(2),
 
+            Forms\Components\Section::make()
+                ->schema([
 
+                    Select::make('warehouse_id')
+                        ->label('Magazijn')
 
+                        ->relationship(name: 'warehouse', titleAttribute: 'name')
+                        ->loadingMessage('Magazijnen laden...')
+                        ->createOptionForm([
 
+                            Forms\Components\TextInput::make('name')
+                                ->required(),
 
+                        ]),
 
-                                  ])
-            ->columns(2)
-            ->columnSpan(2) ,
+                    //     Select::make('employee_id')
+                    // ->label('Medewerker')
+                    // ->options(User::all()
+                    // ->pluck('name', 'id'))
+                    // ->searchable(),
 
-        Forms\Components\Section::make()
-            ->schema([
+                    // Select::make('inspection_company_id')
+                    // ->label('Keuringsinstantie')
+                    // ->options(ToolsInspectionCompany::all()
+                    // ->pluck('name', 'id'))
+                    // ->searchable() ,
 
-                Select::make('warehouse_id')
-                ->label('Magazijn')
+                    // Select::make('inspection_method')
+                    // ->label('Keuringsmethode')
+                    // ->options(ToolsInspectionMethod::all()
+                    // ->pluck('name', 'id'))
+                    // ->searchable() ,
 
-                ->relationship(name : 'warehouse', titleAttribute : 'name')
-                ->loadingMessage('Magazijnen laden...')
-                ->createOptionForm([
-
-            Forms\Components\TextInput::make('name')
-                ->required() ,
-
-                ]),
-
-            //     Select::make('employee_id')
-            // ->label('Medewerker')
-            // ->options(User::all()
-            // ->pluck('name', 'id'))
-            // ->searchable(),
-
-            // Select::make('inspection_company_id')
-            // ->label('Keuringsinstantie')
-            // ->options(ToolsInspectionCompany::all()
-            // ->pluck('name', 'id'))
-            // ->searchable() ,
-
-            // Select::make('inspection_method')
-            // ->label('Keuringsmethode')
-            // ->options(ToolsInspectionMethod::all()
-            // ->pluck('name', 'id'))
-            // ->searchable() ,
-
-
-
-
-            ])
-            ->columnSpan(['lg' => 1])
+                ])
+                ->columnSpan(['lg' => 1]),
 
         ])
             ->columns(3);
@@ -223,142 +182,127 @@ class ToolsResource extends Resource
 
             ->schema([
 
-        Forms\Components\TextInput::make('name')
-            ->label('Naam') ,
-        //->columnSpan('full')
+                Forms\Components\TextInput::make('name')
+                    ->label('Naam'),
+                //->columnSpan('full')
 
+            ]);
+    }
 
+    public static function table(Table $table):
+    Table {
+        return $table
+            ->groups([
 
+                Group::make('name')
+                    ->label('Naam'),
 
+                Group::make('category.name')
+                    ->label('Categorie'),
 
+                Group::make('brand.name', )
+                    ->label('Merk'),
 
+                Group::make('type.name', )
+                    ->label('Model'),
 
+            ])
+            ->defaultGroup('name')
+            ->columns([
 
-                                    ]);
-                                }
+                ImageColumn::make('image')
+                    ->label('')
+                    ->width(100),
 
-                                public static function table(Table $table):
-                                    Table
-                                    {
-                                        return $table
-                                        ->groups([
+                TextColumn::make('name')
+                    ->searchable()
+                    ->label('Naam')
+                    ->placeholder('-'),
+                // ->description(fn (tools $record): string => $record?->description),
 
-                                            Group::make('name')
-                                            ->label('Naam'),
+                TextColumn::make('serial_number')
+                    ->searchable()
+                    ->label('Serienummer')
+                    ->placeholder('-')
+                    ->searchable()
+                    ->sortable(),
 
-                                            Group::make('category.name')
-                                            ->label('Categorie'),
+                TextColumn::make('category.name')
+                    ->searchable()
+                    ->label('Categorie')
+                    ->placeholder('-')
+                    ->sortable(),
 
-                                            Group::make('brand.name',)
-                                            ->label('Merk'),
+                TextColumn::make('brand.name')
+                    ->searchable()
+                    ->label('Merk')
+                    ->placeholder('-')
+                    ->sortable(),
 
-                                            Group::make('type.name',)
-                                            ->label('Model'),
+                TextColumn::make('type.name')
+                    ->searchable()
+                    ->label('Type / Model')
+                    ->placeholder('-'),
 
+                // TextColumn::make('employee.name')
+                //     ->searchable()
+                //     ->label('Gebruiker')
+                //     ->badge()
 
+                //     ->sortable() ,
 
+            ])
+            //     ->filters([SelectFilter::make('brand_id')
+            //     ->label('Merk')
+            //     ->options(toolsBrand::all()
+            //     ->pluck('name', 'id')) ,
 
-                                        ])
-                                        ->defaultGroup('name')
-                                     ->columns([
+            // SelectFilter::make('category_id')
+            //     ->label('Categorie')
+            //     ->options(toolsCategory::all()
+            //     ->pluck('name', 'id')) ,
 
-                                        ImageColumn::make('image')
-                                            ->label('')
-                                            ->width(100) ,
+            // SelectFilter::make('employee_id')
+            //     ->label('Medewerker')
+            //     ->options(User::all()
+            //     ->pluck('name', 'id')) ,
 
+            //  ])
+            ->actions([
+                EditAction::make()
+                    ->modalHeading('Snel bewerken')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
+            ])
+            ->bulkActions([
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
+            ])
+            ->emptyState(view('partials.empty-state'));
+    }
 
+    public static function getRelations():
+    array {
+        return [
+            //
+        ];
+    }
 
-                                        TextColumn::make('name')
-                                        ->searchable()
-                                        ->label('Naam')
-                                        ->placeholder('-'),
-                                        // ->description(fn (tools $record): string => $record?->description),
-
-                                        TextColumn::make('serial_number')
-                                            ->searchable()
-                                            ->label('Serienummer')
-                                            ->placeholder('-')
-                                            ->searchable()
-                                            ->sortable() ,
-
-                                        TextColumn::make('category.name')
-                                            ->searchable()
-                                            ->label('Categorie')
-                                            ->placeholder('-')
-                                            ->sortable() ,
-
-                                        TextColumn::make('brand.name')
-                                            ->searchable()
-                                            ->label('Merk')
-                                            ->placeholder('-')
-                                            ->sortable() ,
-
-                                        TextColumn::make('type.name')
-                                            ->searchable()
-                                            ->label('Type / Model') 
-                                            ->placeholder('-'),
-
-                                        // TextColumn::make('employee.name')
-                                        //     ->searchable()
-                                        //     ->label('Gebruiker')
-                                        //     ->badge()
-
-                                        //     ->sortable() ,
-
-                                        ])
-                                        //     ->filters([SelectFilter::make('brand_id')
-                                        //     ->label('Merk')
-                                        //     ->options(toolsBrand::all()
-                                        //     ->pluck('name', 'id')) ,
-
-                                        // SelectFilter::make('category_id')
-                                        //     ->label('Categorie')
-                                        //     ->options(toolsCategory::all()
-                                        //     ->pluck('name', 'id')) ,
-
-                                        // SelectFilter::make('employee_id')
-                                        //     ->label('Medewerker')
-                                        //     ->options(User::all()
-                                        //     ->pluck('name', 'id')) ,
-
-                                      //  ])
-                                      ->actions([
-                                        EditAction::make()
-                                            ->modalHeading('Snel bewerken')
-                                            ->tooltip('Bewerken')
-                                            ->label('')
-                                            ->modalIcon('heroicon-o-pencil')
-                                            ->slideOver(),
-                                        DeleteAction::make()
-                                            ->modalIcon('heroicon-o-trash')
-                                            ->tooltip('Verwijderen')
-                                            ->label('')
-                                            ->modalHeading('Verwijderen')
-                                            ->color('danger'),
-                                    ])
-                                            ->bulkActions([
-                                        // Tables\Actions\BulkActionGroup::make([
-                                        //     Tables\Actions\DeleteBulkAction::make(),
-                                        // ]),
-                                        ])
-                                            ->emptyState(view('partials.empty-state'));
-                                    }
-
-                                    public static function getRelations():
-                                        array
-                                        {
-                                            return [
-                                            //
-                                            ];
-                                        }
-
-                                        public static function getPages():
-                                            array
-                                            {
-                                                return ['index' => Pages\ListTools::route('/') ,
-                                                'view' => Pages\ViewTools::route('/{record}') ,
-                                           //     'create' => Pages\CreateTools::route('/create') ,
-                                               // 'edit' => Pages\EditTools::route('/{record}/edit')
-                                               ];
-                                            }
-                                        }
+    public static function getPages():
+    array {
+        return ['index' => Pages\ListTools::route('/'),
+            'view'          => Pages\ViewTools::route('/{record}'),
+            //     'create' => Pages\CreateTools::route('/create') ,
+            // 'edit' => Pages\EditTools::route('/{record}/edit')
+        ];
+    }
+}
