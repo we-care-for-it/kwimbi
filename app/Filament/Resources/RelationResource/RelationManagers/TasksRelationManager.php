@@ -1,21 +1,19 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Filament\Support\Enums\MaxWidth;
-
 
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
     protected static ?string $icon        = 'heroicon-o-rectangle-stack';
-    protected static ?string $title = 'Taken';
+    protected static ?string $title       = 'Taken';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
@@ -88,10 +86,9 @@ class TasksRelationManager extends RelationManager
                     ->label('Taak toevoegen')
                     ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['model_id']   = $this->ownerRecord->id;
-                        $data['model']      = 'location';
-                        $data['model_id']   = $this->getOwnerRecord()->id;
-                        $data['company_id'] = Filament::getTenant()->id;
+                        $data['model_id'] = $this->ownerRecord->id;
+                        $data['model']    = 'relation';
+                        $data['model_id'] = $this->getOwnerRecord()->id;
 
                         return $data;
                     }),

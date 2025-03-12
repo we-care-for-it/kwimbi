@@ -68,15 +68,7 @@ class Contact extends Model
         return $this->belongsTo(Company::class);
     }
 
-    protected static function boot(): void
-    {
-        parent::boot();
 
-        static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
-        });
-
-    }
 
     public function claimer(): MorphTo
     {
