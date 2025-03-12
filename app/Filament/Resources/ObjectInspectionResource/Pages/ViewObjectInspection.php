@@ -3,7 +3,6 @@ namespace App\Filament\Resources\ObjectInspectionResource\Pages;
 
 use App\Filament\Resources\ObjectInspectionResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 //Form
 
 use Filament\Forms\Components\TextInput;
@@ -27,7 +26,7 @@ class ViewObjectInspection extends ViewRecord
                 ->visible(fn($record) => $record->elevator->id ?? false)
                 ->icon('heroicon-o-arrow-uturn-left')
                 ->url(function ($record) {
-                    return "/" . Filament::getTenant()->id . "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
+                    return "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
 
                 }),
 

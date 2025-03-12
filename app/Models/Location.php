@@ -2,88 +2,30 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
- * Class Location
- *
- * @property $id
- * @property $created_at
- * @property $updated_at
- * @property $deleted_at
- * @property $name
- * @property $zipcode
- * @property $place
- * @property $address
- * @property $slug
- * @property $complexnumber
- * @property $management_id
- * @property $customer_id
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @method static create(array $array)
  */
-class Location extends Model implements Auditable
-{ 
- 
-    use SoftDeletes;
-    use \OwenIt\Auditing\Auditable;
- 
-  
- 
+class Location extends Model
+{
+    use HasFactory;
 
-    // Validation rules for this model
-    static $rules = [];
-
-    // Number of items to be shown per page
-    protected $perPage = 20;
-
-    // Attributes that should be mass-assignable
-    protected $fillable = [ 'surface',
-    'levels',
-    'gps_lon',
-    'construction_year'
-    ,'access_code'
-    ,'gps_lat'
-    ,'location_id','customer_id'
-    ,'access_contact'
-    ,'location_key_lock'
-    ,'province'
-    ,'municipality'
-    ,'housenumber',
-    'complexnumber',
-    'image', 
-    'building_type',
-    'building_access_type_id','remark','building_type_id','name','zipcode','place','address','slug','complexnumber','management_id','customer_id'];
-
-  
-    public function customer()
+    public function departments(): HasMany
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasMany(Department::class);
     }
 
-    public function managementcompany()
+    public function workplaces(): HasManyThrough
     {
-        return $this->hasOne(objectManagementCompany::class, 'id', 'management_id');
+        return $this->hasManyThrough(Workplace::class, Department::class);
     }
 
-    public function objects()
+  public function company(): BelongsTo
     {
-        return $this->hasMany(Elevator::class,'address_id','id');
+        return $this->belongsTo(Company::class);
     }
-    
-    public function contacts()
-    {
-        return $this->hasMany(Contact::class,'location_id','id');
-    }
-
-    public function buildingType()
-    {
-        return $this->hasOne(objectBuildingType::class,'id','building_type_id');
-    }
-
-
-
 }

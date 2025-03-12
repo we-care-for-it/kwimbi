@@ -3,7 +3,6 @@ namespace App\Filament\Widgets;
 
 use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
-use Filament\Facades\Filament;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
@@ -25,7 +24,7 @@ class InspectionsChart extends ChartWidget
     protected function getData(): array
     {
 
-        $dataRejected = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::REJECTED))
+        $dataRejected = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('status_id', InspectionStatus::REJECTED))
 
             ->dateColumn('executed_datetime')
             ->between(
@@ -35,7 +34,7 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $dataApproved = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::APPROVED)
+        $dataApproved = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('status_id', InspectionStatus::APPROVED)
         )
 
             ->dateColumn('executed_datetime')
@@ -46,7 +45,7 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $dataApprovedActions = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::APPROVED_ACTIONS)
+        $dataApprovedActions = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('status_id', InspectionStatus::APPROVED_ACTIONS)
         )
 
             ->dateColumn('executed_datetime')
@@ -57,7 +56,7 @@ class InspectionsChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $dataApprovedRepeat = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('company_id', Filament::getTenant()->id)->where('status_id', InspectionStatus::APPROVED_REPEAT)
+        $dataApprovedRepeat = Trend::query(ObjectInspection::whereYear('executed_datetime', date('Y'))->where('status_id', InspectionStatus::APPROVED_REPEAT)
         )
 
             ->dateColumn('executed_datetime')

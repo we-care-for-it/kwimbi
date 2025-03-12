@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use App\Enums\RelationTypes;
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,7 +26,7 @@ class Relation extends Model
     // protected static function booted(): void
     // {
     //     static::addGlobalScope(function ($query) {
-    //         $query->where('company_id', Filament::getTenant()->id);
+    //         $query;
     //     });
     // }
 
@@ -53,7 +52,7 @@ class Relation extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'relation')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'relation');
     }
 
     public function company()
@@ -63,7 +62,7 @@ class Relation extends Model
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id)->where('model', 'Relation');
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'Relation');
     }
 
     public function contactsObject(): HasMany
@@ -78,7 +77,7 @@ class Relation extends Model
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');
     }
 
 }

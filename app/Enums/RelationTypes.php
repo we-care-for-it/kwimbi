@@ -10,7 +10,6 @@ enum RelationTypes: string implements HasLabel {
     case SUPPLIER    = '4';
     case CUSTOMERS   = '5';
     case ADVISOR     = '6';
-
     public function getlabel(): string
     {
         return match ($this) {

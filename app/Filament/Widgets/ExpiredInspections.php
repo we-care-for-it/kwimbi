@@ -2,7 +2,6 @@
 namespace App\Filament\Widgets;
 
 use App\Models\ObjectInspection;
-use Filament\Facades\Filament;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
@@ -24,7 +23,7 @@ class ExpiredInspections extends ChartWidget
     protected function getData(): array
     {
 
-        $data = Trend::query(ObjectInspection::where('company_id', Filament::getTenant()->id)->where('deleted_at', null))
+        $data = Trend::query(ObjectInspection::where('deleted_at', null))
 
             ->dateColumn('end_date')
             ->between(

@@ -3,7 +3,6 @@ namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
 use App\Enums\InspectionStatus;
 use App\Models\Relation;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -243,7 +242,7 @@ class InspectionsRelationManager extends RelationManager
                     , Tables\Actions\Action::make('seeDetails')
                         ->label('Toon details')->color('success')->icon('heroicon-m-eye')
                         ->url(function ($record) {
-                            return "/" . Filament::getTenant()->id . "/object-inspections/" .
+                            return "/object-inspections/" .
                             $record->id;
                         }),
 
@@ -252,7 +251,7 @@ class InspectionsRelationManager extends RelationManager
             ])
 
             ->recordUrl(function ($record) {
-                return "/" . Filament::getTenant()->id . "/object-inspections/" . $record->id;
+                return "/object-inspections/" . $record->id;
             })
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

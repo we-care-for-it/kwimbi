@@ -55,7 +55,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function latestInspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'elevator_id')->where('company_id', Filament::getTenant()->id)->latest('end_date');
+        return $this->hasOne(ObjectInspection::class, 'elevator_id')->latest('end_date');
     }
 
     public function location()
@@ -105,7 +105,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->where('company_id', Filament::getTenant()->id)->orderby('end_date', 'desc');
+        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->orderby('end_date', 'desc');
     }
 
     public function inspection()
@@ -130,12 +130,12 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function uploads()
     {
-        return $this->hasMany(Upload::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Upload::class, 'item_id', 'id');
     }
 
     public function incidents()
     {
-        return $this->hasMany(ObjectIncident::class)->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(ObjectIncident::class);
     }
 
     public function incident_stand_still()
@@ -150,11 +150,11 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function maintenance_contracts()
     {
-        return $this->hasMany(ObjectMaintenanceContract::class)->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(ObjectMaintenanceContract::class);
     }
 
     public function maintenance_visits()
     {
-        return $this->hasMany(ObjectMaintenanceVisits::class)->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(ObjectMaintenanceVisits::class);
     }
 }

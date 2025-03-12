@@ -181,7 +181,7 @@ class ContactsRelationManager extends RelationManager
                 //     })->icon('heroicon-s-user'),
 
             ])->recordUrl(function (object $record) {
-            return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
+            return "/contacts/" . $record->contact_id;
         })
 
             ->actions([
@@ -189,7 +189,7 @@ class ContactsRelationManager extends RelationManager
                 Action::make('openCOntact')
                     ->label('Open contact')
                     ->url(function ($record) {
-                        return "/" . Filament::getTenant()->id . "/contacts/" . $record->contact_id;
+                        return "/contacts/" . $record->contact_id;
 
                     })
                 ,

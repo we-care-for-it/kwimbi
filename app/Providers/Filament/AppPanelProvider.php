@@ -99,7 +99,7 @@ class AppPanelProvider extends PanelProvider
 
  //->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
             ->path('')
-   	    ->tenant(Company::class)
+   	    //->tenant(Company::class)
             ->maxContentWidth(MaxWidth::Full)
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
@@ -159,9 +159,9 @@ class AppPanelProvider extends PanelProvider
                 // ...
                //  Locker::class, // <- Add this
             ])
- ->tenantMiddleware([
-                      \Hasnayeen\Themes\Http\Middleware\SetTheme::class
-        ], isPersistent: true)
+// ->tenantMiddleware([
+     //                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
+     //   ], isPersistent: true)
             ->authMiddleware([
                 Authenticate::class,
             ]);

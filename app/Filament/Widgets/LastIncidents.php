@@ -1,21 +1,19 @@
 <?php
-
 namespace App\Filament\Widgets;
 
 use App\Models\ObjectIncident;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Filament\Facades\Filament;
-use Filament\Tables\Actions\Action;
 
 class LastIncidents extends BaseWidget
 {
-    protected static ?int $sort = 15;
+    protected static ?int $sort                = 15;
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
-    protected static ?string $heading = "Laatste storingen";
-    protected static bool $isLazy = false;
+    protected static ?string $maxHeight        = '300px';
+    protected static ?string $heading          = "Laatste storingen";
+    protected static bool $isLazy              = false;
 
     public function table(Table $table): Table
     {
@@ -44,13 +42,13 @@ class LastIncidents extends BaseWidget
             ])
             ->emptyState(view("partials.empty-state"))
             ->recordUrl(function (ObjectIncident $record) {
-                return "/" . Filament::getTenant()->id . "/objects/" . $record->id."?activeRelationManager=1";
+                return "/objects/" . $record->id . "?activeRelationManager=1";
             })
             ->paginated(false)
             ->headerActions([
                 Action::make('viewAllIncidents')
                     ->label('Bekijk alle storingen')
-                    ->url(fn () => '/' . Filament::getTenant()->id . '/incidents') // Adjust the URL as needed
+                    ->url(fn() => '/incidents') // Adjust the URL as needed
                     ->button()
                     ->link()
                     ->color('primary'),
