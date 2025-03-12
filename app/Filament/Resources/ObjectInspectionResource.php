@@ -343,7 +343,7 @@ class ObjectInspectionResource extends Resource
                 // SelectFilter::make('elevator.maintenance_company_id')
                 //     ->label('Onderhoudspartij')
                 //     ->multiple()
-                //     ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+                //     ->options(Relation::where('type_id', 2)->pluck('name', 'id')),
 
                 // Filter::make('TypeFilter')
                 //     ->form([

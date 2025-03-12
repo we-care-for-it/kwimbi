@@ -23,6 +23,7 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
+use Filament\Infolists\Components\Tabs;
 use Filament\Tables\Table;
 
 //Form
@@ -94,23 +95,28 @@ class RelationResource extends Resource
     {
 
         return $infolist->schema([
+            Tabs::make('Contact Informatie') // Hoofd-tab component
+                ->columnSpan('full')
+                ->tabs([
+                    Tabs\Tab::make('Relatiegegevens')
+                        ->icon('heroicon-s-building-library')
+                        ->schema([
+                            Components\TextEntry::make('name')
+                                ->label("Bedrijfsnaam")
+                                ->placeholder("Niet opgegeven"),
 
-            Components\TextEntry::make('name')
-                ->label("Bedrijfsnaam")
-                ->placeholder("Niet opgegeven"),
+                            Components\TextEntry::make('type_id')
+                                ->label("Categorie")
+                                ->badge()
+                                ->placeholder("Niet opgegeven"),
 
-            Components\TextEntry::make('type_id')
-                ->label("Categorie")
-                ->badge()
-                ->placeholder("Niet opgegeven"),
+                            Components\TextEntry::make("address")
+                                ->label("Adres")
+                                ->getStateUsing(function ($record): ?string {
 
-            Components\TextEntry::make("address")
-                ->label("Adres")
-                ->getStateUsing(function ($record): ?string {
-
-                    return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
-                })
-                ->placeholder("Niet opgegeven"),
+                                return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
+                            })->placeholder("Niet opgegeven")->columns(4),                            ])->columns(4),
+            ]),
 
         ]);
 
