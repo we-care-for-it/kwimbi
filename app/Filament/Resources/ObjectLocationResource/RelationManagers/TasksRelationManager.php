@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\User;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -10,6 +9,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -69,20 +69,20 @@ class TasksRelationManager extends RelationManager
                 //     ->label('Object'),
 
                 Select::make('employee_id')
-                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->options(User::pluck('name', 'id'))
                     ->searchable()
                     ->default(Auth::id())
                     ->label('Medewerker'),
 
-                Select::make('priority')
-                    ->options([
-                        '1' => 'Hoog',
-                        '2' => 'Gemiddeld',
-                        '3' => 'Laag',
+                // Select::make('priority')
+                //     ->options([
+                //         '1' => 'Hoog',
+                //         '2' => 'Gemiddeld',
+                //         '3' => 'Laag',
 
-                    ])
-                    ->searchable()
-                    ->label('Prioriteit'),
+                //     ])
+                //     ->searchable()
+                //     ->label('Prioriteit'),
 
                 DatePicker::make('begin_date')
 
@@ -144,13 +144,17 @@ class TasksRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->modalWidth(MaxWidth::FourExtraLarge)
+                    ->modalHeading('Taak toevoegen')
+                    ->modalDescription('Voeg een nieuwe taak toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
                     ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['model_id']   = $this->ownerRecord->id;
-                        $data['model']      = 'location';
-                        $data['model_id']   = $this->getOwnerRecord()->id;
-                        $data['company_id'] = Filament::getTenant()->id;
+                        $data['model_id'] = $this->ownerRecord->id;
+                        $data['model']    = 'location';
+                        $data['model_id'] = $this->getOwnerRecord()->id;
 
                         return $data;
                     }),

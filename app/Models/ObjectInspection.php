@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-
 class ObjectInspection extends Model
 {
     use SoftDeletes;
@@ -23,11 +21,6 @@ class ObjectInspection extends Model
         ];
     }
 
-
- 
-
- 
-
     public function elevator()
     {
         return $this->belongsTo(Elevator::class, 'elevator_id', 'id');
@@ -35,12 +28,12 @@ class ObjectInspection extends Model
 
     public function itemdata()
     {
-        return $this->hasMany(ObjectInspectionData::class, 'inspection_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(ObjectInspectionData::class, 'inspection_id', 'id');
     }
 
     public function actions()
     {
-        return $this->hasMany(systemAction::class, 'item_id', 'id')->where('model', 'ObjectInspection')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(systemAction::class, 'item_id', 'id')->where('model', 'ObjectInspection');
     }
 
     public function inspectioncompany()
@@ -53,16 +46,16 @@ class ObjectInspection extends Model
         parent::boot();
 
         static::saving(function ($model) {
-         $model->company_id = Filament::getTenant()->id;
+            $model->company_id = Filament::getTenant()->id;
         });
 
         static::saved(function (self $request) {
 
             $elevator_data = Elevator::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE   company_id = '. Filament::getTenant()->id .' AND  object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE   company_id = ' . Filament::getTenant()->id . ' AND  object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                         ->where('elevator_id', $request->elevator_id)
-                        ->where('company_id', Filament::getTenant()->id)
+
                 )->first();
 
             Elevator::where('id', $request->elevator_id)->update([

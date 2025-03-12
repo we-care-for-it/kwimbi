@@ -147,7 +147,7 @@ class ObjectsRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                     ->color('warning')
                     ->label('Open object')->url(function (object $record) {
-                    return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
+                    return "/objects/" . $record->id . "";
                 })->icon('heroicon-c-link'),
 
                 ActionGroup::make([
@@ -165,7 +165,7 @@ class ObjectsRelationManager extends RelationManager
 //                    Tables\Actions\DeleteBulkAction::make(),
 //                ]),
             ])->recordUrl(function (object $record) {
-            return "/" . Filament::getTenant()->id . "/objects/" . $record->id;
+            return "/objects/" . $record->id;
 
         });
     }

@@ -8,7 +8,6 @@ use App\Models\Project;
 use App\Models\Relation;
 use App\Models\Task;
 use App\Models\User;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -36,7 +35,7 @@ class TaskResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('company_id', Filament::getTenant()->id)->count();
+        return static::getModel()::count();
     }
     public static function form(Form $form): Form
     {
@@ -69,7 +68,7 @@ class TaskResource extends Resource
                 Select::make('model_id')
                     ->label('Relatie')
                 //where('type_id', 5)->
-                    ->options(Relation::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->options(Relation::pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'relation' ?? false;
@@ -84,7 +83,7 @@ class TaskResource extends Resource
                     ->label('Project'),
 
                 Select::make('model_id')
-                    ->options(Contact::where('company_id', Filament::getTenant()->id)->pluck('first_name', 'id'))
+                    ->options(Contact::where('company_id')->pluck('first_name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'contactperson' ?? false;
@@ -108,7 +107,7 @@ class TaskResource extends Resource
                 //     ->label('Object'),
 
                 Select::make('model_id')
-                    ->options(ObjectLocation::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->options(ObjectLocation::pluck('name', 'id'))
                     ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'location' ?? false;
@@ -116,7 +115,7 @@ class TaskResource extends Resource
                     ->label('Locatie'),
 
                 Select::make('employee_id')
-                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->options(User::pluck('name', 'id'))
                     ->searchable()
                     ->default(Auth::id())
                     ->label('Medewerker'),
@@ -165,9 +164,7 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->query(
-                Task::where('company_id', Filament::getTenant()->id)
-            )
+
             ->columns([
 
                 Tables\Columns\TextColumn::make('id')

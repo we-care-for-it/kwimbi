@@ -75,9 +75,8 @@ class AttachmentsRelationManager extends RelationManager
             ->headerActions([
 
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
-                    $data['user_id']    = auth()->id();
-                    $data['model']      = "ObjectLocation";
-                    $data['company_id'] = Filament::getTenant()->id;
+                    $data['user_id'] = auth()->id();
+                    $data['model']   = "ObjectLocation";
 
                     return $data;
                 })->label('Bijlage toevoegen'),

@@ -1,34 +1,31 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages\CreateUser;
-use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
-use Filament\Facades\Filament;
 
 class UserResource extends Resource
 {
-    protected static ?string $model           = User::class;
-    protected static ?string $navigationIcon  = 'heroicon-o-users';
-    protected static ?string $navigationLabel = "Gebruikers";
-    protected static ?string $navigationGroup = 'Beheer';
-
+    protected static ?string $model                 = User::class;
+    protected static ?string $navigationIcon        = 'heroicon-o-users';
+    protected static ?string $navigationLabel       = "Gebruikers";
+    protected static ?string $navigationGroup       = 'Beheer';
+    protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
-        
+
         return $form->schema([
             TextInput::make('name')
                 ->label('Naam')
@@ -109,7 +106,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListUsers::route('/'),
+            'index' => ListUsers::route('/'),
             // 'create' => CreateUser::route('/create'),
             // 'edit'   => EditUser::route('/{record}/edit'),
         ];
