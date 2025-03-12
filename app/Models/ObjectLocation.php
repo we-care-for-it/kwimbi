@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -62,13 +61,13 @@ class ObjectLocation extends Model implements Auditable, HasMedia
     protected static function booted(): void
     {
         static::addGlobalScope(function ($query) {
-            $query->where('company_id', Filament::getTenant()->id);
+            $query;
         });
     }
 
     public function relation()
     {
-        return $this->hasOne(Relation::class, 'id', 'customer_id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasOne(Relation::class, 'id', 'customer_id');
     }
 
     public function objectbuildingtype()
@@ -83,12 +82,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function managementcompany()
     {
-        return $this->hasOne(Relation::class, 'id', 'management_id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasOne(Relation::class, 'id', 'management_id');
     }
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Elevator::class, 'address_id', 'id');
     }
 
     public function objects_same_complex()
@@ -100,17 +99,17 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('company_id', Filament::getTenant()->id)->where('model', 'ObjectLocation');
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'ObjectLocation');
     }
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'ObjectLocation');
     }
 
     public function contacts()
     {
-        return $this->hasMany(Contact::class, 'location_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Contact::class, 'location_id', 'id');
     }
     public function contactsObject()
     {
@@ -119,12 +118,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia
 
     public function projects()
     {
-        return $this->hasMany(Project::class, 'location_id', 'id')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Project::class, 'location_id', 'id');
     }
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location')->where('company_id', Filament::getTenant()->id);
+        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'location');
     }
 
     public function company(): BelongsTo

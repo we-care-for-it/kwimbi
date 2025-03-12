@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\DepartmentResource\Pages;
+namespace App\Filament\Resources\LocationResource\Pages;
 
-use App\Filament\Resources\DepartmentResource;
+use App\Filament\Resources\LocationResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditDepartment extends EditRecord
+class EditLocation extends EditRecord
 {
-    protected static string $resource = DepartmentResource::class;
+    protected static string $resource = LocationResource::class;
 
     protected function getHeaderActions(): array
     {

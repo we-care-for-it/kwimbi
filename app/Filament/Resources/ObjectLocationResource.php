@@ -7,7 +7,6 @@ use App\Models\ObjectBuildingType;
 use App\Models\ObjectLocation;
 use App\Models\Relation;
 use App\Services\AddressService;
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
@@ -81,7 +80,7 @@ class ObjectLocationResource extends Resource
                 TextEntry::make("relation.name")
                     ->label("Relatie")
                     ->Url(function (object $record) {
-                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id . "";
+                        return "/relations/" . $record->customer_id . "";
                     })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
@@ -103,7 +102,7 @@ class ObjectLocationResource extends Resource
                     ->label("Beheerder")
                     ->placeholder("Niet opgegeven")
                     ->Url(function (object $record) {
-                        return "/" . Filament::getTenant()->id . "/relations/" . $record->management_id . "";
+                        return "/relations/" . $record->management_id;
                     }),
 
             ]),
@@ -164,13 +163,12 @@ class ObjectLocationResource extends Resource
                                 ])
                                 ->createOptionUsing(function (array $data) {
                                     return Relation::create([
-                                        'name'       => $data['name'],
-                                        'type_id'    => 5,
-                                        'company_id' => Filament::getTenant()->id,
+                                        'name'    => $data['name'],
+                                        'type_id' => 5,
                                     ])->id;
                                 })
                                 ->options(Relation::where('type_id', 5)
-                                        ->where('company_id', Filament::getTenant()->id)
+
                                         ->pluck('name', 'id')),
 
                             Select::make("management_id")
@@ -182,12 +180,11 @@ class ObjectLocationResource extends Resource
                                 ])
                                 ->createOptionUsing(function (array $data) {
                                     return Relation::create([
-                                        'name'       => $data['name'],
-                                        'type_id'    => 2,
-                                        'company_id' => Filament::getTenant()->id,
+                                        'name'    => $data['name'],
+                                        'type_id' => 2,
                                     ])->id;
                                 })
-                                ->options(Relation::where('type_id', 2)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+                                ->options(Relation::where('type_id', 2)->pluck('name', 'id')),
 
                         ])]),
 
@@ -423,7 +420,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Geen relatie gekoppeld")
                     ->searchable()
                     ->url(function (ObjectLocation $record) {
-                        return "/" . Filament::getTenant()->id . "/relations/" . $record->customer_id;
+                        return "/relations/" . $record->customer_id;
                     }),
 
                 Tables\Columns\TextColumn::make("managementcompany.name")
@@ -445,7 +442,7 @@ class ObjectLocationResource extends Resource
                     ->placeholder("Onbekend")])
 
             ->filters([SelectFilter::make("customer_id")
-                    ->options(Relation::where('type_id', 5)->where('company_id', Filament::getTenant()->id)
+                    ->options(Relation::where('type_id', 5)
 
                             ->pluck("name", "id"))
                     ->label("Relatie")

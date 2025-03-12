@@ -86,6 +86,10 @@ class Company extends Model
         return $this->hasMany(ExternalConnection::class);
     }
 
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

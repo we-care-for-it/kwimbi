@@ -5,8 +5,8 @@ use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Contact extends Model
 {
@@ -26,13 +26,6 @@ class Contact extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
-    }
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(function ($query) {
-            $query->where('company_id', Filament::getTenant()->id);
-        });
     }
 
     public function category(): BelongsTo
@@ -59,7 +52,7 @@ class Contact extends Model
         return $this->first_name . " " . $this->last_name;
 
     }
-    
+
     public function relations(): HasMany
     {
         return $this->hasMany(ContactObject::class, 'model_id', 'id');

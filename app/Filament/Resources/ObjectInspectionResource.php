@@ -13,7 +13,6 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
@@ -21,7 +20,6 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -36,8 +34,8 @@ class ObjectInspectionResource extends Resource
     protected static ?string $navigationIcon   = 'heroicon-m-check-badge';
     protected static ?string $modelLabel       = 'Keuring';
     protected static ?string $pluralModelLabel = 'Keuringen';
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 4;
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -340,7 +338,7 @@ class ObjectInspectionResource extends Resource
                 SelectFilter::make('inspection_company_id')
                     ->label('Keuringinstantie')
                     ->multiple()
-                    ->options(Relation::where('type_id', 3)->where('company_id', Filament::getTenant()->id)->pluck('name', 'id')),
+                    ->options(Relation::where('type_id', 3)->pluck('name', 'id')),
 
                 // SelectFilter::make('elevator.maintenance_company_id')
                 //     ->label('Onderhoudspartij')
@@ -479,23 +477,23 @@ class ObjectInspectionResource extends Resource
                 //         ->deleteFileAfterSend(true);
                 // }),
 
-                    Actions\Action::make('cancel_top')
+                Actions\Action::make('cancel_top')
 
-                        ->color('gray')
-                        ->tooltip('Naar Object')
-                        ->label('')
-                        ->color('info')
-                        ->icon('heroicon-o-arrow-up-left')
-                        ->url(function ($record) {
-                            return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
+                    ->color('gray')
+                    ->tooltip('Naar Object')
+                    ->label('')
+                    ->color('info')
+                    ->icon('heroicon-o-arrow-up-left')
+                    ->url(function ($record) {
+                        return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
 
-                        }),
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->tooltip('Verwijderen')
-                        ->label('')
-                        ->modalHeading('Contactpersoon verwijderen')
-                        ->color('danger'),
+                    }),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Contactpersoon verwijderen')
+                    ->color('danger'),
             ])
 
             ->bulkActions([

@@ -1,21 +1,19 @@
 <?php
-
 namespace App\Filament\Widgets;
 
 use App\Models\Elevator;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
-use Filament\Facades\Filament;
-use Filament\Tables\Actions\Action;
 
 class StandStill extends BaseWidget
 {
-    protected static ?int $sort = 12;
-    protected static ?string $heading = "Stilstaande liften";
+    protected static ?int $sort                = 12;
+    protected static ?string $heading          = "Stilstaande liften";
     protected int|string|array $columnSpan = '6';
-    protected static ?string $maxHeight = '300px';
-    protected static bool $isLazy = false;
+    protected static ?string $maxHeight        = '300px';
+    protected static bool $isLazy              = false;
 
     public function table(Table $table): Table
     {
@@ -48,13 +46,13 @@ class StandStill extends BaseWidget
             ])
             ->emptyState(view("partials.empty-state"))
             ->recordUrl(function (Elevator $record) {
-                return "/" . Filament::getTenant()->id . "/objects/" . $record->id."?activeRelationManager=1";
+                return "/objects/" . $record->id . "?activeRelationManager=1";
             })
             ->paginated(false)
             ->headerActions([
                 Action::make('viewAllObjects')
                     ->label('Bekijk alle stilstaande liften')
-                    ->url(fn () => '/' . Filament::getTenant()->id . '/objects')
+                    ->url(fn() => '/objects')
                     ->button()
                     ->link()
                     ->color('primary'),

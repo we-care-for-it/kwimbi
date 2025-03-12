@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Widgets;
 
 use App\Models\Task;
@@ -9,18 +8,16 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class TasksOverview extends BaseWidget
 {
-    protected int | string | array $columnSpan = 'full'; // Span the widget across the full width
-    protected static ?int $sort = 80;
-    protected static ?string $heading = "Taken Overzicht";
-    protected static bool $isLazy = false;
-    protected static ?string $maxHeight = '600px';
+    protected int|string|array $columnSpan = 'full'; // Span the widget across the full width
+    protected static ?int $sort                = 80;
+    protected static ?string $heading          = "Taken Overzicht";
+    protected static bool $isLazy              = false;
+    protected static ?string $maxHeight        = '600px';
 
     public function table(Table $table): Table
     {
         return $table
-            ->query(
-                Task::where('company_id', filament()->getTenant()->id)
-            )
+            ->query(Task::orderby('created_at', 'desc')->limit(10))
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('#')
@@ -57,10 +54,10 @@ class TasksOverview extends BaseWidget
                     ->placeholder('-')
                     ->badge()
                     ->color(fn($state) => match ($state) {
-                        '1' => 'danger', // Hoog
-                        '2' => 'warning', // Gemiddeld
-                        '3' => 'success', // Laag
-                        default => 'gray',
+                        '1'                => 'danger',  // Hoog
+                        '2'                => 'warning', // Gemiddeld
+                        '3'                => 'success', // Laag
+                        default            => 'gray',
                     }),
             ])
             ->filters([

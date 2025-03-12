@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\DepartmentResource\RelationManagers;
+namespace App\Filament\Resources\LocationResource\RelationManagers;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -14,15 +14,16 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
-class WorkplacesRelationManager extends RelationManager
+class DepartmentsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'workplaces';
+    protected static string $relationship = 'departments';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label(__('departments.fields.name'))
                     ->required()
                     ->maxLength(255),
             ]);
@@ -35,7 +36,8 @@ class WorkplacesRelationManager extends RelationManager
             ->paginated([25, 50, 100, 'all'])
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->label(__('departments.fields.name')),
             ])
             ->headerActions([
                 CreateAction::make(),
@@ -53,11 +55,11 @@ class WorkplacesRelationManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return 'Werkplekken';
+        return __('departments.plural');
     }
 
     protected static function getModelLabel(): ?string
     {
-        return 'Werkplek';
+        return __('departments.singular');
     }
 }

@@ -10,7 +10,6 @@ use App\Models\Elevator;
 use App\Models\ObjectType;
 use App\Models\Relation;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -49,7 +48,7 @@ class ObjectResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('company_id', Filament::getTenant()->id)->count();
+        return static::getModel()::count();
     }
 
     public static function form(Form $form): Form
@@ -392,7 +391,7 @@ class ObjectResource extends Resource
 
                         Components\TextEntry::make("location.relation.name")
                             ->label("Relatie")->Url(function (object $record) {
-                            return "/" . Filament::getTenant()->id . "/relations/" . $record->location->customer_id;
+                            return "/relations/" . $record->location->customer_id;
 
                         })
 
