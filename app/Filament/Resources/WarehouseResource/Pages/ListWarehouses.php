@@ -1,35 +1,34 @@
 <?php
 
-namespace App\Filament\Resources\SpaceResource\Pages;
+namespace App\Filament\Resources\WarehouseResource\Pages;
 
-use App\Filament\Resources\SpaceResource;
+use App\Filament\Resources\WarehouseResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
-class ListSpaces extends ListRecords
+class ListWarehouses extends ListRecords
 {
-    protected static string $resource = SpaceResource::class;
+    protected static string $resource = WarehouseResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Ruimte toevoegen')
+                ->label('Magazijn toevoegen')
                 ->slideOver()
                 ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Ruimte toevoegen')
-                ->modalDescription('Vul een ruimte in om de gegevens op te halen')
+                ->modalHeading('Magazijn toevoegen')
+                ->modalDescription('Vul het magazijn in om de gegevens op te halen')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
                 ->slideOver()
-                ->label('Ruimte toevoegen'),
+                ->label('Magazijn toevoegen'),
         ];
     }
-
     public function getHeading(): string
     {
-        return "Ruimte - Overzicht";
+        return "Magazijn - Overzicht";
     }
 }

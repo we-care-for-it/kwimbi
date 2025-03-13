@@ -17,5 +17,9 @@ class Space extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function location(): BelongsTo
+    {
+        return $this->belongsTo(Location::class);
+    }
 
 }

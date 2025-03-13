@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SpaceResource\Pages;
-use App\Filament\Resources\SpaceResource\RelationManagers;
-use App\Models\Space;
+use App\Filament\Resources\WarehouseResource\Pages;
+use App\Filament\Resources\WarehouseResource\RelationManagers;
+use App\Models\Warehouse;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -16,16 +16,16 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SpaceResource extends Resource
+class WarehouseResource extends Resource
 {
-    protected static ?string $model = Space::class;
+    protected static ?string $model = Warehouse::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Objecten';
     protected static ?int $navigationSort = 7;
-    protected static ?string $navigationLabel = "Ruimtes";
-    protected static ?string $title = "Ruimtes";
-    protected static ?string $pluralModelLabel = 'Ruimtes';
+    protected static ?string $navigationLabel = "Magazijnen";
+    protected static ?string $title = "Magazijnen";
+    protected static ?string $pluralModelLabel = 'Magazijnen';
 
     public static function form(Form $form): Form
     {
@@ -39,6 +39,10 @@ class SpaceResource extends Resource
                                     ->label('Naam')
                                     ->required()
                                     ->maxLength(255),
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label('Actief')
+                                    ->default(true),
+
                             ]),
                     ]),
             ]);
@@ -48,13 +52,14 @@ class SpaceResource extends Resource
     {
         return $infolist
             ->schema([
-                Tabs::make('Ruimte Informatie')
+                Tabs::make('Magazijn Informatie')
                     ->columnSpan('full')
                     ->tabs([
                         Tabs\Tab::make('Algemene informatie')
                             ->icon('heroicon-o-information-circle')
                             ->schema([
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
+                                TextEntry::make('is_active')->label('Actief')->placeholder('-'),
                             ])->columns(2),
                     ]),
             ]);
@@ -70,8 +75,8 @@ class SpaceResource extends Resource
 
             ])
             ->filters([
-
-                ])
+                Tables\Filters\TrashedFilter::make(),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Snel bewerken')
@@ -93,7 +98,6 @@ class SpaceResource extends Resource
             ])
             ->emptyState(view('partials.empty-state'));
     }
-
     public static function getRelations(): array
     {
         return [
@@ -104,9 +108,9 @@ class SpaceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSpaces::route('/'),
-            // 'create' => Pages\CreateSpace::route('/create'),
-            // 'edit' => Pages\EditSpace::route('/{record}/edit'),
+            'index' => Pages\ListWarehouses::route('/'),
+            // 'create' => Pages\CreateWarehouse::route('/create'),
+            // 'edit' => Pages\EditWarehouse::route('/{record}/edit'),
         ];
     }
 }
