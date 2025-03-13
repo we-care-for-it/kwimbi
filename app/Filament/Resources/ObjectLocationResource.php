@@ -522,6 +522,8 @@ class ObjectLocationResource extends Resource
             RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
+            RelationManagers\SpacesRelationManager::class,
+            RelationManagers\WarehousesRelationManager::class,
             // ]),
         ];
     }
