@@ -97,7 +97,7 @@ class SpaceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\LocationRelationManager::class,
         ];
     }
 
@@ -105,6 +105,7 @@ class SpaceResource extends Resource
     {
         return [
             'index' => Pages\ListSpaces::route('/'),
+            'view' => Pages\ViewSpace::route('/{record}'),
             // 'create' => Pages\CreateSpace::route('/create'),
             // 'edit' => Pages\EditSpace::route('/{record}/edit'),
         ];

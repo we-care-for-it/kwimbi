@@ -101,7 +101,7 @@ class WarehouseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\LocationRelationManager::class,
         ];
     }
 
@@ -109,6 +109,7 @@ class WarehouseResource extends Resource
     {
         return [
             'index' => Pages\ListWarehouses::route('/'),
+            'view' => Pages\ViewWarehouse::route('/{record}'),
             // 'create' => Pages\CreateWarehouse::route('/create'),
             // 'edit' => Pages\EditWarehouse::route('/{record}/edit'),
         ];
