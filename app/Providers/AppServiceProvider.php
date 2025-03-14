@@ -13,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
 use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+use BezhanSalleh\FilamentLanguageSwitch\Enums\Placement;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,8 +25,14 @@ class AppServiceProvider extends ServiceProvider
 
  LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
-                ->locales(['ar','en','fr']); // also accepts a closure
-        });
+                ->locales(['nl','en'])
+
+->flags([
+                'en' => asset('/images/flags/en.svg'),
+                'nl' => asset('/images/flags/nl.svg')
+            ])    ->circular()
+
+ ->visible(outsidePanels: true)         ->outsidePanelPlacement(Placement::BottomRight)   ;    });
 
 
         FilamentSettingsHub::register([
