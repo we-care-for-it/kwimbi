@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WarehouseResource\Pages;
@@ -20,13 +19,13 @@ class WarehouseResource extends Resource
 {
     protected static ?string $model = Warehouse::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 7;
-    protected static ?string $navigationLabel = "Magazijnen";
-    protected static ?string $title = "Magazijnen";
-    protected static ?string $pluralModelLabel = 'Magazijnen';
-
+    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup       = 'Objecten';
+    protected static ?int $navigationSort           = 7;
+    protected static ?string $navigationLabel       = "Magazijnen";
+    protected static ?string $title                 = "Magazijnen";
+    protected static ?string $pluralModelLabel      = 'Magazijnen';
+    protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
         return $form
@@ -109,7 +108,7 @@ class WarehouseResource extends Resource
     {
         return [
             'index' => Pages\ListWarehouses::route('/'),
-            'view' => Pages\ViewWarehouse::route('/{record}'),
+            'view'  => Pages\ViewWarehouse::route('/{record}'),
             // 'create' => Pages\CreateWarehouse::route('/create'),
             // 'edit' => Pages\EditWarehouse::route('/{record}/edit'),
         ];

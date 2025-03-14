@@ -17,4 +17,9 @@ class ViewSpace extends ViewRecord
         ];
     }
 
+    public function getHeading(): string
+    {
+        return "Bekijk ruimte";
+    }
+
 }
