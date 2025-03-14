@@ -13,6 +13,13 @@
       0 => 'AWT\\Providers\\ApiLogServiceProvider',
     ),
   ),
+  'bezhansalleh/filament-language-switch' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BezhanSalleh\\FilamentLanguageSwitch\\FilamentLanguageSwitchServiceProvider',
+    ),
+  ),
   'bezhansalleh/filament-shield' => 
   array (
     'aliases' => 

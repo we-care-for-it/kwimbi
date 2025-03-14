@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
 use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
-
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+
+ LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['ar','en','fr']); // also accepts a closure
+        });
+
 
         FilamentSettingsHub::register([
             SettingHold::make()
