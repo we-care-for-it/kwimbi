@@ -3,8 +3,8 @@ namespace App\Models;
 
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
+use App\Enums\ObjectMonitoringConnect;
 use App\Models\ObjectInspection;
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,6 +43,7 @@ class Elevator extends Model implements Auditable, HasMedia
         return [
             'status_id'                    => ElevatorStatus::class,
             'current_inspection_status_id' => InspectionStatus::class,
+            'getMonitoringConnectState'    => ObjectMonitoringConnect::class,
 
         ];
     }
@@ -113,15 +114,15 @@ class Elevator extends Model implements Auditable, HasMedia
         return $this->hasOne(ObjectInspection::class, 'id', 'elevator_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
     }
 
-    protected static function boot(): void
-    {
-        parent::boot();
+    // protected static function boot(): void
+    // {
+    //     parent::boot();
 
-        static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
-        });
+    //     static::saving(function ($model) {
+    //         $model->company_id = Filament::getTenant()->id;
+    //     });
 
-    }
+    // }
 
     public function features()
     {
@@ -157,4 +158,37 @@ class Elevator extends Model implements Auditable, HasMedia
     {
         return $this->hasMany(ObjectMaintenanceVisits::class);
     }
+
+    //Monitoring
+
+    public function getMonitoringLastInsert()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->latest();
+    }
+
+    public function getMonitoringVersion()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('created_at');
+    }
+
+    public function getMonitoringType()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('created_at');
+    }
+
+    public function getMonitoringFloor()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'stop')->latest('created_at');
+    }
+
+    public function getMonitoringConnectState()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'connected')->latest('created_at');
+    }
+
+    public function getMonitoringState()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'state')->latest('created_at');
+    }
+
 }

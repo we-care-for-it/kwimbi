@@ -10,6 +10,7 @@ class ProductCategories extends Model
 
     /**
      * @var string[]
+
      */
 
 }

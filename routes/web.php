@@ -1,7 +1,7 @@
 <?php
 
+use App\Console\Command\MQTTModusystem;
 use App\Http\Controllers\ObjectMonitoringController;
-
 // Route::get('/', function () {
 //     return redirect()->to('/app');
 // });
@@ -19,6 +19,8 @@ use App\Http\Controllers\ObjectMonitoringController;
 // });
 
 use App\Http\Controllers\webhook\Mailersend;
+
+Route::get('/test', [MQTTModusystem::class, 'handle']);
 
 Route::middleware('apilogger')->post('/webhook/mailersend', [Mailersend::class, 'handle']);
 
