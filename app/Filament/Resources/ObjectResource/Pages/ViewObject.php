@@ -32,24 +32,38 @@ class ViewObject extends ViewRecord
     }
     protected function getHeaderWidgets(): array
     {
-        return [
-            ObjectResource\Widgets\Monitoring::class,
-            //  ObjectResource\Widgets\MonitoringCounters::class,
 
-        ];
+        if ($this->getRecord()->monitoring_object_id) {
+            return [
+                ObjectResource\Widgets\Monitoring::class,
+                //  ObjectResource\Widgets\MonitoringCounters::class,
+
+            ];
+        } else {
+            return [];
+        }
     }
     protected function getHeaderActions(): array
     {
         return [
+
+            Actions\Action::make('cancel_top')
+                ->iconButton()
+                ->color('gray')
+                ->label('Monitoring')
+                ->link()
+                ->url(function ($record) {
+                    return $this->getRecord()?->monitoring_object_id . "/monitoring";
+                }),
+
             Actions\Action::make('cancel_top')
                 ->iconButton()
                 ->color('gray')
                 ->label('Open locatie')
-
                 ->link()
                 ->icon('heroicon-s-map-pin')
                 ->url(function ($record) {
-                    return "/object-locations/" . $this->getRecord()->location->id;
+                    return "/object-locations/" . $this->getRecord()?->location?->id;
                 }),
 
             Actions\EditAction::make('cancel_top')

@@ -434,7 +434,7 @@ class ObjectResource extends Resource
 
                             ->label("Adres")->getStateUsing(function ($record): ?string {
                             $housenumber = "";
-                            if ($record->location->housenumber) {
+                            if ($record?->location?->housenumber) {
                                 $housenumber = " " . $record?->location?->housenumber;
                             }
 
@@ -471,7 +471,7 @@ class ObjectResource extends Resource
 
                         Components\TextEntry::make("location.relation.name")
                             ->label("Relatie")->Url(function (object $record) {
-                            return "/relations/" . $record->location->customer_id;
+                            return "/relations/" . $record?->location?->customer_id;
 
                         })
 
@@ -550,10 +550,11 @@ class ObjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            "index" => Pages\ListObjects::route("/"),
+            "index"   => Pages\ListObjects::route("/"),
             //   'create' => Pages\CreateObject::route('/create'),
             //  'edit' => Pages\EditObject::route('/{record}/edit'),
-            "view"  => Pages\ViewObject::route("/{record}"),
+            "view"    => Pages\ViewObject::route("/{record}"),
+            "monitor" => Pages\MonitorObject::route("/{record}/monitoring"),
         ];
     }
 }
