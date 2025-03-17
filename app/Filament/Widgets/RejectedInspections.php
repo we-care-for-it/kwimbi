@@ -30,7 +30,7 @@ class RejectedInspections extends BaseWidget
                         if ($record?->location?->name) {
                             return $record?->location?->name;
                         } else {
-                            return $record->location->address .
+                            return $record->location?->address .
                             " - " .
                             $record->location->zipcode .
                             " " .
@@ -42,7 +42,7 @@ class RejectedInspections extends BaseWidget
                         if (! $record?->location?->name) {
                             return $record?->location?->name;
                         } else {
-                            return $record->location->address .
+                            return $record->location?->address .
                             " - " .
                             $record->location->zipcode .
                             " " .

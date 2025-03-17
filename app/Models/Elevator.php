@@ -179,14 +179,39 @@ class Elevator extends Model implements Auditable, HasMedia
         return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'stop')->latest('created_at');
     }
 
-    public function getMonitoringConnectState()
+    public function getMonitoringConnectState(): ?string
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'connected')->latest('created_at');
+        $data = ObjectMonitoring::where('external_object_id', $this->monitoring_object_id)->where('category', 'connected')->select('value')->orderby('created_at', 'desc')->first();
+        switch ($data->value) {
+            case '0':
+                $text  = "Verbroken";
+                $color = "warning";
+                break;
+            case '1':
+                $text  = "Verbinding";
+                $color = "success";
+                break;
+            case '2';
+                $text  = "Foutmelding";
+                $color = "danger";
+                break;
+            default:
+                break;
+        }
+
+        $data = ['text' => $text, 'color' => $color];
+        return response()->json($data);
+
     }
+
+    // public function getMonitoringConnectState()
+    // {
+    //     return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'connected')->select('value')->latest('created_at');
+    // }
 
     public function getMonitoringState()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'state')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'state')->select('value')->latest('created_at');
     }
 
 }
