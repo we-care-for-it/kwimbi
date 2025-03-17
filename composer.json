@@ -33,6 +33,7 @@
         "niladam/filament-auto-logout": "^1.0",
         "owen-it/laravel-auditing": "^13.6",
         "owenvoke/blade-fontawesome": "^2.8",
+        "php-mqtt/laravel-client": "^1.6",
         "pxlrbt/filament-activity-log": "^1.1",
         "pxlrbt/filament-excel": "^2.4",
         "rupadana/filament-api-service": "^3.4",

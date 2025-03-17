@@ -26,7 +26,18 @@ class ViewObject extends ViewRecord
         }
 
     }
+    public function getHeaderWidgetsColumns(): int | array
+    {
+        return 7;
+    }
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ObjectResource\Widgets\Monitoring::class,
+            ObjectResource\Widgets\MonitoringCounters::class,
 
+        ];
+    }
     protected function getHeaderActions(): array
     {
         return [

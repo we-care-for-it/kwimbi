@@ -345,8 +345,86 @@ class ObjectResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
+            // Components\Section::make('Actuele monitoring')
+            //     ->schema([
+            //         Components\Split::make([
+            //             Components\Grid::make(4)->schema([
 
-            Components\Section::make()->schema([
+            // Components\TextEntry::make("getMonitoringState.value")
+            //     ->label("Verbinding status")
+            //     ->badge()
+            //     ->color(fn(string $state): string => match ($state) {
+            //         '0'                               => 'success',
+            //         '1'                               => 'warning',
+            //         '2'                               => 'danger',
+            //         '3'                               => 'danger',
+            //     })
+            //     ->formatStateUsing(function ($state): ?string {
+
+            //         switch ($state) {
+            //             case 0:
+            //                 return "In bedrijf";
+            //                 break;
+            //             case 1:
+            //                 return "Keuring";
+            //                 break;
+            //             case 2:
+            //                 return "Noodgeval";
+            //                 break;
+            //             case 3:
+            //                 return "Foutmelding";
+            //                 break;
+            //         }
+
+            //     })
+            //     ->placeholder("Onbekende status"),
+
+            //                 Components\TextEntry::make("getMonitoringVersion.value")
+            //                     ->label("Versie")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringType.value")
+            //                     ->label("Type")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringFloor.value")
+            //                     ->label("Verdieping")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringConnectState.value")
+            //                     ->label("Verbinding status")
+            //                     ->badge()
+            //                     ->color(fn(string $state): string => match ($state) {
+            //                         '0'                               => 'danger',
+            //                         '1'                               => 'success',
+            //                         '2'                               => 'warning',
+            //                     })->formatStateUsing(function ($state): ?string {
+
+            //                     switch ($state) {
+            //                         case 0:
+            //                             return "Geen verbinding";
+            //                             break;
+            //                         case 1:
+            //                             return "Verbinding";
+            //                             break;
+            //                         case 2:
+            //                             return "Foutmelding";
+            //                             break;
+            //                     }
+
+            //                 })
+            //                     ->placeholder("Geen gegevens"),
+
+            //             ]),
+            //         ]),
+            //     ])->description(function ($record) {
+            //     return "Laatste update op: " . date_format($record->getMonitoringHeartbeat->created_at, "d-m-Y H:i:s");;
+            // })->collapsible()
+            //     ->collapsed(false)->hidden(function ($record): ?string {
+            //     return $record->monitoring_object_id ? false : true;
+            // }),
+
+            Components\Section::make("Object gegevens")->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
 
@@ -407,8 +485,9 @@ class ObjectResource extends Resource
                             ->placeholder("Niet opgegeven"),
                     ]),
                 ])->from("lg"),
-            ]),
-
+            ])->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed(),
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
