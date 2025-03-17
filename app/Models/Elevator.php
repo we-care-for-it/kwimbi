@@ -200,7 +200,7 @@ class Elevator extends Model implements Auditable, HasMedia
         }
 
         $data = ['text' => $text, 'color' => $color];
-        return json_encode($data);
+        return response()->json($data);
 
     }
 
