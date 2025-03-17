@@ -543,6 +543,7 @@ class ObjectResource extends Resource
             RelationManagers\MaintenanceVisitsRelationManager::class,
             //  ]),
             RelationManagers\inspectionsRelationManager::class,
+            RelationManagers\ObjectMonitoringRelationManager::class,
             RelationManagers\AttachmentRelationManager::class,
         ];
     }

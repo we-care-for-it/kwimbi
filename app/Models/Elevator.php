@@ -181,9 +181,9 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function getMonitoringEvents()
     {
-        return $this->hasMany(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id');
+        return $this->hasMany(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->whereIn('category', ['doors', 'moving', 'online', 'floor', 'direction', 'state', 'error', 'speed']);
     }
-    
+
     public function getMonitoringConnectState(): ?string
     {
         $data = ObjectMonitoring::where('external_object_id', $this->monitoring_object_id)->where('category', 'connected')->select('value')->orderby('created_at', 'desc')->first();
