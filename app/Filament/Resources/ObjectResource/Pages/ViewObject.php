@@ -36,7 +36,7 @@ class ViewObject extends ViewRecord
         if ($this->getRecord()->monitoring_object_id) {
             return [
                 ObjectResource\Widgets\Monitoring::class,
-                //  ObjectResource\Widgets\MonitoringCounters::class,
+                 ObjectResource\Widgets\FloorChart::class,
 
             ];
         } else {
