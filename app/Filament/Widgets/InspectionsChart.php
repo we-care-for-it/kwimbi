@@ -15,7 +15,7 @@ class InspectionsChart extends ChartWidget
     protected int|string|array $columnSpan = '6';
     protected static ?string $maxHeight        = '100%';
     protected static bool $isLazy              = false;
-
+    protected static ?string $pollingInterval  = '10s';
     public function getDescription(): ?string
     {
         return 'Het verloop van de keuringen van het huidige jaar';

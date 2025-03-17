@@ -10,25 +10,25 @@ class ViewObject extends ViewRecord
     protected static string $resource = ObjectResource::class;
     protected static ?string $title   = 'Lifteigenschappen';
 
-    public function getSubheading(): ?string
-    {
+    // public function getSubheading(): ?string
+    // {
 
-        if ($this->getRecord()->location) {
+    //     if ($this->getRecord()->location) {
 
-            $location_name = null;
-            if ($this->getRecord()->location?->name) {
-                $location_name = " | " . $this->getRecord()->location?->name;
-            }
-            return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+    //         $location_name = null;
+    //         if ($this->getRecord()->location?->name) {
+    //             $location_name = " | " . $this->getRecord()->location?->name;
+    //         }
+    //         return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
 
-        } else {
-            return "";
-        }
+    //     } else {
+    //         return "";
+    //     }
 
-    }
+    // }
     public function getHeaderWidgetsColumns(): int | array
     {
-        return 7;
+        return 8;
     }
     protected function getHeaderWidgets(): array
     {
@@ -36,8 +36,8 @@ class ViewObject extends ViewRecord
         if ($this->getRecord()->monitoring_object_id) {
             return [
                 ObjectResource\Widgets\Monitoring::class,
-                 ObjectResource\Widgets\FloorChart::class,
-
+                ObjectResource\Widgets\FloorChart::class,
+                ObjectResource\Widgets\IncidentChart::class,
             ];
         } else {
             return [];

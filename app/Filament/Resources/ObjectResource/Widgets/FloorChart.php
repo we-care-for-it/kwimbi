@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class FloorChart extends ChartWidget
 {
-    protected static ?string $heading          = 'Chart';
-    protected int|string|array $columnSpan = '7';
+    protected static ?string $heading          = 'Verdiepingen en stops';
+    protected int|string|array $columnSpan = '4';
     protected static ?string $maxHeight        = '100%';
-    public ?Model $record                      = null;
+
+    public ?Model $record = null;
+
+    protected static ?string $pollingInterval = '10s';
     protected function getData(): array
     {
         $stopData = Trend::query(ObjectMonitoring::where('category', 'stop')->whereYear('created_at', date('Y'))
@@ -58,13 +61,28 @@ class FloorChart extends ChartWidget
 
                     'data'            => $closeData->map(fn(TrendValue $value) => round($value->aggregate)),
                 ],
+
             ],
             'labels'   => $stopData->map(fn(TrendValue $value) => date('m', strtotime($value->date))),
         ];
     }
 
+    protected static ?array $options = [
+        'scale' => [
+            'ticks' => [
+                'precision' => 0,
+            ],
+        ],
+    ];
+
     protected function getType(): string
     {
         return 'bar';
     }
+
+    public function getDescription(): ?string
+    {
+        return 'Deze grafiek toon het aantal deurbewegingen en stops';
+    }
+
 }
