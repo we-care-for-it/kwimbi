@@ -34,7 +34,7 @@ class ViewObject extends ViewRecord
     {
         return [
             ObjectResource\Widgets\Monitoring::class,
-            ObjectResource\Widgets\MonitoringCounters::class,
+            //  ObjectResource\Widgets\MonitoringCounters::class,
 
         ];
     }

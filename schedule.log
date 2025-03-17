@@ -811,3 +811,4 @@
   2   vendor\php-mqtt\client\src\MqttClient.php:123
       PhpMqtt\Client\MqttClient::connectInternal()
 
+^C
