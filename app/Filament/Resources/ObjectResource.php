@@ -59,7 +59,9 @@ class ObjectResource extends Resource
                 TextInput::make("nobo_no")
                     ->label("NOBO Nummer")
                     ->placeholder("Niet opgegeven"),
-
+                TextInput::make("monitoring_object_id")
+                    ->label("Monitoring ID")
+                    ->placeholder("Niet opgegeven"),
                 Select::make("type_id")
                     ->label("Type")
                     ->options(
