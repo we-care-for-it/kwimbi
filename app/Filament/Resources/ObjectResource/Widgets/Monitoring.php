@@ -22,25 +22,35 @@ class Monitoring extends BaseWidget
         //arrow-path
 
         return [
-            Stat::make('Versie', $this->record->getMonitoringVersion->value)
+            Stat::make('Versie', $this->record?->getMonitoringVersion?->value)
                 ->descriptionIcon('heroicon-m-link', IconPosition::Before)
-                ->description("Type: " . ucfirst($this->record->getMonitoringType->value) ?? 'Onbekend type'),
+                ->description("Type: " . ucfirst($this->record?->getMonitoringType?->value) ?? 'Onbekend type'),
 
-            Stat::make('Objectstatus', $this->record->getMonitoringState->value)
-                ->description("Update: " . ucfirst($this->record->getMonitoringType->created_at)),
+            Stat::make('Objectstatus', $this->record?->getMonitoringState?->value)
+                ->description("Update: " . ucfirst($this->record?->getMonitoringType?->created_at)),
 
-            Stat::make('Actuele verdieping', $this->record->getMonitoringFloor->value)
-                ->description("Update : " . date_format($this->record->getMonitoringFloor->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->created_at, "H:i:s")),
+            Stat::make('Actuele verdieping', $this->record?->getMonitoringFloor?->value)
+                ->description("Update : " . date_format($this->record?->getMonitoringFloor?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->created_at, "H:i:s")),
 
-            Stat::make('Verbindingstatus', $this->record->getMonitoringConnectState()),
+            Stat::make('Verbindingstatus', $this->record?->getMonitoringConnectState()),
             //      ->description("Update : " . date_format($this->record->getMonitoringState->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->getMonitoringState, "H:i:s")),
 
         ];
     }
 
+    // public static function canView(): bool
+    // {
+    //     return false;
+    // }
+
+
     protected function getDescription(): ?string
     {
-        return "Laatste update op: " . date_format($this->record->getMonitoringLastInsert->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s");
+        if ($this->record?->getMonitoringLastInsert){
+        return "Laatste update op: " . date_format($this->record?->getMonitoringLastInsert?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s");
+        } else{
+            return 'onbekend';
+        }
     }
 
 }
