@@ -3,7 +3,6 @@ namespace App\Models;
 
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
-use App\Enums\ObjectMonitoringConnect;
 use App\Models\ObjectInspection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +42,6 @@ class Elevator extends Model implements Auditable, HasMedia
         return [
             'status_id'                    => ElevatorStatus::class,
             'current_inspection_status_id' => InspectionStatus::class,
-            'getMonitoringConnectState'    => ObjectMonitoringConnect::class,
 
         ];
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('param01')->nullable();
             $table->string('param02')->nullable();
+            $table->string('brand')->nullable();
             $table->string('value')->nullable();
             $table->datetime('date_time')->nullable();
         });

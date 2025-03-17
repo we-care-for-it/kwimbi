@@ -73,6 +73,7 @@ class MQTTModusystem extends Command
                     "param01" => $param01,
                     "param02" => $param02,
                     "value"   => $value,
+                    "brand"   => "modusystem",
                 ]
             );
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources\ObjectResource\Widgets;
 
+use App\Enums\ObjectMonitoringConnect;
 use Filament\Support\Enums\IconPosition;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -27,12 +28,12 @@ class Monitoring extends BaseWidget
                 ->description("Type: " . ucfirst($this->record->getMonitoringType->value) ?? 'Onbekend type'),
 
             Stat::make('Objectstatus', $this->record->getMonitoringState->value)
-                ->description("Type: " . ucfirst($this->record->getMonitoringType->created_at)),
+                ->description("Update: " . ucfirst($this->record->getMonitoringType->created_at)),
 
             Stat::make('Actuele verdieping', $this->record->getMonitoringFloor->value)
                 ->description("Update : " . date_format($this->record->getMonitoringFloor->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->created_at, "H:i:s")),
 
-            Stat::make('Verbindingstatus', $this->record->getMonitoringState->value ?? 0),
+            Stat::make('Verbindingstatus', ObjectMonitoringConnect::from($this->record->getMonitoringConnectState->value)),
             //      ->description("Update : " . date_format($this->record->getMonitoringState->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->getMonitoringState, "H:i:s")),
 
         ];
