@@ -14,7 +14,7 @@ class ObjectMonitoring extends Model
         'param02',
         'value',
         'date_time',
-
+        'brand',
     ];
 
 }
