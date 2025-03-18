@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\ObjectResource\Pages;
 
 use App\Filament\Resources\ObjectResource;
+
 use Filament\Resources\Pages\Page;
 
 class MonitorObject extends Page
@@ -13,7 +14,15 @@ class MonitorObject extends Page
     public function getSubheading(): ?string
     {
 
-        return $resource;
+        return static::$resource;
+
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+            return [
+                // ObjectResource\Widgets\Monitoring::class,
+                ObjectResource\Widgets\FloorChart::class];
 
     }
 
