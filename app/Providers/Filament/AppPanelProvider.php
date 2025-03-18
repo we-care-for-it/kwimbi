@@ -154,6 +154,7 @@ class AppPanelProvider extends PanelProvider
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
+   \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
        //
               
 
