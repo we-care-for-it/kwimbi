@@ -13,6 +13,13 @@
       0 => 'AWT\\Providers\\ApiLogServiceProvider',
     ),
   ),
+  'bezhansalleh/filament-language-switch' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BezhanSalleh\\FilamentLanguageSwitch\\FilamentLanguageSwitchServiceProvider',
+    ),
+  ),
   'bezhansalleh/filament-shield' => 
   array (
     'aliases' => 
@@ -336,6 +343,17 @@
     'providers' => 
     array (
       0 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
+    ),
+  ),
+  'php-mqtt/laravel-client' => 
+  array (
+    'aliases' => 
+    array (
+      'MQTT' => 'PhpMqtt\\Client\\Facades\\MQTT',
+    ),
+    'providers' => 
+    array (
+      0 => 'PhpMqtt\\Client\\MqttClientServiceProvider',
     ),
   ),
   'pxlrbt/filament-activity-log' => 

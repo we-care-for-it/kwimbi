@@ -59,7 +59,9 @@ class ObjectResource extends Resource
                 TextInput::make("nobo_no")
                     ->label("NOBO Nummer")
                     ->placeholder("Niet opgegeven"),
-
+                TextInput::make("monitoring_object_id")
+                    ->label("Monitoring ID")
+                    ->placeholder("Niet opgegeven"),
                 Select::make("type_id")
                     ->label("Type")
                     ->options(
@@ -85,6 +87,10 @@ class ObjectResource extends Resource
 
                 Select::make("supplier_id")
                     ->label("Leverancier")
+                    ->options(Relation::where('type_id', 4)->pluck("name", "id")),
+
+                Select::make("ss")
+                    ->label("VErdieping")
                     ->options(Relation::where('type_id', 4)->pluck("name", "id")),
 
                 TextInput::make("stopping_places")
@@ -345,8 +351,86 @@ class ObjectResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist->schema([
+            // Components\Section::make('Actuele monitoring')
+            //     ->schema([
+            //         Components\Split::make([
+            //             Components\Grid::make(4)->schema([
 
-            Components\Section::make()->schema([
+            // Components\TextEntry::make("getMonitoringState.value")
+            //     ->label("Verbinding status")
+            //     ->badge()
+            //     ->color(fn(string $state): string => match ($state) {
+            //         '0'                               => 'success',
+            //         '1'                               => 'warning',
+            //         '2'                               => 'danger',
+            //         '3'                               => 'danger',
+            //     })
+            //     ->formatStateUsing(function ($state): ?string {
+
+            //         switch ($state) {
+            //             case 0:
+            //                 return "In bedrijf";
+            //                 break;
+            //             case 1:
+            //                 return "Keuring";
+            //                 break;
+            //             case 2:
+            //                 return "Noodgeval";
+            //                 break;
+            //             case 3:
+            //                 return "Foutmelding";
+            //                 break;
+            //         }
+
+            //     })
+            //     ->placeholder("Onbekende status"),
+
+            //                 Components\TextEntry::make("getMonitoringVersion.value")
+            //                     ->label("Versie")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringType.value")
+            //                     ->label("Type")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringFloor.value")
+            //                     ->label("Verdieping")
+            //                     ->placeholder("Geen gegevens"),
+
+            //                 Components\TextEntry::make("getMonitoringConnectState.value")
+            //                     ->label("Verbinding status")
+            //                     ->badge()
+            //                     ->color(fn(string $state): string => match ($state) {
+            //                         '0'                               => 'danger',
+            //                         '1'                               => 'success',
+            //                         '2'                               => 'warning',
+            //                     })->formatStateUsing(function ($state): ?string {
+
+            //                     switch ($state) {
+            //                         case 0:
+            //                             return "Geen verbinding";
+            //                             break;
+            //                         case 1:
+            //                             return "Verbinding";
+            //                             break;
+            //                         case 2:
+            //                             return "Foutmelding";
+            //                             break;
+            //                     }
+
+            //                 })
+            //                     ->placeholder("Geen gegevens"),
+
+            //             ]),
+            //         ]),
+            //     ])->description(function ($record) {
+            //     return "Laatste update op: " . date_format($record->getMonitoringHeartbeat->created_at, "d-m-Y H:i:s");;
+            // })->collapsible()
+            //     ->collapsed(false)->hidden(function ($record): ?string {
+            //     return $record->monitoring_object_id ? false : true;
+            // }),
+
+            Components\Section::make("Object gegevens")->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
 
@@ -354,7 +438,7 @@ class ObjectResource extends Resource
 
                             ->label("Adres")->getStateUsing(function ($record): ?string {
                             $housenumber = "";
-                            if ($record->location->housenumber) {
+                            if ($record?->location?->housenumber) {
                                 $housenumber = " " . $record?->location?->housenumber;
                             }
 
@@ -391,7 +475,7 @@ class ObjectResource extends Resource
 
                         Components\TextEntry::make("location.relation.name")
                             ->label("Relatie")->Url(function (object $record) {
-                            return "/relations/" . $record->location->customer_id;
+                            return "/relations/" . $record?->location?->customer_id;
 
                         })
 
@@ -407,8 +491,9 @@ class ObjectResource extends Resource
                             ->placeholder("Niet opgegeven"),
                     ]),
                 ])->from("lg"),
-            ]),
-
+            ])->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed(),
             Components\Section::make()->schema([
                 Components\Split::make([
                     Components\Grid::make(4)->schema([
@@ -462,6 +547,7 @@ class ObjectResource extends Resource
             RelationManagers\MaintenanceVisitsRelationManager::class,
             //  ]),
             RelationManagers\inspectionsRelationManager::class,
+            RelationManagers\ObjectMonitoringRelationManager::class,
             RelationManagers\AttachmentRelationManager::class,
         ];
     }
@@ -469,10 +555,11 @@ class ObjectResource extends Resource
     public static function getPages(): array
     {
         return [
-            "index" => Pages\ListObjects::route("/"),
+            "index"   => Pages\ListObjects::route("/"),
             //   'create' => Pages\CreateObject::route('/create'),
             //  'edit' => Pages\EditObject::route('/{record}/edit'),
-            "view"  => Pages\ViewObject::route("/{record}"),
+            "view"    => Pages\ViewObject::route("/{record}"),
+            "monitor" => Pages\MonitorObject::route("/{record}/monitoring"),
         ];
     }
 }

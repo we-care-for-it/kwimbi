@@ -44,7 +44,13 @@ return [
     ],
 
     //API integrations
-
+    'modusystem' => [
+        'url'   => env('MODUSYSTEM_URL', 'mqtt.lift-online.eu'),
+        'port'  => env('MODUSYSTEM_PORT', 'mqtt.lift-online.eu'),
+        'topic' => env('MODUSYSTEM_TOPIC'),
+        'topic' => env('MODUSYSTEM_USERNAME'),
+        'topic' => env('MODUSYSTEM_PASSWORD'),
+    ],
     'rdw'        => [
         'url'   => env('RDW_URL', 'https://opendata.rdw.nl/resource'),
         'token' => env('RDW_TOKEN'),

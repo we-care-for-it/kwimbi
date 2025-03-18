@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -113,15 +112,15 @@ class Elevator extends Model implements Auditable, HasMedia
         return $this->hasOne(ObjectInspection::class, 'id', 'elevator_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
     }
 
-    protected static function boot(): void
-    {
-        parent::boot();
+    // protected static function boot(): void
+    // {
+    //     parent::boot();
 
-        static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
-        });
+    //     static::saving(function ($model) {
+    //         $model->company_id = Filament::getTenant()->id;
+    //     });
 
-    }
+    // }
 
     public function features()
     {
@@ -157,4 +156,98 @@ class Elevator extends Model implements Auditable, HasMedia
     {
         return $this->hasMany(ObjectMaintenanceVisits::class);
     }
+
+    //Monitoring
+
+    public function getMonitoringLastInsert()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->latest();
+    }
+
+    public function getMonitoringVersion()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('created_at');
+    }
+
+    public function getMonitoringType()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('created_at');
+    }
+
+    public function getMonitoringFloor()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'stop')->latest('created_at');
+    }
+
+    public function getMonitoringEvents()
+    {
+        return $this->hasMany(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->whereIn('category', ['doors', 'moving', 'online', 'floor', 'direction', 'state', 'error', 'speed']);
+    }
+
+    // public function getMonitoringConnectState(): ?string
+    // {
+    // $data = ObjectMonitoring::where('external_object_id', $this->monitoring_object_id)->where('category', 'connected')->select('value')->orderby('created_at', 'desc')->first();
+    // switch ($data->value) {
+    //     case '0':
+    //         $text  = "Verbroken";
+    //         $color = "warning";
+    //         break;
+    //     case '1':
+    //         $text  = "Verbinding";
+    //         $color = "success";
+    //         break;
+    //     case '2';
+    //         $text  = "Foutmelding";
+    //         $color = "danger";
+    //         break;
+    //     default:
+    //         break;
+    // }
+
+    // $data = ['text' => $text, 'color' => $color];
+    // return $data;
+
+    // }
+
+    public function getMonitoringConnectState()
+    {
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'connected')->latest('created_at');
+    }
+
+    public function getMonitoringStateText()
+    {
+        switch ($this->getMonitoringConnectState?->value) {
+            case '0':
+                return "Offline";
+                break;
+            case '1':
+                return "Online";
+                break;
+            case '2';
+                return "Foutmelding";
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public function getMonitoringStateColor()
+    {
+        switch ($this->getMonitoringConnectState?->value) {
+            case '0':
+                return "warning";
+                break;
+            case '1':
+                return "success";
+                break;
+            case '2';
+                return "danger";
+                break;
+            default:
+                break;
+        }
+
+    }
+
 }

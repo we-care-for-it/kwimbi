@@ -13,32 +13,63 @@ class ViewObject extends ViewRecord
     public function getSubheading(): ?string
     {
 
-        if ($this->getRecord()->location) {
+        if ($this->getRecord()->monitoring_object_id) {
 
-            $location_name = null;
-            if ($this->getRecord()->location?->name) {
-                $location_name = " | " . $this->getRecord()->location?->name;
-            }
-            return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+            return "Monitoring: " . ucfirst($this->getRecord()->getMonitoringVersion->brand) . " - " . $this->getRecord()->getMonitoringVersion->value . " " . $this->getRecord()->getMonitoringType->value . " " . $this->getRecord()->getMonitoringStateText();
 
         } else {
-            return "";
+            if ($this->getRecord()->location) {
+
+                $location_name = null;
+                if ($this->getRecord()->location?->name) {
+                    $location_name = " | " . $this->getRecord()->location?->name;
+                }
+                return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+
+            } else {
+                return "";
+            }
         }
 
     }
+    public function getHeaderWidgetsColumns(): int | array
+    {
+        return 8;
+    }
+    protected function getHeaderWidgets(): array
+    {
 
+        if ($this->getRecord()->monitoring_object_id) {
+            return [
+                // ObjectResource\Widgets\Monitoring::class,
+                ObjectResource\Widgets\FloorChart::class,
+                ObjectResource\Widgets\IncidentChart::class,
+            ];
+        } else {
+            return [];
+        }
+    }
     protected function getHeaderActions(): array
     {
         return [
+
+            Actions\Action::make('cancel_top')
+                ->iconButton()
+                ->color('gray')
+                ->label('Monitoring')
+                ->link()
+                ->url(function ($record) {
+                    return $this->getRecord()?->id . "/monitoring";
+                }),
+
             Actions\Action::make('cancel_top')
                 ->iconButton()
                 ->color('gray')
                 ->label('Open locatie')
-
                 ->link()
                 ->icon('heroicon-s-map-pin')
                 ->url(function ($record) {
-                    return "/object-locations/" . $this->getRecord()->location->id;
+                    return "/object-locations/" . $this->getRecord()?->location?->id;
                 }),
 
             Actions\EditAction::make('cancel_top')

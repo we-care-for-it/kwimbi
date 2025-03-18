@@ -19,8 +19,8 @@ return new class extends Migration
 
         Schema::create('company_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->integer('user_id');
+            $table->integer('company_id');
             $table->timestamps();
         });
     }
@@ -30,7 +30,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_user');
-        Schema::dropIfExists('companies');
+      Schema::dropIfExists('companies');  
+      Schema::dropIfExists('company_user');
+  
     }
 };

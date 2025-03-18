@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('department_id')->nullable()->constrained('departments');
             $table->foreignId('location_id')->nullable()->constrained('locations');
             $table->foreignId('company_id')->nullable()->constrained('companies');
-
         });
     }
 

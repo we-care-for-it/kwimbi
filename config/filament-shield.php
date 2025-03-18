@@ -9,9 +9,11 @@ return [
         'navigation_group' => true,
         'is_globally_searchable' => false,
         'show_model_path' => true,
-        'is_scoped_to_tenant' => false,
+        'is_scoped_to_tenant' => true,
         'cluster' => null,
     ],
+
+    'tenant_model' => null,
 
     'auth_provider_model' => [
         'fqcn' => 'App\\Models\\User',
@@ -33,7 +35,6 @@ return [
         'resource' => [
             'view',
             'view_any',
-            'view_all',
             'create',
             'update',
             'restore',
