@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('object_monitoring_codes', function (Blueprint $table) {
+            $table->id();
             $table->string('brand')->nullable();
             $table->string('error_code')->nullable();
-            $table->string('brand_mondescriptionitoring')->nullable();
-            $table->string('possreason')->nullable();
-            $table->string('detection')->nullable();
-            $table->string('operation')->nullable();
-            $table->string('recovery')->nullable();
+            $table->longtext('description')->nullable();
+            $table->longtext('possreason')->nullable();
+            $table->longtext('detection')->nullable();
+            $table->longtext('operation')->nullable();
+            $table->longtext('recovery')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

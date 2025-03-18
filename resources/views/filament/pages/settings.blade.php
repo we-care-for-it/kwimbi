@@ -47,6 +47,18 @@
          </a>
       </div>
 
+
+      <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="object-monitoring-codes">
+            <img  src = "/images/icons/pack/package.svg"   class = "max-h-12">
+            <div>
+               <h2>Monitoringscodes</h2>
+               <p class="text-sm text-gray-600">Beheer de magazijnen in je bedrijf</p>
+            </div>
+         </a>
+
+
+
+
       <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Mijn bedrijf</h1>
       <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="themes">
@@ -56,11 +68,11 @@
                <p class="text-sm text-gray-600">Pas de kleuren en theme aan</p>
             </div>
          </a>
-         
+
       </div>
 
 
 
-    
+
    </div>
 </x-filament-panels::page>
