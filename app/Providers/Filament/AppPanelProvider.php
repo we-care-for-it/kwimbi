@@ -88,7 +88,7 @@ class AppPanelProvider extends PanelProvider
       //  ])
  //->plugin(new Lockscreen())   // <- Add this
 ->plugins([
-    \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+ //   \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
 ])
 
 
