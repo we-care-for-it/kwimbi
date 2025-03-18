@@ -48,6 +48,10 @@ class AppPanelProvider extends PanelProvider
     ApiServicePlugin::make()
 ])
 ->plugins([
+    \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+])
+
+->plugins([
 
  FilamentEditProfilePlugin::make()
         ->slug('my-profile')
@@ -87,9 +91,7 @@ class AppPanelProvider extends PanelProvider
 
       //  ])
  //->plugin(new Lockscreen())   // <- Add this
-->plugins([
- //   \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-])
+ 
 
 
  //->plugins([
