@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Filament\Resources\ObjectResource\Pages;
 
 use App\Filament\Resources\ObjectResource;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
+use Filament\Pages\Actions\Action;
 
 class MonitorObject extends Page
 {
@@ -25,24 +27,33 @@ class MonitorObject extends Page
             ObjectResource\Widgets\FloorChart::class,
             ObjectResource\Widgets\IncidentChart::class,
         ];
+    }
 
+    public function getHeaderWidgetsColumns(): int | array
+    {
+        return 8;
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('back')
+                ->label('Terug')
+                ->url(fn () => ObjectResource::getUrl('view', ['record' => $this->record]))
+                ->color('secondary'),
+        ];
     }
 
     public function getSubheading(): ?string
     {
-
         if ($this->getRecord()->location) {
-
             $location_name = null;
             if ($this->getRecord()->location?->name) {
                 $location_name = " | " . $this->getRecord()->location?->name;
             }
             return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
-
         } else {
             return "";
         }
-
     }
-
 }
