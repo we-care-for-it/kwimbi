@@ -89,6 +89,10 @@ class ObjectResource extends Resource
                     ->label("Leverancier")
                     ->options(Relation::where('type_id', 4)->pluck("name", "id")),
 
+                Select::make("ss")
+                    ->label("VErdieping")
+                    ->options(Relation::where('type_id', 4)->pluck("name", "id")),
+
                 TextInput::make("stopping_places")
                     ->label("Stoppplaatsen")
                     ->placeholder("Niet opgegeven"),

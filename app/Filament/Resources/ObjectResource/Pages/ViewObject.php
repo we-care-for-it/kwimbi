@@ -10,22 +10,28 @@ class ViewObject extends ViewRecord
     protected static string $resource = ObjectResource::class;
     protected static ?string $title   = 'Lifteigenschappen';
 
-    // public function getSubheading(): ?string
-    // {
+    public function getSubheading(): ?string
+    {
 
-    //     if ($this->getRecord()->location) {
+        if ($this->getRecord()->monitoring_object_id) {
 
-    //         $location_name = null;
-    //         if ($this->getRecord()->location?->name) {
-    //             $location_name = " | " . $this->getRecord()->location?->name;
-    //         }
-    //         return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+            return "Monitoring: " . ucfirst($this->getRecord()->getMonitoringVersion->brand) . " - " . $this->getRecord()->getMonitoringVersion->value . " " . $this->getRecord()->getMonitoringType->value . " " . $this->getRecord()->getMonitoringStateText();
 
-    //     } else {
-    //         return "";
-    //     }
+        } else {
+            if ($this->getRecord()->location) {
 
-    // }
+                $location_name = null;
+                if ($this->getRecord()->location?->name) {
+                    $location_name = " | " . $this->getRecord()->location?->name;
+                }
+                return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+
+            } else {
+                return "";
+            }
+        }
+
+    }
     public function getHeaderWidgetsColumns(): int | array
     {
         return 8;
@@ -35,7 +41,7 @@ class ViewObject extends ViewRecord
 
         if ($this->getRecord()->monitoring_object_id) {
             return [
-                ObjectResource\Widgets\Monitoring::class,
+                // ObjectResource\Widgets\Monitoring::class,
                 ObjectResource\Widgets\FloorChart::class,
                 ObjectResource\Widgets\IncidentChart::class,
             ];
@@ -53,7 +59,7 @@ class ViewObject extends ViewRecord
                 ->label('Monitoring')
                 ->link()
                 ->url(function ($record) {
-                    return $this->getRecord()?->monitoring_object_id . "/monitoring";
+                    return $this->getRecord()?->id . "/monitoring";
                 }),
 
             Actions\Action::make('cancel_top')
