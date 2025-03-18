@@ -28,4 +28,21 @@ class MonitorObject extends Page
 
     }
 
+    public function getSubheading(): ?string
+    {
+
+        if ($this->getRecord()->location) {
+
+            $location_name = null;
+            if ($this->getRecord()->location?->name) {
+                $location_name = " | " . $this->getRecord()->location?->name;
+            }
+            return $this->getRecord()->location->address . " " . $this->getRecord()->location->zipcode . " " . $this->getRecord()->location->place . $location_name;
+
+        } else {
+            return "";
+        }
+
+    }
+
 }
