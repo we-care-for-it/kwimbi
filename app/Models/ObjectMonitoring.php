@@ -17,4 +17,9 @@ class ObjectMonitoring extends Model
         'brand',
     ];
 
+    public function error()
+    {
+        return $this->belongsTo(ObjectMonitoringCode::class, 'value', 'error_code');
+    }
+
 }

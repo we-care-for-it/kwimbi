@@ -7,7 +7,7 @@ use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Database\Eloquent\Model;
 
-class IncidentChart extends ChartWidget
+class MonitoringIncidentChart extends ChartWidget
 {
     protected static ?string $heading          = 'Storingen';
     protected int|string|array $columnSpan = '4';

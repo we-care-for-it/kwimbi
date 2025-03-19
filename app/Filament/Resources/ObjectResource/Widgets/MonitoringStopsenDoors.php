@@ -7,9 +7,9 @@ use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Database\Eloquent\Model;
 
-class FloorChart extends ChartWidget
+class MonitoringStopsenDoors extends ChartWidget
 {
-    protected static ?string $heading          = 'Verdiepingen en stops';
+    protected static ?string $heading          = 'Deuropeningen en stops';
     protected int|string|array $columnSpan = '4';
     protected static ?string $maxHeight        = '100%';
 
@@ -25,14 +25,14 @@ class FloorChart extends ChartWidget
             ->perMonth()
             ->count();
 
-        $openData = Trend::query(ObjectMonitoring::where('category', 'doors')->where('value', 1)->whereYear('created_at', date('Y'))
+        $openData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [0, 2])->whereYear('created_at', date('Y'))
                 ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
             ->dateColumn('created_at')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
             ->perMonth()
             ->count();
 
-        $closeData = Trend::query(ObjectMonitoring::where('category', 'doors')->where('value', 0)->whereYear('created_at', date('Y'))
+        $closeData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [1, 3])->whereYear('created_at', date('Y'))
                 ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
             ->dateColumn('created_at')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
@@ -82,7 +82,7 @@ class FloorChart extends ChartWidget
 
     public function getDescription(): ?string
     {
-        return 'Deze grafiek toon het aantal deurbewegingen en stops';
+        return 'Deze grafiek toont het aantal deur openeningen en stops';
     }
 
 }
