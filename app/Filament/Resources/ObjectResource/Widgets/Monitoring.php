@@ -21,15 +21,18 @@ class Monitoring extends BaseWidget
         //arrow-path
 
         return [
-            Stat::make('Versie:' . $this->record?->getMonitoringVersion?->value, ucfirst($this->record?->getMonitoringType?->value) ?? 'Onbekend type')
-                ->descriptionIcon('heroicon-m-link'),
-
+            Stat::make("Versie", ucfirst($this->record?->getMonitoringType?->value) ?? 'Onbekend type')
+                ->descriptionIcon('heroicon-m-link')
+                ->description($this->record?->getMonitoringVersion?->value)
+            ,
             // Stat::make('Objectstatus', $this->record?->getMonitoringState?->value)
-            //     ->description("Ge-update: " . ucfirst($this->record?->getMonitoringType?->created_at)),
 
-            Stat::make('Actuele verdieping', $this->record?->getMonitoringFloor?->value, ""),
+            Stat::make('Actuele verdieping', "Verdieping: " . $this->record?->getMonitoringFloor?->value, "")
+                ->description(date_format($this->record?->getMonitoringLastInsert?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s"))
+            ,
 
-            Stat::make('Verbindingstatus', $this->record?->getMonitoringStateText()),
+            Stat::make('Verbindingstatus', $this->record?->getMonitoringStateText())
+                ->description("Aantal events: " . $this->record?->getMonitoringEventCount()),
             ///   ->color($this->record?->getMonitoringStateColor()),
 
         ];
@@ -38,7 +41,7 @@ class Monitoring extends BaseWidget
     // protected function getDescription(): ?string
     // {
     //     if ($this->record?->getMonitoringLastInsert) {
-    //         return "Laatste update op: " . date_format($this->record?->getMonitoringLastInsert?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s");
+    //  return "Laatste update op: " . date_format($this->record?->getMonitoringLastInsert?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s");
     //     } else {
     //         return 'onbekend';
     //     }

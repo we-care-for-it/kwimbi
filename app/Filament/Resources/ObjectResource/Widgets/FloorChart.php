@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FloorChart extends ChartWidget
 {
-    protected static ?string $heading          = 'Verdiepingen en stops';
+    protected static ?string $heading          = 'Deuropeningen en stops';
     protected int|string|array $columnSpan = '4';
     protected static ?string $maxHeight        = '100%';
 
@@ -82,7 +82,7 @@ class FloorChart extends ChartWidget
 
     public function getDescription(): ?string
     {
-        return 'Deze grafiek toon het aantal deurbewegingen en stops';
+        return 'Deze grafiek toont het aantal deur openeningen en stops';
     }
 
 }
