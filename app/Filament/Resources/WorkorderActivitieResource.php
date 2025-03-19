@@ -2,7 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkorderActivitieResource\Pages;
-use App\Models\workType;
+use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 
 class WorkorderActivitieResource extends Resource
 {
-    protected static ?string $model = workType::class;
+    protected static ?string $model = workorderActivities::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel       = "Type werkzaamheden";

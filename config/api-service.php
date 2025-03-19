@@ -3,14 +3,14 @@ return [
     'navigation'                       => [
         'token' => [
             'cluster' => null,
-            //   'group'   => 'Beheer',
+            'group'   => 'Beheer',
             'sort'    => -1,
             'icon'    => 'heroicon-o-key',
         ],
     ],
     'models'                           => [
         'token' => [
-            'enable_policy' => false,
+            'enable_policy' => true,
         ],
     ],
     'route'                            => [
@@ -18,7 +18,7 @@ return [
         'use_resource_middlewares' => true,
     ],
     'tenancy'                          => [
-        'enabled'   => true,
+        'enabled'   => false,
         'awareness' => false,
     ],
     'use-spatie-permission-middleware' => false,
