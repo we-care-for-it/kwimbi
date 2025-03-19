@@ -11,6 +11,8 @@ class Settings extends Page
     protected static ?string $navigationLabel  = "Instellingen";
     protected static ?string $modelLabel       = 'Instellingen';
     protected static ?string $pluralModelLabel = 'Instellingen';
-    protected static ?int $navigationSort      = 99;
+    protected static ?string $title            = "Instellingen";
+
+    protected static ?int $navigationSort = 99;
     //protected static ?string $navigationGroup = 'Beheer';
 }

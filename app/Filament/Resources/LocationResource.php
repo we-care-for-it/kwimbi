@@ -1,11 +1,8 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LocationResource\Pages\CreateLocation;
 use App\Filament\Resources\LocationResource\Pages\EditLocation;
 use App\Filament\Resources\LocationResource\Pages\ListLocations;
-use App\Filament\Resources\LocationResource\RelationManagers\DepartmentsRelationManager;
-use App\Filament\Resources\LocationResource\RelationManagers\WorkplacesRelationManager;
 use App\Models\Location;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -104,17 +101,17 @@ class LocationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            'departments' => DepartmentsRelationManager::class,
-            'workplaces'  => WorkplacesRelationManager::class,
+            // 'departments' => DepartmentsRelationManager::class,
+            // 'workplaces'  => WorkplacesRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index'  => ListLocations::route('/'),
-            'create' => CreateLocation::route('/create'),
-            'edit'   => EditLocation::route('/{record}/edit'),
+            'index' => ListLocations::route('/'),
+            //    'create' => CreateLocation::route('/create'),
+            'edit'  => EditLocation::route('/{record}/edit'),
         ];
     }
 
