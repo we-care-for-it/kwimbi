@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Filament\Resources\ObjectResource\Pages;
 
 use App\Filament\Resources\ObjectResource;
+use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
-use Filament\Pages\Actions\Action;
 
 class MonitorObject extends Page
 {
@@ -27,7 +26,10 @@ class MonitorObject extends Page
             ObjectResource\Widgets\FloorChart::class,
             // ObjectResource\Widgets\FloorTable::class,
             ObjectResource\Widgets\IncidentChart::class,
-            ObjectResource\Widgets\DirectionChart::class,
+            ObjectResource\Widgets\MonitoringIncidentTable::class,
+            ObjectResource\Widgets\MonitoringEventsTable::class,
+
+            // ObjectResource\Widgets\DirectionChart::class,
         ];
     }
 
@@ -41,7 +43,7 @@ class MonitorObject extends Page
         return [
             Action::make('back')
                 ->label('Terug')
-                ->url(fn () => ObjectResource::getUrl('view', ['record' => $this->record]))
+                ->url(fn() => ObjectResource::getUrl('view', ['record' => $this->record]))
                 ->color('secondary'),
         ];
     }
