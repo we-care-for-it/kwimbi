@@ -23,9 +23,9 @@ class MonitorObject extends Page
     {
         return [
             ObjectResource\Widgets\Monitoring::class,
-            ObjectResource\Widgets\FloorChart::class,
+            ObjectResource\Widgets\MonitoringStopsenDoors::class,
             // ObjectResource\Widgets\FloorTable::class,
-            ObjectResource\Widgets\IncidentChart::class,
+            ObjectResource\Widgets\MonitoringIncidentChart::class,
             ObjectResource\Widgets\MonitoringIncidentTable::class,
             ObjectResource\Widgets\MonitoringEventsTable::class,
 

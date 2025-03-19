@@ -28,7 +28,7 @@ class Monitoring extends BaseWidget
             // Stat::make('Objectstatus', $this->record?->getMonitoringState?->value)
 
             Stat::make('Actuele verdieping', "Verdieping: " . $this->record?->getMonitoringFloor?->value, "")
-                ->description(date_format($this->record?->getMonitoringLastInsert?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringLastInsert->created_at, "H:i:s"))
+                ->description(date_format($this->record?->getMonitoringFloor?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->created_at, "H:i:s"))
             ,
 
             Stat::make('Verbindingstatus', $this->record?->getMonitoringStateText())

@@ -7,7 +7,7 @@ use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Database\Eloquent\Model;
 
-class FloorChart extends ChartWidget
+class MonitoringStopsenDoors extends ChartWidget
 {
     protected static ?string $heading          = 'Deuropeningen en stops';
     protected int|string|array $columnSpan = '4';
