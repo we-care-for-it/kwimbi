@@ -8,5 +8,3 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 RelationApiService::routes();
-
-Route::get('/incoming_mail', 'ApiIncomingMail@index');

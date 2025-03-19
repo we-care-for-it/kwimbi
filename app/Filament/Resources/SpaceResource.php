@@ -36,6 +36,7 @@ class SpaceResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('name')
                                     ->label('Naam')
+                                    ->columnSpan('full')
                                     ->required()
                                     ->maxLength(255),
                             ]),
@@ -73,7 +74,7 @@ class SpaceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')

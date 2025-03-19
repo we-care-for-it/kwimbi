@@ -42,8 +42,8 @@ class ViewObject extends ViewRecord
         if ($this->getRecord()->monitoring_object_id) {
             return [
                 // ObjectResource\Widgets\Monitoring::class,
-                ObjectResource\Widgets\FloorChart::class,
-                ObjectResource\Widgets\IncidentChart::class,
+                ObjectResource\Widgets\MonitoringStopsenDoors::class,
+                ObjectResource\Widgets\MonitoringIncidentChart::class,
             ];
         } else {
             return [];

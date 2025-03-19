@@ -11,9 +11,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
@@ -49,6 +47,8 @@ class UserResource extends Resource
                 ->saveRelationshipsUsing(function ($record, $state) {
                     $record->roles()->syncWithPivotValues($state, [config('permission.column_names.team_foreign_key') => getPermissionsTeamId()]);
                 })
+                ->label('Gebruikersrollen')
+                ->columnSpan('full')
                 ->multiple()
                 ->preload()
                 ->searchable(),
@@ -60,7 +60,7 @@ class UserResource extends Resource
     {
         return $table->columns([
             TextColumn::make('id')
-                ->label('ID')
+                ->label('#')
                 ->sortable(),
 
             TextColumn::make('name')
@@ -79,24 +79,26 @@ class UserResource extends Resource
                 ->sortable(),
         ])
             ->filters([
-                Filter::make('recent')
-                    ->label('Nieuwste eerst')
-                    ->query(fn(Builder $query) => $query->latest()),
+                // Filter::make('recent')
+                //     ->label('Nieuwste eerst')
+                //     ->query(fn(Builder $query) => $query->latest()),
             ])
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
+
+                Impersonate::make()->label('Login'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
                     ->modalHeading('Verwijderen')
                     ->color('danger'),
-                Impersonate::make(),
+
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),

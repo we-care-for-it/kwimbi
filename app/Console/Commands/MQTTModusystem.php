@@ -8,39 +8,24 @@ use \PhpMqtt\Client\MqttClient;
 
 class MQTTModusystem extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:m-q-t-t-modusystem';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
+    protected $signature   = 'app:m-q-t-t-modusystem';
     protected $description = 'Command description';
-
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-
+        //  $certificatePath    = storage_path('app/public/certificates/mqtt-ca.crt');
         $server             = 'mqtt.lift-online.eu';
         $port               = 8883;
         $clientId           = rand(5, 15);
         $username           = 'digilevel';
         $password           = 'ohpei5Ge';
-        $clean_session      = false;
+        $clean_session      = true;
         $mqtt_version       = MqttClient::MQTT_3_1;
         $connectionSettings = (new ConnectionSettings)
             ->setUsername($username)
             ->setPassword($password)
-            ->setKeepAliveInterval(60)
+            //->setKeepAliveInterval(60)
             ->setTlsCertificateAuthorityFile("mqtt-ca.crt")
-            ->setConnectTimeout(3)
+            ->setConnectTimeout(50)
             ->setUseTls(true);
         $mqtt = new MqttClient($server, $port, $clientId, $mqtt_version);
         $mqtt->connect($connectionSettings, $clean_session);
@@ -50,11 +35,11 @@ class MQTTModusystem extends Command
             $value        = $data_message[0] ?? 0;
 
             //Find the date
-            //  $dateTime = preg_match('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $string, $matches);
-            //   $dateTime = new DateTime($matches[0]);
+            // $dateTime = preg_match('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $string, $matches);
+            // $dateTime = new DateTime($matches[0]);
             // $dateTime = $dateTime->format('Y-m-d H:i:s');
-
-            $data_topic = explode('/', $topic);
+            // echo $dateTime;
+            // $data_topic = explode('/', $topic);
 
             $uuid     = $data_topic[2] ?? 0;
             $category = $data_topic[4] ?? 0;
