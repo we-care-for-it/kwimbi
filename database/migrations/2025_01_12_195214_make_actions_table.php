@@ -27,7 +27,7 @@ return new class extends Migration
             $table->date('plan_date')->nullable();
             $table->time('plan_time')->nullable();
             $table->integer('private')->nullable();
-            $table->time('private_action')->default(0)->nullable();
+            $table->time('private_action')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');
 
             $table->softDeletes();
