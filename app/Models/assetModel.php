@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +19,7 @@ class AssetModel extends Model
 
     public function brand(): BelongsTo
     {
-        return $this->belongsTo(AssetBrand::class, 'brand_id');
+        return $this->belongsTo(assetBrand::class, 'brand_id');
     }
 
     public function category(): BelongsTo
