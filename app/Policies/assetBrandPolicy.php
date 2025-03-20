@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Policies;
 
+use App\Models\assetBrand;
 use App\Models\User;
-use App\Models\AssetBrand;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AssetBrandPolicy
