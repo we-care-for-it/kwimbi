@@ -49,7 +49,7 @@ class AppPanelProvider extends PanelProvider
 ])
 ->plugins([
     \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-])
+])->passwordReset()
 
 ->plugins([
 
