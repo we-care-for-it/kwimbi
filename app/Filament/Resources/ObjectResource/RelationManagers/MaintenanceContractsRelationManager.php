@@ -59,8 +59,9 @@ class MaintenanceContractsRelationManager extends RelationManager
                 ->preserveFilenames()
                 ->label('Contract')
                 ->visibility('private')->directory(function () {
-                // Assuming you've set up relationships with eloquent
-                return '/uploads/maintenance_contracts';
+                $parent_id = $this
+                    ->ownerRecord->id; // Assuming you've set up relationships with eloquent
+                return '/uploads/' . $parent_id . '/maintenance_contracts';
             })->acceptedFileTypes(['application/pdf']),
 
             Textarea::make('remark')

@@ -3,7 +3,6 @@ namespace App\Models;
 
 use App\Enums\IncidentStatus;
 use App\Enums\IncidentTypes;
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,7 +27,7 @@ class ObjectIncident extends Model
     {
         parent::boot();
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            //    $model->company_id = Filament::getTenant()->id;
         });
 
     }

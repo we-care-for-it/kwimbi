@@ -46,7 +46,7 @@ class ObjectInspection extends Model
         parent::boot();
 
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            //     $model->company_id = Filament::getTenant()->id;
         });
 
         static::saved(function (self $request) {
