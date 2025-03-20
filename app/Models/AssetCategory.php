@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,6 +34,6 @@ class AssetCategory extends Model
 
     public function brands(): HasMany
     {
-        return $this->hasMany(AssetBrand::class);
+        return $this->hasMany(assetBrand::class);
     }
 }

@@ -5,7 +5,7 @@ use App\Filament\Resources\BrandResource\Pages\CreateBrand;
 use App\Filament\Resources\BrandResource\Pages\EditBrand;
 use App\Filament\Resources\BrandResource\Pages\ListBrands;
 use App\Filament\Resources\BrandResource\RelationManagers\ModelsRelationManager;
-use App\Models\AssetBrand;
+use App\Models\assetBrand;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,7 +17,7 @@ use Filament\Tables\Table;
 
 class BrandResource extends Resource
 {
-    protected static ?string $model                 = AssetBrand::class;
+    protected static ?string $model                 = assetBrand::class;
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
