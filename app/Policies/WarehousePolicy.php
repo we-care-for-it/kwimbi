@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\workType;
+use App\Models\warehouse;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class workTypePolicy
+class warehousePolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class workTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_workorder::activitie');
+        return $user->can('view_any_warehouse');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, workType $workType): bool
+    public function view(User $user, warehouse $warehouse): bool
     {
-        return $user->can('view_workorder::activitie');
+        return $user->can('view_warehouse');
     }
 
     /**
@@ -31,23 +31,23 @@ class workTypePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_workorder::activitie');
+        return $user->can('create_warehouse');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, workType $workType): bool
+    public function update(User $user, warehouse $warehouse): bool
     {
-        return $user->can('update_workorder::activitie');
+        return $user->can('update_warehouse');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, workType $workType): bool
+    public function delete(User $user, warehouse $warehouse): bool
     {
-        return $user->can('delete_workorder::activitie');
+        return $user->can('delete_warehouse');
     }
 
     /**
@@ -55,15 +55,15 @@ class workTypePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_workorder::activitie');
+        return $user->can('delete_any_warehouse');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, workType $workType): bool
+    public function forceDelete(User $user, warehouse $warehouse): bool
     {
-        return $user->can('force_delete_workorder::activitie');
+        return $user->can('force_delete_warehouse');
     }
 
     /**
@@ -71,15 +71,15 @@ class workTypePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_workorder::activitie');
+        return $user->can('force_delete_any_warehouse');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, workType $workType): bool
+    public function restore(User $user, warehouse $warehouse): bool
     {
-        return $user->can('restore_workorder::activitie');
+        return $user->can('restore_warehouse');
     }
 
     /**
@@ -87,15 +87,15 @@ class workTypePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_workorder::activitie');
+        return $user->can('restore_any_warehouse');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, workType $workType): bool
+    public function replicate(User $user, warehouse $warehouse): bool
     {
-        return $user->can('replicate_workorder::activitie');
+        return $user->can('replicate_warehouse');
     }
 
     /**
@@ -103,6 +103,6 @@ class workTypePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_workorder::activitie');
+        return $user->can('reorder_warehouse');
     }
 }

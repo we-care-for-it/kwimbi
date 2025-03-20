@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\AssetBrand;
+use App\Models\assetBrand;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AssetBrandPolicy
+class assetBrandPolicy
 {
     use HandlesAuthorization;
 
@@ -21,7 +21,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, AssetBrand $assetBrand): bool
+    public function view(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('view_brand');
     }
@@ -37,7 +37,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, AssetBrand $assetBrand): bool
+    public function update(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('update_brand');
     }
@@ -45,7 +45,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, AssetBrand $assetBrand): bool
+    public function delete(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('delete_brand');
     }
@@ -61,7 +61,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, AssetBrand $assetBrand): bool
+    public function forceDelete(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('force_delete_brand');
     }
@@ -77,7 +77,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, AssetBrand $assetBrand): bool
+    public function restore(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('restore_brand');
     }
@@ -93,7 +93,7 @@ class AssetBrandPolicy
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, AssetBrand $assetBrand): bool
+    public function replicate(User $user, assetBrand $assetBrand): bool
     {
         return $user->can('replicate_brand');
     }

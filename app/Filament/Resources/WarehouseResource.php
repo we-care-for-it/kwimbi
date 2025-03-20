@@ -3,7 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\WarehouseResource\Pages;
 use App\Filament\Resources\WarehouseResource\RelationManagers;
-use App\Models\Warehouse;
+use App\Models\warehouse;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -17,7 +17,7 @@ use Filament\Tables\Table;
 
 class WarehouseResource extends Resource
 {
-    protected static ?string $model = Warehouse::class;
+    protected static ?string $model = warehouse::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup       = 'Objecten';
