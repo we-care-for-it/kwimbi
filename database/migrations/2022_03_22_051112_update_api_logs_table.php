@@ -18,8 +18,6 @@ class UpdateApiLogsTable extends Migration
             $table->integer('status_code')->nullable();
             $table->longText('payload_raw')->nullable();
             $table->longText('response')->nullable();
-            $table->longText('response')->nullable();
-            $table->longText('response')->nullable();
             $table->longText('response_headers')->nullable();
             $table->text('headers')->nullable();
         });
