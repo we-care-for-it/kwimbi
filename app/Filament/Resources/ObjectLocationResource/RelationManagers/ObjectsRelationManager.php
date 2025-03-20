@@ -4,7 +4,6 @@ namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 use App\Enums\ElevatorStatus;
 use App\Models\ObjectType;
 use App\Models\Relation;
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -71,9 +70,9 @@ class ObjectsRelationManager extends RelationManager
                             ])
                             ->createOptionUsing(function (array $data) {
                                 return Relation::create([
-                                    'name'       => $data['name'],
-                                    'type_id'    => 1,
-                                    'company_id' => Filament::getTenant()->id,
+                                    'name'    => $data['name'],
+                                    'type_id' => 1,
+                                    //             'company_id' => Filament::getTenant()->id,
                                 ])->id;
                             })
                             ->options(Relation::where('type_id', 1)->pluck("name", "id")),

@@ -3,7 +3,6 @@ namespace App\Filament\Resources\ObjectLocationResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\ContactObject;
-use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -126,7 +125,7 @@ class ContactsRelationManager extends RelationManager
                         //Maak de contactpersoon aan
                         $contact_id = Contact::insertGetId([
                             'first_name'   => $data['first_name'],
-                            'company_id'   => Filament::getTenant()->id,
+                            // 'company_id'   => Filament::getTenant()->id,
                             'last_name'    => $data['last_name'],
                             'department'   => $data['department'],
                             'email'        => $data['email'],
