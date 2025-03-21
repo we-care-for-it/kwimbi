@@ -1,14 +1,16 @@
 <?php
 namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
+use App\Models\ObjectMonitoring;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ObjectMonitoringRelationManager extends RelationManager
 {
     protected static string $relationship = 'getMonitoringEvents';
+    protected static ?string $title       = "Monitoring events";
 
     public function form(Form $form): Form
     {
@@ -19,43 +21,72 @@ class ObjectMonitoringRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->paginated([30])
-            ->recordTitleAttribute('name')
+            ->query(
+                ObjectMonitoring::whereYear('date_time', date('Y'))
+                    ->where('external_object_id', $this->ownerRecord->monitoring_object_id)
+                    ->orderBy('date_time', 'desc')
+            )
             ->columns([
-                Tables\Columns\TextColumn::make('date_time')
-                    ->label('Datum Tijd')
-                    ->date('d-M-Y H:i:s'),
 
-                Tables\Columns\TextColumn::make('category')
-                    ->label('Categorie'),
+                TextColumn::make("date_time")
+                    ->label("Datum - Tijd")
+                    ->date("d-m-Y h:i:s")
+                    ->width('100')
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
+                // TextColumn::make("error.description")
+                //     ->label("Omschrijving")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->getStateUsing(function ($record): ?string {
+                //         if ($record?->category == 'error') {
+                //             return $record?->error->description;
+                //         } else {
+                //             return "";
+                //         }
+                //     })
+                //     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('param01')
-                    ->label('Verdieping'),
+                TextColumn::make("category")
+                    ->label("Categorie")
+                    ->badge()
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
 
-                Tables\Columns\TextColumn::make('param02')
-                    ->label('Nummer'),
+                // TextColumn::make("error.posreason")
+                //     ->label("Reden")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('brand')
-                    ->label('Merk'),
+                // TextColumn::make("value")
+                //     ->label("Waarde")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->toggleable(),
 
-                Tables\Columns\TextColumn::make('value')
-                    ->label('Waarde'),
+                TextColumn::make("level")
+                    ->label("Verdieping")
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
+
+                TextColumn::make("action")
+                    ->label("Actie")
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
 
             ])
+
             ->filters([
-                //
+
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+
+            ->emptyState(view('partials.empty-state')
+            )
+        ;
     }
 }

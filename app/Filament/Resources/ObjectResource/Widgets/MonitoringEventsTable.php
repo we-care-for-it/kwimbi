@@ -3,6 +3,7 @@ namespace App\Filament\Resources\ObjectResource\Widgets;
 
 use App\Models\ObjectMonitoring;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -23,11 +24,6 @@ class MonitoringEventsTable extends BaseWidget
             )
             ->columns([
 
-                TextColumn::make("id")
-                    ->label("#")
-                    ->sortable()
-                    ->placeholder('-')
-                    ->toggleable(),
                 TextColumn::make("date_time")
                     ->label("Datum - Tijd")
                     ->date("d-m-Y h:i:s")
@@ -50,6 +46,7 @@ class MonitoringEventsTable extends BaseWidget
 
                 TextColumn::make("category")
                     ->label("Categorie")
+                    ->badge()
                     ->sortable()
                     ->placeholder('-')
                     ->toggleable(),
@@ -83,6 +80,7 @@ class MonitoringEventsTable extends BaseWidget
             ->filters([
                 SelectFilter::make('category')
                     ->label('Type')
+                    ->multiple()
                     ->options(ObjectMonitoring::where('external_object_id', $this->record->monitoring_object_id)->pluck('category', 'category')),
 
                 // SelectFilter::make('action')
@@ -106,9 +104,10 @@ class MonitoringEventsTable extends BaseWidget
 
                     ]),
 
-            ])
+            ], layout: FiltersLayout::AboveContent)
 
-            ->emptyState(view('partials.empty-state'))
+            ->emptyState(view('partials.empty-state')
+            )
         ;
     }
 

@@ -2,6 +2,7 @@
 namespace App\Console\Commands;
 
 use App\Models\ObjectMonitoring;
+use App\Models\ObjectMonitoringCode;
 use Illuminate\Console\Command;
 use \PhpMqtt\Client\ConnectionSettings;
 use \PhpMqtt\Client\MqttClient;
@@ -23,12 +24,12 @@ class MQTTModusystem extends Command
             $clientId           = rand(5, 15);
             $username           = config("services.modusystem.username");
             $password           = config("services.modusystem.password");
-            $clean_session      = true;
+            $clean_session      = false;
             $mqtt_version       = MqttClient::MQTT_3_1;
             $connectionSettings = (new ConnectionSettings)
                 ->setUsername($username)
                 ->setPassword($password)
-                ->setKeepAliveInterval(60)
+                //    ->setKeepAliveInterval(60)
                 ->setTlsCertificateAuthorityFile("mqtt-ca.crt")
                 ->setConnectTimeout(50)
                 ->setUseTls(true);
@@ -48,25 +49,68 @@ class MQTTModusystem extends Command
                 $param01  = $data_topic[5] ?? 0;
                 $param02  = $data_topic[6] ?? 0;
 
+                $action = "Nothing";
+
                 if ($category == 'version') {
                     $action = "Software version: " . $value;
                 }
 
+                if ($category == 'error') {
+                    $action = "Error code: " . $value;
+                    //Search for error code
+
+                    $type = ObjectMonitoring::where('external_object_id', $uuid)->where('category', 'type')->first();
+                    if (str_contains($type, 'kone')) {
+                        $brand = "kone";
+                    } elseif (str_contains($type, 'schindler')) {
+                        $brand = "schindler";
+                    } elseif (str_contains($type, 'otis')) {
+                        $brand = "otis";
+                    } elseif (str_contains($type, 'tci')) {
+                        $brand = "tci";
+                    }
+                    $action_from_tabel = ObjectMonitoringCode::where('error_code', $value)->where('brand', $brand)->first();
+                    $action            = $action_from_table?->description;
+                    if (! $action) {
+                        $action = "unknow error " . $value;
+                    }
+
+                }
+
                 if ($category == 'type') {
-                    $action = "Controller type: " . $value;
+                    $action = "Controller type: " . ucfirst($value);
+                }
+
+                if ($category == 'floor') {
+                    $level  = $value;
+                    $action = "actual floor in shaft: " . $value;
+                }
+
+                if ($category == 'stop') {
+                    $level  = $value;
+                    $action = "actual floor stopped: " . $value;
+                }
+                if ($category == 'error_msg') {
+                    $action = "Error: " . $category;
+                }
+
+                if ($category == 'speed') {
+                    switch ($value) {
+                        case 0:
+                            $action = "Slow speed";
+                            break;
+                        case 1:
+                            $action = "Fast speed";
+                            break;
+
+                    }
                 }
 
                 if ($category == 'heartbeat') {
                     $action = "Heartbeat signal interval: " . $value . " minute(s)";
                 }
-                if ($stop == 'heartbeat') {
-                    $action = "Stoping elevator";
-                    $level  = $value;
-                }
 
                 if ($category == 'direction') {
-                    $level = $param01;
-                    $door  = $param02;
                     switch ($value) {
                         case 0:
                             $action = "Elevator stoped";
@@ -177,13 +221,12 @@ class MQTTModusystem extends Command
 
                 if ($category == 'doors') {
                     $level = $param01;
-                    $door  = $param02;
                     switch ($value) {
                         case 0:
-                            $action = "Door " . $door . "opened";
+                            $action = "Door " . $door . " opened";
                             break;
                         case 1:
-                            $action = "Door " . $door . "closed";
+                            $action = "Door " . $door . " closed";
                             break;
                         case 2:
                             $action = "Opening door " . $door;

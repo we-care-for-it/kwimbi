@@ -16,8 +16,8 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
-//Form
 use Filament\Forms\Components\TextInput;
+//Form
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
@@ -26,9 +26,10 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-//Form
 use Filament\Tables\Actions\DeleteAction;
+//Form
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -57,6 +58,7 @@ class ObjectResource extends Resource
         return $form->schema([
 
             Grid::make(4)->schema([
+
                 TextInput::make("nobo_no")
                     ->label("NOBO Nummer")
                     ->placeholder("Niet opgegeven"),
@@ -175,6 +177,14 @@ class ObjectResource extends Resource
     {
         return $table
             ->columns([
+                IconColumn::make('ifMonitoring')
+                    ->trueColor('success')
+                    ->falseColor('warning')
+                    ->trueIcon('heroicon-o-check-badge')
+                    ->boolean()
+                    ->label('Monitoring')
+                    ->alignment(Alignment::Center)
+                    ->falseIcon('heroicon-o-x-mark'),
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Nummer")
                     ->searchable()

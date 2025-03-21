@@ -102,6 +102,16 @@ class Elevator extends Model implements Auditable, HasMedia
         return Elevator::where('address_id', $this->attributes["address_id"])->get();
     }
 
+    public function getifMonitoringAttribute()
+    {
+        if ($this->monitoring_object_id) {
+            return 1;
+        } else {
+            return 0;
+
+        }
+    }
+
     public function inspections()
     {
         return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->orderby('end_date', 'desc');

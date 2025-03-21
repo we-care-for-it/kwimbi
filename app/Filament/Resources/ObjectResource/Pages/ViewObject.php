@@ -15,7 +15,7 @@ class ViewObject extends ViewRecord
 
         if ($this->getRecord()->monitoring_object_id) {
 
-            return "Monitoring: " . ucfirst($this?->getRecord()?->getMonitoringVersion->brand) . " - " . $this->getRecord()?->getMonitoringVersion?->value . " " . $this->getRecord()?->getMonitoringType?->value . " " . $this->getRecord()?->getMonitoringStateText();
+            return "Monitoring: " . ucfirst($this?->getRecord()?->getMonitoringVersion?->brand) . " - " . $this->getRecord()?->getMonitoringVersion?->value . " " . $this->getRecord()?->getMonitoringType?->value . " " . $this->getRecord()?->getMonitoringStateText();
 
         } else {
             if ($this->getRecord()->location) {

@@ -23,12 +23,13 @@ class Monitoring extends BaseWidget
         return [
             Stat::make("Versie", ucfirst($this->record?->getMonitoringType?->value) ?? 'Onbekend type')
                 ->descriptionIcon('heroicon-m-link')
+
                 ->description($this->record?->getMonitoringVersion?->value)
             ,
             // Stat::make('Objectstatus', $this->record?->getMonitoringState?->value)
 
             Stat::make('Actuele verdieping', "Verdieping: " . $this->record?->getMonitoringFloor?->value, "")
-                ->description(date_format($this->record?->getMonitoringFloor?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->created_at, "H:i:s"))
+            //    ->description(date_format($this->record?->getMonitoringFloor?->created_at, "d-m-Y") . " om " . date_format($this->record->getMonitoringFloor->date_time, "H:i:s"))
             ,
 
             Stat::make('Verbindingstatus', $this->record?->getMonitoringStateText())
