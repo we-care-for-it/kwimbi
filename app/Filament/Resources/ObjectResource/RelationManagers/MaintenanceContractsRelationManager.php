@@ -57,12 +57,13 @@ class MaintenanceContractsRelationManager extends RelationManager
             FileUpload::make('contract')
                 ->columnSpan(3)
                 ->preserveFilenames()
+
                 ->label('Contract')
-                ->visibility('private')->directory(function () {
-                $parent_id = $this
-                    ->ownerRecord->id; // Assuming you've set up relationships with eloquent
-                return '/uploads/' . $parent_id . '/maintenance_contracts';
-            })->acceptedFileTypes(['application/pdf']),
+                ->directory(function () {
+                    $parent_id = $this
+                        ->ownerRecord->id; // Assuming you've set up relationships with eloquent
+                    return '/uploads/' . $parent_id . '/maintenance_contracts';
+                })->acceptedFileTypes(['application/pdf']),
 
             Textarea::make('remark')
                 ->rows(7)
@@ -137,8 +138,7 @@ class MaintenanceContractsRelationManager extends RelationManager
 
             Tables\Actions\Action::make('Download')
                 ->label('Download contract')
-                ->action(fn($record) => Storage::disk('private')
-                        ->download($record->contract))
+                ->action(fn($record) => Storage::Storage($record->contract))
                 ->icon('heroicon-o-document-arrow-down')
                 ->visible(function (ObjectMaintenanceContract $record): ?string {
                     return $record?->contract;

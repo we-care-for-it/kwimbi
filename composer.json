@@ -28,6 +28,7 @@
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "marjose123/filament-lockscreen": "^2.4",
         "mvenghaus/filament-plugin-schedule-monitor": "^3.0",
         "niladam/filament-auto-logout": "^1.0",
