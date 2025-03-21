@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Infolists\Components;
+use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -23,7 +24,6 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
-use Filament\Infolists\Components\Tabs;
 use Filament\Tables\Table;
 
 //Form
@@ -114,9 +114,9 @@ class RelationResource extends Resource
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
 
-                                return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
-                            })->placeholder("Niet opgegeven")->columns(4),                            ])->columns(4),
-            ]),
+                                    return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
+                                })->placeholder("Niet opgegeven")->columns(4)])->columns(4),
+                ]),
 
         ]);
 
@@ -176,9 +176,9 @@ class RelationResource extends Resource
             )
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()

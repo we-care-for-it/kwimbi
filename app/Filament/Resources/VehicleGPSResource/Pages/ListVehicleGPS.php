@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Filament\Resources\VehicleGPSResource\Pages;
 
 use App\Filament\Resources\VehicleGPSResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListVehicleGPS extends ListRecords
@@ -13,7 +11,17 @@ class ListVehicleGPS extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Actions\CreateAction::make()
+            //     ->label('GPS Module toevoegen')
+            //     ->slideOver()
+            //     ->modalWidth(MaxWidth::FourExtraLarge)
+            //     ->modalHeading('GPS Module toevoegen')
+            //     ->modalSubmitActionLabel('Opslaan')
+            //     ->modalIcon('heroicon-o-plus')
+            //     ->icon('heroicon-m-plus')
+            //     ->slideOver()
+            //     ->label('GPS Module toevoegen'),
+
         ];
     }
 }

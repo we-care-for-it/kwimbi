@@ -69,7 +69,7 @@ class RejectedInspections extends BaseWidget
             ->paginated(false)
             ->headerActions([
                 Action::make('viewAllRejectedInspections')
-                    ->label('Bekijk alle afgekeurde inspecties')
+                    ->label('Bekijk alle afgekeurde objecten')
                     ->url(fn() => '/objects?filter[current_inspection_status_id]=' . InspectionStatus::REJECTED->value) // Adjust the URL as needed
                     ->button()
                     ->link()

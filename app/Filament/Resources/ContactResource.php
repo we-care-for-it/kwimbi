@@ -11,7 +11,6 @@ use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
@@ -105,19 +104,19 @@ class ContactResource extends Resource
                     ]),
 
                 Forms\Components\Section::make('Social Media')
-                ->schema([
-                    Forms\Components\TextInput::make('linkedin')
-                        ->label('LinkedIn')
-                        ->maxLength(255),
+                    ->schema([
+                        Forms\Components\TextInput::make('linkedin')
+                            ->label('LinkedIn')
+                            ->maxLength(255),
 
-                    Forms\Components\TextInput::make('twitter')
-                        ->label('Twitter')
-                        ->maxLength(255),
+                        Forms\Components\TextInput::make('twitter')
+                            ->label('Twitter')
+                            ->maxLength(255),
 
-                    Forms\Components\TextInput::make('facebook')
-                        ->label('Facebook')
-                        ->maxLength(255),
-                ])->collapsible(),
+                        Forms\Components\TextInput::make('facebook')
+                            ->label('Facebook')
+                            ->maxLength(255),
+                    ])->collapsible(),
 
             ]);
     }
@@ -201,9 +200,9 @@ class ContactResource extends Resource
             ])
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()

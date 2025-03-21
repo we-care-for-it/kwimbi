@@ -11,19 +11,21 @@ class MonitoringIncidentTable extends BaseWidget
 {
     protected int|string|array $columnSpan = '8';
     public ?Model $record                      = null;
+    protected static ?string $heading          = "Laatste foutmeldingen";
 
     public function table(Table $table): Table
     {
         return $table
             ->query(
-                ObjectMonitoring::where('category', 'error')
-                    ->whereYear('created_at', date('Y'))
+                ObjectMonitoring::whereYear('date_time', date('Y'))
                     ->where('external_object_id', $this->record->monitoring_object_id)
+                    ->where('category', 'error')
+                    ->orderBy('id')
             )
             ->columns([
-                TextColumn::make("created_at")
+                TextColumn::make("date_time")
                     ->label("Datum - Tijd")
-                    ->date("h:i:s d-m-Y")
+                    ->date("d-m-Y h:i:s")
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make("error.description")

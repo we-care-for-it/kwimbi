@@ -18,9 +18,9 @@ class MonitoringIncidentChart extends ChartWidget
     protected static ?string $pollingInterval = '10s';
     protected function getData(): array
     {
-        $IncidentData = Trend::query(ObjectMonitoring::where('category', 'error')->whereYear('created_at', date('Y'))
-                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
-            ->dateColumn('created_at')
+        $IncidentData = Trend::query(ObjectMonitoring::where('category', 'error')->whereYear('date_time', date('Y'))
+                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('date_time', date('Y')))
+            ->dateColumn('date_time')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
             ->perMonth()
             ->count();

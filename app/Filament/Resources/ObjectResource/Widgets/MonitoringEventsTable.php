@@ -11,25 +11,40 @@ class MonitoringEventsTable extends BaseWidget
 {
     protected int|string|array $columnSpan = '8';
     public ?Model $record                      = null;
-
+    protected static ?string $heading          = "Alle meldingen";
     public function table(Table $table): Table
     {
         return $table
             ->query(
-                ObjectMonitoring::where('category', 'error')
-                    ->whereYear('created_at', date('Y'))
+                ObjectMonitoring::whereYear('date_time', date('Y'))
                     ->where('external_object_id', $this->record->monitoring_object_id)
+                    ->orderBy('id')
             )
             ->columns([
-                TextColumn::make("created_at")
-                    ->label("Datum - Tijd")
-                    ->date("h:i:s d-m-Y")
+
+                TextColumn::make("id")
+                    ->label("#")
                     ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
+                TextColumn::make("date_time")
+                    ->label("Datum - Tijd")
+                    ->date("d-m-Y h:i:s")
+                    ->sortable()
+                    ->placeholder('-')
                     ->toggleable(),
                 TextColumn::make("error.description")
                     ->label("Omschrijving")
                     ->sortable()
+                    ->placeholder('-')
                     ->toggleable(),
+
+                TextColumn::make("category")
+                    ->label("Categorie")
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
+
                 TextColumn::make("error.posreason")
                     ->label("Reden")
                     ->sortable()

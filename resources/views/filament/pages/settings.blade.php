@@ -46,15 +46,7 @@
             </div>
          </a>
          @endcan
-         @can('view_any_vehicle::g::p::s')
-         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="vehicle-g-ps">
-            <img  src = "/images/icons/pack/automotive.svg"   class = "max-h-12">
-            <div>
-               <h2>GPS Modules</h2>
-               <p class="text-sm text-gray-600">GPS modules voor voortuigen</p>
-            </div>
-         </a>
-         @endcan
+
          @can('view_any_role')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/shield/roles">
             <img  src = "/images/icons/pack/grid.svg"   class = "max-h-12">
@@ -92,6 +84,15 @@
             <div>
                <h2>Auto beheer</h2>
                <p class="text-sm text-gray-600">Categorieen voor artikelen</p>
+            </div>
+         </a>
+         @endcan
+         @can('view_any_vehicle::g::p::s')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="vehicle-g-ps">
+            <img  src = "/images/icons/pack/automotive.svg"   class = "max-h-12">
+            <div>
+               <h2>GPS Modules</h2>
+               <p class="text-sm text-gray-600">GPS modules voor voortuigen</p>
             </div>
          </a>
          @endcan

@@ -12,34 +12,34 @@ class MQTTModusystem extends Command
     protected $description = 'Command description';
     public function handle()
     {
+
         //  $certificatePath    = storage_path('app/public/certificates/mqtt-ca.crt');
-        $server             = 'mqtt.lift-online.eu';
-        $port               = 8883;
+
+        $server = config("services.modusystem.url");
+
+        $port               = config("services.modusystem.port");
         $clientId           = rand(5, 15);
-        $username           = 'digilevel';
-        $password           = 'ohpei5Ge';
+        $username           = config("services.modusystem.username");
+        $password           = config("services.modusystem.password");
         $clean_session      = true;
         $mqtt_version       = MqttClient::MQTT_3_1;
         $connectionSettings = (new ConnectionSettings)
             ->setUsername($username)
             ->setPassword($password)
-            //->setKeepAliveInterval(60)
+            ->setKeepAliveInterval(60)
             ->setTlsCertificateAuthorityFile("mqtt-ca.crt")
             ->setConnectTimeout(50)
             ->setUseTls(true);
         $mqtt = new MqttClient($server, $port, $clientId, $mqtt_version);
         $mqtt->connect($connectionSettings, $clean_session);
-        $mqtt->subscribe('00000688/#', function ($topic, $message) {
+        $mqtt->subscribe(config("services.modusystem.topic"), function ($topic, $message) {
 
             $data_message = explode(" ", $message);
             $value        = $data_message[0] ?? 0;
+            $dateTime     = substr($data_message[1], 0, 19);
+            $dateTime     = str_replace("T", " ", $dateTime);
 
-            //Find the date
-            // $dateTime = preg_match('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/', $string, $matches);
-            // $dateTime = new DateTime($matches[0]);
-            // $dateTime = $dateTime->format('Y-m-d H:i:s');
-            // echo $dateTime;
-            // $data_topic = explode('/', $topic);
+            $data_topic = explode('/', $topic);
 
             $uuid     = $data_topic[2] ?? 0;
             $category = $data_topic[4] ?? 0;
@@ -54,11 +54,11 @@ class MQTTModusystem extends Command
                     //   "date_time"          => $$matches[0],
                 ],
                 [
-                    //     "date_time" => $$matches[0],
-                    "param01" => $param01,
-                    "param02" => $param02,
-                    "value"   => $value,
-                    "brand"   => "modusystem",
+                    "date_time" => $dateTime,
+                    "param01"   => $param01,
+                    "param02"   => $param02,
+                    "value"     => $value,
+                    "brand"     => "modusystem",
                 ]
             );
 
@@ -67,4 +67,5 @@ class MQTTModusystem extends Command
         $mqtt->loop(true);
 
     }
+
 }

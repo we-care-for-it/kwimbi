@@ -1,14 +1,10 @@
 <?php
-
 namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ObjectMonitoringRelationManager extends RelationManager
 {
@@ -17,7 +13,7 @@ class ObjectMonitoringRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form->schema([]);
-            // 
+        //
     }
 
     public function table(Table $table): Table
@@ -26,26 +22,25 @@ class ObjectMonitoringRelationManager extends RelationManager
             ->paginated([30])
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                ->label('Datum Tijd')
-                ->date('d-M-Y H:i:s'),
-                
-                Tables\Columns\TextColumn::make('category')
-                ->label('Categorie'),
-                
-                Tables\Columns\TextColumn::make('param01')
-                ->label('Verdieping'),
-                
-                Tables\Columns\TextColumn::make('param02')
-                ->label('Nummer'),
-                
-                Tables\Columns\TextColumn::make('brand')
-                ->label('Merk'),
-                
-                Tables\Columns\TextColumn::make('value')
-                ->label('Waarde'),
+                Tables\Columns\TextColumn::make('date_time')
+                    ->label('Datum Tijd')
+                    ->date('d-M-Y H:i:s'),
 
-                
+                Tables\Columns\TextColumn::make('category')
+                    ->label('Categorie'),
+
+                Tables\Columns\TextColumn::make('param01')
+                    ->label('Verdieping'),
+
+                Tables\Columns\TextColumn::make('param02')
+                    ->label('Nummer'),
+
+                Tables\Columns\TextColumn::make('brand')
+                    ->label('Merk'),
+
+                Tables\Columns\TextColumn::make('value')
+                    ->label('Waarde'),
+
             ])
             ->filters([
                 //

@@ -295,7 +295,7 @@ class TaskResource extends Resource
                 EditAction::make()
                     ->modalHeading('Snel bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
@@ -306,7 +306,7 @@ class TaskResource extends Resource
                     ->modalHeading('Actie voltooien')
                     ->color('success')
                     ->tooltip('Voltooien')
-                    ->label(''),
+                    ->label('Voltooien'),
 
                 RestoreAction::make()
                     ->color("danger")
