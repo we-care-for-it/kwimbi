@@ -23,16 +23,16 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
 
-        $incidentChart = ObjectIncident::select(DB::raw('MONTH(report_date_time) as month'), DB::raw('count(*) as total'))
+        $incidentChart = ObjectIncident::select(DB::raw('EXTRACT(MONTH FROM report_date_time) as month'), DB::raw('count(*) as total'))
             ->whereYear('report_date_time', '2025')
-            ->groupBy(DB::raw('MONTH(report_date_time)'))
+            ->groupBy(DB::raw('EXTRACT(MONTH FROM report_date_time)'))
             ->pluck('total', 'month')
             ->toArray();
 
-        $incidentStillChart = ObjectIncident::select(DB::raw('MONTH(report_date_time) as month'), DB::raw('count(*) as total'))
+        $incidentStillChart = ObjectIncident::select(DB::raw('EXTRACT(MONTH FROM report_date_time) as month'), DB::raw('count(*) as total'))
             ->whereYear('report_date_time', '2025')
             ->where('standing_still', 1)
-            ->groupBy(DB::raw('MONTH(report_date_time)'))
+            ->groupBy(DB::raw('EXTRACT(MONTH FROM report_date_time)'))
             ->pluck('total', 'month')
             ->toArray();
 
