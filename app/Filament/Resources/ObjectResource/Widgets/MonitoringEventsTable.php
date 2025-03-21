@@ -35,18 +35,18 @@ class MonitoringEventsTable extends BaseWidget
                     ->sortable()
                     ->placeholder('-')
                     ->toggleable(),
-                TextColumn::make("error.description")
-                    ->label("Omschrijving")
-                    ->sortable()
-                    ->placeholder('-')
-                    ->getStateUsing(function ($record): ?string {
-                        if ($record?->category == 'error') {
-                            return $record?->error->description;
-                        } else {
-                            return "";
-                        }
-                    })
-                    ->toggleable(),
+                // TextColumn::make("error.description")
+                //     ->label("Omschrijving")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->getStateUsing(function ($record): ?string {
+                //         if ($record?->category == 'error') {
+                //             return $record?->error->description;
+                //         } else {
+                //             return "";
+                //         }
+                //     })
+                //     ->toggleable(),
 
                 TextColumn::make("category")
                     ->label("Categorie")
@@ -54,20 +54,26 @@ class MonitoringEventsTable extends BaseWidget
                     ->placeholder('-')
                     ->toggleable(),
 
-                TextColumn::make("error.posreason")
-                    ->label("Reden")
-                    ->sortable()
-                    ->placeholder('-')
-                    ->toggleable(),
+                // TextColumn::make("error.posreason")
+                //     ->label("Reden")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->toggleable(),
 
-                TextColumn::make("value")
-                    ->label("Waarde")
-                    ->sortable()
-                    ->placeholder('-')
-                    ->toggleable(),
+                // TextColumn::make("value")
+                //     ->label("Waarde")
+                //     ->sortable()
+                //     ->placeholder('-')
+                //     ->toggleable(),
 
-                TextColumn::make("param01")
+                TextColumn::make("level")
                     ->label("Verdieping")
+                    ->sortable()
+                    ->placeholder('-')
+                    ->toggleable(),
+
+                TextColumn::make("action")
+                    ->label("Actie")
                     ->sortable()
                     ->placeholder('-')
                     ->toggleable(),
@@ -78,6 +84,27 @@ class MonitoringEventsTable extends BaseWidget
                 SelectFilter::make('category')
                     ->label('Type')
                     ->options(ObjectMonitoring::where('external_object_id', $this->record->monitoring_object_id)->pluck('category', 'category')),
+
+                // SelectFilter::make('action')
+                //     ->label('Actie')
+                //     ->options(ObjectMonitoring::where('external_object_id', $this->record->monitoring_object_id)->pluck('action', 'action')),
+
+                SelectFilter::make('level')
+                    ->label('Verdieping')
+                    ->options([
+                        '1'  => 1,
+                        '2'  => 2,
+                        '3'  => 3,
+                        '4'  => 4,
+                        '5'  => 5,
+                        '6'  => 6,
+                        '7'  => 7,
+                        '8'  => 7,
+                        '9'  => 9,
+                        '10' => 10,
+                        '11' => 11,
+
+                    ]),
 
             ])
 
