@@ -20,7 +20,7 @@ class MonitoringIncidentTable extends BaseWidget
                 ObjectMonitoring::whereYear('date_time', date('Y'))
                     ->where('external_object_id', $this->record->monitoring_object_id)
                     ->where('category', 'error')
-                    ->orderBy('id')
+                    ->orderBy('date_time', 'desc')
             )
             ->columns([
                 TextColumn::make("date_time")
@@ -32,7 +32,10 @@ class MonitoringIncidentTable extends BaseWidget
                 TextColumn::make("error.description")
                     ->label("Omschrijving")
                     ->sortable()
-                    ->toggleable(),
+                    ->toggleable()
+
+                ,
+
                 TextColumn::make("error.posreason")
                     ->label("Reden")
                     ->sortable()
