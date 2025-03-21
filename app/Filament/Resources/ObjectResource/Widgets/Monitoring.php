@@ -9,7 +9,7 @@ class Monitoring extends BaseWidget
 {
 
     public ?Model $record                     = null;
-    protected static ?string $pollingInterval = '10s';
+    protected static ?string $pollingInterval = '100s';
     protected function getColumns(): int
     {
         return 4;
