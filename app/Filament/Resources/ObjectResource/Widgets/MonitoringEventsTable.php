@@ -30,6 +30,7 @@ class MonitoringEventsTable extends BaseWidget
                 TextColumn::make("date_time")
                     ->label("Datum - Tijd")
                     ->date("d-m-Y h:i:s")
+                    ->width('100')
                     ->sortable()
                     ->placeholder('-')
                     ->toggleable(),

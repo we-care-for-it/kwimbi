@@ -27,6 +27,7 @@ class MonitoringIncidentTable extends BaseWidget
                     ->label("Datum - Tijd")
                     ->date("d-m-Y h:i:s")
                     ->sortable()
+                    ->width('100')
                     ->toggleable(),
                 TextColumn::make("error.description")
                     ->label("Omschrijving")

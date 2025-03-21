@@ -746,3 +746,4 @@
   2   vendor\php-mqtt\client\src\MqttClient.php:1022
       PhpMqtt\Client\MqttClient::writeToSocketWithAutoReconnect("À\")
 
+^C
