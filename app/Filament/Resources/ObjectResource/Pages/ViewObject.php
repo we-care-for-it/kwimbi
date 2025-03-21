@@ -58,7 +58,7 @@ class ViewObject extends ViewRecord
                 Actions\Action::make('cancel_top')
                     ->iconButton()
                     ->color('gray')
-                    ->label('Monitoring')
+                    ->label('Uitgebreide monitoring')
                     ->link()
                     ->url(function ($record) {
                         return $this->getRecord()?->id . "/monitoring";
