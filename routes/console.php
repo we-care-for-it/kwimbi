@@ -1,12 +1,13 @@
 <?php
 
 Schedule::command('app:import-chex')
-    ->hourly()
-    ->between('8:00', '20:00');
+    ->appendOutputTo('checx.log')
+    ->everyMinute();
+// ->between('8:00', '20:00');
 
 if (config("services.modusystem.username")) {
     Schedule::command('app:m-q-t-t-modusystem')
-        ->appendOutputTo('schedule.log')
+
         ->everySecond();
 }
 
