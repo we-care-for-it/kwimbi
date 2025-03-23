@@ -176,17 +176,17 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function getMonitoringVersion()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('date_time');
     }
 
     public function getMonitoringType()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('date_time');
     }
 
     public function getMonitoringFloor()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'floor')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'stop')->latest('date_time');
     }
 
     public function getMonitoringEvents()

@@ -20,6 +20,7 @@ class MonitoringEventsTable extends BaseWidget
             ->query(
                 ObjectMonitoring::whereYear('date_time', date('Y'))
                     ->where('external_object_id', $this->record->monitoring_object_id)
+                    ->where('category', '<>', 'floor')
                     ->orderBy('date_time', 'desc')
             )
             ->columns([
@@ -81,7 +82,7 @@ class MonitoringEventsTable extends BaseWidget
                 SelectFilter::make('category')
                     ->label('Type')
                     ->multiple()
-                    ->options(ObjectMonitoring::where('external_object_id', $this->record->monitoring_object_id)->pluck('category', 'category')),
+                    ->options(ObjectMonitoring::where('external_object_id', $this->record->monitoring_object_id)->where('category', '<>', 'floor')->pluck('category', 'category')),
 
                 // SelectFilter::make('action')
                 //     ->label('Actie')

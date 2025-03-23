@@ -172,10 +172,10 @@ class MQTTModusystem extends Command
                 if ($category == 'connected') {
                     switch ($value) {
                         case 0:
-                            $action = "Elevator connection connected";
+                            $action = "Elevator connection disconnected";
                             break;
                         case 1:
-                            $action = "Elevator connection disconnected";
+                            $action = "Elevator connection connected ";
                             break;
                         case 2:
                             $action = "Elevator connection error";
@@ -243,8 +243,8 @@ class MQTTModusystem extends Command
                         "external_object_id" => $uuid,
                         "value"              => $value,
                         "param01"            => $param01,
+                        "date_time"          => $dateTime,
                         "param02"            => $param02,
-                        "value"              => $value,
                         "action"             => $action ?? null,
                         "level"              => $level ?? null,
                         "door"               => $door ?? null,
