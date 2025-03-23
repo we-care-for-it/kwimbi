@@ -30,7 +30,7 @@ class TasksOverview extends BaseWidget
                     ->label('Titel')
                     ->placeholder('-')
                     ->sortable()
-                    ->limit(30), // Limit the title length for better display
+                , // Limit the title length for better display
 
                 Tables\Columns\TextColumn::make('begin_date')
                     ->label('Begindatum')
