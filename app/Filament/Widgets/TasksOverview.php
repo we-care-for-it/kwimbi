@@ -60,6 +60,7 @@ class TasksOverview extends BaseWidget
                         default            => 'gray',
                     }),
             ])
+            ->emptyState(view("partials.empty-state"))
             ->filters([
                 // Add filters if needed
             ])
