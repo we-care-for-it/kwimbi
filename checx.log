@@ -1,0 +1,44 @@
+
+   Illuminate\Http\Client\ConnectionException 
+
+  cURL error 6: Could not resolve host: api.chex.nl (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.chex.nl/api/v1/inspections?fromDate=2025-03-24
+
+  at vendor\laravel\framework\src\Illuminate\Http\Client\PendingRequest.php:941
+    937▕                         }
+    938▕                     }
+    939▕                 });
+    940▕             } catch (ConnectException $e) {
+  ➜ 941▕                 $exception = new ConnectionException($e->getMessage(), 0, $e);
+    942▕                 $request = new Request($e->getRequest());
+    943▕ 
+    944▕                 $this->factory?->recordRequestResponsePair($request, null);
+    945▕
+
+  1   vendor\guzzlehttp\guzzle\src\Handler\CurlFactory.php:275
+      GuzzleHttp\Exception\ConnectException::("cURL error 6: Could not resolve host: api.chex.nl (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.chex.nl/api/v1/inspections?fromDate=2025-03-24")
+
+  2   vendor\guzzlehttp\guzzle\src\Handler\CurlFactory.php:205
+      GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle))
+
+
+   Illuminate\Http\Client\ConnectionException 
+
+  cURL error 6: Could not resolve host: api.chex.nl (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.chex.nl/api/v1/inspections?fromDate=2025-03-24
+
+  at vendor\laravel\framework\src\Illuminate\Http\Client\PendingRequest.php:941
+    937▕                         }
+    938▕                     }
+    939▕                 });
+    940▕             } catch (ConnectException $e) {
+  ➜ 941▕                 $exception = new ConnectionException($e->getMessage(), 0, $e);
+    942▕                 $request = new Request($e->getRequest());
+    943▕ 
+    944▕                 $this->factory?->recordRequestResponsePair($request, null);
+    945▕
+
+  1   vendor\guzzlehttp\guzzle\src\Handler\CurlFactory.php:275
+      GuzzleHttp\Exception\ConnectException::("cURL error 6: Could not resolve host: api.chex.nl (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://api.chex.nl/api/v1/inspections?fromDate=2025-03-24")
+
+  2   vendor\guzzlehttp\guzzle\src\Handler\CurlFactory.php:205
+      GuzzleHttp\Handler\CurlFactory::createRejection(Object(GuzzleHttp\Handler\EasyHandle))
+

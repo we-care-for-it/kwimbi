@@ -7,6 +7,7 @@ use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Customer;
 use App\Models\Elevator;
+use App\Models\ObjectMonitoring;
 use App\Models\ObjectType;
 use App\Models\Relation;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
@@ -15,8 +16,8 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
-//Form
 use Filament\Forms\Components\TextInput;
+//Form
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
@@ -25,9 +26,10 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-//Form
 use Filament\Tables\Actions\DeleteAction;
+//Form
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -56,12 +58,23 @@ class ObjectResource extends Resource
         return $form->schema([
 
             Grid::make(4)->schema([
+
                 TextInput::make("nobo_no")
                     ->label("NOBO Nummer")
                     ->placeholder("Niet opgegeven"),
-                TextInput::make("monitoring_object_id")
+
+                Select::make("monitoring_object_id")
+                    ->label("Status")
                     ->label("Monitoring ID")
-                    ->placeholder("Niet opgegeven"),
+                    ->searchable()
+                    ->placeholder("Niet opgegeven")
+
+                    ->reactive()
+                    ->options(
+                        ObjectMonitoring::groupBy("external_object_id")->pluck("external_object_id", "external_object_id")
+
+                    ),
+
                 Select::make("type_id")
                     ->label("Type")
                     ->options(
@@ -164,6 +177,14 @@ class ObjectResource extends Resource
     {
         return $table
             ->columns([
+                IconColumn::make('ifMonitoring')
+                    ->trueColor('success')
+                    ->falseColor('warning')
+                    ->trueIcon('heroicon-o-check-badge')
+                    ->boolean()
+                    ->label('Monitoring')
+                    ->alignment(Alignment::Center)
+                    ->falseIcon('heroicon-o-x-mark'),
                 Tables\Columns\TextColumn::make("unit_no")
                     ->label("Nummer")
                     ->searchable()

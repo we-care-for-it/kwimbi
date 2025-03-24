@@ -28,8 +28,6 @@ return new class extends Migration
             $table->time('plan_time')->nullable();
             $table->integer('private')->nullable();
             $table->time('private_action')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
-
             $table->softDeletes();
             $table->timestamps();
         });

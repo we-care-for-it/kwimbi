@@ -18,23 +18,23 @@ class MonitoringStopsenDoors extends ChartWidget
     protected static ?string $pollingInterval = '10s';
     protected function getData(): array
     {
-        $stopData = Trend::query(ObjectMonitoring::where('category', 'stop')->whereYear('created_at', date('Y'))
-                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
-            ->dateColumn('created_at')
+        $stopData = Trend::query(ObjectMonitoring::where('category', 'stop')->whereYear('date_time', date('Y'))
+                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('date_time', date('Y')))
+            ->dateColumn('date_time')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
             ->perMonth()
             ->count();
 
-        $openData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [0, 2])->whereYear('created_at', date('Y'))
-                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
-            ->dateColumn('created_at')
+        $openData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [0, 2])->whereYear('date_time', date('Y'))
+                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('date_time', date('Y')))
+            ->dateColumn('date_time')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
             ->perMonth()
             ->count();
 
-        $closeData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [1, 3])->whereYear('created_at', date('Y'))
-                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('created_at', date('Y')))
-            ->dateColumn('created_at')
+        $closeData = Trend::query(ObjectMonitoring::where('category', 'doors')->whereIn('value', [1, 3])->whereYear('date_time', date('Y'))
+                ->where('external_object_id', $this->record->monitoring_object_id)->whereYear('date_time', date('Y')))
+            ->dateColumn('date_time')
             ->between(start: now()->startOfYear(), end: now()->endOfYear())
             ->perMonth()
             ->count();

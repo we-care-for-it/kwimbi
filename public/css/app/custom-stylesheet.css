@@ -62,11 +62,6 @@
   float: right;
 }
 
-.fi-ac-btn-action {
-  border-radius: 5px;
-  padding: 5px;
-
-}
 
 .leading-6 {
   font-weight: normal !important;
@@ -171,11 +166,11 @@
   background-color: #7DC481 !important;
 }
 
-/* .fi-btn-label {
+.fi-btn-label {
   color: white !important;
 
 }
- */
+
 
 .widget_dasboard {
   background-color: rgb(125, 196, 129) !important

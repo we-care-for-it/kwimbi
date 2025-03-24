@@ -4,8 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Facades\Filament;
+
 class gpsObjectData extends Model implements Auditable
 {
     use SoftDeletes;
@@ -24,11 +23,10 @@ class gpsObjectData extends Model implements Auditable
         parent::boot();
 
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            //  $model->company_id = Filament::getTenant()->id;
             $model->params_acc = 0;
         });
 
     }
-
 
 }

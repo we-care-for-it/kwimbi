@@ -3,14 +3,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SpaceResource\Pages;
 use App\Filament\Resources\SpaceResource\RelationManagers;
+use App\Models\Department;
+use App\Models\Location;
 use App\Models\Space;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -30,17 +32,48 @@ class SpaceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Algemene informatie')
-                    ->schema([
-                        Grid::make(2)
-                            ->schema([
-                                Forms\Components\TextInput::make('name')
-                                    ->label('Naam')
-                                    ->columnSpan('full')
-                                    ->required()
-                                    ->maxLength(255),
-                            ]),
-                    ]),
+
+                Forms\Components\TextInput::make('name')
+                    ->label('Naam')
+                    ->columnSpan('full')
+                    ->required()
+                    ->maxLength(255),
+
+                Forms\Components\Select::make("floor_level")
+                    ->label("Verdieping")
+                    ->options([
+                        '1'  => '1',
+                        '2'  => '2',
+                        '3'  => '3',
+                        '4'  => '4',
+                        '5'  => '5',
+                        '6'  => '6',
+                        '7'  => '7',
+                        '8'  => '8',
+                        '9'  => '9',
+                        '10' => '10',
+                        '11' => '11',
+                        '12' => '12',
+                        '13' => '12',
+                        '14' => '13',
+                        '15' => '15',
+                        '16' => '16',
+
+                    ]
+                    ),
+
+                Forms\Components\Select::make("location_id")
+                    ->label("Locatie")
+                    ->options(
+                        Location::pluck("name", "id")
+                    ),
+
+                Forms\Components\Select::make("department_id")
+                    ->label("Afdeling")
+                    ->options(
+                        Department::pluck("name", "id")
+                    ),
+
             ]);
     }
 
@@ -66,6 +99,20 @@ class SpaceResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->label('Naam')
+                    ->searchable(),
+                TextColumn::make('location.name')
+                    ->label('Locatie')
+                    ->placeholder('-')
+                    ->searchable(),
+                TextColumn::make('department.name')
+                    ->label('Afdeling')
+                    ->placeholder('-')
+                    ->searchable(),
+                TextColumn::make('floor_level')
+                    ->label('Verdieping')
+                    ->placeholder('-')
+                    ->badge()
+                    ->alignment(Alignment::Center)
                     ->searchable(),
 
             ])

@@ -102,6 +102,16 @@ class Elevator extends Model implements Auditable, HasMedia
         return Elevator::where('address_id', $this->attributes["address_id"])->get();
     }
 
+    public function getifMonitoringAttribute()
+    {
+        if ($this->monitoring_object_id) {
+            return 1;
+        } else {
+            return 0;
+
+        }
+    }
+
     public function inspections()
     {
         return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->orderby('end_date', 'desc');
@@ -166,17 +176,17 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function getMonitoringVersion()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'version')->latest('date_time');
     }
 
     public function getMonitoringType()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'type')->latest('date_time');
     }
 
     public function getMonitoringFloor()
     {
-        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'floor')->latest('created_at');
+        return $this->hasOne(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->where('category', 'stop')->latest('date_time');
     }
 
     public function getMonitoringEvents()
@@ -186,7 +196,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function getMonitoringEventCount()
     {
-        return $this->hasMany(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->whereIn('category', ['doors', 'moving', 'online', 'floor', 'direction', 'state', 'error', 'speed'])->count();
+        return $this->hasMany(ObjectMonitoring::class, 'external_object_id', 'monitoring_object_id')->count();
     }
 
     // public function getMonitoringConnectState(): ?string

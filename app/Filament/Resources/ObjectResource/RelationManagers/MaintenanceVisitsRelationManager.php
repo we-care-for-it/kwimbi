@@ -43,8 +43,7 @@ class MaintenanceVisitsRelationManager extends RelationManager
                         ->label("Uitvoerdatum"),
 
                     DatePicker::make("planning_date")
-                        ->label("Plandatum")
-                        ->required(),
+                        ->label("Plandatum"),
                 ]),
 
             FileUpload::make('document')

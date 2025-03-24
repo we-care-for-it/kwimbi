@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-use Filament\Facades\Filament;
+
 class ObjectInspectionData extends Model implements Auditable
 {
     use SoftDeletes;
@@ -21,7 +21,7 @@ class ObjectInspectionData extends Model implements Auditable
     {
         parent::boot();
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            // $model->company_id = Filament::getTenant()->id;    $model->company_id = Filament::getTenant()->id;
         });
 
     }

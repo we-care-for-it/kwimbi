@@ -15,7 +15,7 @@ class ViewObject extends ViewRecord
 
         if ($this->getRecord()->monitoring_object_id) {
 
-            return "Monitoring: " . ucfirst($this->getRecord()->getMonitoringVersion->brand) . " - " . $this->getRecord()->getMonitoringVersion->value . " " . $this->getRecord()->getMonitoringType->value . " " . $this->getRecord()->getMonitoringStateText();
+            return "Monitoring: " . ucfirst($this?->getRecord()?->getMonitoringVersion?->brand) . " - " . $this->getRecord()?->getMonitoringVersion?->value . " " . $this->getRecord()?->getMonitoringType?->value . " " . $this->getRecord()?->getMonitoringStateText();
 
         } else {
             if ($this->getRecord()->location) {
@@ -51,33 +51,56 @@ class ViewObject extends ViewRecord
     }
     protected function getHeaderActions(): array
     {
-        return [
 
-            Actions\Action::make('cancel_top')
-                ->iconButton()
-                ->color('gray')
-                ->label('Monitoring')
-                ->link()
-                ->url(function ($record) {
-                    return $this->getRecord()?->id . "/monitoring";
-                }),
+        if ($this->getRecord()->monitoring_object_id) {
+            return [
 
-            Actions\Action::make('cancel_top')
-                ->iconButton()
-                ->color('gray')
-                ->label('Open locatie')
-                ->link()
-                ->icon('heroicon-s-map-pin')
-                ->url(function ($record) {
-                    return "/object-locations/" . $this->getRecord()?->location?->id;
-                }),
+                Actions\Action::make('cancel_top')
+                    ->iconButton()
+                    ->color('gray')
+                    ->label('Uitgebreide monitoring')
+                    ->link()
+                    ->url(function ($record) {
+                        return $this->getRecord()?->id . "/monitoring";
+                    }),
 
-            Actions\EditAction::make('cancel_top')
-                ->slideOver()
-                ->icon('heroicon-o-pencil')
-                ->label('Wijzig'),
+                Actions\Action::make('cancel_top')
+                    ->iconButton()
+                    ->color('gray')
+                    ->label('Open locatie')
+                    ->link()
+                    ->icon('heroicon-s-map-pin')
+                    ->url(function ($record) {
+                        return "/object-locations/" . $this->getRecord()?->location?->id;
+                    }),
 
-        ];
+                Actions\EditAction::make('cancel_top')
+                    ->slideOver()
+                    ->icon('heroicon-o-pencil')
+                    ->label('Wijzig'),
+
+            ];
+        } else {
+            return [
+
+                Actions\Action::make('cancel_top')
+                    ->iconButton()
+                    ->color('gray')
+                    ->label('Open locatie')
+                    ->link()
+                    ->icon('heroicon-s-map-pin')
+                    ->url(function ($record) {
+                        return "/object-locations/" . $this->getRecord()?->location?->id;
+                    }),
+
+                Actions\EditAction::make('cancel_top')
+                    ->slideOver()
+                    ->icon('heroicon-o-pencil')
+                    ->label('Wijzig'),
+
+            ];
+        }
+
     }
 
 }

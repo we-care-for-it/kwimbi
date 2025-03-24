@@ -45,11 +45,11 @@ return [
 
     //API integrations
     'modusystem' => [
-        'url'   => env('MODUSYSTEM_URL', 'mqtt.lift-online.eu'),
-        'port'  => env('MODUSYSTEM_PORT', 'mqtt.lift-online.eu'),
-        'topic' => env('MODUSYSTEM_TOPIC'),
-        'topic' => env('MODUSYSTEM_USERNAME'),
-        'topic' => env('MODUSYSTEM_PASSWORD'),
+        'url'      => env('MODUSYSTEM_URL', 'mqtt.lift-online.eu'),
+        'port'     => env('MODUSYSTEM_PORT', '8883'),
+        'topic'    => env('MODUSYSTEM_TOPIC'),
+        'username' => env('MODUSYSTEM_USERNAME'),
+        'password' => env('MODUSYSTEM_PASSWORD'),
     ],
     'rdw'        => [
         'url'   => env('RDW_URL', 'https://opendata.rdw.nl/resource'),

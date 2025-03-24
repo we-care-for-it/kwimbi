@@ -1,22 +1,17 @@
 <?php
-
 namespace App\Models;
 
-use Filament\Facades\Filament;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
-use Carbon\Carbon;
- 
+
 class Tools extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-    
 
     protected $fillable = [
-   'description','serial_number',  'employee_id', 'warehouse_id','inspection_interval', 'name','brand_id','category_id','supplier_id','type_id','image','inspection_company_id','inspection_method'
+        'description', 'serial_number', 'employee_id', 'warehouse_id', 'inspection_interval', 'name', 'brand_id', 'category_id', 'supplier_id', 'type_id', 'image', 'inspection_company_id', 'inspection_method',
     ];
 
     protected static function boot(): void
@@ -24,7 +19,7 @@ class Tools extends Model implements Auditable
         parent::boot();
 
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            //      $model->company_id = Filament::getTenant()->id;
         });
 
     }
@@ -34,27 +29,32 @@ class Tools extends Model implements Auditable
         return $this->belongsTo(Company::class);
     }
 
-   public function brand(){
+    public function brand()
+    {
         return $this->belongsTo(toolsBrand::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(toolsCategory::class);
     }
-    public function supplier(){
+    public function supplier()
+    {
         return $this->belongsTo(toolsSupplier::class);
     }
 
-    public function type(){
+    public function type()
+    {
         return $this->belongsTo(toolsType::class);
     }
 
-    public function warehouse(){
+    public function warehouse()
+    {
         return $this->belongsTo(warehouse::class);
     }
 
-
-    public function employee(){
+    public function employee()
+    {
         return $this->belongsTo(User::class);
     }
 

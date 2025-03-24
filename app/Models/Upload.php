@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -32,7 +31,7 @@ class Upload extends Model implements Auditable
     {
         parent::boot();
         static::saving(function ($model) {
-            $model->company_id = Filament::getTenant()->id;
+            // $model->company_id = Filament::getTenant()->id;     $model->company_id = Filament::getTenant()->id;
         });
 
     }
