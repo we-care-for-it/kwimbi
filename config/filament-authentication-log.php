@@ -2,7 +2,7 @@
 
 return [
 
-    'resources' => [
+    'resources'               => [
         'AutenticationLogResource' => \Tapp\FilamentAuthenticationLog\Resources\AuthenticationLogResource::class,
     ],
 
@@ -10,20 +10,20 @@ return [
         \App\Models\User::class,
     ],
 
-    'authenticatable' => [
+    'authenticatable'         => [
         'field-to-display' => null,
     ],
 
-    'navigation' => [
+    'navigation'              => [
         'authentication-log' => [
-            'register' => true,
-            'sort' => 1,
-            'icon' => 'heroicon-o-shield-check',
+            'register' => false,
+            'sort'     => 1,
+            'icon'     => 'heroicon-o-shield-check',
         ],
     ],
 
-    'sort' => [
-        'column' => 'login_at',
+    'sort'                    => [
+        'column'    => 'login_at',
         'direction' => 'desc',
     ],
 ];

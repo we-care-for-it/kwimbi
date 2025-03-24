@@ -132,6 +132,28 @@
          </a>
          @endcan
       </div>
+
+
+
+      <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Logboeken</h1>
+      <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
+
+      @can('view_any_authentication::log')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href=" authentication-logs">
+            <img  src = "/images/icons/pack/webcam.svg"   class = "max-h-12">
+            <div>
+               <h2>Inlog logboek</h2>
+               <p class="text-sm text-gray-600">Bekijk welke gebruiker waneer is ingelogd </p>
+            </div>
+         </a>
+
+         @endcan
+
+      </div>
+
+
+
+
       <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Werkbonnen</h1>
       <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
 

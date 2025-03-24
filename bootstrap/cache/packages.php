@@ -370,6 +370,13 @@
       0 => 'pxlrbt\\FilamentExcel\\FilamentExcelServiceProvider',
     ),
   ),
+  'rappasoft/laravel-authentication-log' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rappasoft\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider',
+    ),
+  ),
   'rupadana/filament-api-service' => 
   array (
     'aliases' => 
@@ -508,6 +515,13 @@
     'providers' => 
     array (
       0 => 'Swis\\Filament\\Backgrounds\\FilamentBackgroundsServiceProvider',
+    ),
+  ),
+  'tapp/filament-authentication-log' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Tapp\\FilamentAuthenticationLog\\FilamentAuthenticationLogServiceProvider',
     ),
   ),
   'tomatophp/console-helpers' => 

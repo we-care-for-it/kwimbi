@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
+use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -17,7 +18,7 @@ use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
-    use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles;
+    use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles, AuthenticationLoggable;
 
     public function canAccessPanel(Panel $panel): bool
     {

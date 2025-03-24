@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Models\User;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
 
 class UserResource extends Resource
 {
@@ -110,10 +112,16 @@ class UserResource extends Resource
         return [
             'index' => ListUsers::route('/'),
             // 'create' => CreateUser::route('/create'),
-            // 'edit'   => EditUser::route('/{record}/edit'),
+            'edit'  => EditUser::route('/{record}/edit'),
         ];
     }
-
+    public static function getRelations(): array
+    {
+        return [
+            AuthenticationLogsRelationManager::class,
+            // ...
+        ];
+    }
     public static function getModelLabel(): string
     {
         return "Gebruikers";
