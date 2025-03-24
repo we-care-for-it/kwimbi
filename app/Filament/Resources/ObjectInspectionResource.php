@@ -7,7 +7,6 @@ use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
 use App\Models\Elevator;
 use App\Models\ObjectInspection;
 use App\Models\Relation;
-use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
@@ -485,7 +484,7 @@ class ObjectInspectionResource extends Resource
                     ->color('info')
                     ->icon('heroicon-o-arrow-up-left')
                     ->url(function ($record) {
-                        return "/" . Filament::getTenant()->id . "/objects/" . $record->id . "";
+                        return "/objects/" . $record->id . "";
 
                     }),
                 DeleteAction::make()
