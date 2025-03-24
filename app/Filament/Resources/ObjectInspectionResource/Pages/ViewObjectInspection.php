@@ -18,17 +18,6 @@ class ViewObjectInspection extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\Action::make('cancel_top')
-                ->iconButton()
-                ->color('gray')
-                ->label('Naar object')
-                ->link()
-                ->visible(fn($record) => $record->elevator->id ?? false)
-                ->icon('heroicon-o-arrow-uturn-left')
-                ->url(function ($record) {
-                    return "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
-
-                }),
 
             Actions\Action::make("Downloaddocument")->color("warning")
                 ->label("Download rapport")
@@ -44,6 +33,7 @@ class ViewObjectInspection extends ViewRecord
                         $record?->elevator?->location?->place,
                     ]
                 )
+                ->hidden(fn($record) => $record->document ? false : true)
 
                 ->action(function ($data, $record) {
                     if ($record->schedule_run_token) {
@@ -83,8 +73,20 @@ class ViewObjectInspection extends ViewRecord
                 ->label('Wijzig')
                 ->hidden(fn($record) => $record->external_uuid),
 
+            Actions\Action::make('cancel_top')
+
+                ->label('Naar object')
+
+                ->visible(fn($record) => $record->elevator->id ?? false)
+                ->icon('heroicon-c-arrows-up-down')
+                ->url(function ($record) {
+                    return "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
+
+                }),
+
             //  ->hidden(fn($record) => $record?->schedule_run_token &&  $record?->if_match <> 0)
         ];
+
     }
 
     public function getSubheading(): ?string
