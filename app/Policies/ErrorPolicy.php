@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Solutions;
+use App\Models\Error;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SolutionsPolicy
+class ErrorPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class SolutionsPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_solutions');
+        return $user->can('view_any_error');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Solutions $solutions): bool
+    public function view(User $user, Error $error): bool
     {
-        return $user->can('view_solutions');
+        return $user->can('view_error');
     }
 
     /**
@@ -31,23 +31,23 @@ class SolutionsPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_solutions');
+        return $user->can('create_error');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Solutions $solutions): bool
+    public function update(User $user, Error $error): bool
     {
-        return $user->can('update_solutions');
+        return $user->can('update_error');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Solutions $solutions): bool
+    public function delete(User $user, Error $error): bool
     {
-        return $user->can('delete_solutions');
+        return $user->can('delete_error');
     }
 
     /**
@@ -55,15 +55,15 @@ class SolutionsPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_solutions');
+        return $user->can('delete_any_error');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Solutions $solutions): bool
+    public function forceDelete(User $user, Error $error): bool
     {
-        return $user->can('force_delete_solutions');
+        return $user->can('force_delete_error');
     }
 
     /**
@@ -71,15 +71,15 @@ class SolutionsPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_solutions');
+        return $user->can('force_delete_any_error');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Solutions $solutions): bool
+    public function restore(User $user, Error $error): bool
     {
-        return $user->can('restore_solutions');
+        return $user->can('restore_error');
     }
 
     /**
@@ -87,15 +87,15 @@ class SolutionsPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_solutions');
+        return $user->can('restore_any_error');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Solutions $solutions): bool
+    public function replicate(User $user, Error $error): bool
     {
-        return $user->can('replicate_solutions');
+        return $user->can('replicate_error');
     }
 
     /**
@@ -103,6 +103,6 @@ class SolutionsPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_solutions');
+        return $user->can('reorder_error');
     }
 }

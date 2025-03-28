@@ -1,8 +1,8 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\WorkorderActivitieResource\Pages;
-use App\Models\workorderActivities;
+use App\Filament\Resources\ErrorResource\Pages;
+use App\Models\Error;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,36 +11,33 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
-class WorkorderActivitieResource extends Resource
+class ErrorResource extends Resource
 {
-    protected static ?string $model = workorderActivities::class;
-
-    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel       = "Type werkzaamheden";
-    protected static ?string $title                 = "Type werkzaamheden";
-    protected static ?string $pluralModelLabel      = 'Type werkzaamheden';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $model            = Error::class;
+    protected static ?string $navigationLabel  = "Foutmeldingen";
+    protected static ?string $title            = "Foutmeldingen";
+    protected static ?string $pluralModelLabel = 'Foutmeldingen';
+    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
-                Forms\Components\TextInput::make('name')
-                    ->label('Naam')
+                Forms\Components\TextInput::make('code')
+                    ->label('Code')
                     ->required()
-                    ->columnSpan('full'), Forms\Components\TimePicker::make('default_time')
-                    ->label('Standaard tijd')
-                    ->seconds(false)
-                ,
-                Forms\Components\TextArea::make('description')
-                    ->label('Omschrijving')
-                    ->required()
-                    ->columnSpan('full'),
+                    ->extraAlpineAttributes(['@input' => '$el.value = $el.value.toUpperCase()'])->minLength(4)
+                    ->maxLength(10),
+                Forms\Components\TextArea::make('error')
+                    ->label('Oplossing')
 
+                    ->required()
+                    ->columnSpan("full")
+                    ->maxLength(255),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Actief')
                     ->default(true),
+
             ]);
     }
 
@@ -52,26 +49,19 @@ class WorkorderActivitieResource extends Resource
                     ->onColor('success')
                     ->offColor('danger')
                     ->width(100),
-
-                TextColumn::make('name')
-                    ->placeholder('-')
-                    ->label('Naam')
+                TextColumn::make('code')
+                    ->label('Code')
+                    ->width(20)
                     ->searchable(),
-                TextColumn::make('default_time')
-                    ->placeholder('-')
-                    ->label('Standardtijd')
-                    ->date("h:s")
+                TextColumn::make('error')
+                    ->label('Oplossing')
                     ->searchable(),
-                TextColumn::make('description')
-                    ->label('Omschrijving')
-                    ->placeholder('-')
-                    ->searchable(),
-
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
@@ -83,7 +73,8 @@ class WorkorderActivitieResource extends Resource
                     ->tooltip('Verwijderen')
                     ->label('')
                     ->modalHeading('Verwijderen')
-                    ->color('danger')])
+                    ->color('danger'),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -101,9 +92,9 @@ class WorkorderActivitieResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListWorkorderActivities::route('/'),
-            // 'create' => Pages\CreateWorkorderActivitie::route('/create'),
-            //  'edit'   => Pages\EditWorkorderActivitie::route('/{record}/edit'),
+            'index' => Pages\ListErrors::route('/'),
+            //   'create' => Pages\CreateError::route('/create'),
+            //   'edit'   => Pages\EditError::route('/{record}/edit'),
         ];
     }
 }

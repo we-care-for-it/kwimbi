@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             CompanyUserSeeder::class,
             ObjectTypeSeeder::class,
+            WorkActivitieSeeder::class,
+
         ]);
 
     }
