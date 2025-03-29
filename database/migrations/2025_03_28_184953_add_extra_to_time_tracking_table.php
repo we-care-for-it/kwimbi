@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('status_id')->nullable();
             $table->integer('weekno')->nullable();
             $table->integer('work_type_id')->nullable();
+            $table->integer('project_id')->nullable();
+            $table->time('project_id')->nullable();
             $table->softDeletes();
         });
     }

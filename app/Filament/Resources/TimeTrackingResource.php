@@ -1,25 +1,33 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Enums\TimeTrackingStatus;
 use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\TimeTracking;
 use App\Models\User;
+use App\Models\workorderActivities;
+use Carbon\CarbonInterval;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TimeTrackingResource extends Resource
 {
     protected static ?string $model = TimeTracking::class;
 
-    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon   = 'heroicon-o-clock';
     protected static ?string $navigationLabel  = "Tijdregistratie";
     protected static ?string $title            = "Tijdregistratie";
     protected static ?string $pluralModelLabel = 'Tijdregistratie';
@@ -28,7 +36,43 @@ class TimeTrackingResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\DatePicker::make('started_at')
+                    ->label('Datum')
+                    ->closeOnDateSelection()
+                    ->default(now())
+                    ->required(),
+                Forms\Components\TimePicker::make('time')
+                    ->label('Tijd')
+                    ->seconds(false)
+                    ->required(),
+                Forms\Components\Select::make("relation_id")
+                    ->label("Relatie")
+                    ->searchable()
+                    ->options(Relation::where('type_id', 5)->pluck("name", "id"))
+                    ->placeholder("Niet opgegeven"),
+                Forms\Components\Select::make("project_id")
+                    ->label("Project")
+                    ->searchable()
+                    ->placeholder("Niet opgegeven")
+                    ->options(Project::pluck("name", "id")),
+                Forms\Components\Select::make('status_id')
+                    ->label('Status')
+                    ->options(TimeTrackingStatus::class)
+                    ->default(2)
+                    ->required(),
+                Forms\Components\Select::make('work_type_id')
+                    ->label('Type')
+                    ->searchable()
+                    ->options(workorderActivities::pluck("name", "id"))
+                    ->required(),
+                Forms\Components\TextArea::make('description')
+                    ->label('Omschrijving')
+                    ->required()
+                    ->columnSpan('full'),
+                Forms\Components\Toggle::make('invoiceable')
+                    ->label('Facturabel')
+                    ->default(true),
+
             ]);
     }
 
@@ -37,56 +81,85 @@ class TimeTrackingResource extends Resource
         return $table
 
             ->groups([
-                Group::make('weeknr')
+                Group::make('weekno')
                     ->label('Weeknummer'),
                 Group::make('project_id')
                     ->label('Project'),
                 Group::make('relation_id')
+                    ->getTitleFromRecordUsing(fn(TimeTracking $record): string => ucfirst($record?->relation?->name))
                     ->label('Relatie'),
                 Group::make('status_id')
                     ->label('Status'),
+                Group::make('invoiceable')
+                    ->label('Facturable'),
             ])
 
             ->columns([
 
-                TextColumn::make('fff')
+                TextColumn::make('started_at')
                     ->label('Datum')
+                    ->sortable()
                     ->width(50)
+                    ->date('d-m-Y')
+                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
-                TextColumn::make('coddde')
+
+                TextColumn::make('time')
+                    ->label('Uren')
+                    ->sortable()
+
+                    ->placeholder('-')
+                    ->width(10)
+
+                    ->summarize(
+                        Tables\Columns\Summarizers\Sum::make()
+                            ->formatStateUsing(function (int $state) {
+                                $interval    = CarbonInterval::seconds($state)->cascade();
+                                $totalHours  = $interval->d * 24 + $interval->h;
+                                $newInterval = CarbonInterval::hours($totalHours)->minutes($interval->minutes)->seconds($interval->seconds);
+
+                                return $totalHours;
+                            }),
+                    ),
+
+                TextColumn::make('weekno')
                     ->label('Week nr.')
                     ->width(50)
                     ->placeholder('-')
+                    ->sortable()
+                    ->sortable()
                     ->searchable(),
 
-                TextColumn::make('Activiteit')
+                TextColumn::make('description')
                     ->label('Activiteit')
                     ->placeholder('-')
-
                     ->searchable(),
 
-                TextColumn::make('cdddde')
+                TextColumn::make('relation.name')
                     ->label('Relatie')
+                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
-                TextColumn::make('codddde')
+                TextColumn::make('project.name')
+                    ->sortable()
                     ->label('Project')
+                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
-                TextColumn::make('cdddodddae')
-                    ->label('Uren')
-                    ->placeholder('-')
-                    ->width(10)
-                    ->searchable(),
-                TextColumn::make('coddddddddde')
-                    ->label('Facturable')
-                    ->placeholder('-')
-                    ->searchable(),
-                TextColumn::make('code')
+                TextColumn::make('status_id')
+                    ->sortable()
                     ->label('Status')
+                    ->badge()
+                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
+                ToggleColumn::make('invoiceable')
+                    ->label('Facturabel')
+                    ->onColor('success')
+                    ->sortable()
+                    ->offColor('danger')
+                    ->width(100),
             ])
             ->filters([
                 SelectFilter::make('periode_id')
@@ -115,10 +188,14 @@ class TimeTrackingResource extends Resource
                             ->pluck("name", "id"))
                     ->label('Project'),
                 SelectFilter::make('status_id')
+                    ->options(TimeTrackingStatus::class)
                     ->label('Status'),
             ], layout: FiltersLayout::AboveContent)
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken'),
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
@@ -127,32 +204,38 @@ class TimeTrackingResource extends Resource
                     ->color('danger'),
             ]
             )
-
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
 
-            ])
+                ExportBulkAction::make()
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->askForFilename()
 
-            ->emptyState(view('partials.empty-state')
-            )
-        ;
-    }
+                            ->withColumns([
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+                                Column::make("started_at")->heading("Datum"),
+                                Column::make("weekno")->heading("Weeknummer"),
+                                Column::make("time")->heading("Tijd"),
+                                Column::make("description")->heading("Omschrijving"),
+                                Column::make("relation.name")->heading("Relatie"),
+                                Column::make("project.name")->heading("Project"),
+                                Column::make("status_id")->heading("Status"),
+                                Column::make("invoiceable")->heading("Facturable"),
+
+                            ])
+                            ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                            ->withFilename(date("m-d-Y H:i") . " - Tijdregistratie export")])])
+            ->emptyState(view("partials.empty-state"));
+
     }
 
     public static function getPages(): array
     {
         return [
-            'index'  => Pages\ListTimeTrackings::route('/'),
-            'create' => Pages\CreateTimeTracking::route('/create'),
-            'edit'   => Pages\EditTimeTracking::route('/{record}/edit'),
+            'index' => Pages\ListTimeTrackings::route('/'),
+            //    'create' => Pages\CreateTimeTracking::route('/create'),
+            //     'edit'   => Pages\EditTimeTracking::route('/{record}/edit'),
         ];
     }
 }
