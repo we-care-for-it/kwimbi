@@ -5,7 +5,7 @@ use App\Enums\TimeTrackingStatus;
 use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
-use App\Models\TimeTracking;
+use App\Models\timeTracking;
 use App\Models\User;
 use App\Models\workorderActivities;
 use Carbon\CarbonInterval;
@@ -25,7 +25,7 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TimeTrackingResource extends Resource
 {
-    protected static ?string $model = TimeTracking::class;
+    protected static ?string $model = timeTracking::class;
 
     protected static ?string $navigationIcon   = 'heroicon-o-clock';
     protected static ?string $navigationLabel  = "Tijdregistratie";
