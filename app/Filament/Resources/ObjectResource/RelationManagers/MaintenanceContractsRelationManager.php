@@ -3,13 +3,16 @@ namespace App\Filament\Resources\ObjectResource\RelationManagers;
 
 use App\Models\ObjectMaintenanceContract;
 use App\Models\Relation;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
 // use Filament\Infolists\Components\Grid;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
@@ -47,11 +50,26 @@ class MaintenanceContractsRelationManager extends RelationManager
 
                     DatePicker::make("startdate")
                         ->label("Startdatum")
-                        ->required(),
+                        ->required()
+                    ,
 
                     DatePicker::make("enddate")
                         ->label("Einddatum")
-                        ->required(),
+                        ->required()
+
+                        ->hintAction(
+                            Action::make('Startdatum + 1 jaar')
+                                ->icon('heroicon-m-bolt')
+                                ->action(function (Set $set, Get $get, $state) {
+
+                                    $date = new DateTime($get('startdate'));
+                                    $date->add(new DateInterval("P1Y")); //"Plus 1 year"
+
+                                    $set('enddate', $date->format("m/d/y"));
+
+                                })
+                        )
+                    ,
                 ]),
 
             FileUpload::make('contract')

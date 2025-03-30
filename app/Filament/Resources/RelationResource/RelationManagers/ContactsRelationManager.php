@@ -124,7 +124,6 @@ class ContactsRelationManager extends RelationManager
                         //Maak de contactpersoon aan
                         $contact_id = Contact::insertGetId([
                             'first_name'   => $data['first_name'],
-                            'company_id'   => Filament::getTenant()->id,
                             'last_name'    => $data['last_name'],
                             'department'   => $data['department'],
                             'email'        => $data['email'],

@@ -31,7 +31,8 @@ use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Rupadana\ApiService\ApiServicePlugin;
-
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
+ 
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 
 class AppPanelProvider extends PanelProvider
@@ -49,8 +50,9 @@ class AppPanelProvider extends PanelProvider
 ])
 ->plugins([
     \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+  FilamentAuthenticationLogPlugin::make()
 ])->passwordReset()
-
+ 
 ->plugins([
 
  FilamentEditProfilePlugin::make()
