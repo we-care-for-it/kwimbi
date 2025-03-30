@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WorkorderActivitieResource\Pages;
 use App\Models\workorderActivities;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -33,7 +34,7 @@ class WorkorderActivitieResource extends Resource
                     ->label('Standaard tijd')
                     ->seconds(false)
                 ,
-                Forms\Components\TextArea::make('description')
+                TextArea::make('description')
                     ->label('Omschrijving')
                     ->required()
                     ->columnSpan('full'),

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SolutionResource\Pages;
 use App\Models\Solution;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,11 +33,19 @@ class SolutionResource extends Resource
                     ->required()
                     ->extraAlpineAttributes(['@input' => '$el.value = $el.value.toUpperCase()'])->minLength(4)
                     ->maxLength(10),
-                Forms\Components\TextArea::make('error')
+
+                Forms\Components\TextInput::make('code')
+                    ->label('Code')
+                    ->required()
+                    ->extraAlpineAttributes(['@input' => '$el.value = $el.value.toUpperCase()'])->minLength(4)
+                    ->maxLength(10),
+
+                TextArea::make('error')
                     ->label('Oplossing')
                     ->required()
                     ->columnSpan("full")
                     ->maxLength(255),
+
                 Forms\Components\Toggle::make('is_active')
                     ->label('Actief')
                     ->default(true),

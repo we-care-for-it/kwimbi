@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ErrorResource\Pages;
 use App\Models\Error;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,7 +29,7 @@ class ErrorResource extends Resource
                     ->required()
                     ->extraAlpineAttributes(['@input' => '$el.value = $el.value.toUpperCase()'])->minLength(4)
                     ->maxLength(10),
-                Forms\Components\TextArea::make('error')
+                TextArea::make('error')
                     ->label('Oplossing')
 
                     ->required()

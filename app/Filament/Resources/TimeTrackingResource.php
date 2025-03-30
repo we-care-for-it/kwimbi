@@ -64,7 +64,7 @@ class TimeTrackingResource extends Resource
                 Forms\Components\Select::make('work_type_id')
                     ->label('Type')
                     ->searchable()
-                    ->options(workorderActivities::pluck("name", "id"))
+                    ->options(workorderActivities::where('is_active', 1)->pluck("name", "id"))
                     ->required(),
                 TextArea::make('description')
                     ->label('Omschrijving')
