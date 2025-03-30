@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\workorderActivities;
 use Carbon\CarbonInterval;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -65,7 +66,7 @@ class TimeTrackingResource extends Resource
                     ->searchable()
                     ->options(workorderActivities::pluck("name", "id"))
                     ->required(),
-                Forms\Components\TextArea::make('description')
+                TextArea::make('description')
                     ->label('Omschrijving')
                     ->required()
                     ->columnSpan('full'),
