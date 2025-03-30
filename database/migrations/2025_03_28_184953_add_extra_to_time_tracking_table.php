@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('weekno')->nullable();
             $table->integer('work_type_id')->nullable();
             $table->integer('project_id')->nullable();
-            $table->time('project_id')->nullable();
+            $table->time('time')->nullable();
             $table->softDeletes();
         });
     }
