@@ -9,6 +9,7 @@ use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -77,11 +78,14 @@ class RelationResource extends Resource
                     Forms\Components\TextInput::make("place")
                         ->label("Plaats")
                         ->columnSpan(2),
-                    Forms\Components\Select::make("type_id")
+
+                    ToggleButtons::make('type_id')
                         ->required()
                         ->label("Categorie")
                         ->options(RelationTypes::class)
-                        ->columnSpan(2),
+                        ->inline()
+                        ->default(5)
+                        ->columnSpan('full'),
 
                 ])])
                 ->columns(3)
