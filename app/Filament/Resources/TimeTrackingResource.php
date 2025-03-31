@@ -64,7 +64,7 @@ class TimeTrackingResource extends Resource
                 Forms\Components\Select::make('work_type_id')
                     ->label('Type')
                     ->searchable()
-                    ->options(workorderActivities::pluck("name", "id"))
+                    ->options(workorderActivities::where('is_active', 1)->pluck("name", "id"))
                     ->required(),
                 TextArea::make('description')
                     ->label('Omschrijving')
@@ -112,16 +112,6 @@ class TimeTrackingResource extends Resource
 
                     ->placeholder('-')
                     ->width(10)
-
-                    ->summarize(
-                        Tables\Columns\Summarizers\Sum::make()
-                            ->formatStateUsing(function (int $state) {
-                                $interval    = CarbonInterval::seconds($state)->cascade();
-                                $totalHours  = $interval->d * 24 + $interval->h;
-                                $newInterval = CarbonInterval::hours($totalHours)->minutes($interval->minutes)->seconds($interval->seconds);
-
-                                return $totalHours;
-                            }),
                     ),
 
                 TextColumn::make('weekno')
