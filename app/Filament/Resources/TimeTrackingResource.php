@@ -112,16 +112,6 @@ class TimeTrackingResource extends Resource
 
                     ->placeholder('-')
                     ->width(10)
-
-                    ->summarize(
-                        Tables\Columns\Summarizers\Sum::make()
-                            ->formatStateUsing(function (int $state) {
-                                $interval    = CarbonInterval::seconds($state)->cascade();
-                                $totalHours  = $interval->d * 24 + $interval->h;
-                                $newInterval = CarbonInterval::hours($totalHours)->minutes($interval->minutes)->seconds($interval->seconds);
-
-                                return $totalHours;
-                            }),
                     ),
 
                 TextColumn::make('weekno')
