@@ -99,16 +99,16 @@ class TimeTrackingResource extends Resource
                 TextColumn::make('started_at')
                     ->label('Datum')
                     ->sortable()
+                    ->toggleable()
                     ->width(50)
                     ->date('d-m-Y')
-                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
 
                 TextColumn::make('time')
                     ->label('Uren')
                     ->sortable()
-
+                    ->toggleable()
                     ->placeholder('-')
                     ->width(10)
                 ,
@@ -117,23 +117,26 @@ class TimeTrackingResource extends Resource
                     ->label('Week nr.')
                     ->width(50)
                     ->placeholder('-')
-                    ->sortable()
+                    ->toggleable()
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('description')
                     ->label('Activiteit')
+
                     ->placeholder('-')
                     ->searchable(),
 
                 TextColumn::make('relation.name')
                     ->label('Relatie')
+                    ->toggleable()
                     ->sortable()
                     ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('project.name')
                     ->sortable()
                     ->label('Project')
+                    ->toggleable()
                     ->sortable()
                     ->placeholder('-')
                     ->searchable(),
@@ -141,6 +144,7 @@ class TimeTrackingResource extends Resource
                     ->sortable()
                     ->label('Status')
                     ->badge()
+                    ->toggleable()
                     ->sortable()
                     ->placeholder('-')
                     ->searchable(),
@@ -148,6 +152,7 @@ class TimeTrackingResource extends Resource
                     ->label('Facturabel')
                     ->onColor('success')
                     ->sortable()
+                    ->toggleable()
                     ->offColor('danger')
                     ->width(100),
             ])
