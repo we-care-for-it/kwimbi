@@ -8,7 +8,6 @@ use App\Models\Relation;
 use App\Models\timeTracking;
 use App\Models\User;
 use App\Models\workorderActivities;
-use Carbon\CarbonInterval;
 use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -112,7 +111,7 @@ class TimeTrackingResource extends Resource
 
                     ->placeholder('-')
                     ->width(10)
-                    ),
+                ,
 
                 TextColumn::make('weekno')
                     ->label('Week nr.')
