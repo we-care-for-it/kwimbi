@@ -3,13 +3,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
-use App\Models\Customer;
 use App\Models\ObjectLocation;
 use App\Models\Project;
+use App\Models\Relation;
 use App\Models\Statuses;
 use Filament\Forms;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -19,6 +17,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -98,14 +98,12 @@ class ProjectsResource extends Resource
 
                                 Select::make("status_id")
                                     ->label("Status")
-                                    ->required()
                                     ->reactive()
                                     ->options(
-                                        Statuses::where(
-                                            "model",
-                                            "Project"
-                                        )->pluck("name", "id")
-                                    )->columnSpan("full"),
+                                        [
+                                            "1" => "Open",
+                                        ]
+                                    )->columnSpan("full")->default(1),
                             ]
                         ),
                     ])->columnSpan(1),
@@ -116,7 +114,7 @@ class ProjectsResource extends Resource
                             ->searchable()
                             ->label("Relatie")
                             ->columnSpan("full")
-                            ->options(Customer::all()->pluck("name", "id")),
+                            ->options(Relation::all()->pluck("name", "id")),
 
                         Select::make("location_id")
                             ->searchable()
@@ -128,9 +126,8 @@ class ProjectsResource extends Resource
                     ])
                     ->columns(2)
                     ->columnSpan(1),
-                
 
-                    Section::make()
+                Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
@@ -287,7 +284,7 @@ class ProjectsResource extends Resource
 
                 SelectFilter::make("customer_id")
                     ->label("Relatie")
-                    ->options(Customer::get()->pluck("name", "id"))
+                    ->options(Relation::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
 

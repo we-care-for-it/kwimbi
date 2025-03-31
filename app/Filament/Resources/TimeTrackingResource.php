@@ -63,6 +63,7 @@ class TimeTrackingResource extends Resource
                 Forms\Components\Select::make('work_type_id')
                     ->label('Type')
                     ->searchable()
+                    ->toggleable()
                     ->options(workorderActivities::where('is_active', 1)->pluck("name", "id"))
                     ->required(),
                 TextArea::make('description')
@@ -104,15 +105,12 @@ class TimeTrackingResource extends Resource
                     ->date('d-m-Y')
                     ->placeholder('-')
                     ->searchable(),
-
                 TextColumn::make('time')
                     ->label('Uren')
                     ->sortable()
                     ->toggleable()
                     ->placeholder('-')
-                    ->width(10)
-                ,
-
+                    ->width(10),
                 TextColumn::make('weekno')
                     ->label('Week nr.')
                     ->width(50)
@@ -120,13 +118,11 @@ class TimeTrackingResource extends Resource
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
-
                 TextColumn::make('description')
                     ->label('Activiteit')
-
+                    ->wrap()
                     ->placeholder('-')
                     ->searchable(),
-
                 TextColumn::make('relation.name')
                     ->label('Relatie')
                     ->toggleable()
