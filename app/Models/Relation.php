@@ -75,6 +75,11 @@ class Relation extends Model
         return $this->hasMany(ObjectLocation::class);
     }
 
+    public function timeTracking()
+    {
+        return $this->hasMany(TimeTracking::class)->where('model', 'Relation');
+    }
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');

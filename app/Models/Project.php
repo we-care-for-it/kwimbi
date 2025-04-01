@@ -59,4 +59,9 @@ class Project extends Model implements Auditable
     {
         return $this->hasMany(ProjectLocation::class, 'project_id', 'location_id');
     }
+
+    public function timeTracking()
+{
+    return $this->hasMany(\App\Models\TimeTracking::class);
+}
 }

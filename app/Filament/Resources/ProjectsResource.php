@@ -315,7 +315,7 @@ class ProjectsResource extends Resource
     {
         return [
             RelationManagers\ReactionsRelationManager::class,
-            //RelationManagers\UploadsRelationManager::class,
+            RelationManagers\TimeTrackingRelationManager::class,
             RelationManagers\QuotesRelationManager::class,
         ];
     }
@@ -325,7 +325,7 @@ class ProjectsResource extends Resource
         return [
             "index" => Pages\ListProjects::route("/"),
             // "create" => Pages\CreateProjects::route("/create"),
-            //  'view' => Pages\ViewProjects::route('/{record}') ,
+             'view' => Pages\ViewProjects::route('/{record}') ,
             // "edit"   => Pages\EditProjects::route("/{record}/edit"),
         ];
     }
