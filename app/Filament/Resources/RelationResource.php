@@ -213,8 +213,7 @@ class RelationResource extends Resource
             RelationManagers\TasksRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
-
-            //    RelationManagers\LocationsRelationManager::class
+            RelationManagers\TimeTrackingRelationManager::class
         ];
     }
 
