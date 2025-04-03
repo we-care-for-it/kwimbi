@@ -9,6 +9,7 @@ use App\Models\timeTracking;
 use App\Models\User;
 use App\Models\workorderActivities;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,6 +37,13 @@ class TimeTrackingResource extends Resource
     {
         return $form
             ->schema([
+
+                Forms\Components\Section::make('')
+                ->schema([
+
+                    Grid::make(2)
+                        ->schema([
+
                 Forms\Components\DatePicker::make('started_at')
                     ->label('Datum')
                     ->closeOnDateSelection()
@@ -72,6 +80,7 @@ class TimeTrackingResource extends Resource
                 Forms\Components\Toggle::make('invoiceable')
                     ->label('Facturabel')
                     ->default(true),
+                            ])]),
 
             ]);
     }
@@ -224,6 +233,7 @@ class TimeTrackingResource extends Resource
     {
         return [
             'index' => Pages\ListTimeTrackings::route('/'),
+            'view'  => Pages\ViewTimeTracking::route('/{record}'), // Ensure this is defined
             //    'create' => Pages\CreateTimeTracking::route('/create'),
             //     'edit'   => Pages\EditTimeTracking::route('/{record}/edit'),
         ];

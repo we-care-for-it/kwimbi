@@ -182,7 +182,7 @@ class RelationResource extends Resource
                 EditAction::make()
                     ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()

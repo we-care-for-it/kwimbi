@@ -33,7 +33,7 @@ class ContactResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Section::make('Persoonsgegevens')
+                Forms\Components\Section::make('')
                     ->schema([
 
                         Grid::make(2)
@@ -77,7 +77,7 @@ class ContactResource extends Resource
 
                             ])]),
 
-                Forms\Components\Section::make('Adresgegevens')
+                Forms\Components\Section::make('')
 
                     ->schema([
 
@@ -103,7 +103,7 @@ class ContactResource extends Resource
                             ]),
                     ]),
 
-                Forms\Components\Section::make('Social Media')
+                Forms\Components\Section::make('')
                     ->schema([
                         Forms\Components\TextInput::make('linkedin')
                             ->label('LinkedIn')
@@ -202,7 +202,7 @@ class ContactResource extends Resource
                 EditAction::make()
                     ->modalHeading('Bewerken')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
