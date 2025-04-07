@@ -120,8 +120,9 @@ class TimeTrackingResource extends Resource
                     ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('time')
-                    ->label('Uren')
+                    ->label('Tijd')
                     ->sortable()
+                    ->date('H:i')
                     ->toggleable()
                     ->placeholder('-')
                     ->width(10),
