@@ -19,7 +19,7 @@ class IncidentResource extends Resource
 {
     protected static ?string $model = ObjectIncident::class;
 
-    protected static ?string $navigationIcon  = "heroicon-o-exclamation-circle";
+    protected static ?string $navigationIcon  = "heroicon-o-exclamation-triangle";
     protected static ?string $navigationLabel = "Storingen";
     protected static ?string $navigationGroup = 'Objecten';
     protected static ?int $navigationSort = 3;
@@ -42,8 +42,9 @@ class IncidentResource extends Resource
                 //
             ])
             ->actions([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Storing Bewerken')
+                    ->modalDescription('Pas de bestaande storing aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')

@@ -89,7 +89,13 @@ class LocationResource extends Resource
                     ->badge(),
             ])
             ->actions([
-                EditAction::make(),
+                EditAction::make()
+                    ->modalHeading('Locatie Bewerken')
+                    ->modalDescription('Pas de bestaande locatie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),                
                 DeleteAction::make(),
             ])
             ->bulkActions([

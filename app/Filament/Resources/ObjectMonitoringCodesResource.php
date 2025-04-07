@@ -82,7 +82,7 @@ class ObjectMonitoringCodesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Monitorings Codes Bewerken')
+                    ->modalHeading('Monitorings Code Bewerken')
                     ->modalDescription('Pas de bestaande monitorings code aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')

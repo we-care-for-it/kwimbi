@@ -18,7 +18,7 @@ class ErrorResource extends Resource
     protected static ?string $navigationLabel  = "Foutmeldingen";
     protected static ?string $title            = "Foutmeldingen";
     protected static ?string $pluralModelLabel = 'Foutmeldingen';
-    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon   = 'heroicon-o-exclamation-circle';
 
     public static function form(Form $form): Form
     {
@@ -64,9 +64,10 @@ class ErrorResource extends Resource
             ->actions([
 
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Foutmelding Bewerken')
+                    ->modalDescription('Pas de foutmelding leverancier aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()

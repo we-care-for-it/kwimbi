@@ -200,7 +200,8 @@ class ContactResource extends Resource
             ])
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Contact Bewerken')
+                    ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
