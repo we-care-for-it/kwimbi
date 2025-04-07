@@ -75,11 +75,11 @@ class SolutionResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Oplossing Bewerken')
+                    ->modalDescription('Pas de bestaande oplossing aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()

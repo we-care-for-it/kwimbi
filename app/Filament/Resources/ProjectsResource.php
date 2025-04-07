@@ -247,8 +247,9 @@ class ProjectsResource extends Resource
                     ->preload(),
             ])
             ->actions([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Project Bewerken')
+                    ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')

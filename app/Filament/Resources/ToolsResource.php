@@ -269,8 +269,9 @@ class ToolsResource extends Resource
 
             //  ])
             ->actions([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Gereedschap Bewerken')
+                    ->modalDescription('Pas het bestaande gereedschap aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
