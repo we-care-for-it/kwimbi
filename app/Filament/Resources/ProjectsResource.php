@@ -14,6 +14,9 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
@@ -29,21 +32,12 @@ class ProjectsResource extends Resource
     protected static ?string $model             = Project::class;
     protected static ?string $title             = "Projecten";
     protected static ?string $SearchResultTitle = "Projecten";
+    protected static ?string $navigationLabel   = "Projecten";
+    protected static ?string $navigationIcon    = "heroicon-o-archive-box";
+    protected static bool $isLazy               = false;
+    protected static ?int $navigationSort       = 90;
+    protected static ?string $pluralModelLabel  = 'Projecten';
 
-    protected static ?string $navigationLabel = "Projecten";
-    protected static ?string $navigationIcon  = "heroicon-o-archive-box";
-    protected static bool $isLazy             = false;
-    protected static ?int $navigationSort     = 90;
-
-    protected static ?string $pluralModelLabel = 'Projecten';
-
-    // public static function getGlobalSearchResultDetails(Model $record): array
-    // {
-    //     return [
-    //         'Author' => $record->name,
-    //         'Category' => $record->name,
-    //     ];
-    // }
     protected $listeners = ["refresh" => '$refresh'];
     private null $id;
 
@@ -56,7 +50,6 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
-
                 Section::make()
                     ->schema([
                         Grid::make([
@@ -72,7 +65,6 @@ class ProjectsResource extends Resource
                                 ->maxLength(255)
                                 ->required()
                                 ->columnSpan("full"),
-
                             TextInput::make("description")
                                 ->label("Opmerking")
                                 ->columnSpan("full"),
@@ -89,23 +81,18 @@ class ProjectsResource extends Resource
                             "lg"      => 2,
                             "xl"      => 2,
                             "2xl"     => 2,
-                        ])->schema(
-                            components: [
-                                TextInput::make("budget_costs")
-                                    ->label("Budget")
-                                    ->suffixIcon("heroicon-o-currency-euro")
-                                    ->columnSpan("full"),
-
-                                Select::make("status_id")
-                                    ->label("Status")
-                                    ->reactive()
-                                    ->options(
-                                        [
-                                            "1" => "Open",
-                                        ]
-                                    )->columnSpan("full")->default(1),
-                            ]
-                        ),
+                        ])->schema([
+                            TextInput::make("budget_costs")
+                                ->label("Budget")
+                                ->suffixIcon("heroicon-o-currency-euro")
+                                ->columnSpan("full"),
+                            Select::make("status_id")
+                                ->label("Status")
+                                ->reactive()
+                                ->options(["1" => "Open"])
+                                ->columnSpan("full")
+                                ->default(1),
+                        ]),
                     ])->columnSpan(1),
 
                 Section::make()
@@ -115,14 +102,11 @@ class ProjectsResource extends Resource
                             ->label("Relatie")
                             ->columnSpan("full")
                             ->options(Relation::all()->pluck("name", "id")),
-
                         Select::make("location_id")
                             ->searchable()
                             ->label("Locatie")
                             ->columnSpan("full")
-                            ->options(
-                                ObjectLocation::all()->pluck("address", "id")
-                            ),
+                            ->options(ObjectLocation::all()->pluck("address", "id")),
                     ])
                     ->columns(2)
                     ->columnSpan(1),
@@ -137,34 +121,30 @@ class ProjectsResource extends Resource
                             "xl"      => 2,
                             "2xl"     => 2,
                         ])->schema([
-                            DatePicker::make("requestdate")->label(
-                                "Aanvraagdatum"
-                            ),
-
+                            DatePicker::make("requestdate")->label("Aanvraagdatum"),
                             DatePicker::make("date_of_execution")
                                 ->label("Plandatum")
                                 ->placeholder('Onbekend'),
-
                             DatePicker::make("startdate")->label("Startdatum"),
                             DatePicker::make("enddate")->label("Einddatum"),
                         ]),
                     ]),
-            ])
-            // ->columns(5)
-        ;
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->groups([
-                Group::make("customer.name")->label("Relatie")
+                Group::make("customer.name")
+                    ->label("Relatie")
                     ->titlePrefixedWithLabel(false),
-                Group::make("status.name")->label("Status")
+                Group::make("status.name")
+                    ->label("Status")
                     ->titlePrefixedWithLabel(false)
                     ->getKeyFromRecordUsing(fn(Project $record): string => $record->status->name),
-
-            ])->defaultGroup("customer.name")
+            ])
+            ->defaultGroup("customer.name")
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
@@ -180,23 +160,21 @@ class ProjectsResource extends Resource
                     ->label("Omschrijving")
                     ->searchable()
                     ->wrap()
-
                     ->description(function (Project $record) {
                         if (! $record?->description) {
                             return false;
                         } else {
                             return $record->description;
                         }
-                    })->verticalAlignment(VerticalAlignment::Start),
+                    })
+                    ->verticalAlignment(VerticalAlignment::Start),
 
                 Tables\Columns\TextColumn::make("customer.name")
                     ->getStateUsing(function (Project $record): ?string {
                         return $record?->customer->name;
                     })
                     ->url(function (Project $record) {
-                        return "/app/customers/" .
-                        $record->customer_id .
-                            "/edit";
+                        return "/app/customers/" . $record->customer_id . "/edit";
                     })
                     ->searchable()
                     ->sortable()
@@ -206,23 +184,15 @@ class ProjectsResource extends Resource
                         if (! $record?->location_id) {
                             return "Geen locatie gekoppeld";
                         } else {
-                            return $record->location?->address .
-                            " - " .
-                            $record->location?->zipcode .
-                            "  " .
-                            $record->location?->place;
+                            return $record->location?->address . " - " . $record->location?->zipcode . "  " . $record->location?->place;
                         }
                     }),
 
                 Tables\Columns\TextColumn::make("startdate")
                     ->label("Looptijd")
                     ->getStateUsing(function (Project $record): ?string {
-                        $startdate = $record->startdate
-                        ? date("d-m-Y", strtotime($record?->startdate))
-                        : "nodate";
-                        $enddate = $record->enddate
-                        ? date("d-m-Y", strtotime($record?->enddate))
-                        : "nodate";
+                        $startdate = $record->startdate ? date("d-m-Y", strtotime($record?->startdate)) : "nodate";
+                        $enddate = $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
 
                         if ($record->enddate || $record->$startdate) {
                             return $startdate . " - " . $enddate;
@@ -237,22 +207,14 @@ class ProjectsResource extends Resource
                     ->label("Plandatum")
                     ->getStateUsing(function (Project $record): ?string {
                         if ($record->date_of_execution) {
-                            return date(
-                                "d-m-Y",
-                                strtotime($record?->date_of_execution)
-                            );
+                            return date("d-m-Y", strtotime($record?->date_of_execution));
                         } else {
                             return false;
                         }
                     })
                     ->placeholder('Onbekend')
                     ->searchable()
-                    ->color(
-                        fn($record) => strtotime($record?->date_of_execution) <
-                        time()
-                        ? "danger"
-                        : "success"
-                    ),
+                    ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? "danger" : "success"),
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
@@ -271,27 +233,23 @@ class ProjectsResource extends Resource
                     ->badge()
                     ->label("Reacties")
                     ->alignment('center'),
-
             ])
             ->filters([
                 SelectFilter::make("status_id")
                     ->label("Status")
-                    ->options(
-                        Statuses::where("model", "Project")->pluck("name", "id")
-                    )
+                    ->options(Statuses::where("model", "Project")->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
-
                 SelectFilter::make("customer_id")
                     ->label("Relatie")
                     ->options(Relation::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
-
             ])
             ->actions([
-                EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Project Bewerken')
+                    ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
@@ -311,6 +269,92 @@ class ProjectsResource extends Resource
             ->emptyState(view("partials.empty-state"));
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Tabs::make('Project Details')
+                    ->columnSpan('full')
+                    ->tabs([
+                        Tabs\Tab::make('Algemene Informatie')
+                            ->icon('heroicon-o-information-circle')
+                            ->schema([
+                                TextEntry::make('name')
+                                    ->label('Omschrijving')
+                                    ->placeholder('-'),
+                                TextEntry::make('description')
+                                    ->label('Opmerkingen')
+                                    ->placeholder('-')
+                                    ->columnSpanFull(),
+                                TextEntry::make('status.name')
+                                    ->label('Status')
+                                    ->badge()
+                                    ->placeholder('-'),
+                                TextEntry::make('budget_costs')
+                                    ->label('Budget')
+                                    ->money('EUR')
+                                    ->placeholder('-'),
+                            ])->columns(2),
+                            
+                        Tabs\Tab::make('Relatie & Locatie')
+                            ->icon('heroicon-o-map-pin')
+                            ->schema([
+                                TextEntry::make('customer.name')
+                                    ->label('Relatie')
+                                    ->placeholder('-'),
+                                TextEntry::make('location.address')
+                                    ->label('Adres')
+                                    ->placeholder('-'),
+                                TextEntry::make('location.zipcode')
+                                    ->label('Postcode')
+                                    ->placeholder('-'),
+                                TextEntry::make('location.place')
+                                    ->label('Plaats')
+                                    ->placeholder('-'),
+                            ])->columns(2),
+                            
+                        Tabs\Tab::make('Planning')
+                            ->icon('heroicon-o-calendar')
+                            ->schema([
+                                TextEntry::make('requestdate')
+                                    ->label('Aanvraagdatum')
+                                    ->date('d-m-Y')
+                                    ->placeholder('-'),
+                                TextEntry::make('date_of_execution')
+                                    ->label('Plandatum')
+                                    ->date('d-m-Y')
+                                    ->color(fn($state) => strtotime($state) < time() ? 'danger' : 'success')
+                                    ->placeholder('-'),
+                                TextEntry::make('startdate')
+                                    ->label('Startdatum')
+                                    ->date('d-m-Y')
+                                    ->placeholder('-'),
+                                TextEntry::make('enddate')
+                                    ->label('Einddatum')
+                                    ->date('d-m-Y')
+                                    ->placeholder('-'),
+                            ])->columns(2),
+                            
+                        Tabs\Tab::make('Statistieken')
+                            ->icon('heroicon-o-chart-bar')
+                            ->schema([
+                                TextEntry::make('quotes_count')
+                                    ->label('Aantal offertes')
+                                    ->badge()
+                                    ->placeholder('0'),
+                                TextEntry::make('reactions_count')
+                                    ->label('Aantal reacties')
+                                    ->badge()
+                                    ->placeholder('0'),
+                                TextEntry::make('timeTrackings_count')
+                                    ->label('Uren geregistreerd')
+                                    ->badge()
+                                    ->placeholder('0'),
+                            ])->columns(3),
+                    ]),
+            ]);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -324,9 +368,7 @@ class ProjectsResource extends Resource
     {
         return [
             "index" => Pages\ListProjects::route("/"),
-            // "create" => Pages\CreateProjects::route("/create"),
-             'view' => Pages\ViewProjects::route('/{record}') ,
-            // "edit"   => Pages\EditProjects::route("/{record}/edit"),
+            'view' => Pages\ViewProjects::route('/{record}'),
         ];
     }
 }

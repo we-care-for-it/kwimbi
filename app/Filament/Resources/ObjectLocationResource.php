@@ -471,12 +471,13 @@ class ObjectLocationResource extends Resource
             ->actions([
                 ViewAction::make()
                     ->tooltip('Bekijk locatie')
-                    ->label('Open locatie'),
+                    ->label(''),
 
                 EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Locatie Bewerken')
+                    ->modalDescription('Pas de bestaande locatie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
 

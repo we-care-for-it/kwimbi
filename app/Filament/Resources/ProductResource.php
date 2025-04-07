@@ -36,8 +36,13 @@ class ProductResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Product Bewerken')
+                    ->modalDescription('Pas de bestaande product aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

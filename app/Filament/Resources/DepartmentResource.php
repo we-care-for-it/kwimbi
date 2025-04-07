@@ -60,9 +60,10 @@ class DepartmentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Afdeling Bewerken')
+                    ->modalDescription('Pas de bestaande afdeling aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()

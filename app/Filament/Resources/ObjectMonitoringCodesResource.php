@@ -81,8 +81,13 @@ class ObjectMonitoringCodesResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij')->label(''),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Monitorings Code Bewerken')
+                    ->modalDescription('Pas de bestaande monitorings code aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),                Tables\Actions\DeleteAction::make()->modalHeading('Verwijderen van deze rij')->label(''),
                 Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])

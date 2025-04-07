@@ -180,9 +180,10 @@ class RelationResource extends Resource
             )
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Relatie Bewerken')
+                    ->modalDescription('Pas de Relatie leverancier aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()

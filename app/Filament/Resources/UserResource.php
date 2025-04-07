@@ -87,12 +87,12 @@ class UserResource extends Resource
             ])
             ->actions([
                 EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Gebruiker Bewerken')
+                    ->modalDescription('Pas de bestaande gebruiker aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
-
                 Impersonate::make()->label('Login'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

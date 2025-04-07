@@ -291,22 +291,22 @@ class TaskResource extends Resource
 
             ])
             ->actions([
-
                 EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    ->modalHeading('Taak Bewerken')
+                    ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
-                DeleteAction::make()
 
+                DeleteAction::make()
                     ->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
                     ->icon('heroicon-o-check')
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
-                    ->color('success')
+                    ->color('info')
                     ->tooltip('Voltooien')
-                    ->label('Voltooien'),
+                    ->label(''),
 
                 RestoreAction::make()
                     ->color("danger")

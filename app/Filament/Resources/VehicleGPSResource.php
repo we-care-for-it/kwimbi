@@ -94,7 +94,14 @@ class VehicleGPSResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Small),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Locatie Bewerken')
+                    ->modalDescription('Pas de bestaande locatie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver()
+                    ->modalWidth(MaxWidth::Small),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

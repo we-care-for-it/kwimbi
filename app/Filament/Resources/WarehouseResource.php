@@ -86,11 +86,11 @@ class WarehouseResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Bewerken')
+                    ->modalHeading('Magazijn Bewerken')
+                    ->modalDescription('Pas de bestaande magazijn aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('Bewerken')
+                    ->label('')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()

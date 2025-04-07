@@ -397,8 +397,9 @@ class VehicleResource extends Resource
                     ->modalDescription(
                         "Weet je zeker dat je dit item permanent wilt verwijderen?"
                     ),
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Snel bewerken')
+                    Tables\Actions\EditAction::make()
+                    ->modalHeading('Voertuig Bewerken')
+                    ->modalDescription('Pas de bestaande voertuig aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
