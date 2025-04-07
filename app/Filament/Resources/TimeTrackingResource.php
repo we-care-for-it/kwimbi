@@ -12,8 +12,9 @@ use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Forms\Get;
 use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -56,13 +57,21 @@ class TimeTrackingResource extends Resource
                                 Forms\Components\Select::make("relation_id")
                                     ->label("Relatie")
                                     ->searchable()
+                                    ->live()
                                     ->options(Relation::where('type_id', 5)->pluck("name", "id"))
                                     ->placeholder("Niet opgegeven"),
                                 Forms\Components\Select::make("project_id")
                                     ->label("Project")
                                     ->searchable()
                                     ->placeholder("Niet opgegeven")
-                                    ->options(Project::pluck("name", "id")),
+                                    ->options(function (Get $get) {
+                                        return Project::where('customer_id', $get('relation_id') ?? null)->pluck('name', 'id');
+                                    })
+                                    ->searchable()
+                                    ->disabled(function (Get $get) {
+                                        return Project::where('customer_id', $get('relation_id'))->count() <= 0;
+                                    })
+                                ,
                                 Forms\Components\Select::make('status_id')
                                     ->label('Status')
                                     ->options(TimeTrackingStatus::class)
@@ -80,7 +89,7 @@ class TimeTrackingResource extends Resource
                                 Forms\Components\Toggle::make('invoiceable')
                                     ->label('Facturabel')
                                     ->default(true),
-                            ])
+                            ]),
                     ]),
             ]);
     }
@@ -216,8 +225,8 @@ class TimeTrackingResource extends Resource
                                 Column::make("invoiceable")->heading("Facturable"),
                             ])
                             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
-                            ->withFilename(date("m-d-Y H:i") . " - Tijdregistratie export")
-                    ])
+                            ->withFilename(date("m-d-Y H:i") . " - Tijdregistratie export"),
+                    ]),
             ])
             ->emptyState(view("partials.empty-state"));
     }
@@ -243,7 +252,7 @@ class TimeTrackingResource extends Resource
                                     ->label('Omschrijving')
                                     ->placeholder('-'),
                             ])->columns(3),
-                            
+
                         Tabs\Tab::make('Relatie & Project')
                             ->icon('heroicon-o-link')
                             ->schema([
@@ -257,7 +266,7 @@ class TimeTrackingResource extends Resource
                                     ->label('Type werk')
                                     ->placeholder('-'),
                             ])->columns(3),
-                            
+
                         Tabs\Tab::make('Status & Facturatie')
                             ->icon('heroicon-o-document-text')
                             ->schema([
@@ -267,7 +276,7 @@ class TimeTrackingResource extends Resource
                                     ->placeholder('-'),
                                 TextEntry::make('invoiceable')
                                     ->label('Facturabel')
-                                    ->formatStateUsing(fn ($state) => $state ? 'Ja' : 'Nee')
+                                    ->formatStateUsing(fn($state) => $state ? 'Ja' : 'Nee')
                                     ->placeholder('-'),
                                 TextEntry::make('user.name')
                                     ->label('Medewerker')
