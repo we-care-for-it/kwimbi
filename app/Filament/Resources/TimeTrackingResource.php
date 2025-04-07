@@ -182,11 +182,14 @@ class TimeTrackingResource extends Resource
                     ]),
                 SelectFilter::make('user_id')
                     ->options(User::all()->pluck("name", "id"))
+                    ->multiple()
                     ->label('Medewerker'),
                 SelectFilter::make('relation_id')
+                    ->multiple()
                     ->label('Relatie')
                     ->options(Relation::where('type_id', 5)->pluck("name", "id")),
                 SelectFilter::make('project_id')
+                    ->multiple()
                     ->options(Project::all()->pluck("name", "id"))
                     ->label('Project'),
                 SelectFilter::make('status_id')
