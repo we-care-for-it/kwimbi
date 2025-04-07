@@ -79,7 +79,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function type()
     {
-        return $this->hasOne(ObjectType::class, 'id', 'object_type_id');
+        return $this->hasOne(ObjectType::class, 'id', 'type_id');
     }
 
     public function company(): BelongsTo
