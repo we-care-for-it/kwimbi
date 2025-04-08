@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Filament\Resources\WorkorderActivitieResource\Pages;
 
 use App\Filament\Resources\WorkorderActivitieResource;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListWorkorderActivities extends ListRecords
 {
@@ -12,8 +15,19 @@ class ListWorkorderActivities extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Toevoegen')
-                ->modalHeading('Uurtype aanmaken')->slideOver(),
+            Actions\CreateAction::make()
+                ->label('Uurtype toevoegen')
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Uurtype toevoegen')
+                ->modalDescription('Voeg een nieuw uurtype toe door de onderstaande gegevens in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-clock')
+                ->slideOver(),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Uurtypen - Overzicht";
     }
 }

@@ -4,7 +4,9 @@ namespace App\Filament\Resources\IncidentResource\Pages;
 
 use App\Filament\Resources\IncidentResource;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListIncidents extends ListRecords
 {
@@ -13,7 +15,19 @@ class ListIncidents extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Storing toevoegen')
+                ->modalDescription('Voeg een nieuwe storing toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver()
+                ->label('Storing toevoegen'),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Storingen - Overzicht";
     }
 }

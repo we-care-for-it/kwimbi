@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\LocationResource\Pages;
 
 use App\Filament\Resources\LocationResource;
-use Filament\Actions\CreateAction;
+use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListLocations extends ListRecords
 {
@@ -13,7 +15,19 @@ class ListLocations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Locatie toevoegen')
+                ->modalDescription('Voeg een nieuwe locatie toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver()
+                ->label('Locatie toevoegen'),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Locaties - Overzicht";
     }
 }

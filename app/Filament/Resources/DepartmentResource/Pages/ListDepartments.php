@@ -16,13 +16,16 @@ class ListDepartments extends ListRecords
             Actions\CreateAction::make()
                 ->label('Afdeling toevoegen')
                 ->slideOver()
+                ->modalDescription('Voeg een nieuwe afdeling toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Afdeling toevoegen')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
-                ->icon('heroicon-m-plus')
-                ->slideOver()
-                ->label('Afdeling toevoegen'),
+                ->icon('heroicon-m-plus'),
         ];
+    }
+    public function getHeading(): string
+    {
+        return "Afdeling - Overzicht";
     }
 }
