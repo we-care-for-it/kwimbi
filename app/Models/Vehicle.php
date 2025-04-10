@@ -33,7 +33,7 @@ class Vehicle extends Model implements Auditable, HasMedia
 
     public function GPSObject()
     {
-        return $this->hasOne(gpsObject::class, 'vehicle_id', 'id');
+        return $this->belongsTo(gpsObject::class, 'id', 'vehicle_id');
     }
     public function GPSObjectsForThisTenant()
     {
