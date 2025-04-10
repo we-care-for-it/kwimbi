@@ -23,6 +23,7 @@ use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 
 class VehicleResource extends Resource
@@ -397,11 +398,11 @@ class VehicleResource extends Resource
                     ->modalDescription(
                         "Weet je zeker dat je dit item permanent wilt verwijderen?"
                     ),
-                    Tables\Actions\EditAction::make()
+                Tables\Actions\EditAction::make()
                     ->modalHeading('Voertuig Bewerken')
                     ->modalDescription('Pas de bestaande voertuig aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()

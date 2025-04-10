@@ -150,7 +150,7 @@ class GpsDataRelationManager extends RelationManager
                     ->ModalHeading('Bekijk locatie')
                     ->modalContent(fn($record) => view('filament.infolists.entries.gpsframeModal', ['record' => $record]))
                     ->tooltip('Navigeer in google maps naar dit adres'),
-            ]);
-
+            ])
+            ->emptyState(view('partials.empty-state'));
     }
 }
