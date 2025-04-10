@@ -4,7 +4,9 @@ namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListProducts extends ListRecords
 {
@@ -13,7 +15,19 @@ class ListProducts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Product toevoegen')
+                ->modalDescription('Voeg een nieuw product toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver()
+                ->label('Product toevoegen'),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Producten - Overzicht";
     }
 }

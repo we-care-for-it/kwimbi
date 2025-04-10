@@ -172,7 +172,7 @@
             <img  src = "/images/icons/pack/webcam.svg"   class = "max-h-12">
             <div>
                <h2>Oplossingen</h2>
-               <p class="text-sm text-gray-600">Standaard opl;ossingen </p>
+               <p class="text-sm text-gray-600">Standaard oplossingen </p>
             </div>
          </a>
          @endcan
