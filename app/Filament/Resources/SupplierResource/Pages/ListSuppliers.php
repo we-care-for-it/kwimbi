@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\SupplierResource\Pages;
 
 use App\Filament\Resources\SupplierResource;
-use Filament\Actions\CreateAction;
+use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListSuppliers extends ListRecords
 {
@@ -13,7 +15,19 @@ class ListSuppliers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make()
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Leverancier toevoegen')
+                ->modalDescription('Voeg een nieuwe leverancier toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver()
+                ->label('Leverancier toevoegen'),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Leveranciers - Overzicht";
     }
 }

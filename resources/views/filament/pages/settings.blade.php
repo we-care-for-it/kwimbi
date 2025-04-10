@@ -79,11 +79,11 @@
       <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Assets</h1>
       <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
          @can('view_any_vehicle')
-         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="article-category">
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="vehicles">
             <img  src = "/images/icons/pack/candle_sticks.svg"   class = "max-h-12">
             <div>
                <h2>Auto beheer</h2>
-               <p class="text-sm text-gray-600">Categorieen voor artikelen</p>
+               <p class="text-sm text-gray-600">Voertuigenbeheer</p>
             </div>
          </a>
          @endcan
@@ -172,7 +172,7 @@
             <img  src = "/images/icons/pack/webcam.svg"   class = "max-h-12">
             <div>
                <h2>Oplossingen</h2>
-               <p class="text-sm text-gray-600">Standaard opl;ossingen </p>
+               <p class="text-sm text-gray-600">Standaard oplossingen </p>
             </div>
          </a>
          @endcan

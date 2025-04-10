@@ -75,10 +75,10 @@ class VehicleGPSResource extends Resource
                         : "success"
                     ),
 
-                TextColumn::make('vehicle.kenteken')
+                TextColumn::make('vehicle')
                     ->getStateUsing(function ($record): ?string {
                         if ($record->vehicle?->kenteken) {
-                            return strtoupper($record?->vehicle->kenteken) . "-" . $record?->vehicle->merk;
+                            return strtoupper($record?->vehicle->kenteken) . " - " . $record?->vehicle->merk;
 
                         } else {
                             return false;
@@ -95,10 +95,8 @@ class VehicleGPSResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Locatie Bewerken')
-                    ->modalDescription('Pas de bestaande locatie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver()
                     ->modalWidth(MaxWidth::Small),
@@ -109,6 +107,9 @@ class VehicleGPSResource extends Resource
                     ->modalHeading('Verwijderen')
                     ->color('danger'),
 
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -116,7 +117,8 @@ class VehicleGPSResource extends Resource
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyState(view('partials.empty-state'));
     }
 
     public static function getRelations(): array

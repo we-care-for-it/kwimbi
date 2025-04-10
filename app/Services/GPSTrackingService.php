@@ -42,19 +42,14 @@ final class GPSTrackingService
         ]);
 
         foreach ($request->json() as $data) {
-
-            //Search
-
             gpsObject::updateOrCreate([
                 'imei' => $data['imei'],
             ], [
                 'active'           => $data['active'],
-
                 'object_expire'    => $data['object_expire'],
                 'model'            => 'vehicle',
                 'object_expire_dt' => $data['object_expire_dt'],
                 'name'             => $data['name'] ?? '',
-
             ]);
 
         }
@@ -100,13 +95,13 @@ final class GPSTrackingService
                     'params_batl'             => $data['params']['batl'] ?? '',
                     'loc_valid'               => $data['loc_valid'] ?? '',
                     'imei'                    => $imei ?? '',
-                    'streetNameAndNumber'     => $data?->streetNameAndNumber ?? null,
-                    'countryCode'             => $data?->countryCode ?? null,
-                    'municipalitySubdivision' => $data?->municipality ?? null,
-                    'countryCodeISO3'         => $data?->countryCodeISO3 ?? null,
-                    'countrySubdivisionName'  => $data?->countrySubdivisionName ?? null,
-                    'countrySubdivisionCode'  => $data?->countrySubdivisionCode ?? null,
-                    'zipcode'                 => $data?->extendedPostalCode ?? null,
+                    'streetNameAndNumber'     => $address_data?->streetNameAndNumber ?? null,
+                    'countryCode'             => $address_data?->countryCode ?? null,
+                    'municipalitySubdivision' => $address_data?->municipality ?? null,
+                    'countryCodeISO3'         => $address_data?->countryCodeISO3 ?? null,
+                    'countrySubdivisionName'  => $address_data?->countrySubdivisionName ?? null,
+                    'countrySubdivisionCode'  => $address_data?->countrySubdivisionCode ?? null,
+                    'zipcode'                 => $address_data?->extendedPostalCode ?? null,
                 ]);
 
         }

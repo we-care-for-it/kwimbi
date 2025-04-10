@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Filament\Resources\ObjectMonitoringCodesResource\Pages;
 
 use App\Filament\Resources\ObjectMonitoringCodesResource;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Enums\MaxWidth;
 
 class ListObjectMonitoringCodes extends ListRecords
 {
@@ -18,7 +21,19 @@ class ListObjectMonitoringCodes extends ListRecords
                 ->link()
                 ->color('primary'),
 
-            Actions\CreateAction::make()->label('Toevoegen'),
+            Actions\CreateAction::make()
+                ->label('Monitoringcode toevoegen')
+                ->modalWidth(MaxWidth::FourExtraLarge)
+                ->modalHeading('Monitoringcode toevoegen')
+                ->modalDescription('Voeg een nieuwe monitoringcode toe door de onderstaande gegevens in te vullen.')
+                ->icon('heroicon-m-plus')
+                ->modalIcon('heroicon-o-plus')
+                ->slideOver(),
         ];
+    }
+
+    public function getHeading(): string
+    {
+        return "Monitoringcodes - Overzicht";
     }
 }
