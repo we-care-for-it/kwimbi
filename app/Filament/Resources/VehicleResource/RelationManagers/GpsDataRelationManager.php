@@ -151,6 +151,12 @@ class GpsDataRelationManager extends RelationManager
                     ->modalContent(fn($record) => view('filament.infolists.entries.gpsframeModal', ['record' => $record]))
                     ->tooltip('Navigeer in google maps naar dit adres'),
             ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ])
+
             ->emptyState(view('partials.empty-state'));
     }
 }

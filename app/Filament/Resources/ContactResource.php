@@ -125,11 +125,11 @@ class ContactResource extends Resource
     {
         return $infolist
             ->schema([
-                Tabs::make('Contact Informatie') // Hoofd-tab component
+                Tabs::make('Contact Details') // Hoofd-tab component
                     ->columnSpan('full')
                     ->tabs([
-                        Tabs\Tab::make('Persoonsgegevens')
-                            ->icon('heroicon-o-user')
+                        Tabs\Tab::make('Algemene Informatie')
+                            ->icon('heroicon-o-information-circle')
                             ->schema([
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
                                 TextEntry::make('department')->label('Afdeling')->placeholder('-'),

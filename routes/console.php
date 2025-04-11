@@ -1,16 +1,17 @@
 <?php
-use App\Services\GPSTrackingService;
-//Inspections - Check
-Schedule::command('app:import-chex')
-    ->appendOutputTo('checx.log')
-    ->everyMinute()
-    ->between('8:00', '20:00');
 
+if (env('CHEX_TOKEN')) {
+//Inspections - Check
+    Schedule::command('app:import-chex')
+        ->appendOutputTo('checx.log')
+        ->everyMinute()
+        ->between('10:00', '20:00');
+}
 //Monitoring - Modusystem
 if (config("services.modusystem.username")) {
     Schedule::command('app:m-q-t-t-modusystem')
         ->between('12:00', '23:59')
-        ->everySecond();
+        ->everyFiveMinutes();
 }
 
 //GPS - LoveTracking

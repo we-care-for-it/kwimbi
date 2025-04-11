@@ -168,19 +168,83 @@ class TimeTrackingResource extends Resource
                     ->width(100),
             ])
             ->filters([
-                SelectFilter::make('periode_id')
-                    ->label('Periode')
-                    ->options([
-                        '1' => 'Deze week',
-                        '2' => 'Deze maand',
-                        '3' => 'Dit kwartaal',
-                        '4' => 'Dit jaar',
-                        '5' => 'Gisteren',
-                        '6' => 'Vorige week',
-                        '7' => 'Vorige maand',
-                        '8' => 'Vorig kwartaal',
-                        '9' => 'Vorig jaar',
-                    ]),
+SelectFilter::make('periode_id')
+    ->label('Periode')
+    ->options([
+        '1' => 'Deze week',
+        '2' => 'Deze maand',
+        '3' => 'Dit kwartaal',
+        '4' => 'Dit jaar',
+        '5' => 'Gisteren',
+        '6' => 'Vorige week',
+        '7' => 'Vorige maand',
+        '8' => 'Vorig kwartaal',
+        '9' => 'Vorig jaar',
+    ])
+    ->multiple()
+    ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
+        $periodes = $data['values'] ?? [];
+
+        if (empty($periodes)) {
+            return;
+        }
+
+        $query->where(function ($query) use ($periodes) {
+            foreach ($periodes as $periode) {
+                $query->orWhere(function ($query) use ($periode) {
+                    switch ($periode) {
+                        case '1': // Deze week
+                            $query->whereBetween('started_at', [
+                                now()->startOfWeek(),
+                                now()->endOfWeek(),
+                            ]);
+                            break;
+                        case '2': // Deze maand
+                            $query->whereBetween('started_at', [
+                                now()->startOfMonth(),
+                                now()->endOfMonth(),
+                            ]);
+                            break;
+                        case '3': // Dit kwartaal
+                            $query->whereBetween('started_at', [
+                                now()->startOfQuarter(),
+                                now()->endOfQuarter(),
+                            ]);
+                            break;
+                        case '4': // Dit jaar
+                            $query->whereYear('started_at', now()->year);
+                            break;
+                        case '5': // Gisteren
+                            $query->whereDate('started_at', now()->subDay()->toDateString());
+                            break;
+                        case '6': // Vorige week
+                            $query->whereBetween('started_at', [
+                                now()->subWeek()->startOfWeek(),
+                                now()->subWeek()->endOfWeek(),
+                            ]);
+                            break;
+                        case '7': // Vorige maand
+                            $query->whereBetween('started_at', [
+                                now()->subMonth()->startOfMonth(),
+                                now()->subMonth()->endOfMonth(),
+                            ]);
+                            break;
+                        case '8': // Vorig kwartaal
+                            $query->whereBetween('started_at', [
+                                now()->subQuarter()->startOfQuarter(),
+                                now()->subQuarter()->endOfQuarter(),
+                            ]);
+                            break;
+                        case '9': // Vorig jaar
+                            $query->whereYear('started_at', now()->subYear()->year);
+                            break;
+                    }
+                });
+            }
+        });
+    }),
+
+            
                 SelectFilter::make('user_id')
                     ->options(User::all()->pluck("name", "id"))
                     ->multiple()
@@ -255,7 +319,7 @@ class TimeTrackingResource extends Resource
                                 TextEntry::make('description')
                                     ->label('Omschrijving')
                                     ->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
 
                         Tabs\Tab::make('Relatie & Project')
                             ->icon('heroicon-o-link')
@@ -269,7 +333,7 @@ class TimeTrackingResource extends Resource
                                 TextEntry::make('workType.name')
                                     ->label('Type werk')
                                     ->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
 
                         Tabs\Tab::make('Status & Facturatie')
                             ->icon('heroicon-o-document-text')
@@ -285,7 +349,7 @@ class TimeTrackingResource extends Resource
                                 TextEntry::make('user.name')
                                     ->label('Medewerker')
                                     ->placeholder('-'),
-                            ])->columns(3),
+                            ])->columns(4),
                     ]),
             ]);
     }

@@ -2,14 +2,12 @@
 namespace App\Console\Commands;
 
 use App\Models\Elevator;
+use App\Models\external;
 use App\Models\ExternalApiLog;
-use App\Models\externalConnection;
-use App\Models\ObjectInspection;
-use App\Models\ObjectInspectionData;
+use DB;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use DB;
 
 class ImportChex extends Command
 {
@@ -19,7 +17,7 @@ class ImportChex extends Command
     public function handle()
     {
 
-        $importsdata = DB::table('external')->where('is_active', 1)->get();
+        $importsdata = external::where('is_active', 1)->get();
 
         foreach ($importsdata as $data) {
 
@@ -75,19 +73,15 @@ class ImportChex extends Command
                         ]
                     );
 
+                    $inspection_data_from_db = DB::table('object_inspections')
+                        ->where('status_id', $status_id)
+                        ->where('nobo_number', $item->objectId)
+                        ->where('elevator_id', $elevator_information?->id)
+                        ->where('schedule_run_token', $schedule_run_token)
 
-                    $inspection_data_from_db =     DB::table('object_inspections')
-                    ->where('status_id',$status_id)
-                    ->where('nobo_number',$item->objectId)
-                    ->where('elevator_id',$elevator_information?->id)
-                    ->where('schedule_run_token',$schedule_run_token)
-                   
+                        ->first();
 
-    ->first();
-
-
-                    //get last info 
-                    
+                    //get last info
 
                     $url = config("services.chex.url") . "/inspections/" . $item->inspectionId;
 
