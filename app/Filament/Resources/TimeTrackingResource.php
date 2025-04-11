@@ -6,7 +6,6 @@ use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\timeTracking;
-use App\Models\User;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -20,10 +19,11 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -94,6 +94,12 @@ class TimeTrackingResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', Auth::id());
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -143,14 +149,22 @@ class TimeTrackingResource extends Resource
                     ->toggleable()
                     ->sortable()
                     ->placeholder('-')
-                    ->searchable(),
+                    ->searchable()
+                    ->url(function ($record) {
+                        return "relations/" . $record->relation_id;
+                    })
+                    ->color('warning'),
                 TextColumn::make('project.name')
                     ->sortable()
                     ->label('Project')
                     ->toggleable()
                     ->sortable()
                     ->placeholder('-')
-                    ->searchable(),
+                    ->searchable()
+                    ->url(function ($record) {
+                        return "projects/" . $record->project_id;
+                    })
+                    ->color('warning'),
                 TextColumn::make('status_id')
                     ->sortable()
                     ->label('Status')
@@ -168,87 +182,87 @@ class TimeTrackingResource extends Resource
                     ->width(100),
             ])
             ->filters([
-SelectFilter::make('periode_id')
-    ->label('Periode')
-    ->options([
-        '1' => 'Deze week',
-        '2' => 'Deze maand',
-        '3' => 'Dit kwartaal',
-        '4' => 'Dit jaar',
-        '5' => 'Gisteren',
-        '6' => 'Vorige week',
-        '7' => 'Vorige maand',
-        '8' => 'Vorig kwartaal',
-        '9' => 'Vorig jaar',
-    ])
-    ->multiple()
-    ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
-        $periodes = $data['values'] ?? [];
-
-        if (empty($periodes)) {
-            return;
-        }
-
-        $query->where(function ($query) use ($periodes) {
-            foreach ($periodes as $periode) {
-                $query->orWhere(function ($query) use ($periode) {
-                    switch ($periode) {
-                        case '1': // Deze week
-                            $query->whereBetween('started_at', [
-                                now()->startOfWeek(),
-                                now()->endOfWeek(),
-                            ]);
-                            break;
-                        case '2': // Deze maand
-                            $query->whereBetween('started_at', [
-                                now()->startOfMonth(),
-                                now()->endOfMonth(),
-                            ]);
-                            break;
-                        case '3': // Dit kwartaal
-                            $query->whereBetween('started_at', [
-                                now()->startOfQuarter(),
-                                now()->endOfQuarter(),
-                            ]);
-                            break;
-                        case '4': // Dit jaar
-                            $query->whereYear('started_at', now()->year);
-                            break;
-                        case '5': // Gisteren
-                            $query->whereDate('started_at', now()->subDay()->toDateString());
-                            break;
-                        case '6': // Vorige week
-                            $query->whereBetween('started_at', [
-                                now()->subWeek()->startOfWeek(),
-                                now()->subWeek()->endOfWeek(),
-                            ]);
-                            break;
-                        case '7': // Vorige maand
-                            $query->whereBetween('started_at', [
-                                now()->subMonth()->startOfMonth(),
-                                now()->subMonth()->endOfMonth(),
-                            ]);
-                            break;
-                        case '8': // Vorig kwartaal
-                            $query->whereBetween('started_at', [
-                                now()->subQuarter()->startOfQuarter(),
-                                now()->subQuarter()->endOfQuarter(),
-                            ]);
-                            break;
-                        case '9': // Vorig jaar
-                            $query->whereYear('started_at', now()->subYear()->year);
-                            break;
-                    }
-                });
-            }
-        });
-    }),
-
-            
-                SelectFilter::make('user_id')
-                    ->options(User::all()->pluck("name", "id"))
+                SelectFilter::make('periode_id')
+                    ->label('Periode')
+                    ->options([
+                        '1' => 'Deze week',
+                        '2' => 'Deze maand',
+                        '3' => 'Dit kwartaal',
+                        '4' => 'Dit jaar',
+                        '5' => 'Gisteren',
+                        '6' => 'Vorige week',
+                        '7' => 'Vorige maand',
+                        '8' => 'Vorig kwartaal',
+                        '9' => 'Vorig jaar',
+                    ])
+                    ->default([1])
                     ->multiple()
-                    ->label('Medewerker'),
+                    ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
+                        $periodes = $data['values'] ?? [];
+
+                        if (empty($periodes)) {
+                            return;
+                        }
+
+                        $query->where(function ($query) use ($periodes) {
+                            foreach ($periodes as $periode) {
+                                $query->orWhere(function ($query) use ($periode) {
+                                    switch ($periode) {
+                                        case '1': // Deze week
+                                            $query->whereBetween('started_at', [
+                                                now()->startOfWeek(),
+                                                now()->endOfWeek(),
+                                            ]);
+                                            break;
+                                        case '2': // Deze maand
+                                            $query->whereBetween('started_at', [
+                                                now()->startOfMonth(),
+                                                now()->endOfMonth(),
+                                            ]);
+                                            break;
+                                        case '3': // Dit kwartaal
+                                            $query->whereBetween('started_at', [
+                                                now()->startOfQuarter(),
+                                                now()->endOfQuarter(),
+                                            ]);
+                                            break;
+                                        case '4': // Dit jaar
+                                            $query->whereYear('started_at', now()->year);
+                                            break;
+                                        case '5': // Gisteren
+                                            $query->whereDate('started_at', now()->subDay()->toDateString());
+                                            break;
+                                        case '6': // Vorige week
+                                            $query->whereBetween('started_at', [
+                                                now()->subWeek()->startOfWeek(),
+                                                now()->subWeek()->endOfWeek(),
+                                            ]);
+                                            break;
+                                        case '7': // Vorige maand
+                                            $query->whereBetween('started_at', [
+                                                now()->subMonth()->startOfMonth(),
+                                                now()->subMonth()->endOfMonth(),
+                                            ]);
+                                            break;
+                                        case '8': // Vorig kwartaal
+                                            $query->whereBetween('started_at', [
+                                                now()->subQuarter()->startOfQuarter(),
+                                                now()->subQuarter()->endOfQuarter(),
+                                            ]);
+                                            break;
+                                        case '9': // Vorig jaar
+                                            $query->whereYear('started_at', now()->subYear()->year);
+                                            break;
+                                    }
+                                });
+                            }
+                        });
+                    }),
+
+                // SelectFilter::make('user_id')
+                //     ->options(User::all()->pluck("name", "id"))
+                //     ->multiple()
+                //     ->label('Medewerker'),
                 SelectFilter::make('relation_id')
                     ->multiple()
                     ->label('Relatie')
@@ -260,13 +274,14 @@ SelectFilter::make('periode_id')
                 SelectFilter::make('status_id')
                     ->options(TimeTrackingStatus::class)
                     ->label('Status'),
-            ], layout: FiltersLayout::AboveContent)
+            ])->filtersFormColumns(2)
+
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Tijdregistratie Bewerken')
                     ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()
@@ -281,11 +296,12 @@ SelectFilter::make('periode_id')
                     ->exports([
                         ExcelExport::make()
                             ->fromTable()
-                            ->askForFilename()
                             ->withColumns([
-                                Column::make("started_at")->heading("Datum"),
+                                Column::make("started_at")->heading("Datum")
+                                    ->formatStateUsing(fn($state) => date("d-m-Y", strtotime($state))),
                                 Column::make("weekno")->heading("Weeknummer"),
-                                Column::make("time")->heading("Tijd"),
+                                Column::make("time")->heading("Tijd")
+                                    ->formatStateUsing(fn($state) => date("H:i", strtotime($state))),
                                 Column::make("description")->heading("Omschrijving"),
                                 Column::make("relation.name")->heading("Relatie"),
                                 Column::make("project.name")->heading("Project"),
@@ -358,7 +374,7 @@ SelectFilter::make('periode_id')
     {
         return [
             'index' => Pages\ListTimeTrackings::route('/'),
-            'view'  => Pages\ViewTimeTracking::route('/{record}'),
+            //   'view'  => Pages\ViewTimeTracking::route('/{record}'),
         ];
     }
 }
