@@ -23,12 +23,12 @@ class Vehicle extends Model implements Auditable, HasMedia
 
     public function GpsData()
     {
-        return $this->hasMany(gpsObjectData::class)->where('params_acc', 0)->orderby('created_at', 'desc');
+        return $this->hasMany(gpsObjectData::class)->where('speed', 0)->orderby('created_at', 'desc');
     }
 
     public function GpsDataLatestLocation()
     {
-        return $this->hasOne(gpsObjectData::class)->where('params_acc', 0)->latest();
+        return $this->hasOne(gpsObjectData::class)->where('speed', 0)->latest();
     }
 
     public function GPSObject()
