@@ -17,6 +17,9 @@ use Filament\Forms\Components\TextArea;
 class TimeTrackingRelationManager extends RelationManager
 {
     protected static string $relationship = 'timeTracking';
+    protected static ?string $label = 'Tijdregistratie';
+    protected static ?string $title = 'Tijdregistratie';
+    protected static ?string $icon = 'heroicon-o-clock';
 
     public function form(Form $form): Form
     {

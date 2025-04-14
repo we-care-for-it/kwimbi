@@ -102,8 +102,8 @@ class RelationResource extends Resource
             Tabs::make('Contact Informatie') // Hoofd-tab component
                 ->columnSpan('full')
                 ->tabs([
-                    Tabs\Tab::make('Relatiegegevens')
-                        ->icon('heroicon-s-building-library')
+                    Tabs\Tab::make('Algemene Informatie')
+                        ->icon('heroicon-o-information-circle')
                         ->schema([
                             Components\TextEntry::make('name')
                                 ->label("Bedrijfsnaam")
