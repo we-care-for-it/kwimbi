@@ -19,6 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -265,7 +266,8 @@ class TimeTrackingResource extends Resource
                                 });
                             }
                         });
-                    }),
+                    })
+                ,
 
                 // SelectFilter::make('user_id')
                 //     ->options(User::all()->pluck("name", "id"))
@@ -282,7 +284,8 @@ class TimeTrackingResource extends Resource
                 SelectFilter::make('status_id')
                     ->options(TimeTrackingStatus::class)
                     ->label('Status'),
-            ])->filtersFormColumns(2)
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(4)
 
             ->actions([
                 Tables\Actions\EditAction::make()
