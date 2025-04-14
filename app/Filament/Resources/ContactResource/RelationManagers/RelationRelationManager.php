@@ -3,7 +3,6 @@ namespace App\Filament\Resources\ContactResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\ContactObject;
-use Filament\Facades\Filament;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -66,7 +65,7 @@ class RelationRelationManager extends RelationManager
             ])
             ->emptyState(view('partials.empty-state-small'))
             ->recordUrl(function (object $record) {
-                return "/" . Filament::getTenant()->id . "/relations/" . $record->model_id;
+                return "/relations/" . $record->id;
             })
 
             ->actions([
@@ -74,7 +73,7 @@ class RelationRelationManager extends RelationManager
                 Action::make('openRelation')
                     ->label('Open relatie')
                     ->url(function ($record) {
-                        return "/" . Filament::getTenant()->id . "/relations/" . $record->model_id;
+                        return "/relations/" . $record->model_id;
                     })->icon('heroicon-s-credit-card')
                     ->color('warning'),
 

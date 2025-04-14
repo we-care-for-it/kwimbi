@@ -1,11 +1,8 @@
 <?php
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Filament\Resources\ProjectsResource\Pages;
-use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\ObjectLocation;
 use App\Models\Project;
-use App\Models\Relation;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -14,40 +11,24 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Tabs;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-class ProjectsResource extends Resource
+class ProjectsRelationManager extends RelationManager
 {
-    protected static ?string $model             = Project::class;
-    protected static ?string $title             = "Projecten";
-    protected static ?string $SearchResultTitle = "Projecten";
-    protected static ?string $navigationLabel   = "Projecten";
-    protected static ?string $navigationIcon    = "heroicon-o-archive-box";
-    protected static bool $isLazy               = false;
-    protected static ?int $navigationSort       = 90;
-    protected static ?string $pluralModelLabel  = 'Projecten';
+    protected static ?string $icon        = "heroicon-o-archive-box";
+    protected static string $relationship = 'Projects';
+    protected static ?string $title       = 'Projecten';
 
-    protected $listeners = ["refresh" => '$refresh'];
-    private null $id;
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
+
             ->schema([
                 Section::make()
                     ->schema([
@@ -96,16 +77,11 @@ class ProjectsResource extends Resource
 
                 Section::make()
                     ->schema([
-                        Select::make("customer_id")
-                            ->searchable()
-                            ->label("Relatie")
-                            ->columnSpan("full")
-                            ->options(Relation::all()->pluck("name", "id")),
                         Select::make("location_id")
                             ->searchable()
                             ->label("Locatie")
                             ->columnSpan("full")
-                            ->options(ObjectLocation::all()->pluck("address", "id")),
+                            ->options(ObjectLocation::where('customer_id', $this->getOwnerRecord()->id)->pluck("address", "id")),
                     ])
                     ->columns(2)
                     ->columnSpan(1),
@@ -131,19 +107,10 @@ class ProjectsResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
-            ->groups([
-                Group::make("customer.name")
-                    ->label("Relatie")
-                    ->titlePrefixedWithLabel(false),
-                Group::make("status.name")
-                    ->label("Status")
-                    ->titlePrefixedWithLabel(false)
-                    ->getKeyFromRecordUsing(fn(Project $record): string => $record->status->name),
-            ])
-            ->defaultGroup("customer.name")
+
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
@@ -169,18 +136,11 @@ class ProjectsResource extends Resource
                     ->verticalAlignment(VerticalAlignment::Start),
 
                 Tables\Columns\TextColumn::make("customer.name")
-                    ->getStateUsing(function (Project $record): ?string {
-                        return $record?->customer->name;
-                    })
-                    ->url(function (Project $record) {
-                        return "/relations/" . $record->customer_id;
-                    })
-                    ->color('primary')
                     ->searchable()
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
                     ->label("Adres")
-                    ->description(function (Project $record) {
+                    ->getStateUsing(function (Project $record) {
                         if (! $record?->location_id) {
                             return "Geen locatie gekoppeld";
                         } else {
@@ -218,6 +178,7 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
+                    ->placeholder('Onbekend')
                     ->sortable()
                     ->badge(),
 
@@ -240,11 +201,7 @@ class ProjectsResource extends Resource
                     ->options(Statuses::where("model", "Project")->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
-                SelectFilter::make("customer_id")
-                    ->label("Relatie")
-                    ->options(Relation::get()->pluck("name", "id"))
-                    ->searchable()
-                    ->preload(),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -254,12 +211,20 @@ class ProjectsResource extends Resource
                     ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
+                Action::make('openRelation')
+                    ->label('Open project')
+                    ->url(function ($record) {
+                        return "/projects/" . $record->id;
+                    })->icon('heroicon-s-credit-card')
+                    ->color('warning'),
+
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()->label('Project toevoegen')
+                    ->modalHeading('Project toevoegen')
+                    ->slideOver(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -267,108 +232,6 @@ class ProjectsResource extends Resource
                 ]),
             ])
             ->emptyState(view("partials.empty-state"));
-    }
 
-    public static function infolist(Infolist $infolist): Infolist
-    {
-        return $infolist
-            ->schema([
-                Tabs::make('Project Details')
-                    ->columnSpan('full')
-                    ->tabs([
-                        Tabs\Tab::make('Algemene Informatie')
-                            ->icon('heroicon-o-information-circle')
-                            ->schema([
-                                TextEntry::make('name')
-                                    ->label('Omschrijving')
-                                    ->placeholder('-'),
-                                TextEntry::make('description')
-                                    ->label('Opmerkingen')
-                                    ->placeholder('-')
-                                    ->columnSpanFull(),
-                                TextEntry::make('status.name')
-                                    ->label('Status')
-                                    ->badge()
-                                    ->placeholder('-'),
-                                TextEntry::make('budget_costs')
-                                    ->label('Budget')
-                                    ->money('EUR')
-                                    ->placeholder('-'),
-                            ])->columns(2),
-
-                        Tabs\Tab::make('Relatie & Locatie')
-                            ->icon('heroicon-o-map-pin')
-                            ->schema([
-                                TextEntry::make('customer.name')
-                                    ->label('Relatie')
-                                    ->placeholder('-'),
-                                TextEntry::make('location.address')
-                                    ->label('Adres')
-                                    ->placeholder('-'),
-                                TextEntry::make('location.zipcode')
-                                    ->label('Postcode')
-                                    ->placeholder('-'),
-                                TextEntry::make('location.place')
-                                    ->label('Plaats')
-                                    ->placeholder('-'),
-                            ])->columns(2),
-
-                        Tabs\Tab::make('Planning')
-                            ->icon('heroicon-o-calendar')
-                            ->schema([
-                                TextEntry::make('requestdate')
-                                    ->label('Aanvraagdatum')
-                                    ->date('d-m-Y')
-                                    ->placeholder('-'),
-                                TextEntry::make('date_of_execution')
-                                    ->label('Plandatum')
-                                    ->date('d-m-Y')
-                                    ->color(fn($state) => strtotime($state) < time() ? 'danger' : 'success')
-                                    ->placeholder('-'),
-                                TextEntry::make('startdate')
-                                    ->label('Startdatum')
-                                    ->date('d-m-Y')
-                                    ->placeholder('-'),
-                                TextEntry::make('enddate')
-                                    ->label('Einddatum')
-                                    ->date('d-m-Y')
-                                    ->placeholder('-'),
-                            ])->columns(2),
-
-                        Tabs\Tab::make('Statistieken')
-                            ->icon('heroicon-o-chart-bar')
-                            ->schema([
-                                TextEntry::make('quotes_count')
-                                    ->label('Aantal offertes')
-                                    ->badge()
-                                    ->placeholder('0'),
-                                TextEntry::make('reactions_count')
-                                    ->label('Aantal reacties')
-                                    ->badge()
-                                    ->placeholder('0'),
-                                TextEntry::make('timeTrackings_count')
-                                    ->label('Uren geregistreerd')
-                                    ->badge()
-                                    ->placeholder('0'),
-                            ])->columns(3),
-                    ]),
-            ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            RelationManagers\ReactionsRelationManager::class,
-            RelationManagers\TimeTrackingRelationManager::class,
-            RelationManagers\QuotesRelationManager::class,
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            "index" => Pages\ListProjects::route("/"),
-            'view'  => Pages\ViewProjects::route('/{record}'),
-        ];
     }
 }

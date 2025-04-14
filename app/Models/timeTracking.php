@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Enums\TimeTrackingStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class timeTracking extends Model implements Auditable
@@ -21,7 +22,9 @@ class timeTracking extends Model implements Auditable
 
         static::saving(function ($model) {
             $model->weekno = date("W", strtotime($model->started_at));
-
+            if (! $model['user_id']) {
+                $model['user_id'] = auth()->id();
+            }
         });
 
     }

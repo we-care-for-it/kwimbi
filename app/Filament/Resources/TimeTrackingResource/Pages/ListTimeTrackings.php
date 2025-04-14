@@ -3,7 +3,6 @@ namespace App\Filament\Resources\TimeTrackingResource\Pages;
 
 use App\Filament\Resources\TimeTrackingResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
