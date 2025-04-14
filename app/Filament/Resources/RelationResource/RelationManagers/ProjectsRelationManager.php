@@ -217,7 +217,7 @@ class ProjectsRelationManager extends RelationManager
                     ->url(function ($record) {
                         return "/projects/" . $record->id;
                     })->icon('heroicon-s-credit-card')
-                    ->color('warning'),
+                ,
 
             ])
             ->headerActions([
