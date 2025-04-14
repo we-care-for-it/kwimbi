@@ -71,12 +71,6 @@ class ContactsRelationManager extends RelationManager
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
-
-            // ->recordUrl(Contact::getUrl('edit', ['record' => auth()->user()])
-
-            //  route('filament.resources.contacts.edit', ['tenant' => filament()->getTenant()])
-            //   )
-
             ->emptyState(view('partials.empty-state-small'))
 
             ->filters([

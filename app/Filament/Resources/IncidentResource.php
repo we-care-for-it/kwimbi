@@ -1,19 +1,13 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\IncidentResource\Pages;
-use App\Filament\Resources\IncidentResource\RelationManagers;
 use App\Models\ObjectIncident;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Table;
 
 class IncidentResource extends Resource
 {
@@ -22,7 +16,7 @@ class IncidentResource extends Resource
     protected static ?string $navigationIcon  = "heroicon-o-exclamation-triangle";
     protected static ?string $navigationLabel = "Storingen";
     protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort     = 3;
 
     public static function form(Form $form): Form
     {
@@ -73,9 +67,9 @@ class IncidentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListIncidents::route('/'),
+            'index'  => Pages\ListIncidents::route('/'),
             'create' => Pages\CreateIncident::route('/create'),
-            'edit' => Pages\EditIncident::route('/{record}/edit'),
+            'edit'   => Pages\EditIncident::route('/{record}/edit'),
         ];
     }
 }
