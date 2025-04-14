@@ -58,6 +58,15 @@ class TimeTrackingResource extends Resource
                                     ->label("Relatie")
                                     ->searchable()
                                     ->live()
+                                    ->createOptionForm([
+                                    Forms\Components\TextInput::make('name'),
+                                ])
+                                ->createOptionUsing(function (array $data) {
+                                    return Relation::create([
+                                        'name'    => $data['name'],
+                                        'type_id' => 5,
+                                    ])->id;
+                                })
                                     ->options(Relation::where('type_id', 5)->pluck("name", "id"))
                                     ->placeholder("Niet opgegeven"),
                                 Forms\Components\Select::make("project_id")
