@@ -1,25 +1,22 @@
 <?php
-
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\TimeTrackingStatus;
 use App\Models\Relation;
 use App\Models\workorderActivities;
 use Filament\Forms;
+use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextArea;
 
 class TimeTrackingRelationManager extends RelationManager
 {
     protected static string $relationship = 'timeTracking';
-    protected static ?string $label = 'Tijdregistratie';
-    protected static ?string $title = 'Tijdregistratie';
-    protected static ?string $icon = 'heroicon-o-clock';
+    protected static ?string $label       = 'Tijdregistratie';
+    protected static ?string $title       = 'Tijdregistratie';
+    protected static ?string $icon        = 'heroicon-o-clock';
 
     public function form(Form $form): Form
     {
@@ -74,7 +71,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label('Relatie'),
                 Tables\Columns\TextColumn::make('status_id')
                     ->label('Status')
-                    ->formatStateUsing(fn ($state) => TimeTrackingStatus::tryFrom($state)?->name()), // Display enum value
+                    ->formatStateUsing(fn($state) => TimeTrackingStatus::tryFrom($state)?->name()), // Display enum value
                 Tables\Columns\TextColumn::make('workType.name')
                     ->label('Type'),
                 Tables\Columns\IconColumn::make('invoiceable')
@@ -95,6 +92,6 @@ class TimeTrackingRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view("partials.empty-state"));
     }
 }
