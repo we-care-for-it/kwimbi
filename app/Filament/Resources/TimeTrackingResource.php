@@ -19,6 +19,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -59,14 +60,14 @@ class TimeTrackingResource extends Resource
                                     ->searchable()
                                     ->live()
                                     ->createOptionForm([
-                                    Forms\Components\TextInput::make('name'),
-                                ])
-                                ->createOptionUsing(function (array $data) {
-                                    return Relation::create([
-                                        'name'    => $data['name'],
-                                        'type_id' => 5,
-                                    ])->id;
-                                })
+                                        Forms\Components\TextInput::make('name'),
+                                    ])
+                                    ->createOptionUsing(function (array $data) {
+                                        return Relation::create([
+                                            'name'    => $data['name'],
+                                            'type_id' => 5,
+                                        ])->id;
+                                    })
                                     ->options(Relation::where('type_id', 5)->pluck("name", "id"))
                                     ->placeholder("Niet opgegeven"),
                                 Forms\Components\Select::make("project_id")
@@ -159,21 +160,21 @@ class TimeTrackingResource extends Resource
                     ->sortable()
                     ->placeholder('-')
                     ->searchable()
+                    ->color('primary')
                     ->url(function ($record) {
                         return "relations/" . $record->relation_id;
-                    })
-                    ->color('warning'),
+                    }),
                 TextColumn::make('project.name')
                     ->sortable()
                     ->label('Project')
                     ->toggleable()
                     ->sortable()
+                    ->color('primary')
                     ->placeholder('-')
                     ->searchable()
                     ->url(function ($record) {
                         return "projects/" . $record->project_id;
-                    })
-                    ->color('warning'),
+                    }),
                 TextColumn::make('status_id')
                     ->sortable()
                     ->label('Status')
@@ -204,7 +205,6 @@ class TimeTrackingResource extends Resource
                         '8' => 'Vorig kwartaal',
                         '9' => 'Vorig jaar',
                     ])
-                    ->default([1])
                     ->multiple()
                     ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
                         $periodes = $data['values'] ?? [];
@@ -266,7 +266,8 @@ class TimeTrackingResource extends Resource
                                 });
                             }
                         });
-                    }),
+                    })
+                ,
 
                 // SelectFilter::make('user_id')
                 //     ->options(User::all()->pluck("name", "id"))
@@ -283,14 +284,15 @@ class TimeTrackingResource extends Resource
                 SelectFilter::make('status_id')
                     ->options(TimeTrackingStatus::class)
                     ->label('Status'),
-            ])->filtersFormColumns(2)
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(4)
 
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Tijdregistratie Bewerken')
                     ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()
