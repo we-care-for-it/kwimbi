@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\TimeTrackingStatus;
-use App\Models\Relation;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\TextArea;
@@ -31,11 +30,12 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label('Tijd')
                     ->seconds(false)
                     ->required(),
-                Forms\Components\Select::make("relation_id")
-                    ->label("Relatie")
-                    ->searchable()
-                    ->options(Relation::where('type_id', 5)->pluck("name", "id")->toArray())
-                    ->placeholder("Niet opgegeven"),
+                Forms\Components\Select::make("project_id")
+                    ->label("Project")
+                    ->preload()
+                    ->placeholder("Niet opgegeven")
+                    ->relationship(name: 'projects', titleAttribute: 'name')
+                    ->searchable(),
                 Forms\Components\Select::make('status_id')
                     ->label('Status')
                     ->options(TimeTrackingStatus::class) // Using the Enum directly
