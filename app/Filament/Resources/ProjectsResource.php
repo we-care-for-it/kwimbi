@@ -14,14 +14,13 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
@@ -174,8 +173,9 @@ class ProjectsResource extends Resource
                         return $record?->customer->name;
                     })
                     ->url(function (Project $record) {
-                        return "/app/customers/" . $record->customer_id . "/edit";
+                        return "/relations/" . $record->customer_id;
                     })
+                    ->color('primary')
                     ->searchable()
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
@@ -192,7 +192,7 @@ class ProjectsResource extends Resource
                     ->label("Looptijd")
                     ->getStateUsing(function (Project $record): ?string {
                         $startdate = $record->startdate ? date("d-m-Y", strtotime($record?->startdate)) : "nodate";
-                        $enddate = $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
+                        $enddate   = $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
 
                         if ($record->enddate || $record->$startdate) {
                             return $startdate . " - " . $enddate;
@@ -251,7 +251,7 @@ class ProjectsResource extends Resource
                     ->modalHeading('Project Bewerken')
                     ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
@@ -295,7 +295,7 @@ class ProjectsResource extends Resource
                                     ->money('EUR')
                                     ->placeholder('-'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Relatie & Locatie')
                             ->icon('heroicon-o-map-pin')
                             ->schema([
@@ -312,7 +312,7 @@ class ProjectsResource extends Resource
                                     ->label('Plaats')
                                     ->placeholder('-'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Planning')
                             ->icon('heroicon-o-calendar')
                             ->schema([
@@ -334,7 +334,7 @@ class ProjectsResource extends Resource
                                     ->date('d-m-Y')
                                     ->placeholder('-'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Statistieken')
                             ->icon('heroicon-o-chart-bar')
                             ->schema([
@@ -368,7 +368,7 @@ class ProjectsResource extends Resource
     {
         return [
             "index" => Pages\ListProjects::route("/"),
-            'view' => Pages\ViewProjects::route('/{record}'),
+            'view'  => Pages\ViewProjects::route('/{record}'),
         ];
     }
 }
