@@ -1,1 +1,1 @@
-<img src = "/images/digilevel_white.png">
+<img src = "/images/workall_header_white.png">
