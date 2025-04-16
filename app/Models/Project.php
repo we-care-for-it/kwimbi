@@ -61,7 +61,7 @@ class Project extends Model implements Auditable
     }
 
     public function timeTracking()
-{
-    return $this->hasMany(\App\Models\TimeTracking::class);
-}
+    {
+        return $this->hasMany(\App\Models\timeTracking::class);
+    }
 }
