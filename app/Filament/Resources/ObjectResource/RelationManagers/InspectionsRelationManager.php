@@ -15,7 +15,6 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Http\Response;
 
 class InspectionsRelationManager extends RelationManager
@@ -261,12 +260,10 @@ class InspectionsRelationManager extends RelationManager
                 ])->label('Toevoegen'),
             ]);
     }
-    
-    
 
-public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-{
-    return false;
-}
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return false;
+    }
 
 }

@@ -29,19 +29,15 @@ class UserResource extends Resource
         return $form->schema([
             TextInput::make('name')
                 ->label('Naam')
-                ->required()
                 ->maxLength(255),
 
             TextInput::make('email')
                 ->label('E-mail')
-                ->email()
-                ->required()
-                ->unique(User::class, 'email'),
+                ->email(),
 
             TextInput::make('password')
                 ->label('Wachtwoord')
                 ->password()
-                ->required()
                 ->minLength(8),
 
             Select::make('roles')
