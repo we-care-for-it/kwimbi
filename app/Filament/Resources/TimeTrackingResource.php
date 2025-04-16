@@ -5,7 +5,7 @@ use App\Enums\TimeTrackingStatus;
 use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
-use App\Models\TimeTracking;
+use App\Models\timeTracking;
 use App\Models\WorkorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -23,20 +23,19 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
-use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TimeTrackingResource extends Resource
 {
-    protected static ?string $model = TimeTracking::class;
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
-    protected static ?string $navigationLabel = "Tijdregistratie";
-    protected static ?string $title = "Tijdregistratie";
+    protected static ?string $model            = TimeTracking::class;
+    protected static ?string $navigationIcon   = 'heroicon-o-clock';
+    protected static ?string $navigationLabel  = "Tijdregistratie";
+    protected static ?string $title            = "Tijdregistratie";
     protected static ?string $pluralModelLabel = 'Tijdregistratie';
 
     public static function form(Form $form): Form
@@ -187,9 +186,9 @@ class TimeTrackingResource extends Resource
                     ->width(100),
                 TextColumn::make('total_hours')
                     ->label('Uren')
-                    ->getStateUsing(function (TimeTracking $record) {
+                    ->getStateUsing(function (timeTracking $record) {
                         $seconds = strtotime($record->time) - strtotime('00:00:00');
-                        $hours = floor($seconds / 3600);
+                        $hours   = floor($seconds / 3600);
                         $minutes = floor(($seconds % 3600) / 60);
                         return sprintf('%d:%02d', $hours, $minutes);
                     })
@@ -405,50 +404,50 @@ class TimeTrackingStatsWidget extends BaseWidget
     {
         // Get the base query that respects current filters
         $query = $this->getFilteredQuery();
-        
+
         // Calculate total time
-        $totalSeconds = $query->sum(function($record) {
+        $totalSeconds = $query->sum(function ($record) {
             return strtotime($record->time) - strtotime('00:00:00');
         });
-        $totalHours = floor($totalSeconds / 3600);
+        $totalHours       = floor($totalSeconds / 3600);
         $remainingMinutes = floor(($totalSeconds % 3600) / 60);
-        
+
         // Calculate billable time
-        $billableSeconds = $query->where('invoiceable', true)->sum(function($record) {
+        $billableSeconds = $query->where('invoiceable', true)->sum(function ($record) {
             return strtotime($record->time) - strtotime('00:00:00');
         });
-        $billableHours = floor($billableSeconds / 3600);
+        $billableHours            = floor($billableSeconds / 3600);
         $billableRemainingMinutes = floor(($billableSeconds % 3600) / 60);
-        
+
         // Calculate current week time
         $currentWeekSeconds = $query->whereBetween('started_at', [
             now()->startOfWeek(),
-            now()->endOfWeek()
-        ])->sum(function($record) {
+            now()->endOfWeek(),
+        ])->sum(function ($record) {
             return strtotime($record->time) - strtotime('00:00:00');
         });
-        $currentWeekHours = floor($currentWeekSeconds / 3600);
+        $currentWeekHours            = floor($currentWeekSeconds / 3600);
         $currentWeekRemainingMinutes = floor(($currentWeekSeconds % 3600) / 60);
 
         return [
             Stat::make('Huidige weeknummer', now()->weekOfYear)
                 ->icon('heroicon-o-calendar')
                 ->description(now()->format('d-m-Y')),
-                
+
             Stat::make('Totaal uren (gefilterd)', sprintf('%d:%02d', $totalHours, $remainingMinutes))
                 ->description('Totaal van alle gefilterde registraties')
                 ->icon('heroicon-o-clock')
                 ->color('primary'),
-                
+
             Stat::make('Factureerbare uren', sprintf('%d:%02d', $billableHours, $billableRemainingMinutes))
-                ->description($totalSeconds > 0 ? 
-                    sprintf('%d%% factureerbaar', round(($billableSeconds/$totalSeconds)*100)) : 
+                ->description($totalSeconds > 0 ?
+                    sprintf('%d%% factureerbaar', round(($billableSeconds / $totalSeconds) * 100)) :
                     'Geen uren')
                 ->icon('heroicon-o-currency-euro')
                 ->color($billableHours >= $totalHours * 0.8 ? 'success' : 'warning'),
-                
+
             Stat::make('Deze week', sprintf('%d:%02d', $currentWeekHours, $currentWeekRemainingMinutes))
-                ->description(sprintf('Week %d (%s - %s)', 
+                ->description(sprintf('Week %d (%s - %s)',
                     now()->weekOfYear,
                     now()->startOfWeek()->format('d-m'),
                     now()->endOfWeek()->format('d-m')))
@@ -456,7 +455,7 @@ class TimeTrackingStatsWidget extends BaseWidget
                 ->color('info'),
         ];
     }
-    
+
     protected function getFilteredQuery()
     {
         // This gets the base query with all filters applied
