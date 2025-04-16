@@ -7,13 +7,12 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-
 class ChecksRelationManager extends RelationManager
 {
     protected static string $relationship = 'Checks';
     protected static ?string $title = 'Keuringen';
     protected static bool $isLazy = false;
-    
+
     public function form(Form $form): Form
     {
         return $form
@@ -47,4 +46,5 @@ class ChecksRelationManager extends RelationManager
                 ]),
             ]);
     }
+
 }
