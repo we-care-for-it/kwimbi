@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers;
 
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Filament\Support\Assets\Css;
@@ -12,8 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
 use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
-use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
-use BezhanSalleh\FilamentLanguageSwitch\Enums\Placement;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,18 +22,21 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-
- LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+        // Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
+        //     $event->extendSocialite('azure', \SocialiteProviders\Azure\Provider::class);
+        // });
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
-                ->locales(['nl','en'])
+                ->locales(['nl', 'en'])
 
-->flags([
-                'en' => asset('/images/flags/en.svg'),
-                'nl' => asset('/images/flags/nl.svg')
-            ])    ->circular()
+                ->flags([
+                    'en' => asset('/images/flags/en.svg'),
+                    'nl' => asset('/images/flags/nl.svg'),
+                ])->circular()
 
- ->visible(outsidePanels: true)         ->outsidePanelPlacement(Placement::BottomRight)   ;    });
-
+                ->visible(outsidePanels: false);
+            //->outsidePanelPlacement(Placement::BottomRight);
+        });
 
         FilamentSettingsHub::register([
             SettingHold::make()
