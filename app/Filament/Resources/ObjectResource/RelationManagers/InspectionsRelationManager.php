@@ -22,6 +22,12 @@ class InspectionsRelationManager extends RelationManager
     protected static string $relationship = "inspections";
     protected static ?string $title       = "Keuringen";
     protected static bool $isLazy         = false;
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_inspections ?? false;
+    }
+
     public function getContentTabIcon(): ?string
     {
         return 'heroicon-m-cog';
@@ -259,11 +265,6 @@ class InspectionsRelationManager extends RelationManager
                     //      Tables\Actions\DeleteBulkAction::make(),
                 ])->label('Toevoegen'),
             ]);
-    }
-
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
-        return false;
     }
 
 }

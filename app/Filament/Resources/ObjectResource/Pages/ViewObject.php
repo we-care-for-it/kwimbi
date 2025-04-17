@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewObject extends ViewRecord
 {
     protected static string $resource = ObjectResource::class;
-    protected static ?string $title   = 'Lifteigenschappen';
+    protected static ?string $title   = 'Objecten eigenschappen';
 
     public function getSubheading(): ?string
     {

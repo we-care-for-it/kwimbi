@@ -87,6 +87,15 @@
             </div>
          </a>
          @endcan
+         @can('view_any_object')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="object-types">
+            <img  src = "/images/icons/pack/candle_sticks.svg"   class = "max-h-12">
+            <div>
+               <h2>Object types</h2>
+               <p class="text-sm text-gray-600">Object types</p>
+            </div>
+         </a>
+         @endcan
          @can('view_any_vehicle::g::p::s')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="vehicle-g-ps">
             <img  src = "/images/icons/pack/automotive.svg"   class = "max-h-12">

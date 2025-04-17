@@ -12,6 +12,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class IncidentsRelationManager extends RelationManager
 {
@@ -143,4 +144,10 @@ class IncidentsRelationManager extends RelationManager
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
             ]), ]);
     }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_incidents ?? false;
+    }
+
 }

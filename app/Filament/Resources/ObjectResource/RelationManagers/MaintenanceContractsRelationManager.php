@@ -26,6 +26,11 @@ class MaintenanceContractsRelationManager extends RelationManager
     protected static ?string $title       = 'Onderhoudscontracten';
     protected static bool $isLazy         = false;
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_maintencycontracts ?? false;
+    }
+
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job

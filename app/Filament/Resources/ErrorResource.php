@@ -14,12 +14,12 @@ use Filament\Tables\Table;
 
 class ErrorResource extends Resource
 {
-    protected static ?string $model            = Error::class;
-    protected static ?string $navigationLabel  = "Foutmeldingen";
-    protected static ?string $title            = "Foutmeldingen";
-    protected static ?string $pluralModelLabel = 'Foutmeldingen';
-    protected static ?string $navigationIcon   = 'heroicon-o-exclamation-circle';
-
+    protected static ?string $model                 = Error::class;
+    protected static ?string $navigationLabel       = "Foutmeldingen";
+    protected static ?string $title                 = "Foutmeldingen";
+    protected static ?string $pluralModelLabel      = 'Foutmeldingen';
+    protected static ?string $navigationIcon        = 'heroicon-o-exclamation-circle';
+    protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
         return $form

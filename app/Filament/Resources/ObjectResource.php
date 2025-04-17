@@ -2,7 +2,6 @@
 namespace App\Filament\Resources;
 
 use App\Enums\ElevatorStatus;
-use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Customer;
@@ -18,18 +17,15 @@ use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Infolists\Components;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -40,12 +36,12 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ObjectResource extends Resource
 {
-    protected static ?string $model = Elevator::class;
-    protected static ?string $navigationIcon = "heroicon-c-arrows-up-down";
-    protected static ?string $navigationLabel = "Objecten";
+    protected static ?string $model            = Elevator::class;
+    protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
+    protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 2;
 
     public static function getNavigationBadge(): ?string
     {
@@ -69,7 +65,7 @@ class ObjectResource extends Resource
                 Select::make("type_id")
                     ->label("Type")
                     ->options(ObjectType::where("is_active", 1)->pluck("name", "id")),
-                TextInput::make("unit_no")->label("Unit Nummer"),
+                TextInput::make("unit_no")->label("Serienummer"),
                 Select::make("energy_label")
                     ->live()
                     ->label("Energielabel")
@@ -96,10 +92,7 @@ class ObjectResource extends Resource
                 Select::make("maintenance_company_id")
                     ->label("Onderhoudspartij")
                     ->options(Relation::where('type_id', 1)->pluck("name", "id")),
-                Select::make("inspection_company_id")
-                    ->label("Keuringsinstantie")
-                    ->live()
-                    ->options(Relation::where('type_id', 3)->pluck("name", "id")),
+
                 TextInput::make("name")->label("Naam"),
             ]),
             Grid::make(2)->schema([
@@ -131,6 +124,21 @@ class ObjectResource extends Resource
                 ->collapsed(false)
                 ->persistCollapsed()
                 ->columns(1),
+
+            Section::make("Keuringgegevens")
+                ->compact()
+                ->schema([
+                    Select::make("inspection_company_id")
+                        ->label("Keuringsinstantie")
+                        ->live()
+                        ->options(Relation::where('type_id', 3)->pluck("name", "id")),
+                ])
+
+                ->collapsible()
+                ->collapsed(false)
+                ->persistCollapsed()
+                ->visible(fn($record, $get) => $record->type->has_inspections)->columns(1),
+
         ]);
     }
 
@@ -138,25 +146,32 @@ class ObjectResource extends Resource
     {
         return $table
             ->columns([
-                IconColumn::make('ifMonitoring')
-                    ->trueColor('success')
-                    ->falseColor('warning')
-                    ->trueIcon('heroicon-o-check-badge')
-                    ->boolean()
-                    ->label('Monitoring')
-                    ->alignment(Alignment::Center)
-                    ->falseIcon('heroicon-o-x-mark'),
-                Tables\Columns\TextColumn::make("unit_no")
-                    ->label("Nummer")
-                    ->searchable()
+                // IconColumn::make('ifMonitoring')
+                //     ->trueColor('success')
+                //     ->falseColor('warning')
+                //     ->trueIcon('heroicon-o-check-badge')
+                //     ->boolean()
+                //     ->label('Monitoring')
+                //     ->alignment(Alignment::Center)
+                //     ->falseIcon('heroicon-o-x-mark'),
+                Tables\Columns\TextColumn::make("type.name")
+                    ->label("type")
+                    ->default(0)
+                    ->badge()
                     ->sortable()
-                    ->placeholder("Geen unitnummer")
                     ->toggleable(),
                 Tables\Columns\TextColumn::make("name")
                     ->label("Naam")
                     ->placeholder("-")
                     ->toggleable(),
+                Tables\Columns\TextColumn::make("unit_no")
+                    ->label("Nummer")
+                    ->searchable()
+                    ->sortable()
+                    ->placeholder("-r")
+                    ->toggleable(),
                 SpatieMediaLibraryImageColumn::make('objectimage')
+                    ->placeholder('Geen')
                     ->label('Afbeelding')
                     ->toggleable()
                     ->limit(2)
@@ -179,80 +194,82 @@ class ObjectResource extends Resource
                 Tables\Columns\TextColumn::make("location.address")
                     ->label("Adres")
                     ->searchable()
-                    ->sortable()
-                    ->hidden(true),
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make("incidents_count")
                     ->toggleable()
                     ->counts("incidents")
                     ->label("Storingen")
                     ->alignment(Alignment::Center)
                     ->sortable()
+
                     ->badge(),
-                Tables\Columns\TextColumn::make("nobo_no")
-                    ->toggleable()
-                    ->label("Nobonummer")
-                    ->searchable()
-                    ->placeholder("Geen Nobonummer"),
-                Tables\Columns\TextColumn::make("location")
-                    ->toggleable()
-                    ->getStateUsing(function (Elevator $record): ?string {
-                        if ($record?->location?->name) {
-                            return $record?->location->name;
-                        } else {
-                            return $record?->location?->address . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
-                        }
-                    })
-                    ->label("Locatie")
-                    ->description(function (Elevator $record) {
-                        if (! $record?->location?->name) {
-                            return $record?->location?->name;
-                        } else {
-                            return $record->location->address . " - " . $record->location->zipcode . " " . $record->location->place;
-                        }
-                    }),
-                Tables\Columns\TextColumn::make("location.zipcode")
-                    ->label("Postcode")
-                    ->searchable()
-                    ->hidden(true),
-                Tables\Columns\TextColumn::make("location.place")
-                    ->toggleable()
-                    ->label("Plaats")
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make("nobo_no")
+                //     ->toggleable()
+                //     ->label("Nobonummer")
+                //     ->searchable()
+                //     ->placeholder("Geen Nobonummer"),
+                // Tables\Columns\TextColumn::make("location")
+                //     ->toggleable()
+                //     ->getStateUsing(function (Elevator $record): ?string {
+                //         if ($record?->location?->name) {
+                //             return $record?->location->name;
+                //         } else {
+                //             return $record?->location?->address . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
+                //         }
+                //     })
+                //   ->label("Locatie")
+                // ->description(function (Elevator $record) {
+                //     if (! $record?->location?->name) {
+                //         return $record?->location?->name;
+                //     } else {
+                //         return $record->location->address . " - " . $record->location->zipcode . " " . $record->location->place;
+                //     }
+                // }),
+                // Tables\Columns\TextColumn::make("location.zipcode")
+                //     ->label("Postcode")
+                //     ->searchable()
+                //     ->hidden(true),
+                // Tables\Columns\TextColumn::make("location.place")
+                //     ->toggleable()
+                //     ->label("Plaats")
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make("location.customer.name")
                     ->toggleable()
                     ->searchable()
                     ->label("Relatie")
                     ->placeholder("Niet gekoppeld aan relatie")
                     ->sortable(),
-                Tables\Columns\TextColumn::make("management_company.name")
-                    ->toggleable()
-                    ->label("Beheerder")
-                    ->placeholder("Geen beheerder")
-                    ->sortable(),
-                Tables\Columns\TextColumn::make("maintenance_company.name")
-                    ->searchable()
-                    ->toggleable()
-                    ->placeholder("Geen onderhoudspartij")
-                    ->sortable()
-                    ->label("Onderhoudspartij"),
+                // Tables\Columns\TextColumn::make("management_company.name")
+                //     ->toggleable()
+                //     ->label("Beheerder")
+                //     ->placeholder("Geen beheerder")
+                //     ->sortable(),
+                // Tables\Columns\TextColumn::make("maintenance_company.name")
+                //     ->searchable()
+                //     ->toggleable()
+                //     ->hidden(false)
+                //     ->placeholder("Geen onderhoudspartij")
+                //     ->sortable()
+                //     ->label("Onderhoudspartij"),
             ])
             ->filters([
                 SelectFilter::make('type_id')
                     ->label('Type')
-                    ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
-                SelectFilter::make('maintenance_company_id')
-                    ->label('Onderhoudspartij')
-                    ->options(Relation::where('type_id', 1)->pluck("name", "id")),
-                SelectFilter::make('status_id')
-                    ->label("Status")
-                    ->options(ElevatorStatus::class),
+                    ->options(ObjectType::where('is_active', 1)->where('show_on_resource_page', true)->pluck('name', 'id')),
+                // SelectFilter::make('maintenance_company_id')
+                //     ->label('Onderhoudspartij')
+                //  ->options(Relation::where('type_id', 1)->pluck("name", "id")),
+                // SelectFilter::make('status_id')
+                //     ->label("Status")
+                //     ->options(ElevatorStatus::class),
                 SelectFilter::make('customer_id')
                     ->label('Relatie')
                     ->options(Customer::all()->pluck("name", "id")),
-                SelectFilter::make("current_inspection_status_id")
-                    ->searchable()
-                    ->label("Keuringstatus")
-                    ->options(InspectionStatus::class),
+                // SelectFilter::make("current_inspection_status_id")
+                //     ->searchable()
+                //     ->label("Keuringstatus")
+                //     ->options(InspectionStatus::class),
             ], layout: FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -291,8 +308,8 @@ class ObjectResource extends Resource
                                 Column::make("management_company.name")->heading("Beheerder"),
                                 Column::make("remark")->heading("Opmerking"),
                             ])
-                            ->withFilename(date("m-d-Y H:i") . " - objecten export")
-                    ])
+                            ->withFilename(date("m-d-Y H:i") . " - objecten export"),
+                    ]),
             ])
             ->emptyState(view("partials.empty-state"));
     }
@@ -329,7 +346,7 @@ class ObjectResource extends Resource
                                     ->label('Energielabel')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(3),
-                            
+
                         Tabs\Tab::make('Locatie & Relatie')
                             ->icon('heroicon-o-map-pin')
                             ->schema([
@@ -349,7 +366,7 @@ class ObjectResource extends Resource
                                     ->label('Stopplaatsen')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Partijen')
                             ->icon('heroicon-o-user-group')
                             ->schema([
@@ -361,12 +378,13 @@ class ObjectResource extends Resource
                                     ->placeholder('Niet opgegeven'),
                                 TextEntry::make('inspectioncompany.name')
                                     ->label('Keuringsinstantie')
-                                    ->placeholder('Niet opgegeven'),
+                                    ->placeholder('Niet opgegeven')
+                                    ->hidden(),
                                 TextEntry::make('location.managementcompany.name')
                                     ->label('Beheerder')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Status & Keuring')
                             ->icon('heroicon-o-clipboard-document-check')
                             ->schema([
@@ -387,9 +405,10 @@ class ObjectResource extends Resource
                                     ->badge()
                                     ->placeholder('0'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Afbeeldingen')
                             ->icon('heroicon-o-photo')
+
                             ->schema([
                                 SpatieMediaLibraryImageEntry::make('objectimage')
                                     ->hiddenLabel()
@@ -398,7 +417,7 @@ class ObjectResource extends Resource
                                     ->ring(5)
                                     ->collection('objectimages'),
                             ]),
-                            
+
                         Tabs\Tab::make('Opmerkingen')
                             ->icon('heroicon-o-chat-bubble-bottom-center-text')
                             ->schema([
