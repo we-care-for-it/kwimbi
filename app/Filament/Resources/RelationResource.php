@@ -1,11 +1,10 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Enums\RelationTypes;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
-use App\Models\RelationType;
+use App\Models\relationType;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -169,7 +168,7 @@ class RelationResource extends Resource
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(RelationTypes::class),
+                    ->options(relationType::class),
 
                 Tables\Filters\TrashedFilter::make(),
 
@@ -180,7 +179,7 @@ class RelationResource extends Resource
                     ->modalHeading('Relatie Bewerken')
                     ->modalDescription('Pas de Relatie leverancier aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()
