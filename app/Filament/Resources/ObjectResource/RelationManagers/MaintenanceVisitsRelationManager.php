@@ -12,6 +12,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class MaintenanceVisitsRelationManager extends RelationManager
@@ -23,6 +24,11 @@ class MaintenanceVisitsRelationManager extends RelationManager
     public static function getBadge($ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->maintenance_visits->count();
+    }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_maintency ?? false;
     }
 
     public function form(Form $form): Form

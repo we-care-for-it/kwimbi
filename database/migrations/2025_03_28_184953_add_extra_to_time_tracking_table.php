@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('time_tracking', function (Blueprint $table) {
-
             $table->foreignId('relation_id')->nullable();
             $table->longtext('description')->nullable();
             $table->integer('status_id')->nullable();

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ObjectTypeResource\Pages;
@@ -13,9 +12,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ObjectTypeResource extends Resource
 {
-    protected static ?string $model = ObjectType::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $model                 = ObjectType::class;
+    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
         return $form
@@ -23,14 +22,14 @@ class ObjectTypeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                    
+
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->directory('object-types'),
-                    
+
                 Forms\Components\Toggle::make('is_active')
                     ->default(true),
-                    
+
                 Forms\Components\Fieldset::make('Relations')
                     ->schema([
                         Forms\Components\Toggle::make('has_inspections')
@@ -43,7 +42,16 @@ class ObjectTypeResource extends Resource
                             ->label('Maintenance'),
                         Forms\Components\Toggle::make('has_tickets')
                             ->label('Tickets'),
-                    ])->columns(2)
+                        Forms\Components\Toggle::make('show_on_resource_page')
+                            ->label('Overzicht pagine'),
+
+                        Forms\Components\Select::make('template_id')
+                            ->label('Template')
+                            ->options([
+                                1 => 'Liften & Roltrappen',
+                                2 => 'ICT Hardware',
+                            ]),
+                    ])->columns(2),
             ]);
     }
 
@@ -54,30 +62,34 @@ class ObjectTypeResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                    
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean()
                     ->toggleable(),
-                    
+
                 // Toggle columns for each relation
                 Tables\Columns\ToggleColumn::make('has_inspections')
                     ->label('Inspections'),
-                    
+
                 Tables\Columns\ToggleColumn::make('has_incidents')
                     ->label('Incidents'),
-                    
+
                 Tables\Columns\ToggleColumn::make('has_maintencycontracts')
                     ->label('Maint. Contracts'),
-                    
+
                 Tables\Columns\ToggleColumn::make('has_maintency')
                     ->label('Maintenance'),
-                    
+
                 Tables\Columns\ToggleColumn::make('has_tickets')
                     ->label('Tickets'),
+
+                Tables\Columns\ToggleColumn::make('show_on_resource_page')
+                    ->label('Overzicht'),
+
             ])
             ->filters([
                 Tables\Filters\Filter::make('is_active')
-                    ->query(fn (Builder $query): Builder => $query->where('is_active', true))
+                    ->query(fn(Builder $query): Builder => $query->where('is_active', true))
                     ->label('Only active'),
             ])
             ->actions([
@@ -106,7 +118,7 @@ class ObjectTypeResource extends Resource
     {
         return [
             'index' => Pages\ListObjectTypes::route('/'),
-            'view' => Pages\ViewObjectType::route('/{record}'),
+            'view'  => Pages\ViewObjectType::route('/{record}'),
         ];
     }
 }

@@ -13,6 +13,8 @@ return new class extends Migration
             $table->boolean('has_maintencycontracts')->default(false)->after('has_incidents');
             $table->boolean('has_maintency')->default(false)->after('has_maintencycontracts');
             $table->boolean('has_tickets')->default(false)->after('has_maintency');
+            $table->boolean('show_on_resource_page')->default(false)->after('has_maintency');
+            $table->integer('template_id')->nullable();
         });
     }
 
@@ -24,7 +26,8 @@ return new class extends Migration
                 'has_incidents',
                 'has_maintencycontracts',
                 'has_maintency',
-                'has_tickets'
+                'has_tickets',
+                'show_on_resource_page',
             ]);
         });
     }
