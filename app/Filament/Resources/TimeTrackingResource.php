@@ -6,7 +6,7 @@ use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\timeTracking;
-use App\Models\WorkorderActivities;
+use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
@@ -89,7 +89,7 @@ class TimeTrackingResource extends Resource
                                 Forms\Components\Select::make('work_type_id')
                                     ->label('Type')
                                     ->searchable()
-                                    ->options(WorkorderActivities::where('is_active', 1)->pluck("name", "id"))
+                                    ->options(workorderActivities::where('is_active', 1)->pluck("name", "id"))
                                     ->required(),
                                 TextArea::make('description')
                                     ->label('Omschrijving')
