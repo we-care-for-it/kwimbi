@@ -19,6 +19,17 @@
             </div>
          </a>
          @endcan
+         @can('view_any_relation')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="relation-types">
+            <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
+            <div>
+               <h2>Relatietypes</h2>
+               <p class="text-sm text-gray-600">Relatie types</p>
+            </div>
+         </a>
+         @endcan
+
+
          @can('view_any_location')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="locations">
             <img  src = "/images/icons/pack/department.svg"  class = "max-h-12">
