@@ -5,11 +5,11 @@ use App\Enums\RelationTypes;
 use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
+use App\Models\RelationType;
 use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -79,13 +79,10 @@ class RelationResource extends Resource
                         ->label("Plaats")
                         ->columnSpan(2),
 
-                    ToggleButtons::make('type_id')
+                    Forms\Components\Select::make('type_id')
                         ->required()
                         ->label("Categorie")
-                        ->options(RelationTypes::class)
-                        ->inline()
-                        ->default(5)
-                        ->columnSpan('full'),
+                        ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
 
                 ])])
                 ->columns(3)
