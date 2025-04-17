@@ -2,7 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RelationTypeResource\Pages;
-use App\Models\RelationType;
+use App\Models\relationType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 
 class RelationTypeResource extends Resource
 {
-    protected static ?string $model = RelationType::class;
+    protected static ?string $model = relationType::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static bool $shouldRegisterNavigation = false;
