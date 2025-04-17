@@ -64,7 +64,8 @@ class RelationTypeResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view('partials.empty-state'));
+
     }
 
     public static function getRelations(): array
