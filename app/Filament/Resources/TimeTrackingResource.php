@@ -16,6 +16,7 @@ use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -126,6 +127,7 @@ class TimeTrackingResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->width(50)
+                    ->alignment(Alignment::Center)
                     ->date('d-m-Y')
                     ->placeholder('-')
                     ->searchable(),
@@ -184,15 +186,15 @@ class TimeTrackingResource extends Resource
                     ->toggleable()
                     ->offColor('danger')
                     ->width(100),
-                TextColumn::make('total_hours')
-                    ->label('Uren')
-                    ->getStateUsing(function (timeTracking $record) {
-                        $seconds = strtotime($record->time) - strtotime('00:00:00');
-                        $hours   = floor($seconds / 3600);
-                        $minutes = floor(($seconds % 3600) / 60);
-                        return sprintf('%d:%02d', $hours, $minutes);
-                    })
-                    ->alignEnd(),
+                // TextColumn::make('total_hours')
+                //     ->label('Uren')
+                //     ->getStateUsing(function (timeTracking $record) {
+                //         $seconds = strtotime($record->time) - strtotime('00:00:00');
+                //         $hours   = floor($seconds / 3600);
+                //         $minutes = floor(($seconds % 3600) / 60);
+                //         return sprintf('%d:%02d', $hours, $minutes);
+                //     })
+                //     ->alignEnd(),
             ])
             ->filters([
                 SelectFilter::make('periode_id')

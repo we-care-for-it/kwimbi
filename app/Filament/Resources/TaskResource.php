@@ -306,7 +306,7 @@ class TaskResource extends Resource
                     ->modalHeading('Actie voltooien')
                     ->color('info')
                     ->tooltip('Voltooien')
-                    ->label(''),
+                    ->label('Voltooien'),
 
                 RestoreAction::make()
                     ->color("danger")

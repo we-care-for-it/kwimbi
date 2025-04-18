@@ -167,7 +167,7 @@ class ContactResource extends Resource
                 fn(Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
             )
             ->groups([
-                Group::make('company.name')
+                Group::make('company_id')
                     ->label('Bedrijf'),
             ])
             ->columns([
@@ -175,6 +175,26 @@ class ContactResource extends Resource
                 TileColumn::make('name')
                     ->description(fn($record) => $record->email)
                     ->image(fn($record) => $record->avatar),
+
+                TextColumn::make('related_to')
+                    ->label('Gerelateerd  aan')
+                    ->getStateUsing(function ($record): ?string {
+                        switch ($record->model) {
+                            case 'relation':
+                                return $record?->related_to?->name;
+                                break;
+
+                            default:
+                                return "-";
+                        }
+
+                    }
+                    )->placeholder('-'),
+
+                TextColumn::make("relation")
+                    ->label("relation.name")
+                    ->placeholder("-")
+                    ->toggleable(),
 
                 TextColumn::make("department")
                     ->label("Afdeling")
@@ -203,7 +223,7 @@ class ContactResource extends Resource
                     ->modalHeading('Contact Bewerken')
                     ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
                 DeleteAction::make()

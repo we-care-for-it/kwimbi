@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use Filament\Facades\Filament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -53,7 +52,7 @@ class Contact extends Model
 
     }
 
-    public function relations(): HasMany
+    public function relation(): HasMany
     {
         return $this->hasMany(ContactObject::class, 'model_id', 'id');
     }
@@ -67,8 +66,6 @@ class Contact extends Model
     {
         return $this->belongsTo(Company::class);
     }
-
-
 
     public function claimer(): MorphTo
     {
