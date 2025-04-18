@@ -168,8 +168,7 @@ class RelationResource extends Resource
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(relationType::class),
-
+                    ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
                 Tables\Filters\TrashedFilter::make(),
 
             ],
