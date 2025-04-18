@@ -10,10 +10,19 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class StandStill extends BaseWidget
 {
     protected static ?int $sort                = 12;
-    protected static ?string $heading          = "Stilstaande liften";
+    protected static ?string $heading          = "Stilstaande lidften";
     protected int|string|array $columnSpan = '6';
     protected static ?string $maxHeight        = '300px';
     protected static bool $isLazy              = false;
+
+    public static function canView(): bool
+    {
+        if (env('TYPE_PORTAL') == 'elevator') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function table(Table $table): Table
     {

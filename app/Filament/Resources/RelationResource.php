@@ -105,7 +105,7 @@ class RelationResource extends Resource
                                 ->label("Bedrijfsnaam")
                                 ->placeholder("Niet opgegeven"),
 
-                            Components\TextEntry::make('type_id')
+                            Components\TextEntry::make('type.name')
                                 ->label("Categorie")
                                 ->badge()
                                 ->placeholder("Niet opgegeven"),
@@ -126,12 +126,12 @@ class RelationResource extends Resource
     {
         return
 
-        $table->groups([Group::make("type_id")
+        $table->groups([Group::make("type.name")
                 ->titlePrefixedWithLabel(false)
                 ->label("Categorie"),
 
         ])
-            ->defaultGroup('type_id')->
+            ->defaultGroup('type.name')->
 
             columns([
 
@@ -156,7 +156,7 @@ class RelationResource extends Resource
                     return $rec->zipcode . " " . $rec->place;
                 }),
 
-            Tables\Columns\TextColumn::make('type_id')
+            Tables\Columns\TextColumn::make('type.name')
                 ->label('Categorie')
                 ->badge()
                 ->placeholder('-')

@@ -29,8 +29,37 @@ class TasksOverview extends BaseWidget
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
                     ->placeholder('-')
-                    ->sortable()
-                , // Limit the title length for better display
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('related_to')
+                    ->label('Gerelateerd  aan')
+                    ->getStateUsing(function ($record): ?string {
+                        switch ($record->model) {
+                            case 'relation':
+                                return $record?->related_to?->name;
+                                break;
+                            case 'project':
+                                return $record?->related_to?->name;
+                                break;
+                            case 'location':
+                                $housenumber   = "";
+                                $complexnumber = "";
+                                $name          = "";
+                                if ($record->related_to?->housenumber) {
+                                    $housenumber = " " . $record->related_to->housenumber;
+                                }
+                                return $record?->related_to->address . " " . $housenumber . " - " . $record->related_to?->zipcode . " - " . $record->related_to?->place;
+                                break;
+                            case 'object':
+                                return $record->related_to->nobo_no;
+                                break;
+                            case 'contactperson':
+                                return $record?->related_to?->first_name . " " . $record->related_to?->last_name;
+                                break;
+                            default:
+                                return "-";
+                        }
+                    })->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('begin_date')
                     ->label('Begindatum')

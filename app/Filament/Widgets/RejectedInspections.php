@@ -16,6 +16,15 @@ class RejectedInspections extends BaseWidget
     protected static bool $isLazy              = false;
     protected static ?string $maxHeight        = '600px';
 
+    public static function canView(): bool
+    {
+        if (env('TYPE_PORTAL') == 'elevator') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function table(Table $table): Table
     {
         return $table
