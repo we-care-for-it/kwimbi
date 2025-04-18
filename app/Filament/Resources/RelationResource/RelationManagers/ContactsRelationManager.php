@@ -2,19 +2,17 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
-use App\Models\ContactObject;
+use App\Models\contactsObject;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Support\Enums\MaxWidth;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class ContactsRelationManager extends RelationManager
@@ -35,6 +33,37 @@ class ContactsRelationManager extends RelationManager
         return $form
 
             ->schema([
+
+                Grid::make(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('first_name')
+                            ->label('Voornaam')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('last_name')
+                            ->label('Achternaam')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mailadres')
+                            ->email()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('department')
+                            ->label('Afdeling')
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('function')
+                            ->label('Functie')
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('Telefoonnummer')
+                            ->maxLength(255),
+
+                    ]),
 
             ]);
     }
@@ -91,88 +120,57 @@ class ContactsRelationManager extends RelationManager
                 Action::make('createContact')
                     ->label('Toevoegen')
                     ->modalHeading('Contactpersoon toevoegen')
-                    ->form([
-                        Grid::make(2)
-                            ->schema([
-                                Forms\Components\TextInput::make('first_name')
-                                    ->label('Voornaam')
-                                    ->required()
-                                    ->maxLength(255),
 
-                                Forms\Components\TextInput::make('last_name')
-                                    ->label('Achternaam')
-                                    ->required()
-                                    ->maxLength(255),
+                // ->mutateFormDataUsing(function (array $data): array {
+                //     //Maak de contactpersoon aan
+                //     $contact_id = Contact::insertGetId([
+                //         'first_name'   => $data['first_name'],
+                //         'last_name'    => $data['last_name'],
+                //         'department'   => $data['department'],
+                //         'email'        => $data['email'],
+                //         'function'     => $data['function'],
+                //         'phone_number' => $data['phone_number'],
+                //     ]);
 
-                                Forms\Components\TextInput::make('email')
-                                    ->label('E-mailadres')
-                                    ->email()
-                                    ->maxLength(255),
+                //     ContactObject::create([
+                //         'model'      => 'location',
+                //         'contact_id' => $contact_id,
+                //         'model_id'   => $this->getOwnerRecord()->id,
+                //     ]);
 
-                                Forms\Components\TextInput::make('department')
-                                    ->label('Afdeling')
-                                    ->maxLength(255),
-
-                                Forms\Components\TextInput::make('function')
-                                    ->label('Functie')
-                                    ->maxLength(255),
-
-                                Forms\Components\TextInput::make('phone_number')
-                                    ->label('Telefoonnummer')
-                                    ->maxLength(255),
-
-                            ]),
-
-                    ])
-                    ->mutateFormDataUsing(function (array $data): array {
-                        //Maak de contactpersoon aan
-                        $contact_id = Contact::insertGetId([
-                            'first_name'   => $data['first_name'],
-                            'last_name'    => $data['last_name'],
-                            'department'   => $data['department'],
-                            'email'        => $data['email'],
-                            'function'     => $data['function'],
-                            'phone_number' => $data['phone_number'],
-                        ]);
-
-                        ContactObject::create([
-                            'model'      => 'location',
-                            'contact_id' => $contact_id,
-                            'model_id'   => $this->getOwnerRecord()->id,
-                        ]);
-
-                        return $data;
-                    })->slideOver()
+                //     return $data;
+                // })
+                    ->slideOver()
 
                 ,
 
-                Action::make('Attach')
-                    ->modalWidth(MaxWidth::Large)
-                    ->modalHeading('Contactpersoon toevoegen')
-                    ->modalDescription('Koppel een bestaand contactpersoon aan deze relatie ')
-                    ->label('Koppel bestaand contact')
-                    ->form([
+                // Action::make('Attach')
+                //     ->modalWidth(MaxWidth::Large)
+                //     ->modalHeading('Contactpersoon toevoegen')
+                //     ->modalDescription('Koppel een bestaand contactpersoon aan deze relatie ')
+                //     ->label('Koppel bestaand contact')
+                //     ->form([
 
-                        TileSelect::make('contact_id')
-                            ->searchable(['first_name', 'last_name', 'email'])
-                            ->model(Contact::class)
-                            ->titleKey('name')
-                            ->imageKey('avatar')
-                            ->descriptionKey('email')
-                            ->label('Contactpersoon')
+                //         TileSelect::make('contact_id')
+                //             ->searchable(['first_name', 'last_name', 'email'])
+                //             ->model(Contact::class)
+                //             ->titleKey('name')
+                //             ->imageKey('avatar')
+                //             ->descriptionKey('email')
+                //             ->label('Contactpersoon')
 
-                        ,
+                //         ,
 
-                    ])
-                    ->action(function (array $data) {
-                        ContactObject::create(
-                            [
-                                'model_id'   => $this->ownerRecord->id,
-                                'model'      => 'relation',
-                                'contact_id' => $data['contact_id'],
-                            ]
-                        );
-                    }),
+                //     ]),
+                // ->action(function (array $data) {
+                //     ContactObject::create(
+                //         [
+                //             'model_id'   => $this->ownerRecord->id,
+                //             'model'      => 'relation',
+                //             'contact_id' => $data['contact_id'],
+                //         ]
+                //     );
+                // }),
 
             ])
 

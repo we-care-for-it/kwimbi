@@ -77,12 +77,12 @@ class RelationRelationManager extends RelationManager
                     })->icon('heroicon-s-credit-card')
                     ->color('warning'),
 
-                Action::make('Detach')
-                    ->label('Ontkoppel')
-                    ->requiresConfirmation()
-                    ->action(function (array $data, $record): void {
-                        $record->delete();
-                    }),
+                // Action::make('Detach')
+                //     ->label('Ontkoppel')
+                //     ->requiresConfirmation()
+                //     ->action(function (array $data, $record): void {
+                //         $record->delete();
+                //     }),
 
             ])
             ->bulkActions([

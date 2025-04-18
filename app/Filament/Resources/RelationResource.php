@@ -158,6 +158,7 @@ class RelationResource extends Resource
 
             Tables\Columns\TextColumn::make('type.name')
                 ->label('Categorie')
+                ->columnSpan("full")
                 ->badge()
                 ->placeholder('-')
                 ->searchable()
