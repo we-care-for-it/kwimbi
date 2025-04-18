@@ -15,6 +15,15 @@ class StatsOverview extends BaseWidget
     protected int|string|array $columnSpan = '12';
     protected static bool $isLazy              = false;
 
+    public static function canView(): bool
+    {
+        if (env('TYPE_PORTAL') == 'elevator') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected function getColumns(): int
     {
         return 4;
