@@ -37,11 +37,12 @@ use Filament\Tables\Table;
 
 class ObjectLocationResource extends Resource
 {
-    protected static ?string $model           = ObjectLocation::class;
-    protected static ?string $navigationIcon  = "heroicon-o-building-office-2";
-    protected static ?string $navigationLabel = "Locaties";
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort     = 1;
+    protected static ?string $model                 = ObjectLocation::class;
+    protected static ?string $navigationIcon        = "heroicon-o-building-office-2";
+    protected static ?string $navigationLabel       = "Locaties";
+    protected static ?string $navigationGroup       = 'Objecten';
+    protected static ?int $navigationSort           = 1;
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function infolist(Infolist $infolist): Infolist
     {

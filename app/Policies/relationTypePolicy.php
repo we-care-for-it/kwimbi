@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\RelationType;
+use App\Models\relationType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RelationTypePolicy
+class relationTypePolicy
 {
     use HandlesAuthorization;
 
@@ -21,7 +21,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, RelationType $relationType): bool
+    public function view(User $user, relationType $relationType): bool
     {
         return $user->can('view_relation::type');
     }
@@ -37,7 +37,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, RelationType $relationType): bool
+    public function update(User $user, relationType $relationType): bool
     {
         return $user->can('update_relation::type');
     }
@@ -45,7 +45,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, RelationType $relationType): bool
+    public function delete(User $user, relationType $relationType): bool
     {
         return $user->can('delete_relation::type');
     }
@@ -61,7 +61,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, RelationType $relationType): bool
+    public function forceDelete(User $user, relationType $relationType): bool
     {
         return $user->can('force_delete_relation::type');
     }
@@ -77,7 +77,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, RelationType $relationType): bool
+    public function restore(User $user, relationType $relationType): bool
     {
         return $user->can('restore_relation::type');
     }
@@ -93,7 +93,7 @@ class RelationTypePolicy
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, RelationType $relationType): bool
+    public function replicate(User $user, relationType $relationType): bool
     {
         return $user->can('replicate_relation::type');
     }
