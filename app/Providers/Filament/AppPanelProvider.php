@@ -88,7 +88,7 @@ class AppPanelProvider extends PanelProvider
     ])
 
 
-->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
+//->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
 
   // ->plugins([
          //   TwoFactorAuthenticationPlugin::make()
