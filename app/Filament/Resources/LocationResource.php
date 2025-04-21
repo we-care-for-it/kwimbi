@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LocationResource\Pages\EditLocation;
@@ -95,7 +94,7 @@ class LocationResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-o-pencil')
-                    ->slideOver(),                
+                    ->slideOver(),
                 DeleteAction::make(),
             ])
             ->bulkActions([

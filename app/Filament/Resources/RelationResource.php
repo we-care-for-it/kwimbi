@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Infolists\Components;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
@@ -87,6 +88,13 @@ class RelationResource extends Resource
                 ->columns(3)
                 ->columnSpan(4),
 
+            Forms\Components\Section::make()->schema([
+
+                Forms\Components\TextArea::make("remark")
+                    ->label("Opmerking")
+                    ->columnSpan("full"),
+            ]),
+
         ]);
 
     }
@@ -118,6 +126,14 @@ class RelationResource extends Resource
                                 })->placeholder("Niet opgegeven")->columns(4)])->columns(4),
                 ]),
 
+            Section::make()
+                ->schema([
+                    // ...
+
+                    Components\TextEntry::make('remark')
+                        ->label("Opmerking")
+                        ->placeholder("Geen opmerking"),
+                ]),
         ]);
 
     }

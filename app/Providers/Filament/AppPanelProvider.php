@@ -87,6 +87,9 @@ class AppPanelProvider extends PanelProvider
             ->timeLeftText('')                              // Remove the time left text (displays only countdown)
     ])
 
+
+->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
+
   // ->plugins([
          //   TwoFactorAuthenticationPlugin::make()
                  //   ->addTwoFactorMenuItem() // Add 2FA settings to user menu items

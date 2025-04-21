@@ -49,7 +49,8 @@
         "stephenjude/filament-two-factor-authentication": "^0.0.14",
         "swisnl/filament-backgrounds": "^1.1",
         "tapp/filament-authentication-log": "3.1",
-        "tomatophp/filament-pwa": "^1.0"
+        "tomatophp/filament-pwa": "^1.0",
+        "tomatophp/filament-settings-hub": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

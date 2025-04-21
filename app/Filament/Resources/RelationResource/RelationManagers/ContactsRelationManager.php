@@ -73,7 +73,7 @@ class ContactsRelationManager extends RelationManager
 
             ->columns([
 
-                TileColumn::make('first_name')
+                TileColumn::make('name')
                     ->description(fn($record) => $record->function)
                     ->sortable()
                     ->image(fn($record) => $record->avatar),
