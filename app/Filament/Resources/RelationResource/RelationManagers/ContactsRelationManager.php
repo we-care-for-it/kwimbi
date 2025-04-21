@@ -7,8 +7,8 @@ use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -18,7 +18,7 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 class ContactsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
-    protected static string $relationship   = 'contactsObject';
+    protected static string $relationship   = 'contacts';
     protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
 
@@ -74,29 +74,29 @@ class ContactsRelationManager extends RelationManager
 
             ->columns([
 
-                TileColumn::make('contact.name')
+                TileColumn::make('first_name')
                     ->description(fn($record) => $record->contact?->function)
                     ->sortable()
                     ->image(fn($record) => $record->contact?->avatar),
 
-                TextColumn::make('contact.email')
+                TextColumn::make('email')
                     ->placeholder('-')
                     ->Url(function (object $record) {
                         return "mailto:" . $record?->contact?->email;
                     })
                     ->label('Emailadres'),
 
-                TextColumn::make('contact.department')
+                TextColumn::make('department')
                     ->placeholder('-')
                     ->sortable()
                     ->label('Afdeling'),
 
-                TextColumn::make('contact.function')
+                TextColumn::make('function')
                     ->placeholder('-')
                     ->sortable()
                     ->label('Functie'),
 
-                TextColumn::make('contact.phone_number')
+                TextColumn::make('phone_number')
                     ->placeholder('-')
                     ->Url(function (object $record) {
                         return "tel:" . $record?->contact?->phone_number;
@@ -117,7 +117,7 @@ class ContactsRelationManager extends RelationManager
             ])
             ->headerActions([
 
-                Action::make('createContact')
+                Tables\Actions\CreateAction::make('createContact')
                     ->label('Toevoegen')
                     ->modalHeading('Contactpersoon toevoegen')
 
@@ -186,14 +186,14 @@ class ContactsRelationManager extends RelationManager
 
                 EditAction::make()
                     ->label('Bewerken')->color('success'),
-                DeleteAction::make('Detach')
-                    ->label('Verwijderen')
-                    ->modalHeading('Contactpersonen ontkoppelen van deze ')
-                    ->label('')
-                    ->requiresConfirmation()
-                    ->action(function (array $data, $record): void {
-                        $record->delete();
-                    }),
+                // DeleteAction::make('Detach')
+                //     ->label('Verwijderen')
+                //     ->modalHeading('Contactpersonen ontkoppelen van deze ')
+                //     ->label('')
+                //     ->requiresConfirmation()
+                //     ->action(function (array $data, $record): void {
+                //         $record->delete();
+                //     }),
 
             ])
             ->bulkActions([
