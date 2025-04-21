@@ -87,6 +87,10 @@ class RelationResource extends Resource
                 ->columns(3)
                 ->columnSpan(4),
 
+            Forms\Components\TextArea::make("remark")
+                ->label("Opmerking")
+                ->columnSpan("full"),
+
         ]);
 
     }
@@ -117,6 +121,10 @@ class RelationResource extends Resource
                                     return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
                                 })->placeholder("Niet opgegeven")->columns(4)])->columns(4),
                 ]),
+
+            Components\TextEntry::make('remark')
+                ->label("Opmerking"))
+                ->placeholder("Geen opmerking"),
 
         ]);
 
