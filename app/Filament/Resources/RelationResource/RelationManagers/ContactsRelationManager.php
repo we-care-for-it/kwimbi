@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
-use App\Models\contactsObject;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -25,7 +24,7 @@ class ContactsRelationManager extends RelationManager
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
-        return $ownerRecord->contactsObject->count();
+        return $ownerRecord->contacts->count();
     }
 
     public function form(Form $form): Form
@@ -75,14 +74,14 @@ class ContactsRelationManager extends RelationManager
             ->columns([
 
                 TileColumn::make('first_name')
-                    ->description(fn($record) => $record->contact?->function)
+                    ->description(fn($record) => $record->function)
                     ->sortable()
-                    ->image(fn($record) => $record->contact?->avatar),
+                    ->image(fn($record) => $record->avatar),
 
                 TextColumn::make('email')
                     ->placeholder('-')
                     ->Url(function (object $record) {
-                        return "mailto:" . $record?->contact?->email;
+                        return "mailto:" . $record?->email;
                     })
                     ->label('Emailadres'),
 
