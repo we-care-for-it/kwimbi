@@ -175,9 +175,17 @@ class ContactResource extends Resource
             ])
             ->columns([
 
-                TileColumn::make('name')
-                    ->description(fn($record) => $record->email)
+                TileColumn::make('first_name')
+                    ->description(fn($record) => $record->function)
+                    ->sortable()
                     ->image(fn($record) => $record->avatar),
+
+                TextColumn::make('email')
+                    ->placeholder('-')
+                    ->Url(function (object $record) {
+                        return "mailto:" . $record?->email;
+                    })
+                    ->label('Emailadres'),
 
                 // TextColumn::make('related_to')
                 //     ->label('Gerelateerd  aan')
