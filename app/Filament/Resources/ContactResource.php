@@ -2,7 +2,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
-use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -138,6 +137,10 @@ class ContactResource extends Resource
                                 TextEntry::make('email')->label('E-mail')->placeholder('-'),
                                 TextEntry::make('phone_number')->label('Telefoon')->placeholder('-'),
                                 TextEntry::make('mobile_number')->label('Intern Tel')->placeholder('-'),
+                                TextEntry::make('relation.name')->label('Relatie')->placeholder('-')
+                                    ->url(function ($record) {
+                                        return "/relations/" . $record->relation_id;
+                                    }),
                             ])->columns(4),
 
                         Tabs\Tab::make('Social Media')
@@ -176,24 +179,27 @@ class ContactResource extends Resource
                     ->description(fn($record) => $record->email)
                     ->image(fn($record) => $record->avatar),
 
-                TextColumn::make('related_to')
-                    ->label('Gerelateerd  aan')
-                    ->getStateUsing(function ($record): ?string {
-                        switch ($record->model) {
-                            case 'relation':
-                                return $record?->related_to?->name;
-                                break;
+                // TextColumn::make('related_to')
+                //     ->label('Gerelateerd  aan')
+                //     ->getStateUsing(function ($record): ?string {
+                //         switch ($record->model) {
+                //             case 'relation':
+                //                 return $record?->related_to?->name;
+                //                 break;
 
-                            default:
-                                return "-";
-                        }
+                //             default:
+                //                 return "-";
+                //         }
 
-                    }
-                    )->placeholder('-'),
+                //     }
+                //     )->placeholder('-'),
 
-                TextColumn::make("relation")
-                    ->label("relation.name")
+                TextColumn::make("relation.name")
+                    ->label("Relatie")
                     ->placeholder("-")
+                    ->url(function ($record) {
+                        return "/relations/" . $record->relation_id;
+                    })
                     ->toggleable(),
 
                 TextColumn::make("department")
@@ -241,7 +247,7 @@ class ContactResource extends Resource
     {
         return [
 
-            RelationManagers\RelationRelationManager::class,
+            //    RelationManagers\RelationRelationManager::class,
 
         ];
     }

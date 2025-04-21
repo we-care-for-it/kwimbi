@@ -49,7 +49,7 @@ class Contact extends Model
 
     public function relation(): HasMany
     {
-        return $this->hasMany(ContactObject::class, 'model_id', 'id');
+        return $this->hasMany(Relation::class, 'id', 'relation_id');
     }
 
     public function location(): BelongsTo

@@ -170,7 +170,7 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("customer.name")
                     ->getStateUsing(function (Project $record): ?string {
-                        return $record?->customer->name;
+                        return $record?->customer?->name;
                     })
                     ->url(function (Project $record) {
                         return "/relations/" . $record->customer_id;
