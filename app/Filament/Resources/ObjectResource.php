@@ -256,7 +256,8 @@ class ObjectResource extends Resource
             ->filters([
                 SelectFilter::make('type_id')
                     ->label('Type')
-                    ->options(ObjectType::where('is_active', 1)->where('show_on_resource_page', true)->pluck('name', 'id')),
+                    // ->options(ObjectType::where('is_active', 1)->where('show_on_resource_page', true)->pluck('name', 'id'))
+                    ,
                 // SelectFilter::make('maintenance_company_id')
                 //     ->label('Onderhoudspartij')
                 //  ->options(Relation::where('type_id', 1)->pluck("name", "id")),
