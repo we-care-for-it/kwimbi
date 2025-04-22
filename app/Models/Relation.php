@@ -56,7 +56,7 @@ class Relation extends Model
 
     public function type()
     {
-        return $this->belongsTo(RelationType::class);
+        return $this->belongsTo(relationType::class);
     }
 
     public function tasks()

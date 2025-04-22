@@ -34,4 +34,8 @@ class relationLocation extends Model implements Auditable, HasMedia
     // Number of items to be shown per page
     protected $perPage = 20;
 
+    public function contactsObject()
+    {
+        return $this->hasMany(Contact::class, 'location_id', 'id');
+    }
 }

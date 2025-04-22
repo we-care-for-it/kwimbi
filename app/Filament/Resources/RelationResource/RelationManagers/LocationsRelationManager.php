@@ -232,6 +232,12 @@ class LocationsRelationManager extends RelationManager
             ])
             ->actions([
 
+                Tables\Actions\Action::make('opLocation')->label('Open locatie')
+                    ->url(function ($record) {
+                        return "/relation-locations/" . $record->id;
+
+                    }),
+
                 Tables\Actions\EditAction::make()
                     ->label('Wijzigen')
                     ->slideOver()
