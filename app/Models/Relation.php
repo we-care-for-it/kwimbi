@@ -56,7 +56,7 @@ class Relation extends Model
 
     public function type()
     {
-        return $this->belongsTo(RelationType::class);
+        return $this->belongsTo(relationType::class);
     }
 
     public function tasks()
@@ -79,14 +79,19 @@ class Relation extends Model
         return $this->hasMany(ContactObject::class, 'model_id', 'id');
     }
 
-    public function locations()
-    {
-        return $this->hasMany(ObjectLocation::class);
-    }
+    // public function locations()
+    // {
+    //     return $this->hasMany(ObjectLocation::class);
+    // }
 
     public function timeTracking()
     {
-        return $this->hasMany(timeTracking::class)->where('model', 'Relation');
+        return $this->hasMany(timeTracking::class);
+    }
+
+    public function locations()
+    {
+        return $this->hasMany(relationLocation::class);
     }
 
     public function attachments()

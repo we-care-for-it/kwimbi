@@ -63,13 +63,13 @@ class TimeTrackingResource extends Resource
                                     ->createOptionForm([
                                         Forms\Components\TextInput::make('name'),
                                     ])
-                                    ->createOptionUsing(function (array $data) {
-                                        return Relation::create([
-                                            'name'    => $data['name'],
-                                            'type_id' => 5,
-                                        ])->id;
-                                    })
-                                    ->options(Relation::where('type_id', 5)->pluck("name", "id"))
+                                    // ->createOptionUsing(function (array $data) {
+                                    //     return Relation::create([
+                                    //         'name'    => $data['name'],
+                                    //         'type_id' => 5,
+                                    //     ])->id;
+                                    // })
+                                    ->options(Relation::all()->pluck("name", "id"))
                                     ->placeholder("Niet opgegeven"),
                                 Forms\Components\Select::make("project_id")
                                     ->label("Project")
@@ -275,7 +275,7 @@ class TimeTrackingResource extends Resource
                 SelectFilter::make('relation_id')
                     ->multiple()
                     ->label('Relatie')
-                    ->options(Relation::where('type_id', 5)->pluck("name", "id")),
+                    ->options(Relation::all()->pluck("name", "id")),
                 SelectFilter::make('project_id')
                     ->multiple()
                     ->options(Project::all()->pluck("name", "id"))

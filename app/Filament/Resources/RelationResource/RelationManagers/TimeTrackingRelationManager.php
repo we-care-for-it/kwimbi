@@ -2,12 +2,16 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\TimeTrackingStatus;
+use App\Models\Project;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class TimeTrackingRelationManager extends RelationManager
@@ -34,7 +38,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label("Project")
                     ->preload()
                     ->placeholder("Niet opgegeven")
-                    ->relationship(name: 'projects', titleAttribute: 'name')
+                    ->options(Project::where('customer_id', $this->getOwnerRecord()->id)->pluck("name", "id")->toArray())
                     ->searchable(),
                 Forms\Components\Select::make('status_id')
                     ->label('Status')
@@ -61,32 +65,92 @@ class TimeTrackingRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
-                Tables\Columns\TextColumn::make('started_at')
+                TextColumn::make('started_at')
                     ->label('Datum')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('time')
-                    ->label('Tijd'),
-                Tables\Columns\TextColumn::make('relation.name')
-                    ->label('Relatie'),
-                Tables\Columns\TextColumn::make('status_id')
+                    ->sortable()
+                    ->toggleable()
+                    ->width(50)
+                    ->alignment(Alignment::Center)
+                    ->date('d-m-Y')
+                    ->placeholder('-')
+                    ->searchable(),
+                TextColumn::make('time')
+                    ->label('Tijd')
+                    ->sortable()
+                    ->date('H:i')
+                    ->toggleable()
+                    ->placeholder('-')
+                    ->width(10),
+                TextColumn::make('weekno')
+                    ->label('Week nr.')
+                    ->width(50)
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('description')
+                    ->label('Activiteit')
+                    ->wrap()
+                    ->placeholder('-')
+                    ->searchable(),
+
+                TextColumn::make('project.name')
+                    ->sortable()
+                    ->label('Project')
+                    ->toggleable()
+                    ->sortable()
+                    ->color('primary')
+                    ->placeholder('-')
+                    ->searchable()
+                    ->url(function ($record) {
+                        return "projects/" . $record->project_id;
+                    }),
+                TextColumn::make('status_id')
+                    ->sortable()
                     ->label('Status')
-                    ->formatStateUsing(fn($state) => TimeTrackingStatus::tryFrom($state)?->name()), // Display enum value
-                Tables\Columns\TextColumn::make('workType.name')
-                    ->label('Type'),
-                Tables\Columns\IconColumn::make('invoiceable')
+                    ->badge()
+                    ->toggleable()
+                    ->sortable()
+                    ->placeholder('-')
+                    ->searchable(),
+                ToggleColumn::make('invoiceable')
                     ->label('Facturabel')
-                    ->boolean(),
+                    ->onColor('success')
+                    ->sortable()
+                    ->toggleable()
+                    ->offColor('danger')
+                    ->width(100),
+                // TextColumn::make('total_hours')
+                //     ->label('Uren')
+                //     ->getStateUsing(function (timeTracking $record) {
+                //         $seconds = strtotime($record->time) - strtotime('00:00:00');
+                //         $hours   = floor($seconds / 3600);
+                //         $minutes = floor(($seconds % 3600) / 60);
+                //         return sprintf('%d:%02d', $hours, $minutes);
+                //     })
+                //     ->alignEnd(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->slideOver(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Tijdregistratie Bewerken')
+                    ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

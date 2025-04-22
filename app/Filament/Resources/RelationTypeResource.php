@@ -46,6 +46,7 @@ class RelationTypeResource extends Resource
                 //
             ])
             ->actions([
+
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Relatie type')
                     ->modalDescription('Pas het bestaande object type aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')

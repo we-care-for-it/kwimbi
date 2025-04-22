@@ -5,18 +5,12 @@ use App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
 use App\Models\relationType;
-use App\Services\AddressService;
 use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Infolist;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
@@ -50,47 +44,47 @@ class RelationResource extends Resource
 
                     ->columnSpan("full"),
 
-                Grid::make(5)->schema([Forms\Components\TextInput::make("zipcode")
-                        ->label("Postcode")
-                        ->maxLength(255)
-                        ->suffixAction(Action::make("searchAddressByZipcode")
-                                ->icon("heroicon-m-magnifying-glass")
-                                ->action(function (Get $get, Set $set) {
+                // Grid::make(5)->schema([Forms\Components\TextInput::make("zipcode")
+                //         ->label("Postcode")
+                //         ->maxLength(255)
+                //         ->suffixAction(Action::make("searchAddressByZipcode")
+                //                 ->icon("heroicon-m-magnifying-glass")
+                //                 ->action(function (Get $get, Set $set) {
 
-                                    $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
-                                    $data = json_decode($data);
+                //                     $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
+                //                     $data = json_decode($data);
 
-                                    if (isset($data->error_id)) {
-                                        Notification::make()
-                                            ->warning()
-                                            ->title("Geen resultaten")
-                                            ->body("Helaas er zijn geen gegevens gevonden bij de postcode <b>" . $get("zipcode") . "</b> Controleer de postcode en probeer opnieuw.")->send();
-                                    } else {
-                                        $set("place", $data?->municipality);
-                                        $set("address", $data?->street);
-                                        $set("place", $data?->settlement);
-                                    }
-                                })),
+                //                     if (isset($data->error_id)) {
+                //                         Notification::make()
+                //                             ->warning()
+                //                             ->title("Geen resultaten")
+                //                             ->body("Helaas er zijn geen gegevens gevonden bij de postcode <b>" . $get("zipcode") . "</b> Controleer de postcode en probeer opnieuw.")->send();
+                //                     } else {
+                //                         $set("place", $data?->municipality);
+                //                         $set("address", $data?->street);
+                //                         $set("place", $data?->settlement);
+                //                     }
+                //                 })),
 
-                    Forms\Components\TextInput::make("address")
-                        ->label("Adres")
-                        ->columnSpan(2),
-                    Forms\Components\TextInput::make("place")
-                        ->label("Plaats")
-                        ->columnSpan(2),
+                //     Forms\Components\TextInput::make("address")
+                //         ->label("Adres")
+                //         ->columnSpan(2),
+                //     Forms\Components\TextInput::make("place")
+                //         ->label("Plaats")
+                //         ->columnSpan(2),
 
-                    Forms\Components\Select::make('type_id')
-                        ->required()
-                        ->label("Categorie")
-                        ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
+                //     Forms\Components\Select::make('type_id')
+                //         ->required()
+                //         ->label("Categorie")
+                //         ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
 
-                ])])
-                ->columns(3)
-                ->columnSpan(4),
-
+                //])
+                // ->columns(3)
+                // ->columnSpan(4),
+            ]),
             Forms\Components\Section::make()->schema([
 
-                Forms\Components\TextArea::make("remark")
+                Forms\Components\Textarea::make("remark")
                     ->label("Opmerking")
                     ->columnSpan("full"),
             ]),
@@ -185,7 +179,7 @@ class RelationResource extends Resource
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
+                    ->options(relationType::where('is_active', 1)->pluck('name', 'id')),
                 Tables\Filters\TrashedFilter::make(),
 
             ],
@@ -223,6 +217,7 @@ class RelationResource extends Resource
     {
         return [
             RelationManagers\ContactsRelationManager::class,
+            RelationManagers\LocationsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,

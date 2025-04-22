@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Models\ObjectLocation;
 use App\Models\Project;
 use App\Models\Statuses;
 use Filament\Forms;
@@ -52,6 +51,36 @@ class ProjectsRelationManager extends RelationManager
                     ])
                     ->columnSpan(["lg" => 2]),
 
+                // Section::make()
+                //     ->schema([
+                //         Select::make("location_id")
+                //             ->searchable()
+                //             ->label("Locatie")
+                //             ->columnSpan("full")
+                //             ->options(ObjectLocation::where('customer_id', $this->getOwnerRecord()->id)->pluck("address", "id")),
+                //     ])
+                //     ->columns(2)
+                //     ->columnSpan(1),
+
+                Section::make()
+                    ->schema([
+                        Grid::make([
+                            "default" => 2,
+                            "sm"      => 2,
+                            "md"      => 2,
+                            "lg"      => 2,
+                            "xl"      => 2,
+                            "2xl"     => 2,
+                        ])->schema([
+                            DatePicker::make("requestdate")->label("Aanvraagdatum"),
+                            DatePicker::make("date_of_execution")
+                                ->label("Plandatum")
+                                ->placeholder('Onbekend'),
+                            DatePicker::make("startdate")->label("Startdatum"),
+                            DatePicker::make("enddate")->label("Einddatum"),
+                        ]),
+                    ]),
+
                 Section::make()
                     ->schema([
                         Grid::make([
@@ -75,35 +104,6 @@ class ProjectsRelationManager extends RelationManager
                         ]),
                     ])->columnSpan(1),
 
-                Section::make()
-                    ->schema([
-                        Select::make("location_id")
-                            ->searchable()
-                            ->label("Locatie")
-                            ->columnSpan("full")
-                            ->options(ObjectLocation::where('customer_id', $this->getOwnerRecord()->id)->pluck("address", "id")),
-                    ])
-                    ->columns(2)
-                    ->columnSpan(1),
-
-                Section::make()
-                    ->schema([
-                        Grid::make([
-                            "default" => 2,
-                            "sm"      => 2,
-                            "md"      => 2,
-                            "lg"      => 2,
-                            "xl"      => 2,
-                            "2xl"     => 2,
-                        ])->schema([
-                            DatePicker::make("requestdate")->label("Aanvraagdatum"),
-                            DatePicker::make("date_of_execution")
-                                ->label("Plandatum")
-                                ->placeholder('Onbekend'),
-                            DatePicker::make("startdate")->label("Startdatum"),
-                            DatePicker::make("enddate")->label("Einddatum"),
-                        ]),
-                    ]),
             ]);
     }
 
