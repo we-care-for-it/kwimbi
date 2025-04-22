@@ -222,10 +222,12 @@ class ContactResource extends Resource
 
                 TextColumn::make("phone_number")
                     ->label("Telefoonnummer")
+                    ->toggleable()
                     ->placeholder("-"),
 
                 TextColumn::make("mobile_number")
                     ->label("Intern Telefoonnummer")
+                    ->toggleable()
                     ->placeholder("-"),
 
             ])
