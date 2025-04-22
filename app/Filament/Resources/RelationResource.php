@@ -90,7 +90,7 @@ class RelationResource extends Resource
 
             Forms\Components\Section::make()->schema([
 
-                Forms\Components\TextArea::make("remark")
+                Forms\Components\textArea::make("remark")
                     ->label("Opmerking")
                     ->columnSpan("full"),
             ]),
