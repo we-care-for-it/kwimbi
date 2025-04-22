@@ -62,6 +62,7 @@ class NotesRelationManager extends RelationManager
                     $data['user_id']    = auth()->id();
                     $data['updated_at'] = null;
                     $data['model']      = "relation";
+                    $data['item_id']    = $this->getOwnerRecord()->id;
                     return $data;
                 })->label('Notitie toevoegen')
                     ->modalHeading('Notitie toevoegen'),
@@ -73,6 +74,7 @@ class NotesRelationManager extends RelationManager
                     Tables\Actions\EditAction::make()->mutateFormDataUsing(function (array $data): array {
                         $data['user_id'] = auth()->id();
                         $data['model']   = "relation";
+
                         return $data;
                     })
                         ->modalHeading('Notitie wijzigen'),
