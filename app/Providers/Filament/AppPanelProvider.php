@@ -40,27 +40,7 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-                ->userMenuItems([
-            MenuItem::make()
-                ->label('Feature request')
-                ->url('#')
-                ->icon('heroicon-o-light-bulb'),
-                
-            MenuItem::make()
-                ->label('Server status')
-                ->url('#')
-                ->icon('heroicon-o-server'),
-                
-            MenuItem::make()
-                ->label('Bug rapporteren')
-                ->url('#')
-                ->icon('heroicon-o-bug-ant'),
-                
-            MenuItem::make()
-                ->label('Support')
-                ->url('#')
-                ->icon('heroicon-o-lifebuoy'),
-        ])
+
        
 ->darkMode(false)
 ->default()
@@ -197,6 +177,39 @@ class AppPanelProvider extends PanelProvider
      //   ], isPersistent: true)
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+                   ->userMenuItems([
+
+            // Changelog menu item
+            MenuItem::make('changelog')
+                ->label('Changelog')
+                ->url(fn () => route('filament.app.pages.changelog'))
+                ->icon('heroicon-o-document-text'),
+                
+            // Feature request
+            MenuItem::make('feature-request')
+                ->label('Feature request')
+                ->url('#')
+                ->icon('heroicon-o-light-bulb'),
+                
+            // Server status
+            MenuItem::make('server-status')
+                ->label('Server status')
+                ->url('#')
+                ->icon('heroicon-o-server'),
+                
+            // Bug report
+            MenuItem::make('bug-report')
+                ->label('Bug rapporteren')
+                ->url('#')
+                ->icon('heroicon-o-bug-ant'),
+                
+            // Support
+            MenuItem::make('support')
+                ->label('Support')
+                ->url('#')
+                ->icon('heroicon-o-lifebuoy')
+        ])
+;
     }
 }
