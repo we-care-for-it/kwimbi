@@ -69,7 +69,7 @@ class TimeTrackingResource extends Resource
                                             'type_id' => 5,
                                         ])->id;
                                     })
-                                    ->options(Relation::where('type_id', 5)->pluck("name", "id"))
+                                    ->options(Relation::all()->pluck("name", "id"))
                                     ->placeholder("Niet opgegeven"),
                                 Forms\Components\Select::make("project_id")
                                     ->label("Project")
