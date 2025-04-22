@@ -179,7 +179,7 @@ class RelationResource extends Resource
 
                 SelectFilter::make('type_id')
                     ->label('Categorie')
-                    ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
+                    ->options(relationType::where('is_active', 1)->pluck('name', 'id')),
                 Tables\Filters\TrashedFilter::make(),
 
             ],
