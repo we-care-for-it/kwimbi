@@ -73,10 +73,10 @@ class RelationResource extends Resource
                 //         ->label("Plaats")
                 //         ->columnSpan(2),
 
-                //     Forms\Components\Select::make('type_id')
-                //         ->required()
-                //         ->label("Categorie")
-                //         ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
+                Forms\Components\Select::make('type_id')
+                    ->required()
+                    ->label("Categorie")
+                    ->options(RelationType::where('is_active', 1)->pluck('name', 'id')),
 
                 //])
                 // ->columns(3)
