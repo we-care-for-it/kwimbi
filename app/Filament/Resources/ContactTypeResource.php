@@ -2,7 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactTypeResource\Pages;
-use App\Models\ContactType;
+use App\Models\contactType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 
 class ContactTypeResource extends Resource
 {
-    protected static ?string $model                 = ContactType::class;
+    protected static ?string $model                 = contactType::class;
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
