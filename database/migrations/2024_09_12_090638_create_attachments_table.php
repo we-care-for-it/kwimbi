@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('original_filename')->nullable();
             $table->string('extention')->nullable();
             $table->longtext('description')->nullable();
-            $table->string('size')->nullable();         
+            $table->string('size')->nullable();
             $table->string('user_id');
             $table->integer('item_id')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');
