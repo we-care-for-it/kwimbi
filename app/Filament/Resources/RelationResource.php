@@ -168,7 +168,7 @@ class RelationResource extends Resource
                         $housenumber = " " . $record?->parentaddress?->housenumber;
                     }
 
-                    return $record?->parentaddress?->address . " " . $housenumber . " - " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
+                    return $record?->parentaddress?->address . " " . $housenumber;
 
                 })
                 ->searchable()
@@ -180,7 +180,14 @@ class RelationResource extends Resource
                 ->placeholder('-')
                 ->label('Postcode')
                 ->state(function (Relation $rec) {
-                    return $rec->zipcode . " " . $rec->place;
+                    return $rec->parentaddress?->zipcode;
+                }),
+
+            Tables\Columns\TextColumn::make('place')
+                ->placeholder('-')
+                ->label('Plaats')
+                ->state(function (Relation $rec) {
+                    return $rec->parentaddress?->place;
                 }),
 
             Tables\Columns\TextColumn::make('type.name')
