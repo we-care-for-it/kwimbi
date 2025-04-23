@@ -3,7 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RelationLocationResource\Pages;
 use App\Filament\Resources\RelationLocationResource\RelationManagers;
-use App\Models\RelationLocation;
+use App\Models\relationLocation;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -11,7 +11,7 @@ use Filament\Tables\Table;
 
 class RelationLocationResource extends Resource
 {
-    protected static ?string $model = RelationLocation::class;
+    protected static ?string $model = relationLocation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
