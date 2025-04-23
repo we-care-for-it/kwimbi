@@ -164,11 +164,11 @@ class RelationResource extends Resource
                 ->getStateUsing(function ($record): ?string {
                     $housenumber = "";
 
-                    if ($record->parentaddress->housenumber) {
-                        $housenumber = " " . $record->parentaddress->housenumber;
+                    if ($record?->parentaddress?->housenumber) {
+                        $housenumber = " " . $record?->parentaddress?->housenumber;
                     }
 
-                    return $record->parentaddress->address . " " . $housenumber . " - " . $record->parentaddress->zipcode . " - " . $record->parentaddress->place;
+                    return $record?->parentaddress?->address . " " . $housenumber . " - " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
 
                 })
                 ->searchable()

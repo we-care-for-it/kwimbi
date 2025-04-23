@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\RelationLocationResource\Pages;
 
 use App\Filament\Resources\RelationLocationResource;
@@ -13,7 +12,14 @@ class ViewRelationLocation extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make(),
+            Actions\EditAction::make()
+                ->label("Wijzig")
+                ->modalHeading('Locatie Bewerken')
+                ->modalDescription('Pas de bestaande locatie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                ->tooltip('Bewerken')
+                ->modalIcon('heroicon-o-pencil')
+                ->slideOver(),
+
         ];
     }
 }
