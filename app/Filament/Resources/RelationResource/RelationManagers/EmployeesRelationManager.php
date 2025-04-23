@@ -7,11 +7,18 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Support\Enums\MaxWidth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class EmployeesRelationManager extends RelationManager
 {
     protected static string $relationship = 'employees';
+
+    protected static ?string $title = 'Medewerkers';
+
+    protected static ?string $modelLabel = 'medewerker';
+    
+    protected static ?string $pluralModelLabel = 'medewerkers';
 
     public function form(Form $form): Form
     {
@@ -43,7 +50,6 @@ class EmployeesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('phone_number')
                     ->label('Telefoonnummer')
                     ->maxLength(255),
-
             ]);
     }
 
@@ -52,18 +58,16 @@ class EmployeesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
                     ->sortable()
-                    ->image(fn($record) => $record->avatar),
+                    ->image(fn($record) => $record->avatar)
+                    ->label('Naam'),
 
                 TextColumn::make('email')
                     ->placeholder('-')
-                    ->Url(function (object $record) {
-                        return "mailto:" . $record?->email;
-                    })
-                    ->label('Emailadres'),
+                    ->url(fn($record) => "mailto:{$record->email}")
+                    ->label('E-mailadres'),
 
                 TextColumn::make('department')
                     ->placeholder('-')
@@ -77,45 +81,45 @@ class EmployeesRelationManager extends RelationManager
 
                 TextColumn::make('phone_number')
                     ->placeholder('-')
-                    ->Url(function (object $record) {
-                        return "tel:" . $record?->contact?->phone_number;
-                    })
-                    ->label('Telefoonnummers')
+                    ->url(fn($record) => "tel:{$record->contact?->phone_number}")
+                    ->label('Telefoonnummer')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
-
-            // ->recordUrl(Contact::getUrl('edit', ['record' => auth()->user()])
-
-            //  route('filament.resources.contacts.edit', ['tenant' => filament()->getTenant()])
-            //   )
-
             ->emptyState(view('partials.empty-state-small'))
-
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label("Toevoegen")->slideOver(),
+                Tables\Actions\CreateAction::make()
+                    ->modalWidth(MaxWidth::FourExtraLarge)
+                    ->modalHeading('Medewerker toevoegen')
+                    ->modalDescription('Voeg een nieuwe medewerker toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
+                    ->slideOver()
+                    ->label('Medewerker toevoegen'),
             ])
             ->actions([
-
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Contact Bewerken')
-                    ->modalDescription('Pas het medewerker contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->modalHeading('Medewerker bewerken')
+                    ->modalDescription('Pas de medewerker aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
+                    
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
-                    ->modalHeading('Verwijderen')
+                    ->modalHeading('Medewerker verwijderen')
+                    ->modalDescription('Weet u zeker dat u deze medewerker wilt verwijderen?')
                     ->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->label('Geselecteerde medewerkers verwijderen'),
                 ]),
             ]);
     }
