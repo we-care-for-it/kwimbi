@@ -32,6 +32,11 @@ class Contact extends Model
         return $this->belongsTo(AssetCategory::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(contactType::class);
+    }
+
     public function getAvatarAttribute($value)
     {
         // if ($this->image) {

@@ -1,13 +1,14 @@
 <?php
 namespace App\Filament\Resources\RelationLocationResource\RelationManagers;
 
-use App\Models\Contact;
+use App\Models\contactType;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -59,6 +60,11 @@ class ContactsRelationManager extends RelationManager
                             ->label('Telefoonnummer')
                             ->maxLength(255),
 
+                        Forms\Components\select::make('type_id')
+                            ->label('Categorie')
+                            ->options(contactType::where('is_active', 1)->pluck("name", "id"))
+                        ,
+
                     ]),
 
             ]);
@@ -70,33 +76,43 @@ class ContactsRelationManager extends RelationManager
 
             ->columns([
 
-                TileColumn::make('contact.name')
-                    ->description(fn($record) => $record->contact?->function)
-
-                    ->image(fn($record) => $record->contact?->avatar),
-
-                TextColumn::make('contact.email')
+                TileColumn::make('name')
+                    ->description(fn($record) => $record->function)
+                    ->sortable()
+                    ->image(fn($record) => $record->avatar),
+                TextColumn::make("type.name")
+                    ->label("Categorie")
+                    ->placeholder("-")
+                    ->badge()
+                    ->color('primary')
+                    ->toggleable(),
+                TextColumn::make('email')
                     ->placeholder('-')
                     ->Url(function (object $record) {
-                        return "mailto:" . $record?->contact?->email;
+                        return "mailto:" . $record?->email;
                     })
                     ->label('Emailadres'),
 
-                TextColumn::make('contact.department')
-                    ->placeholder('-')
-                    ->label('Afdeling'),
+                TextColumn::make("department")
+                    ->label("Afdeling")
+                    ->placeholder("-")
+                    ->toggleable(),
 
-                TextColumn::make('contact.function')
-                    ->placeholder('-')
-                    ->label('Functie'),
+                TextColumn::make("function")
+                    ->label("Functie")
+                    ->placeholder("-")
+                    ->toggleable(),
 
-                TextColumn::make('contact.phone_number')
-                    ->placeholder('-')
-                    ->Url(function (object $record) {
-                        return "tel:" . $record?->contact?->phone_number;
-                    })
-                    ->label('Telefoonnummers')
-                    ->description(fn($record): ?string => $record?->mobile_number ?? null),
+                TextColumn::make("phone_number")
+                    ->label("Telefoonnummer")
+                    ->toggleable()
+                    ->placeholder("-"),
+
+                TextColumn::make("mobile_number")
+                    ->label("Intern Telefoonnummer")
+                    ->toggleable()
+                    ->placeholder("-"),
+
             ])
             ->emptyState(view('partials.empty-state-small'))
 
@@ -121,20 +137,19 @@ class ContactsRelationManager extends RelationManager
 
             ->actions([
 
-                Action::make('openCOntact')
-                    ->label('Open contact')
-                    ->url(function ($record) {
-                        return "/contacts/" . $record->contact_id;
-
-                    })
-                ,
-
-                Action::make('Detach')
-                    ->label('Ontkoppel')
-                    ->requiresConfirmation()
-                    ->action(function (array $data, $record): void {
-                        $record->delete();
-                    }),
+                EditAction::make()
+                    ->modalHeading('Contact Bewerken')
+                    ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
+                    ->modalIcon('heroicon-o-pencil')
+                    ->slideOver(),
+                DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
 
             ])
             ->bulkActions([
