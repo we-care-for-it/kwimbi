@@ -38,4 +38,15 @@ class relationLocation extends Model implements Auditable, HasMedia
     {
         return $this->hasMany(Contact::class, 'location_id', 'id');
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'RelationLocation');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'RelationLocation');
+    }
+
 }
