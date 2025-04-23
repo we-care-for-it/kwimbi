@@ -99,6 +99,11 @@ class Relation extends Model
         return $this->hasMany(relationLocation::class);
     }
 
+    public function parentaddress()
+    {
+        return $this->hasOne(relationLocation::class)->where('type_id', 1);
+    }
+
     public function attachments()
     {
         return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');
