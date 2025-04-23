@@ -60,7 +60,7 @@ class ContactsRelationManager extends RelationManager
                             ->label('Telefoonnummer')
                             ->maxLength(255),
 
-                        Forms\Components\select::make('type_id')
+                        Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->options(contactType::where('is_active', 1)->pluck("name", "id"))
                         ,

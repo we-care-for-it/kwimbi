@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
+use App\Models\contactType;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -61,7 +62,10 @@ class ContactsRelationManager extends RelationManager
                         Forms\Components\TextInput::make('phone_number')
                             ->label('Telefoonnummer')
                             ->maxLength(255),
-
+                        Forms\Components\Select::make('type_id')
+                            ->label('Categorie')
+                            ->options(contactType::where('is_active', 1)->pluck("name", "id"))
+                        ,
                     ]),
 
             ]);
@@ -77,7 +81,12 @@ class ContactsRelationManager extends RelationManager
                     ->description(fn($record) => $record->function)
                     ->sortable()
                     ->image(fn($record) => $record->avatar),
-
+                TextColumn::make("type.name")
+                    ->label("Categorie")
+                    ->placeholder("-")
+                    ->badge()
+                    ->color('primary')
+                    ->toggleable(),
                 TextColumn::make('email')
                     ->placeholder('-')
                     ->Url(function (object $record) {

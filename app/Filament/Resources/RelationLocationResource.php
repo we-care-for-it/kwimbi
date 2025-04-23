@@ -11,7 +11,8 @@ use Filament\Tables\Table;
 
 class RelationLocationResource extends Resource
 {
-    protected static ?string $model = relationLocation::class;
+    protected static ?string $model           = relationLocation::class;
+    protected static ?string $navigationLabel = "Oplossingen";
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

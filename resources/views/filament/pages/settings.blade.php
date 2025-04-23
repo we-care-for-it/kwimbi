@@ -19,6 +19,16 @@
             </div>
          </a>
          @endcan
+
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="contact-types">
+            <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
+            <div>
+               <h2>Contactpersonen categorieen </h2>
+               <p class="text-sm text-gray-600">Contactpersoon  types rechten instellen</p>
+            </div>
+         </a>
+
+
          @can('view_any_relation')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="relation-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
@@ -28,6 +38,9 @@
             </div>
          </a>
          @endcan
+
+         /contact-types
+
 
 
          @can('view_any_location')
