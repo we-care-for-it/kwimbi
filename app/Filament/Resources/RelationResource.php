@@ -112,12 +112,19 @@ class RelationResource extends Resource
                                 ->badge()
                                 ->placeholder("Niet opgegeven"),
 
-                            Components\TextEntry::make("address")
+                            Components\TextEntry::make("parentaddress.name")
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
+                                    $housenumber = "";
 
-                                    return $record?->address . " - " . $record?->zipcode . " " . $record?->place;
-                                })->placeholder("Niet opgegeven")->columns(4)])->columns(4),
+                                    if ($record->parentaddress->housenumber) {
+                                        $housenumber = " " . $record->parentaddress->housenumber;
+                                    }
+
+                                    return $record->parentaddress->address . " " . $housenumber . " - " . $record->parentaddress->zipcode . " - " . $record->parentaddress->place;
+
+                                })
+                                ->placeholder("Niet opgegeven")->columns(4)])->columns(4),
                 ]),
 
             Section::make()
@@ -152,12 +159,22 @@ class RelationResource extends Resource
                 ->placeholder('-')
                 ->label('Bedrijfsnaam'),
 
-            Tables\Columns\TextColumn::make('address')
+            Tables\Columns\TextColumn::make("parentaddress")
+                ->toggleable()
+                ->getStateUsing(function ($record): ?string {
+                    $housenumber = "";
+
+                    if ($record->parentaddress->housenumber) {
+                        $housenumber = " " . $record->parentaddress->housenumber;
+                    }
+
+                    return $record->parentaddress->address . " " . $housenumber . " - " . $record->parentaddress->zipcode . " - " . $record->parentaddress->place;
+
+                })
                 ->searchable()
-                ->label('Adres')
-                ->weight('medium')
-                ->placeholder('-')
-                ->alignLeft(),
+                ->label("Adres")->description(function ($record) {
+
+            }),
 
             Tables\Columns\TextColumn::make('zipcode')
                 ->placeholder('-')
