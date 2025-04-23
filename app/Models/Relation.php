@@ -39,6 +39,11 @@ class Relation extends Model
         return $this->hasMany(Project::class, 'customer_id', 'id');
     }
 
+    public function employees(): HasMany
+    {
+        return $this->hasMany(employee::class);
+    }
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);

@@ -216,6 +216,7 @@ class RelationResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\EmployeesRelationManager::class,
             RelationManagers\ContactsRelationManager::class,
             RelationManagers\LocationsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
