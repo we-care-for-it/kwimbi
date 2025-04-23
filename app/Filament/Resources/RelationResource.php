@@ -116,13 +116,16 @@ class RelationResource extends Resource
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
                                     $housenumber = "";
+                                    if ($record?->parentaddress) {
+                                        if ($record?->parentaddress?->housenumber) {
+                                            $housenumber = " " . $record?->parentaddress?->housenumber;
+                                        }
 
-                                    if ($record?->parentaddress?->housenumber) {
-                                        $housenumber = " " . $record?->parentaddress?->housenumber;
+                                        return $record?->parentaddress?->address . " " . $housenumber . " - " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
+
+                                    } else {
+                                        return "Geen locatie toegevoegd";
                                     }
-
-                                    return $record?->parentaddress?->address . " " . $housenumber . " - " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
-
                                 })
                                 ->placeholder("Niet opgegeven")->columns(4)])->columns(4),
                 ]),
