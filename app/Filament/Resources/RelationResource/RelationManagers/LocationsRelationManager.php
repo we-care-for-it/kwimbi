@@ -13,7 +13,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Infolists\Components\Section;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -21,6 +20,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class LocationsRelationManager extends RelationManager
 {
@@ -28,7 +28,7 @@ class LocationsRelationManager extends RelationManager
     protected static ?string $title       = 'Locaties';
     protected static ?string $icon        = 'heroicon-o-building-office-2';
 
-        public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->locations()->count();
     }
@@ -140,92 +140,95 @@ class LocationsRelationManager extends RelationManager
                     ->autosize()]);
     }
 
-public function table(Table $table): Table
-{
-    return $table
-        ->defaultSort('address')
-        ->recordUrl(function ($record) {
-            return "/relation-locations/" . $record->id;
-        })
-        ->columns([
-            Tables\Columns\TextColumn::make("type_id")
-                ->label("Type")
-                ->searchable()
-                ->badge()
-                ->width(100)
-                ->toggleable(),
+    public function table(Table $table): Table
+    {
+        return $table
+            ->defaultSort('address')
+            ->recordUrl(function ($record) {
+                return "/relation-locations/" . $record->id;
+            })
+            ->columns([
+                Tables\Columns\TextColumn::make("type_id")
+                    ->label("Type")
+                    ->searchable()
+                    ->badge()
+                    ->width(100)
+                    ->toggleable(),
 
-            SpatieMediaLibraryImageColumn::make('locationimage')
-                ->label('Afbeelding')
-                ->toggleable()
-                ->limit(2)
-                ->placeholder("-")
-                ->collection('locationimages'),
+                SpatieMediaLibraryImageColumn::make('locationimage')
+                    ->label('Afbeelding')
+                    ->toggleable()
+                    ->limit(2)
+                    ->placeholder("-")
+                    ->collection('locationimages'),
 
-            Tables\Columns\TextColumn::make("address")
-                ->toggleable()
-                ->sortable()
-                ->getStateUsing(function ($record): ?string {
-                    $housenumber = "";
-                    if ($record->housenumber) {
-                        $housenumber = " " . $record->housenumber;
-                    }
-                    return $record->address . $housenumber . " - " . $record->zipcode . " - " . $record->place;
-                })
-                ->searchable()
-                ->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
-                ->description(function ($record) {
-                    return $record?->name;
-                }),
+                Tables\Columns\TextColumn::make("address")
+                    ->toggleable()
+                    ->label('Adres')
 
-            Tables\Columns\TextColumn::make("zipcode")
-                ->label("Postcode")
-                ->searchable()
-                ->toggleable()
-                ->hidden(true),
-                
-            Tables\Columns\TextColumn::make("place")
-                ->label("Plaats")
-                ->searchable()
-                ->toggleable()
-                ->hidden(true),
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        $housenumber = "";
+                        if ($record->housenumber) {
+                            $housenumber = " " . $record->housenumber;
+                        }
+                        return $record->address . $housenumber . " - " . $record->zipcode . " - " . $record->place;
+                    })
+                    ->searchable()
+                    //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
+                    ->description(function ($record) {
+                        return $record?->name;
+                    }),
 
-            Tables\Columns\TextColumn::make("buildingtype.name")
-                ->toggleable()
-                ->sortable()
-                ->label("Gebouwtype")
-                ->badge()
-                ->searchable()
-                ->placeholder("Onbekend")
-        ])
-        ->filters([
-            //
-        ])
-        ->headerActions([
-            Tables\Actions\CreateAction::make()
-                ->label('Locatie toevoegen')
-                ->slideOver()
-                ->modalHeading('Locatie toevoegen'),
-        ])
-        ->actions([
-            Tables\Actions\Action::make('openLocation')
-                ->label('Open locatie')
-                ->url(function ($record) {
-                    return "/relation-locations/" . $record->id;
-                })
-                ->icon('heroicon-s-eye'),
+                Tables\Columns\TextColumn::make("zipcode")
+                    ->label("Postcode")
+                    ->searchable()
+                    ->toggleable()
+                    ->hidden(true),
 
-            Tables\Actions\EditAction::make()
-                ->label('Wijzigen')
-                ->slideOver()
-                ->modalHeading('Locatie wijzigen'),
-                
-            Tables\Actions\DeleteAction::make()
-                ->modalHeading('Bevestig actie')
-                ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
+                Tables\Columns\TextColumn::make("place")
+                    ->label("Plaats")
+                    ->searchable()
+                    ->toggleable()
+                    ->hidden(true),
 
-            RestoreAction::make(),
-        ])
-        ->emptyState(view("partials.empty-state"));
-}
+                Tables\Columns\TextColumn::make("buildingtype.name")
+                    ->toggleable()
+                    ->sortable()
+                    ->label("Gebouwtype")
+                    ->badge()
+                    ->searchable()
+                    ->placeholder("Onbekend"),
+            ])
+            ->filters([
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                    ->label('Locatie toevoegen')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
+                    ->slideOver()
+                    ->modalHeading('Locatie toevoegen'),
+            ])
+            ->actions([
+
+                Tables\Actions\EditAction::make()
+                    ->label('Wijzigen')
+                    ->slideOver()
+                    ->modalHeading('Locatie wijzigen'),
+
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading('Bevestig actie')
+                    ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
+                Tables\Actions\Action::make('openLocation')
+                    ->label('Open locatie')
+                    ->url(function ($record) {
+                        return "/relation-locations/" . $record->id;
+                    })
+                    ->icon('heroicon-s-eye'),
+                RestoreAction::make(),
+            ])
+            ->emptyState(view("partials.empty-state"));
+    }
 }

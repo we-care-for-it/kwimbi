@@ -15,8 +15,8 @@ use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ProjectsRelationManager extends RelationManager
@@ -229,6 +229,8 @@ class ProjectsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()->label('Project toevoegen')
                     ->modalHeading('Project toevoegen')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->slideOver(),
 
             ])

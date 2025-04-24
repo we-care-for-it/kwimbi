@@ -4,7 +4,6 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 use App\Enums\TimeTrackingStatus;
 use App\Models\Project;
 use App\Models\workorderActivities;
-use Illuminate\Database\Eloquent\Model;
 use Filament\Forms;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
@@ -14,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class TimeTrackingRelationManager extends RelationManager
 {
@@ -21,7 +21,7 @@ class TimeTrackingRelationManager extends RelationManager
     protected static ?string $label       = 'Tijdregistratie';
     protected static ?string $title       = 'Tijdregistratie';
     protected static ?string $icon        = 'heroicon-o-clock';
-        
+
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->timeTracking()->count();
@@ -132,6 +132,8 @@ class TimeTrackingRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->slideOver(),
             ])
             ->actions([
