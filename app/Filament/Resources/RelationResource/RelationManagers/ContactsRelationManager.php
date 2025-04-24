@@ -64,7 +64,7 @@ class ContactsRelationManager extends RelationManager
                         Forms\Components\TextInput::make('phone_number')
                             ->label('Telefoonnummer')
                             ->maxLength(255),
-                            
+
                         Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->options(contactType::where('is_active', 1)->pluck("name", "id")),
@@ -80,34 +80,40 @@ class ContactsRelationManager extends RelationManager
                     ->description(fn($record) => $record->function)
                     ->sortable()
                     ->image(fn($record) => $record->avatar),
-                    
+
                 TextColumn::make("company")
                     ->label("Bedrijf")
                     ->placeholder("-")
+                    ->toggleable()
                     ->sortable()
                     ->searchable(),
-                    
+
                 TextColumn::make("type.name")
                     ->label("Categorie")
                     ->placeholder("-")
                     ->badge()
                     ->color('primary')
-                    ->toggleable(),
-                    
+                    ->toggleable()
+                    ->sortable(),
+
                 TextColumn::make('email')
                     ->placeholder('-')
                     ->Url(function (object $record) {
                         return "mailto:" . $record?->email;
                     })
-                    ->label('Emailadres'),
+                    ->label('Emailadres')
+                    ->toggleable()
+                    ->sortable(),
 
                 TextColumn::make('department')
                     ->placeholder('-')
-                    ->sortable()
-                    ->label('Afdeling'),
+                    ->label('Afdeling')
+                    ->toggleable()
+                    ->sortable(),
 
                 TextColumn::make('function')
                     ->placeholder('-')
+                    ->toggleable()
                     ->sortable()
                     ->label('Functie'),
 
@@ -120,12 +126,17 @@ class ContactsRelationManager extends RelationManager
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
             ->emptyState(view('partials.empty-state-small'))
+            ->recordUrl(function ($record) {
+                return "/contacts/" . $record->id;
+            })
             ->filters([
                 //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make('createContact')
-                    ->label('Toevoegen')
+                    ->label('Contacpersoon toevoegen')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
                     ->modalHeading('Contactpersoon tovoegen')
                     ->slideOver(),
             ])
@@ -134,11 +145,12 @@ class ContactsRelationManager extends RelationManager
                     ->label('Bekijk contact')
                     ->color('primary')
                     ->url(function ($record) {
-                        return "/contacts/" . $record->contact_id;
+                        return "/contacts/" . $record->id;
                     })->icon('heroicon-s-eye'),
 
                 EditAction::make()
-                    ->label('Bewerken')->color('success'),
+                    ->slideOver()
+                    ->label('Bewerken'),
             ])
             ->bulkActions([
                 //

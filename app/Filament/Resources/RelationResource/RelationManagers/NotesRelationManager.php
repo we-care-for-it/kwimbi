@@ -65,7 +65,9 @@ class NotesRelationManager extends RelationManager
                     $data['item_id']    = $this->getOwnerRecord()->id;
                     return $data;
                 })->label('Notitie toevoegen')
-                    ->modalHeading('Notitie toevoegen'),
+                    ->modalHeading('Notitie toevoegen')
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus'),
 
             ])
             ->actions([
