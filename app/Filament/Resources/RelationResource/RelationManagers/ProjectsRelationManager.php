@@ -15,6 +15,7 @@ use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
@@ -23,6 +24,11 @@ class ProjectsRelationManager extends RelationManager
     protected static ?string $icon        = "heroicon-o-archive-box";
     protected static string $relationship = 'Projects';
     protected static ?string $title       = 'Projecten';
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->Projects()->count();
+    }
 
     public function form(Form $form): Form
     {

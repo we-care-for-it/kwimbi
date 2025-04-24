@@ -4,6 +4,7 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 use App\Enums\TimeTrackingStatus;
 use App\Models\Project;
 use App\Models\workorderActivities;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Forms;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
@@ -20,6 +21,11 @@ class TimeTrackingRelationManager extends RelationManager
     protected static ?string $label       = 'Tijdregistratie';
     protected static ?string $title       = 'Tijdregistratie';
     protected static ?string $icon        = 'heroicon-o-clock';
+        
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->timeTracking()->count();
+    }
 
     public function form(Form $form): Form
     {
@@ -120,15 +126,6 @@ class TimeTrackingRelationManager extends RelationManager
                     ->toggleable()
                     ->offColor('danger')
                     ->width(100),
-                // TextColumn::make('total_hours')
-                //     ->label('Uren')
-                //     ->getStateUsing(function (timeTracking $record) {
-                //         $seconds = strtotime($record->time) - strtotime('00:00:00');
-                //         $hours   = floor($seconds / 3600);
-                //         $minutes = floor(($seconds % 3600) / 60);
-                //         return sprintf('%d:%02d', $hours, $minutes);
-                //     })
-                //     ->alignEnd(),
             ])
             ->filters([
                 //
