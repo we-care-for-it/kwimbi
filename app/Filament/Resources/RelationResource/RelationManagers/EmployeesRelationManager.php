@@ -7,6 +7,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Support\Enums\MaxWidth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
@@ -19,6 +20,11 @@ class EmployeesRelationManager extends RelationManager
     protected static ?string $modelLabel = 'medewerker';
     
     protected static ?string $pluralModelLabel = 'medewerkers';
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->employees()->count();
+    }
 
     public function form(Form $form): Form
     {
