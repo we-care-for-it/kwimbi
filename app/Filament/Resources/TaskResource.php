@@ -181,11 +181,17 @@ class TaskResource extends Resource
                         return sprintf('%06d', $record?->id);
                     }),
 
-                Tables\Columns\TextColumn::make('type_id')
+                    Tables\Columns\TextColumn::make('type_id')
                     ->badge()
                     ->sortable()
                     ->toggleable()
-                    ->label('Type'),
+                    ->label('Type'),                
+                    
+                    Tables\Columns\TextColumn::make('priority')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Prioriteit'),
 
                 Tables\Columns\TextColumn::make('title')
                     ->description(function ($record): ?string {

@@ -151,7 +151,8 @@ class RelationResource extends Resource
                 ->label("Categorie"),
 
         ])
-            ->defaultGroup('type.name')->
+            // ->defaultGroup('type.name')
+            ->
 
             columns([
 
