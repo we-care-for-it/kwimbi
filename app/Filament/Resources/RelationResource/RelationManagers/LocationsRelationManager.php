@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Enums\LocationType;
 use App\Models\ObjectBuildingType;
 use App\Services\AddressService;
 use Filament\Forms;
@@ -47,7 +46,7 @@ class LocationsRelationManager extends RelationManager
                                 ->label("Gebouwtype"),
 
                             Select::make("type_id")
-                                ->options(LocationType::class)
+                                ->options(ObjectBuildingType::class)
                                 ->default(1)
                                 ->reactive()
                                 ->searchable()
