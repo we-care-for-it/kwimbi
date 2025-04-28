@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\ActionTypes;
+use App\Enums\Priority;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +24,7 @@ class Task extends Model
         return [
             'status_id' => ActionStatus::class,
             'type_id'   => ActionTypes::class,
+            'priority'   => Priority::class,
 
         ];
     }

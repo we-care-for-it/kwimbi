@@ -36,6 +36,7 @@ return [
      */
     'database' => [
         'central_connection' => env('DB_CONNECTION', 'central'),
+        'tenant_connection' => 'tenant',
 
         /**
          * Connection used as a "template" for the dynamically created tenant database connection.

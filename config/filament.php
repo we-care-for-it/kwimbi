@@ -2,6 +2,20 @@
 
 return [
 
+    'panels' => [
+    'tenant' => [
+        'path' => 'tenant',
+        'domain' => '{tenant:domain}',
+        'middleware' => [
+            'web',
+            \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+        ],
+        'auth' => [
+            'guard' => 'tenant',
+        ],
+    ],
+    // ... your admin panel
+],
     /*
     |--------------------------------------------------------------------------
     | Broadcasting
