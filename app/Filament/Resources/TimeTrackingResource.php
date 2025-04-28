@@ -214,7 +214,6 @@ class TimeTrackingResource extends Resource
                         '8' => 'Vorig kwartaal',
                         '9' => 'Vorig jaar',
                     ])
-                    ->multiple()
                     ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
                         $periodes = $data['values'] ?? [];
 
