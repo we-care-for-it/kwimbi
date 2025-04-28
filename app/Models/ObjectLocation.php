@@ -119,13 +119,13 @@ class ObjectLocation extends Model implements Auditable, HasMedia
     public function projects()
     {
         return $this->hasMany(Project::class, 'location_id', 'id');
-    }    
-    
+    }
+
     public function warehouses()
     {
         return $this->hasMany(Warehouse::class, 'location_id', 'id');
-    }    
-    
+    }
+
     public function spaces()
     {
         return $this->hasMany(Space::class, 'location_id', 'id');
