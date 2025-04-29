@@ -161,8 +161,13 @@ class TimeTrackingResource extends Resource
                 Tables\Columns\TextColumn::make('activity.name')
                     ->label('Type')
                     ->badge()
-                    ->searchable()
-                    ->description(fn($record) => $record->description),
+
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('description')
+                    ->label('description')
+                    ->wrap()
+                    ->searchable(),
 
                 TextColumn::make('')
                     ->label('Activiteit')
