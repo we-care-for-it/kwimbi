@@ -1,18 +1,15 @@
 <?php
-
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use App\Enums\TimeTrackingStatus;
-use App\Models\Relation;
 use App\Models\workorderActivities;
 use Filament\Forms;
+use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextArea;
 
 class TimeTrackingRelationManager extends RelationManager
 {
@@ -31,11 +28,6 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label('Tijd')
                     ->seconds(false)
                     ->required(),
-                Forms\Components\Select::make("relation_id")
-                    ->label("Relatie")
-                    ->searchable()
-                    ->options(Relation::where('type_id', 5)->pluck("name", "id")->toArray())
-                    ->placeholder("Niet opgegeven"),
                 Forms\Components\Select::make('status_id')
                     ->label('Status')
                     ->options(TimeTrackingStatus::class)
@@ -67,11 +59,10 @@ class TimeTrackingRelationManager extends RelationManager
                     ->sortable(),
                 Tables\Columns\TextColumn::make('time')
                     ->label('Tijd'),
-                Tables\Columns\TextColumn::make('relation.name')
-                    ->label('Relatie'),
+
                 Tables\Columns\TextColumn::make('status_id')
-                    ->label('Status')
-                    ->formatStateUsing(fn ($state) => TimeTrackingStatus::tryFrom($state)?->name()),
+                    ->label('Status'),
+                //      ->formatStateUsing(fn ($state) => TimeTrackingStatus::tryFrom($state)?->name()),
                 Tables\Columns\TextColumn::make('workType.name')
                     ->label('Type'),
                 Tables\Columns\IconColumn::make('invoiceable')
@@ -90,14 +81,14 @@ class TimeTrackingRelationManager extends RelationManager
                     ->options(workorderActivities::where('is_active', 1)->pluck("name", "id")->toArray()),
                 Tables\Filters\Filter::make('invoiceable')
                     ->label('Alleen facturabel')
-                    ->query(fn (Builder $query) => $query->where('invoiceable', true)),
+                    ->query(fn(Builder $query) => $query->where('invoiceable', true)),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()->label(''),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

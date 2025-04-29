@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use APP\Enums\Priority;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
 use App\Models\ObjectLocation;
@@ -22,6 +23,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 
@@ -121,12 +123,9 @@ class TaskResource extends Resource
                     ->label('Medewerker'),
 
                 Select::make('priority')
-                    ->options([
-                        '1' => 'Hoog',
-                        '2' => 'Gemiddeld',
-                        '3' => 'Laag',
-
-                    ])
+                    ->placeholder('Geen')
+                    ->default(3)
+                    ->options(Priority::class)
                     ->searchable()
                     ->label('Prioriteit'),
 
@@ -153,6 +152,7 @@ class TaskResource extends Resource
                         '3' => 'Te doen',
 
                     ])
+                    ->required()
                     ->searchable()
                     ->default(3)
                     ->label('Type'),
@@ -181,13 +181,13 @@ class TaskResource extends Resource
                         return sprintf('%06d', $record?->id);
                     }),
 
-                    Tables\Columns\TextColumn::make('type_id')
+                Tables\Columns\TextColumn::make('type_id')
                     ->badge()
                     ->sortable()
                     ->toggleable()
-                    ->label('Type'),                
-                    
-                    Tables\Columns\TextColumn::make('priority')
+                    ->label('Type'),
+
+                Tables\Columns\TextColumn::make('priority')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -294,6 +294,9 @@ class TaskResource extends Resource
 
             ])
             ->filters([
+                SelectFilter::make('relation_id')
+                    ->label('Relatie')
+                    ->options(Relation::all()->pluck("name", "id")),
 
             ])
             ->actions([
@@ -301,7 +304,7 @@ class TaskResource extends Resource
                     ->modalHeading('Taak Bewerken')
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
+                    ->label('Bewerken')
                     ->modalIcon('heroicon-o-pencil')
                     ->slideOver(),
 

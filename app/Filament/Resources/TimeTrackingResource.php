@@ -157,11 +157,19 @@ class TimeTrackingResource extends Resource
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('description')
+
+                Tables\Columns\TextColumn::make('activity.name')
+                    ->label('Type')
+                    ->badge()
+                    ->searchable()
+                    ->description(fn($record) => $record->description),
+
+                TextColumn::make('')
                     ->label('Activiteit')
                     ->wrap()
-                    ->placeholder('-')
-                    ->searchable(),
+                    ->hidden()
+                    ->placeholder('-'),
+
                 TextColumn::make('relation.name')
                     ->label('Relatie')
                     ->toggleable()
