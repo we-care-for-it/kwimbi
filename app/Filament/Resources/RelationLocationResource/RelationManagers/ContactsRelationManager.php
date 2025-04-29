@@ -124,6 +124,8 @@ class ContactsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make('createContact')
                     ->label('Toevoegen')
                     ->slideOver()
+                    ->Icon('heroicon-m-plus')
+
                     ->modalHeading('Contactpersoon toevoegen')
                     ->mutateFormDataUsing(function (array $data): array {
 
@@ -142,7 +144,7 @@ class ContactsRelationManager extends RelationManager
                     ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

@@ -166,10 +166,13 @@
 
 }
 
-/* .fi-btn-label {
-  color: white !important;
+.fi-btn-label {
 
-} */
+  border-radius: 5px !important;
+
+}
+
+
 
 
 .widget_dasboard {

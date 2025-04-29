@@ -76,7 +76,7 @@ class ViewObject extends ViewRecord
 
                 Actions\EditAction::make('cancel_top')
                     ->slideOver()
-                    ->icon('heroicon-o-pencil')
+                    ->icon('heroicon-m-pencil-square')
                     ->label('Wijzig'),
 
             ];
@@ -95,7 +95,7 @@ class ViewObject extends ViewRecord
 
                 Actions\EditAction::make('cancel_top')
                     ->slideOver()
-                    ->icon('heroicon-o-pencil')
+                    ->icon('heroicon-m-pencil-square')
                     ->label('Wijzig'),
 
             ];

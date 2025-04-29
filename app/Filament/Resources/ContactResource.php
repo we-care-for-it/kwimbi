@@ -3,6 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
+use App\Models\Relation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -12,20 +13,40 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
 
-    protected static ?string $navigationIcon  = 'heroicon-o-user-group';
-    protected static ?string $navigationLabel = "Contactpersonen";
-    protected static ?string $title           = "Contactpersonen";
+    protected static ?string $navigationIcon        = 'heroicon-o-user-group';
+    protected static ?string $navigationLabel       = "Contactpersonen";
+    protected static ?string $title                 = "Contactpersonen";
+    protected static ?string $recordTitleAttribute  = 'name';
+    protected static ?string $pluralModelLabel      = 'Contactpersonen';
+    protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $pluralModelLabel = 'Contactpersonen';
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['first_name', 'last_name', 'email', 'relation.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+
+        return [
+            'E-mailadres' => $record?->email ?? "Onbekend",
+        ];
+
+    }
 
     public static function form(Form $form): Form
     {
@@ -76,33 +97,33 @@ class ContactResource extends Resource
 
                             ])]),
 
-                Forms\Components\Section::make('')
+                // Forms\Components\Section::make('')
 
-                    ->schema([
+                //     ->schema([
 
-                        Grid::make(2)
-                            ->schema([
+                //         Grid::make(2)
+                //             ->schema([
 
-                                Forms\Components\TextInput::make('street')
-                                    ->label('Straat')
-                                    ->maxLength(255),
+                //                 Forms\Components\TextInput::make('street')
+                //                     ->label('Straat')
+                //                     ->maxLength(255),
 
-                                Forms\Components\TextInput::make('city')
-                                    ->label('Stad')
-                                    ->maxLength(255),
+                //                 Forms\Components\TextInput::make('city')
+                //                     ->label('Stad')
+                //                     ->maxLength(255),
 
-                                Forms\Components\TextInput::make('postal_code')
-                                    ->label('Postcode')
-                                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
-                                    ->maxLength(10),
+                //                 Forms\Components\TextInput::make('postal_code')
+                //                     ->label('Postcode')
+                //                     ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+                //                     ->maxLength(10),
 
-                                Forms\Components\TextInput::make('country')
-                                    ->label('Land')
-                                    ->maxLength(255),
-                            ]),
-                    ]),
+                //                 Forms\Components\TextInput::make('country')
+                //                     ->label('Land')
+                //                     ->maxLength(255),
+                //             ]),
+                //     ]),
 
-                Forms\Components\Section::make('')
+                Forms\Components\Section::make('Sociaal media')
                     ->schema([
                         Forms\Components\TextInput::make('linkedin')
                             ->label('LinkedIn')
@@ -151,14 +172,14 @@ class ContactResource extends Resource
                                 TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
                             ])->columns(4),
 
-                        Tabs\Tab::make('Adresgegevens')
-                            ->icon('heroicon-o-map')
-                            ->schema([
-                                TextEntry::make('street')->label('Straat')->placeholder('-'),
-                                TextEntry::make('city')->label('Stad')->placeholder('-'),
-                                TextEntry::make('postal_code')->label('Postcode')->placeholder('-'),
-                                TextEntry::make('country')->label('Land')->placeholder('-'),
-                            ])->columns(4),
+                        //     Tabs\Tab::make('Adresgegevens')
+                        //         ->icon('heroicon-o-map')
+                        //         ->schema([
+                        //             TextEntry::make('street')->label('Straat')->placeholder('-'),
+                        //             TextEntry::make('city')->label('Stad')->placeholder('-'),
+                        //             TextEntry::make('postal_code')->label('Postcode')->placeholder('-'),
+                        //             TextEntry::make('country')->label('Land')->placeholder('-'),
+                        //         ])->columns(4),
                     ]),
             ]);
     }
@@ -170,18 +191,24 @@ class ContactResource extends Resource
                 fn(Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
             )
             ->groups([
-                Group::make('company_id')
-                    ->label('Bedrijf'),
+                Group::make('relation_id')
+                    ->getTitleFromRecordUsing(fn($record): string => ucfirst($record?->name))
+                    ->label('Relatie'),
+
             ])
             ->columns([
 
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
                     ->sortable()
+                    ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record->avatar),
 
                 TextColumn::make('email')
                     ->placeholder('-')
+                    ->icon('heroicon-m-envelope')
+                    ->sortable()
+                    ->searchable()
                     ->Url(function (object $record) {
                         return "mailto:" . $record?->email;
                     })
@@ -203,6 +230,8 @@ class ContactResource extends Resource
                 //     )->placeholder('-'),
 
                 TextColumn::make("relation.name")
+                    ->sortable()
+                    ->searchable()
                     ->label("Relatie")
                     ->placeholder("-")
                     ->url(function ($record) {
@@ -231,16 +260,26 @@ class ContactResource extends Resource
                     ->placeholder("-"),
 
             ])
-            ->filters([])
+            ->filters([
+                SelectFilter::make('relation_id')
+                    ->label('Relatie')
+                    ->options(Relation::all()->pluck("name", "id")),
+
+            ])
             ->headerActions([
+
             ])
             ->actions([
+                ViewAction::make()
+                    ->label('Bekijk')
+                    ->modalIcon('heroicon-o-eye'),
+
                 EditAction::make()
                     ->modalHeading('Contact Bewerken')
                     ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
@@ -249,7 +288,25 @@ class ContactResource extends Resource
                     ->modalHeading('Verwijderen')
                     ->color('danger'),
             ])
-            ->bulkActions([])
+            ->bulkActions([
+                ExportBulkAction::make()
+                    ->exports([
+                        ExcelExport::make()
+                            ->fromTable()
+                            ->withColumns([
+                                Column::make("name")->heading("Naam"),
+                                Column::make("email")->heading("E-Mailadres"),
+                                Column::make("relation.name")->heading("Relatie"),
+                                Column::make("department")->heading("Afdeling"),
+                                Column::make("function")->heading("Functie"),
+                                Column::make("phone_number")->heading("Telefoonnummer"),
+                                Column::make("Mobiele telefoon")->heading("mobile_number"),
+                            ])
+                            ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                            ->withFilename(date("m-d-Y H:i") . " - Contactpersonen export"),
+                    ]),
+
+            ])
             ->emptyState(view('partials.empty-state'));
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use App\Models\Statuses;
@@ -20,8 +19,8 @@ use Filament\Tables\Table;
 class ReactionsRelationManager extends RelationManager
 {
     protected static string $relationship = "Reactions";
-    protected static ?string $title = 'Reacties';
-    protected static ?string $icon = 'heroicon-o-chat-bubble-left-right';
+    protected static ?string $title       = 'Reacties';
+    protected static ?string $icon        = 'heroicon-o-chat-bubble-left-right';
 
     public function hasCombinedRelationManagerTabsWithForm(): bool
     {
@@ -64,24 +63,34 @@ class ReactionsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make("created_at")
                     ->dateTime("d-m-Y H:i:s")
+                    ->sortable()
                     ->label("Toegevoegd op"),
                 Tables\Columns\TextColumn::make("user.name")
+                    ->sortable()
                     ->label('Medewerker'),
                 Tables\Columns\TextColumn::make("reaction")
                     ->label('Reactie')
                     ->grow(true)->wrap(),
                 Tables\Columns\TextColumn::make("status.name")
+                    ->sortable()
                     ->label("Status")
-                    ->badge()
-                  ])->emptyState(view('partials.empty-state-small'))
+                    ->placeholder('-')
+                    ->badge(),
+            ])->emptyState(view('partials.empty-state-small'))
             ->filters([
                 //No Filters
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->modalHeading('Project reactie toevoegen')
+                    ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Toevoegen')
+                    ->label('Toevoegen')
+                    ->modalIcon('heroicon-o-plus')
+                    ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data["user_id"] = auth()->id();
-                        if (!$data["status_id"]) {
+                        if (! $data["status_id"]) {
                             $data["status_id"] = $this->getOwnerRecord()->status_id;
                         }
                         return $data;
@@ -91,7 +100,12 @@ class ReactionsRelationManager extends RelationManager
             ])
             ->searchable(false)
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Project reactie wijzigen')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
+                    ->modalIcon('heroicon-m-pencil-square')
+                    ->slideOver(),
                 Tables\Actions\DeleteAction::make()
                     ->label(""),
             ])

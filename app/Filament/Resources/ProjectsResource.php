@@ -28,17 +28,33 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ProjectsResource extends Resource
 {
-    protected static ?string $model             = Project::class;
-    protected static ?string $title             = "Projecten";
-    protected static ?string $SearchResultTitle = "Projecten";
-    protected static ?string $navigationLabel   = "Projecten";
-    protected static ?string $navigationIcon    = "heroicon-o-archive-box";
-    protected static bool $isLazy               = false;
-    protected static ?int $navigationSort       = 90;
-    protected static ?string $pluralModelLabel  = 'Projecten';
+    protected static ?string $model                = Project::class;
+    protected static ?string $title                = "Projecten";
+    protected static ?string $SearchResultTitle    = "Projecten";
+    protected static ?string $navigationLabel      = "Projecten";
+    protected static ?string $navigationIcon       = "heroicon-o-archive-box";
+    protected static bool $isLazy                  = false;
+    protected static ?int $navigationSort          = 90;
+    protected static ?string $pluralModelLabel     = 'Projecten';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected $listeners = ["refresh" => '$refresh'];
     private null $id;
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'customer.name'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+
+        return [
+            'Nummer'     => sprintf("%05d", $record?->id),
+            'Relatlatie' => $record?->customer?->name ?? "Onbekend",
+        ];
+
+    }
 
     public static function getNavigationBadge(): ?string
     {
@@ -252,7 +268,8 @@ class ProjectsResource extends Resource
                     ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

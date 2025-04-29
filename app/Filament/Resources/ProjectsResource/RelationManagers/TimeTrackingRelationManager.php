@@ -7,13 +7,24 @@ use Filament\Forms;
 use Filament\Forms\Components\TextArea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class TimeTrackingRelationManager extends RelationManager
 {
     protected static string $relationship = 'timeTracking';
+    protected static ?string $label       = 'Tijdregistratie';
+    protected static ?string $title       = 'Tijdregistratie';
+    protected static ?string $icon        = 'heroicon-o-clock';
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    {
+        return $ownerRecord->timeTracking()->count();
+    }
 
     public function form(Form $form): Form
     {
@@ -30,8 +41,8 @@ class TimeTrackingRelationManager extends RelationManager
                     ->required(),
                 Forms\Components\Select::make('status_id')
                     ->label('Status')
-                    ->options(TimeTrackingStatus::class)
-                    ->default(TimeTrackingStatus::REGISTERED->value) // Changed from IN_PROGRESS to REGISTERED
+                    ->options(TimeTrackingStatus::class) // Using the Enum directly
+                    ->default(2)
                     ->required(),
                 Forms\Components\Select::make('work_type_id')
                     ->label('Type')
@@ -53,47 +64,79 @@ class TimeTrackingRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
-                Tables\Columns\TextColumn::make('started_at')
+                TextColumn::make('started_at')
                     ->label('Datum')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('time')
-                    ->label('Tijd'),
+                    ->sortable()
+                    ->toggleable()
+                    ->width(50)
+                    ->alignment(Alignment::Center)
+                    ->date('d-m-Y')
+                    ->placeholder('-')
+                    ->searchable(),
+                TextColumn::make('time')
+                    ->label('Tijd')
+                    ->sortable()
+                    ->date('H:i')
+                    ->toggleable()
+                    ->placeholder('-')
+                    ->width(10),
+                TextColumn::make('weekno')
+                    ->label('Week nr.')
+                    ->width(50)
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('description')
+                    ->label('Activiteit')
+                    ->wrap()
+                    ->placeholder('-')
+                    ->searchable(),
 
-                Tables\Columns\TextColumn::make('status_id')
-                    ->label('Status'),
-                //      ->formatStateUsing(fn ($state) => TimeTrackingStatus::tryFrom($state)?->name()),
-                Tables\Columns\TextColumn::make('workType.name')
-                    ->label('Type'),
-                Tables\Columns\IconColumn::make('invoiceable')
+                TextColumn::make('status_id')
+                    ->sortable()
+                    ->label('Status')
+                    ->badge()
+                    ->toggleable()
+                    ->sortable()
+                    ->placeholder('-')
+                    ->searchable(),
+                ToggleColumn::make('invoiceable')
                     ->label('Facturabel')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Omschrijving')
-                    ->limit(50),
+                    ->onColor('success')
+                    ->sortable()
+                    ->toggleable()
+                    ->offColor('danger')
+                    ->width(100),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('status_id')
-                    ->label('Status')
-                    ->options(TimeTrackingStatus::class),
-                Tables\Filters\SelectFilter::make('work_type_id')
-                    ->label('Type')
-                    ->options(workorderActivities::where('is_active', 1)->pluck("name", "id")->toArray()),
-                Tables\Filters\Filter::make('invoiceable')
-                    ->label('Alleen facturabel')
-                    ->query(fn(Builder $query) => $query->where('invoiceable', true)),
+                //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->icon('heroicon-m-plus')
+                    ->modalIcon('heroicon-o-plus')
+                    ->slideOver(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()->label(''),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Tijdregistratie Bewerken')
+                    ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
+                    ->modalIcon('heroicon-m-pencil-square')
+                    ->slideOver(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalIcon('heroicon-o-trash')
+                    ->tooltip('Verwijderen')
+                    ->label('')
+                    ->modalHeading('Verwijderen')
+                    ->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view("partials.empty-state"));
     }
 }

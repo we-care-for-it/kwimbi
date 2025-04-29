@@ -87,7 +87,7 @@ class UserResource extends Resource
                     ->modalDescription('Pas de bestaande gebruiker aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 Impersonate::make()->label('Login'),
                 DeleteAction::make()

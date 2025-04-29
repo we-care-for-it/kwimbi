@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -19,7 +20,7 @@ class relationLocation extends Model implements Auditable, HasMedia
     use SoftDeletes;
     use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
-
+    use HasFilamentComments;
     protected function casts(): array
     {
         return [

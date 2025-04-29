@@ -37,8 +37,8 @@ class ProductCategoriesResource extends Resource
                     ->modalDescription('Pas de bestaande productcategorie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->slideOver(),            ])
+                    ->modalIcon('heroicon-m-pencil-square')
+                    ->slideOver()])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -4,11 +4,11 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Filament\Support\Enums\MaxWidth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class EmployeesRelationManager extends RelationManager
@@ -18,7 +18,7 @@ class EmployeesRelationManager extends RelationManager
     protected static ?string $title = 'Medewerkers';
 
     protected static ?string $modelLabel = 'medewerker';
-    
+
     protected static ?string $pluralModelLabel = 'medewerkers';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
@@ -111,9 +111,9 @@ class EmployeesRelationManager extends RelationManager
                     ->modalDescription('Pas de medewerker aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
-                    
+
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

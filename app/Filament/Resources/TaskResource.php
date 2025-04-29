@@ -26,6 +26,8 @@ use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TaskResource extends Resource
 {
@@ -305,11 +307,10 @@ class TaskResource extends Resource
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
 
-                DeleteAction::make()
-                    ->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
+                DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
                     ->icon('heroicon-o-check')
                     ->modalIcon('heroicon-o-check')
                     ->modalHeading('Actie voltooien')
@@ -329,6 +330,16 @@ class TaskResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     RestoreBulkAction::make(),
+
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make()
+                                ->fromTable()
+
+                                ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                                ->withFilename(date("m-d-Y H:i") . " - Takenoverzicht export"),
+                        ]),
+
                 ]),
 
             ])->emptyState(view("partials.empty-state"));

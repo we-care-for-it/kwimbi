@@ -64,7 +64,7 @@ class DepartmentResource extends Resource
                     ->modalDescription('Pas de bestaande afdeling aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

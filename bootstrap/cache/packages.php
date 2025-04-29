@@ -64,6 +64,17 @@
       0 => 'Dedoc\\Scramble\\ScrambleServiceProvider',
     ),
   ),
+  'devonab/filament-easy-footer' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentEasyFooter' => 'Devonab\\FilamentEasyFooter\\Facades\\EasyFooter',
+    ),
+    'providers' => 
+    array (
+      0 => 'Devonab\\FilamentEasyFooter\\EasyFooterServiceProvider',
+    ),
+  ),
   'dutchcodingcompany/filament-developer-logins' => 
   array (
     'providers' => 
@@ -343,6 +354,13 @@
     'providers' => 
     array (
       0 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
+    ),
+  ),
+  'parallax/filament-comments' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Parallax\\FilamentComments\\FilamentCommentsServiceProvider',
     ),
   ),
   'php-mqtt/laravel-client' => 

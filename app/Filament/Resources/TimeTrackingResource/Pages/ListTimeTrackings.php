@@ -20,6 +20,7 @@ class ListTimeTrackings extends ListRecords
                 ->modalIcon('heroicon-o-plus')
                 ->slideOver()
                 ->label('Registratie toevoegen'),
+
         ];
     }
     public function getHeading(): string
