@@ -49,4 +49,8 @@ class relationLocation extends Model implements Auditable, HasMedia
         return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'RelationLocation');
     }
 
+    public function buildingtype()
+    {
+        return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
+    }
 }

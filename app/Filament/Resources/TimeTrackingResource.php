@@ -18,6 +18,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -107,10 +108,11 @@ class TimeTrackingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->groups([
                 Group::make('weekno')
                     ->label('Weeknummer'),
-                Group::make('project_id')
+                Group::make('project.name')
                     ->label('Project'),
                 Group::make('relation_id')
                     ->getTitleFromRecordUsing(fn(TimeTracking $record): string => ucfirst($record?->relation?->name))
@@ -120,7 +122,11 @@ class TimeTrackingResource extends Resource
                 Group::make('invoiceable')
                     ->label('Facturable'),
             ])
+            ->defaultSort('weekno', 'asc')
             ->defaultGroup('weekno')
+            ->persistSearchInSession()
+            ->persistSortInSession()
+            ->persistColumnSearchesInSession()
             ->columns([
                 TextColumn::make('started_at')
                     ->label('Datum')
@@ -132,24 +138,38 @@ class TimeTrackingResource extends Resource
                     ->placeholder('-')
                     ->searchable(),
                 TextColumn::make('time')
-                    ->label('Tijd')
-                    ->sortable()
-                    ->date('H:i')
-                    ->toggleable()
-                    ->placeholder('-')
-                    ->width(10),
+                    ->label('Uren')
+                    ->getStateUsing(function (timeTracking $record) {
+                        $seconds = strtotime($record->time) - strtotime('00:00:00');
+                        $hours   = floor($seconds / 3600);
+                        $minutes = floor(($seconds % 3600) / 60);
+                        return sprintf('%d:%02d', $hours, $minutes);
+                    })
+                    ->alignEnd()
+                // ->summarize(Sum::make()->label('Total'))
+                    ->width(20),
                 TextColumn::make('weekno')
                     ->label('Week nr.')
+                    ->badge()
                     ->width(50)
                     ->placeholder('-')
+                    ->alignment(Alignment::Center)
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('description')
+
+                Tables\Columns\TextColumn::make('activity.name')
+                    ->label('Type')
+                    ->badge()
+                    ->searchable()
+                    ->description(fn($record) => $record->description),
+
+                TextColumn::make('')
                     ->label('Activiteit')
                     ->wrap()
-                    ->placeholder('-')
-                    ->searchable(),
+                    ->hidden()
+                    ->placeholder('-'),
+
                 TextColumn::make('relation.name')
                     ->label('Relatie')
                     ->toggleable()
@@ -186,15 +206,7 @@ class TimeTrackingResource extends Resource
                     ->toggleable()
                     ->offColor('danger')
                     ->width(100),
-                // TextColumn::make('total_hours')
-                //     ->label('Uren')
-                //     ->getStateUsing(function (timeTracking $record) {
-                //         $seconds = strtotime($record->time) - strtotime('00:00:00');
-                //         $hours   = floor($seconds / 3600);
-                //         $minutes = floor(($seconds % 3600) / 60);
-                //         return sprintf('%d:%02d', $hours, $minutes);
-                //     })
-                //     ->alignEnd(),
+
             ])
             ->filters([
                 SelectFilter::make('periode_id')
@@ -210,7 +222,6 @@ class TimeTrackingResource extends Resource
                         '8' => 'Vorig kwartaal',
                         '9' => 'Vorig jaar',
                     ])
-                    ->multiple()
                     ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
                         $periodes = $data['values'] ?? [];
 
@@ -273,11 +284,9 @@ class TimeTrackingResource extends Resource
                         });
                     }),
                 SelectFilter::make('relation_id')
-                    ->multiple()
                     ->label('Relatie')
                     ->options(Relation::all()->pluck("name", "id")),
                 SelectFilter::make('project_id')
-                    ->multiple()
                     ->options(Project::all()->pluck("name", "id"))
                     ->label('Project'),
                 SelectFilter::make('status_id')

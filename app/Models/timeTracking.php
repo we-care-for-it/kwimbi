@@ -47,4 +47,9 @@ class timeTracking extends Model implements Auditable
         return $this->belongsTo(Project::class);
     }
 
+    public function activity()
+    {
+        return $this->hasOne(workorderActivities::class, 'id', 'work_type_id');
+    }
+
 }
