@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Contact extends Model
 {
     use HasFactory;
-
+    use HasFilamentComments;
     /**
      * @var string[]
      */

@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Filament\Resources\ContactResource\Pages;
 
 use App\Filament\Resources\ContactResource;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Resources\Pages\ViewRecord;
+use Parallax\FilamentComments\Actions\CommentsAction;
 
 class ViewContact extends ViewRecord
 {
@@ -16,6 +16,7 @@ class ViewContact extends ViewRecord
         return [
             EditAction::make()->label('Wijzigen')->slideOver(),
             DeleteAction::make(),
+            CommentsAction::make(),
         ];
     }
 }
