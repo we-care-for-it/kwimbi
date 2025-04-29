@@ -122,8 +122,8 @@ class TimeTrackingResource extends Resource
                 Group::make('invoiceable')
                     ->label('Facturable'),
             ])
-            ->defaultSort('weekno', 'asc')
-            ->defaultGroup('weekno')
+            // ->defaultSort('weekno', 'asc')
+            // ->defaultGroup('weekno')
             ->persistSearchInSession()
             ->persistSortInSession()
             ->persistColumnSearchesInSession()
@@ -161,7 +161,7 @@ class TimeTrackingResource extends Resource
                 Tables\Columns\TextColumn::make('activity.name')
                     ->label('Type')
                     ->badge()
-
+                    ->toggleable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('description')
