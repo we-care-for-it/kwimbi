@@ -13,7 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -210,20 +210,21 @@ class ProjectsRelationManager extends RelationManager
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Project Bewerken')
-                    ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->tooltip('Bewerken')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->slideOver(),
 
-                Action::make('openRelation')
+                ViewAction::make('openRelation')
                     ->label('Open project')
                     ->url(function ($record) {
                         return "/projects/" . $record->id;
                     })->icon('heroicon-s-credit-card')
                 ,
+
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Project Bewerken')
+                    ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken')
+                    ->label('Bewerken')
+                    ->modalIcon('heroicon-m-pencil-square')
+                    ->slideOver(),
 
             ])
             ->headerActions([

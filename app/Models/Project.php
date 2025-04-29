@@ -4,12 +4,13 @@ namespace App\Models;
 use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 
 class Project extends Model implements Auditable
 {
     //  use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-
+    use HasFilamentComments;
     public function location()
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'location_id');
@@ -28,7 +29,7 @@ class Project extends Model implements Auditable
 
     public function status()
     {
-        return $this->hasOne(Statuses::class, 'id', 'status_id')->where('model', 'Project');
+        return $this->hasOne(Statuses::class, 'id', 'status_id')->where('model', 'project');
     }
 
     public function customer()

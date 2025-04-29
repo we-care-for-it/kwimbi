@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\RelationResource\Pages;
 
 use App\Filament\Resources\RelationResource;
@@ -16,4 +15,5 @@ class EditRelation extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
 }

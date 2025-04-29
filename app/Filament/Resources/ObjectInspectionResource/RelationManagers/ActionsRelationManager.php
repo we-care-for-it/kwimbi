@@ -130,7 +130,7 @@ class ActionsRelationManager extends RelationManager
                 //  ActionGroup::make([
                 EditAction::make()
                     ->modalHeading('Snel bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->hidden(fn($record) => $record->external_uuid)
                     ->label('Snel bewerken')
 

@@ -69,7 +69,7 @@ class ViewObjectInspection extends ViewRecord
                 ])
                 ->visible(fn($record) => $record?->document ?? true),
             Actions\EditAction::make('cancel_top')
-                ->icon('heroicon-o-pencil')
+                ->icon('heroicon-m-pencil-square')
                 ->label('Wijzig')
                 ->hidden(fn($record) => $record->external_uuid),
 

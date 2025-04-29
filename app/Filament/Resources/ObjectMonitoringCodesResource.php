@@ -86,8 +86,8 @@ class ObjectMonitoringCodesResource extends Resource
                     ->modalDescription('Pas de bestaande monitoringcode aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-o-pencil')
-                    ->slideOver(),                
+                    ->modalIcon('heroicon-m-pencil-square')
+                    ->slideOver(),
                 Tables\Actions\DeleteAction::make()
                     ->modalHeading('Verwijderen van deze rij')
                     ->label(''),

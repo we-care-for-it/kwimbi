@@ -32,16 +32,17 @@ use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Rupadana\ApiService\ApiServicePlugin;
 use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
- 
+ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
-
+use Filament\Enums\ThemeMode;
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-
-       
+      ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+  ->font('Poppins')
+           ->defaultThemeMode(ThemeMode::Light)
 ->darkMode(false)
 ->default()
 
@@ -54,6 +55,19 @@ class AppPanelProvider extends PanelProvider
   FilamentAuthenticationLogPlugin::make()
 ])->passwordReset()
  
+ ->favicon(asset('https://workall.nl/favicon.png')) 
+
+ 
+->plugins([
+    EasyFooterPlugin::make()
+   ->withLogo(
+            'https://workall.nl/favicon.png', // Path to logo
+            'https://www.workall.nl'                                // URL for logo link (optional)
+        )
+ ->withFooterPosition('sidebar.footer'),
+])
+
+
 ->plugins([
 
  FilamentEditProfilePlugin::make()

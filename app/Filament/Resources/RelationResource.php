@@ -17,9 +17,11 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 //Form
 
@@ -151,10 +153,10 @@ class RelationResource extends Resource
                 ->label("Categorie"),
 
         ])
-            // ->defaultGroup('type.name')
+        // ->defaultGroup('type.name')
             ->
 
-            columns([
+        columns([
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
@@ -213,12 +215,18 @@ class RelationResource extends Resource
             ],
             )
             ->actions([
+
+                CommentsAction::make(),
+                ViewAction::make()
+                    ->label('Bekijk')
+                    ->modalIcon('heroicon-o-eye'),
+
                 EditAction::make()
                     ->modalHeading('Relatie Bewerken')
                     ->modalDescription('Pas de Relatie leverancier aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

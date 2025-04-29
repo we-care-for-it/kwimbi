@@ -169,7 +169,7 @@ class TimeTrackingResource extends Resource
                     ->wrap()
                     ->searchable(),
 
-                TextColumn::make('')
+                TextColumn::make('activity.name')
                     ->label('Activiteit')
                     ->wrap()
                     ->hidden()
@@ -305,7 +305,7 @@ class TimeTrackingResource extends Resource
                     ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-o-pencil')
+                    ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

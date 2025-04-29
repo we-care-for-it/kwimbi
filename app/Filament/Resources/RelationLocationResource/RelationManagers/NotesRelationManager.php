@@ -65,6 +65,8 @@ class NotesRelationManager extends RelationManager
                     $data['model']      = "RelationLocation";
                     return $data;
                 })->label('Notitie toevoegen')
+                    ->Icon('heroicon-m-plus')
+
                     ->slideOver()
                     ->modalHeading('Notitie toevoegen'),
 

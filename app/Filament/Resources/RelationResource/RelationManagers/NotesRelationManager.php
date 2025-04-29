@@ -44,6 +44,12 @@ class NotesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
 
+                Tables\Columns\TextColumn::make("created_at")
+                    ->dateTime("d-m-Y H:i:s")
+                    ->sortable()
+                    ->width('120px')
+                    ->label("Toegevoegd op"),
+
                 Tables\Columns\TextColumn::make('note')->label('Notitie')->wrap(),
                 // ->description(function ($record) {
 
@@ -66,25 +72,25 @@ class NotesRelationManager extends RelationManager
                     return $data;
                 })->label('Notitie toevoegen')
                     ->modalHeading('Notitie toevoegen')
+                    ->slideOver()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus'),
 
             ])
             ->actions([
 
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()->mutateFormDataUsing(function (array $data): array {
-                        $data['user_id'] = auth()->id();
-                        $data['model']   = "relation";
+                Tables\Actions\EditAction::make()->mutateFormDataUsing(function (array $data): array {
+                    $data['user_id'] = auth()->id();
+                    $data['model']   = "relation";
 
-                        return $data;
-                    })
-                        ->modalHeading('Notitie wijzigen'),
-                    Tables\Actions\DeleteAction::make()
+                    return $data;
+                })
+                    ->modalHeading('Notitie wijzigen'),
+                Tables\Actions\DeleteAction::make()
 
-                        ->modalHeading('Bevestig actie')
-                        ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
-                ]),
+                    ->modalHeading('Bevestig actie')
+                    ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
+
             ])
             ->bulkActions([
                 //

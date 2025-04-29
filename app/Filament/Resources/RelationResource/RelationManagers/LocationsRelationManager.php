@@ -211,7 +211,12 @@ class LocationsRelationManager extends RelationManager
                     ->modalHeading('Locatie toevoegen'),
             ])
             ->actions([
-
+                Tables\Actions\ViewAction::make('openLocation')
+                    ->label('Bekijk')
+                    ->url(function ($record) {
+                        return "/relation-locations/" . $record->id;
+                    })
+                    ->icon('heroicon-s-eye'),
                 Tables\Actions\EditAction::make()
                     ->label('Wijzigen')
                     ->slideOver()
@@ -220,12 +225,7 @@ class LocationsRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make()
                     ->modalHeading('Bevestig actie')
                     ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
-                Tables\Actions\Action::make('openLocation')
-                    ->label('Open locatie')
-                    ->url(function ($record) {
-                        return "/relation-locations/" . $record->id;
-                    })
-                    ->icon('heroicon-s-eye'),
+
                 RestoreAction::make(),
             ])
             ->emptyState(view("partials.empty-state"));

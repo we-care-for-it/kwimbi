@@ -79,12 +79,13 @@ class AttachmentsRelationManager extends RelationManager
                     $data['model']   = "RelationLocation";
 
                     return $data;
-                })->label('Bijlage toevoegen'),
+                })->label('Bijlage toevoegen')->icon('heroicon-m-plus'),
             ])
             ->actions([
 
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
+
                     ->action(fn($record) => Storage::disk('private')
                             ->download($record->filename))
                     ->icon('heroicon-o-document-arrow-down'),

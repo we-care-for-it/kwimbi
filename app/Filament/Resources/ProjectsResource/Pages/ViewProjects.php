@@ -5,6 +5,7 @@ use App\Filament\Resources\ProjectsResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
+use Parallax\FilamentComments\Actions\CommentsAction;
 
 class ViewProjects extends ViewRecord
 {
@@ -19,10 +20,13 @@ class ViewProjects extends ViewRecord
                 ->label('Terug naar overzicht')
                 ->link()
                 ->color('gray'),
-            Actions\EditAction::make()->icon('heroicon-m-pencil-square'),
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')
+                ->slideOver(),
             Actions\DeleteAction::make()->icon('heroicon-m-trash'),
+            CommentsAction::make(),
         ];
     }
+
     protected function getHeaderWidgets(): array
     {
         return [
