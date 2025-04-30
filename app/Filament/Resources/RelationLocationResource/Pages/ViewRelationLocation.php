@@ -21,6 +21,6 @@ class ViewRelationLocation extends ViewRecord
 
     public function getTitle(): string
     {
-        return $this->getRecord()->name;
+        return $this->getRecord()?->address . " " . $this->getRecord()?->housenumber . "," . $this->getRecord()?->zipcode . " " . $this->getRecord()?->place;
     }
 }

@@ -6,7 +6,6 @@ use App\Services\AddressService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -39,22 +38,11 @@ class LocationsRelationManager extends RelationManager
                         ->schema([Forms\Components\TextInput::make("name")
                                 ->label("Naam"),
 
-                            Select::make("building_type_id")
-                                ->options(ObjectBuildingType::pluck("name", "id"))
-                                ->reactive()
-                                ->searchable()
-                                ->label("Gebouwtype"),
-
-                            Select::make("type_id")
-                                ->options(ObjectBuildingType::class)
-                                ->default(1)
-                                ->reactive()
-                                ->searchable()
-                                ->label("Gebouwtype"),
-
                         ])]),
 
-            Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
+            Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([
+
+                Forms\Components\TextInput::make("zipcode")
                     ->label("Postcode")
                     ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
 
@@ -191,13 +179,13 @@ class LocationsRelationManager extends RelationManager
                     ->toggleable()
                     ->hidden(true),
 
-                Tables\Columns\TextColumn::make("buildingtype.name")
-                    ->toggleable()
-                    ->sortable()
-                    ->label("Gebouwtype")
-                    ->badge()
-                    ->searchable()
-                    ->placeholder("Onbekend"),
+                // Tables\Columns\TextColumn::make("buildingtype.name")
+                //     ->toggleable()
+                //     ->sortable()
+                //     ->label("Gebouwtype")
+                //     ->badge()
+                //     ->searchable()
+                //     ->placeholder("Onbekend"),
             ])
             ->filters([
                 //

@@ -165,7 +165,7 @@ class TimeTrackingResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('description')
-                    ->label('description')
+                    ->label('Omschrijving')
                     ->wrap()
                     ->searchable(),
 
