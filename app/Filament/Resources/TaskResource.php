@@ -64,7 +64,7 @@ class TaskResource extends Resource
                         //  'project'       => 'Project',
                         //   'contactperson' => 'Contactpersoon',
                         //  'object'        => 'Object',
-                        'location' => 'Locatie',
+
                     ])
                     ->searchable()
                     ->live()

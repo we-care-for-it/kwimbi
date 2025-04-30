@@ -278,10 +278,10 @@ class RelationLocationResource extends Resource
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
 
-                // TextEntry::make("buildingtype.name")
-                //     ->label("Gebouwtype")
-                //     ->badge()
-                //     ->placeholder("Niet opgegeven"),
+                TextEntry::make("buildingtype.name")
+                    ->label("Gebouwtype")
+                    ->badge()
+                    ->placeholder("Niet opgegeven"),
 
                 // TextEntry::make("complexnumber")
                 //     ->label("Complexnummer")

@@ -41,7 +41,7 @@ class AppPanelProvider extends PanelProvider
     {
         return $panel
       ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
-  ->font('Poppins')
+
            ->defaultThemeMode(ThemeMode::Light)
 ->darkMode(false)
 ->default()
