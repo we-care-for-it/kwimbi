@@ -294,9 +294,9 @@ class TimeTrackingResource extends Resource
                 SelectFilter::make('project_id')
                     ->options(Project::all()->pluck("name", "id"))
                     ->label('Project'),
-                SelectFilter::make('status_id')
-                    ->options(TimeTrackingStatus::class)
-                    ->label('Status'),
+                // SelectFilter::make('status_id')
+                //     ->options(TimeTrackingStatus::class)
+                //     ->label('Status'),
             ], layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
             ->actions([

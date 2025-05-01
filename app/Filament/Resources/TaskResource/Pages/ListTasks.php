@@ -2,9 +2,12 @@
 namespace App\Filament\Resources\TaskResource\Pages;
 
 use App\Filament\Resources\TaskResource;
+use App\Models\Task;
 use Filament\Actions;
+use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListTasks extends ListRecords
 {
@@ -27,4 +30,24 @@ class ListTasks extends ListRecords
     {
         return "Taak - Overzicht";
     }
+
+    public function getTabs(): array
+    {
+        return [
+            'Alles'     => Tab::make(),
+            'Hoog'      => Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1))
+                ->badgeColor('danger')
+                ->badge(Task::query()->where('priority', 2)->count()),
+            'Gemiddeld' => Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2))
+                ->badgeColor('warning')
+                ->badge(Task::query()->where('priority', 1)->count()),
+            'Laag'      => Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 3))
+                ->badgeColor('success')
+                ->badge(Task::query()->where('priority', 3)->count()),
+        ];
+    }
+
 }
