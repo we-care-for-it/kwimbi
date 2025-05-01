@@ -32,7 +32,7 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 class TaskResource extends Resource
 {
     protected static ?string $model            = Task::class;
-    protected static ?string $navigationIcon   = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon   = 'heroicon-o-list-bullet';
     protected static ?string $navigationLabel  = 'Taken';
     protected static ?string $pluralModelLabel = 'Taken';
     protected static ?string $title            = 'Taken';

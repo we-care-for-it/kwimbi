@@ -50,8 +50,8 @@ class ProjectsResource extends Resource
     {
 
         return [
-            'Nummer'     => sprintf("%05d", $record?->id),
-            'Relatlatie' => $record?->customer?->name ?? "Onbekend",
+            'Nummer'  => sprintf("%05d", $record?->id),
+            'Relatie' => $record?->customer?->name ?? "Onbekend",
         ];
 
     }
