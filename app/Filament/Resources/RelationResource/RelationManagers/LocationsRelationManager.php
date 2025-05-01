@@ -152,7 +152,6 @@ class LocationsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make("address")
                     ->toggleable()
                     ->label('Adres')
-
                     ->sortable()
                     ->getStateUsing(function ($record): ?string {
                         $housenumber = "";
