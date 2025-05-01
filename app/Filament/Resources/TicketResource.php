@@ -53,9 +53,19 @@ class TicketResource extends Resource
                     ->getStateUsing(function ($record): ?string {
                         return $record->AssignedByUser->name;
                     })
-                    ->label('MEdewerker')
+                    ->label('Medewerker')
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record->AssignedByUser->avatar),
+
+                TileColumn::make('createByUser')
+                // ->description(fn($record) => $record->AssignedByUser->email)
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        return $record->createByUser->name;
+                    })
+                    ->label('Gemeld door')
+                    ->searchable(['first_name', 'last_name'])
+                    ->image(fn($record) => $record->createByUser->avatar),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->sortable()
@@ -78,11 +88,6 @@ class TicketResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->label('Omschrijving'),
-
-                // Tables\Columns\TextColumn::make('createByUser.name')
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->label('Medewerker'),
 
                 // Tables\Columns\TextColumn::make('AssignedByUser.name')
                 //     ->sortable()
