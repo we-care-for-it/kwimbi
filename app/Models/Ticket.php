@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ class Ticket extends Model
 
     protected $casts = [
         'status_id' => TicketStatus::class,
+        'prio'      => Priority::class,
         'type_id'   => TicketTypes::class,
     ];
 
@@ -30,7 +32,12 @@ class Ticket extends Model
 
     public function createByUser()
     {
-        return $this->hasOne(User::class, 'id', 'created_by_user');
+        return $this->hasOne(Employee::class, 'id', 'created_by_user');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(ticketReplies::class);
     }
 
 }

@@ -75,10 +75,19 @@ class Relation extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function relation()
+    {
+        return $this->belongsTo(Relation::class);
+    }
 
     public function notes()
     {
         return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'Relation');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 
     public function contactsObject(): HasMany
