@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('prio')->nullable();
             $table->integer('type_id')->nullable();
             $table->integer('status_id')->nullable();
-            $table->foreignId('created_by_user')->nullable()->constrained('users');
+            $table->foreignId('created_by_user')->nullable();
             $table->foreignId('assigned_by_user')->nullable();
             $table->integer('model')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');

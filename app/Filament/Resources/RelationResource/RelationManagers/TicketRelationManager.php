@@ -5,6 +5,7 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Models\Department;
+use App\Models\Employee;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -15,6 +16,7 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
+use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketRelationManager extends RelationManager
@@ -32,9 +34,14 @@ class TicketRelationManager extends RelationManager
                 Section::make('Ticket gegevens')
                     ->schema([
 
-                        Forms\Components\Select::make('assigned_by_user')
-                            ->label('Medewerker')
-                            ->options(User::all()->pluck("name", "id")),
+                        TileSelect::make('created_by_user')
+                            ->searchable(['first_name', 'last_name', 'email'])
+                            ->options(Employee::where('relation_id', $this->ownerRecord->id)->pluck("first_name", "id"))
+                            ->titleKey('created_by_user')
+                            ->imageKey('avatar')
+                            ->descriptionKey('email')
+                            ->label('Melder'),
+
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
@@ -51,7 +58,12 @@ class TicketRelationManager extends RelationManager
                             ->label('Prioriteit')
                             ->options(Priority::class)
                             ->default('3'),
-                    ])->columns(4),
+
+                        Forms\Components\Select::make('assigned_by_user')
+                            ->label('Medewerker')
+                            ->options(User::all()->pluck("name", "id")),
+
+                    ])->columns(3),
 
                 Section::make('Ticket omschrijving')
                     ->description('Zoals een foutmelding of aanvraag voor veranderingen')

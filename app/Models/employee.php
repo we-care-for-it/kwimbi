@@ -17,5 +17,13 @@ class employee extends Model implements Auditable
         return $this->first_name . " " . $this->last_name;
 
     }
+    public function getAvatarAttribute($value)
+    {
+        if ($this->image) {
+            return $this->image;
+        } else {
+            return '/images/noavatar.jpg';
+        }
+    }
 
 }

@@ -5,6 +5,7 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Filament\Resources\TicketResource\Pages;
+use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Relation;
 use App\Models\Ticket;
@@ -47,6 +48,7 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
                             ->options(User::all()->pluck("name", "id")),
+
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
@@ -251,7 +253,7 @@ class TicketResource extends Resource
             ], layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver(),
                 Tables\Actions\ViewAction::make('openLocation')
                     ->label('Bekijk')
                     ->url(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))
@@ -260,16 +262,16 @@ class TicketResource extends Resource
             fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record])
         )
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ])->emptyState(view("partials.empty-state"));
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\TicketReplyManager::class,
         ];
     }
 
