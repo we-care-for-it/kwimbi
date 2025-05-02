@@ -5,7 +5,6 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Models\Department;
-use App\Models\Employee;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -16,8 +15,6 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketRelationManager extends RelationManager
 {
@@ -34,12 +31,14 @@ class TicketRelationManager extends RelationManager
                 Section::make('Ticket gegevens')
                     ->schema([
 
-                        TileSelect::make('created_by_user')
-                            ->searchable(['first_name', 'last_name', 'email'])
-                            ->options(Employee::where('relation_id', $this->ownerRecord->id)->pluck("first_name", "id"))
-                            ->titleKey('created_by_user')
-                            ->imageKey('avatar')
-                            ->descriptionKey('email')
+                        Forms\Components\Select::make('created_by_user')
+
+                            ->options(
+                                \App\Models\Employee::where('relation_id', $this->ownerRecord->id)
+                                    ->get()->mapWithKeys(function ($user) {
+                                    return [$user->id => $user->first_name . ' ' . $user->last_name];
+                                }))
+
                             ->label('Melder'),
 
                         Forms\Components\Select::make('status_id')
@@ -97,19 +96,25 @@ class TicketRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('status_id')
                     ->badge()
                     ->sortable()
-
                     ->toggleable()
                     ->label('Status'),
-                TileColumn::make('AssignedByUser')
-                // ->description(fn($record) => $record->AssignedByUser->email)
-                    ->sortable()
-                    ->placeholder('Geen')
+                // TileColumn::make('AssignedByUser')
+                // // ->description(fn($record) => $record->AssignedByUser->email)
+                //     ->sortable()
+                //     ->placeholder('Geen')
+                //     ->getStateUsing(function ($record): ?string {
+                //         return $record?->AssignedByUser?->name;
+                //     })
+                //     ->label('Medewerker')
+                //     ->searchable(['first_name', 'last_name'])
+                //     ->image(fn($record) => $record?->AssignedByUser?->avatar),
+
+                Tables\Columns\TextColumn::make('AssignedByUser')
                     ->getStateUsing(function ($record): ?string {
                         return $record?->AssignedByUser?->name;
                     })
-                    ->label('Medewerker')
-                    ->searchable(['first_name', 'last_name'])
-                    ->image(fn($record) => $record?->AssignedByUser?->avatar),
+                    ->placeholder('Algemeen')
+                    ->label('Gemeld'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->getStateUsing(function ($record): ?string {
@@ -119,6 +124,7 @@ class TicketRelationManager extends RelationManager
                     ->description(function ($record): ?string {
                         return date("d-m-Y H m:s", strtotime($record?->created_at));
                     })
+                    ->placeholder('Onbekend')
                     ->label('Gemeld'),
 
                 Tables\Columns\TextColumn::make('department.name')
