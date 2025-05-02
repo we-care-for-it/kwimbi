@@ -37,7 +37,7 @@ class ListTickets extends ListRecords
             'Gemiddeld' => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 2))
                 ->badgeColor('warning')
-                ->badge(Ticket::query()->where('prio', 12)->count()),
+                ->badge(Ticket::query()->where('prio', 2)->count()),
             'Laag'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 3))
                 ->badgeColor('success')
