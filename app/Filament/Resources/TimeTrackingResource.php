@@ -317,33 +317,12 @@ class TimeTrackingResource extends Resource
             ])
 
             ->bulkActions([
-
-                BulkAction::make('mark_as_invoiced')
-                    ->label('Markeer als gefactureerd')
-                    ->icon('heroicon-o-check-circle')
-                    ->action(function ($records) {
-                        foreach ($records as $record) {
-                            $record->update(['status_id' => '1']);
-                        }
-                    })
-                    ->requiresConfirmation()
-                    ->deselectRecordsAfterCompletion(),
                 ExportBulkAction::make()
                     ->exports([
 
-                        BulkAction::make('update_invoiced')
-                            ->label('Update als gefactureerd')
-                            ->icon('heroicon-o-check-circle')
-                            ->action(function (Collection $records) {
-                                foreach ($records as $record) {
-                                    $record->update(['status_id' => '1']);
-                                }
-                            })
-                            ->requiresConfirmation()
-                            ->deselectRecordsAfterCompletion(),
-
                         ExcelExport::make()
                             ->fromTable()
+                            ->link()
                             ->withColumns([
                                 Column::make("started_at")->heading("Datum")
                                     ->formatStateUsing(fn($state) => date("d-m-Y", strtotime($state))),
@@ -354,11 +333,26 @@ class TimeTrackingResource extends Resource
                                 Column::make("relation.name")->heading("Relatie"),
                                 Column::make("project.name")->heading("Project"),
                                 Column::make("status_id")->heading("Status"),
-                                Column::make("invoiceable")->heading("Facturable"),
                             ])
                             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                             ->withFilename(date("m-d-Y H:i") . " - Tijdregistratie export"),
                     ]),
+                BulkAction::make('mark_as_invoiced')
+                    ->label('Update status')
+                    ->form([
+                        Forms\Components\Select::make('status_id')
+                            ->options(TimeTrackingStatus::class)
+                            ->required(),
+                    ])
+                    ->link()
+                    ->action(function ($records, array $data) {
+                        foreach ($records as $record) {
+                            $record->update(['status_id' => $data['status_id']]);
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->deselectRecordsAfterCompletion(),
+
             ])
             ->emptyState(view("partials.empty-state"));
     }

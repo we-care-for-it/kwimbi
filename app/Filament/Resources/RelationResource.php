@@ -177,7 +177,7 @@ class RelationResource extends Resource
                     return $record?->parentaddress?->address . " " . $housenumber;
 
                 })
-                ->searchable()
+
                 ->label("Adres")->description(function ($record) {
 
             }),
