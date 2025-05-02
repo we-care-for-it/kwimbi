@@ -317,12 +317,12 @@ class TimeTrackingResource extends Resource
             ])
 
             ->bulkActions([
-                ExportBulkAction::make()
+                ExportBulkAction::make()->link()
                     ->exports([
 
                         ExcelExport::make()
                             ->fromTable()
-                            ->link()
+
                             ->withColumns([
                                 Column::make("started_at")->heading("Datum")
                                     ->formatStateUsing(fn($state) => date("d-m-Y", strtotime($state))),
