@@ -33,11 +33,11 @@ class ListTickets extends ListRecords
             'Hoog'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 1))
                 ->badgeColor('danger')
-                ->badge(Ticket::query()->where('prio', 2)->count()),
+                ->badge(Ticket::query()->where('prio', 1)->count()),
             'Gemiddeld' => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 2))
                 ->badgeColor('warning')
-                ->badge(Ticket::query()->where('prio', 1)->count()),
+                ->badge(Ticket::query()->where('prio', 12)->count()),
             'Laag'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 3))
                 ->badgeColor('success')
