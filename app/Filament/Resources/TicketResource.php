@@ -83,6 +83,7 @@ class TicketResource extends Resource
             \Filament\Infolists\Components\Section::make()
 
                 ->schema([
+
                     Components\TextEntry::make('relation.name')
                         ->label("Relatie")
                         ->placeholder("Niet opgegeven"),
@@ -195,7 +196,8 @@ class TicketResource extends Resource
                     })
                     ->label('Medewerker')
                     ->searchable(['first_name', 'last_name'])
-                    ->image(fn($record) => $record?->AssignedByUser?->avatar),
+                    ->image(fn($record) => $record?->AssignedByUser?->avatar)
+                    ->placeholder('Geen'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->getStateUsing(function ($record): ?string {
