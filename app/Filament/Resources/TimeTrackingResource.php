@@ -322,6 +322,7 @@ class TimeTrackingResource extends Resource
 
                         ExcelExport::make()
                             ->fromTable()
+                            ->link()
                             ->withColumns([
                                 Column::make("started_at")->heading("Datum")
                                     ->formatStateUsing(fn($state) => date("d-m-Y", strtotime($state))),
@@ -332,7 +333,6 @@ class TimeTrackingResource extends Resource
                                 Column::make("relation.name")->heading("Relatie"),
                                 Column::make("project.name")->heading("Project"),
                                 Column::make("status_id")->heading("Status"),
-                                Column::make("invoiceable")->heading("Facturable"),
                             ])
                             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                             ->withFilename(date("m-d-Y H:i") . " - Tijdregistratie export"),
