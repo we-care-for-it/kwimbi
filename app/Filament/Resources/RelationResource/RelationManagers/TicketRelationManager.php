@@ -183,8 +183,6 @@ class TicketRelationManager extends RelationManager
 
             ])
 
-            ->bulkActions([
-
-            ])->emptyState(view("partials.empty-state"));
+            ->emptyState(view("partials.empty-state"));
     }
 }

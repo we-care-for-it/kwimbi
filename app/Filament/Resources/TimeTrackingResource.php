@@ -18,6 +18,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -314,9 +315,33 @@ class TimeTrackingResource extends Resource
                     ->modalHeading('Verwijderen')
                     ->color('danger'),
             ])
+
             ->bulkActions([
+
+                BulkAction::make('mark_as_invoiced')
+                    ->label('Markeer als gefactureerd')
+                    ->icon('heroicon-o-check-circle')
+                    ->action(function ($records) {
+                        foreach ($records as $record) {
+                            $record->update(['status_id' => '1']);
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->deselectRecordsAfterCompletion(),
                 ExportBulkAction::make()
                     ->exports([
+
+                        BulkAction::make('update_invoiced')
+                            ->label('Update als gefactureerd')
+                            ->icon('heroicon-o-check-circle')
+                            ->action(function (Collection $records) {
+                                foreach ($records as $record) {
+                                    $record->update(['status_id' => '1']);
+                                }
+                            })
+                            ->requiresConfirmation()
+                            ->deselectRecordsAfterCompletion(),
+
                         ExcelExport::make()
                             ->fromTable()
                             ->withColumns([
