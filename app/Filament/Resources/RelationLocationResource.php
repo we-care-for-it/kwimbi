@@ -26,6 +26,23 @@ class RelationLocationResource extends Resource
     protected static ?string $model                 = relationLocation::class;
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel       = "Relaties";
+    protected static ?string $pluralModelLabel      = 'Relaties';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ["name", "address"];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+
+        return [
+            'Adres'     => $record->address . "   " . $record?->housenumber . " " . $record?->place,
+            'Beheerder' => $record?->managementcompany->name ?? "-",
+        ];
+
+    }
 
     public static function form(Form $form): Form
     {
@@ -320,7 +337,7 @@ class RelationLocationResource extends Resource
         return [
 
             //   RelationGroup::make('Contacts', [
-            //      RelationManagers\ObjectsRelationManager::class,
+            RelationManagers\ObjectsRelationManager::class,
             RelationManagers\ContactsRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             //  RelationManagers\ProjectsRelationManager::class,

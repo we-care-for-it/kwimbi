@@ -22,6 +22,11 @@ class TimeTrackingRelationManager extends RelationManager
     protected static ?string $title       = 'Tijdregistratie';
     protected static ?string $icon        = 'heroicon-o-clock';
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_timeregistration ?? false;
+    }
+
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->timeTracking()->count();

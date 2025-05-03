@@ -14,6 +14,7 @@ use Filament\Forms\Set;
 use Filament\Infolists\Components\Section;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -135,6 +136,24 @@ class LocationsRelationManager extends RelationManager
                 return "/relation-locations/" . $record->id;
             })
             ->columns([
+
+                Tables\Columns\TextColumn::make("address")
+                    ->toggleable()
+                    ->label('Adres')
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        $housenumber = "";
+                        if ($record->housenumber) {
+                            $housenumber = " " . $record->housenumber;
+                        }
+                        return $record->address . $housenumber . " - " . $record->zipcode . " - " . $record->place;
+                    })
+                    ->searchable()
+                //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
+                    ->description(function ($record) {
+                        return $record?->name;
+                    }),
+
                 Tables\Columns\TextColumn::make("type_id")
                     ->label("Type")
                     ->searchable()
@@ -149,23 +168,6 @@ class LocationsRelationManager extends RelationManager
                     ->placeholder("-")
                     ->collection('locationimages'),
 
-                Tables\Columns\TextColumn::make("address")
-                    ->toggleable()
-                    ->label('Adres')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        $housenumber = "";
-                        if ($record->housenumber) {
-                            $housenumber = " " . $record->housenumber;
-                        }
-                        return $record->address . $housenumber . " - " . $record->zipcode . " - " . $record->place;
-                    })
-                    ->searchable()
-                    //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
-                    ->description(function ($record) {
-                        return $record?->name;
-                    }),
-
                 Tables\Columns\TextColumn::make("zipcode")
                     ->label("Postcode")
                     ->searchable()
@@ -177,7 +179,34 @@ class LocationsRelationManager extends RelationManager
                     ->searchable()
                     ->toggleable()
                     ->hidden(true),
+                Tables\Columns\TextColumn::make("objects_count")
+                    ->counts("objects")
+                    ->label("Objecten")
+                    ->toggleable()
+                    ->sortable()
+                    ->badge()
+                    ->visible(function (): ?string {
+                        return $this->getOwnerRecord()->type->has_objects ?? false;
+                    })
+                    ->alignment(Alignment::Center)
+                    ->color("success"),
 
+                Tables\Columns\TextColumn::make("notes_count")
+                    ->toggleable()
+                    ->counts("notes")
+                    ->label("Notites")
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center)
+                    ->color("success"), Tables\Columns\TextColumn::make("attachments_count")
+                    ->toggleable()
+                    ->counts("attachments")
+                    ->label("Bijlages")
+                    ->sortable()
+                    ->badge()
+                    ->alignment(Alignment::Center)
+                    ->toggleable()
+                    ->color("success"),
                 // Tables\Columns\TextColumn::make("buildingtype.name")
                 //     ->toggleable()
                 //     ->sortable()

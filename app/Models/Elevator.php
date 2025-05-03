@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -33,7 +34,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  */
 class Elevator extends Model implements Auditable, HasMedia
 {
-
+    use HasFilamentComments;
     public $table = "elevators";
     use InteractsWithMedia;
     use SoftDeletes;
@@ -59,7 +60,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function location()
     {
-        return $this->hasOne(ObjectLocation::class, 'id', 'address_id');
+        return $this->hasOne(RelationLocation::class, 'id', 'address_id');
     }
 
     public function management()

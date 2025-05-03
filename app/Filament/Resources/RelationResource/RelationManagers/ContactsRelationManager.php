@@ -28,6 +28,11 @@ class ContactsRelationManager extends RelationManager
         return $ownerRecord->contacts->count();
     }
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_contacts ?? false;
+    }
+
     public function form(Form $form): Form
     {
         return $form

@@ -71,6 +71,7 @@ class ViewObjectInspection extends ViewRecord
             Actions\EditAction::make('cancel_top')
                 ->icon('heroicon-m-pencil-square')
                 ->label('Wijzig')
+                ->slideOver()
                 ->hidden(fn($record) => $record->external_uuid),
 
             Actions\Action::make('cancel_top')
