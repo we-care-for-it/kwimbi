@@ -243,4 +243,10 @@ class ProjectsRelationManager extends RelationManager
             ->emptyState(view("partials.empty-state"));
 
     }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_projects ?? false;
+    }
+
 }

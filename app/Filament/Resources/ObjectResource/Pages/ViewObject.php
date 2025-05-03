@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ViewRecord;
+use Parallax\FilamentComments\Actions\CommentsAction;
 
 class ViewObject extends ViewRecord
 {
@@ -97,6 +98,8 @@ class ViewObject extends ViewRecord
                     ->slideOver()
                     ->icon('heroicon-m-pencil-square')
                     ->label('Wijzig'),
+
+                CommentsAction::make(),
 
             ];
         }

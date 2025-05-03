@@ -16,15 +16,23 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketRelationManager extends RelationManager
 {
     protected static string $relationship = 'tickets';
-    public static function getNavigationBadge(): ?string
+
+    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-        return static::getModel()::count();
+        // $ownerModel is of actual type Job
+        return $ownerRecord->notes->count();
+    }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return $ownerRecord->type->has_tickets ?? false;
     }
 
     public function form(Form $form): Form

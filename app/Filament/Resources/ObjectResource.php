@@ -36,16 +36,32 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ObjectResource extends Resource
 {
-    protected static ?string $model            = Elevator::class;
-    protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
-    protected static ?string $navigationLabel  = "Objecten";
-    protected static ?string $pluralModelLabel = 'Objecten';
-    protected static ?string $navigationGroup  = 'Objecten';
-    protected static ?int $navigationSort      = 2;
-
+    protected static ?string $model                 = Elevator::class;
+    protected static ?string $navigationIcon        = "heroicon-c-arrows-up-down";
+    protected static ?string $navigationLabel       = "Objecten";
+    protected static ?string $pluralModelLabel      = 'Objecten';
+    protected static ?string $navigationGroup       = 'Objecten';
+    protected static ?int $navigationSort           = 2;
+    protected static bool $shouldRegisterNavigation = true;
+    protected static ?string $recordTitleAttribute  = 'title';
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ["name", "unit_no", 'nobo_no'];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+
+        return [
+            'Adres'     => $record->address . "   " . $record?->housenumber . " " . $record?->place,
+            'Beheerder' => $record?->managementcompany->name ?? "-",
+        ];
+
     }
 
     public static function form(Form $form): Form
@@ -137,7 +153,7 @@ class ObjectResource extends Resource
                 ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed()
-                ->visible(fn($record, $get) => $record->type->has_inspections)->columns(1),
+                ->visible(fn($record, $get) => $record?->type?->has_inspections)->columns(1),
 
         ]);
     }
@@ -176,12 +192,7 @@ class ObjectResource extends Resource
                     ->toggleable()
                     ->limit(2)
                     ->collection('objectimages'),
-                Tables\Columns\TextColumn::make("status_id")
-                    ->label("Status")
-                    ->default(0)
-                    ->badge()
-                    ->sortable()
-                    ->toggleable(),
+
                 Tables\Columns\TextColumn::make("current_inspection_status_id")
                     ->label("KeuringStatus")
                     ->placeholder('-')
@@ -346,7 +357,20 @@ class ObjectResource extends Resource
                                     ->view('filament.infolists.entries.energylabel')
                                     ->label('Energielabel')
                                     ->placeholder('Niet opgegeven'),
-                            ])->columns(3),
+                                TextEntry::make('status_id')
+                                    ->label('Status')
+                                    ->badge()
+                                    ->placeholder('Niet opgegeven'),
+                                TextEntry::make('latestInspection.status_id')
+                                    ->label('Keuringsstatus')
+                                    ->badge()
+                                    ->placeholder('Onbekend'),
+                                TextEntry::make('current_inspection_end_date')
+                                    ->label('Keuringsverloop datum')
+                                    ->date('d-m-Y')
+                                    ->placeholder('Onbekend'),
+
+                            ])->columns(4),
 
                         Tabs\Tab::make('Locatie & Relatie')
                             ->icon('heroicon-o-map-pin')
@@ -386,27 +410,6 @@ class ObjectResource extends Resource
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
 
-                        Tabs\Tab::make('Status & Keuring')
-                            ->icon('heroicon-o-clipboard-document-check')
-                            ->schema([
-                                TextEntry::make('status_id')
-                                    ->label('Status')
-                                    ->badge()
-                                    ->placeholder('Niet opgegeven'),
-                                TextEntry::make('latestInspection.status_id')
-                                    ->label('Keuringsstatus')
-                                    ->badge()
-                                    ->placeholder('Onbekend'),
-                                TextEntry::make('current_inspection_end_date')
-                                    ->label('Keuringsdatum')
-                                    ->date('d-m-Y')
-                                    ->placeholder('Onbekend'),
-                                TextEntry::make('incidents_count')
-                                    ->label('Aantal storingen')
-                                    ->badge()
-                                    ->placeholder('0'),
-                            ])->columns(2),
-
                         Tabs\Tab::make('Afbeeldingen')
                             ->icon('heroicon-o-photo')
 
@@ -419,16 +422,17 @@ class ObjectResource extends Resource
                                     ->collection('objectimages'),
                             ]),
 
-                        Tabs\Tab::make('Opmerkingen')
-                            ->icon('heroicon-o-chat-bubble-bottom-center-text')
-                            ->schema([
-                                TextEntry::make('remark')
-                                    ->label('')
-                                    ->columnSpanFull()
-                                    ->placeholder('Geen opmerkingen'),
-                            ]),
+                    ]),
+                \Filament\Infolists\Components\Section::make()
+                    ->schema([
+                        // ...
+
+                        TextEntry::make('remark')
+                            ->label("Opmerking")
+                            ->placeholder("Geen opmerking"),
                     ]),
             ]);
+
     }
 
     public static function getRelations(): array

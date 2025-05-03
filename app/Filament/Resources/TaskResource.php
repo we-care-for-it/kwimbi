@@ -230,6 +230,7 @@ class TaskResource extends Resource
 
                 Tables\Columns\TextColumn::make('related_to')
                     ->label('Gerelateerd  aan')
+                    ->toggleable()
                     ->getStateUsing(function ($record): ?string {
                         switch ($record->model) {
                             case 'relation':
@@ -292,7 +293,8 @@ class TaskResource extends Resource
 
                 Tables\Columns\TextColumn::make('employee.name')
 
-                    ->label('Toegewezen aan'),
+                    ->label('Toegewezen aan')
+                    ->toggleable(),
 
             ])
             ->filters([
