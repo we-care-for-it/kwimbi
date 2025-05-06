@@ -124,7 +124,7 @@ class AppPanelProvider extends PanelProvider
 
  //->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
             ->path('')
-   	    //->tenant(Company::class)
+   	
             ->maxContentWidth(MaxWidth::Full)
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()

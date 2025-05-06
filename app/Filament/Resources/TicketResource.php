@@ -5,7 +5,6 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Filament\Resources\TicketResource\Pages;
-use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Relation;
 use App\Models\Ticket;
@@ -273,7 +272,7 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\TicketReplyManager::class,
+            //    RelationManagers\TicketReplyManager::class,
         ];
     }
 
