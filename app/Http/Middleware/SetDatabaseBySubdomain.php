@@ -12,10 +12,9 @@ class SetDatabaseBySubdomain
         $host      = $request->getHost(); // e.g., client1.example.com
         $subdomain = explode('.', $host)[0];
 
-        // Example: Map subdomains to database names
         $databaseMap = [
-            'tenant1' => 'tenant1_db',
-            'tenant2' => 'tenant2_db',
+            'ltssoftware' => 'ltssoftware',
+            'vlsmontage'  => 'vlsmontage',
         ];
 
         if (isset($databaseMap[$subdomain])) {
