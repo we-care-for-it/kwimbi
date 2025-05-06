@@ -388,6 +388,13 @@
       0 => 'Rappasoft\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider',
     ),
   ),
+  'rawilk/filament-password-input' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rawilk\\FilamentPasswordInput\\FilamentPasswordInputServiceProvider',
+    ),
+  ),
   'rupadana/filament-api-service' => 
   array (
     'aliases' => 

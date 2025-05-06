@@ -13,15 +13,17 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Rawilk\FilamentPasswordInput\Password;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
 
 class UserResource extends Resource
 {
-    protected static ?string $model                 = User::class;
-    protected static ?string $navigationIcon        = 'heroicon-o-users';
-    protected static ?string $navigationLabel       = "Gebruikers";
-    protected static ?string $navigationGroup       = 'Beheer';
+    protected static ?string $model           = User::class;
+    protected static ?string $navigationIcon  = 'heroicon-o-users';
+    protected static ?string $navigationLabel = "Gebruikers";
+    protected static ?string $navigationGroup = 'Beheer';
+
     protected static bool $shouldRegisterNavigation = false;
     public static function form(Form $form): Form
     {
@@ -35,10 +37,13 @@ class UserResource extends Resource
                 ->label('E-mail')
                 ->email(),
 
-            TextInput::make('password')
-                ->label('Wachtwoord')
-                ->password()
-                ->minLength(8),
+            Password::make('password')
+                ->copyable()
+                ->copyMessage('Wachtwoord gekopieerd')
+                ->copyable(color: 'success')
+                ->regeneratePassword()
+                ->maxLength(10)
+                ->label('Wachtwoord'),
 
             Select::make('roles')
                 ->relationship('roles', 'name')

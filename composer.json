@@ -39,6 +39,7 @@
         "pxlrbt/filament-activity-log": "^1.1",
         "pxlrbt/filament-excel": "^2.4",
         "rappasoft/laravel-authentication-log": "^4.0",
+        "rawilk/filament-password-input": "^2.0",
         "rupadana/filament-api-service": "^3.4",
         "sentry/sentry-laravel": "^4.13",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
