@@ -6,6 +6,8 @@ use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Relation;
 use App\Models\relationType;
 use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Components\Section;
@@ -83,6 +85,85 @@ class RelationResource extends Resource
                 // ->columns(3)
                 // ->columnSpan(4),
             ]),
+
+            Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
+                    ->label("Postcode")
+                    ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+
+                    ->maxLength(255)->suffixAction(Action::make("searchAddressByZipcode")
+                        ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {
+                        $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
+                        $data = json_decode($data);
+
+                        if (isset($data->error_id)) {
+                            Notification::make()
+                                ->warning()
+                                ->title("Geen resultaten")
+                                ->body("Helaas er zijn geen gegevens gevonden bij de postcode <b>" . $get("zipcode") . "</b> Controleer de postcode en probeer opnieuw.")->send();
+                        } else {
+
+                            $set("place", $data?->municipality);
+                            $set("gps_lat", $data?->lat);
+                            $set("gps_lon", $data?->lng);
+                            $set("address", $data?->street);
+                            $set("municipality", $data?->municipality);
+                            $set("province", $data?->province);
+                            $set("place", $data?->settlement);
+
+                            $set("construction_year", $data?->constructionYear);
+                            $set("surface", $data?->surfaceArea);
+
+                            //check building type ifexist
+                            $buildTypeExist = ObjectBuildingType::where('name', '=', $data?->purposes[0])->first();
+                            if ($buildTypeExist === null) {
+                                $buildingTypeId = ObjectBuildingType::insertGetId(['name' => ucfirst($data?->purposes[0])]);
+
+                            } else {
+                                $buildingTypeId = $buildTypeExist->id;
+                            }
+
+                            $set("building_type_id", $buildingTypeId);
+
+                        }
+                    }))->reactive(),
+
+                Forms\Components\TextInput::make("address")
+                    ->label("Adres")
+                    ->required()
+                    ->columnSpan(2),
+
+                Forms\Components\TextInput::make("place")
+                    ->label("Plaats")
+
+                    ->columnSpan(1),
+
+                Forms\Components\TextInput::make("gps_lat")
+                    ->label("GPS latitude")
+
+                    ->columnSpan(1)
+                    ->hidden(), Forms\Components\TextInput::make("gps_lon")
+                    ->label("GPS longitude")
+                    ->hidden()
+                    ->columnSpan(1),
+            ])]),
+
+            Forms\Components\Section::make('Contactgegevens')->schema([
+                Grid::make(4)->schema([
+                    Forms\Components\TextInput::make("emailaddress")
+                        ->label("E-mailadres")
+                        ->email()
+                        ->columnSpan(2),
+
+                    Forms\Components\TextInput::make("phonenumber")
+                        ->label("Telefoonnummer")
+                        ->columnSpan(2),
+
+                    Forms\Components\TextInput::make("website")
+                        ->label("Website")
+                        ->columnSpan(2),
+                ]),
+            ]),
+
             Forms\Components\Section::make()->schema([
 
                 Forms\Components\Textarea::make("remark")
@@ -113,22 +194,39 @@ class RelationResource extends Resource
                                 ->badge()
                                 ->placeholder("Niet opgegeven"),
 
-                            Components\TextEntry::make("parentaddress.name")
+                            Components\TextEntry::make("address")
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
                                     $housenumber = "";
-                                    if ($record?->parentaddress) {
-                                        if ($record?->parentaddress?->housenumber) {
-                                            $housenumber = " " . $record?->parentaddress?->housenumber;
-                                        }
+                                    if ($record?->address) {
 
-                                        return $record?->parentaddress?->address . " " . $housenumber . " - " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
+                                        return $record?->address . " " . $record?->zipcode . " - " . $record?->place;
 
                                     } else {
                                         return "Geen locatie toegevoegd";
                                     }
                                 })
-                                ->placeholder("Niet opgegeven")->columns(4)])->columns(4),
+                                ->placeholder("Niet opgegeven"),
+
+                            Components\TextEntry::make('website')
+                                ->label("Website")
+                                ->placeholder("Niet opgegeven")
+                                ->url(fn($record) => $record->website)
+                                ->icon('heroicon-m-link'),
+                            Components\TextEntry::make('emailaddress')
+                                ->label("E-mailadres")
+
+                                ->url(fn($record) => "mailto:" . $record->emailaddress)
+                                ->icon('heroicon-m-envelope')
+                                ->placeholder("Niet opgegeven"),
+
+                            Components\TextEntry::make('phonenumber')
+                                ->label("Telefoonnummer")
+                                ->placeholder("Niet opgegeven")
+                                ->url(fn($record) => "tel:" . $record->phonenumber)
+                                ->icon('heroicon-m-phone')
+                                ->columns(4)])->columns(4),
+
                 ]),
 
             Section::make()
@@ -164,36 +262,20 @@ class RelationResource extends Resource
                 ->placeholder('-')
                 ->label('Bedrijfsnaam'),
 
-            Tables\Columns\TextColumn::make("parentaddress")
+            Tables\Columns\TextColumn::make("address")
                 ->toggleable()
-                ->getStateUsing(function ($record): ?string {
-                    $housenumber = "";
+                ->label("Adres")
+                ->description(function ($record) {
 
-                    if ($record?->parentaddress?->housenumber) {
-                        $housenumber = " " . $record?->parentaddress?->housenumber;
-                    }
-
-                    return $record?->parentaddress?->address . " " . $housenumber;
-
-                })
-
-                ->label("Adres")->description(function ($record) {
-
-            }),
+                }),
 
             Tables\Columns\TextColumn::make('zipcode')
                 ->placeholder('-')
-                ->label('Postcode')
-                ->state(function (Relation $rec) {
-                    return $rec->parentaddress?->zipcode;
-                }),
+                ->label('Postcode'),
 
             Tables\Columns\TextColumn::make('place')
                 ->placeholder('-')
-                ->label('Plaats')
-                ->state(function (Relation $rec) {
-                    return $rec->parentaddress?->place;
-                }),
+                ->label('Plaats'),
 
             Tables\Columns\TextColumn::make('type.name')
                 ->label('Categorie')
@@ -202,6 +284,30 @@ class RelationResource extends Resource
                 ->placeholder('-')
                 ->searchable()
                 ->sortable(),
+
+            Tables\Columns\TextColumn::make('phonenumber')
+                ->searchable()
+                ->toggleable()
+                ->placeholder('-')
+                ->url(fn($record) => "tel:" . $record->phonenumber)
+                ->icon('heroicon-m-phone')
+                ->label('Telefoonnummer'),
+
+            Tables\Columns\TextColumn::make('website')
+                ->searchable()
+                ->toggleable()
+                ->placeholder('-')
+                ->url(fn($record) => "https://" . $record->website)
+                ->icon('heroicon-m-link')
+                ->label('Website'),
+
+            Tables\Columns\TextColumn::make('emailaddress')
+                ->searchable()
+                ->toggleable()
+                ->url(fn($record) => "https://" . $record->emailaddress)
+                ->icon('heroicon-m-envelope')
+                ->placeholder('-')
+                ->label('Emailadres'),
 
         ])
             ->filters([
