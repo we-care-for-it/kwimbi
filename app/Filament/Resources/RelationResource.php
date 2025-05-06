@@ -187,6 +187,7 @@ class RelationResource extends Resource
                         ->schema([
                             Components\TextEntry::make('name')
                                 ->label("Bedrijfsnaam")
+
                                 ->placeholder("Niet opgegeven"),
 
                             Components\TextEntry::make('type.name')
@@ -257,7 +258,11 @@ class RelationResource extends Resource
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
+                ->description(function ($record) {
+                    return $record->remark;
+                })
                 ->weight('medium')
+                ->wrap()
                 ->alignLeft()
                 ->placeholder('-')
                 ->label('Bedrijfsnaam'),
