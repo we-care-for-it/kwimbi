@@ -6,13 +6,6 @@
       'EloquentSerialize' => 'AnourValar\\EloquentSerialize\\Facades\\EloquentSerializeFacade',
     ),
   ),
-  'awt/apilogger' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'AWT\\Providers\\ApiLogServiceProvider',
-    ),
-  ),
   'bezhansalleh/filament-language-switch' => 
   array (
     'providers' => 
