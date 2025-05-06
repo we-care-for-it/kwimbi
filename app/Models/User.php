@@ -136,12 +136,4 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     //     return $this->companies()->whereKey($tenant)->exists();
     // }
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($query) {
-            $query->team_id = 34;
-        });
-    }
-
 }

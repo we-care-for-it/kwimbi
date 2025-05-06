@@ -43,6 +43,7 @@ class UserResource extends Resource
                 ->copyable(color: 'success')
                 ->regeneratePassword()
                 ->maxLength(10)
+                ->password()
                 ->label('Wachtwoord'),
 
             Select::make('roles')
