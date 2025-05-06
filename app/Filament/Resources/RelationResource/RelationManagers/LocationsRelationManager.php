@@ -21,13 +21,18 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Attributes\On;
 
 class LocationsRelationManager extends RelationManager
 {
     protected static string $relationship = 'locations';
     protected static ?string $title       = 'Locaties';
     protected static ?string $icon        = 'heroicon-o-building-office-2';
-
+    #[On('refreshForm')]
+    public function refreshForm(): void
+    {
+        $this->fillForm();
+    }
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->locations()->count();
@@ -80,12 +85,10 @@ class LocationsRelationManager extends RelationManager
 
                         }
                     }))->reactive(),
-
                 Forms\Components\TextInput::make("address")
                     ->label("Straatnaam")
                     ->required()
                     ->columnSpan(2),
-
                 Forms\Components\TextInput::make("housenumber")
                     ->label("Huisnummer")
                     ->required(),
