@@ -300,6 +300,13 @@
       0 => 'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider',
     ),
   ),
+  'martinpetricko/filament-sentry-feedback' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MartinPetricko\\FilamentSentryFeedback\\FilamentSentryFeedbackServiceProvider',
+    ),
+  ),
   'mvenghaus/filament-plugin-schedule-monitor' => 
   array (
     'providers' => 
@@ -386,6 +393,13 @@
     'providers' => 
     array (
       0 => 'Rappasoft\\LaravelAuthenticationLog\\LaravelAuthenticationLogServiceProvider',
+    ),
+  ),
+  'rawilk/filament-password-input' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rawilk\\FilamentPasswordInput\\FilamentPasswordInputServiceProvider',
     ),
   ),
   'rupadana/filament-api-service' => 

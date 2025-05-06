@@ -35,6 +35,9 @@ use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
  use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
+use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
+
+
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -45,6 +48,16 @@ class AppPanelProvider extends PanelProvider
            ->defaultThemeMode(ThemeMode::Light)
 ->darkMode(false)
 ->default()
+
+
+->plugins([
+    \MartinPetricko\FilamentSentryFeedback\FilamentSentryFeedbackPlugin::make()
+        ->sentryUser(function (): ?SentryUser {
+            return new SentryUser(auth()->user()->name, auth()->user()->email);
+        }),
+])
+
+
 
             ->id('app')
 ->plugins([

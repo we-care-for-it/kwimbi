@@ -42,7 +42,7 @@ class relationLocation extends Model implements Auditable, HasMedia
 
     public function relation()
     {
-        return $this->belongsTo(relation::class);
+        return $this->belongsTo(Relation::class);
     }
 
     public function contactsObject()

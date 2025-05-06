@@ -95,9 +95,9 @@ class ObjectLocationResource extends Resource
                     ->label("Complexnummer")
                     ->placeholder("Niet opgegeven"),
 
-                TextEntry::make("province")
-                    ->label("Provincie")
-                    ->placeholder("Niet opgegeven"),
+                // TextEntry::make("province")
+                //     ->label("Provincie")
+                //     ->placeholder("Niet opgegeven"),
 
                 TextEntry::make("managementcompany.name")
                     ->label("Beheerder")
