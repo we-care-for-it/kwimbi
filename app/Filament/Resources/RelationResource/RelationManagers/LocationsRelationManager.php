@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
+use App\Enums\LocationType;
 use App\Models\ObjectBuildingType;
 use App\Services\AddressService;
 use Filament\Forms;
@@ -86,13 +87,13 @@ class LocationsRelationManager extends RelationManager
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("housenumber")
-                    ->label("Huisnummer"), Forms\Components\TextInput::make("place")
-                    ->label("Plaats"), Forms\Components\TextInput::make("province")
-                    ->label("Provincie"), Forms\Components\TextInput::make("gps_lat")
-                    ->label("GPS latitude")
+                    ->label("Huisnummer"),
 
-                    ->columnSpan(1)
-                    ->hidden(), Forms\Components\TextInput::make("gps_lon")
+                Forms\Components\Select::make('type_id')
+                    ->label('Categorie')
+                    ->options(LocationType::class),
+
+                Forms\Components\TextInput::make("gps_lon")
                     ->label("GPS longitude")
                     ->hidden()
                     ->columnSpan(1),
