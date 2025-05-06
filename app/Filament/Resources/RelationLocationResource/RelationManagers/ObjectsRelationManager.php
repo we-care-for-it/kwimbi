@@ -36,7 +36,7 @@ class ObjectsRelationManager extends RelationManager
     }
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord?->relation->type->has_objects;
+        return $ownerRecord?->relation?->type?->has_objects ?? false;
 
     }
 
