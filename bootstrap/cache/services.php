@@ -100,8 +100,6 @@
     96 => 'App\\Providers\\AppServiceProvider',
     97 => 'App\\Providers\\AuthServiceProvider',
     98 => 'App\\Providers\\Filament\\AppPanelProvider',
-    99 => 'App\\Providers\\Filament\\TenantPanelProvider',
-    100 => 'App\\Providers\\TenantPanelProvider',
   ),
   'eager' => 
   array (
@@ -187,8 +185,6 @@
     79 => 'App\\Providers\\AppServiceProvider',
     80 => 'App\\Providers\\AuthServiceProvider',
     81 => 'App\\Providers\\Filament\\AppPanelProvider',
-    82 => 'App\\Providers\\Filament\\TenantPanelProvider',
-    83 => 'App\\Providers\\TenantPanelProvider',
   ),
   'deferred' => 
   array (

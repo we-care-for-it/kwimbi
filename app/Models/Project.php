@@ -5,12 +5,14 @@ use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class Project extends Model implements Auditable
 {
     //  use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     use HasFilamentComments;
+    use BelongsToTenant;
     public function location()
     {
         return $this->hasOne(ObjectLocation::class, 'id', 'location_id');
