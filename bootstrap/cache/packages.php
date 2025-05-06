@@ -300,6 +300,13 @@
       0 => 'lockscreen\\FilamentLockscreen\\FilamentLockscreenServiceProvider',
     ),
   ),
+  'martinpetricko/filament-sentry-feedback' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MartinPetricko\\FilamentSentryFeedback\\FilamentSentryFeedbackServiceProvider',
+    ),
+  ),
   'mvenghaus/filament-plugin-schedule-monitor' => 
   array (
     'providers' => 
