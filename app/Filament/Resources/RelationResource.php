@@ -21,12 +21,11 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
-use Parallax\FilamentComments\Tables\Actions\CommentsAction;
-
-//Form
 
 class RelationResource extends Resource
 {
+
+    protected $listeners            = ["refresh" => '$refresh'];
     protected static ?string $model = Relation::class;
 
     protected static ?string $navigationIcon       = 'heroicon-s-building-library';
@@ -216,7 +215,6 @@ class RelationResource extends Resource
             )
             ->actions([
 
-                CommentsAction::make(),
                 ViewAction::make()
                     ->label('Bekijk')
                     ->modalIcon('heroicon-o-eye'),

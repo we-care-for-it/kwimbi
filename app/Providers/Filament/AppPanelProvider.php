@@ -53,7 +53,7 @@ class AppPanelProvider extends PanelProvider
 ->plugins([
     \MartinPetricko\FilamentSentryFeedback\FilamentSentryFeedbackPlugin::make()
         ->sentryUser(function (): ?SentryUser {
-            return new SentryUser(auth()->user()->name, auth()->user()->email);
+            return new SentryUser(auth()->user()?->name, auth()?->user()?->email);
         }),
 ])
 
