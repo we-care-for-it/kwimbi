@@ -87,12 +87,14 @@ class LocationsRelationManager extends RelationManager
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("housenumber")
-                    ->label("Huisnummer"),
-
+                    ->label("Huisnummer")
+                    ->required(),
+                Forms\Components\TextInput::make("place")
+                    ->label("Plaats"),
                 Forms\Components\Select::make('type_id')
                     ->label('Categorie')
+                    ->default(1)
                     ->options(LocationType::class),
-
                 Forms\Components\TextInput::make("gps_lon")
                     ->label("GPS longitude")
                     ->hidden()
