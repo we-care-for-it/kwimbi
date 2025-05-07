@@ -60,7 +60,7 @@ class Elevator extends Model implements Auditable, HasMedia
 
     public function location()
     {
-        return $this->hasOne(RelationLocation::class, 'id', 'address_id');
+        return $this->hasOne(relationLocation::class, 'id', 'address_id');
     }
 
     public function management()
