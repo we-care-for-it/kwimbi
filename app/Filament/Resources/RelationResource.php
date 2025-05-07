@@ -23,6 +23,9 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Filament\Forms\Set as FilamentSet; // Alias toevoegen om conflict te voorkomen
+use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Str;
 
 class RelationResource extends Resource
 {
@@ -46,28 +49,45 @@ class RelationResource extends Resource
                     ->required()
 
                     ->columnSpan("full"),
+Forms\Components\TextInput::make("phone")
+                ->label("Telefoonnummer")
+                ->tel()
+                ->required()
+                ->numeric() // Alleen cijfers toestaan
+                ->maxLength(20)
+                ->mutateDehydratedStateUsing(fn ($state) => preg_replace('/[^0-9]/', '', $state)), // Verwijder alle niet-cijfers
 
-                // Grid::make(5)->schema([Forms\Components\TextInput::make("zipcode")
-                //         ->label("Postcode")
-                //         ->maxLength(255)
-                //         ->suffixAction(Action::make("searchAddressByZipcode")
-                //                 ->icon("heroicon-m-magnifying-glass")
-                //                 ->action(function (Get $get, Set $set) {
+            TextInput::make('zipcode')
+                ->label('Postcode')
+                ->required()
+                ->maxLength(6)
+                ->live(onBlur: true)
+                ->afterStateUpdated(function ($state, FilamentSet $set) {
+                    // Verwijder spaties en zet om naar hoofdletters
+                    $cleanZipcode = Str::upper(preg_replace('/\s+/', '', $state));
+                    $set('zipcode', $cleanZipcode);
+                })
+                ->rule('regex:/^[1-9][0-9]{3} ?[a-zA-Z]{2}$/')
+                ->suffixAction(
+                    Action::make('searchAddressByZipcode')
+                        ->icon('heroicon-m-magnifying-glass')
+                        ->action(function ($get, FilamentSet $set) {
+                            $zipcode = preg_replace('/\s+/', '', $get('zipcode'));
+                            $data = (new AddressService())->GetAddress($zipcode, $get('number'));
+                            $data = json_decode($data);
 
-                //                     $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
-                //                     $data = json_decode($data);
-
-                //                     if (isset($data->error_id)) {
-                //                         Notification::make()
-                //                             ->warning()
-                //                             ->title("Geen resultaten")
-                //                             ->body("Helaas er zijn geen gegevens gevonden bij de postcode <b>" . $get("zipcode") . "</b> Controleer de postcode en probeer opnieuw.")->send();
-                //                     } else {
-                //                         $set("place", $data?->municipality);
-                //                         $set("address", $data?->street);
-                //                         $set("place", $data?->settlement);
-                //                     }
-                //                 })),
+                            if (isset($data->error_id)) {
+                                Notification::make()
+                                    ->warning()
+                                    ->title('Geen resultaten')
+                                    ->body('Geen adres gevonden voor deze postcode/huisnummer combinatie')
+                                    ->send();
+                            } else {
+                                $set('place', $data?->municipality);
+                                $set('address', $data?->street);
+                            }
+                        })
+                ),
 
                 //     Forms\Components\TextInput::make("address")
                 //         ->label("Adres")
