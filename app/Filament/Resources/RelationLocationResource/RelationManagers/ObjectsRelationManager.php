@@ -36,8 +36,7 @@ class ObjectsRelationManager extends RelationManager
     }
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord?->relation?->type?->has_objects ?? false;
-
+        return in_array('Objecten', $ownerRecord?->type->options) ? true : false;
     }
 
     public function form(Form $form): Form

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('type_id')->nullable();
             $table->integer('relation_id')->nullable();
             $table->integer('building_type_id')->nullable();
+            $table->integer('management_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->string('gps_lat')->nullable();
             $table->string('gps_lon')->nullable();

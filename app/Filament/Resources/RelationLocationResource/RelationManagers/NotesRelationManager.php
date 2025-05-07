@@ -14,12 +14,10 @@ class NotesRelationManager extends RelationManager
     protected static ?string $title       = 'Notities';
     protected static ?string $icon        = 'heroicon-o-clipboard-document';
 
-    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        // $ownerModel is of actual type Job
-        return $ownerRecord->notes->count();
+        return in_array('Notities', $ownerRecord?->type->options) ? true : false;
     }
-
     public function form(Form $form): Form
     {
         return $form
