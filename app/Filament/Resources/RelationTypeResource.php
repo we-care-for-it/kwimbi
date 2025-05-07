@@ -5,7 +5,7 @@ use App\Filament\Resources\RelationTypeResource\Pages;
 use App\Models\relationType;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,30 +32,21 @@ class RelationTypeResource extends Resource
                     ->description('Een selectie van de modules voor deze relatie type')
                     ->schema([
 
-                        Toggle::make('has_contacts')
-                            ->label('Contactpersonen')
+                        ToggleButtons::make('options')
+                            ->label('Opties')
+                            ->multiple()
+                            ->options([
+                                'Medewerkers'     => 'Medewerkers',
+                                'Contactpersonen' => 'Contactpersonen',
+                                'Tickets'         => 'Tickets',
+                                'Bijlages'        => 'Bijlages',
+                                'Tijdregistratie' => 'Tijdregistratie',
+                                'Projecten'       => 'Projecten',
+                                'Locaties'        => 'Locaties',
+                            ])
                             ->inline()
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('has_tickets')
-                            ->label('Tickets')->inline()
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('has_timeregistration')
-                            ->label('Tijdregistratie')
-                            ->inline()
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('has_projects')
-                            ->label('Projecten')
-                            ->inline()
-                            ->onColor('success')
-                            ->offColor('danger'),
-                        Toggle::make('has_objects')
-                            ->label('Objecten')
-                            ->inline()
-                            ->onColor('success')
-                            ->offColor('danger'),
+                            ->columns(2),
+
                     ]),
             ]);
     }

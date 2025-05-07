@@ -405,8 +405,13 @@ class ObjectResource extends Resource
                                     ->label('Keuringsinstantie')
                                     ->placeholder('Niet opgegeven')
                                     ->hidden(),
-                                TextEntry::make('location.managementcompany.name')
+                                TextEntry::make('location.management.name')
                                     ->label('Beheerder')
+                                    ->visible(function ($record) {
+
+                                        return in_array('Beheerder', $record?->location->type->options) ? true : false;;
+                                    })
+
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
 

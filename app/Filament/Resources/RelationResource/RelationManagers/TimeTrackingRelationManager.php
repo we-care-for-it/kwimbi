@@ -24,7 +24,8 @@ class TimeTrackingRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_timeregistration ?? false;
+
+        return in_array('Tijdregistratie', $ownerRecord?->type->options) ? true : false;
     }
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string

@@ -30,6 +30,12 @@ class ProjectsRelationManager extends RelationManager
         return $ownerRecord->Projects()->count();
     }
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+
+        return in_array('Projecten', $ownerRecord?->type->options) ? true : false;
+    }
+
     public function form(Form $form): Form
     {
         return $form
@@ -242,11 +248,6 @@ class ProjectsRelationManager extends RelationManager
             ])
             ->emptyState(view("partials.empty-state"));
 
-    }
-
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
-        return $ownerRecord->type->has_projects ?? false;
     }
 
 }
