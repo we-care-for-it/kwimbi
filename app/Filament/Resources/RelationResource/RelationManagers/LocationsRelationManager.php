@@ -38,6 +38,12 @@ class LocationsRelationManager extends RelationManager
         return $ownerRecord->locations()->count();
     }
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+
+        return in_array('Locaties', $ownerRecord?->type->options) ? true : false;
+    }
+
     public function form(Form $form): Form
     {
         return $form->schema([Forms\Components\Section::make()
@@ -156,6 +162,7 @@ class LocationsRelationManager extends RelationManager
 
                 Tables\Columns\TextColumn::make("type.name")
                     ->label("Type")
+                    ->placeholder("Onbekend")
                     ->searchable()
                     ->badge()
                     ->width(100)

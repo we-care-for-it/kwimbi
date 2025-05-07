@@ -12,6 +12,10 @@ class relationType extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     public $table = "relation_types";
 
+    protected $casts = [
+        'options' => 'array',
+    ];
+
     protected $fillable = [
         'name',
         'is_active',

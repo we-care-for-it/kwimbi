@@ -3,9 +3,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
-use App\Models\ObjectLocation;
 use App\Models\Project;
 use App\Models\Relation;
+use App\Models\relationLocation;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -14,6 +14,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -116,12 +117,35 @@ class ProjectsResource extends Resource
                             ->searchable()
                             ->label("Relatie")
                             ->columnSpan("full")
-                            ->options(Relation::all()->pluck("name", "id")),
+                            ->options(Relation::all()->pluck("name", "id"))
+                        //      ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
+                            ->reactive()
+                        ,
                         Select::make("location_id")
                             ->searchable()
+                            ->preload()
                             ->label("Locatie")
                             ->columnSpan("full")
-                            ->options(ObjectLocation::all()->pluck("address", "id")),
+                            ->options(relationLocation::all()->pluck("name", "id"))
+                        // ->options(function (callable $get) {
+                        //     $countryId = $get('customer_id');
+
+                        //     $cities = relationLocation::where('relation_id', $countryId)->pluck('name', 'id');
+
+                        //     if ($cities->isEmpty()) {
+                        //         return [];
+                        //     } else {
+                        //         return $cities;
+                        //     }
+                        // })
+
+                            ->placeholder('Kies een locatie'),
+                        // ->hint(fn(callable $get) =>
+                        //     relationLocation::where('relation_id', $get('customer_id'))->count() === 0
+                        //     ? 'Geen locaties gevonden.'
+                        //     : null
+                        // )-
+
                     ])
                     ->columns(2)
                     ->columnSpan(1),

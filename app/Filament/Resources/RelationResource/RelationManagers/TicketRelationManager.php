@@ -32,7 +32,8 @@ class TicketRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_tickets ?? false;
+
+        return in_array('Tickets', $ownerRecord?->type->options) ? true : false;
     }
 
     public function form(Form $form): Form
