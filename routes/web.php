@@ -1,5 +1,11 @@
 <?php
 
 use App\Http\Controllers\ObjectMonitoringController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/monitoring/retrieveInfo', [ObjectMonitoringController::class, 'retrieveInfo']);
+
+Route::get('/run-migration', function () {
+    Artisan::call('migrate --force');
+    return 'Migration complete';
+});
