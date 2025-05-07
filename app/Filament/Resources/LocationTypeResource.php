@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Enums\LocationTypeOptions;
 use App\Filament\Resources\LocationTypeResource\Pages;
 use App\Models\locationType;
 use Filament\Forms;
@@ -36,10 +35,16 @@ class LocationTypeResource extends Resource
                         ToggleButtons::make('options')
                             ->label('Opties')
                             ->multiple()
-                            ->options(LocationTypeOptions::class)
+                            ->options([
+                                'Afbeeldingen'    => 'Afbeeldingen',
+                                'Contactpersonen' => 'Contactpersonen',
+                                'Notities'        => 'Notities',
+                                'Bijlages'        => 'Bijlages',
+                                'Beheerder'       => 'Beheerder',
+                                'Objecten'        => 'Objecten',
+                            ])
                             ->inline()
-                            ->columns(2)
-                            ->grouped(),
+                            ->columns(2),
 
                     ]),
             ]);
@@ -54,18 +59,10 @@ class LocationTypeResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                // Tables\Columns\TextColumn::make('options')
-                //     ->label('Opties')
-                //     ->badge(),
-
                 Tables\Columns\TextColumn::make('options')
-                    ->formatStateUsing(fn($state) => collect($state)
-                            ->filter()
+                    ->label('Opties')
+                    ->badge(),
 
-                            ->map(fn($value) => LocationTypeOptions::tryFrom($value)?->getlabel() ?? ucfirst($value))
-                            ->join(', '))
-
-                ,
             ])
             ->filters([
                 //

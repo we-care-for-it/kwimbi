@@ -69,4 +69,9 @@ class relationLocation extends Model implements Auditable, HasMedia
         return $this->belongsTo(locationType::class);
     }
 
+    public function management()
+    {
+        return $this->belongsTo(Relation::class);
+    }
+
 }

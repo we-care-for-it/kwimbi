@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationLocationResource\Pages;
 use App\Filament\Resources\RelationLocationResource\RelationManagers;
 use App\Models\ObjectBuildingType;
+use App\Models\Relation;
 use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -187,6 +188,9 @@ class RelationLocationResource extends Resource
                 ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed()
+                ->visible(function (object $record) {
+                    return in_array('Afbeeldingen', $record?->type->options) ? true : false;;
+                })
                 ->columns(1),
 
             Forms\Components\Section::make("Gebouwgegevens")
@@ -210,7 +214,19 @@ class RelationLocationResource extends Resource
                                 ->reactive()
                                 ->searchable()
 
-                                ->label("Gebouwtype")
+                                ->label("Gebouwtype"),
+
+                            Select::make("management_id")
+                                ->options(Relation::pluck("name", "id"))
+
+                                ->reactive()
+                                ->searchable()
+
+                                ->label("Beheerder")
+
+                                ->visible(function (object $record) {
+                                    return in_array('Beheerder', $record?->type->options) ? true : false;;
+                                })
 
                                 ->columnSpan(1),
 
@@ -287,6 +303,15 @@ class RelationLocationResource extends Resource
                 //     ->label("Bouwjaar")
                 //     ->placeholder("Niet opgegeven"),
 
+                TextEntry::make("type.name")
+                    ->label("Type")
+                    ->badge()
+                    ->placeholder("Niet opgegeven"),
+                TextEntry::make("buildingtype.name")
+                    ->label("Gebouwtype")
+                    ->badge()
+                    ->placeholder("Niet opgegeven"),
+
                 TextEntry::make("relation.name")
                     ->label("Relatie")
                     ->Url(function (object $record) {
@@ -295,23 +320,17 @@ class RelationLocationResource extends Resource
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
 
-                TextEntry::make("buildingtype.name")
-                    ->label("Gebouwtype")
-                    ->badge()
-                    ->placeholder("Niet opgegeven"),
-
                 // TextEntry::make("complexnumber")
                 //     ->label("Complexnummer")
                 //     ->placeholder("Niet opgegeven"),
 
-                TextEntry::make("type.name")
-                    ->label("Type")
-                    ->badge()
-                    ->placeholder("Niet opgegeven"),
-
-                TextEntry::make("management_id")
+                TextEntry::make("management.name")
                     ->label("Beheerder")
-                    ->badge()
+                    ->Url(function (object $record) {
+                        return "/relations/" . $record->relation_id . "";
+                    })
+                    ->icon("heroicon-c-link")
+
                     ->placeholder("Niet opgegeven")
                     ->visible(function (object $record) {
                         return in_array('Beheerder', $record?->type->options) ? true : false;;
