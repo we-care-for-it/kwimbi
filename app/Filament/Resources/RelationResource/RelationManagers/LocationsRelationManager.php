@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Enums\LocationType;
+use App\Models\locationType;
 use App\Models\ObjectBuildingType;
 use App\Services\AddressService;
 use Filament\Forms;
@@ -88,16 +88,13 @@ class LocationsRelationManager extends RelationManager
                 Forms\Components\TextInput::make("address")
                     ->label("Straatnaam")
                     ->required()
-                    ->columnSpan(2),
-                Forms\Components\TextInput::make("housenumber")
-                    ->label("Huisnummer")
-                    ->required(),
+                    ->columnSpan(3),
                 Forms\Components\TextInput::make("place")
                     ->label("Plaats"),
                 Forms\Components\Select::make('type_id')
-                    ->label('Categorie')
+                    ->label('Type')
                     ->default(1)
-                    ->options(LocationType::class),
+                    ->options(locationType::pluck('name', 'id')),
                 Forms\Components\TextInput::make("gps_lon")
                     ->label("GPS longitude")
                     ->hidden()
@@ -148,11 +145,8 @@ class LocationsRelationManager extends RelationManager
                     ->label('Adres')
                     ->sortable()
                     ->getStateUsing(function ($record): ?string {
-                        $housenumber = "";
-                        if ($record->housenumber) {
-                            $housenumber = " " . $record->housenumber;
-                        }
-                        return $record->address . $housenumber . " - " . $record->zipcode . " - " . $record->place;
+
+                        return $record->address . "-" . $record->zipcode . " - " . $record->place;
                     })
                     ->searchable()
                 //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
@@ -160,7 +154,7 @@ class LocationsRelationManager extends RelationManager
                         return $record?->name;
                     }),
 
-                Tables\Columns\TextColumn::make("type_id")
+                Tables\Columns\TextColumn::make("type.name")
                     ->label("Type")
                     ->searchable()
                     ->badge()

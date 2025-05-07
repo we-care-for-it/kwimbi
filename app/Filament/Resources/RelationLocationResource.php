@@ -290,7 +290,7 @@ class RelationLocationResource extends Resource
                 TextEntry::make("relation.name")
                     ->label("Relatie")
                     ->Url(function (object $record) {
-                        return "/relations/" . $record->customer_id . "";
+                        return "/relations/" . $record->relation_id . "";
                     })
                     ->icon("heroicon-c-link")
                     ->placeholder("Niet opgegeven"),
@@ -304,16 +304,23 @@ class RelationLocationResource extends Resource
                 //     ->label("Complexnummer")
                 //     ->placeholder("Niet opgegeven"),
 
-                TextEntry::make("province")
-                    ->label("Provincie")
+                TextEntry::make("type.name")
+                    ->label("Type")
+                    ->badge()
                     ->placeholder("Niet opgegeven"),
+
+                TextEntry::make("management_id")
+                    ->label("Beheerder")
+                    ->badge()
+                    ->placeholder("Niet opgegeven")
+                    ->visible(function (object $record) {
+                        return in_array('Beheerder', $record?->type->options) ? true : false;;
+                    }),
 
                 // TextEntry::make("managementcompany.name")
                 //     ->label("Beheerder")
                 //     ->placeholder("Niet opgegeven")
-                //     ->Url(function (object $record) {
-                //         return "/relations/" . $record->management_id;
-                //     }),
+                //     ->Url(f,
 
             ]),
 
@@ -328,8 +335,14 @@ class RelationLocationResource extends Resource
                         ->placeholder('Geen afbeeldingen')
                         ->collection('relationlocationimages')])->collapsible()
                 ->collapsed(false)
+                ->visible(function (object $record) {
+                    return in_array('Afbeeldingen', $record?->type->options) ? true : false;;
+                })
+
                 ->persistCollapsed(),
-        ]);
+        ])
+
+        ;
     }
 
     public static function getRelations(): array

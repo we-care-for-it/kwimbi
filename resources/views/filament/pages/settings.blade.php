@@ -29,17 +29,26 @@
          </a>
 
 
-         @can('view_any_relation')
+         @can('view_any_relationTypePolicy')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="relation-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Relatietypes</h2>
+               <h2>view_any_relation::type</h2>
                <p class="text-sm text-gray-600">Relatie types</p>
             </div>
          </a>
          @endcan
 
-         /contact-types
+
+         @can('view_any_location::type')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="location-types">
+            <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
+            <div>
+               <h2>Locatie types</h2>
+               <p class="text-sm text-gray-600">Locatie types</p>
+            </div>
+         </a>
+         @endcan
 
 
 

@@ -27,6 +27,11 @@ class AttachmentsRelationManager extends RelationManager
             ->count();
     }
 
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        return in_array('Bijlages', $ownerRecord?->type->options) ? true : false;
+    }
+
     public function form(Form $form): Form
     {
         return $form

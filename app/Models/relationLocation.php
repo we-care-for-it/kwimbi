@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Enums\LocationType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,13 +20,13 @@ class relationLocation extends Model implements Auditable, HasMedia
     use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
     use HasFilamentComments;
-    protected function casts(): array
-    {
-        return [
-            'type_id' => LocationType::class,
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'type_id' => LocationType::class,
 
-        ];
-    }
+    //     ];
+    // }
 
     // Validation rules for this model
     static $rules = [];
@@ -64,4 +63,10 @@ class relationLocation extends Model implements Auditable, HasMedia
     {
         return $this->belongsTo(ObjectBuildingType::class, 'building_type_id', 'id');
     }
+
+    public function type()
+    {
+        return $this->belongsTo(locationType::class);
+    }
+
 }

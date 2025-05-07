@@ -21,10 +21,9 @@ class ContactsRelationManager extends RelationManager
     protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
 
-    public static function getBadge(Model $ownerRecord, string $pageClass): ?string
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        // $ownerModel is of actual type Job
-        return $ownerRecord->contactsObject->count();
+        return in_array('Contactpersonen', $ownerRecord?->type->options) ? true : false;
     }
 
     public function form(Form $form): Form
