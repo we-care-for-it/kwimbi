@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -32,12 +34,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @package App
  * @mixin Builder
  */
-class Elevator extends Model implements Auditable, HasMedia
+class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
 {
     use HasFilamentComments;
     public $table = "elevators";
     use InteractsWithMedia;
     use SoftDeletes;
+    use UsesCustomFields;
     protected function casts(): array
     {
         return [

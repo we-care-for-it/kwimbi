@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 
-class Relation extends Model
+class Relation extends Model implements HasCustomFields
 {
     use HasFactory;
     use SoftDeletes;
     use HasFilamentComments;
-
+    use UsesCustomFields;
     protected $fillable = [
         'name',
     ];

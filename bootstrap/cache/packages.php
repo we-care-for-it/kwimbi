@@ -374,6 +374,13 @@
       0 => 'PhpMqtt\\Client\\MqttClientServiceProvider',
     ),
   ),
+  'postare/blade-mdi' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Postare\\BladeMdi\\BladeMdiServiceProvider',
+    ),
+  ),
   'pxlrbt/filament-activity-log' => 
   array (
     'providers' => 
@@ -400,6 +407,17 @@
     'providers' => 
     array (
       0 => 'Rawilk\\FilamentPasswordInput\\FilamentPasswordInputServiceProvider',
+    ),
+  ),
+  'relaticle/custom-fields' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Relaticle\\CustomFields\\CustomFieldsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'CustomFields' => 'Relaticle\\CustomFields\\Facades\\CustomFields',
     ),
   ),
   'rupadana/filament-api-service' => 
@@ -465,6 +483,13 @@
       0 => 'Spatie\\Backup\\BackupServiceProvider',
     ),
   ),
+  'spatie/laravel-data' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\LaravelData\\LaravelDataServiceProvider',
+    ),
+  ),
   'spatie/laravel-medialibrary' => 
   array (
     'providers' => 
@@ -516,6 +541,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\Sitemap\\SitemapServiceProvider',
+    ),
+  ),
+  'spatie/php-structure-discoverer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\StructureDiscoverer\\StructureDiscovererServiceProvider',
     ),
   ),
   'stancl/tenancy' => 

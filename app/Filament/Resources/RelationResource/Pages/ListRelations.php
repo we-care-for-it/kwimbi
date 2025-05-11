@@ -3,12 +3,13 @@ namespace App\Filament\Resources\RelationResource\Pages;
 
 use App\Filament\Resources\RelationResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListRelations extends ListRecords
 {
+    use InteractsWithCustomFields;
     protected static string $resource = RelationResource::class;
     protected function getHeaderActions(): array
     {

@@ -36,7 +36,7 @@ use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
-
+use Relaticle\CustomFields\CustomFieldsPlugin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -60,6 +60,13 @@ class AppPanelProvider extends PanelProvider
 
 
             ->id('app')
+
+
+    ->plugins([
+            CustomFieldsPlugin::make(),
+        ])
+
+
 ->plugins([
     ApiServicePlugin::make()
 ])

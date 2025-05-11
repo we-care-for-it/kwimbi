@@ -3,6 +3,7 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\contactType;
+use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -30,7 +31,8 @@ class ObjectsRelationManager extends RelationManager
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
 
-        return in_array('Objecten', $ownerRecord?->type->options) ? true : false;
+        return relationLocation::where('relation_id', $ownerRecord?->id)->count();
+
     }
 
     public function form(Form $form): Form

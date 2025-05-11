@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -28,12 +30,12 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @package App
  * @mixin Builder
  */
-class ObjectLocation extends Model implements Auditable, HasMedia
+class ObjectLocation extends Model implements Auditable, HasMedia, HasCustomFields
 {
     use SoftDeletes;
     use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
-
+    use UsesCustomFields;
     // Validation rules for this model
     static $rules = [];
 

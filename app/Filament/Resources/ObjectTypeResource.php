@@ -2,6 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ObjectTypeResource\Pages;
+use App\Filament\Resources\ObjectTypeResource\RelationManagers;
 use App\Models\ObjectType;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,35 +24,28 @@ class ObjectTypeResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\FileUpload::make('image')
-                    ->image()
-                    ->directory('object-types'),
+                // Forms\Components\FileUpload::make('image')
+                //     ->image()
+                //     ->directory('object-types'),
 
                 Forms\Components\Toggle::make('is_active')
                     ->default(true),
 
-                Forms\Components\Fieldset::make('Relations')
+                Forms\Components\Fieldset::make('Opties')
                     ->schema([
                         Forms\Components\Toggle::make('has_inspections')
-                            ->label('Inspections'),
+                            ->label('Keuringen'),
                         Forms\Components\Toggle::make('has_incidents')
-                            ->label('Incidents'),
+                            ->label('Storingen'),
                         Forms\Components\Toggle::make('has_maintencycontracts')
-                            ->label('Maintenance Contracts'),
+                            ->label('Onderhoudscontracten'),
                         Forms\Components\Toggle::make('has_maintency')
-                            ->label('Maintenance'),
+                            ->label('Onderhoudsbeurten'),
                         Forms\Components\Toggle::make('has_tickets')
                             ->label('Tickets'),
-                        Forms\Components\Toggle::make('show_on_resource_page')
-                            ->label('Overzicht pagine'),
 
-                        Forms\Components\Select::make('template_id')
-                            ->label('Template')
-                            ->options([
-                                1 => 'Liften & Roltrappen',
-                                2 => 'ICT Hardware',
-                            ]),
                     ])->columns(2),
+
             ]);
     }
 
@@ -114,12 +108,19 @@ class ObjectTypeResource extends Resource
             ])->emptyState(view('partials.empty-state'));
 
     }
+    public static function getRelations(): array
+    {
+        return [
+            RelationManagers\CustomFieldsRelationManager::class,
 
+        ];
+    }
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListObjectTypes::route('/'),
             'view'  => Pages\ViewObjectType::route('/{record}'),
+            'edit'  => Pages\EditObjectType::route('/{record}'),
         ];
     }
 }
