@@ -1,17 +1,18 @@
 <?php
-
 namespace App\Filament\Resources\ContactResource\Pages;
 
 use App\Filament\Resources\ContactResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
-
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListContacts extends ListRecords
 {
+
+    use InteractsWithCustomFields;
     protected static string $resource = ContactResource::class;
-    protected static ?string $title = "Contactpersonen";
+    protected static ?string $title   = "Contactpersonen";
     protected function getHeaderActions(): array
     {
         return [

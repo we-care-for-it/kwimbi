@@ -33,6 +33,8 @@ use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class ObjectResource extends Resource
 {
@@ -155,6 +157,9 @@ class ObjectResource extends Resource
                 ->persistCollapsed()
                 ->visible(fn($record, $get) => $record?->type?->has_inspections)->columns(1),
 
+            CustomFieldsComponent::make()
+                ->columns(1),
+
         ]);
     }
 
@@ -251,6 +256,7 @@ class ObjectResource extends Resource
                     ->label("Relatie")
                     ->placeholder("Niet gekoppeld aan relatie")
                     ->sortable(),
+
                 // Tables\Columns\TextColumn::make("management_company.name")
                 //     ->toggleable()
                 //     ->label("Beheerder")
@@ -436,6 +442,10 @@ class ObjectResource extends Resource
                             ->label("Opmerking")
                             ->placeholder("Geen opmerking"),
                     ]),
+
+                // Custom Fields
+                CustomFieldsInfolists::make()
+                    ->columnSpanFull(),
             ]);
 
     }

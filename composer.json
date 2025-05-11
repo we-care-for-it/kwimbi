@@ -41,6 +41,7 @@
         "pxlrbt/filament-excel": "^2.4",
         "rappasoft/laravel-authentication-log": "^4.0",
         "rawilk/filament-password-input": "^2.0",
+        "relaticle/custom-fields": "^1.4",
         "rupadana/filament-api-service": "^3.4",
         "sentry/sentry-laravel": "^4.13",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
@@ -108,6 +109,10 @@
         {
             "type": "composer",
             "url": "https://composer.larazeus.com"
+        },
+        {
+            "type": "composer",
+            "url": "https://satis.relaticle.com"
         }
     ],
     "config": {

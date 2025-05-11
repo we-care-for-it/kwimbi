@@ -22,6 +22,7 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 
 class ContactResource extends Resource
 {
@@ -32,7 +33,7 @@ class ContactResource extends Resource
     protected static ?string $title                 = "Contactpersonen";
     protected static ?string $recordTitleAttribute  = 'name';
     protected static ?string $pluralModelLabel      = 'Contactpersonen';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -138,6 +139,10 @@ class ContactResource extends Resource
                             ->maxLength(255),
                     ])->collapsible(),
 
+                // Add the CustomFieldsComponent
+                CustomFieldsComponent::make()
+                    ->columns(1),
+
             ]);
     }
 
@@ -181,6 +186,11 @@ class ContactResource extends Resource
                         //             TextEntry::make('country')->label('Land')->placeholder('-'),
                         //         ])->columns(4),
                     ]),
+
+                // Custom Fields
+                CustomFieldsInfolists::make()
+                    ->columnSpanFull(),
+
             ]);
     }
 

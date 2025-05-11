@@ -5,11 +5,12 @@ use App\Filament\Resources\ObjectResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListObjects extends ListRecords
 {
     protected static string $resource = ObjectResource::class;
-
+    use InteractsWithCustomFields;
     protected static ?string $title = 'Objecten';
 
     protected function getHeaderActions(): array

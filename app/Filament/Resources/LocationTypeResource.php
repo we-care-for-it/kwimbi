@@ -43,6 +43,7 @@ class LocationTypeResource extends Resource
                                 'Beheerder'       => 'Beheerder',
                                 'Objecten'        => 'Objecten',
                             ])
+                            ->required()
                             ->inline()
                             ->columns(2),
 

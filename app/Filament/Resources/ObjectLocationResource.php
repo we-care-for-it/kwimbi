@@ -34,6 +34,7 @@ use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 
 class ObjectLocationResource extends Resource
 {
@@ -320,7 +321,15 @@ class ObjectLocationResource extends Resource
                     ->rows(7)
                     ->label("Opmerking")
                     ->columnSpan(3)
-                    ->autosize()]);
+                    ->autosize(),
+
+                CustomFieldsComponent::make()
+                    ->columns(1),
+
+            ]);
+
+        // Add the CustomFieldsComponent
+
     }
 
     public static function table(Table $table): Table

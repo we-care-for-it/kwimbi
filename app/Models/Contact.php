@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 
-class Contact extends Model
+class Contact extends Model implements HasCustomFields
 {
     use HasFactory;
     use HasFilamentComments;
+    use UsesCustomFields;
     /**
      * @var string[]
      */

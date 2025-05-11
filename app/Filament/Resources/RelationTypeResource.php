@@ -44,6 +44,7 @@ class RelationTypeResource extends Resource
                                 'Projecten'       => 'Projecten',
                                 'Locaties'        => 'Locaties',
                             ])
+                            ->required()
                             ->inline()
                             ->columns(2),
 

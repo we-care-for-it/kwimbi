@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +9,7 @@ class ObjectType extends Model implements Auditable
 {
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
- 
+
     protected $fillable = [
         'name',
         'is_active',
@@ -22,12 +21,17 @@ class ObjectType extends Model implements Auditable
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'has_inspections' => 'boolean',
-        'has_incidents' => 'boolean',
+        'is_active'              => 'boolean',
+        'has_inspections'        => 'boolean',
+        'has_incidents'          => 'boolean',
         'has_maintencycontracts' => 'boolean',
-        'has_maintency' => 'boolean',
-        'has_tickets' => 'boolean',
+        'has_maintency'          => 'boolean',
+        'has_tickets'            => 'boolean',
     ];
+
+    public function customFields()
+    {
+        return $this->hasMany(customFieldinModel::class, 'model_id');
+    }
 
 }

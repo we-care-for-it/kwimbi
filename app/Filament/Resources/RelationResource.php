@@ -27,6 +27,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group; // Alias toevoegen om conflict te voorkomen
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class RelationResource extends Resource
 {
@@ -145,6 +147,10 @@ class RelationResource extends Resource
                     ->columnSpan("full"),
             ]),
 
+            // Add the CustomFieldsComponent
+            CustomFieldsComponent::make()
+                ->columns(1),
+
         ]);
 
     }
@@ -211,6 +217,11 @@ class RelationResource extends Resource
                         ->label("Opmerking")
                         ->placeholder("Geen opmerking"),
                 ]),
+
+            // Custom Fields
+            CustomFieldsInfolists::make()
+                ->columnSpanFull(),
+
         ]);
 
     }
@@ -271,21 +282,21 @@ class RelationResource extends Resource
                 ->icon('heroicon-m-phone')
                 ->label('Telefoonnummer'),
 
-            Tables\Columns\TextColumn::make('website')
-                ->searchable()
-                ->toggleable()
-                ->placeholder('-')
-                ->url(fn($record) => "https://" . $record->website)
-                ->icon('heroicon-m-link')
-                ->label('Website'),
+            // Tables\Columns\TextColumn::make('website')
+            //     ->searchable()
+            //     ->toggleable()
+            //     ->placeholder('-')
+            //     ->url(fn($record) => "https://" . $record->website)
+            //     ->icon('heroicon-m-link')
+            //     ->label('Website'),
 
-            Tables\Columns\TextColumn::make('emailaddress')
-                ->searchable()
-                ->toggleable()
-                ->url(fn($record) => "https://" . $record->emailaddress)
-                ->icon('heroicon-m-envelope')
-                ->placeholder('-')
-                ->label('Emailadres'),
+            // Tables\Columns\TextColumn::make('emailaddress')
+            //     ->searchable()
+            //     ->toggleable()
+            //     ->url(fn($record) => "https://" . $record->emailaddress)
+            //     ->icon('heroicon-m-envelope')
+            //     ->placeholder('-')
+            //     ->label('Emailadres'),
 
         ])
             ->filters([
@@ -334,7 +345,7 @@ class RelationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\ObjectsRelationManager::class,
+            //  RelationManagers\ObjectsRelationManager::class,
             RelationManagers\TicketRelationManager::class,
             RelationManagers\EmployeesRelationManager::class,
             RelationManagers\ContactsRelationManager::class,
