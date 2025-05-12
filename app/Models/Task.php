@@ -72,25 +72,24 @@ class Task extends Model implements HasCustomFields
     public function getRelatedToAttribute()
     {
 
-        switch ($this->model) {
-            case 'relation':
-                return Relation::whereId($this->model_id)->first();
-                break;
-            case 'project':
-                return Project::whereId($this->model_id)->first();
-                break;
-            case 'location':
-                return ObjectLocation::whereId($this->model_id)->first();
-                break;
-            case 'object':
-                return Elevator::whereId($this->model_id)->first();
-                break;
-            case 'contactperson':
-                return Contact::whereId($this->model_id)->first();
-                break;
-            default:
-                //code block
-        }
+        // switch ($this->model) {
+        //     case 'relation':
+        return Relation::whereId($this->model_id)->first();
+        //     break;
+        // case 'project':
+        //     return Project::whereId($this->model_id)->first();
+        //     break;
+        // case 'location':
+        //     return ObjectLocation::whereId($this->model_id)->first();
+        //     break;
+        // case 'object':
+        //     return Elevator::whereId($this->model_id)->first();
+        //     break;
+        // case 'contactperson':
+        //     return Contact::whereId($this->model_id)->first();
+        //     break;
+        // default:
+        //code block
 
     }
 

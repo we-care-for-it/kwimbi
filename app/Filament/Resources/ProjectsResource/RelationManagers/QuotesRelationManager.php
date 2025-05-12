@@ -1,8 +1,8 @@
 <?php
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
+use App\Enums\QuoteStatus;
 use App\Enums\QuoteTypes;
-use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -42,12 +42,19 @@ class QuotesRelationManager extends RelationManager
                         ->default('1'),
 
                     Select::make("company_id")
-                        ->relationship(name: 'supplier', titleAttribute: 'name')
-                        ->label('Leverancier')
-                        ->createOptionForm([
-                            Forms\Components\TextInput::make('name')->label('Naam van de leveracnier')->required(),
 
-                        ])->columnSpan("full"),
+                        ->options(function () {
+                            return \App\Models\Relation::all()
+                                ->groupBy('type.name')
+                                ->mapWithKeys(function ($group, $category) {
+                                    return [
+                                        $category => $group->pluck('name', 'id')->toArray(),
+                                    ];
+                                })->toArray();
+                        })
+
+                        ->label('Leverancier')
+                        ->columnSpan("full"),
                     TextInput::make("number")
                         ->label("Nummer")
                         ->placeholder('-'),
@@ -84,9 +91,7 @@ class QuotesRelationManager extends RelationManager
                     Select::make("status_id")
                         ->label("Status")
                         ->required()
-                        ->reactive()
-                        ->options(Statuses::where("model", "ProjectQuotes")
-                                ->pluck("name", "id"))
+                        ->options(QuoteStatus::class)
                         ->columnSpan("full"),
 
                 ])

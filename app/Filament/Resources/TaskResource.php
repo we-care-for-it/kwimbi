@@ -6,7 +6,6 @@ use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
 use App\Models\ObjectLocation;
 use App\Models\Project;
-use App\Models\Relation;
 use App\Models\Task;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
@@ -59,25 +58,31 @@ class TaskResource extends Resource
                     ->columnSpan('full')
                     ->autosize(),
 
-                Select::make('model')
-                    ->options([
-                        'relation' => 'Relatie',
-                        //  'project'       => 'Project',
-                        //   'contactperson' => 'Contactpersoon',
-                        //  'object'        => 'Object',
+                // Select::make('model')
+                //     ->options([
+                //         'relation' => 'Relatie',
+                //         //  'project'       => 'Project',
+                //         //   'contactperson' => 'Contactpersoon',
+                //         //  'object'        => 'Object',
 
-                    ])
-                    ->searchable()
-                    ->live()
-                    ->label('Koppel aan'),
+                //     ])
+                //     ->searchable()
+                //     ->live()
+                //     ->label('Koppel aan'),
                 Select::make('model_id')
                     ->label('Relatie')
                 //where('type_id', 5)->
-                    ->options(Relation::pluck('name', 'id'))
-                    ->searchable()
-                    ->visible(function (Get $get, Set $set) {
-                        return $get('model') == 'relation' ?? false;
-                    }),
+                    ->options(function () {
+                        return \App\Models\Relation::all()
+                            ->groupBy('type.name')
+                            ->mapWithKeys(function ($group, $category) {
+                                return [
+                                    $category => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    })
+
+                    ->searchable(),
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))
@@ -198,68 +203,12 @@ class TaskResource extends Resource
                     ->toggleable()
                     ->label('Prioriteit'),
 
-                Tables\Columns\TextColumn::make('title')
-                    ->description(function ($record): ?string {
-                        if ($record?->description) {
-                            return $record?->description;
-                        } else {
-                            return false;
-                        }
-                    })
-                    ->label('Title')
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('begin_date')
-                    ->label('Plandatum')
-                    ->placeholder('-')
-                    ->toggleable()
-                    ->sortable()
-                    ->dateTime("d-m-Y")
-                    ->sortable(),
-
-                Tables\Columns\TextColumn::make('deadline')
-                    ->label('Einddatum')
-                    ->placeholder('-')
-                    ->toggleable()
-                    ->sortable()
-                    ->dateTime("d-m-Y")
-                    ->color(
-                        fn($record) => strtotime($record?->deadline) <
-                        time()
-                        ? "danger"
-                        : "success"
-                    )
-                    ->sortable(),
-
                 Tables\Columns\TextColumn::make('related_to')
-                    ->label('Gerelateerd  aan')
+                    ->label('Relatien')
                     ->toggleable()
                     ->getStateUsing(function ($record): ?string {
-                        switch ($record->model) {
-                            case 'relation':
-                                return $record?->related_to?->name;
-                                break;
-                            case 'project':
-                                return $record?->related_to?->name;
-                                break;
-                            case 'location':
-                                $housenumber   = "";
-                                $complexnumber = "";
-                                $name          = "";
-                                if ($record->related_to?->housenumber) {
-                                    $housenumber = " " . $record->related_to->housenumber;
-                                }
-                                return $record?->related_to->address . " " . $housenumber . " - " . $record->related_to?->zipcode . " - " . $record->related_to?->place;
-                                break;
-                            case 'object':
-                                return $record->related_to->nobo_no;
-                                break;
-                            case 'contactperson':
-                                return $record?->related_to?->first_name . " " . $record->related_to?->last_name;
-                                break;
-                            default:
-                                return "-";
-                        }
+                        return $record?->related_to?->name;
+
                     })->placeholder('-')
 
                     ->description(function ($record): ?string {
@@ -294,6 +243,39 @@ class TaskResource extends Resource
 
                 ,
 
+                Tables\Columns\TextColumn::make('title')
+                    ->description(function ($record): ?string {
+                        if ($record?->description) {
+                            return $record?->description;
+                        } else {
+                            return false;
+                        }
+                    })
+                    ->label('Title')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('begin_date')
+                    ->label('Plandatum')
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->sortable()
+                    ->dateTime("d-m-Y")
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('deadline')
+                    ->label('Einddatum')
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->sortable()
+                    ->dateTime("d-m-Y")
+                    ->color(
+                        fn($record) => strtotime($record?->deadline) <
+                        time()
+                        ? "danger"
+                        : "success"
+                    )
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('employee.name')
 
                     ->label('Toegewezen aan')
@@ -303,7 +285,15 @@ class TaskResource extends Resource
             ->filters([
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
-                    ->options(Relation::all()->pluck("name", "id")),
+                    ->options(function () {
+                        return \App\Models\Relation::all()
+                            ->groupBy('type.name')
+                            ->mapWithKeys(function ($group, $category) {
+                                return [
+                                    $category => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    }),
 
             ])
             ->actions([
