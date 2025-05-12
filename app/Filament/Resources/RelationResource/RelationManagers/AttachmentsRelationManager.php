@@ -31,7 +31,7 @@ class AttachmentsRelationManager extends RelationManager
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
 
-        return in_array('Bijlages', $ownerRecord?->type->options) ? true : false;
+        return in_array('Bijlages', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function form(Form $form): Form

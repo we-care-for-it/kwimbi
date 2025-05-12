@@ -27,10 +27,10 @@ class ContactsRelationManager extends RelationManager
         // $ownerModel is of actual type Job
         return $ownerRecord->contacts->count();
     }
-
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_contacts ?? false;
+
+        return in_array('Contactpersonen', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function form(Form $form): Form
