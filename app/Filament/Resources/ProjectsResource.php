@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 use App\Enums\ProjectStatus;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
-use App\Models\Contact;
+use App\Models\Employee;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\relationLocation;
@@ -145,7 +145,7 @@ class ProjectsResource extends Resource
                                 ->options(function (callable $get) {
                                     $relationId = $get('customer_id');
 
-                                    return Contact::query()
+                                    return Employee::query()
                                         ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
                                         ->get()
                                         ->mapWithKeys(function ($contact) {
