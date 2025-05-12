@@ -96,7 +96,8 @@ return [
         App\Filament\Resources\ContactResource::class,
         App\Filament\Resources\ProjectsResource::class,
         App\Filament\Resources\ObjectResource::class,
-        //   App\Filament\Resources\ObjectLocationResource::class,
+        App\Filament\Resources\RelationLocationResource::class,
+        App\Filament\Resources\TimeTrackingResource::class,
     ],
 
     'disallowed_entity_resources' => [

@@ -8,9 +8,11 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Database\Eloquent\Builder;
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListTasks extends ListRecords
 {
+    use InteractsWithCustomFields;
     protected static string $resource = TaskResource::class;
     protected static ?string $title   = 'Alle acties';
     protected function getHeaderActions(): array

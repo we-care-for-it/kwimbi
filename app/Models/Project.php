@@ -5,17 +5,18 @@ use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
-use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 
-class Project extends Model implements Auditable
+class Project extends Model implements Auditable, HasCustomFields
 {
     //  use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
     use HasFilamentComments;
-    use BelongsToTenant;
+    use UsesCustomFields;
     public function location()
     {
-        return $this->hasOne(ObjectLocation::class, 'id', 'location_id');
+        return $this->hasOne(relationLocation::class, 'id', 'location_id');
     }
 
     static $rules = [
@@ -60,7 +61,7 @@ class Project extends Model implements Auditable
 
     public function locations()
     {
-        return $this->hasMany(ProjectLocation::class, 'project_id', 'location_id');
+        return $this->hasMany(relationLocation::class, 'project_id', 'location_id');
     }
 
     public function timeTracking()

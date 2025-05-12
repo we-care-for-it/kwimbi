@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -14,12 +16,13 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @package App
  * @mixin Builder
  */
-class relationLocation extends Model implements Auditable, HasMedia
+class relationLocation extends Model implements Auditable, HasMedia, HasCustomFields
 {
     use SoftDeletes;
     use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
     use HasFilamentComments;
+    use UsesCustomFields;
     // protected function casts(): array
     // {
     //     return [
@@ -74,4 +77,9 @@ class relationLocation extends Model implements Auditable, HasMedia
         return $this->belongsTo(Relation::class);
     }
 
+    public function getFullAddress(): ?string
+    {
+
+        return collect([$this->address, $this->zipcode, $this->place])->filter()->implode(' ');
+    }
 }

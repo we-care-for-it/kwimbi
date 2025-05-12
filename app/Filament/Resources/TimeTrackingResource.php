@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 
 class TimeTrackingResource extends Resource
 {
@@ -103,6 +104,9 @@ class TimeTrackingResource extends Resource
                                     ->default(true),
                             ]),
                     ]),
+                // Add the CustomFieldsComponent
+                CustomFieldsComponent::make()
+                    ->columnSpanFull(),
             ]);
     }
 

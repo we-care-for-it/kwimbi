@@ -26,6 +26,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class ProjectsResource extends Resource
 {
@@ -100,55 +102,68 @@ class ProjectsResource extends Resource
                         ])->schema([
                             TextInput::make("budget_costs")
                                 ->label("Budget")
-                                ->suffixIcon("heroicon-o-currency-euro")
-                                ->columnSpan("full"),
+                                ->suffixIcon("heroicon-o-currency-euro"),
+
                             Select::make("status_id")
                                 ->label("Status")
                                 ->reactive()
                                 ->options(["1" => "Open"])
-                                ->columnSpan("full")
                                 ->default(1),
+
+                            Select::make("customer_id")
+                                ->searchable()
+                                ->label("Relatie")
+
+                                ->options(Relation::all()->pluck("name", "id"))
+                            //  ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
+                                ->reactive(),
+
+                            Select::make("location_id")
+
+                                ->options(function (callable $get) {
+                                    $relationId = $get('relation_id'); // get value from another input field
+
+                                    return relationLocation::when($relationId, fn($query) => $query->where('relation_id', $relpationId))
+                                        ->get()
+                                        ->mapWithKeys(function ($location) {
+                                            return [
+                                                $location->id => collect([$location->address, $location->zipcode, $location->place])->filter()->implode(' '),
+
+                                            ];
+                                        })
+                                        ->toArray();
+                                })
+
+                                ->searchable()
+                                ->label('Locatie'),
+
                         ]),
-                    ])->columnSpan(1),
+                    ])->columnSpan("full"),
 
-                Section::make()
-                    ->schema([
-                        Select::make("customer_id")
-                            ->searchable()
-                            ->label("Relatie")
-                            ->columnSpan("full")
-                            ->options(Relation::all()->pluck("name", "id"))
-                        //      ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
-                            ->reactive()
-                        ,
-                        Select::make("location_id")
-                            ->searchable()
-                            ->preload()
-                            ->label("Locatie")
-                            ->columnSpan("full")
-                            ->options(relationLocation::all()->pluck("name", "id"))
-                        // ->options(function (callable $get) {
-                        //     $countryId = $get('customer_id');
+                // Select::make("location_id")
+                //     ->searchable()
+                //     ->preload()
+                //     ->label("Locatie")
+                //     ->columnSpan("full")
+                //     ->options(relationLocation::all()->pluck("name", "id"))
+                // // ->options(function (callable $get) {
+                //     $countryId = $get('customer_id');
 
-                        //     $cities = relationLocation::where('relation_id', $countryId)->pluck('name', 'id');
+                //     $cities = relationLocation::where('relation_id', $countryId)->pluck('name', 'id');
 
-                        //     if ($cities->isEmpty()) {
-                        //         return [];
-                        //     } else {
-                        //         return $cities;
-                        //     }
-                        // })
+                //     if ($cities->isEmpty()) {
+                //         return [];
+                //     } else {
+                //         return $cities;
+                //     }
+                // })
 
-                            ->placeholder('Kies een locatie'),
-                        // ->hint(fn(callable $get) =>
-                        //     relationLocation::where('relation_id', $get('customer_id'))->count() === 0
-                        //     ? 'Geen locaties gevonden.'
-                        //     : null
-                        // )-
-
-                    ])
-                    ->columns(2)
-                    ->columnSpan(1),
+                //    ->placeholder('Kies een locatie'),
+                // ->hint(fn(callable $get) =>
+                //     relationLocation::where('relation_id', $get('customer_id'))->count() === 0
+                //     ? 'Geen locaties gevonden.'
+                //     : null
+                // )-
 
                 Section::make()
                     ->schema([
@@ -168,6 +183,11 @@ class ProjectsResource extends Resource
                             DatePicker::make("enddate")->label("Einddatum"),
                         ]),
                     ]),
+
+                // Add the CustomFieldsComponent
+                CustomFieldsComponent::make()
+                    ->columnSpanFull(),
+
             ]);
     }
 
@@ -393,6 +413,11 @@ class ProjectsResource extends Resource
                                     ->placeholder('0'),
                             ])->columns(3),
                     ]),
+
+                // Custom Fields
+                CustomFieldsInfolists::make()
+                    ->columnSpanFull(),
+
             ]);
     }
 

@@ -21,14 +21,16 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class RelationLocationResource extends Resource
 {
     protected static ?string $model                 = relationLocation::class;
     protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel       = "Relaties";
-    protected static ?string $pluralModelLabel      = 'Relaties';
+    protected static ?string $navigationLabel       = "Relaties locaties";
+    protected static ?string $pluralModelLabel      = 'Relaties locaties';
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -95,6 +97,7 @@ class RelationLocationResource extends Resource
                             //         ->options(Relation::where('type_id', 2)->pluck('name', 'id')),
 
                         ]),
+
                 ]),
 
             Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("zipcode")
@@ -231,8 +234,14 @@ class RelationLocationResource extends Resource
                                 ->columnSpan(1),
 
                         ])])
-                ->columnSpan(["lg" => 3])])
+                ->columnSpan(["lg" => 3])
+
+            , CustomFieldsComponent::make()
+                ->columnSpanFull(),
+
+        ])
             ->columns(3);
+        // Add the CustomFieldsComponent
 
         Section::make()
             ->schema([
@@ -240,7 +249,10 @@ class RelationLocationResource extends Resource
                     ->rows(7)
                     ->label("Opmerking")
                     ->columnSpan(3)
-                    ->autosize()]);
+                    ->autosize(),
+
+            ]);
+
     }
 
     public static function table(Table $table): Table
@@ -342,10 +354,16 @@ class RelationLocationResource extends Resource
                 //     ->Url(f,
 
             ]),
+            // Custom Fields
 
         ]),
 
-        ]), Section::make('Afbeeldingen')
+        ]),
+
+            CustomFieldsInfolists::make()
+                ->columnSpanFull(),
+
+            Section::make('Afbeeldingen')
                 ->schema([
                     SpatieMediaLibraryImageEntry::make('relationlocationimage')
                         ->hiddenLabel()
@@ -362,6 +380,7 @@ class RelationLocationResource extends Resource
         ])
 
         ;
+
     }
 
     public static function getRelations(): array
@@ -386,7 +405,7 @@ class RelationLocationResource extends Resource
             'index' => Pages\ListRelationLocations::route('/'),
             //   'create' => Pages\CreateRelationLocation::route('/create'),
             'view'  => Pages\ViewRelationLocation::route('/{record}'),
-            //    'edit'   => Pages\EditRelationLocation::route('/{record}/edit'),
+            //'edit'  => Pages\EditRelationLocation::route('/{record}/edit'),
         ];
     }
 }

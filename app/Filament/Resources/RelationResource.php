@@ -149,7 +149,7 @@ class RelationResource extends Resource
 
             // Add the CustomFieldsComponent
             CustomFieldsComponent::make()
-                ->columns(1),
+                ->columnSpanFull(),
 
         ]);
 
