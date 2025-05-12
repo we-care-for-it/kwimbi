@@ -75,7 +75,7 @@ class Project extends Model implements Auditable, HasCustomFields
 
     public function contact()
     {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function timeTracking()
