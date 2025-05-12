@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
+use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 
-class timeTracking extends Model implements Auditable
+class timeTracking extends Model implements Auditable, HasCustomFields
 {
 
     use SoftDeletes;
     use HasFilamentComments;
+    use UsesCustomFields;
     use \OwenIt\Auditing\Auditable;
     public $table       = "time_tracking";
     protected $fillable = ['description', 'weekno', 'relation_id', 'project_id', 'status_id', 'work_type_id', 'invoiceable'];

@@ -8,9 +8,11 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Database\Eloquent\Builder;
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListTimeTrackings extends ListRecords
 {
+    use InteractsWithCustomFields;
     protected static string $resource = TimeTrackingResource::class;
     protected function getHeaderActions(): array
     {
