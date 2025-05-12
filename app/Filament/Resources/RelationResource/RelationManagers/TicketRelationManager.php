@@ -30,12 +30,15 @@ class TicketRelationManager extends RelationManager
         return $ownerRecord->notes->count();
     }
 
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
-
-        return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
+public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+{
+    if (!$ownerRecord->type) {
+        return false;
     }
-
+    
+    $options = $ownerRecord->type->options ?? [];
+    return in_array('Tickets', (array) $options);
+}
     public function form(Form $form): Form
     {
         return $form
@@ -190,4 +193,5 @@ class TicketRelationManager extends RelationManager
 
             ])->emptyState(view("partials.empty-state"));
     }
+    
 }

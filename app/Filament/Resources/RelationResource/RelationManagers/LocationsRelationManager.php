@@ -128,6 +128,19 @@ class LocationsRelationManager extends RelationManager
         ])
             ->columns(3);
 
+        // Select::make("management_id")
+        //     ->options(Relation::pluck("name", "id"))
+
+        //     ->reactive()
+        //     ->searchable()
+
+        //     ->label("Beheerder")
+
+        //     ->visible(function ($record) {
+        //         dd($record);
+        //         return in_array('Beheerder', $record?->type->options) ? true : false;;
+        //     });
+
         Section::make()
             ->schema([
                 Textarea::make("remark")
