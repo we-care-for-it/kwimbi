@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
-use APP\Enums\Priority;
+use App\Enums\Priority;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
 use App\Models\ObjectLocation;
@@ -28,6 +28,7 @@ use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 
 class TaskResource extends Resource
 {
@@ -158,7 +159,9 @@ class TaskResource extends Resource
                     ->searchable()
                     ->default(3)
                     ->label('Type'),
-
+                // Add the CustomFieldsComponent
+                CustomFieldsComponent::make()
+                    ->columnSpanFull(),
             ]);
 
     }
