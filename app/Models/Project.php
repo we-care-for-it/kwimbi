@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\ProjectStatus;
 use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -23,6 +24,14 @@ class Project extends Model implements Auditable, HasCustomFields
         'name'        => 'required',
         'customer_id' => 'required',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'status_id' => ProjectStatus::class,
+
+        ];
+    }
 
     // Number of items to be shown per page
     protected $perPage = 20;

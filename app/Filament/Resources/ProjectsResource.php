@@ -1,12 +1,12 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Enums\ProjectStatus;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\relationLocation;
-use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
@@ -107,7 +107,7 @@ class ProjectsResource extends Resource
                             Select::make("status_id")
                                 ->label("Status")
                                 ->reactive()
-                                ->options(["1" => "Open"])
+                                ->options(ProjectStatus::class)
                                 ->default(1),
 
                             Select::make("customer_id")
@@ -276,7 +276,7 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? "danger" : "success"),
 
-                Tables\Columns\TextColumn::make("status.name")
+                Tables\Columns\TextColumn::make("status_id")
                     ->label("Status")
                     ->sortable()
                     ->badge(),
@@ -297,7 +297,7 @@ class ProjectsResource extends Resource
             ->filters([
                 SelectFilter::make("status_id")
                     ->label("Status")
-                    ->options(Statuses::where("model", "Project")->pluck("name", "id"))
+                    ->options(ProjectStatus::class)
                     ->searchable()
                     ->preload(),
                 SelectFilter::make("customer_id")
