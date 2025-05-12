@@ -174,20 +174,24 @@ class RelationResource extends Resource
                                 ->label("Categorie")
                                 ->badge()
                                 ->placeholder("Niet opgegeven"),
-
+                                
                             Components\TextEntry::make("address")
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
-                                    $housenumber = "";
                                     if ($record?->address) {
-
                                         return $record?->address . " " . $record?->zipcode . " - " . $record?->place;
-
                                     } else {
                                         return "Geen locatie toegevoegd";
                                     }
                                 })
-                                ->placeholder("Niet opgegeven"),
+                                ->icon('heroicon-o-clipboard-document')
+                                ->placeholder("Niet opgegeven")
+                                ->copyable()  // Enables copy to clipboard
+                                ->copyMessage('Adres gekopieerd!')  // Success message
+                                ->copyMessageDuration(1500)  // Message display duration
+                                ->extraAttributes([
+                                    'class' => 'cursor-pointer hover:text-primary-500 hover:underline', // Adds underline on hover
+                                ]),
 
                             Components\TextEntry::make('website')
                                 ->label("Website")
