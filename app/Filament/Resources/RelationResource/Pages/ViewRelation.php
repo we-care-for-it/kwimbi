@@ -13,6 +13,7 @@ class ViewRelation extends ViewRecord
     {
         return [
             Actions\EditAction::make()->label('Wijzigen')
+                ->slideOver()
                 ->icon('heroicon-m-pencil-square'),
             CommentsAction::make(),
         ];
