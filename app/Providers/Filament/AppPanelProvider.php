@@ -149,25 +149,25 @@ class AppPanelProvider extends PanelProvider
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
-->plugins([
+//->plugins([
               
-                FilamentSocialitePlugin::make()
-                    ->providers([
-                        Provider::make('azure')
-     ->icon('fab-microsoft')
-  ->color(Color::hex('#5E5E5E'))
-       ->outlined(false)            
-                    ])->slug('app')
+//                FilamentSocialitePlugin::make()
+          //          ->providers([
+       //                 Provider::make('azure')
+  //   ->icon('fab-microsoft')
+ // ->color(Color::hex('#5E5E5E'))
+      // ->outlined(false)            
+               //     ])->slug('app')
 
    
-                    ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
-                        'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
- 
-                        'email' => $oauthUser->getEmail(),
-                    ]))
+              //      ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
+               //         'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
+ //
+              //          'email' => $oauthUser->getEmail(),
+              //      ]))
 
 
-                    ->registration(false)            ])
+               //     ->registration(false)            ])
 
 
 
