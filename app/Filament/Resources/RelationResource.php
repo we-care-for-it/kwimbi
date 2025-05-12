@@ -174,7 +174,7 @@ class RelationResource extends Resource
                                 ->label("Categorie")
                                 ->badge()
                                 ->placeholder("Niet opgegeven"),
-                                
+
                             Components\TextEntry::make("address")
                                 ->label("Adres")
                                 ->getStateUsing(function ($record): ?string {
@@ -186,9 +186,9 @@ class RelationResource extends Resource
                                 })
                                 ->icon('heroicon-o-clipboard-document')
                                 ->placeholder("Niet opgegeven")
-                                ->copyable()  // Enables copy to clipboard
-                                ->copyMessage('Adres gekopieerd!')  // Success message
-                                ->copyMessageDuration(1500)  // Message display duration
+                                ->copyable()                       // Enables copy to clipboard
+                                ->copyMessage('Adres gekopieerd!') // Success message
+                                ->copyMessageDuration(1500)        // Message display duration
                                 ->extraAttributes([
                                     'class' => 'cursor-pointer hover:text-primary-500 hover:underline', // Adds underline on hover
                                 ]),
@@ -214,11 +214,14 @@ class RelationResource extends Resource
                 ]),
 
             Section::make()
+                ->visible(fn($record) => $record?->remark ?? false)
+
                 ->schema([
                     // ...
 
                     Components\TextEntry::make('remark')
                         ->label("Opmerking")
+
                         ->placeholder("Geen opmerking"),
                 ]),
 

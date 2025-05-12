@@ -11,11 +11,11 @@ use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -23,6 +23,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -67,7 +68,7 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
@@ -89,7 +90,7 @@ class ProjectsResource extends Resource
                     ])
                     ->columnSpan(["lg" => 2]),
 
-                Section::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
@@ -175,7 +176,7 @@ class ProjectsResource extends Resource
                         ]),
                     ])->columnSpan("full"),
 
-                Section::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Grid::make([
                             "default" => 2,
@@ -323,12 +324,9 @@ class ProjectsResource extends Resource
 
             ->actions([
 
-                Tables\Actions\Action::make('openProject')
-                    ->label('Bekijk project')
-                    ->color('primary')
-                    ->url(function ($record) {
-                        return "/projects/" . $record->id;
-                    })->icon('heroicon-s-eye'),
+                ViewAction::make()
+                    ->label('Bekijk')
+                    ->modalIcon('heroicon-o-eye'),
 
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Project Bewerken')
@@ -370,10 +368,7 @@ class ProjectsResource extends Resource
                                 TextEntry::make('name')
                                     ->label('Omschrijving')
                                     ->placeholder('-'),
-                                TextEntry::make('description')
-                                    ->label('Opmerkingen')
-                                    ->placeholder('-')
-                                    ->columnSpanFull(),
+
                                 TextEntry::make('status.name')
                                     ->label('Status')
                                     ->badge()
@@ -382,7 +377,8 @@ class ProjectsResource extends Resource
                                     ->label('Budget')
                                     ->money('EUR')
                                     ->placeholder('-'),
-                            ])->columns(2),
+
+                            ])->columns(4),
 
                         Tabs\Tab::make('Relatie & Locatie')
                             ->icon('heroicon-o-map-pin')
@@ -439,6 +435,18 @@ class ProjectsResource extends Resource
                                     ->badge()
                                     ->placeholder('0'),
                             ])->columns(3),
+                    ]),
+
+                Section::make()
+                    ->visible(fn($record) => $record?->description ?? false)
+
+                    ->schema([
+                        // ...
+
+                        TextEntry::make('description')
+                            ->label("Opmerking")
+
+                            ->placeholder("Geen opmerking"),
                     ]),
 
                 CustomFieldsInfolists::make()
