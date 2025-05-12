@@ -112,7 +112,16 @@ class ProjectsResource extends Resource
                             Select::make("customer_id")
                                 ->searchable()
                                 ->label("Relatie")
-                                ->options(Relation::all()->pluck("name", "id"))
+                                ->options(function () {
+                                    return \App\Models\Relation::all()
+                                        ->groupBy('type.name')
+                                        ->mapWithKeys(function ($group, $category) {
+                                            return [
+                                                $category => $group->pluck('name', 'id')->toArray(),
+                                            ];
+                                        })->toArray();
+                                })
+
                                 ->afterStateUpdated(function (callable $set) {
                                     $set('location_id', null);
                                     $set('contact_id', null);
@@ -313,6 +322,14 @@ class ProjectsResource extends Resource
             ->filtersFormColumns(4)
 
             ->actions([
+
+                Tables\Actions\Action::make('openProject')
+                    ->label('Bekijk project')
+                    ->color('primary')
+                    ->url(function ($record) {
+                        return "/projects/" . $record->id;
+                    })->icon('heroicon-s-eye'),
+
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Project Bewerken')
                     ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')

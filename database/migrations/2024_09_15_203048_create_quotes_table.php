@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('project_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            $table->foreignId('company_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
