@@ -3,11 +3,13 @@ namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
 use Filament\Resources\Pages\ListRecords;
+use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListProjects extends ListRecords
 {
     protected static string $resource = ProjectsResource::class;
     protected static ?string $title   = 'Projecten';
+    use InteractsWithCustomFields;
     protected function getHeaderActions(): array
     {
         return [
