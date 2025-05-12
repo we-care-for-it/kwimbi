@@ -73,6 +73,11 @@ class Project extends Model implements Auditable, HasCustomFields
         return $this->hasMany(relationLocation::class, 'project_id', 'location_id');
     }
 
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
+    }
+
     public function timeTracking()
     {
         return $this->hasMany(\App\Models\timeTracking::class);

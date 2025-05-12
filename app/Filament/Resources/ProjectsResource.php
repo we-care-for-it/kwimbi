@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Enums\ProjectStatus;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
+use App\Models\Contact;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\relationLocation;
@@ -22,8 +23,8 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
@@ -51,12 +52,10 @@ class ProjectsResource extends Resource
 
     public static function getGlobalSearchResultDetails($record): array
     {
-
         return [
             'Nummer'  => sprintf("%05d", $record?->id),
             'Relatie' => $record?->customer?->name ?? "Onbekend",
         ];
-
     }
 
     public static function getNavigationBadge(): ?string
@@ -113,57 +112,59 @@ class ProjectsResource extends Resource
                             Select::make("customer_id")
                                 ->searchable()
                                 ->label("Relatie")
-
                                 ->options(Relation::all()->pluck("name", "id"))
-                            //  ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
+                                ->afterStateUpdated(function (callable $set) {
+                                    $set('location_id', null);
+                                    $set('contact_id', null);
+                                })
                                 ->reactive(),
 
                             Select::make("location_id")
-
+                                ->label('Locatie')
                                 ->options(function (callable $get) {
-                                    $relationId = $get('relation_id'); // get value from another input field
-
-                                    return relationLocation::when($relationId, fn($query) => $query->where('relation_id', $relpationId))
+                                    $relationId = $get('customer_id');
+                                    return relationLocation::query()
+                                        ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
                                         ->get()
                                         ->mapWithKeys(function ($location) {
                                             return [
-                                                $location->id => collect([$location->address, $location->zipcode, $location->place])->filter()->implode(' '),
-
+                                                $location->id => collect([
+                                                    $location->address,
+                                                    $location->zipcode,
+                                                    $location->place,
+                                                ])->filter()->implode(', '),
                                             ];
                                         })
                                         ->toArray();
                                 })
+                                ->reactive()
+                                ->disabled(fn(callable $get) => ! $get('customer_id'))
+                                ->placeholder('Selecteer een locatie'),
 
+                            Select::make("contact_id")
+                                ->options(function (callable $get) {
+                                    $relationId = $get('customer_id');
+
+                                    return Contact::query()
+                                        ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                        ->get()
+                                        ->mapWithKeys(function ($contact) {
+                                            return [
+                                                $contact->id => collect([
+                                                    $contact->first_name,
+                                                    $contact->last_name,
+                                                ])->filter()->implode(', '),
+                                            ];
+                                        })
+                                        ->toArray();
+
+                                })
                                 ->searchable()
-                                ->label('Locatie'),
 
+                                ->reactive()
+                                ->label('Contactpersoon'),
                         ]),
                     ])->columnSpan("full"),
-
-                // Select::make("location_id")
-                //     ->searchable()
-                //     ->preload()
-                //     ->label("Locatie")
-                //     ->columnSpan("full")
-                //     ->options(relationLocation::all()->pluck("name", "id"))
-                // // ->options(function (callable $get) {
-                //     $countryId = $get('customer_id');
-
-                //     $cities = relationLocation::where('relation_id', $countryId)->pluck('name', 'id');
-
-                //     if ($cities->isEmpty()) {
-                //         return [];
-                //     } else {
-                //         return $cities;
-                //     }
-                // })
-
-                //    ->placeholder('Kies een locatie'),
-                // ->hint(fn(callable $get) =>
-                //     relationLocation::where('relation_id', $get('customer_id'))->count() === 0
-                //     ? 'Geen locaties gevonden.'
-                //     : null
-                // )-
 
                 Section::make()
                     ->schema([
@@ -184,26 +185,15 @@ class ProjectsResource extends Resource
                         ]),
                     ]),
 
-                // Add the CustomFieldsComponent
                 CustomFieldsComponent::make()
                     ->columnSpanFull(),
-
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->groups([
-                Group::make("customer.name")
-                    ->label("Relatie")
-                    ->titlePrefixedWithLabel(false),
-                Group::make("status.name")
-                    ->label("Status")
-                    ->titlePrefixedWithLabel(false)
-                    ->getKeyFromRecordUsing(fn(Project $record): string => $record->status->name),
-            ])
-            ->defaultGroup("customer.name")
+
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
@@ -212,12 +202,18 @@ class ProjectsResource extends Resource
                     })
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
                     ->wrap()
                     ->verticalAlignment(VerticalAlignment::Start),
+
+                Tables\Columns\TextColumn::make("contact.name")
+                    ->toggleable()
+                    ->label("Contactpersoon"),
 
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
                     ->searchable()
+                    ->toggleable()
                     ->wrap()
                     ->description(function (Project $record) {
                         if (! $record?->description) {
@@ -237,6 +233,7 @@ class ProjectsResource extends Resource
                     })
                     ->color('primary')
                     ->searchable()
+                    ->toggleable()
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
                     ->label("Adres")
@@ -260,6 +257,7 @@ class ProjectsResource extends Resource
                             return "";
                         }
                     })
+                    ->toggleable()
                     ->placeholder('Onbekend')
                     ->searchable(),
 
@@ -272,6 +270,7 @@ class ProjectsResource extends Resource
                             return false;
                         }
                     })
+                    ->toggleable()
                     ->placeholder('Onbekend')
                     ->searchable()
                     ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? "danger" : "success"),
@@ -279,10 +278,12 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make("status_id")
                     ->label("Status")
                     ->sortable()
+                    ->toggleable()
                     ->badge(),
 
                 Tables\Columns\TextColumn::make('quotes_count')
                     ->counts('quotes')
+                    ->toggleable()
                     ->badge()
                     ->sortable()
                     ->label("Offertes")
@@ -292,6 +293,7 @@ class ProjectsResource extends Resource
                     ->counts('reactions')
                     ->badge()
                     ->label("Reacties")
+                    ->toggleable()
                     ->alignment('center'),
             ])
             ->filters([
@@ -299,20 +301,23 @@ class ProjectsResource extends Resource
                     ->label("Status")
                     ->options(ProjectStatus::class)
                     ->searchable()
+
                     ->preload(),
                 SelectFilter::make("customer_id")
                     ->label("Relatie")
                     ->options(Relation::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
-            ])
+
+            ], layout: FiltersLayout::AboveContent)
+            ->filtersFormColumns(4)
+
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Project Bewerken')
                     ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
@@ -326,8 +331,13 @@ class ProjectsResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     ExportBulkAction::make(),
                 ]),
+
             ])
-            ->emptyState(view("partials.empty-state"));
+
+            ->emptyState(view('partials.empty-state')
+            )
+        ;
+
     }
 
     public static function infolist(Infolist $infolist): Infolist
@@ -414,10 +424,8 @@ class ProjectsResource extends Resource
                             ])->columns(3),
                     ]),
 
-                // Custom Fields
                 CustomFieldsInfolists::make()
                     ->columnSpanFull(),
-
             ]);
     }
 
