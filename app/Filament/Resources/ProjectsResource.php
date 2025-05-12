@@ -5,6 +5,7 @@ use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\Project;
 use App\Models\Relation;
+use App\Models\relationLocation;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -112,13 +113,32 @@ class ProjectsResource extends Resource
                             Select::make("customer_id")
                                 ->searchable()
                                 ->label("Relatie")
-                                ->columnSpan("full")
+
                                 ->options(Relation::all()->pluck("name", "id"))
-                            //      ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
+                            //  ->afterStateUpdated(fn(callable $set) => $set('location_id', null))
                                 ->reactive(),
 
+                            Select::make("location_id")
+
+                                ->options(function (callable $get) {
+                                    $relationId = $get('relation_id'); // get value from another input field
+
+                                    return relationLocation::when($relationId, fn($query) => $query->where('relation_id', $relpationId))
+                                        ->get()
+                                        ->mapWithKeys(function ($location) {
+                                            return [
+                                                $location->id => collect([$location->address, $location->zipcode, $location->place])->filter()->implode(' '),
+
+                                            ];
+                                        })
+                                        ->toArray();
+                                })
+
+                                ->searchable()
+                                ->label('Locatie'),
+
                         ]),
-                    ])->columnSpan(1),
+                    ])->columnSpan("full"),
 
                 // Select::make("location_id")
                 //     ->searchable()

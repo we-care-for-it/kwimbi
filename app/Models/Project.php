@@ -16,7 +16,7 @@ class Project extends Model implements Auditable, HasCustomFields
     use UsesCustomFields;
     public function location()
     {
-        return $this->hasOne(ObjectLocation::class, 'id', 'location_id');
+        return $this->hasOne(relationLocation::class, 'id', 'location_id');
     }
 
     static $rules = [
@@ -61,7 +61,7 @@ class Project extends Model implements Auditable, HasCustomFields
 
     public function locations()
     {
-        return $this->hasMany(ProjectLocation::class, 'project_id', 'location_id');
+        return $this->hasMany(relationLocation::class, 'project_id', 'location_id');
     }
 
     public function timeTracking()

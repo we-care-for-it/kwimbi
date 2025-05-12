@@ -77,4 +77,9 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
         return $this->belongsTo(Relation::class);
     }
 
+    public function getFullAddress(): ?string
+    {
+
+        return collect([$this->address, $this->zipcode, $this->place])->filter()->implode(' ');
+    }
 }
