@@ -226,6 +226,10 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("contact.name")
                     ->toggleable()
+                    ->Url(function ($record) {
+                        return "/contacts/" . $record->contact_id . "";
+                    })
+                    ->placeholder('-')
                     ->label("Contactpersoon"),
 
                 Tables\Columns\TextColumn::make("name")

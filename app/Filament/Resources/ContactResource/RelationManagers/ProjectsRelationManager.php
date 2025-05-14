@@ -9,8 +9,8 @@ use Filament\Tables\Table;
 class ProjectsRelationManager extends RelationManager
 {
     protected static string $relationship = 'projects';
-    protected static ?string $title       = 'Projecten';
-
+    protected static ?string $title       = 'Gekoppelde projecten';
+    protected static ?string $subheading  = 'Custom Page Heading';
     public function table(Table $table): Table
     {
         return $table
@@ -21,14 +21,12 @@ class ProjectsRelationManager extends RelationManager
                     ->getStateUsing(function ($record): ?string {
                         return sprintf("%05d", $record?->id);
                     })
-                    ->searchable()
                     ->sortable()
                     ->wrap()
                 ,
 
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
-                    ->searchable()
                     ->wrap()
                     ->description(function ($record) {
                         if (! $record?->description) {
@@ -37,7 +35,16 @@ class ProjectsRelationManager extends RelationManager
                             return $record->description;
                         }
                     })
+
                 ,
+
+                Tables\Columns\TextColumn::make("customer.name")
+                    ->label("Relatie")
+                    ->placeholder('-')
+                    ->url(function ($record) {
+                        return "/relations/" . $record->customer_id;
+                    })
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make("location")
                     ->getStateUsing(function ($record): ?string {
