@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use SocialiteProviders\Azure\Provider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
-use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,17 +45,6 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
-        FilamentSettingsHub::register([
-            SettingHold::make()
-                ->order(2)
-                ->label('Site Settings') // to translate label just use direct translation path like `messages.text.name`
-                ->icon('heroicon-o-globe-alt')
-                ->route('filament.admin.pages.site-settings')                    // use page / route
-                ->page(\TomatoPHP\FilamentSettingsHub\Pages\SiteSettings::class) // use page / route
-                ->description('Name, Logo, Site Profile')                        // to translate label just use direct translation path like `messages.text.name`
-                ->group('General'),                                              // to translate label just use direct translation path like `messages.text.name`,
-        ]);
-
         Gate::define('viewApiDocs', function (User $user) {
             return in_array($user->email, ['superadmin@ltssoftware.nl']);
         });
@@ -87,7 +74,7 @@ class AppServiceProvider extends ServiceProvider
                 //     ->icon('heroicon-m-clipboard-document-list'),
                 UserMenuItem::make()
                     ->label('Mijn profiel')
-                    ->url('/admin/edit-profile')
+                    ->url('/my-profile')
                     ->icon('heroicon-o-user'),
 
             ]);

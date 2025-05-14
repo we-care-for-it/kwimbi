@@ -40,7 +40,7 @@ use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
 
-
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -105,6 +105,8 @@ class AppPanelProvider extends PanelProvider
         ->shouldShowDeleteAccountForm(false)
         ->shouldShowBrowserSessionsForm(true)
         ->shouldShowAvatarForm(),
+
+
         FilamentDeveloperLoginsPlugin::make()
         ->enabled(app()->environment('local'))
         ->switchable(false)
@@ -219,49 +221,19 @@ FilamentSocialitePlugin::make()
             ->authMiddleware([
                 Authenticate::class,
             ])
+
 ->userMenuItems([
-    // Categorie: Documentatie & Updates (nep titel)
-    MenuItem::make('separator-docs')
+  MenuItem::make('separator-docs')
         ->label('— Documentatie & Updates —')
         ->url('#')
-        ->icon(''),
+      ->icon('heroicon-o-cog-6-tooth'),
 
-    MenuItem::make('changelog')
-        ->label('Changelog')
-        ->url(fn () => route('filament.app.pages.changelog'))
-        ->icon('heroicon-o-document-text'),
 
-    // Categorie: Feedback & Issues
-    MenuItem::make('separator-feedback')
-        ->label('— Feedback & Issues —')
-        ->url('#')
-        ->icon(''),
+]) 
 
-    MenuItem::make('feature-request')
-        ->label('Feature request')
-        ->url('#')
-        ->icon('heroicon-o-light-bulb'),
+->userMenuItems([
 
-    MenuItem::make('bug-report')
-        ->label('Bug rapporteren')
-        ->url('#')
-        ->icon('heroicon-o-bug-ant'),
-
-    // Categorie: Support & Status
-    MenuItem::make('separator-support')
-        ->label('— Support & Status —')
-        ->url('#')
-        ->icon(''),
-
-    MenuItem::make('server-status')
-        ->label('Server status')
-        ->url('#')
-        ->icon('heroicon-o-server'),
-
-    MenuItem::make('support')
-        ->label('Support')
-        ->url('#')
-        ->icon('heroicon-o-lifebuoy'),
+ 
 ])
 
 ;
