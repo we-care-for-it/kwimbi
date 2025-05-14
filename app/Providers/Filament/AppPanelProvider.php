@@ -222,14 +222,7 @@ FilamentSocialitePlugin::make()
                 Authenticate::class,
             ])
 
-->userMenuItems([
-  MenuItem::make('separator-docs')
-        ->label('— Documentatie & Updates —')
-        ->url('#')
-      ->icon('heroicon-o-cog-6-tooth'),
 
-
-]) 
 
 ->userMenuItems([
 

@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Middleware;
 
+use App\Models\Tenant;
 use Closure;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
@@ -9,30 +12,24 @@ class SetDatabaseBySubdomain
 {
     public function handle($request, Closure $next)
     {
-        $host      = $request->getHost(); // e.g., client1.example.com
-        $subdomain = explode('.', $host)[0];
 
-        $databaseMap = [
-            'ltssoftware' => 'ltssoftware',
-            'vlsmontage'  => 'vlsmontage',
-        ];
+        $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
+        Cache::put('tenant', $tenant);
 
-        if (isset($databaseMap[$subdomain])) {
-            Config::set('database.connections.tenant', [
-                'driver'   => 'pgsql',
-                'host'     => env('DB_HOST', '127.0.0.1'),
-                'port'     => env('DB_PORT', '3306'),
-                'database' => $databaseMap[$subdomain],
-                'username' => env('DB_USERNAME', 'root'),
-                'password' => env('DB_PASSWORD', ''),
-                'prefix'   => '',
-                'strict'   => true,
-                'engine'   => null,
-            ]);
+        Config::set('database.connections.tenant', [
+            'driver'   => env('DB_CONNECTION'),
+            'host'     => env('DB_HOST', '127.0.0.1'),
+            'port'     => env('DB_PORT', '3306'),
+            'database' => $tenant->database ?? "dd",
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'prefix'   => '',
+            'strict'   => true,
+            'engine'   => null,
+        ]);
 
-            Config::set('database.default', 'tenant');
-            DB::purge('tenant');
-        }
+        Config::set('database.default', 'tenant');
+        DB::purge('tenant');
 
         return $next($request);
     }
