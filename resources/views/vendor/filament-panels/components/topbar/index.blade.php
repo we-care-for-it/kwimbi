@@ -10,14 +10,14 @@
         ])
     }}
 >
-    <nav
+     <nav  style = "background-color: {{Cache::get('tenant')->color1}} "
         class="flex h-16 items-center gap-x-4 bg-white px-4 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 md:px-6 lg:px-8"
-    >
+      >
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::TOPBAR_START) }}
 
         @if (filament()->hasNavigation())
             <x-filament::icon-button
-                color="gray"
+                color="white"
                 icon="heroicon-o-bars-3"
                 icon-alias="panels::topbar.open-sidebar-button"
                 icon-size="lg"
@@ -33,7 +33,7 @@
             />
 
             <x-filament::icon-button
-                color="gray"
+                color="white"
                 icon="heroicon-o-x-mark"
                 icon-alias="panels::topbar.close-sidebar-button"
                 icon-size="lg"

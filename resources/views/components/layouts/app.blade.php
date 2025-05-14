@@ -8,7 +8,7 @@
     dir="{{ __('filament-panels::layout.direction') ?? 'ltr' }}"
     @class([
         'fi min-h-screen',
-        'dark' => filament()->hasDarkModeForced(),
+   ^
     ])
 >
 <head>
@@ -18,7 +18,7 @@
     <meta name="description" content="@yield('description')">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{{url()->current()}}" />
-    <title>@yield('title')</title>
+    <title>@yield('title') ss</title>
 
     <meta property="og:type" content="@yield('type', 'website')" />
     <meta property="og:title" content="@yield('title')" />
@@ -39,7 +39,7 @@
 
     <title>
         {{ filled($title = strip_tags(($livewire ?? null)?->getTitle() ?? '')) ? "{$title} - " : null }}
-        {{ strip_tags(filament()->getBrandName()) }}
+        {{ strip_tags(filament()->getBrandName()) }} s
     </title>
 
 
