@@ -61,6 +61,11 @@ class Contact extends Model implements HasCustomFields
         return $this->hasMany(Relation::class, 'id', 'relation_id');
     }
 
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);

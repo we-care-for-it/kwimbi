@@ -2,6 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
+use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -335,6 +336,7 @@ class ContactResource extends Resource
         return [
 
             //    RelationManagers\RelationRelationManager::class,
+            RelationManagers\ProjectsRelationManager::class,
 
         ];
     }
