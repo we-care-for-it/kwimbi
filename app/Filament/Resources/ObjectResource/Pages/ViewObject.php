@@ -3,6 +3,7 @@ namespace App\Filament\Resources\ObjectResource\Pages;
 
 use App\Filament\Resources\ObjectResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use Parallax\FilamentComments\Actions\CommentsAction;
 
@@ -56,6 +57,13 @@ class ViewObject extends ViewRecord
         if ($this->getRecord()->monitoring_object_id) {
             return [
 
+                Action::make('back')
+
+                ->label('Terug naar overzicht')
+                ->link()
+                ->url('/objects')                
+                ->color('gray'),
+
                 Actions\Action::make('cancel_top')
                     ->iconButton()
                     ->color('gray')
@@ -84,6 +92,12 @@ class ViewObject extends ViewRecord
         } else {
             return [
 
+                Action::make('back')
+
+                ->label('Terug naar overzicht')
+                ->link()
+                ->url('/relations')                
+                ->color('gray'),
                 Actions\Action::make('cancel_top')
                     ->iconButton()
                     ->color('gray')

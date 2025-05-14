@@ -1,7 +1,7 @@
 <?php
 namespace App\Providers;
 
-use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+//use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
 use Filament\Support\Assets\Css;
@@ -25,18 +25,18 @@ class AppServiceProvider extends ServiceProvider
         // Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
         //     $event->extendSocialite('azure', \SocialiteProviders\Azure\Provider::class);
         // });
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->locales(['nl', 'en'])
+        // LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+        //     $switch
+        //         ->locales(['nl', 'en'])
 
-                ->flags([
-                    'en' => asset('/images/flags/en.svg'),
-                    'nl' => asset('/images/flags/nl.svg'),
-                ])->circular()
+        //         ->flags([
+        //             'en' => asset('/images/flags/en.svg'),
+        //             'nl' => asset('/images/flags/nl.svg'),
+        //         ])->circular()
 
-                ->visible(outsidePanels: false);
-            //->outsidePanelPlacement(Placement::BottomRight);
-        });
+        //         ->visible(outsidePanels: false);
+        //     //->outsidePanelPlacement(Placement::BottomRight);
+        // });
 
         FilamentSettingsHub::register([
             SettingHold::make()
