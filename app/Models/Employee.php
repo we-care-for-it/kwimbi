@@ -8,7 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 
-class employee extends Model implements Auditable
+class Employee extends Model implements Auditable
 {
     use SoftDeletes;
     use UsesCustomFields;
