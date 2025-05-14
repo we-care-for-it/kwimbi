@@ -163,7 +163,7 @@ class ProjectsResource extends Resource
                                     //                $managementId =
                                     return Employee::query()
                                     // ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
-                                        ->when($relationId, fn($query) => $query->whereIn('relation_id', [$relationId, $locationData->management_id]))
+                                        ->when($relationId, fn($query) => $query->whereIn('relation_id', [$relationId, $locationData?->management_id]))
                                         ->get()
 
                                         ->mapWithKeys(function ($contact) {
@@ -226,6 +226,10 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("contact.name")
                     ->toggleable()
+                    ->Url(function ($record) {
+                        return "/contacts/" . $record->contact_id . "";
+                    })
+                    ->placeholder('-')
                     ->label("Contactpersoon"),
 
                 Tables\Columns\TextColumn::make("name")
@@ -381,6 +385,14 @@ class ProjectsResource extends Resource
                                     ->label('Omschrijving')
                                     ->placeholder('-'),
 
+                                TextEntry::make('contact.name')
+                                    ->label('Contactpersoon')
+                                    ->icon("heroicon-c-link")
+                                    ->Url(function ($record) {
+                                        return "/contacts/" . $record->contact_id . "";
+                                    })
+                                    ->placeholder('-'),
+
                                 TextEntry::make('status.name')
                                     ->label('Status')
                                     ->badge()
@@ -397,6 +409,10 @@ class ProjectsResource extends Resource
                             ->schema([
                                 TextEntry::make('customer.name')
                                     ->label('Relatie')
+                                    ->icon("heroicon-c-link")
+                                    ->Url(function ($record) {
+                                        return "/relations/" . $record->contact_id . "";
+                                    })
                                     ->placeholder('-'),
                                 TextEntry::make('location.address')
                                     ->label('Adres')

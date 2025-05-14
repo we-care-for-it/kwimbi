@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Models\Project;
 use App\Models\Statuses;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -11,13 +10,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class ProjectsRelationManager extends RelationManager
 {
@@ -126,86 +123,43 @@ class ProjectsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
-                    ->getStateUsing(function (Project $record): ?string {
+                    ->getStateUsing(function ($record): ?string {
                         return sprintf("%05d", $record?->id);
                     })
                     ->searchable()
                     ->sortable()
                     ->wrap()
-                    ->verticalAlignment(VerticalAlignment::Start),
+                ,
 
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
                     ->searchable()
                     ->wrap()
-                    ->description(function (Project $record) {
+                    ->description(function ($record) {
                         if (! $record?->description) {
                             return false;
                         } else {
                             return $record->description;
                         }
                     })
-                    ->verticalAlignment(VerticalAlignment::Start),
+                ,
 
-                Tables\Columns\TextColumn::make("customer.name")
-                    ->searchable()
-                    ->sortable()
-                    ->verticalAlignment(VerticalAlignment::Start)
-                    ->label("Adres")
-                    ->getStateUsing(function (Project $record) {
-                        if (! $record?->location_id) {
-                            return "Geen locatie gekoppeld";
-                        } else {
-                            return $record->location?->address . " - " . $record->location?->zipcode . "  " . $record->location?->place;
-                        }
-                    }),
-
-                Tables\Columns\TextColumn::make("startdate")
-                    ->label("Looptijd")
-                    ->getStateUsing(function (Project $record): ?string {
-                        $startdate = $record->startdate ? date("d-m-Y", strtotime($record?->startdate)) : "nodate";
-                        $enddate   = $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
-
-                        if ($record->enddate || $record->$startdate) {
-                            return $startdate . " - " . $enddate;
-                        } else {
-                            return "";
-                        }
+                Tables\Columns\TextColumn::make("location")
+                    ->getStateUsing(function ($record): ?string {
+                        return $record?->location?->address . "-" . $record?->location?->zipcode . " - " . $record?->location?->place;
                     })
-                    ->placeholder('Onbekend')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make("date_of_execution")
-                    ->label("Plandatum")
-                    ->getStateUsing(function (Project $record): ?string {
-                        if ($record->date_of_execution) {
-                            return date("d-m-Y", strtotime($record?->date_of_execution));
-                        } else {
-                            return false;
-                        }
+                    ->label("Locatie")
+                    ->placeholder('Geen')
+                    ->url(function ($record) {
+                        return "/relation-locations/" . $record->location_id;
                     })
-                    ->placeholder('Onbekend')
-                    ->searchable()
-                    ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? "danger" : "success"),
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->placeholder('Onbekend')
                     ->sortable()
                     ->badge(),
-
-                Tables\Columns\TextColumn::make('quotes_count')
-                    ->counts('quotes')
-                    ->badge()
-                    ->sortable()
-                    ->label("Offertes")
-                    ->alignment('center'),
-
-                Tables\Columns\TextColumn::make('reactions_count')
-                    ->counts('reactions')
-                    ->badge()
-                    ->label("Reacties")
-                    ->alignment('center'),
             ])
             ->filters([
                 SelectFilter::make("status_id")
@@ -217,35 +171,14 @@ class ProjectsRelationManager extends RelationManager
             ])
             ->actions([
 
-                ViewAction::make('openRelation')
-                    ->label('Open project')
+                Action::make('openproject')
+                    ->label('Meer informatie')
                     ->url(function ($record) {
-                        return "/projects/" . $record->id;
-                    })->icon('heroicon-s-credit-card')
-                ,
-
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Project Bewerken')
-                    ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->tooltip('Bewerken')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                        return "/projects/" . $record->model_id;
+                    })->icon('heroicon-s-eye'),
 
             ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Project toevoegen')
-                    ->modalHeading('Project toevoegen')
-                    ->icon('heroicon-m-plus')
-                    ->modalIcon('heroicon-o-plus')
-                    ->slideOver(),
 
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    ExportBulkAction::make(),
-                ]),
-            ])
             ->emptyState(view("partials.empty-state"));
 
     }

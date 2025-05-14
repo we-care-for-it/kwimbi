@@ -112,27 +112,13 @@ class EmployeesRelationManager extends RelationManager
                     ->label('Medewerker toevoegen'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Medewerker bewerken')
-                    ->modalDescription('Pas de medewerker aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->tooltip('Bewerken')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                Tables\Actions\Action::make('openContact')
+                    ->label('Open contactpersoon')
+                    ->url(function ($record) {
+                        return "/contacts/" . $record->id;
+                    })->icon('heroicon-s-eye'),
 
-                Tables\Actions\DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Medewerker verwijderen')
-                    ->modalDescription('Weet u zeker dat u deze medewerker wilt verwijderen?')
-                    ->color('danger'),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->label('Geselecteerde medewerkers verwijderen'),
-                ]),
-            ]);
+        ;
     }
 }

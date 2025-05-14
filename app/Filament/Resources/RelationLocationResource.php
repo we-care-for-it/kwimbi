@@ -379,7 +379,7 @@ class RelationLocationResource extends Resource
                         ->collection('relationlocationimages')])->collapsible()
                 ->collapsed(false)
                 ->visible(function (object $record) {
-                    return in_array('Afbeeldingen', $record?->type->options) ? true : false;;
+                    return in_array('Afbeeldingen', $record?->type?->options) ? true : false;;
                 })
 
                 ->persistCollapsed(),
