@@ -6,7 +6,7 @@ use Filament\Support\Contracts\HasLabel;
 enum QuoteStatus: string implements HasLabel {
     case CONCEPT        = '1';
     case VERZONDEN      = '2';
-    case IN_BEHANDELING = 'i3';
+    case IN_BEHANDELING = '3';
     case GEACCEPTEERD   = '4';
     case AFGEWEZEN      = '5';
     case VERVALLEN      = '6';

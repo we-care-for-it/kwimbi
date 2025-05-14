@@ -1,9 +1,7 @@
 <?php
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
-use App\Models\Statuses;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -42,12 +40,12 @@ class ReactionsRelationManager extends RelationManager
                 ->autosize()
                 ->required(),
 
-            Select::make("status_id")
-                ->label("Status")
-                ->placeholder("Huidige status")
-                ->options(
-                    Statuses::where("model", "Project")->pluck("name", "id")
-                ),
+            // Select::make("status_id")
+            //     ->label("Status")
+            //     ->placeholder("Huidige status")
+            //     ->options(
+            //         Statuses::where("model", "Project")->pluck("name", "id")
+            //     ),
 
             DateTimePicker::make("created_at")
                 ->label("Invoegdatum / tijd")

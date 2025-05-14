@@ -294,9 +294,18 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('quotes_count')
                     ->counts('quotes')
                     ->toggleable()
-                    ->badge()
                     ->sortable()
+                    ->badge()
                     ->label("Offertes")
+                    ->alignment('center'),
+
+                Tables\Columns\TextColumn::make('budget_costs')
+
+                    ->toggleable()
+
+                    ->sortable()
+                    ->money('EUR')
+                    ->label("Budget")
                     ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('reactions_count')
@@ -339,7 +348,7 @@ class ProjectsResource extends Resource
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')
                     ->label('')
-                    ->modalHeading('Verwijderen')
+                    ->Heading('Verwijderen')
                     ->color('danger'),
             ])
             ->bulkActions([

@@ -26,7 +26,6 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group; // Alias toevoegen om conflict te voorkomen
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
@@ -72,12 +71,12 @@ class RelationResource extends Resource
 
                     ->maxLength(6)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(function ($state, FilamentSet $set) {
-                        // Verwijder spaties en zet om naar hoofdletters
-                        $cleanZipcode = Str::upper(preg_replace('/\s+/', '', $state));
-                        $set('zipcode', $cleanZipcode);
+                // ->afterStateUpdated(function ($state, FilamentSet $set) {
+                //     // Verwijder spaties en zet om naar hoofdletters
+                //     // $cleanZipcode = Str::upper(preg_replace('/\s+/', '', $state));
+                //     $set('zipcode', $state);
 
-                    })
+                // })
                     ->rule('regex:/^[1-9][0-9]{3} ?[a-zA-Z]{2}$/')
                     ->suffixAction(
                         Action::make('searchAddressByZipcode')
