@@ -7,7 +7,7 @@
 <header class="fi-simple-header flex flex-col items-center pb-10">
     @if ($logo)
 
-    <img  style = "height:90px" src = "/images/logo.png">
+    <img  style = "height:60px" src = "/images/logo.png">
 
     @endif
 

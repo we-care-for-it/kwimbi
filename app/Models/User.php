@@ -7,7 +7,6 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
 use Spatie\Activitylog\LogOptions;
@@ -40,12 +39,15 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     //     // return str_ends_with($this->email, '@ltssoftware.nl');
     // }
 
+    // public function getFilamentAvatarUrl(): ?string
+    // {
+    //     $avatarColumn = config('filament-edit-profile.avatar_column', 'avatar_url');
+    //     return $this->$avatarColumn ? Storage::url("$this->$avatarColumn") : null;
+    // }
     public function getFilamentAvatarUrl(): ?string
     {
-        $avatarColumn = config('filament-edit-profile.avatar_column', 'avatar_url');
-        return $this->$avatarColumn ? Storage::url("$this->$avatarColumn") : null;
+        return $this->avatar_url;
     }
-
     // public function getTenantIdLabel(): string
     // {
     //     return Filament::getTenant()->id;
@@ -93,8 +95,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function getAvatarAttribute($value)
     {
-        if ($this->image) {
-            return $this->image;
+        if ($this->imavatar_urlage) {
+            return $this->avatar_url;
         } else {
             return '/images/noavatar.jpg';
         }

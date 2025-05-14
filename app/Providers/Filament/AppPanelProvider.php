@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers\Filament;
 use App\Models\Company;
+ 
 use Filament\Navigation\MenuItem;
 use App\Filament\Pages\Tenancy\RegisterCompany;
 use Filament\Http\Middleware\Authenticate;
@@ -8,6 +9,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -37,6 +39,8 @@ use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
+
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -81,7 +85,7 @@ class AppPanelProvider extends PanelProvider
 ->plugins([
     EasyFooterPlugin::make()
    ->withLogo(
-            'images/ico.png', // Path to logo
+            '/images/ico.png', // Path to logo
             'https://www.workall.nl'                                // URL for logo link (optional)
         )
  ->withFooterPosition('sidebar.footer'),
@@ -101,6 +105,8 @@ class AppPanelProvider extends PanelProvider
         ->shouldShowDeleteAccountForm(false)
         ->shouldShowBrowserSessionsForm(true)
         ->shouldShowAvatarForm(),
+
+
         FilamentDeveloperLoginsPlugin::make()
         ->enabled(app()->environment('local'))
         ->switchable(false)
@@ -149,25 +155,28 @@ class AppPanelProvider extends PanelProvider
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
-//->plugins([
+ ->plugins([
               
-//                FilamentSocialitePlugin::make()
-          //          ->providers([
-       //                 Provider::make('azure')
-  //   ->icon('fab-microsoft')
- // ->color(Color::hex('#5E5E5E'))
-      // ->outlined(false)            
-               //     ])->slug('app')
-
-   
-              //      ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
-               //         'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
- //
-              //          'email' => $oauthUser->getEmail(),
-              //      ]))
 
 
-               //     ->registration(false)            ])
+FilamentSocialitePlugin::make()
+                    ->providers([
+                        Provider::make('azure'),
+                    ])
+                     ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => User::create([
+                        'first_name' => $oauthUser->user['givenName'],
+                        'last_name' => $oauthUser->user['surname'],
+                        'email' => $oauthUser->getEmail(),
+                    ]))
+                    ->registration(true),
+          
+
+
+        
+                    ]) 
+
+
+ 
 
 
 
@@ -212,49 +221,19 @@ class AppPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+
 ->userMenuItems([
-    // Categorie: Documentatie & Updates (nep titel)
-    MenuItem::make('separator-docs')
+  MenuItem::make('separator-docs')
         ->label('— Documentatie & Updates —')
         ->url('#')
-        ->icon(''),
+      ->icon('heroicon-o-cog-6-tooth'),
 
-    MenuItem::make('changelog')
-        ->label('Changelog')
-        ->url(fn () => route('filament.app.pages.changelog'))
-        ->icon('heroicon-o-document-text'),
 
-    // Categorie: Feedback & Issues
-    MenuItem::make('separator-feedback')
-        ->label('— Feedback & Issues —')
-        ->url('#')
-        ->icon(''),
+]) 
 
-    MenuItem::make('feature-request')
-        ->label('Feature request')
-        ->url('#')
-        ->icon('heroicon-o-light-bulb'),
+->userMenuItems([
 
-    MenuItem::make('bug-report')
-        ->label('Bug rapporteren')
-        ->url('#')
-        ->icon('heroicon-o-bug-ant'),
-
-    // Categorie: Support & Status
-    MenuItem::make('separator-support')
-        ->label('— Support & Status —')
-        ->url('#')
-        ->icon(''),
-
-    MenuItem::make('server-status')
-        ->label('Server status')
-        ->url('#')
-        ->icon('heroicon-o-server'),
-
-    MenuItem::make('support')
-        ->label('Support')
-        ->url('#')
-        ->icon('heroicon-o-lifebuoy'),
+ 
 ])
 
 ;
