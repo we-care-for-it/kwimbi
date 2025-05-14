@@ -3,7 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
 use App\Filament\Resources\ContactResource\RelationManagers;
-use App\Models\Contact;
+use App\Models\Employee;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -27,7 +27,7 @@ use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class ContactResource extends Resource
 {
-    protected static ?string $model = Contact::class;
+    protected static ?string $model = Employee::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-user-group';
     protected static ?string $navigationLabel       = "Contactpersonen";
@@ -198,9 +198,7 @@ class ContactResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordUrl(
-                fn(Contact $record): string => Pages\ViewContact::getUrl(['record' => $record->id]), // Use Contact instead of Model
-            )
+
             ->groups([
                 Group::make('relation_id')
                     ->getTitleFromRecordUsing(fn($record): string => ucfirst($record?->name))
@@ -224,21 +222,6 @@ class ContactResource extends Resource
                         return "mailto:" . $record?->email;
                     })
                     ->label('Emailadres'),
-
-                // TextColumn::make('related_to')
-                //     ->label('Gerelateerd  aan')
-                //     ->getStateUsing(function ($record): ?string {
-                //         switch ($record->model) {
-                //             case 'relation':
-                //                 return $record?->related_to?->name;
-                //                 break;
-
-                //             default:
-                //                 return "-";
-                //         }
-
-                //     }
-                //     )->placeholder('-'),
 
                 TextColumn::make("relation.name")
                     ->sortable()
