@@ -132,6 +132,7 @@ class ProjectsResource extends Resource
                                 ->label('Locatie')
                                 ->options(function (callable $get) {
                                     $relationId = $get('customer_id');
+
                                     return relationLocation::query()
                                         ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
                                         ->get()
@@ -150,13 +151,21 @@ class ProjectsResource extends Resource
                                 ->disabled(fn(callable $get) => ! $get('customer_id'))
                                 ->placeholder('Selecteer een locatie'),
 
+                            // return relationLocation::query()
+                            //
+                            //     ->get()
+
                             Select::make("contact_id")
                                 ->options(function (callable $get) {
-                                    $relationId = $get('customer_id');
+                                    $relationId   = $get('customer_id');
+                                    $locationData = relationLocation::whereId($get('location_id'))->first();
 
+                                    //                $managementId =
                                     return Employee::query()
-                                        ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                    // ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                        ->when($relationId, fn($query) => $query->whereIn('relation_id', [$relationId, $locationData->management_id]))
                                         ->get()
+
                                         ->mapWithKeys(function ($contact) {
                                             return [
                                                 $contact->id => collect([

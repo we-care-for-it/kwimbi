@@ -285,6 +285,7 @@ class TaskResource extends Resource
             ->filters([
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
+                    ->searchable()
                     ->options(function () {
                         return \App\Models\Relation::all()
                             ->groupBy('type.name')

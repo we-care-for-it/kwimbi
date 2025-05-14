@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationLocationResource\Pages;
 use App\Filament\Resources\RelationLocationResource\RelationManagers;
 use App\Models\ObjectBuildingType;
-use App\Models\Relation;
 use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -191,9 +190,7 @@ class RelationLocationResource extends Resource
                 ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed()
-                ->visible(function (object $record) {
-                    return in_array('Afbeeldingen', $record?->type->options) ? true : false;;
-                })
+
                 ->columns(1),
 
             Forms\Components\Section::make("Gebouwgegevens")
@@ -220,8 +217,17 @@ class RelationLocationResource extends Resource
                                 ->label("Gebouwtype"),
 
                             Select::make("management_id")
-                                ->options(Relation::pluck("name", "id"))
-
+                                ->searchable()
+                                ->label("Relatie")
+                                ->options(function () {
+                                    return \App\Models\Relation::all()
+                                        ->groupBy('type.name')
+                                        ->mapWithKeys(function ($group, $category) {
+                                            return [
+                                                $category => $group->pluck('name', 'id')->toArray(),
+                                            ];
+                                        })->toArray();
+                                })
                                 ->reactive()
                                 ->searchable()
 
@@ -339,7 +345,7 @@ class RelationLocationResource extends Resource
                 TextEntry::make("management.name")
                     ->label("Beheerder")
                     ->Url(function (object $record) {
-                        return "/relations/" . $record->relation_id . "";
+                        return "/relations/" . $record->management_id . "";
                     })
                     ->icon("heroicon-c-link")
 

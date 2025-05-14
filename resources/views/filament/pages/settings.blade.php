@@ -214,6 +214,20 @@
 
          @endcan
 
+
+
+         @can('view_any_authentication::log')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href=" mail-settings">
+            <img  src = "/images/icons/pack/webcam.svg"   class = "max-h-12">
+            <div>
+               <h2>Mail instellingen</h2>
+               <p class="text-sm text-gray-600">Configureer de uitgaande mail isntellingen </p>
+            </div>
+         </a>
+
+         @endcan
+
+
       </div>
 
 
