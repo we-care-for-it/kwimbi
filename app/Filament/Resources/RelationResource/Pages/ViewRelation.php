@@ -17,6 +17,7 @@ class ViewRelation extends ViewRecord
 
                 ->label('Terug naar overzicht')
                 ->link()
+                ->url('/relations')                
                 ->color('gray'),
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),

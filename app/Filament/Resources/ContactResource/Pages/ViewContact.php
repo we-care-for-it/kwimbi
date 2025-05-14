@@ -19,6 +19,7 @@ class ViewContact extends ViewRecord
 
                 ->label('Terug naar overzicht')
                 ->link()
+                ->url('/contacts')
                 ->color('gray'),
             EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),

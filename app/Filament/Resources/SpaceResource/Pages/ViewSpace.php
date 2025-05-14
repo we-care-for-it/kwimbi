@@ -17,7 +17,8 @@ class ViewSpace extends ViewRecord
             Action::make('back')
 
                 ->label('Terug naar overzicht')
-                ->link()
+                ->link()                
+                ->url('/spaces')
                 ->color('gray'),
             EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),

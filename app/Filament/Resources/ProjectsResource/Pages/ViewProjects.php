@@ -19,6 +19,7 @@ class ViewProjects extends ViewRecord
             Action::make('back')
                 ->label('Terug naar overzicht')
                 ->link()
+                ->url('/projects')
                 ->color('gray'),
 
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')

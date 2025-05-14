@@ -17,6 +17,7 @@ class ViewVehicle extends ViewRecord
 
                 ->label('Terug naar overzicht')
                 ->link()
+                ->url('/vehicles')
                 ->color('gray'),
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),
