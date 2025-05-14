@@ -2,12 +2,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
+use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 
 class employee extends Model implements Auditable
 {
     use SoftDeletes;
+    use UsesCustomFields;
+    use HasFilamentComments;
     use \OwenIt\Auditing\Auditable;
     //  public $table = "object_building_types";
     //  protected $fillable = ['name', 'is_active'];
@@ -26,4 +31,14 @@ class employee extends Model implements Auditable
         }
     }
 
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'contact_id', 'id');
+
+    }
+
+    public function relation(): HasMany
+    {
+        return $this->hasMany(Relation::class, 'id', 'relation_id');
+    }
 }
