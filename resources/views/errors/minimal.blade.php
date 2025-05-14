@@ -7,7 +7,7 @@
       <div class="flex min-h-screen items-center justify-center py-12 text-gray-900">
          <div class="relative  ">
             <div class="flex w-full justify-center pb-4">
-               <img src="/images/digilevel_logo.png" alt="Logo" style = "height: 150px;" class=" mx-auto mb-4">
+               <img src="/images/logo.png" alt="Logo" style = "height: 150px;" class=" mx-auto mb-4">
             </div>
             <h2 class="text-center text-2xl font-bold tracking-tight pb-4">
                {{$exception?->getStatusCode()}}
