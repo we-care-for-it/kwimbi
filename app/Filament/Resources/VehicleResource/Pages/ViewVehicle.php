@@ -3,17 +3,24 @@ namespace App\Filament\Resources\VehicleResource\Pages;
 
 use App\Filament\Resources\VehicleResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewVehicle extends ViewRecord
 {
     protected static string $resource = VehicleResource::class;
 
-    protected function getHeaderActions(): array
-    {
+    protected function getHeaderActions():
+    array {
         return [
-            Actions\EditAction::make()->label('Wijzigen')->slideOver(),
-            Actions\DeleteAction::make(),
+            Action::make('back')
+
+                ->label('Terug naar overzicht')
+                ->link()
+                ->color('gray'),
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')
+                ->slideOver(),
+            Actions\DeleteAction::make()->icon('heroicon-m-trash'),
         ];
     }
 
