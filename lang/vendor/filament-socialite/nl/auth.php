@@ -7,5 +7,5 @@ return [
 
     'user-not-allowed'         => 'Account is niet toegstaan om in te loggen.',
 
-    'registration-not-enabled' => 'E-mail adres niet bekend bij Digilevel. ',
+    'registration-not-enabled' => 'E-mail adres niet geregisteerd . ',
 ];

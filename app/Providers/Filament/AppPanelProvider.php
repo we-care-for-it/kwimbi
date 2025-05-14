@@ -1,6 +1,7 @@
 <?php
 namespace App\Providers\Filament;
 use App\Models\Company;
+ 
 use Filament\Navigation\MenuItem;
 use App\Filament\Pages\Tenancy\RegisterCompany;
 use Filament\Http\Middleware\Authenticate;
@@ -38,8 +39,6 @@ use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
-
-use SocialiteProviders\Azure\User;
 
 
 
@@ -156,17 +155,25 @@ class AppPanelProvider extends PanelProvider
             ->breadcrumbs(true)
  ->plugins([
               
-               FilamentSocialitePlugin::make()
-                 ->providers([
-                       Provider::make('azure')
-     ->icon('fab-microsoft')
- ->color(Color::hex('#5E5E5E'))
-       ->outlined(false)    
- ]) 
+
+
+FilamentSocialitePlugin::make()
+                    ->providers([
+                        Provider::make('azure'),
+                    ])
+                     ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => User::create([
+                        'first_name' => $oauthUser->user['givenName'],
+                        'last_name' => $oauthUser->user['surname'],
+                        'email' => $oauthUser->getEmail(),
+                    ]))
+                    ->registration(true),
+          
 
 
         
                     ]) 
+
+
  
 
 
