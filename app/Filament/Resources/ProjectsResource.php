@@ -22,7 +22,6 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -133,6 +132,7 @@ class ProjectsResource extends Resource
                                 ->label('Locatie')
                                 ->options(function (callable $get) {
                                     $relationId = $get('customer_id');
+
                                     return relationLocation::query()
                                         ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
                                         ->get()
@@ -151,13 +151,21 @@ class ProjectsResource extends Resource
                                 ->disabled(fn(callable $get) => ! $get('customer_id'))
                                 ->placeholder('Selecteer een locatie'),
 
+                            // return relationLocation::query()
+                            //
+                            //     ->get()
+
                             Select::make("contact_id")
                                 ->options(function (callable $get) {
-                                    $relationId = $get('customer_id');
+                                    $relationId   = $get('customer_id');
+                                    $locationData = relationLocation::whereId($get('location_id'))->first();
 
+                                    //                $managementId =
                                     return Employee::query()
-                                        ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                    // ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                        ->when($relationId, fn($query) => $query->whereIn('relation_id', [$relationId, $locationData->management_id]))
                                         ->get()
+
                                         ->mapWithKeys(function ($contact) {
                                             return [
                                                 $contact->id => collect([
@@ -294,9 +302,18 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('quotes_count')
                     ->counts('quotes')
                     ->toggleable()
-                    ->badge()
                     ->sortable()
+                    ->badge()
                     ->label("Offertes")
+                    ->alignment('center'),
+
+                Tables\Columns\TextColumn::make('budget_costs')
+
+                    ->toggleable()
+
+                    ->sortable()
+                    ->money('EUR')
+                    ->label("Budget")
                     ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('reactions_count')
@@ -335,12 +352,7 @@ class ProjectsResource extends Resource
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

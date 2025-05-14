@@ -3,7 +3,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
-use App\Models\Relation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -274,7 +273,17 @@ class ContactResource extends Resource
             ->filters([
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
-                    ->options(Relation::all()->pluck("name", "id")),
+                    ->searchable()
+                    ->label("Relatie")
+                    ->options(function () {
+                        return \App\Models\Relation::all()
+                            ->groupBy('type.name')
+                            ->mapWithKeys(function ($group, $category) {
+                                return [
+                                    $category => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    }),
 
             ])
             ->headerActions([
