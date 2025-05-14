@@ -70,7 +70,8 @@ class ProjectsRelationManager extends RelationManager
                         return "/projects/" . $record->model_id;
                     })->icon('heroicon-s-eye'),
 
-            ]);
+            ])->emptyState(view("partials.empty-state"));
 
     }
+
 }
