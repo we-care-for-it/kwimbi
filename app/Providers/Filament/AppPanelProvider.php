@@ -8,6 +8,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -37,6 +38,10 @@ use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
+
+use SocialiteProviders\Azure\User;
+
+
 
 class AppPanelProvider extends PanelProvider
 {
@@ -81,7 +86,7 @@ class AppPanelProvider extends PanelProvider
 ->plugins([
     EasyFooterPlugin::make()
    ->withLogo(
-            'images/ico.png', // Path to logo
+            '/images/ico.png', // Path to logo
             'https://www.workall.nl'                                // URL for logo link (optional)
         )
  ->withFooterPosition('sidebar.footer'),
@@ -149,25 +154,20 @@ class AppPanelProvider extends PanelProvider
   ->sidebarCollapsibleOnDesktop()
             ->unsavedChangesAlerts()
             ->breadcrumbs(true)
-//->plugins([
+ ->plugins([
               
-//                FilamentSocialitePlugin::make()
-          //          ->providers([
-       //                 Provider::make('azure')
-  //   ->icon('fab-microsoft')
- // ->color(Color::hex('#5E5E5E'))
-      // ->outlined(false)            
-               //     ])->slug('app')
-
-   
-              //      ->createUserUsing(fn (string $provider, User $oauthUser, FilamentSocialitePlugin $plugin) => UserModel::create([
-               //         'name' => $oauthUser->user['givenName'] . " " . $oauthUser->user['surname'],
- //
-              //          'email' => $oauthUser->getEmail(),
-              //      ]))
+               FilamentSocialitePlugin::make()
+                 ->providers([
+                       Provider::make('azure')
+     ->icon('fab-microsoft')
+ ->color(Color::hex('#5E5E5E'))
+       ->outlined(false)    
+ ]) 
 
 
-               //     ->registration(false)            ])
+        
+                    ]) 
+ 
 
 
 

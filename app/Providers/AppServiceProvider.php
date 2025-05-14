@@ -9,8 +9,11 @@ use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use SocialiteProviders\Azure\Provider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 use TomatoPHP\FilamentSettingsHub\Facades\FilamentSettingsHub;
 use TomatoPHP\FilamentSettingsHub\Services\Contracts\SettingHold;
 
@@ -37,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
         //         ->visible(outsidePanels: false);
         //     //->outsidePanelPlacement(Placement::BottomRight);
         // });
+
+        Event::listen(function (SocialiteWasCalled $event) {
+            $event->extendSocialite('azure', Provider::class);
+        });
 
         FilamentSettingsHub::register([
             SettingHold::make()
