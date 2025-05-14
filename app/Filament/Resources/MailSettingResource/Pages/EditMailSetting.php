@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\MailSettingResource\Pages;
 
 use App\Filament\Resources\MailSettingResource;
-use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Config;

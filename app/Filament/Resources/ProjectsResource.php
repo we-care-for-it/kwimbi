@@ -22,7 +22,6 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\VerticalAlignment;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -344,12 +343,7 @@ class ProjectsResource extends Resource
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->Heading('Verwijderen')
-                    ->color('danger'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

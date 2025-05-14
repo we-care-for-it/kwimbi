@@ -62,6 +62,17 @@ class TimeTrackingResource extends Resource
                                 Forms\Components\Select::make("relation_id")
                                     ->label("Relatie")
                                     ->searchable()
+                                    ->label("Relatie")
+                                    ->options(function () {
+                                        return \App\Models\Relation::all()
+                                            ->groupBy('type.name')
+                                            ->mapWithKeys(function ($group, $category) {
+                                                return [
+                                                    $category => $group->pluck('name', 'id')->toArray(),
+                                                ];
+                                            })->toArray();
+                                    })
+                                    ->searchable()
                                     ->live()
 
                                     // ->createOptionUsing(function (array $data) {
@@ -302,9 +313,31 @@ class TimeTrackingResource extends Resource
                     }),
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
-                    ->options(Relation::all()->pluck("name", "id")),
+                    ->searchable()
+                    ->label("Relatie")
+                    ->options(function () {
+                        return \App\Models\Relation::all()
+                            ->groupBy('type.name')
+                            ->mapWithKeys(function ($group, $category) {
+                                return [
+                                    $category => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    }),
                 SelectFilter::make('project_id')
-                    ->options(Project::all()->pluck("name", "id"))
+
+                    ->searchable()
+                    ->label("Relatie")
+                    ->options(function () {
+                        return \App\Models\Project::all()
+                            ->groupBy('customer.name')
+                            ->mapWithKeys(function ($group, $data) {
+                                return [
+                                    $data => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    })
+
                     ->label('Project'),
                 // SelectFilter::make('status_id')
                 //     ->options(TimeTrackingStatus::class)
