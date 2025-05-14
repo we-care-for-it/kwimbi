@@ -34,16 +34,16 @@
 }
 
 .fi-topbar .bg-white {
-  background-color: rgb(139, 217, 144)
+  background-color: #777EE3;
 }
 
 
 .fi-sidebar-header {
-  background-color: rgb(125, 196, 129) !important
+  background-color: #4a56a2 !important
 }
 
 .fi-sidebar-header {
-  background-color: rgb(125, 196, 129) !important
+  background-color: #4a56a2 !important
 }
 
 /* .fi-sidebar-header .fi-icon-btn-icon {
@@ -143,22 +143,6 @@
 
 
 
-.fi-global-search-result {
-  background-color: rgb(139, 217, 144)
-}
-
-.fi-topbar .bg-white {
-  background-color: rgb(139, 217, 144)
-}
-
-.fi-sidebar-header {
-  background-color: rgb(0, 0, 0) !important
-}
-
-.fi-sidebar-header {
-  background-color: rgb(125, 196, 129) !important
-}
-
 .fi-ac-btn-action {
   padding: 12px !important;
   border-radius: 5px !important;
@@ -175,9 +159,6 @@
 
 
 
-.widget_dasboard {
-  background-color: rgb(125, 196, 129) !important
-}
 
 .toggleStatus {
   border-bottom: 10px solid red;

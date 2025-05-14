@@ -160,14 +160,15 @@ class ContactResource extends Resource
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
                                 TextEntry::make('department')->label('Afdeling')->placeholder('-'),
                                 TextEntry::make('function')->label('Functie')->placeholder('-'),
-                                TextEntry::make('company.name')->label('Bedrijf')->placeholder('-'),
+                                //    TextEntry::make('company.name')->label('Bedrijf')->placeholder('-'),
                                 TextEntry::make('email')->label('E-mail')->placeholder('-'),
                                 TextEntry::make('phone_number')->label('Telefoon')->placeholder('-'),
                                 TextEntry::make('mobile_number')->label('Intern Tel')->placeholder('-'),
                                 TextEntry::make('relation.name')->label('Relatie')->placeholder('-')
                                     ->url(function ($record) {
                                         return "/relations/" . $record->relation_id;
-                                    }),
+                                    })
+                                    ->Icon('heroicon-o-link'),
                             ])->columns(4),
 
                         Tabs\Tab::make('Social Media')

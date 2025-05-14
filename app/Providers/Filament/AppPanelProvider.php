@@ -75,13 +75,13 @@ class AppPanelProvider extends PanelProvider
   FilamentAuthenticationLogPlugin::make()
 ])->passwordReset()
  
- ->favicon(asset('https://workall.nl/favicon.png')) 
+ ->favicon(asset('/images/ico.png')) 
 
  
 ->plugins([
     EasyFooterPlugin::make()
    ->withLogo(
-            'https://workall.nl/favicon.png', // Path to logo
+            'images/ico.png', // Path to logo
             'https://www.workall.nl'                                // URL for logo link (optional)
         )
  ->withFooterPosition('sidebar.footer'),

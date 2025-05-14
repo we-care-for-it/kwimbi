@@ -5,6 +5,7 @@ use App\Filament\Resources\RelationResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Tables\Actions\ActionGroup;
 use Parallax\FilamentComments\Actions\CommentsAction;
 
 class ViewRelation extends ViewRecord
@@ -14,15 +15,20 @@ class ViewRelation extends ViewRecord
     array {
         return [
             Action::make('back')
-
                 ->label('Terug naar overzicht')
                 ->link()
-                ->url('/relations')                
+                ->url(url()->previous())
                 ->color('gray'),
+
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),
-            Actions\DeleteAction::make()->icon('heroicon-m-trash'),
+
             CommentsAction::make(),
+
+            ActionGroup::make([
+                Actions\DeleteAction::make('Verwijderen'),
+            ]),
+
         ];
     }
 
