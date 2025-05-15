@@ -2,7 +2,8 @@
 namespace App\Filament\Resources\TicketResource\Pages;
 
 use App\Filament\Resources\TicketResource;
-use Filament\Pages\Actions\EditAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use Livewire\Attributes\On;
 
@@ -14,10 +15,18 @@ class ViewTicket extends ViewRecord
     {
         $this->fillForm();
     }
-    protected function getHeaderActions(): array
-    {
+    protected function getHeaderActions():
+    array {
         return [
-            EditAction::make()->slideOver(),
+            Action::make('back')
+
+                ->label('Terug naar overzicht')
+                ->link()
+                ->url('/vehicles')
+                ->color('gray'),
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')
+                ->slideOver(),
+            Actions\DeleteAction::make()->icon('heroicon-m-trash'),
         ];
     }
 
