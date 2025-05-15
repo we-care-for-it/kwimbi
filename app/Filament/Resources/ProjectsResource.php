@@ -411,7 +411,7 @@ class ProjectsResource extends Resource
                                     ->label('Relatie')
                                     ->icon("heroicon-c-link")
                                     ->Url(function ($record) {
-                                        return "/relations/" . $record->contact_id . "";
+                                        return "/relations/" . $record->customer_id . "";
                                     })
                                     ->placeholder('-'),
                                 TextEntry::make('location.address')
