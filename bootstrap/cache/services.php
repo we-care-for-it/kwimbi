@@ -104,7 +104,8 @@
     100 => 'TomatoPHP\\FilamentSettingsHub\\FilamentSettingsHubServiceProvider',
     101 => 'App\\Providers\\AppServiceProvider',
     102 => 'App\\Providers\\AuthServiceProvider',
-    103 => 'App\\Providers\\Filament\\AppPanelProvider',
+    103 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    104 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'eager' => 
   array (
@@ -194,7 +195,8 @@
     83 => 'TomatoPHP\\FilamentSettingsHub\\FilamentSettingsHubServiceProvider',
     84 => 'App\\Providers\\AppServiceProvider',
     85 => 'App\\Providers\\AuthServiceProvider',
-    86 => 'App\\Providers\\Filament\\AppPanelProvider',
+    86 => 'App\\Providers\\Filament\\AdminPanelProvider',
+    87 => 'App\\Providers\\Filament\\AppPanelProvider',
   ),
   'deferred' => 
   array (

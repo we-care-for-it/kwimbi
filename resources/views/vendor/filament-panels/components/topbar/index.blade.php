@@ -17,7 +17,7 @@
 
         @if (filament()->hasNavigation())
             <x-filament::icon-button
-                color="white"
+
                 icon="heroicon-o-bars-3"
                 icon-alias="panels::topbar.open-sidebar-button"
                 icon-size="lg"
@@ -33,7 +33,7 @@
             />
 
             <x-filament::icon-button
-                color="white"
+
                 icon="heroicon-o-x-mark"
                 icon-alias="panels::topbar.close-sidebar-button"
                 icon-size="lg"

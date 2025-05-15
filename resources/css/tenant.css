@@ -8,7 +8,6 @@
 }
 
 
-
 .fi-sidebar {
   @apply bg-gray-50 dark:bg-gray-950 !important;
 }
@@ -17,34 +16,24 @@
 
 .fi-topbar {
   font-weight: normal !important;
-
 }
 
 .font-semibold {
   font-weight: normal !important;
-
 }
-
-
-
 
 .fi-header-heading {
   font-weight: normal !important;
-
 }
-
-
 
 .fi-input-wrp {
   background-color: white !important;
   border-radius: 2px !important;
 }
 
-
 .fi-ac {
   float: right;
 }
-
 
 .leading-6 {
   font-weight: normal !important;
@@ -63,6 +52,10 @@
 
 .fi-ta-content {
   padding: 10px;
+}
+
+.fi-topbar-open-sidebar-btn {
+  color: white !important;
 }
 
 .fi-ta-ctn {
@@ -112,7 +105,10 @@
 
 
 
-
+.fi-icon-btn-icon {
+  color: #f87171;
+  /* Tailwind's red-400 */
+}
 
 
 
