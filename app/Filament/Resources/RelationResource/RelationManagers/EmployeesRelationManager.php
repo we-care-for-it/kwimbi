@@ -110,8 +110,15 @@ class EmployeesRelationManager extends RelationManager
                     ->modalIcon('heroicon-o-plus')
                     ->slideOver()
                     ->label('Medewerker toevoegen'),
+
             ])
             ->actions([
+
+                Tables\Actions\EditAction::make()
+                    ->label('Wijzigen')
+                    ->slideOver()
+                    ->modalHeading('Locatie wijzigen'),
+
                 Tables\Actions\Action::make('openContact')
                     ->label('Open contactpersoon')
                     ->url(function ($record) {
