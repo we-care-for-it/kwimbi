@@ -1,23 +1,19 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BrandResource\Pages\CreateBrand;
-use App\Filament\Resources\BrandResource\Pages\EditBrand;
 use App\Filament\Resources\BrandResource\Pages\ListBrands;
 use App\Filament\Resources\BrandResource\RelationManagers\ModelsRelationManager;
-use App\Models\assetBrand;
+use App\Models\Brand;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class BrandResource extends Resource
 {
-    protected static ?string $model                 = assetBrand::class;
+    protected static ?string $model                 = Brand::class;
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -38,9 +34,7 @@ class BrandResource extends Resource
             ->defaultPaginationPageOption(100)
             ->paginated([25, 50, 100, 'all'])
             ->columns([
-                TextColumn::make('index')
-                    ->label('#')
-                    ->rowIndex(),
+
                 TextColumn::make('name')
                     ->label(__('asset_brands.fields.name'))
                     ->searchable()
@@ -49,10 +43,7 @@ class BrandResource extends Resource
                 TextColumn::make('models_count')
                     ->label('Modellen')
                     ->counts('models')
-                    ->url(fn($record) => EditBrand::getUrl([
-                        $record,
-                        'activeRelationManager' => 'models',
-                    ]) . '#relationManagerModels')
+
                     ->alignCenter()
                     ->badge(),
             ])
@@ -66,12 +57,12 @@ class BrandResource extends Resource
                     ->slideOver(),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
+            ])
+            ->emptyState(view('partials.empty-state'));
     }
-
     public static function getRelations(): array
     {
         return [
@@ -82,9 +73,9 @@ class BrandResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index'  => ListBrands::route('/'),
-            'create' => CreateBrand::route('/create'),
-            'edit'   => EditBrand::route('/{record}/edit'),
+            'index' => ListBrands::route('/'),
+            // 'create' => CreateBrand::route('/create'),
+            //  'edit'   => EditBrand::route('/{record}/edit'),
         ];
     }
 

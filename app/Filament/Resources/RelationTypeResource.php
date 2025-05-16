@@ -43,6 +43,7 @@ class RelationTypeResource extends Resource
                                 'Tijdregistratie' => 'Tijdregistratie',
                                 'Projecten'       => 'Projecten',
                                 'Locaties'        => 'Locaties',
+                                'Objecten'        => 'Objecten',
                             ])
                             ->required()
                             ->inline()
