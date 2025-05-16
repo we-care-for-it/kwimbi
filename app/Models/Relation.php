@@ -92,6 +92,10 @@ class Relation extends Model implements HasCustomFields
         return $this->hasMany(Ticket::class);
     }
 
+    public function objects()
+    {
+        return $this->hasMany(Elevator::class, 'customer_id', 'id');
+    }
     public function contactsObject(): HasMany
     {
         return $this->hasMany(ContactObject::class, 'model_id', 'id');

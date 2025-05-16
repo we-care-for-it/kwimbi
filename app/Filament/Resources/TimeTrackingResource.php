@@ -6,7 +6,9 @@ use App\Filament\Resources\TimeTrackingResource\Pages;
 use App\Models\Project;
 use App\Models\Relation;
 use App\Models\timeTracking;
+use App\Models\User;
 use App\Models\workorderActivities;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
@@ -34,13 +36,27 @@ use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 
-class TimeTrackingResource extends Resource
+class TimeTrackingResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model            = TimeTracking::class;
     protected static ?string $navigationIcon   = 'heroicon-o-clock';
     protected static ?string $navigationLabel  = "Tijdregistratie";
     protected static ?string $title            = "Tijdregistratie";
     protected static ?string $pluralModelLabel = 'Tijdregistratie';
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish',
+            'view_all_users',
+        ];
+    }
 
     public static function form(Form $form): Form
     {
@@ -324,6 +340,14 @@ class TimeTrackingResource extends Resource
                                 ];
                             })->toArray();
                     }),
+
+                SelectFilter::make('user_id')
+                    ->label('Medewerker')
+                    ->searchable()
+                    ->options(User::all()->pluck('name', 'id'))
+                    ->visible(fn() => auth()->user()->can('view_any_time::tracking')),
+//)
+
                 SelectFilter::make('project_id')
 
                     ->searchable()

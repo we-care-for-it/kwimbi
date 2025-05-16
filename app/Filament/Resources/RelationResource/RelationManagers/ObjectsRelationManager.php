@@ -3,7 +3,6 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\contactType;
-use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -19,7 +18,7 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 class ObjectsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
-    protected static string $relationship   = 'contacts';
+    protected static string $relationship   = 'objects';
     protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Objecten';
 
@@ -31,8 +30,7 @@ class ObjectsRelationManager extends RelationManager
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
 
-        return relationLocation::where('relation_id', $ownerRecord?->id)->count();
-
+        return in_array('Objecten', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function form(Form $form): Form
