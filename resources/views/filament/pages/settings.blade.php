@@ -289,7 +289,7 @@ NOG RECHTEN CHECKEN
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="models">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Merken</h2>
+               <h2>Modellen</h2>
                <p class="text-sm text-gray-600">Beheer de medewerkersn</p>
             </div>
          </a>
