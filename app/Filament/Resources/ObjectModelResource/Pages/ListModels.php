@@ -12,7 +12,10 @@ class ListModels extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Model toevoegen'),
+            Actions\CreateAction::make()
+                ->label('Model toevoegen')
+                ->modalHeading('Nieuwe model toevoegen')
+                ->modalDescription('Voer hieronder de gegevens om een object model toe te voegen'),
         ];
     }
 }

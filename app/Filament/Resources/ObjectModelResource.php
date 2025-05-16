@@ -38,17 +38,13 @@ class ObjectModelResource extends Resource
                     ->label("Merk")
                     ->required()
                     ->searchable()
-                    ->options(
-                        Brand::pluck("name", "id")
-                    ),
+                    ->options(Brand::pluck("name", "id")),
 
                 Forms\Components\Select::make("type_id")
-                    ->label("Type")
+                    ->label("Categorie")
                     ->required()
                     ->searchable()
-                    ->options(
-                        ObjectType::pluck("name", "id")
-                    ),
+                    ->options(ObjectType::pluck("name", "id")),
 
             ]);
     }
@@ -77,7 +73,8 @@ class ObjectModelResource extends Resource
                     ->searchable(),
 
                 TextColumn::make('type.name')
-                    ->label('Merk')
+                    ->label('Categorie')
+                    ->badge()
                     ->placeholder("-")
                     ->sortable()
                     ->searchable(),
@@ -96,7 +93,6 @@ class ObjectModelResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Model bewerken')
                     ->tooltip('Bewerken')
-                    ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make()
