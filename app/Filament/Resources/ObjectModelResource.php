@@ -1,17 +1,19 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ModelResource\Pages;
+use App\Filament\Resources\ObjectModelResource\Pages;
 use App\Models\Brand;
 use App\Models\ObjectModel;
+use App\Models\ObjectType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
-class ModelResource extends Resource
+class ObjectModelResource extends Resource
 {
     protected static ?string $model = ObjectModel::class;
 
@@ -35,9 +37,17 @@ class ModelResource extends Resource
                 Forms\Components\Select::make("brand_id")
                     ->label("Merk")
                     ->required()
-                    ->searchable()()
+                    ->searchable()
                     ->options(
                         Brand::pluck("name", "id")
+                    ),
+
+                Forms\Components\Select::make("type_id")
+                    ->label("Type")
+                    ->required()
+                    ->searchable()
+                    ->options(
+                        ObjectType::pluck("name", "id")
                     ),
 
             ]);
@@ -46,15 +56,36 @@ class ModelResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
+            ->groups([
+
+                Group::make('name')
+                    ->label('Naam'),
+
+                Group::make('type.name')
+                    ->label('Categorie'),
+
+                Group::make('brand.name', )
+                    ->label('Merk'),
+
+            ])
+
             ->columns([
 
                 TextColumn::make('name')
                     ->label('Naam')
                     ->searchable(),
 
-                TextColumn::make('location.name')
-                    ->label('Locatie')
+                TextColumn::make('type.name')
+                    ->label('Merk')
                     ->placeholder("-")
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('brand.name')
+                    ->label('Merk')
+                    ->placeholder("-")
+                    ->sortable()
                     ->searchable(),
 
             ])
@@ -63,8 +94,7 @@ class ModelResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Magazijn Bewerken')
-                    ->modalDescription('Pas de bestaande magazijn aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->modalHeading('Model bewerken')
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
