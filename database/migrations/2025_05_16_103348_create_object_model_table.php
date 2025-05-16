@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', total: 12, places: 2)->nullable();
             $table->softDeletes();
+            $table->integer('type_id');
             $table->timestamps();
         });
     }
