@@ -17,11 +17,11 @@ class ObjectModelResource extends Resource
 {
     protected static ?string $model = ObjectModel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationLabel  = "Object Modellen";
-    protected static ?string $title            = "Object Modellen";
-    protected static ?string $pluralModelLabel = "Object Modellen";
+    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel       = "Object Modellen";
+    protected static ?string $title                 = "Object Modellen";
+    protected static ?string $pluralModelLabel      = "Object Modellen";
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
