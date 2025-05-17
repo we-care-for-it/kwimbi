@@ -5,6 +5,7 @@ use App\Filament\Resources\TicketResource;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Tables\Actions\ActionGroup;
 use Livewire\Attributes\On;
 
 class ViewTicket extends ViewRecord
@@ -19,14 +20,19 @@ class ViewTicket extends ViewRecord
     array {
         return [
             Action::make('back')
-
                 ->label('Terug naar overzicht')
                 ->link()
-                ->url('/vehicles')
+                ->icon('heroicon-s-arrow-uturn-left')
+                ->url(url()->previous())
                 ->color('gray'),
+
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),
-            Actions\DeleteAction::make()->icon('heroicon-m-trash'),
+
+            ActionGroup::make([
+                Actions\DeleteAction::make('Verwijderen'),
+            ]),
+
         ];
     }
 

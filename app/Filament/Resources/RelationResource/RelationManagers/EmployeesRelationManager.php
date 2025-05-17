@@ -125,6 +125,10 @@ class EmployeesRelationManager extends RelationManager
                         return "/contacts/" . $record->id;
                     })->icon('heroicon-s-eye'),
 
+                Tables\Actions\DeleteAction::make()
+                    ->label('')
+                ,
+
             ])
         ;
     }

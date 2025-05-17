@@ -105,16 +105,8 @@
 
 
 
-.fi-icon-btn-icon {
-  color: #FFFFFF;
-  /* Tailwind's red-400 */
-}
 
-
-
-
-
-.fi-section-header {
+*/ .fi-section-header {
   background-color: #F9FAFC !important;
   ;
 }
