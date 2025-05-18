@@ -47,7 +47,7 @@ class ProjectsResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return setting('use_projects');
+        return setting('use_projects') ?? false;
     }
 
     public static function getGloballySearchableAttributes(): array

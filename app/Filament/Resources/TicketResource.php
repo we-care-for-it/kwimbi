@@ -34,7 +34,7 @@ class TicketResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return setting('use_tickets');
+        return setting('use_tickets') ?? false;
     }
 
     public static function form(Form $form): Form

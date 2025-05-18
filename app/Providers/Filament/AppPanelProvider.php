@@ -177,7 +177,7 @@ FilamentSocialitePlugin::make()
 
    ->sidebarCollapsibleOnDesktop()
  
-   ->topNavigation(setting('portal_menu_position')) 
+   ->topNavigation(setting('portal_menu_position') ?? false) 
  
 
     ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)

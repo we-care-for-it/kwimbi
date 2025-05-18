@@ -46,7 +46,7 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
 
     public static function shouldRegisterNavigation(): bool
     {
-        return setting('use_timetracking');
+        return setting('use_timetracking') ?? false;
     }
 
     public static function getPermissionPrefixes(): array

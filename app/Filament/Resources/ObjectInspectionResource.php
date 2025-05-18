@@ -38,7 +38,7 @@ class ObjectInspectionResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return setting('use_inspections');
+        return setting('use_inspections') ?? false;
     }
 
     public static function infolist(Infolist $infolist): Infolist
