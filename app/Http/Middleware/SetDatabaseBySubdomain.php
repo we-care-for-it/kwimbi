@@ -29,6 +29,8 @@ class SetDatabaseBySubdomain
         ]);
 
         Config::set('database.default', 'tenant');
+
+        Config::set('app.url', $tenant->domain);
         DB::purge('tenant');
 
         return $next($request);

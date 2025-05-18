@@ -221,11 +221,11 @@ class TenantSettings extends Page implements HasForms
 
                         ]),
 
-                    Forms\Components\Tabs\Tab::make('Kleuren')
+                    Forms\Components\Tabs\Tab::make('Vormgeving')
 
                         ->schema([
 
-                            Section::make('Portal vormgeving')
+                            Section::make()
 
                                 ->columns(4)
                                 ->schema([
@@ -239,15 +239,15 @@ class TenantSettings extends Page implements HasForms
 
                                 ]),
 
-                            Section::make('Huistijl')
+                            Section::make('KLeuren')
                                 ->columns(4)
                                 ->schema([
                                     Forms\Components\ColorPicker::make('color2')
-                                        ->label('Kleur 2')
+                                        ->label('Kleur 1')
                                         ->hint('Bovenbalk links')
                                         ->required(),
                                     Forms\Components\ColorPicker::make('color1')
-                                        ->label('Kleur 1')
+                                        ->label('Kleur 2')
                                         ->hint('Bovenbalk rechts')
                                         ->required(),
 
