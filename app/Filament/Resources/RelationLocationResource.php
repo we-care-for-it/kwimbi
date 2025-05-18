@@ -146,7 +146,9 @@ class RelationLocationResource extends Resource
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("housenumber")
-                    ->label("Huisnummer"), Forms\Components\TextInput::make("place")
+                    ->label("Huisnummer"),
+
+                Forms\Components\TextInput::make("place")
                     ->label("Plaats"), Forms\Components\TextInput::make("province")
                     ->label("Provincie"), Forms\Components\TextInput::make("gps_lat")
                     ->label("GPS latitude")

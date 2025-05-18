@@ -19,7 +19,6 @@ use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
-use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class SupplierResource extends Resource
@@ -69,14 +68,21 @@ class SupplierResource extends Resource
                     Forms\Components\TextInput::make("place")
                         ->label("Plaats")
                         ->columnSpan(2),
-                    Forms\Components\Select::make("type_id")
-                        ->required()
-                        ->label("Categorie")
-                        ->options(RelationTypes::class)
-                        ->columnSpan(2),
 
                 ])])
-                ->columns(3)
+
+            // Forms\Components\Fieldset::make('options')
+            //     ->label('zichtbaarheid')
+            //     ->schema([
+            //         Forms\Components\Toggle::make('show_on_products')
+            //             ->label('Keuringen'),
+            //         Forms\Components\Toggle::make('show_on_object')
+            //             ->label('Storingen'),
+            //         Forms\Components\Toggle::make('show_on_object')
+            //             ->label('Storingen'),
+
+            //     ])
+
                 ->columnSpan(4),
 
         ]);
@@ -90,11 +96,6 @@ class SupplierResource extends Resource
 
             Components\TextEntry::make('name')
                 ->label("Bedrijfsnaam")
-                ->placeholder("Niet opgegeven"),
-
-            Components\TextEntry::make('type_id')
-                ->label("Categorie")
-                ->badge()
                 ->placeholder("Niet opgegeven"),
 
             Components\TextEntry::make("address")
@@ -113,12 +114,7 @@ class SupplierResource extends Resource
     {
         return
 
-        $table->groups([Group::make("type_id")
-                ->titlePrefixedWithLabel(false)
-                ->label("Categorie"),
-
-        ])
-            ->defaultGroup('type_id')->
+        $table->
 
             columns([
 
@@ -138,17 +134,7 @@ class SupplierResource extends Resource
 
             Tables\Columns\TextColumn::make('zipcode')
                 ->placeholder('-')
-                ->label('Postcode')
-                ->state(function (Relation $rec) {
-                    return $rec->zipcode . " " . $rec->place;
-                }),
-
-            Tables\Columns\TextColumn::make('type_id')
-                ->label('Categorie')
-                ->badge()
-                ->placeholder('-')
-                ->searchable()
-                ->sortable(),
+                ->label('Postcode'),
 
         ])
             ->filters([
@@ -166,7 +152,6 @@ class SupplierResource extends Resource
                     ->modalHeading('Leverancier Bewerken')
                     ->modalDescription('Pas de bestaande leverancier aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make()
