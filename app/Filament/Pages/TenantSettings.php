@@ -239,7 +239,7 @@ class TenantSettings extends Page implements HasForms
 
                                 ]),
 
-                            Section::make('KLeuren')
+                            Section::make('Kleuren')
                                 ->columns(4)
                                 ->schema([
                                     Forms\Components\ColorPicker::make('color2')
