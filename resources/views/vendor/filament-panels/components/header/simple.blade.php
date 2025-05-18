@@ -7,7 +7,7 @@
 <header class="fi-simple-header flex flex-col items-center pb-10">
 
     @if ($logo)
-    <img  style = "max-height: 140px"  src = "{{storage(setting('company_logo'))}}">
+    <img  style = "max-height: 140px"  src = "{{asset('storage/'.setting('company_logo'))}}">
     @endif
 
     @if (filled($heading))

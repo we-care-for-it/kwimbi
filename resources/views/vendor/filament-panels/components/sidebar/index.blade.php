@@ -128,8 +128,6 @@
   width: 100px;"  src = "{{asset('storage/'.setting('company_logo'))}}">
 
 
-{{asset(setting('company_logo'))}}
-
 
   </center>
         <ul class="fi-sidebar-nav-groups -mx-2 flex flex-col gap-y-7">
