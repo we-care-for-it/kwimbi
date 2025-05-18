@@ -20,7 +20,7 @@ class IncidentResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return setting('use_incidents');
+        return setting('use_incidents') ?? false;
     }
 
     public static function form(Form $form): Form
