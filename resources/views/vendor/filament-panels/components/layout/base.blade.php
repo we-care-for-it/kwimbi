@@ -18,9 +18,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        @if ($favicon = filament()->getFavicon())
-            <link rel="icon" href="{{ $favicon }}" />
-        @endif
+
+            <link rel="icon" href="{{ setting('company_favo_logo') }}" />
+
 
         @php
             $title = trim(strip_tags(($livewire ?? null)?->getTitle() ?? ''));
@@ -28,7 +28,7 @@
         @endphp
 
         <title>
-            {{ filled($title) ? "{$title} - " : null }}  {{Cache::get('tenant')->name}}
+            {{ filled($title) ? "{$title} - " : null }}  {{setting('company_name')}}
         </title>
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_BEFORE, scopes: $livewire->getRenderHookScopes()) }}

@@ -173,4 +173,76 @@
 </x-filament::dropdown>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<x-filament::dropdown
+    placement="bottom-end"
+    teleport
+    :attributes="
+        \Filament\Support\prepare_inherited_attributes($attributes)
+            ->class(['fi-user-menu'])
+    "
+>
+    <x-slot name="trigger">
+        <button
+            aria-label="{{ __('filament-panels::layout.actions.open_user_menu.label') }}"
+            type="button"
+
+            class="shrink-0"
+        >
+        <svg style = "color: white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+</svg>
+
+
+        </button>
+    </x-slot>
+
+    @if ($profileItem?->isVisible() ?? true)
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_BEFORE) }}
+
+
+
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_AFTER) }}
+    @endif
+
+
+
+
+
+    <x-filament::dropdown.list>
+
+
+    <x-filament::dropdown.list.item tag="a" href="/my-company"  icon="heroicon-o-building-office">
+    Mijn bedrijf
+    </x-filament::dropdown.list.item>
+
+    <x-filament::dropdown.list.item tag="a" href="/settings"  icon="heroicon-o-circle-stack">
+    Stamgegevens
+    </x-filament::dropdown.list.item>
+
+    <x-filament::dropdown.list.item tag="a" href="/tenant-settings"  icon="heroicon-o-cog-6-tooth">
+    Instellingen
+    </x-filament::dropdown.list.item>
+
+
+</x-filament::dropdown.list>
+
+
+
+
+</x-filament::dropdown>
+
+
+
 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_AFTER) }}

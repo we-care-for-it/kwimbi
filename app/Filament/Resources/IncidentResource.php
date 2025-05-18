@@ -18,6 +18,11 @@ class IncidentResource extends Resource
     protected static ?string $navigationGroup = 'Objecten';
     protected static ?int $navigationSort     = 3;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_incidents');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

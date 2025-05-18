@@ -45,6 +45,11 @@ class ProjectsResource extends Resource
     protected $listeners = ["refresh" => '$refresh'];
     private null $id;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_projects');
+    }
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'customer.name'];

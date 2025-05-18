@@ -33,9 +33,9 @@
     <meta name="twitter:description" content="@yield('description')">
     <meta name="twitter:image" content="@yield('image')">
 
-    @if ($favicon = filament()->getFavicon())
-        <link rel="icon" href="{{ $favicon }}" />
-    @endif
+
+        <link rel="icon" href="{{ setting('company_favo_logo') }}" />
+
 
     <title>
         {{ filled($title = strip_tags(($livewire ?? null)?->getTitle() ?? '')) ? "{$title} - " : null }}

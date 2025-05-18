@@ -71,9 +71,18 @@ class AppServiceProvider extends ServiceProvider
                     ->url('/my-profile')
                     ->icon('heroicon-o-user'),
                 UserMenuItem::make()
-                    ->label('Mijn bedrijf')
+                    ->label('Bedrijfsinstellingen')
                     ->url('/my-company')
                     ->icon('heroicon-o-building-office-2'),
+                UserMenuItem::make()
+                    ->label('Instellingen')
+                    ->url('/tenant-settings')
+                    ->icon('heroicon-o-cog-6-tooth'),
+
+                UserMenuItem::make()
+                    ->label('Stamgegevens')
+                    ->url('/settings')
+                    ->icon('heroicon-o-circle-stack'),
 
             ]);
         });
