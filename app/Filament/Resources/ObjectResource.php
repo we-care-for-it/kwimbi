@@ -100,7 +100,7 @@ class ObjectResource extends Resource
                     ->options(ElevatorStatus::class),
                 Select::make("supplier_id")
                     ->label("Leverancier")
-                    ->options(Relation::where('type_id', 4)->pluck("name", "id")),
+                    ->options(Relation::where('type_id', setting('object_supplier_group'))->pluck("name", "id")),
                 TextInput::make("stopping_places")
                     ->label("Stoppplaatsen")
                     ->placeholder("Niet opgegeven"),

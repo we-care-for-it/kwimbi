@@ -1,19 +1,38 @@
 <?php
-
 namespace App\Filament\Pages;
-use Filament\Pages\Dashboard\Concerns\HasFiltersForm;
-use Filament\Forms\Components\TextInput;
 
-
+use App\Filament\Widgets\LastIncidents;
+use App\Filament\Widgets\TasksOverview;
 
 class Dashboard extends \Filament\Pages\Dashboard
 {
-   public function getColumns(): int | string | array
-{
- 
-    return 12;
-}
+    public function getColumns(): int | string | array
+    {
 
+        return 12;
+    }
 
+    public function getHeaderWidgets(): array
+    {
+
+        $widgets = [];
+
+        if (setting('use_incidents')) {
+            $widgets[] = LastIncidents::class;
+            //   $widgets[] = IncidentChart::class;
+            //   $widgets[] = LastIncidents::class;
+        }
+
+        if (setting('use_api_connection')) {
+            $widgets[] = TasksOverview::class;
+        }
+
+        if (setting('use_api_connection')) {
+            $widgets[] = TasksOverview::class;
+        }
+
+        return $widgets;
+
+    }
 
 }
