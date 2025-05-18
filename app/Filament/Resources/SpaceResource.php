@@ -124,15 +124,9 @@ class SpaceResource extends Resource
                     ->modalHeading('Ruimte Bewerken')
                     ->modalDescription('Pas de bestaande ruimte aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
-                Tables\Actions\DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -204,7 +204,7 @@ class TaskResource extends Resource
                     ->label('Prioriteit'),
 
                 Tables\Columns\TextColumn::make('related_to')
-                    ->label('Relatien')
+                    ->label('Relatie')
                     ->toggleable()
                     ->getStateUsing(function ($record): ?string {
                         return $record?->related_to?->name;
@@ -251,7 +251,7 @@ class TaskResource extends Resource
                             return false;
                         }
                     })
-                    ->label('Title')
+                    ->label('Taak omschrijving')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('begin_date')

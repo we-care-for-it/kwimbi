@@ -3,6 +3,7 @@ namespace App\Filament\Resources\DepartmentResource\Pages;
 
 use App\Filament\Resources\DepartmentResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -13,6 +14,13 @@ class ListDepartments extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+
+            Action::make('back')
+                ->label('Terug naar mijn bedrijf')
+                ->link()
+                ->url(url()->previous())
+                ->color('gray'),
+
             Actions\CreateAction::make()
                 ->label('Afdeling toevoegen')
                 ->slideOver()

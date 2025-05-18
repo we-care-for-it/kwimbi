@@ -4,8 +4,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\LocationResource\Pages\EditLocation;
 use App\Filament\Resources\LocationResource\Pages\ListLocations;
 use App\Models\Location;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
+use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -26,25 +27,50 @@ class LocationResource extends Resource
     {
         return $form
             ->schema([
-                Section::make()
-                    ->schema([
-                        TextInput::make('name')
-                            ->label('Naam')
-                            ->maxLength(255)
-                            ->required(),
-                        TextInput::make('postal_code')
-                            ->label('Postcode')
-                            ->maxLength(255),
-                        TextInput::make('city')
-                            ->label('Plaats')
-                            ->maxLength(255),
-                        TextInput::make('street')
-                            ->label('Adres')
-                            ->maxLength(255),
-                    ])
-                    ->columnSpan(['lg' => 2]),
-            ])
-            ->columns(3);
+
+                Forms\Components\Section::make()
+                    ->schema([Grid::make(2)
+                            ->schema([Forms\Components\TextInput::make("name")
+                                    ->label("Naam"),
+
+                            ]),
+
+                    ]),
+
+                Forms\Components\Section::make("Locatie gegevens")->schema([Grid::make(4)->schema([Forms\Components\TextInput::make("postal_code")
+                        ->label("Postcode")
+                        ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase()'])
+
+                        ->maxLength(255)->suffixAction(Action::make("searchAddressByZipcode")
+                            ->icon("heroicon-m-magnifying-glass")->action(function (Get $get, Set $set) {
+                            $data = (new AddressService())->GetAddress($get("zipcode"), $get("number"));
+                            $data = json_decode($data);
+
+                            if (isset($data->error_id)) {
+                                Notification::make()
+                                    ->warning()
+                                    ->title("Geen resultaten")
+                                    ->body("Helaas er zijn geen gegevens gevonden bij de postcode <b>" . $get("zipcode") . "</b> Controleer de postcode en probeer opnieuw.")->send();
+                            } else {
+
+                                $set("address", $data?->street);
+
+                                $set("city", $data?->settlement);
+
+                            }
+                        }))->reactive(),
+
+                    Forms\Components\TextInput::make("street")
+                        ->label("Adres")
+                        ->required()
+                        ->columnSpan(2)
+
+                    , Forms\Components\TextInput::make("city")
+                        ->label("Plaats"),
+
+                ])]),
+            ]);
+
     }
 
     public static function table(Table $table): Table

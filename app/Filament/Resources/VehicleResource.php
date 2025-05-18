@@ -7,6 +7,7 @@ use App\Models\Vehicle;
 use App\Services\RDWService;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -174,8 +175,8 @@ class VehicleResource extends Resource
                         Action::make("searchDataByLicenceplate")
                             ->icon("heroicon-m-magnifying-glass")
                             ->action(function (Get $get, Set $set) {
-                                // Format the license plate before searching
-                                $formattedLicensePlate = Vehicle::formatLicensePlate($get("kenteken"));
+                                                                           // Format the license plate before searching
+                                $formattedLicensePlate = $get("kenteken"); //Vehicle::formatLicensePlate();
 
                                 // Search using the formatted license plate
                                 $data = (new RDWService())->GetVehicle($formattedLicensePlate);
@@ -252,7 +253,8 @@ class VehicleResource extends Resource
                         TextInput::make("variant")
                             ->label("Variant"),
 
-                        TextInput::make("vervaldatum_apk")
+                        DatePicker::make("vervaldatum_apk")
+                            ->format('d-m-Y')
                             ->label("Vervaldatum APK"),
                     ]),
 

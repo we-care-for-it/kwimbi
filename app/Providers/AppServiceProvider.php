@@ -49,12 +49,6 @@ class AppServiceProvider extends ServiceProvider
             return in_array($user->email, ['superadmin@ltssoftware.nl']);
         });
 
-        Filament::registerNavigationGroups([
-            'Objecten',
-            'Blog',
-            'Settings',
-        ]);
-
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
@@ -76,6 +70,10 @@ class AppServiceProvider extends ServiceProvider
                     ->label('Mijn profiel')
                     ->url('/my-profile')
                     ->icon('heroicon-o-user'),
+                UserMenuItem::make()
+                    ->label('Mijn bedrijf')
+                    ->url('/my-company')
+                    ->icon('heroicon-o-building-office-2'),
 
             ]);
         });
