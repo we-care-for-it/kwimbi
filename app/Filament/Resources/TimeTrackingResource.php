@@ -44,6 +44,11 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
     protected static ?string $title            = "Tijdregistratie";
     protected static ?string $pluralModelLabel = 'Tijdregistratie';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_timetracking');
+    }
+
     public static function getPermissionPrefixes(): array
     {
         return [

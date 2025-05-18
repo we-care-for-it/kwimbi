@@ -6,7 +6,7 @@
 
 <header class="fi-simple-header flex flex-col items-center pb-10">
     @if ($logo)
-    <img  style = "max-height: 140px"  src = "{{Cache::get('tenant')->logo}}">
+    <img  style = "max-height: 140px"  src = "{{setting('company_logo')}}">
     @endif
 
     @if (filled($heading))

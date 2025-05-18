@@ -32,6 +32,11 @@ class TicketResource extends Resource
     protected static ?string $pluralModelLabel = 'Tickets';
     protected static ?string $title            = 'Tickets';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_tickets');
+    }
+
     public static function form(Form $form): Form
     {
 
@@ -40,39 +45,39 @@ class TicketResource extends Resource
 
                 Section::make('Ticket gegevens')
                     ->schema([
-                                Forms\Components\Select::make("relation_id")
-                                    ->label("Relatie")
-                                    ->searchable()
-                                    ->label("Relatie")
-                                    ->options(function () {
-                                        return \App\Models\Relation::all()
-                                            ->groupBy('type.name')
-                                            ->mapWithKeys(function ($group, $category) {
-                                                return [
-                                                    $category => $group->pluck('name', 'id')->toArray(),
-                                                ];
-                                            })->toArray();
-                                    })
-                                    ->searchable()
-                                    ->live()
+                        Forms\Components\Select::make("relation_id")
+                            ->label("Relatie")
+                            ->searchable()
+                            ->label("Relatie")
+                            ->options(function () {
+                                return \App\Models\Relation::all()
+                                    ->groupBy('type.name')
+                                    ->mapWithKeys(function ($group, $category) {
+                                        return [
+                                            $category => $group->pluck('name', 'id')->toArray(),
+                                        ];
+                                    })->toArray();
+                            })
+                            ->searchable()
+                            ->live()
 
-                                    // ->createOptionUsing(function (array $data) {
-                                    //     return Relation::create([
-                                    //         'name'    => $data['name'],
-                                    //         'type_id' => 5,
-                                    //     ])->id;
-                                    // })
-                                    ->options(function () {
-                                        return \App\Models\Relation::all()
-                                            ->groupBy('type.name')
-                                            ->mapWithKeys(function ($group, $category) {
-                                                return [
-                                                    $category => $group->pluck('name', 'id')->toArray(),
-                                                ];
-                                            })->toArray();
-                                    })
+                        // ->createOptionUsing(function (array $data) {
+                        //     return Relation::create([
+                        //         'name'    => $data['name'],
+                        //         'type_id' => 5,
+                        //     ])->id;
+                        // })
+                            ->options(function () {
+                                return \App\Models\Relation::all()
+                                    ->groupBy('type.name')
+                                    ->mapWithKeys(function ($group, $category) {
+                                        return [
+                                            $category => $group->pluck('name', 'id')->toArray(),
+                                        ];
+                                    })->toArray();
+                            })
 
-                                    ->placeholder("Niet opgegeven"),
+                            ->placeholder("Niet opgegeven"),
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
                             ->options(User::all()->pluck("name", "id")),

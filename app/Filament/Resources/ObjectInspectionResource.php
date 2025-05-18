@@ -13,13 +13,11 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
-use Filament\Infolists\Components;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
-use Filament\Tables;
 use Filament\Tables\Actions;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
@@ -30,13 +28,18 @@ use Illuminate\Contracts\View\View;
 
 class ObjectInspectionResource extends Resource
 {
-    protected static ?string $model = ObjectInspection::class;
-    protected static ?string $navigationLabel = "Keuringen";
-    protected static ?string $navigationIcon = 'heroicon-m-check-badge';
-    protected static ?string $modelLabel = 'Keuring';
+    protected static ?string $model            = ObjectInspection::class;
+    protected static ?string $navigationLabel  = "Keuringen";
+    protected static ?string $navigationIcon   = 'heroicon-m-check-badge';
+    protected static ?string $modelLabel       = 'Keuring';
     protected static ?string $pluralModelLabel = 'Keuringen';
-    protected static ?string $navigationGroup = 'Objecten';
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup  = 'Objecten';
+    protected static ?int $navigationSort      = 4;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_inspections');
+    }
 
     public static function infolist(Infolist $infolist): Infolist
     {
@@ -68,7 +71,7 @@ class ObjectInspectionResource extends Resource
                                     ->dateTime('d-m-Y')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Object & Locatie')
                             ->icon('heroicon-o-map-pin')
                             ->schema([
@@ -76,9 +79,9 @@ class ObjectInspectionResource extends Resource
                                     ->label('Liftadres')
                                     ->getStateUsing(function ($record): ?string {
                                         if ($record?->elevator?->nobo_no) {
-                                            return $record?->elevator?->location?->address . " " . 
-                                                   $record?->elevator?->location?->zipcode . " " . 
-                                                   $record?->elevator?->location?->place;
+                                            return $record?->elevator?->location?->address . " " .
+                                            $record?->elevator?->location?->zipcode . " " .
+                                            $record?->elevator?->location?->place;
                                         } else {
                                             return "Niet gekoppeld";
                                         }
@@ -91,7 +94,7 @@ class ObjectInspectionResource extends Resource
                                     ->label('Beheerder')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Keuring Partijen')
                             ->icon('heroicon-o-user-group')
                             ->schema([
@@ -105,7 +108,7 @@ class ObjectInspectionResource extends Resource
                                     ->label('Contactpersoon')
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
-                            
+
                         Tabs\Tab::make('Resultaten')
                             ->icon('heroicon-o-clipboard-document-check')
                             ->schema([
@@ -122,7 +125,7 @@ class ObjectInspectionResource extends Resource
                                     ->badge()
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(3),
-                            
+
                         Tabs\Tab::make('Opmerkingen')
                             ->icon('heroicon-o-chat-bubble-bottom-center-text')
                             ->schema([
@@ -155,9 +158,9 @@ class ObjectInspectionResource extends Resource
                         ->label("Type keuring")
                         ->searchable()
                         ->options([
-                            "Periodieke keuring" => "Periodieke keuring", 
-                            "Modernisering keuring" => "Modernisering keuring", 
-                            "Oplever keuring" => "Oplever keuring"
+                            "Periodieke keuring"    => "Periodieke keuring",
+                            "Modernisering keuring" => "Modernisering keuring",
+                            "Oplever keuring"       => "Oplever keuring",
                         ]),
                 ]),
             Grid::make(4)
@@ -181,7 +184,7 @@ class ObjectInspectionResource extends Resource
                         ->rows(3)
                         ->label('Opmerking')
                         ->columnSpan(1)
-                        ->autosize()
+                        ->autosize(),
                 ]),
         ]);
     }
@@ -287,9 +290,9 @@ class ObjectInspectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListObjectInspections::route('/'),
+            'index'  => Pages\ListObjectInspections::route('/'),
             'create' => Pages\CreateObjectInspection::route('/create'),
-            'view' => Pages\ViewObjectInspection::route('/{record}')
+            'view'   => Pages\ViewObjectInspection::route('/{record}'),
         ];
     }
 }

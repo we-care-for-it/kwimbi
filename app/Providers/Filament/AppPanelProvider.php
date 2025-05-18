@@ -105,11 +105,11 @@ class AppPanelProvider extends PanelProvider
         ->shouldShowDeleteAccountForm(false)
         ->shouldShowBrowserSessionsForm(true)
         ->shouldShowAvatarForm(),
-
-
+ 
         FilamentDeveloperLoginsPlugin::make()
         ->enabled(app()->environment('local'))
         ->switchable(false)
+ 
 
         ->users([
             'Admin' => 'superAdmin@ltssoftware.nl',
@@ -175,10 +175,10 @@ FilamentSocialitePlugin::make()
         
                     ]) 
 
-
+   ->sidebarCollapsibleOnDesktop()
  
-
-
+   ->topNavigation(setting('portal_menu_position')) 
+ 
 
     ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
             ->login()

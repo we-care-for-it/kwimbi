@@ -51,7 +51,7 @@
         <header
             class="fi-sidebar-header flex h-16 items-center bg-white px-6 ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10 lg:shadow-sm"
 
-            style = "background-color: {{Cache::get('tenant')->color2}} "
+            style = "background-color: {{setting('color2')}}"
         >
             <div
                 @if (filament()->isSidebarCollapsibleOnDesktop())
@@ -125,7 +125,7 @@
         @endif
         <center>
         <img  style = "    position: relative;
-  width: 100px;"  src = "{{Cache::get('tenant')->logo}}">
+  width: 100px;"  src = "{{setting('company_logo')}}">
   </center>
         <ul class="fi-sidebar-nav-groups -mx-2 flex flex-col gap-y-7">
             @foreach ($navigation as $group)
