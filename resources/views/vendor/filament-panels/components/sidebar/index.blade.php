@@ -125,7 +125,7 @@
         @endif
         <center>
         <img  style = "    position: relative;
-  width: 100px;"  src = "{{asset(setting('company_logo'))}}">
+  width: 100px;"  src = "{{asset('storage/'.setting('company_logo'))}}">
 
 
 {{asset(setting('company_logo'))}}
