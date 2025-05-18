@@ -2,10 +2,10 @@
 namespace App\Filament\Resources\SpaceResource\Pages;
 
 use App\Filament\Resources\SpaceResource;
+use Filament\Actions;
 use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\ViewRecord;
+use Filament\Tables\Actions\ActionGroup;
 
 class ViewSpace extends ViewRecord
 {
@@ -15,14 +15,18 @@ class ViewSpace extends ViewRecord
     array {
         return [
             Action::make('back')
-
                 ->label('Terug naar overzicht')
-                ->link()                
-                ->url('/spaces')
+                ->link()
+                ->url(url()->previous())
                 ->color('gray'),
-            EditAction::make()->icon('heroicon-m-pencil-square')
+
+            Actions\EditAction::make()->icon('heroicon-m-pencil-square')
                 ->slideOver(),
-            DeleteAction::make()->icon('heroicon-m-trash'),
+
+            ActionGroup::make([
+                Actions\DeleteAction::make('Verwijderen'),
+            ]),
+
         ];
     }
 

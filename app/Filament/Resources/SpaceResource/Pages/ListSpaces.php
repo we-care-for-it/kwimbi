@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Filament\Resources\SpaceResource\Pages;
 
 use App\Filament\Resources\SpaceResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -14,6 +14,13 @@ class ListSpaces extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+
+            Action::make('back')
+                ->label('Terug naar mijn bedrijf')
+                ->link()
+                ->url(url()->previous())
+                ->color('gray'),
+
             Actions\CreateAction::make()
                 ->label('Ruimte toevoegen')
                 ->slideOver()
