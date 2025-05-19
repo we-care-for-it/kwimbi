@@ -40,7 +40,6 @@ class EmployeesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('first_name')
                     ->label('Voornaam')
                     ->required()
-                    ->searchable()
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('last_name')
