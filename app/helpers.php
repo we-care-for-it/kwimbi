@@ -3,6 +3,13 @@
 use App\Models\tenantSetting;
 use Illuminate\Support\Facades\Schema;
 
+if (! function_exists('table_exists')) {
+    function table_exists(string $tableName): bool
+    {
+        return Schema::hasTable($tableName);
+    }
+}
+
 if (! function_exists('setting')) {
     function setting(string $key, mixed $default = null): mixed
     {
