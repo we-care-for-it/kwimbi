@@ -55,7 +55,7 @@ class TenantSettings extends Page implements HasForms
     public $mail_from_address;
     public $mail_from_name;
     public $mail_encryption;
-
+    public $management_relation_group;
     public function mount(): void
     {
         $this->form->fill([
@@ -93,6 +93,8 @@ class TenantSettings extends Page implements HasForms
             'mail_from_address'         => $this->getSetting('mail_from_address'),
             'mail_from_name'            => $this->getSetting('mail_from_name'),
             'mail_encryption'           => $this->getSetting('mail_encryption'),
+            'management_relation_group' => $this->getSetting('management_relation_group'),
+
         ]);
     }
 
