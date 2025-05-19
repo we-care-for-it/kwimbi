@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('phone_number')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
 
             $table->softDeletes();
             $table->timestamps();
