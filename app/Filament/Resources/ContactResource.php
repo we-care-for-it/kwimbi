@@ -246,11 +246,6 @@ class ContactResource extends Resource
                     ->toggleable()
                     ->placeholder("-"),
 
-                TextColumn::make("mobile_number")
-                    ->label("Intern Telefoonnummer")
-                    ->toggleable()
-                    ->placeholder("-"),
-
             ])
             ->filters([
                 SelectFilter::make('relation_id')
