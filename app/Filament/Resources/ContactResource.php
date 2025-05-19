@@ -11,6 +11,7 @@ use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
+use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
@@ -83,10 +84,6 @@ class ContactResource extends Resource
 
                                 Forms\Components\TextInput::make('phone_number')
                                     ->label('Telefoonnummer')
-                                    ->maxLength(15),
-
-                                Forms\Components\TextInput::make('mobile_number')
-                                    ->label('Intern telefoonnummer')
                                     ->maxLength(15),
 
                                 Forms\Components\TextInput::make('function')
@@ -278,20 +275,20 @@ class ContactResource extends Resource
                 ViewAction::make()
                     ->label('Bekijk')
                     ->modalIcon('heroicon-o-eye'),
-
-                EditAction::make()
-                    ->modalHeading('Contact Bewerken')
-                    ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->tooltip('Bewerken')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+                Tables\Actions\ActionGroup::make([
+                    EditAction::make()
+                        ->modalHeading('Contact Bewerken')
+                        ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                        ->tooltip('Bewerken')
+                        ->label('Bewerken')
+                        ->modalIcon('heroicon-m-pencil-square')
+                        ->slideOver(),
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                ]),
             ])
             ->bulkActions([
                 ExportBulkAction::make()
