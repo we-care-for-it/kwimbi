@@ -14,6 +14,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
 class LocationResource extends Resource
@@ -122,6 +123,11 @@ class LocationResource extends Resource
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
                 DeleteAction::make(),
+
+                RestoreAction::make(),
+            ])
+            ->filters([
+                TrashedFilter::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

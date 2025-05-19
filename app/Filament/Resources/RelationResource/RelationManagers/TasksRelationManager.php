@@ -57,6 +57,7 @@ class TasksRelationManager extends RelationManager
                     ->sortable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Beschrijving')
+                    ->searchable()
                     ->placeholder('-')
                     ->limit(50),
                 //  Tables\Columns\TextColumn::make('deadline')
@@ -73,9 +74,7 @@ class TasksRelationManager extends RelationManager
                     ->time(),
 
             ])
-            ->filters([
-                //
-            ])
+
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->modalWidth(MaxWidth::FourExtraLarge)
@@ -94,11 +93,19 @@ class TasksRelationManager extends RelationManager
                     }),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->label('Bewerken')->color('success'),
                 Tables\Actions\DeleteAction::make()
                     ->label('Voltooi taak'),
+                Tables\Actions\ActionGroup::make([
+
+                    Tables\Actions\EditAction::make()
+                        ->label('Wijzigen')
+                        ->slideOver()
+                        ->modalHeading('Taak wijzigen'),
+
+                ]),
+
             ])
+
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make()

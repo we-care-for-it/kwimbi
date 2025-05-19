@@ -19,6 +19,7 @@ use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\On;
@@ -236,7 +237,7 @@ class LocationsRelationManager extends RelationManager
                 //     ->placeholder("Onbekend"),
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -247,22 +248,39 @@ class LocationsRelationManager extends RelationManager
                     ->modalHeading('Locatie toevoegen'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make('openLocation')
+
+                Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk')
-                    ->url(function ($record) {
-                        return "/relation-locations/" . $record->id;
-                    })
                     ->icon('heroicon-s-eye'),
-                Tables\Actions\EditAction::make()
-                    ->label('Wijzigen')
-                    ->slideOver()
-                    ->modalHeading('Locatie wijzigen'),
 
-                Tables\Actions\DeleteAction::make()
-                    ->modalHeading('Bevestig actie')
-                    ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
+                Tables\Actions\ActionGroup::make([
 
-                RestoreAction::make(),
+                    Tables\Actions\EditAction::make()
+                        ->label('Wijzigen')
+                        ->slideOver()
+                        ->modalHeading('Locatie wijzigen'),
+
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Verwijder'),
+
+                    RestoreAction::make(),
+                ]),
+
+                // Tables\Actions\ViewAction::make('openLocation')
+                //     ->label('Bekijk')
+                //     ->url(function ($record) {
+                //         return "/relation-locations/" . $record->id;
+                //     })
+                //     ->icon('heroicon-s-eye'),
+                // Tables\Actions\EditAction::make()
+                //     ->label('Wijzigen')
+                //     ->slideOver()
+                //     ->modalHeading('Locatie wijzigen'),
+
+                // Tables\Actions\DeleteAction::make()
+                //     ->modalHeading('Bevestig actie')
+                //     ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
+
             ])
             ->emptyState(view("partials.empty-state"));
     }

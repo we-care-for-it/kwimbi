@@ -8,8 +8,7 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -146,16 +145,23 @@ class ObjectsRelationManager extends RelationManager
                     ->slideOver(),
             ])
             ->actions([
-                Action::make('openContact')
-                    ->label('Bekijk contact')
-                    ->color('primary')
-                    ->url(function ($record) {
-                        return "/contacts/" . $record->id;
-                    })->icon('heroicon-s-eye'),
 
-                EditAction::make()
-                    ->slideOver()
-                    ->label('Bewerken'),
+                Tables\Actions\ViewAction::make('openContact')
+                    ->label('Bekijk')
+                    ->icon('heroicon-s-eye'),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->modalHeading('Object Bewerken')
+                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                        ->tooltip('Bewerken')
+                        ->modalIcon('heroicon-m-pencil-square')
+                        ->slideOver(),
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                ]),
             ])
             ->bulkActions([
                 //

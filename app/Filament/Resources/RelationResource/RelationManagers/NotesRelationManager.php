@@ -79,17 +79,19 @@ class NotesRelationManager extends RelationManager
             ])
             ->actions([
 
-                Tables\Actions\EditAction::make()->mutateFormDataUsing(function (array $data): array {
-                    $data['user_id'] = auth()->id();
-                    $data['model']   = "relation";
+                Tables\Actions\ActionGroup::make([
 
-                    return $data;
-                })
-                    ->modalHeading('Notitie wijzigen'),
-                Tables\Actions\DeleteAction::make()
+                    Tables\Actions\EditAction::make()
+                        ->label('Wijzigen')
+                        ->slideOver()
+                        ->modalHeading('Notitie wijzigen'),
 
-                    ->modalHeading('Bevestig actie')
-                    ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
+                    Tables\Actions\DeleteAction::make()
+
+                        ->modalHeading('Bevestig actie')
+                        ->modalDescription('Weet je zeker dat je deze notities wilt verwijderen?'),
+
+                ]),
 
             ])
             ->bulkActions([
