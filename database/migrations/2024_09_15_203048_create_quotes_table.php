@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('accepted_at')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('status_id')->nullable();
-            $table->string('price')->nullable();
             $table->integer('for_company_id')->nullable();
             $table->integer('price')->nullable();
             $table->integer('project_id')->nullable();

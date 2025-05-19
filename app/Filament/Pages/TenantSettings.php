@@ -217,6 +217,10 @@ class TenantSettings extends Page implements HasForms
                                         ->label('Keuringen')
                                         ->options(relationType::pluck('name', 'id')),
 
+                                    Forms\Components\Select::make('management_relation_group')
+                                        ->label('Beheerder')
+                                        ->options(relationType::pluck('name', 'id')),
+
                                 ])->description('Selecteer standaard relatie categorieen per onderdeel'),
 
                         ]),
