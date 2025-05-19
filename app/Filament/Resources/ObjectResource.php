@@ -290,19 +290,25 @@ class ObjectResource extends Resource
                 //     ->options(InspectionStatus::class),
             ], layout: FiltersLayout::AboveContent)
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Object Bewerken')
-                    ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->tooltip('Bewerken')
-                    ->label('')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
-                DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
+                Tables\Actions\ViewAction::make('openContact')
+                    ->label('Bekijk')
+                    ->icon('heroicon-s-eye'),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->modalHeading('Object Bewerken')
+                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                        ->tooltip('Bewerken')
+                        ->label('')
+                        ->modalIcon('heroicon-m-pencil-square')
+                        ->slideOver(),
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->label('')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                ]),
             ])
             ->bulkActions([
                 ExportBulkAction::make()

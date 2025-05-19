@@ -30,15 +30,15 @@ class TicketRelationManager extends RelationManager
         return $ownerRecord->notes->count();
     }
 
-public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-{
-    if (!$ownerRecord->type) {
-        return false;
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+        if (! $ownerRecord->type) {
+            return false;
+        }
+
+        $options = $ownerRecord->type->options ?? [];
+        return in_array('Tickets', (array) $options);
     }
-    
-    $options = $ownerRecord->type->options ?? [];
-    return in_array('Tickets', (array) $options);
-}
     public function form(Form $form): Form
     {
         return $form
@@ -168,13 +168,23 @@ public static function canViewForRecord(Model $ownerRecord, string $pageClass): 
             ], layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
-                Tables\Actions\ViewAction::make('openLocation')
+
+                Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk')
-                    ->url(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))
-
                     ->icon('heroicon-s-eye'),
-
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()
+                        ->modalHeading('Object Bewerken')
+                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                        ->tooltip('Bewerken')
+                        ->modalIcon('heroicon-m-pencil-square')
+                        ->slideOver(),
+                    Tables\Actions\DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                ]),
             ])
             ->headerActions([
 
@@ -193,5 +203,5 @@ public static function canViewForRecord(Model $ownerRecord, string $pageClass): 
 
             ])->emptyState(view("partials.empty-state"));
     }
-    
+
 }

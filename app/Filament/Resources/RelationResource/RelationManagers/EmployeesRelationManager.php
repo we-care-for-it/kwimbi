@@ -7,6 +7,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
@@ -39,6 +40,7 @@ class EmployeesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('first_name')
                     ->label('Voornaam')
                     ->required()
+                    ->searchable()
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('last_name')
@@ -69,38 +71,46 @@ class EmployeesRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('name')
+
+            ->filters([
+                TrashedFilter::make(),
+            ])
+
             ->columns([
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
                     ->sortable()
+                    ->searchable()
                     ->image(fn($record) => $record->avatar)
                     ->label('Naam'),
 
                 TextColumn::make('email')
                     ->placeholder('-')
+                    ->searchable()
                     ->url(fn($record) => "mailto:{$record->email}")
                     ->label('E-mailadres'),
 
                 TextColumn::make('department')
                     ->placeholder('-')
+                    ->searchable()
                     ->sortable()
                     ->label('Afdeling'),
 
                 TextColumn::make('function')
                     ->placeholder('-')
+                    ->searchable()
                     ->sortable()
                     ->label('Functie'),
 
                 TextColumn::make('phone_number')
                     ->placeholder('-')
+                    ->searchable()
                     ->url(fn($record) => "tel:{$record->contact?->phone_number}")
                     ->label('Telefoonnummer')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
             ->emptyState(view('partials.empty-state-small'))
-            ->filters([
-                //
-            ])
+
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->modalWidth(MaxWidth::FourExtraLarge)
@@ -112,21 +122,24 @@ class EmployeesRelationManager extends RelationManager
                     ->label('Medewerker toevoegen'),
 
             ])
+
             ->actions([
 
-                Tables\Actions\EditAction::make()
-                    ->label('Wijzigen')
-                    ->slideOver()
-                    ->modalHeading('Locatie wijzigen'),
+                Tables\Actions\ViewAction::make('openContact')
+                    ->label('Bekijk')
+                    ->icon('heroicon-s-eye'),
 
-                Tables\Actions\Action::make('openContact')
-                    ->label('Open contactpersoon')
-                    ->url(function ($record) {
-                        return "/contacts/" . $record->id;
-                    })->icon('heroicon-s-eye'),
+                Tables\Actions\ActionGroup::make([
 
-                Tables\Actions\DeleteAction::make()
-                    ->label('')
+                    Tables\Actions\EditAction::make()
+                        ->label('Wijzigen')
+                        ->slideOver()
+                        ->modalHeading('COntact wijzigen'),
+
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Verwijder'),
+                ])
+
                 ,
 
             ])

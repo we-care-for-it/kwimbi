@@ -8,7 +8,6 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -146,7 +145,7 @@ class ContactsRelationManager extends RelationManager
                     ->slideOver(),
             ])
             ->actions([
-                Action::make('openContact')
+                Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk contact')
                     ->color('primary')
                     ->url(function ($record) {
