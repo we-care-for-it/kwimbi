@@ -24,7 +24,7 @@ if (! function_exists('setting')) {
 
             return $settingsCache[$key] = $value ?? $default;
         } else {
-            // Table doesn't exist
+            return null;
         }
 
     }
