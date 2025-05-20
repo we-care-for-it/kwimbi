@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,11 +25,6 @@ class Asset extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(AssetCategory::class);
-    }
-
-    public function model(): BelongsTo
-    {
-        return $this->belongsTo(AssetModel::class);
     }
 
     public function location(): BelongsTo

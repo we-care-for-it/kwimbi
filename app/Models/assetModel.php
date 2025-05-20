@@ -22,9 +22,9 @@ class AssetModel extends Model
         return $this->belongsTo(assetBrand::class, 'brand_id');
     }
 
-    public function category(): BelongsTo
+    public function category()
     {
-        return $this->belongsTo(AssetCategory::class, 'category_id');
+        return $this->hasOne(ObjectType::class, 'id', 'type_id');
     }
 
     public function assets(): HasMany
