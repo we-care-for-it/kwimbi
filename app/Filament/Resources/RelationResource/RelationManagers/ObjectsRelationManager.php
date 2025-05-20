@@ -8,7 +8,6 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -156,7 +155,7 @@ class ObjectsRelationManager extends RelationManager
                         ->tooltip('Bewerken')
                         ->modalIcon('heroicon-m-pencil-square')
                         ->slideOver(),
-                    DeleteAction::make()
+                    Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')
                         ->modalHeading('Verwijderen')

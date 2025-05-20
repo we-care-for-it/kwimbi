@@ -1,9 +1,11 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\BrandResource\Pages\EditBrand;
 use App\Filament\Resources\BrandResource\Pages\ListBrands;
 use App\Filament\Resources\BrandResource\RelationManagers\ModelsRelationManager;
 use App\Models\Brand;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,9 +24,15 @@ class BrandResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label(__('asset_brands.fields.name'))
-                    ->required(),
+
+                Section::make()
+                    ->columns(4)
+                    ->schema([
+
+                        TextInput::make('name')
+                            ->label(__('asset_brands.fields.name'))
+                            ->required(),
+                    ]),
             ]);
     }
 
@@ -52,7 +60,6 @@ class BrandResource extends Resource
                     ->modalHeading('Merk Bewerken')
                     ->modalDescription('Pas het bestaande merk aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
             ])
@@ -75,7 +82,7 @@ class BrandResource extends Resource
         return [
             'index' => ListBrands::route('/'),
             // 'create' => CreateBrand::route('/create'),
-            //  'edit'   => EditBrand::route('/{record}/edit'),
+            'edit'  => EditBrand::route('/{record}/edit'),
         ];
     }
 

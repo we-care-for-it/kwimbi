@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Filament\Resources\BrandResource\RelationManagers;
 
-use App\Filament\Resources\AssetResource\Pages\ListAssets;
-use App\Filament\Resources\CategoryResource;
-use App\Models\AssetCategory;
+use App\Models\ObjectType;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -15,7 +13,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Grouping\Group;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,52 +23,33 @@ class ModelsRelationManager extends RelationManager
 
     public function form(Form $form): Form
     {
-        $categories = AssetCategory::query()
-            ->where(fn ($query) => $query
-                ->whereNotNull('parent_id')
-                ->orWhereDoesntHave('subCategories')
-            )
-            ->get()
-            ->groupBy('parent_id')
-            ->mapWithKeys(function ($categories, $parent_id) {
-                $categorie = $categories->first()->parent ?? $categories->first();
-
-                return [
-                    $categorie->name => $categories->pluck('name', 'id'),
-                ];
-            });
 
         return $form
+
             ->schema([
                 TextInput::make('name')
-                    ->label(__('asset_models.fields.name'))
+                    ->label('Naam of produkt nummer')
                     ->required()
                     ->maxLength(255)
                     ->required()
                     ->columnSpan(4),
-                Select::make('category_id')
-                    ->options($categories)
+                Select::make('type_id')
+                    ->options(ObjectType::pluck('name', 'id'))
                     ->preload()
                     ->searchable()
                     ->label('Categorie')
                     ->required()
                     ->columnSpan(4),
-                Select::make('brand_id')
-                    ->relationship(name: 'brand', titleAttribute: 'name')
-                    ->preload()
-                    ->searchable()
-                    ->label('Merk')
-                    ->required()
-                    ->columnSpan(4),
-                TextInput::make('price')
-                    ->label(__('asset_models.fields.price'))
-                    ->numeric()
-                    ->placeholder('-')
-                    ->inputMode('decimal')
-                    ->step('0.01')
-                    ->prefixIcon('heroicon-o-currency-euro')
-                    ->columnSpan(4),
-                ...CategoryResource::getMetadataForm(),
+
+                Textarea::make("remark")
+                    ->rows(7)
+                    ->label('Opmerking')
+                    ->columnSpan('full')
+                    ->autosize()
+                    ->hint(fn($state, $component) => "Aantal karakters: " . $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                    ->maxlength(255)
+                    ->reactive(),
+
             ])->columns(12);
     }
 
@@ -80,45 +59,38 @@ class ModelsRelationManager extends RelationManager
             ->defaultPaginationPageOption(100)
             ->paginated([25, 50, 100, 'all'])
             ->recordTitleAttribute('name')
-            ->groups([
-                Group::make('category.name')
-                    ->label('Subcategorie'),
-                Group::make('category.parent.name')
-                    ->label('Hoofdcategorie'),
-            ])->defaultGroup('category.parent.name')
+
             ->columns([
-                TextColumn::make('index')
-                    ->label('#')
-                    ->rowIndex(),
+                // TextColumn::make('index')
+                //     ->label('#')
+                //     ->rowIndex(),
                 TextColumn::make('name')
                     ->label(__('asset_models.fields.name'))
                     ->searchable()
-                    ->sortable(),
-                TextColumn::make('price')
-                    ->label('Prijs')
-                    ->searchable()
-                    ->placeholder('-')
-                    ->sortable(),
-                TextColumn::make('category.parent.name')
-                    ->label('Hoofdcategorie')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('category.name')
-                    ->label('Subcategorie')
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('asset_count')
-                    ->label('Aantal assets')
-                    ->badge()
-                    ->url(fn ($record) => ListAssets::getUrl([
-                        'tableFilters[model_id][value]' => $record->id,
-                    ]))
                     ->sortable()
-                    ->getStateUsing(fn (Model $record) => $record->assets()->where('model_id', $record->id)->count()),
+                    ->description(function ($record) {
+                        return $record->remark;
+                    }),
+
+                TextColumn::make('category.name')
+                    ->badge()
+                    ->label('Categorie')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->headerActions([
                 CreateAction::make(),
             ])
+
+            ->filters([
+                SelectFilter::make('type_id')
+                    ->label('Categorie')
+                    ->searchable()
+
+                    ->options(ObjectType::pluck('name', 'id')),
+
+            ])
+
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),
@@ -127,7 +99,9 @@ class ModelsRelationManager extends RelationManager
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->emptyState(view('partials.empty-state'));
+
     }
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
