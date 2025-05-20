@@ -26,8 +26,8 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 class TicketResource extends Resource
 {
 
-    protected static ?string $model = Ticket::class;
-
+    protected static ?string $model            = Ticket::class;
+    protected $listeners                       = ["refresh" => '$refresh'];
     protected static ?string $navigationIcon   = 'heroicon-o-queue-list';
     protected static ?string $navigationLabel  = 'Tickets';
     protected static ?string $pluralModelLabel = 'Tickets';

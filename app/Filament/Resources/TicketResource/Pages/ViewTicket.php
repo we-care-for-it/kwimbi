@@ -16,13 +16,16 @@ class ViewTicket extends ViewRecord
     {
         $this->fillForm();
     }
+
+    protected $listeners = ["refresh" => '$refresh'];
+
     protected function getHeaderActions():
     array {
         return [
             Action::make('back')
                 ->label('Terug naar overzicht')
                 ->link()
-                ->icon('heroicon-s-arrow-uturn-left')
+                ->icon('heroicon-s-map-pin')
                 ->url(url()->previous())
                 ->color('gray'),
 
