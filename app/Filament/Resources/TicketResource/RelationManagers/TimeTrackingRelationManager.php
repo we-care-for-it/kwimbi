@@ -129,8 +129,18 @@ class TimeTrackingRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->icon('heroicon-m-plus')
                     ->modalHeading('Activiteit toevoegen')
-                    ->modalIcon('heroicon-o-plus'),
+                    ->modalIcon('heroicon-o-plus')
+                    ->label('Activiteit toevoegen')
+                    ->mutateFormDataUsing(function (array $data): array {
+
+                        $data['relation_id'] = $this->ownerRecord?->relation_id;
+
+                        return $data;
+                    })
+
+                ,
             ])
+
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Activiteit bewerken')
@@ -150,4 +160,13 @@ class TimeTrackingRelationManager extends RelationManager
                 ]),
             ])->emptyState(view("partials.empty-state"));
     }
+
+    // protected function mutateFormDataBeforeCreate(array $data): array
+    // {
+    //     dd($data);
+    //     $data['relation_id'] = ;
+
+    //     return $data;
+    // }
+
 }
