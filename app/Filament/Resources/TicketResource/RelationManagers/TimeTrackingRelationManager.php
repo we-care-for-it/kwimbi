@@ -1,6 +1,8 @@
 <?php
 namespace App\Filament\Resources\TicketResource\RelationManagers;
 
+use App\Enums\TicketStatus;
+use App\Models\Ticket;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,6 +14,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+use Livewire\Attributes\On;
 
 class TimeTrackingRelationManager extends RelationManager
 {
@@ -19,6 +22,12 @@ class TimeTrackingRelationManager extends RelationManager
     protected static ?string $label       = '';
     protected static ?string $title       = 'Activiteiten';
     protected static ?string $icon        = 'heroicon-o-clock';
+
+    #[On('refreshForm')]
+    public function refreshForm(): void
+    {
+        $this->fillForm();
+    }
 
     // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     // {
@@ -57,6 +66,11 @@ class TimeTrackingRelationManager extends RelationManager
                 Forms\Components\Toggle::make('invoiceable')
                     ->label('Facturabel')
                     ->default(true),
+
+                Forms\Components\select::make('ticket_status_id')
+                    ->label('Status')
+                    ->options(TicketStatus::Class),
+
             ]);
     }
 
@@ -114,6 +128,15 @@ class TimeTrackingRelationManager extends RelationManager
                     ->wrap()
                     ->placeholder('-')
                     ->searchable(),
+
+                TextColumn::make('ticket_status_id')
+                    ->badge()
+                    ->label('Tickt status')
+                    ->placeholder('Geen status update')
+                    ->toggleable()
+                    ->width('200px')
+                    ->sortable(),
+
                 ToggleColumn::make('invoiceable')
                     ->label('Facturabel')
                     ->onColor('success')
@@ -132,9 +155,8 @@ class TimeTrackingRelationManager extends RelationManager
                     ->modalIcon('heroicon-o-plus')
                     ->label('Activiteit toevoegen')
                     ->mutateFormDataUsing(function (array $data): array {
-
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
-
+                        Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
                         return $data;
                     })
 
@@ -146,6 +168,11 @@ class TimeTrackingRelationManager extends RelationManager
                     ->modalHeading('Activiteit bewerken')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['relation_id'] = $this->ownerRecord?->relation_id;
+                        Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
+                        return $data;
+                    })
                     ->modalIcon('heroicon-m-pencil-square'),
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

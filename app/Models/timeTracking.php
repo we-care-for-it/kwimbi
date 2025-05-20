@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Enums\TicketStatus;
 use App\Enums\TimeTrackingStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,6 +23,7 @@ class timeTracking extends Model implements Auditable, HasCustomFields
 
     protected static function boot(): void
     {
+
         parent::boot();
 
         static::saving(function ($model) {
@@ -36,8 +38,8 @@ class timeTracking extends Model implements Auditable, HasCustomFields
     protected function casts(): array
     {
         return [
-            'status_id' => TimeTrackingStatus::class,
-
+            'status_id'        => TimeTrackingStatus::class,
+            'ticket_status_id' => TicketStatus::class,
         ];
     }
 
