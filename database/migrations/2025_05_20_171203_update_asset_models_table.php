@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('asset_models', function (Blueprint $table) {
             $table->dropColumn('category_id');
+            $table->integer('type_id')->nullable();
             $table->text('remark')->nullable();
         });
     }
