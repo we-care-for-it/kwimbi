@@ -56,4 +56,9 @@ class timeTracking extends Model implements Auditable, HasCustomFields
         return $this->hasOne(workorderActivities::class, 'id', 'work_type_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
+
 }

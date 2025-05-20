@@ -24,6 +24,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function timeTracking()
+    {
+        return $this->hasMany(timeTracking::class);
+    }
 
     public function AssignedByUser()
     {

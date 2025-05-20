@@ -46,7 +46,7 @@ class RelationResource extends Resource
             Forms\Components\Section::make()->schema([
 
                 Forms\Components\TextInput::make("name")
-                    ->label("Naam / Bedrijfsnaam")
+                    ->label("Naam organistie")
                     ->required()
 
                     ->columnSpan("full"),
@@ -108,6 +108,136 @@ class RelationResource extends Resource
 
                     ->columnSpan(1),
 
+                Forms\Components\Select::make("country")
+                    ->label("Land")
+                    ->searchable()
+                    ->options([
+                        'Afghanistan'                                => 'Afghanistan',
+                        'Albanië'                                    => 'Albanië',
+                        'Algerije'                                   => 'Algerije',
+                        'Andorra'                                    => 'Andorra',
+                        'Angola'                                     => 'Angola',
+                        'Antigua en Barbuda'                         => 'Antigua en Barbuda',
+                        'Argentinië'                                 => 'Argentinië',
+                        'Armenië'                                    => 'Armenië',
+                        'Australië'                                  => 'Australië',
+                        'Oostenrijk'                                 => 'Oostenrijk',
+                        'Azerbeidzjan'                               => 'Azerbeidzjan',
+                        'Bahama\'s'                                  => 'Bahama\'s',
+                        'Bahrein'                                    => 'Bahrein',
+                        'Bangladesh'                                 => 'Bangladesh',
+                        'Barbados'                                   => 'Barbados',
+                        'België'                                     => 'België',
+                        'Belize'                                     => 'Belize',
+                        'Benin'                                      => 'Benin',
+                        'Bermuda'                                    => 'Bermuda',
+                        'Bhutan'                                     => 'Bhutan',
+                        'Bolivia'                                    => 'Bolivia',
+                        'Bosnië en Herzegovina'                      => 'Bosnië en Herzegovina',
+                        'Botswana'                                   => 'Botswana',
+                        'Brazilië'                                   => 'Brazilië',
+                        'Brits Territorium in de Indische Oceaan'    => 'Brits Territorium in de Indische Oceaan',
+                        'Britse Maagdeneilanden'                     => 'Britse Maagdeneilanden',
+                        'Brunei'                                     => 'Brunei',
+                        'Bulgarije'                                  => 'Bulgarije',
+                        'Burkina Faso'                               => 'Burkina Faso',
+                        'Burundi'                                    => 'Burundi',
+                        'Cambodja'                                   => 'Cambodja',
+                        'Canada'                                     => 'Canada',
+                        'Centraal-Afrikaanse Republiek'              => 'Centraal-Afrikaanse Republiek',
+                        'Chili'                                      => 'Chili',
+                        'China'                                      => 'China',
+                        'Christmaseiland'                            => 'Christmaseiland',
+                        'Cocoseilanden'                              => 'Cocoseilanden',
+                        'Colombia'                                   => 'Colombia',
+                        'Comoren'                                    => 'Comoren',
+                        'Congo-Brazzaville'                          => 'Congo-Brazzaville',
+                        'Congo-Kinshasa'                             => 'Congo-Kinshasa',
+                        'Cookeilanden'                               => 'Cookeilanden',
+                        'Costa Rica'                                 => 'Costa Rica',
+                        'Cuba'                                       => 'Cuba',
+                        'Cyprus'                                     => 'Cyprus',
+                        'Denemarken'                                 => 'Denemarken',
+                        'Djibouti'                                   => 'Djibouti',
+                        'Dominica'                                   => 'Dominica',
+                        'Dominicaanse Republiek'                     => 'Dominicaanse Republiek',
+                        'Duitsland'                                  => 'Duitsland',
+                        'Ecuador'                                    => 'Ecuador',
+                        'Egypte'                                     => 'Egypte',
+                        'El Salvador'                                => 'El Salvador',
+                        'Equatoriaal-Guinea'                         => 'Equatoriaal-Guinea',
+                        'Eritrea'                                    => 'Eritrea',
+                        'Estland'                                    => 'Estland',
+                        'Ethiopië'                                   => 'Ethiopië',
+                        'Faeröer'                                    => 'Faeröer',
+                        'Falklandeilanden'                           => 'Falklandeilanden',
+                        'Fiji'                                       => 'Fiji',
+                        'Filipijnen'                                 => 'Filipijnen',
+                        'Finland'                                    => 'Finland',
+                        'Frankrijk'                                  => 'Frankrijk',
+                        'Frans-Guyana'                               => 'Frans-Guyana',
+                        'Frans-Polynesië'                            => 'Frans-Polynesië',
+                        'Franse Zuidelijke en Antarctische Gebieden' => 'Franse Zuidelijke en Antarctische Gebieden',
+                        'Gabon'                                      => 'Gabon',
+                        'Gambia'                                     => 'Gambia',
+                        'Georgië'                                    => 'Georgië',
+                        'Ghana'                                      => 'Ghana',
+                        'Gibraltar'                                  => 'Gibraltar',
+                        'Grenada'                                    => 'Grenada',
+                        'Griekenland'                                => 'Griekenland',
+                        'Groenland'                                  => 'Groenland',
+                        'Guadeloupe'                                 => 'Guadeloupe',
+                        'Guernsey'                                   => 'Guernsey',
+                        'Guam'                                       => 'Guam',
+                        'Guatemala'                                  => 'Guatemala',
+                        'Guinee'                                     => 'Guinee',
+                        'Guinee-Bissau'                              => 'Guinee-Bissau',
+                        'Guyana'                                     => 'Guyana',
+                        'Haïti'                                      => 'Haïti',
+                        'Honduras'                                   => 'Honduras',
+                        'Hongarije'                                  => 'Hongarije',
+                        'IJsland'                                    => 'IJsland',
+                        'India'                                      => 'India',
+                        'Indonesië'                                  => 'Indonesië',
+                        'Irak'                                       => 'Irak',
+                        'Iran'                                       => 'Iran',
+                        'Isle of Man'                                => 'Isle of Man',
+                        'Israël'                                     => 'Israël',
+                        'Italië'                                     => 'Italië',
+                        'Ivoorkust'                                  => 'Ivoorkust',
+                        'Jamaica'                                    => 'Jamaica',
+                        'Japan'                                      => 'Japan',
+                        'Jemen'                                      => 'Jemen',
+                        'Jersey'                                     => 'Jersey',
+                        'Jordanië'                                   => 'Jordanië',
+                        'Kaaimaneilanden'                            => 'Kaaimaneilanden',
+                        'Kaapverdië'                                 => 'Kaapverdië',
+                        'Kameroen'                                   => 'Kameroen',
+                        'Kazachstan'                                 => 'Kazachstan',
+                        'Kenia'                                      => 'Kenia',
+                        'Kirgizië'                                   => 'Kirgizië',
+                        'Kiribati'                                   => 'Kiribati',
+                        'Koeweit'                                    => 'Koeweit',
+                        'Kroatië'                                    => 'Kroatië',
+                        'Laos'                                       => 'Laos',
+                        'Lesotho'                                    => 'Lesotho',
+                        'Letland'                                    => 'Letland',
+                        'Libanon'                                    => 'Libanon',
+                        'Liberia'                                    => 'Liberia',
+                        'Libië'                                      => 'Libië',
+                        'Liechtenstein'                              => 'Liechtenstein',
+                        'Litouwen'                                   => 'Litouwen',
+                        'Luxemburg'                                  => 'Luxemburg',
+                        'Macau'                                      => 'Macau',
+                        'Macedonië'                                  => 'Macedonië',
+                        'Madagaskar'                                 => 'Madagaskar',
+                        'Malawi'                                     => 'Malawi',
+                        'Maldiven'                                   => 'Maldiven',
+                        'Maleisië'                                   => 'Maleisië',
+
+                    ])
+                    ->columnSpan(2),
+
                 Forms\Components\TextInput::make("gps_lat")
                     ->label("GPS latitude")
 
@@ -141,7 +271,7 @@ class RelationResource extends Resource
             Forms\Components\Section::make()->schema([
 
                 Forms\Components\Textarea::make("remark")
-                    ->label("Opmerking")
+                    ->label("Notitie")
                     ->columnSpan("full"),
             ]),
 
@@ -164,7 +294,7 @@ class RelationResource extends Resource
                         ->icon('heroicon-o-information-circle')
                         ->schema([
                             Components\TextEntry::make('name')
-                                ->label("Bedrijfsnaam")
+                                ->label("Organisatie naam")
 
                                 ->placeholder("Niet opgegeven"),
 
@@ -175,6 +305,7 @@ class RelationResource extends Resource
 
                             Components\TextEntry::make("address")
                                 ->label("Adres")
+                                ->columnSpan(2)
                                 ->getStateUsing(function ($record): ?string {
                                     if ($record?->address) {
                                         return $record?->address . " " . $record?->zipcode . " - " . $record?->place;
@@ -206,7 +337,11 @@ class RelationResource extends Resource
                                 ->label("Telefoonnummer")
                                 ->placeholder("Niet opgegeven")
                                 ->url(fn($record) => "tel:" . $record->phonenumber)
-                                ->icon('heroicon-m-phone')
+                                ->icon('heroicon-m-phone'),
+                            Components\TextEntry::make('country')
+                                ->label("Land")
+                                ->placeholder("Niet opgegeven")
+
                                 ->columns(4)])->columns(4),
 
                 ]),
@@ -218,9 +353,9 @@ class RelationResource extends Resource
                     // ...
 
                     Components\TextEntry::make('remark')
-                        ->label("Opmerking")
+                        ->label("Notitie")
 
-                        ->placeholder("Geen opmerking"),
+                        ->placeholder("Geen Notitie"),
                 ]),
 
             // Custom Fields
@@ -254,7 +389,7 @@ class RelationResource extends Resource
                 ->wrap()
                 ->alignLeft()
                 ->placeholder('-')
-                ->label('Bedrijfsnaam'),
+                ->label('Naam organistie'),
 
             Tables\Columns\TextColumn::make("address")
                 ->toggleable()

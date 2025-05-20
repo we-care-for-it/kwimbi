@@ -17,7 +17,6 @@ use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use LaraZeus\Tiles\Forms\Components\TileSelect;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketRelationManager extends RelationManager
@@ -27,7 +26,7 @@ class TicketRelationManager extends RelationManager
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
-        return $ownerRecord->notes->count();
+        return $ownerRecord->tickets->count();
     }
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
@@ -46,13 +45,17 @@ class TicketRelationManager extends RelationManager
                 Section::make('Ticket gegevens')
                     ->schema([
 
-                        TileSelect::make('created_by_user')
+                        Forms\Components\Select::make('created_by_user')
                             ->searchable(['first_name', 'last_name', 'email'])
-                            ->options(Employee::where('relation_id', $this->ownerRecord->id)->pluck("first_name", "id"))
-                            ->titleKey('created_by_user')
-                            ->imageKey('avatar')
-                            ->descriptionKey('email')
-                            ->label('Melder'),
+                            ->options(
+                                Employee::where('relation_id', $this->ownerRecord->id)
+                                    ->get()
+                                    ->mapWithKeys(fn($employee) => [
+                                        $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                    ])
+                            )
+                            ->label('Melder')
+                        ,
 
                         Forms\Components\Select::make('status_id')
                             ->default('1')
@@ -73,7 +76,12 @@ class TicketRelationManager extends RelationManager
 
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
-                            ->options(User::all()->pluck("name", "id")),
+                            ->options(
+                                User::get()
+                                    ->mapWithKeys(fn($employee) => [
+                                        $employee->id => "{$employee->name}",
+                                    ])
+                            ),
 
                     ])->columns(3),
 
@@ -117,9 +125,6 @@ class TicketRelationManager extends RelationManager
                         return $record?->createByUser?->name;
                     })
 
-                    ->description(function ($record): ?string {
-                        return date("d-m-Y H m:s", strtotime($record?->created_at));
-                    })
                     ->label('Melder'),
 
                 TileColumn::make('AssignedByUser')
@@ -169,16 +174,21 @@ class TicketRelationManager extends RelationManager
             ->filtersFormColumns(4)
             ->actions([
 
-                Tables\Actions\ViewAction::make('openContact')
+                Tables\Actions\ViewAction::make('OpenTicket')
                     ->label('Bekijk')
-                    ->icon('heroicon-s-eye'),
+                    ->icon('heroicon-s-pencil')
+                    ->slideOver(),
+
+                Tables\Actions\EditAction::make('editTicket')
+                    ->label('Snel bewerken')
+                    ->icon('heroicon-s-pencil')
+                    ->slideOver(),
+
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make()
-                        ->modalHeading('Object Bewerken')
-                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                         ->tooltip('Bewerken')
-                        ->modalIcon('heroicon-m-pencil-square')
                         ->slideOver(),
+
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')

@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
+use App\Enums\Priority;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -38,6 +39,13 @@ class TasksRelationManager extends RelationManager
                     ->label('Starttijd'),
                 Forms\Components\TimePicker::make('end_time')
                     ->label('Eindtijd'),
+
+                Forms\Components\Select::make('priority')
+                    ->placeholder('Geen')
+                    ->default(3)
+                    ->options(Priority::class)
+                    ->searchable()
+                    ->label('Prioriteit'),
 
                 // Forms\Components\DatePicker::make('deadline')
                 // ->label('Deadline'),
