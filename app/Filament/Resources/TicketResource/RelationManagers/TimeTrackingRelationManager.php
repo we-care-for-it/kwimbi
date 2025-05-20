@@ -1,8 +1,6 @@
 <?php
-namespace App\Filament\Resources\RelationResource\RelationManagers;
+namespace App\Filament\Resources\TicketResource\RelationManagers;
 
-use App\Enums\TimeTrackingStatus;
-use App\Models\Project;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,19 +11,20 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TimeTrackingRelationManager extends RelationManager
 {
     protected static string $relationship = 'timeTracking';
-    protected static ?string $label       = 'Tijdregistratie';
-    protected static ?string $title       = 'Tijdregistratie';
+    protected static ?string $label       = '';
+    protected static ?string $title       = 'Activiteiten';
     protected static ?string $icon        = 'heroicon-o-clock';
 
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
+    // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    // {
 
-        return in_array('Tijdregistratie', $ownerRecord?->type->options) ? true : false;
-    }
+    //     return in_array('Tijdregistratie', $ownerRecord?->relation->type->options) ? true : false;
+    // }
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
@@ -45,24 +44,14 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label('Tijd')
                     ->seconds(false)
                     ->required(),
-                Forms\Components\Select::make("project_id")
-                    ->label("Project")
-                    ->preload()
-                    ->placeholder("Niet opgegeven")
-                    ->options(Project::where('customer_id', $this->getOwnerRecord()->id)->pluck("name", "id")->toArray())
-                    ->searchable(),
-                Forms\Components\Select::make('status_id')
-                    ->label('Status')
-                    ->options(TimeTrackingStatus::class) // Using the Enum directly
-                    ->default(2)
-                    ->required(),
                 Forms\Components\Select::make('work_type_id')
-                    ->label('Type')
+                    ->label('Uursoort')
                     ->searchable()
                     ->options(workorderActivities::where('is_active', 1)->pluck("name", "id")->toArray())
                     ->required(),
                 Forms\Components\TextArea::make('description')
                     ->label('Omschrijving')
+                    ->autosize()
                     ->required()
                     ->columnSpan('full'),
                 Forms\Components\Toggle::make('invoiceable')
@@ -76,6 +65,19 @@ class TimeTrackingRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('description')
             ->columns([
+
+                TileColumn::make('')
+                    ->description(fn($record) => $record->user->email)
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        return $record?->user?->name;
+                    })
+                    ->label('Medewerker')
+                    ->searchable(['first_name', 'last_name'])
+                    ->image(fn($record) => $record?->user?->avatar)
+                    ->width('300px')
+                    ->placeholder('Geen'),
+
                 TextColumn::make('started_at')
                     ->label('Datum')
                     ->sortable()
@@ -100,29 +102,16 @@ class TimeTrackingRelationManager extends RelationManager
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('activity.name')
+                    ->badge()
+                    ->label('Uursoort')
+                    ->placeholder('-')
+                    ->toggleable()
+                    ->width('200px')
+                    ->sortable(),
                 TextColumn::make('description')
                     ->label('Activiteit')
                     ->wrap()
-                    ->placeholder('-')
-                    ->searchable(),
-
-                TextColumn::make('project.name')
-                    ->sortable()
-                    ->label('Project')
-                    ->toggleable()
-                    ->sortable()
-                    ->color('primary')
-                    ->placeholder('-')
-                    ->searchable()
-                    ->url(function ($record) {
-                        return "projects/" . $record->project_id;
-                    }),
-                TextColumn::make('status_id')
-                    ->sortable()
-                    ->label('Status')
-                    ->badge()
-                    ->toggleable()
-                    ->sortable()
                     ->placeholder('-')
                     ->searchable(),
                 ToggleColumn::make('invoiceable')
@@ -139,17 +128,15 @@ class TimeTrackingRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->icon('heroicon-m-plus')
-                    ->modalIcon('heroicon-o-plus')
-                    ->slideOver(),
+                    ->modalHeading('Activiteit toevoegen')
+                    ->modalIcon('heroicon-o-plus'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Tijdregistratie Bewerken')
-                    ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->modalHeading('Activiteit bewerken')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                    ->modalIcon('heroicon-m-pencil-square'),
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

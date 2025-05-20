@@ -5,6 +5,7 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Filament\Resources\TicketResource\Pages;
+use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Relation;
 use App\Models\Ticket;
@@ -48,7 +49,7 @@ class TicketResource extends Resource
                         Forms\Components\Select::make("relation_id")
                             ->label("Relatie")
                             ->searchable()
-                            ->label("Relatie")
+                            ->columnSpan('2')
                             ->options(function () {
                                 return \App\Models\Relation::all()
                                     ->groupBy('type.name')
@@ -87,7 +88,7 @@ class TicketResource extends Resource
                             ->label('Status')
                             ->options(TicketStatus::Class),
                         Forms\Components\Select::make('type_id')
-                            ->label('Type')
+                            ->label('Uursoort')
                             ->default('2')
                             ->options(TicketTypes::Class),
                         Forms\Components\Select::make('department_id')
@@ -98,7 +99,7 @@ class TicketResource extends Resource
                             ->label('Prioriteit')
                             ->options(Priority::class)
                             ->default('3'),
-                    ])->columns(4),
+                    ])->columns(3),
 
                 Section::make('Ticket omschrijving')
                     ->description('Zoals een foutmelding of aanvraag voor veranderingen')
@@ -169,12 +170,12 @@ class TicketResource extends Resource
 
                 ])->columns(4),
 
-            \Filament\Infolists\Components\Section::make()
+            \Filament\Infolists\Components\Section::make('Ticket omschrijving')
                 ->schema([
                     // ...
 
                     Components\TextEntry::make('description')
-                        ->label("TIcker informatie")
+                        ->hiddenLabel()
                         ->placeholder("Geen opmerking"),
                 ]),
         ]);
@@ -227,7 +228,7 @@ class TicketResource extends Resource
                     ->getStateUsing(function ($record): ?string {
                         return $record?->AssignedByUser?->name;
                     })
-                    ->label('Medewerker')
+                    ->label('Toegewezen medewerker')
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar)
                     ->placeholder('Geen'),
@@ -243,7 +244,6 @@ class TicketResource extends Resource
                     ->label('Gemeld'),
                 Tables\Columns\TextColumn::make('relation.name')
                     ->sortable()
-
                     ->toggleable()
                     ->label('Relatie'),
 
@@ -270,12 +270,13 @@ class TicketResource extends Resource
                     ->badge()
                     ->sortable()
                     ->toggleable()
-                    ->label('Type'),
+                    ->label('Uursoort'),
 
             ])
             ->filters([
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
+
                     ->options(Relation::all()->pluck("name", "id")),
                 SelectFilter::make('assigned_by_user')
                     ->label('Medewerker')
@@ -306,10 +307,10 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //    RelationManagers\TicketReplyManager::class,
+
+            RelationManagers\TimeTrackingRelationManager::class,
         ];
     }
-
     public static function getPages(): array
     {
         return [

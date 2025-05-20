@@ -100,11 +100,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function getAvatarAttribute($value)
     {
-        if ($this->imavatar_urlage) {
-            return $this->avatar_url;
+        if ($this->avatar_url) {
+            return "/storage/" . $this->avatar_url;
         } else {
             return '/images/noavatar.jpg';
         }
+
     }
 
     public function activities()

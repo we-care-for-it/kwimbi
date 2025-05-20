@@ -274,6 +274,7 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("startdate")
                     ->label("Looptijd")
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->getStateUsing(function (Project $record): ?string {
                         $startdate = $record->startdate ? date("d-m-Y", strtotime($record?->startdate)) : "nodate";
                         $enddate   = $record->enddate ? date("d-m-Y", strtotime($record?->enddate)) : "nodate";
@@ -290,6 +291,7 @@ class ProjectsResource extends Resource
 
                 Tables\Columns\TextColumn::make("date_of_execution")
                     ->label("Plandatum")
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->getStateUsing(function (Project $record): ?string {
                         if ($record->date_of_execution) {
                             return date("d-m-Y", strtotime($record?->date_of_execution));
