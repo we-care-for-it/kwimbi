@@ -20,7 +20,9 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\BulkAction;
+use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -225,7 +227,7 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                     ->sortable()
                     ->placeholder('-')
                     ->searchable()
-                    ->color('primary')
+
                     ->url(function ($record) {
                         return "relations/" . $record->relation_id;
                     }),
@@ -351,7 +353,8 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                     ->searchable()
                     ->options(User::all()->pluck('name', 'id'))
                     ->visible(fn() => auth()->user()->can('view_any_time::tracking')),
-//)
+
+                Tables\Filters\TrashedFilter::make(),
 
                 SelectFilter::make('project_id')
 
@@ -371,8 +374,8 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                 // SelectFilter::make('status_id')
                 //     ->options(TimeTrackingStatus::class)
                 //     ->label('Status'),
-            ], layout: FiltersLayout::AboveContent)
-            ->filtersFormColumns(4)
+            ], layout: FiltersLayout::Modal)
+            ->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Tijdregistratie Bewerken')
@@ -381,12 +384,20 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->slideOver(),
-                Tables\Actions\DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
+                RestoreAction::make(),
+
+                ActionGroup::make([
+
+                    Tables\Actions\DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+
+                ]),
+
             ])
 
             ->bulkActions([

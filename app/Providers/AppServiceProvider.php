@@ -4,8 +4,10 @@ namespace App\Providers;
 //use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Facades\Filament;
 use Filament\Navigation\UserMenuItem;
+use Filament\Notifications\Livewire\Notifications;
 use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\VerticalAlignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentColor;
 use Illuminate\Database\Eloquent\Model;
@@ -52,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
         FilamentAsset::register([
             Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
+        Notifications::verticalAlignment(VerticalAlignment::End);
 
         FilamentColor::register([
             'primary' => Color::hex('#ff0000'),

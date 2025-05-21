@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -133,7 +134,7 @@ class TimeTrackingRelationManager extends RelationManager
                 //     ->width(100),
                 TextColumn::make('ticket_status_id')
                     ->badge()
-                    ->label('Tickt status')
+                    ->label('Ticket status')
                     ->placeholder('Geen status update')
                     ->toggleable()
                     ->width('200px')
@@ -151,6 +152,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->label('Activiteit toevoegen')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
+                        $data['ticket_id']   = $this->ownerRecord?->id;
                         Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
                         return $data;
                     })
@@ -169,12 +171,17 @@ class TimeTrackingRelationManager extends RelationManager
                         return $data;
                     })
                     ->modalIcon('heroicon-m-pencil-square'),
-                Tables\Actions\DeleteAction::make()
-                    ->modalIcon('heroicon-o-trash')
-                    ->tooltip('Verwijderen')
-                    ->label('')
-                    ->modalHeading('Verwijderen')
-                    ->color('danger'),
+
+                ActionGroup::make([
+
+                    Tables\Actions\DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->label('')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                ]),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

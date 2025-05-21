@@ -25,14 +25,9 @@ class Ticket extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function employeees()
-    {
-        return $this->belongsTo(Employee::class);
-    }
-
     public function timeTracking()
     {
-        return $this->hasMany(timeTracking::class, 'id', 'ticket_id');
+        return $this->hasMany(timeTracking::class, 'ticket_id', 'id');
     }
 
     public function AssignedByUser()
