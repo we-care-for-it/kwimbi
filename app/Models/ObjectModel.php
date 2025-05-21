@@ -16,9 +16,9 @@ class ObjectModel extends Model implements Auditable
         return $this->belongsTo(Brand::class);
     }
 
-    public function type()
+    public function category()
     {
-        return $this->belongsTo(ObjectType::class);
+        return $this->hasOne(ObjectType::class, 'id', 'type_id');
     }
 
 }

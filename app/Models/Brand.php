@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\assetModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +15,6 @@ class Brand extends Model
 
     public function models()
     {
-        return $this->hasMany(assetModel::class, 'brand_id');
+        return $this->hasMany(ObjectModel::class, 'brand_id');
     }
 }
