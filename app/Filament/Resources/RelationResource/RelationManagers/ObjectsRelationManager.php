@@ -1,10 +1,14 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Models\Contact;
-use App\Models\contactType;
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use App\Models\Employee;
+use App\Models\ObjectModel;
+use App\Models\ObjectType;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -23,7 +27,7 @@ class ObjectsRelationManager extends RelationManager
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
-        return $ownerRecord->contacts->count();
+        return $ownerRecord->objects->count();
     }
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
@@ -35,43 +39,103 @@ class ObjectsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Grid::make(2)
-                    ->schema([
-                        Forms\Components\TextInput::make('first_name')
-                            ->label('Voornaam')
-                            ->required()
-                            ->maxLength(255),
 
-                        Forms\Components\TextInput::make('last_name')
-                            ->label('Achternaam')
-                            ->required()
-                            ->maxLength(255),
+                Wizard::make([
+                    Step::make('Hardware informatie')
+                        ->schema([
 
-                        Forms\Components\TextInput::make('company')
-                            ->label('Bedrijf')
-                            ->maxLength(255),
+                            Select::make('type_id')
+                                ->label('Type')
+                                ->options(ObjectType::pluck('name', 'id'))
+                                ->reactive()
 
-                        Forms\Components\TextInput::make('email')
-                            ->label('E-mailadres')
-                            ->email()
-                            ->maxLength(255),
+                                ->required()->afterStateUpdated(function (callable $set) {
+                                $set('brand_id', null);
+                            }),
 
-                        Forms\Components\TextInput::make('department')
-                            ->label('Afdeling')
-                            ->maxLength(255),
+                            Select::make('brand_id')
+                                ->label('Merk')
+                                ->options(function (callable $get) {
+                                    $type_id = $get('type_id');
 
-                        Forms\Components\TextInput::make('function')
-                            ->label('Functie')
-                            ->maxLength(255),
+                                    return ObjectModel::query()
+                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id))
+                                        ->get()
+                                        ->groupBy('brand_id')
+                                        ->map(fn($group) => $group->first()) // Only one per brand
+                                        ->filter(fn($item) => $item->brand)  // Ensure brand exists
+                                        ->mapWithKeys(fn($item) => [
+                                            $item->id => $item->brand->name,
+                                        ])
+                                        ->toArray();
+                                })
+                                ->reactive()
+                                ->disabled(fn(callable $get) => ! $get('type_id')),
 
-                        Forms\Components\TextInput::make('phone_number')
-                            ->label('Telefoonnummer')
-                            ->maxLength(255),
+                            Select::make('model_id')
+                                ->label('Model')
+                                ->options(function (callable $get) {
+                                    $type_id  = $get('type_id');
+                                    $brand_id = $get('brand_id');
 
-                        Forms\Components\Select::make('type_id')
-                            ->label('Categorie')
-                            ->options(contactType::where('is_active', 1)->pluck("name", "id")),
-                    ]),
+                                    return ObjectModel::query()
+                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id)->where('brand_id', $brand_id))
+                                        ->get()
+                                        ->mapWithKeys(function ($data) {
+
+                                            return [
+                                                $data->id => collect([
+                                                    $data->name,
+
+                                                ])->filter()->implode(', '),
+                                            ];
+                                        })
+                                        ->toArray();
+                                })
+                                ->reactive()
+                                ->disabled(fn(callable $get) => ! $get('brand_id')),
+
+                            TextInput::make('name')
+                                ->label('Naam'),
+
+                        ])->columns(2),
+
+                    Step::make('Toewijzing')
+                        ->schema([
+
+                            TextInput::make('serial_number')
+                                ->label('Serienummer'),
+
+                            Select::make('employee_id')
+                                ->searchable(['first_name', 'last_name', 'email'])
+                                ->options(
+                                    Employee::where('relation_id', $this->ownerRecord->id)
+                                        ->get()
+                                        ->mapWithKeys(fn($employee) => [
+                                            $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                        ])
+                                )
+                                ->label('Medewerker'),
+
+                            TextInput::make('uuid')
+                                ->label('Uniek id nummer')
+                                ->hint('Scan een barcode sticker'),
+                        ]),
+
+                    Step::make('Opmerking')
+                        ->schema([
+                            Textarea::make("remark")
+                                ->rows(7)
+                                ->label('Opmerking')
+                                ->columnSpan('full')
+                                ->autosize()
+                                ->hint(fn($state, $component) => "Aantal karakters: " . $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                                ->maxlength(255)
+                                ->reactive(),
+                        ]),
+                ])->columnSpanFull(),
+                //  ->submitAction(new \Filament\Forms\Components\Actions\ButtonAction('Submit')),
+
             ]);
     }
 
@@ -79,87 +143,76 @@ class ObjectsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TileColumn::make('name')
-                    ->description(fn($record) => $record->function)
-                    ->sortable()
-                    ->image(fn($record) => $record->avatar),
 
-                TextColumn::make("company")
-                    ->label("Bedrijf")
+                TextColumn::make("type.name")
+                    ->badge()
+                    ->label("Categorie")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make("brand.name")
+                    ->label("Merk")
                     ->placeholder("-")
                     ->toggleable()
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make("type.name")
-                    ->label("Categorie")
+                TextColumn::make("model.name")
+                    ->label("Model")
                     ->placeholder("-")
-                    ->badge()
-                    ->color('primary')
-                    ->toggleable()
-                    ->sortable(),
-
-                TextColumn::make('email')
-                    ->placeholder('-')
-                    ->Url(function (object $record) {
-                        return "mailto:" . $record?->email;
-                    })
-                    ->label('Emailadres')
-                    ->toggleable()
-                    ->sortable(),
-
-                TextColumn::make('department')
-                    ->placeholder('-')
-                    ->label('Afdeling')
-                    ->toggleable()
-                    ->sortable(),
-
-                TextColumn::make('function')
-                    ->placeholder('-')
                     ->toggleable()
                     ->sortable()
-                    ->label('Functie'),
+                    ->searchable(),
+                TileColumn::make('name')
+                    ->description(fn($record) => $record->function)
+                    ->sortable()
+                    ->image(fn($record) => $record->avatar),
 
-                TextColumn::make('phone_number')
-                    ->placeholder('-')
-                    ->Url(function (object $record) {
-                        return "tel:" . $record?->contact?->phone_number;
-                    })
-                    ->label('Telefoonnummers')
-                    ->description(fn($record): ?string => $record?->mobile_number ?? null),
+                TextColumn::make("employee.name")
+                    ->badge()
+                    ->label("Medewerker")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make("serial_number")
+                    ->label("Serienummer")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+
             ])
             ->emptyState(view('partials.empty-state-small'))
             ->recordUrl(function ($record) {
                 return "/contacts/" . $record->id;
             })
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make('createContact')
-                    ->label('Contacpersoon toevoegen')
-                    ->icon('heroicon-m-plus')
-                    ->modalIcon('heroicon-o-plus')
-                    ->modalHeading('Contactpersoon tovoegen')
-                    ->slideOver(),
+                Tables\Actions\CreateAction::make()
+                    ->modalHeading('Object aanmaken')
+                    ->label('Toevoegen')
+                    ->icon('heroicon-m-plus'),
             ])
             ->actions([
 
-                Tables\Actions\ViewAction::make('openContact')
-                    ->label('Bekijk')
-                    ->icon('heroicon-s-eye'),
+                Tables\Actions\RestoreAction::make(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make()
                         ->modalHeading('Object Bewerken')
                         ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                         ->tooltip('Bewerken')
-                        ->modalIcon('heroicon-m-pencil-square')
-                        ->slideOver(),
+                    ,
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')
                         ->modalHeading('Verwijderen')
                         ->color('danger'),
+
                 ]),
             ])
             ->bulkActions([

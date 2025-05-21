@@ -61,6 +61,11 @@ class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
         return $this->hasOne(ObjectInspection::class, 'elevator_id')->latest('end_date');
     }
 
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'id', 'employee_id');
+    }
+
     public function location()
     {
         return $this->hasOne(relationLocation::class, 'id', 'address_id');
@@ -267,6 +272,16 @@ class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
                 break;
         }
 
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(ObjectModel::class);
     }
 
 }

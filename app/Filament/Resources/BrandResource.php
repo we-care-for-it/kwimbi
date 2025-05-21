@@ -31,6 +31,8 @@ class BrandResource extends Resource
 
                         TextInput::make('name')
                             ->label(__('asset_brands.fields.name'))
+                            ->columnSpan('full')
+
                             ->required(),
                     ]),
             ]);

@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('asset_models', function (Blueprint $table) {
-            $table->dropColumn('category_id');
-            $table->integer('type_id')->nullable();
+        Schema::table('object_models', function (Blueprint $table) {
+            //  $table->dropColumn('category_id');
+            //    $table->integer('type_id')->nullable();
             $table->text('remark')->nullable();
         });
     }
 
     public function down()
     {
-        Schema::table('asset_models', function (Blueprint $table) {
+        Schema::table('object_models', function (Blueprint $table) {
             $table->unsignedBigInteger('category_id')->nullable();
             $table->dropColumn('remark');
         });
