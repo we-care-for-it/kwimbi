@@ -10,7 +10,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
@@ -63,9 +62,6 @@ class TimeTrackingRelationManager extends RelationManager
                     ->autosize()
                     ->required()
                     ->columnSpan('full'),
-                Forms\Components\Toggle::make('invoiceable')
-                    ->label('Facturabel')
-                    ->default(true),
 
                 Forms\Components\select::make('ticket_status_id')
                     ->label('Status')
@@ -128,7 +124,13 @@ class TimeTrackingRelationManager extends RelationManager
                     ->wrap()
                     ->placeholder('-')
                     ->searchable(),
-
+                // ToggleColumn::make('invoiceable')
+                //     ->label('Facturabel')
+                //     ->onColor('success')
+                //     ->sortable()
+                //     ->toggleable()
+                //     ->offColor('danger')
+                //     ->width(100),
                 TextColumn::make('ticket_status_id')
                     ->badge()
                     ->label('Tickt status')
@@ -137,13 +139,6 @@ class TimeTrackingRelationManager extends RelationManager
                     ->width('200px')
                     ->sortable(),
 
-                ToggleColumn::make('invoiceable')
-                    ->label('Facturabel')
-                    ->onColor('success')
-                    ->sortable()
-                    ->toggleable()
-                    ->offColor('danger')
-                    ->width(100),
             ])
             ->filters([
                 //

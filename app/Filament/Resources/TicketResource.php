@@ -7,10 +7,12 @@ use App\Enums\TicketTypes;
 use App\Filament\Resources\TicketResource\Pages;
 use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
+use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -21,6 +23,7 @@ use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketResource extends Resource
@@ -43,63 +46,79 @@ class TicketResource extends Resource
 
         return $form
             ->schema([
-
-                Section::make('Ticket gegevens')
+                Section::make()
                     ->schema([
-                        Forms\Components\Select::make("relation_id")
-                            ->label("Relatie")
-                            ->searchable()
-                            ->columnSpan('2')
-                            ->options(function () {
-                                return \App\Models\Relation::all()
-                                    ->groupBy('type.name')
-                                    ->mapWithKeys(function ($group, $category) {
-                                        return [
-                                            $category => $group->pluck('name', 'id')->toArray(),
-                                        ];
-                                    })->toArray();
-                            })
-                            ->searchable()
-                            ->live()
+                        // Forms\Components\Select::make('created_by_user')
+                        //     ->label('Created By')
+                        //     ->searchable()
+                        //     ->relationship(name: 'employees', titleAttribute: 'first_name')
 
-                        // ->createOptionUsing(function (array $data) {
-                        //     return Relation::create([
-                        //         'name'    => $data['name'],
-                        //         'type_id' => 5,
-                        //     ])->id;
-                        // })
-                            ->options(function () {
-                                return \App\Models\Relation::all()
-                                    ->groupBy('type.name')
-                                    ->mapWithKeys(function ($group, $category) {
-                                        return [
-                                            $category => $group->pluck('name', 'id')->toArray(),
-                                        ];
-                                    })->toArray();
-                            })
-
-                            ->placeholder("Niet opgegeven"),
-                        Forms\Components\Select::make('assigned_by_user')
-                            ->label('Medewerker')
-                            ->options(User::all()->pluck("name", "id")),
+                        // ,
 
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
                             ->options(TicketStatus::Class),
                         Forms\Components\Select::make('type_id')
-                            ->label('Uursoort')
+                            ->label('Type')
                             ->default('2')
                             ->options(TicketTypes::Class),
-                        Forms\Components\Select::make('department_id')
-                            ->label('Afdeling')
-                            ->options(Department::pluck('name', 'id')),
 
                         Forms\Components\Select::make('prio')
                             ->label('Prioriteit')
                             ->options(Priority::class)
                             ->default('3'),
+
                     ])->columns(3),
+
+                Section::make()
+                    ->schema([
+                        Forms\Components\Select::make('department_id')
+                            ->label('Afdeling toewijzing')
+
+                            ->options(Department::pluck('name', 'id'))
+
+                            ->createOptionForm([
+
+                                Grid::make(2)
+                                    ->schema([
+
+                                        Forms\Components\TextInput::make('name')
+                                            ->label('Afdelingsnaam')
+                                            ->required(),
+
+                                        Forms\Components\Select::make("location_id")
+                                            ->label("Locatie")
+                                            ->required()
+                                            ->options(
+                                                Location::pluck("name", "id")
+                                            ),
+
+                                    ]),
+
+                            ])
+
+                            ->createOptionUsing(function (array $data): int {
+
+                                return Department::create($data)->getKey();
+                            }),
+
+                        Forms\Components\Select::make('assigned_by_user')
+                            ->label('Medewerker')
+
+                            ->options(User::pluck('name', 'id'))
+                            ->searchable()
+                            ->default(Auth::id())
+                            ->label('Medewerker')
+
+                            ->options(
+                                User::get()
+                                    ->mapWithKeys(fn($employee) => [
+                                        $employee->id => "{$employee->name}",
+                                    ])
+                            ),
+                    ])
+                    ->columns(3),
 
                 Section::make('Ticket omschrijving')
                     ->description('Zoals een foutmelding of aanvraag voor veranderingen')
@@ -286,10 +305,15 @@ class TicketResource extends Resource
                     ->label('Status')
                     ->options(TicketStatus::Class),
 
-            ], layout: FiltersLayout::AboveContent)
+                SelectFilter::make('department_id')
+                    ->label('Afdeling')
+                    ->options(Department::pluck('name', 'id')),
+
+            ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
                 Tables\Actions\EditAction::make()->slideOver(),
+
                 Tables\Actions\ViewAction::make('openLocation')
                     ->label('Bekijk')
                     ->url(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))

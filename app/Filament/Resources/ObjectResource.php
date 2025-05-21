@@ -469,7 +469,7 @@ class ObjectResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ["uuid", "name"];
+        return ["uuid", "name", "serial_number"];
     }
 
     public static function getGlobalSearchResultDetails($record): array

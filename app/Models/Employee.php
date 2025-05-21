@@ -31,11 +31,6 @@ class Employee extends Model implements Auditable
         }
     }
 
-    public function getFullNameAttribute()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    }
-
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'contact_id', 'id');
