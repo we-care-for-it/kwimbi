@@ -3,7 +3,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrandResource\Pages\EditBrand;
 use App\Filament\Resources\BrandResource\Pages\ListBrands;
-use App\Filament\Resources\BrandResource\RelationManagers\ModelsRelationManager;
+use App\Filament\Resources\RelationResource\RelationManagers;
 use App\Models\Brand;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -75,7 +75,8 @@ class BrandResource extends Resource
     public static function getRelations(): array
     {
         return [
-            'models' => ModelsRelationManager::make(),
+
+            RelationManagers\ModelsRelationManager::class,
         ];
     }
 
