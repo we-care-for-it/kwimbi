@@ -166,7 +166,9 @@ class ObjectsRelationManager extends RelationManager
                     ->searchable(),
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
+                    ->placeholder("-")
                     ->sortable()
+
                     ->image(fn($record) => $record->avatar),
 
                 TextColumn::make("employee.name")

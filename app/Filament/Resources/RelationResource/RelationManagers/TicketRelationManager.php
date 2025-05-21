@@ -6,8 +6,10 @@ use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Location;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
@@ -17,6 +19,7 @@ use Filament\Tables;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
 class TicketRelationManager extends RelationManager
@@ -42,11 +45,12 @@ class TicketRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Section::make('Ticket gegevens')
+                Section::make()
                     ->schema([
 
                         Forms\Components\Select::make('created_by_user')
                             ->searchable(['first_name', 'last_name', 'email'])
+
                             ->options(
                                 Employee::where('relation_id', $this->ownerRecord->id)
                                     ->get()
@@ -54,7 +58,52 @@ class TicketRelationManager extends RelationManager
                                         $employee->id => "{$employee->first_name} {$employee->last_name}",
                                     ])
                             )
+
+                            ->createOptionForm([
+
+                                Grid::make(4)
+                                    ->schema([
+
+                                        Forms\Components\TextInput::make('first_name')
+                                            ->label('Voornaam')
+                                            ->required()
+                                            ->maxLength(255),
+
+                                        Forms\Components\TextInput::make('last_name')
+                                            ->label('Achternaam')
+                                            ->required()
+                                            ->maxLength(255),
+
+                                        Forms\Components\TextInput::make('email')
+                                            ->columnSpan(2)
+                                            ->label('E-mailadres')
+                                            ->email()
+                                            ->maxLength(255),
+
+                                        Forms\Components\TextInput::make('department')
+                                            ->label('Afdeling')
+                                            ->maxLength(255),
+
+                                        Forms\Components\TextInput::make('function')
+                                            ->label('Functie')
+                                            ->maxLength(255),
+
+                                        Forms\Components\TextInput::make('phone_number')
+                                            ->label('Telefoonnummer')
+                                            ->maxLength(255),
+
+                                    ]),
+
+                            ])
+
+                            ->createOptionUsing(function (array $data): int {
+
+                                $data['relation_id'] = $this->ownerRecord->id;
+                                return Employee::create($data)->getKey();
+                            })
+
                             ->label('Melder')
+                            ->columnSpan(2)
                         ,
 
                         Forms\Components\Select::make('status_id')
@@ -65,25 +114,62 @@ class TicketRelationManager extends RelationManager
                             ->label('Type')
                             ->default('2')
                             ->options(TicketTypes::Class),
-                        Forms\Components\Select::make('department_id')
-                            ->label('Afdeling')
-                            ->options(Department::pluck('name', 'id')),
 
                         Forms\Components\Select::make('prio')
                             ->label('Prioriteit')
                             ->options(Priority::class)
                             ->default('3'),
 
+                    ])->columns(3),
+
+                Section::make()
+                    ->schema([
+                        Forms\Components\Select::make('department_id')
+                            ->label('Afdeling toewijzing')
+
+                            ->options(Department::pluck('name', 'id'))
+
+                            ->createOptionForm([
+
+                                Grid::make(2)
+                                    ->schema([
+
+                                        Forms\Components\TextInput::make('name')
+                                            ->label('Afdelingsnaam')
+                                            ->required(),
+
+                                        Forms\Components\Select::make("location_id")
+                                            ->label("Locatie")
+                                            ->required()
+                                            ->options(
+                                                Location::pluck("name", "id")
+                                            ),
+
+                                    ]),
+
+                            ])
+
+                            ->createOptionUsing(function (array $data): int {
+
+                                return Department::create($data)->getKey();
+                            }),
+
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
+
+                            ->options(User::pluck('name', 'id'))
+                            ->searchable()
+                            ->default(Auth::id())
+                            ->label('Medewerker')
+
                             ->options(
                                 User::get()
                                     ->mapWithKeys(fn($employee) => [
                                         $employee->id => "{$employee->name}",
                                     ])
                             ),
-
-                    ])->columns(3),
+                    ])
+                    ->columns(3),
 
                 Section::make('Ticket omschrijving')
                     ->description('Zoals een foutmelding of aanvraag voor veranderingen')
@@ -142,6 +228,7 @@ class TicketRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable()
                     ->badge()
+                    ->placeholder('-')
                     ->placeholder('Geen')
                     ->label('Afdeling'),
 
