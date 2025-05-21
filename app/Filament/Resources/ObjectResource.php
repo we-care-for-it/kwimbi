@@ -51,19 +51,9 @@ class ObjectResource extends Resource
         return static::getModel()::count();
     }
 
-    public static function getGloballySearchableAttributes(): array
+    public static function getGlobalSearchResultTitle($record): string
     {
-        return ["name", "unit_no", 'nobo_no'];
-    }
-
-    public static function getGlobalSearchResultDetails($record): array
-    {
-
-        return [
-            'Adres'     => $record->address . "   " . $record?->housenumber . " " . $record?->place,
-            'Beheerder' => $record?->managementcompany->name ?? "-",
-        ];
-
+        return $record->name;
     }
 
     public static function form(Form $form): Form
@@ -476,4 +466,19 @@ class ObjectResource extends Resource
             "monitor" => Pages\MonitorObject::route("/{record}/monitoring"),
         ];
     }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ["uuid", "name"];
+    }
+
+    public static function getGlobalSearchResultDetails($record): array
+    {
+        return [
+            'Medewerker'  => $record->employee->name ?? "Geen",
+            'Serienummer' => $record?->serial_number ?? "-",
+            'Categorie'   => $record?->categorie->name ?? "-",
+        ];
+    }
+
 }

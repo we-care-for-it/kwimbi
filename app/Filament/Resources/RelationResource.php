@@ -37,7 +37,7 @@ class RelationResource extends Resource
     protected static ?string $navigationIcon       = 'heroicon-s-building-library';
     protected static ?string $navigationLabel      = "Relaties";
     protected static ?string $pluralModelLabel     = 'Relaties';
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'asdasd';
 
     public static function form(Form $form): Form
     {

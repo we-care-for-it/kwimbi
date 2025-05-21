@@ -65,7 +65,7 @@ class ObjectsRelationManager extends RelationManager
                                         ->map(fn($group) => $group->first()) // Only one per brand
                                         ->filter(fn($item) => $item->brand)  // Ensure brand exists
                                         ->mapWithKeys(fn($item) => [
-                                            $item->id => $item->brand->name,
+                                            $item->brand_id => $item->brand->name,
                                         ])
                                         ->toArray();
                                 })
