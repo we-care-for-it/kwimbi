@@ -263,6 +263,9 @@ class TicketResource extends Resource
                     ->label('Gemeld'),
                 Tables\Columns\TextColumn::make('relation.name')
                     ->sortable()
+                    ->url(function ($record) {
+                        return "relations/" . $record->relation_id;
+                    })
                     ->toggleable()
                     ->label('Relatie'),
 
