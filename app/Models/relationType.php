@@ -19,6 +19,7 @@ class relationType extends Model implements Auditable
     protected $fillable = [
         'name',
         'is_active',
+        'sort',
 
     ];
 
