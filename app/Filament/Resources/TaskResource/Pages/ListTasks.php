@@ -40,7 +40,7 @@ class ListTasks extends ListRecords
             'Hoog'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1))
                 ->badgeColor('danger')
-                ->badge(Task::query()->where('priority', 21)->count()),
+                ->badge(Task::query()->where('priority', 1)->count()),
             'Gemiddeld' => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2))
                 ->badgeColor('warning')
