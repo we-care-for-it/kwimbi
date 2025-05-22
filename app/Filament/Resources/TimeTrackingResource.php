@@ -173,6 +173,9 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
             ->persistSearchInSession()
             ->persistSortInSession()
             ->persistColumnSearchesInSession()
+            ->recordClasses(fn($record) =>
+                $record->deleted_at ? 'table_row_deleted ' : null
+            )
             ->columns([
                 TextColumn::make('started_at')
                     ->label('Datum')
@@ -383,7 +386,7 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
 
                 RestoreAction::make(),
 

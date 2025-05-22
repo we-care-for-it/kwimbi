@@ -125,7 +125,7 @@ class SpaceResource extends Resource
                     ->modalDescription('Pas de bestaande ruimte aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
 
             ])
             ->bulkActions([

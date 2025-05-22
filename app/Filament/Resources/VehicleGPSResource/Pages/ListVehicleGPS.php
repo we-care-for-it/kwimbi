@@ -13,13 +13,13 @@ class ListVehicleGPS extends ListRecords
         return [
             // Actions\CreateAction::make()
             //     ->label('GPS Module toevoegen')
-            //     ->slideOver()
+            //
             //     ->modalWidth(MaxWidth::FourExtraLarge)
             //     ->modalHeading('GPS Module toevoegen')
             //     ->modalSubmitActionLabel('Opslaan')
             //     ->modalIcon('heroicon-o-plus')
             //     ->icon('heroicon-m-plus')
-            //     ->slideOver()
+            //
             //     ->label('GPS Module toevoegen'),
 
         ];

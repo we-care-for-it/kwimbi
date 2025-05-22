@@ -41,8 +41,8 @@ class ProductResource extends Resource
                     ->modalDescription('Pas de bestaande product aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver()])
+                    ->modalIcon('heroicon-m-pencil-square'),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -59,10 +59,10 @@ class ViewObject extends ViewRecord
 
                 Action::make('back')
 
-                ->label('Terug naar overzicht')
-                ->link()
-                ->url('/objects')                
-                ->color('gray'),
+                    ->label('Terug naar overzicht')
+                    ->link()
+                    ->url('/objects')
+                    ->color('gray'),
 
                 Actions\Action::make('cancel_top')
                     ->iconButton()
@@ -84,7 +84,7 @@ class ViewObject extends ViewRecord
                     }),
 
                 Actions\EditAction::make('cancel_top')
-                    ->slideOver()
+
                     ->icon('heroicon-m-pencil-square')
                     ->label('Wijzig'),
 
@@ -94,10 +94,10 @@ class ViewObject extends ViewRecord
 
                 Action::make('back')
 
-                ->label('Terug naar overzicht')
-                ->link()
-                ->url('/relations')                
-                ->color('gray'),
+                    ->label('Terug naar overzicht')
+                    ->link()
+                    ->url('/relations')
+                    ->color('gray'),
                 Actions\Action::make('cancel_top')
                     ->iconButton()
                     ->color('gray')
@@ -109,7 +109,7 @@ class ViewObject extends ViewRecord
                     }),
 
                 Actions\EditAction::make('cancel_top')
-                    ->slideOver()
+
                     ->icon('heroicon-m-pencil-square')
                     ->label('Wijzig'),
 

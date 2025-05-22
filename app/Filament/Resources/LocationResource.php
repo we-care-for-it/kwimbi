@@ -121,7 +121,7 @@ class LocationResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 DeleteAction::make(),
 
                 RestoreAction::make(),

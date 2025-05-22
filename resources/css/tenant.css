@@ -31,6 +31,10 @@
   border-radius: 2px !important;
 }
 
+.table_row_deleted {
+  background-color: rgb(252, 241, 241);
+}
+
 .fi-ac {
   float: right;
 }

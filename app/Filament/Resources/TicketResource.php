@@ -20,9 +20,14 @@ use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
@@ -218,10 +223,20 @@ class TicketResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('id', 'decs')
+            ->persistSortInSession()
+            ->persistSearchInSession()
+            ->searchable()
+            ->persistColumnSearchesInSession()
+            ->recordClasses(fn($record) =>
+                $record->deleted_at ? 'table_row_deleted ' : null
+            )
+
             ->columns([
 
                 Tables\Columns\TextColumn::make('id')
                     ->sortable()
+                    ->grow(false)
                     ->toggleable()
                     ->label('#')
                     ->getStateUsing(function ($record): ?string {
@@ -231,6 +246,7 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('prio')
                     ->badge()
                     ->sortable()
+                    ->grow(false)
                     ->toggleable()
                     ->label('Prioriteit'),
 
@@ -238,16 +254,22 @@ class TicketResource extends Resource
                 Tables\Columns\TextColumn::make('status_id')
                     ->badge()
                     ->sortable()
-
                     ->toggleable()
                     ->label('Status'),
+
+                Tables\Columns\TextColumn::make('type_id')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Type'),
+
                 TileColumn::make('AssignedByUser')
                 // ->description(fn($record) => $record->AssignedByUser->email)
                     ->sortable()
                     ->getStateUsing(function ($record): ?string {
                         return $record?->AssignedByUser?->name;
                     })
-                    ->description(fn($record) => $record->AssignedByUser?->email)
+                //     ->description(fn($record) => $record->AssignedByUser?->email)
                     ->label('Toegewezen medewerker')
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar)
@@ -271,6 +293,8 @@ class TicketResource extends Resource
                     ->label('Relatie'),
 
                 Tables\Columns\TextColumn::make('department.name')
+                    ->toggleable(isToggledHiddenByDefault: true)
+
                     ->sortable()
                     ->toggleable()
                     ->badge()
@@ -288,12 +312,6 @@ class TicketResource extends Resource
                 //     ->sortable()
                 //     ->toggleable()
                 //     ->label('Medewerker'),
-
-                Tables\Columns\TextColumn::make('type_id')
-                    ->badge()
-                    ->sortable()
-                    ->toggleable()
-                    ->label('Uursoort'),
 
             ])
             ->filters([
@@ -313,15 +331,44 @@ class TicketResource extends Resource
                     ->label('Afdeling')
                     ->options(Department::pluck('name', 'id')),
 
+                TernaryFilter::make('email_verified_at')
+                    ->label('Gesloten tickets')
+                    ->placeholder('Alle tickets')
+                    ->trueLabel('Verbergen')
+                    ->falseLabel('Tonen')
+                    ->queries(
+                        true: fn(Builder $query)  => $query->whereNot('status_id', 7),
+                        false: fn(Builder $query) => $query->where('status_id', 7),
+                        blank: fn(Builder $query) => $query, // In this example, we do not want to filter the query when it is blank.
+                    )
+                    ->default(1),
+
+                TrashedFilter::make(),
+
             ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
-
                 Tables\Actions\ViewAction::make('openLocation')
                     ->label('Bekijk')
                     ->url(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))
                     ->icon('heroicon-s-eye'),
+                RestoreAction::make()
+                    ->color("danger")
+                    ->modalHeading('Actie terug plaatsen')
+                    ->modalDescription(
+                        "Weet je zeker dat je deze actie wilt activeren"
+                    ),
+                Tables\Actions\ActionGroup::make([
+
+                    DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
+                    Tables\Actions\EditAction::make(),
+
+                ]),
+
             ])->recordUrl(
             fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record])
         )

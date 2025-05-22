@@ -21,7 +21,7 @@ class ViewSpace extends ViewRecord
                 ->color('gray'),
 
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
-                ->slideOver(),
+            ,
 
             ActionGroup::make([
                 Actions\DeleteAction::make('Verwijderen'),

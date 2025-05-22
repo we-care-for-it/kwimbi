@@ -94,7 +94,7 @@ class UserResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 Impersonate::make()->label('Login'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

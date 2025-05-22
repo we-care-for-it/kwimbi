@@ -87,7 +87,7 @@ class ObjectMonitoringCodesResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 Tables\Actions\DeleteAction::make()
                     ->modalHeading('Verwijderen van deze rij')
                     ->label(''),

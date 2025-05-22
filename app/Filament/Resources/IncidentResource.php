@@ -46,8 +46,7 @@ class IncidentResource extends Resource
                     ->modalDescription('Pas de bestaande storing aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('')
-                    ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                    ->modalIcon('heroicon-m-pencil-square'),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

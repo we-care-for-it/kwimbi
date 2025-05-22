@@ -13,7 +13,7 @@ class ViewRelationLocation extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()->label('Wijzigen')->slideOver()
+            Actions\EditAction::make()->label('Wijzigen')
                 ->icon('heroicon-m-pencil-square'),
             CommentsAction::make(),
         ];

@@ -15,14 +15,14 @@ class ListVehicles extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Voertuig toevoegen')
-                ->slideOver()
+
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Voertuig toevoegen')
                 ->modalDescription('Vul een kenteken in om de gegevens op te halen')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
-                ->slideOver()
+
                 ->label('Voertuig toevoegen'),
         ];
     }

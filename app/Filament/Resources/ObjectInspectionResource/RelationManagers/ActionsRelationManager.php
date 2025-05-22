@@ -134,7 +134,7 @@ class ActionsRelationManager extends RelationManager
                     ->hidden(fn($record) => $record->external_uuid)
                     ->label('Snel bewerken')
 
-                    ->slideOver(),
+                ,
                 DeleteAction::make()
 
                     ->modalHeading("Actie verwijderen")

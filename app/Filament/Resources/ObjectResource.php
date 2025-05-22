@@ -291,7 +291,7 @@ class ObjectResource extends Resource
                         ->tooltip('Bewerken')
                         ->label('')
                         ->modalIcon('heroicon-m-pencil-square')
-                        ->slideOver(),
+                    ,
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')

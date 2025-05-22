@@ -122,7 +122,7 @@ class ContactsRelationManager extends RelationManager
 
                 Tables\Actions\CreateAction::make('createContact')
                     ->label('Toevoegen')
-                    ->slideOver()
+
                     ->Icon('heroicon-m-plus')
 
                     ->modalHeading('Contactpersoon toevoegen')
@@ -144,7 +144,7 @@ class ContactsRelationManager extends RelationManager
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

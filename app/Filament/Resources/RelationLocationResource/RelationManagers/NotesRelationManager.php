@@ -65,7 +65,6 @@ class NotesRelationManager extends RelationManager
                 })->label('Notitie toevoegen')
                     ->Icon('heroicon-m-plus')
 
-                    ->slideOver()
                     ->modalHeading('Notitie toevoegen'),
 
             ])

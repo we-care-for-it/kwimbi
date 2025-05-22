@@ -85,7 +85,7 @@ class ReactionsRelationManager extends RelationManager
                     ->tooltip('Toevoegen')
                     ->label('Toevoegen')
                     ->modalIcon('heroicon-o-plus')
-                    ->slideOver()
+
                     ->mutateFormDataUsing(function (array $data): array {
                         $data["user_id"] = auth()->id();
                         if (! $data["status_id"]) {
@@ -103,7 +103,7 @@ class ReactionsRelationManager extends RelationManager
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 Tables\Actions\DeleteAction::make()
                     ->label(""),
             ])

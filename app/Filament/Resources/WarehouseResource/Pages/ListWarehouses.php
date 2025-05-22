@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\WarehouseResource\Pages;
 
 use App\Filament\Resources\WarehouseResource;
@@ -16,14 +15,14 @@ class ListWarehouses extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Magazijn toevoegen')
-                ->slideOver()
+
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Magazijn toevoegen')
                 ->modalDescription('Vul het magazijn in om de gegevens op te halen')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
-                ->slideOver()
+
                 ->label('Magazijn toevoegen'),
         ];
     }

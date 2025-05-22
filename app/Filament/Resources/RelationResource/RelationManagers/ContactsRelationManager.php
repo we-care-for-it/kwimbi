@@ -142,7 +142,7 @@ class ContactsRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->modalHeading('Contactpersoon tovoegen')
-                    ->slideOver(),
+                ,
             ])
             ->actions([
                 Tables\Actions\ViewAction::make('openContact')
@@ -153,7 +153,7 @@ class ContactsRelationManager extends RelationManager
                     })->icon('heroicon-s-eye'),
 
                 EditAction::make()
-                    ->slideOver()
+
                     ->label('Bewerken'),
             ])
             ->bulkActions([

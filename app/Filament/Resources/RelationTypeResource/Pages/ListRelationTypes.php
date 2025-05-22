@@ -15,14 +15,14 @@ class ListRelationTypes extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Relatie Type toevoegen')
-                ->slideOver()
+
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Object Type toevoegen')
                 ->modalDescription('Voeg een nieuw relatie type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
-                ->slideOver()
+
                 ->label('Object Type toevoegen'),
         ];
     }
