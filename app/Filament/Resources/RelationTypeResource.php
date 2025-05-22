@@ -9,6 +9,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 
 class RelationTypeResource extends Resource
@@ -56,12 +57,19 @@ class RelationTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort')
+            ->reorderRecordsTriggerAction(
+                fn(Action $action, bool $isReordering) => $action
+                    ->button()
+                    ->label($isReordering ? 'Afsluiten' : 'Volgorde wijzigen'),
+            )
+            ->defaultSort('sort', 'asc')
             ->columns([
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
+
+                Tables\Columns\ToggleColumn::make('is_active')
                     ->label('Actief')
-                    ->width('100px')
-                    ->toggleable(),
+                    ->width('100px'),
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
