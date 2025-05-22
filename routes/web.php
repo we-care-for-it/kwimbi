@@ -7,5 +7,5 @@ Route::get('/monitoring/retrieveInfo', [ObjectMonitoringController::class, 'retr
 
 Route::get('/run-migration', function () {
     Artisan::call('migrate --force');
-    return 'Migration complete';
+    return redirect('/');
 });
