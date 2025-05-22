@@ -98,7 +98,7 @@ class TasksOverview extends BaseWidget
                     ->modalHeading('Snel bewerken')
                     ->tooltip('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
 
                 Tables\Actions\DeleteAction::make()
                     ->modalDescription('Weet je zeker dat je deze taak wilt verwijderen?')

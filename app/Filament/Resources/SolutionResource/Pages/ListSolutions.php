@@ -17,7 +17,7 @@ class ListSolutions extends ListRecords
                 ->modalDescription('Voeg een standaard oplossing toe aan de database')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Oplossing toevoegen'),
         ];
     }

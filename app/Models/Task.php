@@ -6,6 +6,7 @@ use App\Enums\Priority;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
@@ -14,6 +15,7 @@ class Task extends Model implements HasCustomFields
 {
     use HasFactory;
     use UsesCustomFields;
+    use SoftDeletes;
     /**
      * @var string[]
      */

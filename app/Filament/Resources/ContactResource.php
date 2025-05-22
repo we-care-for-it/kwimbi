@@ -277,7 +277,7 @@ class ContactResource extends Resource
                         ->tooltip('Bewerken')
                         ->label('Bewerken')
                         ->modalIcon('heroicon-m-pencil-square')
-                        ->slideOver(),
+                    ,
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')

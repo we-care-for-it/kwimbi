@@ -118,7 +118,7 @@ class GpsDataRelationManager extends RelationManager
                     ->modalHeading('Wijzigen')
                     ->modalIcon('heroicon-m-pencil-square')
                     ->label('Wijzigen')
-                    ->slideOver(),
+                ,
 
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

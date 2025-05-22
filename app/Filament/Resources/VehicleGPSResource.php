@@ -98,7 +98,7 @@ class VehicleGPSResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver()
+
                     ->modalWidth(MaxWidth::Small),
                 DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

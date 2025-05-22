@@ -22,7 +22,7 @@ class ViewContact extends ViewRecord
                 ->color('gray'),
 
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
-                ->slideOver(),
+            ,
 
             CommentsAction::make(),
 

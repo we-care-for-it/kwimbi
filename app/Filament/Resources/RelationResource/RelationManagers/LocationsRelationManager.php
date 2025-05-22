@@ -244,7 +244,7 @@ class LocationsRelationManager extends RelationManager
                     ->label('Locatie toevoegen')
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
-                    ->slideOver()
+
                     ->modalHeading('Locatie toevoegen'),
             ])
             ->actions([
@@ -257,7 +257,7 @@ class LocationsRelationManager extends RelationManager
 
                     Tables\Actions\EditAction::make()
                         ->label('Wijzigen')
-                        ->slideOver()
+
                         ->modalHeading('Locatie wijzigen'),
 
                     Tables\Actions\DeleteAction::make()
@@ -274,7 +274,7 @@ class LocationsRelationManager extends RelationManager
                 //     ->icon('heroicon-s-eye'),
                 // Tables\Actions\EditAction::make()
                 //     ->label('Wijzigen')
-                //     ->slideOver()
+                //
                 //     ->modalHeading('Locatie wijzigen'),
 
                 // Tables\Actions\DeleteAction::make()

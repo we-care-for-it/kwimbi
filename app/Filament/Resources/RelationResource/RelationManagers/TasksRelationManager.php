@@ -91,7 +91,7 @@ class TasksRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
-                    ->slideOver()
+
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id'] = $this->ownerRecord->id;
                         $data['model']    = 'relation';
@@ -103,13 +103,17 @@ class TasksRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\DeleteAction::make()
                     ->label('Voltooi taak'),
+
                 Tables\Actions\ActionGroup::make([
-
                     Tables\Actions\EditAction::make()
-                        ->label('Wijzigen')
-                        ->slideOver()
-                        ->modalHeading('Taak wijzigen'),
+                        ->tooltip('Bewerken')
+                    ,
 
+                    Tables\Actions\DeleteAction::make()
+                        ->modalIcon('heroicon-o-trash')
+                        ->tooltip('Verwijderen')
+                        ->modalHeading('Verwijderen')
+                        ->color('danger'),
                 ]),
 
             ])

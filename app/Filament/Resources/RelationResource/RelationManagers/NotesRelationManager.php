@@ -72,7 +72,7 @@ class NotesRelationManager extends RelationManager
                     return $data;
                 })->label('Notitie toevoegen')
                     ->modalHeading('Notitie toevoegen')
-                    ->slideOver()
+
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus'),
 
@@ -83,7 +83,7 @@ class NotesRelationManager extends RelationManager
 
                     Tables\Actions\EditAction::make()
                         ->label('Wijzigen')
-                        ->slideOver()
+
                         ->modalHeading('Notitie wijzigen'),
 
                     Tables\Actions\DeleteAction::make()

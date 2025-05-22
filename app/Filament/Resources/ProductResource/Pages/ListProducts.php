@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Filament\Resources\ProductResource\Pages;
 
 use App\Filament\Resources\ProductResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -21,7 +19,7 @@ class ListProducts extends ListRecords
                 ->modalDescription('Voeg een nieuw product toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Product toevoegen'),
         ];
     }

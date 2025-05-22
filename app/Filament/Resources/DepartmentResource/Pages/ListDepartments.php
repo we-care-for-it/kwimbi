@@ -23,7 +23,7 @@ class ListDepartments extends ListRecords
 
             Actions\CreateAction::make()
                 ->label('Afdeling toevoegen')
-                ->slideOver()
+
                 ->modalDescription('Voeg een nieuwe afdeling toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Afdeling toevoegen')

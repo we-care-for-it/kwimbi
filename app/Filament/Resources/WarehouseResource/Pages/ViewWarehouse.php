@@ -12,7 +12,7 @@ class ViewWarehouse extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\EditAction::make()->label('Wijzigen')->slideOver(),
+            Actions\EditAction::make()->label('Wijzigen'),
             Actions\DeleteAction::make(),
         ];
     }

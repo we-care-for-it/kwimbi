@@ -280,7 +280,7 @@ class RelationLocationResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
@@ -19,7 +18,7 @@ class ListUsers extends ListRecords
                 ->modalDescription('Voeg een nieuwe gebruiker toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Gebruiker toevoegen'),
         ];
     }
@@ -28,4 +27,3 @@ class ListUsers extends ListRecords
         return "Gebruiker - Overzicht";
     }
 }
-

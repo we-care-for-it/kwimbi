@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Filament\Resources\BrandResource\Pages;
 
 use App\Filament\Resources\BrandResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -21,7 +19,7 @@ class ListBrands extends ListRecords
                 ->modalDescription('Voeg een nieuw merk toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Merk toevoegen'),
         ];
     }

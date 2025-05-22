@@ -80,7 +80,7 @@ class ContactsRelationManager extends RelationManager
 
                 Action::make('createContact')
                     ->label('Toevoegen')
-                    ->slideOver()
+
                     ->modalHeading('Contactpersoon toevoegen')
                     ->form([
                         Grid::make(2)
@@ -142,7 +142,7 @@ class ContactsRelationManager extends RelationManager
                     ->modalWidth(MaxWidth::Large)
                     ->modalHeading('Contactpersoon toevoegen')
                     ->modalDescription('Koppel een bestaande contactpersoon aan deze locatie')
-                    ->slideOver()
+
                     ->label('Koppel bestaand contact')
                     ->form([
 

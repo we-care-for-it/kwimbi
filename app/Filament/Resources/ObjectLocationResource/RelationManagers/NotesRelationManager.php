@@ -65,7 +65,7 @@ class NotesRelationManager extends RelationManager
                     $data['model']      = "ObjectLocation";
                     return $data;
                 })->label('Notitie toevoegen')
-                    ->slideOver()
+
                     ->modalHeading('Notitie toevoegen'),
 
             ])

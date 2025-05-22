@@ -1,21 +1,20 @@
 <?php
-
 namespace App\Enums;
 
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
 enum Priority: string implements HasLabel, HasColor {
-    case HIGH = '1';
+    case HIGH   = '1';
     case MEDIUM = '2';
-    case LOW = '3';
+    case LOW    = '3';
 
     public function getlabel(): string
     {
         return match ($this) {
-            self::HIGH => 'Hoog',
+            self::HIGH   => 'Hoog',
             self::MEDIUM => 'Gemiddeld',
-            self::LOW => 'Laag',
+            self::LOW    => 'Laag',
 
         };
     }
@@ -31,9 +30,9 @@ enum Priority: string implements HasLabel, HasColor {
     public function getColor(): string | array | null
     {
         return match ($this) {
-            self::HIGH => 'danger',
+            self::HIGH   => 'danger',
             self::MEDIUM => 'warning',
-            self::LOW => 'success',
+            self::LOW    => 'success',
         };
     }
 }

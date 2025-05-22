@@ -63,7 +63,7 @@ class BrandResource extends Resource
                     ->modalDescription('Pas het bestaande merk aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([

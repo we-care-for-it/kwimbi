@@ -264,17 +264,17 @@ class TicketRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make('OpenTicket')
                     ->label('Bekijk')
                     ->icon('heroicon-s-pencil')
-                    ->slideOver(),
+                ,
 
                 Tables\Actions\EditAction::make('editTicket')
                     ->label('Snel bewerken')
                     ->icon('heroicon-s-pencil')
-                    ->slideOver(),
+                ,
 
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make()
                         ->tooltip('Bewerken')
-                        ->slideOver(),
+                    ,
 
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
@@ -292,7 +292,7 @@ class TicketRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->label('Ticket toevoegen')
-                    ->slideOver(),
+                ,
 
             ])
 

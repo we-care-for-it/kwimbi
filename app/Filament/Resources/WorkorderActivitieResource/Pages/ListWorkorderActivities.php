@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Filament\Resources\WorkorderActivitieResource\Pages;
 
 use App\Filament\Resources\WorkorderActivitieResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -22,7 +20,7 @@ class ListWorkorderActivities extends ListRecords
                 ->modalDescription('Voeg een nieuw uurtype toe door de onderstaande gegevens in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-clock')
-                ->slideOver(),
+            ,
         ];
     }
 

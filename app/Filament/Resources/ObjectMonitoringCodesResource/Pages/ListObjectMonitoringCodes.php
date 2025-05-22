@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Filament\Resources\ObjectMonitoringCodesResource\Pages;
 
 use App\Filament\Resources\ObjectMonitoringCodesResource;
 use Filament\Actions;
-use Filament\Facades\Filament;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -28,7 +26,7 @@ class ListObjectMonitoringCodes extends ListRecords
                 ->modalDescription('Voeg een nieuwe monitoringcode toe door de onderstaande gegevens in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver(),
+            ,
         ];
     }
 

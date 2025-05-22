@@ -15,14 +15,14 @@ class ListObjectTypes extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Object Type toevoegen')
-                ->slideOver()
+
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Object Type toevoegen')
                 ->modalDescription('Voeg een nieuw object type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
-                ->slideOver()
+
                 ->label('Object Type toevoegen'),
         ];
     }
@@ -32,4 +32,3 @@ class ListObjectTypes extends ListRecords
         return "Object Types - Overzicht";
     }
 }
-

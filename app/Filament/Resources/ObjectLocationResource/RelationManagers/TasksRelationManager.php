@@ -150,7 +150,7 @@ class TasksRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
-                    ->slideOver()
+
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id'] = $this->ownerRecord->id;
                         $data['model']    = 'location';
@@ -161,7 +161,7 @@ class TasksRelationManager extends RelationManager
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->slideOver()
+
                     ->label('Bewerken'),
                 Tables\Actions\DeleteAction::make()
 

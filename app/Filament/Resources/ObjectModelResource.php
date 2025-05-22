@@ -94,7 +94,7 @@ class ObjectModelResource extends Resource
                     ->modalHeading('Model bewerken')
                     ->tooltip('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

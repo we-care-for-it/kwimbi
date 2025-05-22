@@ -5,10 +5,12 @@ use App\Enums\Priority;
 use App\Enums\TicketStatus;
 use App\Enums\TicketTypes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends Model
 {
 
+    use SoftDeletes;
     protected $casts = [
         'status_id' => TicketStatus::class,
         'prio'      => Priority::class,

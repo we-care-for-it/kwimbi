@@ -215,7 +215,13 @@ class ProjectsResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
+            ->defaultSort('id', 'decs')
+            ->persistSortInSession()
+            ->persistSearchInSession()
+            ->searchable()
+            ->persistColumnSearchesInSession()
 
             ->columns([
                 Tables\Columns\TextColumn::make("id")
@@ -347,7 +353,7 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->preload(),
 
-            ], layout: FiltersLayout::AboveContent)
+            ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
 
             ->actions([
@@ -361,8 +367,9 @@ class ProjectsResource extends Resource
                     ->modalDescription('Pas de bestaande project aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
+                    ->slideOver()
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
 
             ])
             ->bulkActions([

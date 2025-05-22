@@ -17,7 +17,7 @@ class ListErrors extends ListRecords
                 ->modalDescription('Voeg een standaard foutmelding toe aan de database')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Foutmelding toevoegen'),
         ];
     }

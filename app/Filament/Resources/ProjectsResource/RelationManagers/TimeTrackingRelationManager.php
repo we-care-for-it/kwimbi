@@ -116,7 +116,7 @@ class TimeTrackingRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
-                    ->slideOver(),
+                ,
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -125,7 +125,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
                     ->tooltip('Verwijderen')

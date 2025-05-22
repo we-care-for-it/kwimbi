@@ -22,7 +22,7 @@ class ListContacts extends ListRecords
                 ->modalDescription('Voeg een nieuwe contact toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Contact toevoegen'),
         ];
     }

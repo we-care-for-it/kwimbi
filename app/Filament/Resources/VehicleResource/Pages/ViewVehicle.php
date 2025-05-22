@@ -20,7 +20,7 @@ class ViewVehicle extends ViewRecord
                 ->url('/vehicles')
                 ->color('gray'),
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
-                ->slideOver(),
+            ,
             Actions\DeleteAction::make()->icon('heroicon-m-trash'),
         ];
     }

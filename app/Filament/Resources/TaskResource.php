@@ -23,6 +23,7 @@ use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
@@ -153,6 +154,9 @@ class TaskResource extends Resource
             ->persistSearchInSession()
             ->searchable()
             ->persistColumnSearchesInSession()
+            ->recordClasses(fn($record) =>
+                $record->deleted_at ? 'table_row_deleted ' : null
+            )
             ->columns([
 
                 TileColumn::make('employee')
@@ -275,6 +279,8 @@ class TaskResource extends Resource
                             })->toArray();
                     }),
 
+                TrashedFilter::make(),
+
             ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
@@ -284,22 +290,33 @@ class TaskResource extends Resource
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
-                    ->slideOver(),
+                ,
 
-                DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
-                    ->icon('heroicon-o-check')
-                    ->modalIcon('heroicon-o-check')
-                    ->modalHeading('Actie voltooien')
-                    ->color('info')
-                    ->tooltip('Voltooien')
-                    ->label('Voltooien'),
+                Tables\Actions\ActionGroup::make([
 
-                RestoreAction::make()
-                    ->color("danger")
-                    ->modalHeading('Actie terug plaatsen')
-                    ->modalDescription(
-                        "Weet je zeker dat je deze actie wilt activeren"
-                    ),
+                    DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
+                        ->icon('heroicon-o-check')
+                        ->modalIcon('heroicon-o-check')
+                        ->modalHeading('Actie voltooien')
+                        ->color('info')
+                        ->tooltip('Voltooien')
+                        ->label('Voltooien'),
+
+                    RestoreAction::make()
+                        ->color("danger")
+                        ->modalHeading('Actie terug plaatsen')
+                        ->modalDescription(
+                            "Weet je zeker dat je deze actie wilt activeren"
+                        ),
+
+                    RestoreAction::make()
+                        ->color("danger")
+                        ->modalHeading('Actie terug plaatsen')
+                        ->modalDescription(
+                            "Weet je zeker dat je deze actie wilt activeren"
+                        ),
+
+                ]),
 
             ])
             ->bulkActions([

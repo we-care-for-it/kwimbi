@@ -24,7 +24,7 @@ class ListTasks extends ListRecords
                 ->modalDescription('Voeg een nieuwe taak toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->icon('heroicon-m-plus')
                 ->modalIcon('heroicon-o-plus')
-                ->slideOver()
+
                 ->label('Taak toevoegen'),
         ];
     }
@@ -40,7 +40,7 @@ class ListTasks extends ListRecords
             'Hoog'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1))
                 ->badgeColor('danger')
-                ->badge(Task::query()->where('priority', 21)->count()),
+                ->badge(Task::query()->where('priority', 1)->count()),
             'Gemiddeld' => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2))
                 ->badgeColor('warning')
