@@ -370,15 +370,15 @@ class RelationResource extends Resource
     {
         return
 
-        $table->groups([Group::make("type.name")
-                ->titlePrefixedWithLabel(false)
-                ->label("Categorie"),
+        // groups([Group::make("type.name")
+        //         ->titlePrefixedWithLabel(false)
+        //         ->label("Categorie"),
 
-        ])
-            ->defaultGroup('type.name')
-            ->
+        // ])
+        //     ->defaultGroup('type.name')
+        //     ->
 
-        columns([
+        $table->columns([
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()

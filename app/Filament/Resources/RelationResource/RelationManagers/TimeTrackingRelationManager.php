@@ -61,7 +61,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->searchable()
                     ->options(workorderActivities::where('is_active', 1)->pluck("name", "id")->toArray())
                     ->required(),
-                Forms\Components\TextArea::make('description')
+                Forms\Components\Textarea::make('description')
                     ->label('Omschrijving')
                     ->required()
                     ->columnSpan('full'),

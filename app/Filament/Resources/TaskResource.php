@@ -11,7 +11,6 @@ use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -22,9 +21,11 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
@@ -46,11 +47,6 @@ class TaskResource extends Resource
     {
         return $form
             ->schema([
-
-                TextInput::make('title')
-                    ->label('Title')
-                    ->required()
-                    ->columnSpan('full'),
 
                 Textarea::make('description')
                     ->rows(3)
@@ -81,13 +77,10 @@ class TaskResource extends Resource
                                     $category => $group->pluck('name', 'id')->toArray(),
                                 ];
                             })->toArray();
-                    })
-
-                    ->searchable(),
+                    }),
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))
-                    ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'project' ?? false;
                     })
@@ -100,26 +93,8 @@ class TaskResource extends Resource
                         return $get('model') == 'contactperson' ?? false;
                     })
                     ->label('Contactpersoon'),
-
-                //         TileSelect::make('contact_id')
-                //             ->searchable(['first_name', 'last_name', 'email'])
-                //             ->model(Contact::class)
-                //             ->titleKey('name')
-                //             ->imageKey('avatar')
-                //             ->descriptionKey('email')
-                //             ->label('Contactpersoon')
-
-                // Select::make('model_id')
-                //     ->options(Elevator::pluck('nobo_no', 'id'))
-                //     ->searchable()
-                //     ->visible(function (Get $get, Set $set) {
-                //         return $get('model') == 'object' ?? false;
-                //     })
-                //     ->label('Object'),
-
                 Select::make('model_id')
                     ->options(ObjectLocation::pluck('name', 'id'))
-                    ->searchable()
                     ->visible(function (Get $get, Set $set) {
                         return $get('model') == 'location' ?? false;
                     })
@@ -127,7 +102,6 @@ class TaskResource extends Resource
 
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
-                    ->searchable()
                     ->default(Auth::id())
                     ->label('Medewerker'),
 
@@ -135,7 +109,6 @@ class TaskResource extends Resource
                     ->placeholder('Geen')
                     ->default(3)
                     ->options(Priority::class)
-                    ->searchable()
                     ->label('Prioriteit'),
 
                 DatePicker::make('begin_date')
@@ -175,10 +148,25 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-
+            ->defaultSort('id', 'desc')
+            ->persistSortInSession()
+            ->persistSearchInSession()
+            ->searchable()
+            ->persistColumnSearchesInSession()
             ->columns([
 
-                Tables\Columns\TextColumn::make('id')
+                TileColumn::make('employee')
+                // ->description(fn($record) => $record->AssignedByUser->email)
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        return $record?->employee?->name;
+                    })
+                    ->description(fn($record) => $record->employee?->email)
+                    ->label('Toegewezen medewerker')
+
+                    ->image(fn($record) => $record?->employee?->avatar)
+                    ->placeholder('Geen'),
+                //Tables\Columns\TextColumn::make('id')
                 // ->description(function ($record): ?string {
                 //     if ($record?->private) {
                 //         return "Priveactie";
@@ -186,11 +174,11 @@ class TaskResource extends Resource
                 //         return false;
                 //     }
                 // })
-                    ->label('#')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        return sprintf('%06d', $record?->id);
-                    }),
+                // ->label('#')
+                // ->sortable()
+                // ->getStateUsing(function ($record): ?string {
+                //     return sprintf('%06d', $record?->id);
+                // }),
 
                 Tables\Columns\TextColumn::make('type_id')
                     ->badge()
@@ -211,62 +199,57 @@ class TaskResource extends Resource
                         return $record?->related_to?->name;
 
                     })->placeholder('-')
-
                     ->description(function ($record): ?string {
-                        switch ($record->model) {
-                            case 'relation':
-                                return false;
-                                break;
-                            case 'project':
-                                return false;
-                                break;
-                            case 'location':
-                                return false;
-                                break;
-                            case 'object':
-                                $housenumber   = "";
-                                $complexnumber = "";
-                                $name          = "";
-                                if ($record?->related_to?->location->housenumber) {
-                                    $housenumber = " " . $record->related_to->location->housenumber;
-                                }
-                                return $record?->related_to->location?->address . " " . $housenumber . " - " . $record->related_to?->location?->zipcode . " - " . $record->related_to?->location?->place;
+                        return $record?->description;
 
-                                break;
-                            case 'contactperson':
-                                return $record?->related_to?->email;
+                    })->wrap(),
 
-                                break;
-                            default:
-                                return false;
-                        }
-                    })
+                // Tables\Columns\TextColumn::make('description')
+                //     ->wrap()
 
-                ,
+                //     ->label('Taak omschrijving')
+                //     ->sortable()->description(function ($record): ?string {
+                //     switch ($record->model) {
+                //         case 'relation':
+                //             return false;
+                //             break;
+                //         case 'project':
+                //             return false;
+                //             break;
+                //         case 'location':
+                //             return false;
+                //             break;
+                //         case 'object':
+                //             $housenumber   = "";
+                //             $complexnumber = "";
+                //             $name          = "";
+                //             if ($record?->related_to?->location->housenumber) {
+                //                 $housenumber = " " . $record->related_to->location->housenumber;
+                //             }
+                //             return $record?->related_to->location?->address . " " . $housenumber . " - " . $record->related_to?->location?->zipcode . " - " . $record->related_to?->location?->place;
 
-                Tables\Columns\TextColumn::make('title')
-                    ->description(function ($record): ?string {
-                        if ($record?->description) {
-                            return $record?->description;
-                        } else {
-                            return false;
-                        }
-                    })
-                    ->label('Taak omschrijving')
-                    ->sortable(),
+                //             break;
+                //         case 'contactperson':
+                //             return $record?->related_to?->email;
+
+                //             break;
+                //         default:
+                //             return false;
+                //     }
+                // }),
 
                 Tables\Columns\TextColumn::make('begin_date')
                     ->label('Plandatum')
                     ->placeholder('-')
-                    ->toggleable()
                     ->sortable()
                     ->dateTime("d-m-Y")
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('deadline')
                     ->label('Einddatum')
                     ->placeholder('-')
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable()
                     ->dateTime("d-m-Y")
                     ->color(
@@ -276,11 +259,6 @@ class TaskResource extends Resource
                         : "success"
                     )
                     ->sortable(),
-
-                Tables\Columns\TextColumn::make('employee.name')
-
-                    ->label('Toegewezen aan')
-                    ->toggleable(),
 
             ])
             ->filters([
@@ -297,7 +275,8 @@ class TaskResource extends Resource
                             })->toArray();
                     }),
 
-            ])
+            ], layout: FiltersLayout::Modal)
+            ->filtersFormColumns(4)
             ->actions([
                 EditAction::make()
                     ->modalHeading('Taak Bewerken')

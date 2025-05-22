@@ -247,6 +247,7 @@ class TicketResource extends Resource
                     ->getStateUsing(function ($record): ?string {
                         return $record?->AssignedByUser?->name;
                     })
+                    ->description(fn($record) => $record->AssignedByUser?->email)
                     ->label('Toegewezen medewerker')
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar)
