@@ -145,7 +145,9 @@ class ObjectResource extends Resource
                 ->collapsible()
                 ->collapsed(false)
                 ->persistCollapsed()
-                ->visible(fn($record, $get) => $record?->type?->has_inspections)->columns(1),
+                ->visible(fn($record, $get) => in_array('Keuringen', $record?->type?->options) ? true : false)
+
+                ->columns(1),
 
             CustomFieldsComponent::make()
                 ->columns(1),
@@ -191,6 +193,7 @@ class ObjectResource extends Resource
                 Tables\Columns\TextColumn::make("current_inspection_status_id")
                     ->label("KeuringStatus")
                     ->placeholder('-')
+
                     ->badge(),
                 Tables\Columns\TextColumn::make("current_inspection_end_date")
                     ->label("Keuringsdatum")
@@ -366,9 +369,13 @@ class ObjectResource extends Resource
                                 TextEntry::make('latestInspection.status_id')
                                     ->label('Keuringsstatus')
                                     ->badge()
-                                    ->placeholder('Onbekend'),
+                                    ->placeholder('Onbekend')
+                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
+                                ,
                                 TextEntry::make('current_inspection_end_date')
                                     ->label('Keuringsverloop datum')
+                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
+
                                     ->date('d-m-Y')
                                     ->placeholder('Onbekend'),
 
@@ -405,16 +412,19 @@ class ObjectResource extends Resource
                                     ->placeholder('Niet opgegeven'),
                                 TextEntry::make('inspectioncompany.name')
                                     ->label('Keuringsinstantie')
+                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
+
                                     ->placeholder('Niet opgegeven')
                                     ->hidden(),
-                                TextEntry::make('location.management.name')
-                                    ->label('Beheerder')
-                                    ->visible(function ($record) {
+                                // TextEntry::make('location.management.name')
+                                //     ->label('Beheerder')
+                                //     ->visible(fn($record) => in_array('Beheerder', $record?->location?->type?->options) ? true : false)
 
-                                        return in_array('Beheerder', $record?->location->type->options) ? true : false;;
-                                    })
+                                // ->visible(function ($record) {
 
-                                    ->placeholder('Niet opgegeven'),
+                                //     return in_array('Beheerder', $record?->location->type->options) ? true : false;;
+                                // })
+
                             ])->columns(2),
 
                         Tabs\Tab::make('Afbeeldingen')
@@ -449,11 +459,11 @@ class ObjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\IncidentsRelationManager::class,
+            RelationManagers\TicketsRelationManager::class,
             RelationManagers\MaintenanceContractsRelationManager::class,
             RelationManagers\MaintenanceVisitsRelationManager::class,
             RelationManagers\inspectionsRelationManager::class,
-            RelationManagers\ObjectMonitoringRelationManager::class,
+            //       RelationManagers\ObjectMonitoringRelationManager::class,
             RelationManagers\AttachmentRelationManager::class,
         ];
     }

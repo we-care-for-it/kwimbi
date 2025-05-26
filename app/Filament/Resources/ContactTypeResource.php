@@ -6,6 +6,7 @@ use App\Models\contactType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -13,6 +14,9 @@ class ContactTypeResource extends Resource
 {
     protected static ?string $model                 = contactType::class;
     protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationLabel       = "Contactpersoon categorieen";
+    protected static ?string $title                 = "Contactpersoon categorieen";
+    protected static ?string $pluralModelLabel      = 'Contactpersoon categorieen';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -21,11 +25,15 @@ class ContactTypeResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\Toggle::make('is_active')
-                    ->default(true),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->label('Naam')
+                    ->maxLength(255)
+                    ->columnSpan("full"),
+
+                // Forms\Components\Toggle::make('is_active')
+                //     ->default(true),
+
             ]);
 
     }
@@ -34,27 +42,28 @@ class ContactTypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
+                Tables\Columns\ToggleColumn::make('is_active')
                     ->label('Actief')
-                    ->width('100px')
-                    ->toggleable(),
+                    ->width('100px'),
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
+                    ->label('Naam')
                     ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->modalWidth(MaxWidth::Medium),
+                Tables\Actions\DeleteAction::make()->label(''),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->emptyState(view('partials.empty-state'));
+
     }
 
     public static function getPages(): array
