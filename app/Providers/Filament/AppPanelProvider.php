@@ -39,7 +39,7 @@ use DutchCodingCompany\FilamentDeveloperLogins\FilamentDeveloperLoginsPlugin;
 use Filament\Enums\ThemeMode;
 use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
-
+use Asmit\ResizedColumn\ResizedColumnPlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 
 class AppPanelProvider extends PanelProvider
@@ -47,6 +47,15 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+
+
+    ->plugins([
+            // ... other plugins
+            ResizedColumnPlugin::make()
+                ->preserveOnDB(true) // Enable database storage (optional)
+        ])
+
+
       ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 
            ->defaultThemeMode(ThemeMode::Light)

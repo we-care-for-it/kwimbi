@@ -3,6 +3,7 @@ namespace App\Filament\Resources\TimeTrackingResource\Pages;
 
 use App\Filament\Resources\TimeTrackingResource;
 use App\Models\timeTracking;
+use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -14,6 +15,7 @@ class ListTimeTrackings extends ListRecords
 {
     use InteractsWithCustomFields;
     protected static string $resource = TimeTrackingResource::class;
+    use HasResizableColumn;
     protected function getHeaderActions(): array
     {
         return [

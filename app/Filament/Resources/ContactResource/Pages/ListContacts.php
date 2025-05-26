@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\ContactResource\Pages;
 
 use App\Filament\Resources\ContactResource;
+use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
@@ -13,6 +14,7 @@ class ListContacts extends ListRecords
     use InteractsWithCustomFields;
     protected static string $resource = ContactResource::class;
     protected static ?string $title   = "Contactpersonen";
+    use HasResizableColumn;
     protected function getHeaderActions(): array
     {
         return [

@@ -2,6 +2,7 @@
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
+use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
@@ -12,7 +13,7 @@ class ListProjects extends ListRecords
     protected static string $resource = ProjectsResource::class;
     protected static ?string $title   = 'Projecten';
     use InteractsWithCustomFields;
-
+    use HasResizableColumn;
     protected function getHeaderActions(): array
     {
         return [

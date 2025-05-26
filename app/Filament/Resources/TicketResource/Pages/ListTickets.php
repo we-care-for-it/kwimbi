@@ -3,6 +3,7 @@ namespace App\Filament\Resources\TicketResource\Pages;
 
 use App\Filament\Resources\TicketResource;
 use App\Models\Ticket;
+use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 class ListTickets extends ListRecords
 {
     protected static string $resource = TicketResource::class;
-
+    use HasResizableColumn;
     // protected function getHeaderActions(): array
     // {
     //     return [
