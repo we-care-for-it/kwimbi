@@ -4,6 +4,7 @@ namespace App\Filament\Resources\RelationResource\Pages;
 use App\Filament\Resources\RelationResource;
 use App\Models\Relation;
 use App\Models\relationType;
+use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -14,6 +15,7 @@ use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 class ListRelations extends ListRecords
 {
     use InteractsWithCustomFields;
+    use HasResizableColumn;
     protected static string $resource = RelationResource::class;
     protected function getHeaderActions(): array
     {

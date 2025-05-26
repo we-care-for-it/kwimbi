@@ -189,7 +189,7 @@ class ObjectsRelationManager extends RelationManager
             ])
             ->emptyState(view('partials.empty-state-small'))
             ->recordUrl(function ($record) {
-                return "/contacts/" . $record->id;
+                return "/objects/" . $record->id;
             })
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

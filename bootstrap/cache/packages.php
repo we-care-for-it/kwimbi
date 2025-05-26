@@ -6,6 +6,13 @@
       'EloquentSerialize' => 'AnourValar\\EloquentSerialize\\Facades\\EloquentSerializeFacade',
     ),
   ),
+  'asmit/resized-column' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Asmit\\ResizedColumn\\ResizedColumnServiceProvider',
+    ),
+  ),
   'bezhansalleh/filament-language-switch' => 
   array (
     'providers' => 
