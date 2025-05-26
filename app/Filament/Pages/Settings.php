@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Pages;
 
-use App\Models\GeneralSetting;
+use App\Models\generalSetting;
 use Filament\Pages\Page;
 
 class Settings extends Page
@@ -21,7 +21,7 @@ class Settings extends Page
 
     public function mount()
     {
-        $this->results = GeneralSetting::all();
+        $this->results = generalSetting::all();
     }
     public function updatedQuery($value)
     {
@@ -31,7 +31,7 @@ class Settings extends Page
     public function search()
     {
 
-        $this->results = GeneralSetting::where('name', 'like', '%' . $this->keyword . '%')
+        $this->results = generalSetting::where('name', 'like', '%' . $this->keyword . '%')
             ->get();
 
     }
