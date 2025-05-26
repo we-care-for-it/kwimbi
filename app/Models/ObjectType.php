@@ -13,25 +13,11 @@ class ObjectType extends Model implements Auditable
     protected $fillable = [
         'name',
         'is_active',
-        'has_inspections',
-        'has_incidents',
-        'has_maintencycontracts',
-        'has_maintency',
-        'has_tickets',
+
     ];
 
     protected $casts = [
-        'is_active'              => 'boolean',
-        'has_inspections'        => 'boolean',
-        'has_incidents'          => 'boolean',
-        'has_maintencycontracts' => 'boolean',
-        'has_maintency'          => 'boolean',
-        'has_tickets'            => 'boolean',
+        'options' => 'array',
     ];
-
-    public function customFields()
-    {
-        return $this->hasMany(customFieldinModel::class, 'model_id');
-    }
 
 }

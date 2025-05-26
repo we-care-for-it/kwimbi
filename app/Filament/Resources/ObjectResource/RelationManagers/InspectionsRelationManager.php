@@ -25,7 +25,8 @@ class InspectionsRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_inspections ?? false;
+
+        return in_array('Keuringen', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function getContentTabIcon(): ?string

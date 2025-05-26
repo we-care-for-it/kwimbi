@@ -14,7 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
-class IncidentsRelationManager extends RelationManager
+class TicketsRelationManager extends RelationManager
 {
     protected static string $relationship = 'Incidents';
     protected static ?string $title       = 'Storingen';
@@ -25,6 +25,12 @@ class IncidentsRelationManager extends RelationManager
         return $ownerRecord
             ->incidents
             ->count();
+    }
+
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+
+        return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function form(Form $form): Form
@@ -143,11 +149,6 @@ class IncidentsRelationManager extends RelationManager
         ])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([
             ]), ]);
-    }
-
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
-        return $ownerRecord->type->has_incidents ?? false;
     }
 
 }

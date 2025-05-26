@@ -74,6 +74,10 @@ class RelationTypeResource extends Resource
                     ->searchable()
                     ->sortable(),
 
+                Tables\Columns\TextColumn::make('options')
+                    ->label('Opties')
+                    ->badge(),
+
             ])
             ->filters([
                 //

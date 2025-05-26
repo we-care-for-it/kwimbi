@@ -28,7 +28,8 @@ class MaintenanceContractsRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_maintencycontracts ?? false;
+
+        return in_array('Onderhoudscontracten', $ownerRecord?->type?->options) ? true : false;
     }
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string

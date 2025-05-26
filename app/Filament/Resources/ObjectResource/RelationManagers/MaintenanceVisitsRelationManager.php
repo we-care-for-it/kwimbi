@@ -28,7 +28,8 @@ class MaintenanceVisitsRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $ownerRecord->type->has_maintency ?? false;
+
+        return in_array('Onderhoudsbeurten', $ownerRecord?->type?->options) ? true : false;
     }
 
     public function form(Form $form): Form
