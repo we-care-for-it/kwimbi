@@ -173,6 +173,16 @@
 
 
 
+         @can('view_any_relation::type')
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="ticket-types">
+            <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
+            <div>
+               <h2>Ticket categorieeen</h2>
+               <p class="text-sm text-gray-600">Locatie Categorieeen</p>
+            </div>
+         </a>
+         @endcan
+
 
          @can('view_any_object::type')
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="object-types">

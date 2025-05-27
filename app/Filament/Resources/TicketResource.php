@@ -3,13 +3,13 @@ namespace App\Filament\Resources;
 
 use App\Enums\Priority;
 use App\Enums\TicketStatus;
-use App\Enums\TicketTypes;
 use App\Filament\Resources\TicketResource\Pages;
 use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
+use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -67,7 +67,7 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
-                            ->options(TicketTypes::Class),
+                            ->options(ticketType::pluck('name', 'id', )),
 
                         Forms\Components\Select::make('prio')
                             ->label('Prioriteit')
@@ -256,13 +256,25 @@ class TicketResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->label('Status'),
+                Tables\Columns\TextColumn::make('department.name')
+                    ->toggleable(isToggledHiddenByDefault: true)
 
-                Tables\Columns\TextColumn::make('type_id')
+                    ->sortable()
+                    ->toggleable()
+                    ->badge()
+
+                    ->label('Afdeling'),
+                Tables\Columns\TextColumn::make('type.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
                     ->label('Type'),
-
+                Tables\Columns\TextColumn::make('description')
+                    ->limit(50)
+                    ->toggleable()
+                    ->wrap()
+                    ->lineClamp(2)
+                    ->label('Omschrijving'),
                 TileColumn::make('AssignedByUser')
                 // ->description(fn($record) => $record->AssignedByUser->email)
                     ->sortable()
@@ -283,7 +295,8 @@ class TicketResource extends Resource
                     ->description(function ($record): ?string {
                         return date("d-m-Y H m:s", strtotime($record?->created_at));
                     })
-                    ->label('Gemeld'),
+                    ->label('Gemeld')
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('relation.name')
                     ->sortable()
                     ->url(function ($record) {
@@ -292,21 +305,6 @@ class TicketResource extends Resource
                     ->toggleable()
                     ->label('Relatie'),
 
-                Tables\Columns\TextColumn::make('department.name')
-                    ->toggleable(isToggledHiddenByDefault: true)
-
-                    ->sortable()
-                    ->toggleable()
-                    ->badge()
-
-                    ->label('Afdeling'),
-
-                Tables\Columns\TextColumn::make('description')
-                    ->limit(50)
-                    ->toggleable()
-                    ->wrap()
-                    ->lineClamp(2)
-                    ->label('Omschrijving'),
                 // Tables\Columns\TextColumn::make('AssignedByUser.name')
                 //     ->sortable()
                 //     ->toggleable()
@@ -325,6 +323,9 @@ class TicketResource extends Resource
                 SelectFilter::make('status_id')
                     ->label('Status')
                     ->options(TicketStatus::Class),
+                SelectFilter::make('type_id')
+                    ->label('Categorie')
+                    ->options(ticketType::pluck('name', 'id')),
 
                 SelectFilter::make('department_id')
                     ->label('Afdeling')

@@ -3,15 +3,16 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\Priority;
 use App\Enums\TicketStatus;
-use App\Enums\TicketTypes;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Location;
+use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
@@ -113,12 +114,19 @@ class TicketRelationManager extends RelationManager
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
-                            ->options(TicketTypes::Class),
+                            ->options(ticketType::pluck('name', 'id')),
 
-                        Forms\Components\Select::make('prio')
-                            ->label('Prioriteit')
+                        ToggleButtons::make('prio')
                             ->options(Priority::class)
-                            ->default('3'),
+
+                            ->colors([
+                                '1' => 'info',
+                                '2' => 'warning',
+                                '3' => 'success',
+
+                            ])
+                            ->default(3)->grouped()
+                            ->label('Prioriteit'),
 
                     ])->columns(3),
 
@@ -289,8 +297,8 @@ class TicketRelationManager extends RelationManager
                     ->modalWidth(MaxWidth::FourExtraLarge)
                     ->modalHeading('Ticket toevoegen')
                     ->modalDescription('Geef de onderstaande gegevens op om de ticket aan te maken.')
-                    ->icon('heroicon-m-plus')
-                    ->modalIcon('heroicon-o-plus')
+                //  ->icon('heroicon-m-plus')
+                // ->modalIcon('heroicon-o-plus')
                     ->label('Ticket toevoegen')
                 ,
 
