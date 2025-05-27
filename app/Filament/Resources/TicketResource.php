@@ -2,13 +2,13 @@
 namespace App\Filament\Resources;
 
 use App\Enums\Priority;
-use App\Enums\TicketStatus;
 use App\Filament\Resources\TicketResource\Pages;
 use App\Filament\Resources\TicketResource\RelationManagers;
 use App\Models\Department;
 use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
+use App\Models\TicketStatus;
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -63,9 +63,9 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(TicketStatus::Class),
+                            ->options(ticketStatus::pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
-                            ->label('Type')
+                            ->label('Categorie')
                             ->default('2')
                             ->options(ticketType::pluck('name', 'id', )),
 
@@ -146,7 +146,7 @@ class TicketResource extends Resource
                         ->label("Relatie")
                         ->placeholder("Niet opgegeven"),
 
-                    Components\TextEntry::make('type_id')
+                    Components\TextEntry::make('type.name')
                         ->label("Type")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
@@ -251,7 +251,7 @@ class TicketResource extends Resource
                     ->label('Prioriteit'),
 
                 //     ->label('Medewerker'),
-                Tables\Columns\TextColumn::make('status_id')
+                Tables\Columns\TextColumn::make('status.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -322,7 +322,7 @@ class TicketResource extends Resource
 
                 SelectFilter::make('status_id')
                     ->label('Status')
-                    ->options(TicketStatus::Class),
+                    ->options(ticketStatus::pluck('name', 'id')),
                 SelectFilter::make('type_id')
                     ->label('Categorie')
                     ->options(ticketType::pluck('name', 'id')),
@@ -348,6 +348,12 @@ class TicketResource extends Resource
             ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
+
+                Tables\Actions\EditAction::make('editTicket')
+                    ->label('Snel bewerken')
+                    ->icon('heroicon-s-pencil')
+                ,
+
                 Tables\Actions\ViewAction::make('openLocation')
                     ->label('Bekijk')
                     ->url(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))

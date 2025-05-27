@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\RelationResource\RelationManagers;
+namespace App\Filament\Resources\RelationLocationResource\RelationManagers;
 
 use App\Enums\Priority;
 use App\Enums\TicketStatus;
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 
-class TicketRelationManager extends RelationManager
+class TicketsRelationManager extends RelationManager
 {
     protected static string $relationship = 'tickets';
 
@@ -44,7 +44,9 @@ class TicketRelationManager extends RelationManager
     }
     public function form(Form $form): Form
     {
+
         return $form
+
             ->schema([
                 Section::make()
                     ->schema([
@@ -53,7 +55,7 @@ class TicketRelationManager extends RelationManager
                             ->searchable(['first_name', 'last_name', 'email'])
 
                             ->options(
-                                Employee::where('relation_id', $this->ownerRecord->id)
+                                Employee::where('relation_id', $this->ownerRecord->relation_id)
                                     ->get()
                                     ->mapWithKeys(fn($employee) => [
                                         $employee->id => "{$employee->first_name} {$employee->last_name}",
@@ -104,7 +106,6 @@ class TicketRelationManager extends RelationManager
                             })
 
                             ->label('Melder')
-
                             ->columnSpan(2)
                         ,
 
@@ -165,7 +166,6 @@ class TicketRelationManager extends RelationManager
 
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
-
                             ->options(User::pluck('name', 'id'))
                             ->searchable()
                             ->default(Auth::id())
@@ -219,7 +219,7 @@ class TicketRelationManager extends RelationManager
                     ->getStateUsing(function ($record): ?string {
                         return $record?->createByUser?->name;
                     })
-                    ->toggleable()
+
                     ->label('Melder'),
 
                 TileColumn::make('AssignedByUser')
@@ -230,24 +230,8 @@ class TicketRelationManager extends RelationManager
                         return $record?->AssignedByUser?->name;
                     })
                     ->label('Medewerker')
-                    ->toggleable()
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar),
-
-                Tables\Columns\TextColumn::make("address")
-                    ->toggleable()
-                    ->toggleable()
-                    ->label('Locatie')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-
-                        return $record?->location?->address . "-" . $record?->location?->zipcode . " - " . $record?->location?->place;
-                    })
-                    ->searchable()
-                    //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
-                    ->description(function ($record) {
-                        return $record?->name;
-                    }),
 
                 Tables\Columns\TextColumn::make('department.name')
                     ->sortable()
@@ -324,6 +308,12 @@ class TicketRelationManager extends RelationManager
             ->bulkActions([
 
             ])->emptyState(view("partials.empty-state"));
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['relation_id'] = $this->ownerRecord->relation_id; // Or any other logic
+        return $data;
     }
 
 }

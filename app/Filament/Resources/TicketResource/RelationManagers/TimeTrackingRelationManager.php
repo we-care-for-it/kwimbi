@@ -52,7 +52,7 @@ class TimeTrackingRelationManager extends RelationManager
                 Forms\Components\TimePicker::make('time')
                     ->label('Tijd')
                     ->seconds(false)
-                    ->required(),
+                ,
                 Forms\Components\Select::make('work_type_id')
                     ->label('Uursoort')
                     ->searchable()
@@ -105,14 +105,14 @@ class TimeTrackingRelationManager extends RelationManager
                     ->toggleable()
                     ->placeholder('-')
                     ->width(10),
-                TextColumn::make('weekno')
-                    ->label('Week nr.')
-                    ->width(50)
-                    ->alignment(Alignment::Center)
-                    ->placeholder('-')
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
+                // TextColumn::make('weekno')
+                //     ->label('Week nr.')
+                //     ->width(50)
+                //     ->alignment(Alignment::Center)
+                //     ->placeholder('-')
+                //     ->toggleable()
+                //     ->sortable()
+                //     ->searchable(),
                 TextColumn::make('activity.name')
                     ->badge()
                     ->label('Uursoort')
@@ -120,7 +120,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->toggleable()
                     ->width('200px')
                     ->sortable(),
-                TextColumn::make('description')
+                TextColumn::make('Werkzaamheden')
                     ->label('Activiteit')
                     ->wrap()
                     ->placeholder('-')
