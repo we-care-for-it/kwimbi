@@ -60,7 +60,7 @@ class TicketResource extends Resource
 
                         // ,
 
-                        Forms\Components\Select::make('status_name')
+                        Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
                             ->default(0)
