@@ -65,7 +65,7 @@ class RelationResource extends Resource
 
                 TextInput::make('zipcode')
                     ->label('Postcode')
-                    ->required()
+
                     ->extraInputAttributes(['onInput' => 'this.value = this.value.toUpperCase().replace(/\s+/g, "")'])
 
                     ->maxLength(6)
@@ -99,13 +99,11 @@ class RelationResource extends Resource
                     ),
 
                 Forms\Components\TextInput::make("address")
-                    ->label("Adres")
                     ->required()
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("place")
                     ->label("Plaats")
-
                     ->columnSpan(1),
 
                 Forms\Components\Select::make("country")
@@ -458,7 +456,7 @@ class RelationResource extends Resource
                         ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                         ->tooltip('Bewerken')
                         ->label('Bewerken')
-                        ->modalIcon('heroicon-m-pencil-square')
+
                     ,
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
