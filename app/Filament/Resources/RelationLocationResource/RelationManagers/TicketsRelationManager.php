@@ -2,10 +2,10 @@
 namespace App\Filament\Resources\RelationLocationResource\RelationManagers;
 
 use App\Enums\Priority;
-use App\Enums\TicketStatus;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Location;
+use App\Models\ticketStatus;
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -112,7 +112,7 @@ class TicketsRelationManager extends RelationManager
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(TicketStatus::Class),
+                            ->options(TicketStatus::pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
