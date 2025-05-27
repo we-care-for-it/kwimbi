@@ -1,21 +1,20 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Enums\ElevatorStatus;
 use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
+use App\Models\Brand;
 use App\Models\Customer;
 use App\Models\Elevator;
-use App\Models\ObjectMonitoring;
+use App\Models\Employee;
+use App\Models\ObjectModel;
 use App\Models\ObjectType;
-use App\Models\Relation;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\Tabs;
@@ -33,18 +32,18 @@ use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class ObjectResource extends Resource
 {
-    protected static ?string $model                 = Elevator::class;
-    protected static ?string $navigationIcon        = "heroicon-c-arrows-up-down";
-    protected static ?string $navigationLabel       = "Objecten";
-    protected static ?string $pluralModelLabel      = 'Objecten';
-    protected static ?string $navigationGroup       = 'Objecten';
+    protected static ?string $model            = Elevator::class;
+    protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
+    protected static ?string $navigationLabel  = "Objecten";
+    protected static ?string $pluralModelLabel = 'Objecten';
+    protected static ?string $navigationGroup  = 'Objecten';
+
     protected static ?int $navigationSort           = 2;
-    protected static bool $shouldRegisterNavigation = true;
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $recordTitleAttribute  = 'title';
     public static function getNavigationBadge(): ?string
     {
@@ -58,101 +57,142 @@ class ObjectResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form->schema([
-            Grid::make(4)->schema([
-                TextInput::make("nobo_no")
-                    ->label("NOBO Nummer")
-                    ->placeholder("Niet opgegeven"),
-                Select::make("monitoring_object_id")
-                    ->label("Status")
-                    ->label("Monitoring ID")
-                    ->searchable()
-                    ->placeholder("Niet opgegeven")
-                    ->reactive()
-                    ->options(ObjectMonitoring::groupBy("external_object_id")->pluck("external_object_id", "external_object_id")),
-                Select::make("type_id")
-                    ->label("Type")
-                    ->options(ObjectType::where("is_active", 1)->pluck("name", "id")),
-                TextInput::make("unit_no")->label("Serienummer"),
-                Select::make("energy_label")
-                    ->live()
-                    ->label("Energielabel")
-                    ->options([
-                        "A" => "A",
-                        "B" => "B",
-                        "C" => "C",
-                        "D" => "D",
-                        "E" => "E",
-                        "F" => "F",
-                    ]),
-                Select::make("status_id")
-                    ->label("Status")
-                    ->options(ElevatorStatus::class),
-                Select::make("supplier_id")
-                    ->label("Leverancier")
-                    ->options(Relation::where('type_id', setting('object_supplier_group'))->pluck("name", "id")),
-                TextInput::make("stopping_places")
-                    ->label("Stoppplaatsen")
-                    ->placeholder("Niet opgegeven"),
-                TextInput::make("construction_year")
-                    ->label("Bouwjaar")
-                    ->placeholder("Niet opgegeven"),
-                Select::make("maintenance_company_id")
-                    ->label("Onderhoudspartij")
-                    ->options(Relation::where('type_id', 1)->pluck("name", "id")),
+        return $form
+            ->schema([
 
-                TextInput::make("name")->label("Naam"),
-            ]),
-            Grid::make(2)->schema([
-                Textarea::make("remark")
-                    ->rows(7)
-                    ->label('Notitie')
-                    ->columnSpan(3)
-                    ->autosize()
-                    ->hint(fn($state, $component) => "Aantal karakters: " . $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
-                    ->maxlength(255)
-                    ->reactive(),
-            ]),
-            Section::make("Afbeeldingen")
-                ->description('Afbeeldingen van het object')
-                ->compact()
-                ->schema([
-                    SpatieMediaLibraryFileUpload::make('objectimage')
-                        ->directory("objects/images/")
-                        ->responsiveImages()
-                        ->image()
-                        ->hiddenlabel()
-                        ->panelLayout('grid')
-                        ->maxFiles(8)
-                        ->label('Afbeeldingen')
-                        ->multiple()
-                        ->collection('objectimages'),
-                ])
-                ->collapsible()
-                ->collapsed(false)
-                ->persistCollapsed()
-                ->columns(1),
+                Wizard::make([
+                    Step::make('Hardware informatie')
+                        ->schema([
 
-            Section::make("Keuringgegevens")
-                ->compact()
-                ->schema([
-                    Select::make("inspection_company_id")
-                        ->label("Keuringsinstantie")
-                        ->live()
-                        ->options(Relation::where('type_id', 3)->pluck("name", "id")),
-                ])
+                            Select::make('type_id')
+                                ->label('Categorie')
+                                ->options(ObjectType::pluck('name', 'id'))
+                                ->reactive()
+                                ->required()->afterStateUpdated(function (callable $set) {
+                                $set('brand_id', null);
+                            }),
 
-                ->collapsible()
-                ->collapsed(false)
-                ->persistCollapsed()
-                ->visible(fn($record, $get) => in_array('Keuringen', $record?->type?->options) ? true : false)
+                            //     ->createOptionForm([
 
-                ->columns(1),
+                            //         TextInput::make('name')
+                            //             ->label('Nieuwe categorie naam')
+                            //             ->required()
+                            //             ->columnSpan('full')
+                            //             ->maxLength(50),
 
-            CustomFieldsComponent::make()
-                ->columns(1),
+                            //         ToggleButtons::make('options')
+                            //             ->label('Opties')
+                            //             ->multiple()
+                            //             ->options([
+                            //                 'Keuringen'            => 'Keuringen',
+                            //                 'Onderhoudscontracten' => 'Onderhoudscontracten',
+                            //                 'Tickets'              => 'Tickets',
+                            //                 'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
 
-        ]);
+                            //             ])
+                            //             ->required()
+                            //             ->inline()
+                            //         ,
+
+                            //     ])->createOptionUsing(function (array $data): int {
+
+                            //     return ObjectType::create($data)->getKey();
+                            // }),
+
+                            Select::make('brand_id')
+                                ->label('Merk')
+                                ->options(function (callable $get) {
+                                    $type_id = $get('type_id');
+
+                                    return ObjectModel::query()
+                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id))
+                                        ->get()
+                                        ->groupBy('brand_id')
+                                        ->map(fn($group) => $group->first()) // Only one per brand
+                                        ->filter(fn($item) => $item->brand)  // Ensure brand exists
+                                        ->mapWithKeys(fn($item) => [
+                                            $item->brand_id => $item->brand->name,
+                                        ])
+                                        ->toArray();
+                                })
+
+                                ->reactive()
+                                ->disabled(fn(callable $get) => ! $get('type_id'))
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->label('Nieuwe merknaam')
+                                        ->required()
+                                        ->columnSpan('full')
+                                        ->maxLength(50),
+                                ])->createOptionUsing(function (array $data): int {
+                                return Brand::create($data)->getKey();
+                            }),
+
+                            Select::make('model_id')
+                                ->label('Model')
+                                ->options(function (callable $get) {
+                                    $type_id  = $get('type_id');
+                                    $brand_id = $get('brand_id');
+
+                                    return ObjectModel::query()
+                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id)->where('brand_id', $brand_id))
+                                        ->get()
+                                        ->mapWithKeys(function ($data) {
+
+                                            return [
+                                                $data->id => collect([
+                                                    $data->name,
+
+                                                ])->filter()->implode(', '),
+                                            ];
+                                        })
+                                        ->toArray();
+                                })
+                                ->reactive()
+                                ->disabled(fn(callable $get) => ! $get('brand_id')),
+
+                            TextInput::make('name')
+                                ->label('Naam'),
+
+                        ])->columns(2),
+
+                    Step::make('Toewijzing')
+                        ->schema([
+
+                            TextInput::make('serial_number')
+                                ->label('Serienummer'),
+
+                            Select::make('employee_id')
+                                ->searchable(['first_name', 'last_name', 'email'])
+                                ->options(
+                                    Employee::where('relation_id', $this->ownerRecord->id)
+                                        ->get()
+                                        ->mapWithKeys(fn($employee) => [
+                                            $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                        ])
+                                )
+                                ->label('Medewerker'),
+
+                            TextInput::make('uuid')
+                                ->label('Uniek id nummer')
+                                ->hint('Scan een barcode sticker'),
+                        ]),
+
+                    Step::make('Opmerking')
+                        ->schema([
+                            Textarea::make("remark")
+                                ->rows(7)
+                                ->label('Opmerking')
+                                ->columnSpan('full')
+                                ->autosize()
+                                ->hint(fn($state, $component) => "Aantal karakters: " . $component->getMaxLength() - strlen($state) . '/' . $component->getMaxLength())
+                                ->maxlength(255)
+                                ->reactive(),
+                        ]),
+                ])->columnSpanFull(),
+                //  ->submitAction(new \Filament\Forms\Components\Actions\ButtonAction('Submit')),
+
+            ]);
     }
 
     public static function table(Table $table): Table
