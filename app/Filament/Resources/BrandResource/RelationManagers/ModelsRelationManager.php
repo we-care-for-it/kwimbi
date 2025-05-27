@@ -5,6 +5,7 @@ use App\Models\ObjectType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -38,6 +39,32 @@ class ModelsRelationManager extends RelationManager
                     ->preload()
                     ->searchable()
                     ->label('Categorie')
+                    ->createOptionForm([
+
+                        TextInput::make('name')
+                            ->label('Nieuwe categorie naam')
+                            ->required()
+                            ->columnSpan('full')
+                            ->maxLength(50),
+
+                        ToggleButtons::make('options')
+                            ->label('Opties')
+                            ->multiple()
+                            ->options([
+                                'Keuringen'            => 'Keuringen',
+                                'Onderhoudscontracten' => 'Onderhoudscontracten',
+                                'Tickets'              => 'Tickets',
+                                'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
+
+                            ])
+                            ->required()
+                            ->inline()
+                        ,
+
+                    ])->createOptionUsing(function (array $data): int {
+
+                    return ObjectType::create($data)->getKey();
+                })
                     ->required()
                     ->columnSpan(4),
 
