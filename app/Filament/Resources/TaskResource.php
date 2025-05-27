@@ -83,79 +83,75 @@ class TaskResource extends Resource
                 //                 ];
                 //             })->toArray();
                 //     }),
-                Section::make()
-                    ->columns(2)
-                    ->schema([
-                        Select::make("relation_id")
-                            ->searchable()
 
-                            ->label("Relatie")
-                            ->options(function () {
-                                return \App\Models\Relation::all()
-                                    ->groupBy('type.name')
-                                    ->mapWithKeys(function ($group, $category) {
-                                        return [
-                                            $category => $group->pluck('name', 'id')->toArray(),
-                                        ];
-                                    })->toArray();
+                Select::make("relation_id")
+                    ->searchable()
+
+                    ->label("Relatie")
+                    ->options(function () {
+                        return \App\Models\Relation::all()
+                            ->groupBy('type.name')
+                            ->mapWithKeys(function ($group, $category) {
+                                return [
+                                    $category => $group->pluck('name', 'id')->toArray(),
+                                ];
+                            })->toArray();
+                    })
+
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('location_id', null);
+                        $set('contact_id', null);
+                    })
+                    ->reactive(),
+
+                Select::make("make_by_employee_id")
+                    ->label('Contactpersoon')
+                    ->options(function (callable $get) {
+                        $relationId = $get('relation_id');
+
+                        return Employee::query()
+                            ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                            ->get()
+                            ->mapWithKeys(function ($location) {
+                                return [
+                                    $location->id => collect([
+                                        $location->first_name,
+                                        $location->last_name,
+
+                                    ])->filter()->implode(', '),
+                                ];
                             })
+                            ->toArray();
+                    })
+                    ->reactive()
+                    ->disabled(fn(callable $get) => ! $get('relation_id'))
 
-                            ->afterStateUpdated(function (callable $set) {
-                                $set('location_id', null);
-                                $set('contact_id', null);
+                    ->placeholder('Selecteer een locatie'),
+
+                Select::make("location_id")
+                    ->label('Locatie')
+                    ->options(function (callable $get) {
+                        $relationId = $get('relation_id');
+
+                        return relationLocation::query()
+                            ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                            ->get()
+                            ->mapWithKeys(function ($location) {
+                                return [
+                                    $location->id => collect([
+                                        $location->address,
+                                        $location->zipcode,
+                                        $location->place,
+                                    ])->filter()->implode(', '),
+                                ];
                             })
-                            ->reactive(),
+                            ->toArray();
+                    })
+                    ->reactive()
+                    ->disabled(fn(callable $get) => ! $get('relation_id'))
+                    ->visible(Setting('tasks_in_location') ?? false)
 
-                        Select::make("make_by_employee_id")
-                            ->label('Melder')
-                            ->options(function (callable $get) {
-                                $relationId = $get('relation_id');
-
-                                return Employee::query()
-                                    ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
-                                    ->get()
-                                    ->mapWithKeys(function ($location) {
-                                        return [
-                                            $location->id => collect([
-                                                $location->first_name,
-                                                $location->last_name,
-
-                                            ])->filter()->implode(', '),
-                                        ];
-                                    })
-                                    ->toArray();
-                            })
-                            ->reactive()
-                            ->disabled(fn(callable $get) => ! $get('relation_id'))
-
-                            ->placeholder('Selecteer een locatie'),
-
-                        Select::make("location_id")
-                            ->label('Locatie')
-                            ->options(function (callable $get) {
-                                $relationId = $get('relation_id');
-
-                                return relationLocation::query()
-                                    ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
-                                    ->get()
-                                    ->mapWithKeys(function ($location) {
-                                        return [
-                                            $location->id => collect([
-                                                $location->address,
-                                                $location->zipcode,
-                                                $location->place,
-                                            ])->filter()->implode(', '),
-                                        ];
-                                    })
-                                    ->toArray();
-                            })
-                            ->reactive()
-                            ->disabled(fn(callable $get) => ! $get('relation_id'))
-                            ->visible(Setting('tasks_in_location') ?? false)
-
-                            ->placeholder('Selecteer een locatie'),
-
-                    ]),
+                    ->placeholder('Selecteer een locatie'),
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))
@@ -206,6 +202,9 @@ class TaskResource extends Resource
                     ->default(3)->grouped()
                     ->label('Prioriteit'),
 
+                CustomFieldsComponent::make()
+                    ->columnSpanFull(),
+
                 Section::make('Planning')
                     ->collapsed()
                     ->collapsed()
@@ -232,8 +231,7 @@ class TaskResource extends Resource
                 //     ->grouped(),
 
                 // Add the CustomFieldsComponent
-                CustomFieldsComponent::make()
-                    ->columnSpanFull(),
+
             ]);
 
     }
@@ -288,11 +286,18 @@ class TaskResource extends Resource
                     ->getStateUsing(function ($record): ?string {
                         return $record?->related_to?->name;
 
-                    })->placeholder('-')
-                    ->description(function ($record): ?string {
-                        return $record?->description;
+                    })->placeholder('-'),
 
-                    }),
+                Tables\Columns\TextColumn::make('description')
+                    ->label('Taak')
+                    ->toggleable()
+                    ->wrap()
+                    ->placeholder('-'),
+
+                // ->description(function ($record): ?string {
+                //     return $record?->description;
+
+                // }),
 
                 Tables\Columns\TextColumn::make('priority')
                     ->badge()
