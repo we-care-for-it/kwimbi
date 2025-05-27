@@ -302,7 +302,6 @@ class TicketResource extends Resource
                     ->label('Afdeling'),
 
                 Tables\Columns\TextColumn::make('description')
-                    ->sortable()
                     ->limit(50)
                     ->toggleable()
                     ->wrap()
@@ -340,8 +339,8 @@ class TicketResource extends Resource
                         true: fn(Builder $query)  => $query->whereNot('status_id', 7),
                         false: fn(Builder $query) => $query->where('status_id', 7),
                         blank: fn(Builder $query) => $query, // In this example, we do not want to filter the query when it is blank.
-                    )
-                    ->default(1),
+                    ),
+                // ->default(1)
 
                 TrashedFilter::make(),
 
