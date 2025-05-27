@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
+use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\ObjectModel;
 use App\Models\ObjectType;
@@ -45,13 +46,39 @@ class ObjectsRelationManager extends RelationManager
                         ->schema([
 
                             Select::make('type_id')
-                                ->label('Type')
+                                ->label('Categorie')
                                 ->options(ObjectType::pluck('name', 'id'))
                                 ->reactive()
-
                                 ->required()->afterStateUpdated(function (callable $set) {
                                 $set('brand_id', null);
                             }),
+
+                            //     ->createOptionForm([
+
+                            //         TextInput::make('name')
+                            //             ->label('Nieuwe categorie naam')
+                            //             ->required()
+                            //             ->columnSpan('full')
+                            //             ->maxLength(50),
+
+                            //         ToggleButtons::make('options')
+                            //             ->label('Opties')
+                            //             ->multiple()
+                            //             ->options([
+                            //                 'Keuringen'            => 'Keuringen',
+                            //                 'Onderhoudscontracten' => 'Onderhoudscontracten',
+                            //                 'Tickets'              => 'Tickets',
+                            //                 'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
+
+                            //             ])
+                            //             ->required()
+                            //             ->inline()
+                            //         ,
+
+                            //     ])->createOptionUsing(function (array $data): int {
+
+                            //     return ObjectType::create($data)->getKey();
+                            // }),
 
                             Select::make('brand_id')
                                 ->label('Merk')
@@ -69,8 +96,18 @@ class ObjectsRelationManager extends RelationManager
                                         ])
                                         ->toArray();
                                 })
+
                                 ->reactive()
-                                ->disabled(fn(callable $get) => ! $get('type_id')),
+                                ->disabled(fn(callable $get) => ! $get('type_id'))
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->label('Nieuwe merknaam')
+                                        ->required()
+                                        ->columnSpan('full')
+                                        ->maxLength(50),
+                                ])->createOptionUsing(function (array $data): int {
+                                return Brand::create($data)->getKey();
+                            }),
 
                             Select::make('model_id')
                                 ->label('Model')
