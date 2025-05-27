@@ -99,7 +99,6 @@ class RelationResource extends Resource
                     ),
 
                 Forms\Components\TextInput::make("address")
-                    ->required()
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("place")
@@ -455,6 +454,7 @@ class RelationResource extends Resource
                         ->modalHeading('Contact Bewerken')
                         ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                         ->tooltip('Bewerken')
+                        ->slideOver()
                         ->label('Bewerken')
 
                     ,
