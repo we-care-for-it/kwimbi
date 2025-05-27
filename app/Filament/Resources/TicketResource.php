@@ -8,7 +8,7 @@ use App\Models\Department;
 use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
-use App\Models\TicketStatus;
+use App\Models\ticketStatus;
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -63,7 +63,8 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(ticketStatus::pluck('name', 'id')),
+                            ->default(0)
+                            ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->default('2')
@@ -151,7 +152,7 @@ class TicketResource extends Resource
                         ->badge()
                         ->placeholder("Niet opgegeven"),
 
-                    Components\TextEntry::make('status_id')
+                    Components\TextEntry::make('status.name')
                         ->label("Status")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
@@ -189,7 +190,6 @@ class TicketResource extends Resource
 
                     Components\TextEntry::make('department.name')
                         ->label("Afdeling")
-
                         ->placeholder("Niet opgegeven"),
 
                 ])->columns(4),
@@ -258,17 +258,17 @@ class TicketResource extends Resource
                     ->label('Status'),
                 Tables\Columns\TextColumn::make('department.name')
                     ->toggleable(isToggledHiddenByDefault: true)
-
                     ->sortable()
                     ->toggleable()
                     ->badge()
-
+                    ->placeholder('Algemeen')
                     ->label('Afdeling'),
                 Tables\Columns\TextColumn::make('type.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
-                    ->label('Type'),
+                    ->placeholder('Algemeen')
+                    ->label('Categorie'),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50)
                     ->toggleable()
@@ -322,7 +322,7 @@ class TicketResource extends Resource
 
                 SelectFilter::make('status_id')
                     ->label('Status')
-                    ->options(ticketStatus::pluck('name', 'id')),
+                    ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
                 SelectFilter::make('type_id')
                     ->label('Categorie')
                     ->options(ticketType::pluck('name', 'id')),

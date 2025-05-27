@@ -112,7 +112,7 @@ class TicketsRelationManager extends RelationManager
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(TicketStatus::pluck('name', 'id')),
+                            ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
