@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use App\Enums\Priority;
-use App\Enums\TicketStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,8 +10,8 @@ class Ticket extends Model
 
     use SoftDeletes;
     protected $casts = [
-        'status_id' => TicketStatus::class,
-        'prio'      => Priority::class,
+
+        'prio' => Priority::class,
 
     ];
 
@@ -33,6 +32,11 @@ class Ticket extends Model
     public function location()
     {
         return $this->hasOne(relationLocation::class, 'id', 'location_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(ticketStatus::class, 'status_id', 'id');
     }
 
     public function timeTracking()
