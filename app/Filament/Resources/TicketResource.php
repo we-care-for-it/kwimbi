@@ -60,7 +60,7 @@ class TicketResource extends Resource
 
                         // ,
 
-                        Forms\Components\Select::make('status_id')
+                        Forms\Components\Select::make('status_name')
                             ->default('1')
                             ->label('Status')
                             ->default(0)
@@ -296,6 +296,7 @@ class TicketResource extends Resource
                         return date("d-m-Y H m:s", strtotime($record?->created_at));
                     })
                     ->label('Gemeld')
+                    ->placeholder('Niet opgegeven')
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('relation.name')
                     ->sortable()
