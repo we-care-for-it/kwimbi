@@ -76,7 +76,7 @@ class Task extends Model implements HasCustomFields
 
         // switch ($this->model) {
         //     case 'relation':
-        return Relation::whereId($this->model_id)->first();
+        return Relation::whereId($this->relation_id)->first();
         //     break;
         // case 'project':
         //     return Project::whereId($this->model_id)->first();

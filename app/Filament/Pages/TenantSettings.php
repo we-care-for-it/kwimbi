@@ -56,6 +56,7 @@ class TenantSettings extends Page implements HasForms
     public $mail_from_name;
     public $mail_encryption;
     public $management_relation_group;
+    public $tasks_in_location;
     public function mount(): void
     {
         $this->form->fill([
@@ -94,6 +95,7 @@ class TenantSettings extends Page implements HasForms
             'mail_from_name'            => $this->getSetting('mail_from_name'),
             'mail_encryption'           => $this->getSetting('mail_encryption'),
             'management_relation_group' => $this->getSetting('management_relation_group'),
+            'tasks_in_location'         => $this->getSetting('tasks_in_location'),
 
         ]);
     }
@@ -341,6 +343,15 @@ class TenantSettings extends Page implements HasForms
                                         ->label('Naam afzender'),
                                 ]),
 
+                        ]),
+
+                    Forms\Components\Tabs\Tab::make('Opties')
+
+                        ->schema([
+                            ToggleButtons::make('tasks_in_location')
+                                ->label('Taak koppelen aan locatie')
+                                ->boolean()
+                                ->inline(),
                         ]),
 
                 ]),

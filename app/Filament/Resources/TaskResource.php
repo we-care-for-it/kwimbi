@@ -4,14 +4,18 @@ namespace App\Filament\Resources;
 use App\Enums\Priority;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
+use App\Models\Employee;
 use App\Models\ObjectLocation;
 use App\Models\Project;
+use App\Models\relationLocation;
 use App\Models\Task;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
@@ -67,18 +71,91 @@ class TaskResource extends Resource
                 //     ->searchable()
                 //     ->live()
                 //     ->label('Koppel aan'),
-                Select::make('model_id')
-                    ->label('Relatie')
-                //where('type_id', 5)->
-                    ->options(function () {
-                        return \App\Models\Relation::all()
-                            ->groupBy('type.name')
-                            ->mapWithKeys(function ($group, $category) {
-                                return [
-                                    $category => $group->pluck('name', 'id')->toArray(),
-                                ];
-                            })->toArray();
-                    }),
+                // Select::make('model_id')
+                //     ->label('Relatie')
+                // //where('type_id', 5)->
+                //     ->options(function () {
+                //         return \App\Models\Relation::all()
+                //             ->groupBy('type.name')
+                //             ->mapWithKeys(function ($group, $category) {
+                //                 return [
+                //                     $category => $group->pluck('name', 'id')->toArray(),
+                //                 ];
+                //             })->toArray();
+                //     }),
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Select::make("relation_id")
+                            ->searchable()
+
+                            ->label("Relatie")
+                            ->options(function () {
+                                return \App\Models\Relation::all()
+                                    ->groupBy('type.name')
+                                    ->mapWithKeys(function ($group, $category) {
+                                        return [
+                                            $category => $group->pluck('name', 'id')->toArray(),
+                                        ];
+                                    })->toArray();
+                            })
+
+                            ->afterStateUpdated(function (callable $set) {
+                                $set('location_id', null);
+                                $set('contact_id', null);
+                            })
+                            ->reactive(),
+
+                        Select::make("make_by_employee_id")
+                            ->label('Melder')
+                            ->options(function (callable $get) {
+                                $relationId = $get('relation_id');
+
+                                return Employee::query()
+                                    ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                    ->get()
+                                    ->mapWithKeys(function ($location) {
+                                        return [
+                                            $location->id => collect([
+                                                $location->first_name,
+                                                $location->last_name,
+
+                                            ])->filter()->implode(', '),
+                                        ];
+                                    })
+                                    ->toArray();
+                            })
+                            ->reactive()
+                            ->disabled(fn(callable $get) => ! $get('relation_id'))
+
+                            ->placeholder('Selecteer een locatie'),
+
+                        Select::make("location_id")
+                            ->label('Locatie')
+                            ->options(function (callable $get) {
+                                $relationId = $get('relation_id');
+
+                                return relationLocation::query()
+                                    ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                                    ->get()
+                                    ->mapWithKeys(function ($location) {
+                                        return [
+                                            $location->id => collect([
+                                                $location->address,
+                                                $location->zipcode,
+                                                $location->place,
+                                            ])->filter()->implode(', '),
+                                        ];
+                                    })
+                                    ->toArray();
+                            })
+                            ->reactive()
+                            ->disabled(fn(callable $get) => ! $get('relation_id'))
+                            ->visible(Setting('tasks_in_location') ?? false)
+
+                            ->placeholder('Selecteer een locatie'),
+
+                    ]),
 
                 Select::make('model_id')
                     ->options(Project::pluck('name', 'id'))
@@ -104,31 +181,8 @@ class TaskResource extends Resource
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
                     ->default(Auth::id())
-                    ->label('Medewerker'),
 
-                Select::make('priority')
-                    ->placeholder('Geen')
-                    ->default(3)
-                    ->options(Priority::class)
-                    ->label('Prioriteit'),
-
-                DatePicker::make('begin_date')
-
-                    ->label('Begindatum'),
-
-                TimePicker::make('begin_time')
-                    ->label('Tijd')
-                    ->seconds(false),
-
-                DatePicker::make('deadline')
-                    ->label('Einddatum'),
-
-                // ToggleButtons::make('private')
-                //     ->label('Prive actie')
-                //     ->default(1)
-                //     ->boolean()
-                //     ->grouped(),
-
+                    ->label('Interne medewerker'),
                 Select::make('type_id')
                     ->options([
                         '1' => 'Terugbelnotitie',
@@ -139,6 +193,44 @@ class TaskResource extends Resource
                     ->searchable()
                     ->default(3)
                     ->label('Type'),
+
+                ToggleButtons::make('priority')
+                    ->options(Priority::class)
+
+                    ->colors([
+                        '1' => 'info',
+                        '2' => 'warning',
+                        '3' => 'success',
+
+                    ])
+                    ->default(3)->grouped()
+                    ->label('Prioriteit'),
+
+                Section::make('Planning')
+                    ->collapsed()
+                    ->collapsed()
+                    ->columns(3)
+                    ->schema([
+
+                        DatePicker::make('begin_date')
+
+                            ->label('Begindatum'),
+
+                        TimePicker::make('begin_time')
+                            ->label('Tijd')
+                            ->seconds(false),
+
+                        DatePicker::make('deadline')
+                            ->label('Einddatum'),
+
+                    ]),
+
+                // ToggleButtons::make('private')
+                //     ->label('Prive actie')
+                //     ->default(1)
+                //     ->boolean()
+                //     ->grouped(),
+
                 // Add the CustomFieldsComponent
                 CustomFieldsComponent::make()
                     ->columnSpanFull(),
@@ -190,12 +282,6 @@ class TaskResource extends Resource
                     ->toggleable()
                     ->label('Type'),
 
-                Tables\Columns\TextColumn::make('priority')
-                    ->badge()
-                    ->sortable()
-                    ->toggleable()
-                    ->label('Prioriteit'),
-
                 Tables\Columns\TextColumn::make('related_to')
                     ->label('Relatie')
                     ->toggleable()
@@ -206,7 +292,13 @@ class TaskResource extends Resource
                     ->description(function ($record): ?string {
                         return $record?->description;
 
-                    })->wrap(),
+                    }),
+
+                Tables\Columns\TextColumn::make('priority')
+                    ->badge()
+                    ->sortable()
+                    ->toggleable()
+                    ->label('Prioriteit'),
 
                 // Tables\Columns\TextColumn::make('description')
                 //     ->wrap()
@@ -288,8 +380,8 @@ class TaskResource extends Resource
                     ->modalHeading('Taak Bewerken')
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
+                    ->slideOver()
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
                 ,
 
                 Tables\Actions\ActionGroup::make([
@@ -301,13 +393,6 @@ class TaskResource extends Resource
                         ->color('info')
                         ->tooltip('Voltooien')
                         ->label('Voltooien'),
-
-                    RestoreAction::make()
-                        ->color("danger")
-                        ->modalHeading('Actie terug plaatsen')
-                        ->modalDescription(
-                            "Weet je zeker dat je deze actie wilt activeren"
-                        ),
 
                     RestoreAction::make()
                         ->color("danger")
