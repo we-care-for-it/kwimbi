@@ -123,7 +123,7 @@
 
 
 
-      <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Categorieeen</h1>
+      <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Statussen & Categorieeen</h1>
       <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
 
 
@@ -171,6 +171,13 @@
          </a>
          @endcan
 
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="ticket-statuses">
+            <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
+            <div>
+               <h2>Ticket statussen</h2>
+               <p class="text-sm text-gray-600"> </p>
+            </div>
+         </a>
 
 
          @can('view_any_relation::type')
@@ -388,6 +395,7 @@ NOG RECHTEN CHECKEN
                <p class="text-sm text-gray-600">Beheer de medewerkersn</p>
             </div>
          </a>
+
 
 
 

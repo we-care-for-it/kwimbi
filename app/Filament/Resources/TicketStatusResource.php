@@ -1,23 +1,22 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LocationTypeResource\Pages;
-use App\Models\locationType;
+use App\Filament\Resources\TicketStatusResource\Pages;
+use App\Models\ticketStatus;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 
-class LocationTypeResource extends Resource
+class TicketStatusResource extends Resource
 {
-    protected static ?string $model = locationType::class;
+    protected static ?string $model = ticketStatus::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static bool $shouldRegisterNavigation = false;
-    protected static ?string $navigationLabel       = "Locatie types";
+    protected static ?string $navigationLabel       = "Oplossingen";
 
     public static function form(Form $form): Form
     {
@@ -28,42 +27,54 @@ class LocationTypeResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Section::make('Modules')
-                    ->description('Een selectie van de modules voor deze locatie type')
-                    ->schema([
+                // Section::make('Modules')
+                //     ->description('Een selectie van de modules voor deze relatie type')
+                //     ->schema([
 
-                        ToggleButtons::make('options')
-                            ->label('Opties')
-                            ->multiple()
-                            ->options([
-                                'Afbeeldingen'    => 'Afbeeldingen',
-                                'Contactpersonen' => 'Contactpersonen',
-                                'Notities'        => 'Notities',
-                                'Bijlages'        => 'Bijlages',
-                                'Beheerder'       => 'Beheerder',
-                                'Objecten'        => 'Objecten',
-                                'Tickets'         => 'Tickets',
-                            ])
-                            ->required()
-                            ->inline()
-                            ->columns(2),
+                //         ToggleButtons::make('options')
+                //             ->label('Opties')
+                //             ->multiple()
+                //             ->options([
+                //                 'Medewerkers'     => 'Medewerkers',
+                //                 'Contactpersonen' => 'Contactpersonen',
+                //                 'Tickets'         => 'Tickets',
+                //                 'Bijlages'        => 'Bijlages',
+                //                 'Tijdregistratie' => 'Tijdregistratie',
+                //                 'Projecten'       => 'Projecten',
+                //                 'Locaties'        => 'Locaties',
+                //                 'Objecten'        => 'Objecten',
+                //             ])
+                //             ->required()
+                //             ->inline()
+                //             ->columns(2),
 
-                    ]),
+                //     ]),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort')
+            ->reorderRecordsTriggerAction(
+                fn(Action $action, bool $isReordering) => $action
+                    ->button()
+                    ->label($isReordering ? 'Afsluiten' : 'Volgorde wijzigen'),
+            )
+            ->defaultSort('sort', 'asc')
             ->columns([
+
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('Actief')
+                    ->width('100px'),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('options')
-                    ->label('Opties')
-                    ->badge(),
+                // Tables\Columns\TextColumn::make('options')
+                //     ->label('Opties')
+                //     ->badge(),
 
             ])
             ->filters([
@@ -103,7 +114,7 @@ class LocationTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRelationTypes::route('/'),
+            'index' => Pages\ListTicketStatuses::route('/'),
             //  'create' => Pages\CreateRelationType::route('/create'),
             //  'edit'   => Pages\EditRelationType::route('/{record}/edit'),
         ];

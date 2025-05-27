@@ -30,6 +30,11 @@ class Ticket extends Model
         return $this->belongsTo(Department::class);
     }
 
+    public function location()
+    {
+        return $this->hasOne(relationLocation::class, 'id', 'location_id');
+    }
+
     public function timeTracking()
     {
         return $this->hasMany(timeTracking::class, 'ticket_id', 'id');

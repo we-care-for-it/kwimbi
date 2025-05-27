@@ -401,7 +401,7 @@ class RelationLocationResource extends Resource
             RelationManagers\NotesRelationManager::class,
             //  RelationManagers\ProjectsRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
-            // RelationManagers\TasksRelationManager::class,
+            RelationManagers\TicketsRelationManager::class,
 
             // ]),
         ];
