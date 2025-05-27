@@ -24,7 +24,7 @@ class ListRelations extends ListRecords
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Relatie toevoegen')
                 ->modalDescription('Voeg een nieuwe relatie toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
-
+                ->slideOver()
                 ->label('Relatie toevoegen'),
         ];
     }
