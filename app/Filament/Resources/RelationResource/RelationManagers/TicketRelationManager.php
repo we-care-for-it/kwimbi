@@ -2,10 +2,10 @@
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\Priority;
-use App\Enums\TicketStatus;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Location;
+use App\Models\ticketStatus;
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -103,7 +103,7 @@ class TicketRelationManager extends RelationManager
                                 return Employee::create($data)->getKey();
                             })
 
-                            ->label('Melder')
+                            ->label('Conmtactpersoon')
 
                             ->columnSpan(2)
                         ,
@@ -111,7 +111,7 @@ class TicketRelationManager extends RelationManager
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(TicketStatus::Class),
+                            ->options(ticketStatus::pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
