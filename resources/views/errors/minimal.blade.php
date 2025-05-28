@@ -12,10 +12,8 @@
             <h2 class="text-center text-2xl font-bold tracking-tight pb-4">
                {{$exception?->getStatusCode()}}
             </h2>
-            @yield('title')
-            <!-- <p class="  text-center ">
-               @yield('message')
-            </p> -->
+            <center> {{$exception?->getMessage()}}
+            </center>
             <p class="text-center mt-5 font-medium">
                <button  onclick="window.history.back()" class="rounded-lg bg-stone-600 hover:bg-slate-500 text-white py-2 px-4  ">Ga Terug</button>
             </p>
