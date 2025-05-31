@@ -45,6 +45,13 @@
       0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
     ),
   ),
+  'charrafimed/global-search-modal' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'CharrafiMed\\GlobalSearchModal\\GlobalSearchModalServiceProvider',
+    ),
+  ),
   'croustibat/filament-jobs-monitor' => 
   array (
     'aliases' => 
@@ -425,6 +432,17 @@
     'aliases' => 
     array (
       'CustomFields' => 'Relaticle\\CustomFields\\Facades\\CustomFields',
+    ),
+  ),
+  'rmsramos/activitylog' => 
+  array (
+    'aliases' => 
+    array (
+      'Activitylog' => 'Rmsramos\\Activitylog\\Facades\\Activitylog',
+    ),
+    'providers' => 
+    array (
+      0 => 'Rmsramos\\Activitylog\\ActivitylogServiceProvider',
     ),
   ),
   'rupadana/filament-api-service' => 

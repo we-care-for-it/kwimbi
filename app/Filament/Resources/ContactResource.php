@@ -47,6 +47,7 @@ class ContactResource extends Resource
 
         return [
             'E-mailadres' => $record?->email ?? "Onbekend",
+            'Relatie'     => empty($record?->relation?->name) ? 'Geen' : $record->relation->name,
         ];
 
     }

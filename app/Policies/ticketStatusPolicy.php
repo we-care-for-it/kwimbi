@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\timeTracking;
+use App\Models\ticketStatus;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class timeTrackingPolicy
+class ticketStatusPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class timeTrackingPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_time::tracking');
+        return $user->can('view_any_ticket::status');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, timeTracking $timeTracking): bool
+    public function view(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('view_time::tracking');
+        return $user->can('view_ticket::status');
     }
 
     /**
@@ -31,23 +31,23 @@ class timeTrackingPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_time::tracking');
+        return $user->can('create_ticket::status');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, timeTracking $timeTracking): bool
+    public function update(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('update_time::tracking');
+        return $user->can('update_ticket::status');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, timeTracking $timeTracking): bool
+    public function delete(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('delete_time::tracking');
+        return $user->can('delete_ticket::status');
     }
 
     /**
@@ -55,15 +55,15 @@ class timeTrackingPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_time::tracking');
+        return $user->can('delete_any_ticket::status');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, timeTracking $timeTracking): bool
+    public function forceDelete(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('{{ ForceDelete }}');
+        return $user->can('force_delete_ticket::status');
     }
 
     /**
@@ -71,15 +71,15 @@ class timeTrackingPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('{{ ForceDeleteAny }}');
+        return $user->can('force_delete_any_ticket::status');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, timeTracking $timeTracking): bool
+    public function restore(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('{{ Restore }}');
+        return $user->can('restore_ticket::status');
     }
 
     /**
@@ -87,15 +87,15 @@ class timeTrackingPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('{{ RestoreAny }}');
+        return $user->can('restore_any_ticket::status');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, timeTracking $timeTracking): bool
+    public function replicate(User $user, ticketStatus $ticketStatus): bool
     {
-        return $user->can('{{ Replicate }}');
+        return $user->can('replicate_ticket::status');
     }
 
     /**
@@ -103,6 +103,6 @@ class timeTrackingPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('{{ Reorder }}');
+        return $user->can('reorder_ticket::status');
     }
 }

@@ -10,19 +10,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Task extends Model implements HasCustomFields
 {
     use HasFactory;
     use UsesCustomFields;
     use SoftDeletes;
+    use LogsActivity;
+
     /**
      * @var string[]
      */
     protected $casts = [
         'metadata' => 'collection',
     ];
-
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'text']);
+    }
     protected function casts(): array
     {
         return [

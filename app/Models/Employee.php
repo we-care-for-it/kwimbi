@@ -31,14 +31,15 @@ class Employee extends Model implements Auditable
         }
     }
 
+    public function relation()
+    {
+        return $this->hasOne(Relation::class, 'id', 'relation_id');
+    }
+
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'contact_id', 'id');
 
     }
 
-    public function relation(): HasMany
-    {
-        return $this->hasMany(Relation::class, 'id', 'relation_id');
-    }
 }

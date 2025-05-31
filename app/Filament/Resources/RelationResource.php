@@ -512,9 +512,19 @@ class RelationResource extends Resource
     {
 
         return [
-            'Type' => $record?->type->name,
+            'Naam'      => $record?->name ?? "Onbekend",
+            'Categorie' => $record?->type->name,
         ];
 
+    }
+
+    public static function getModelLabel(): string
+    {
+        return 'Relatie';
+    }
+    public static function getPluralModelLabel(): string
+    {
+        return 'Relaties';
     }
 
 }

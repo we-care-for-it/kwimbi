@@ -41,7 +41,7 @@ use MartinPetricko\FilamentSentryFeedback\Entities\SentryUser;
 use Relaticle\CustomFields\CustomFieldsPlugin;
 use Asmit\ResizedColumn\ResizedColumnPlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
-
+use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -52,10 +52,17 @@ class AppPanelProvider extends PanelProvider
     ->plugins([
             // ... other plugins
             ResizedColumnPlugin::make()
-                ->preserveOnDB(true) // Enable database storage (optional)
+                ->preserveOnDB(true) // Enable database storage (optional),
+
+ 
         ])
 
 
+    ->plugins([
+     
+
+   GlobalSearchModalPlugin::make()
+        ])
       ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
 
            ->defaultThemeMode(ThemeMode::Light)
