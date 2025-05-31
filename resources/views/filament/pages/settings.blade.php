@@ -123,7 +123,7 @@
 
 
 
-      <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Statussen & Categorieeen</h1>
+      <h1 class="pb-2 text-lg font-medium text-gray-700 pt-10">Statussen & Categorieën </h1>
       <div class="grid grid-cols-4 gap-4 max-xl:grid-cols-3 max-md:grid-cols-2">
 
 
@@ -142,7 +142,7 @@
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
                <h2>view_any_relation::type</h2>
-               <p class="text-sm text-gray-600">Relatie Categorieeen</p>
+               <p class="text-sm text-gray-600">Relatie Categorieën </p>
             </div>
          </a>
          @endcan
@@ -153,8 +153,8 @@
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="location-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Locatie categorieeen</h2>
-               <p class="text-sm text-gray-600">Locatie Categorieeen</p>
+               <h2>Locatie Categorieën </h2>
+               <p class="text-sm text-gray-600">Locatie Categorieën </p>
             </div>
          </a>
          @endcan
@@ -165,8 +165,8 @@
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="relation-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Relatie categorieeen</h2>
-               <p class="text-sm text-gray-600">Locatie Categorieeen</p>
+               <h2>Relatie Categorieën </h2>
+               <p class="text-sm text-gray-600">Locatie Categorieën </p>
             </div>
          </a>
          @endcan
@@ -184,8 +184,8 @@
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="ticket-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Ticket categorieeen</h2>
-               <p class="text-sm text-gray-600">Locatie Categorieeen</p>
+               <h2>Ticket Types </h2>
+               <p class="text-sm text-gray-600">Ticket Types </p>
             </div>
          </a>
          @endcan
@@ -195,8 +195,8 @@
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400  0" href="object-types">
             <img  src = "/images/icons/pack/conference_call.svg"   class = "max-h-12">
             <div>
-               <h2>Object categorieeen</h2>
-               <p class="text-sm text-gray-600">Object Categorieeen</p>
+               <h2>Object Categorieën </h2>
+               <p class="text-sm text-gray-600">Object Categorieën </p>
             </div>
          </a>
          @endcan
@@ -293,7 +293,7 @@
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="article-category">
             <img  src = "/images/icons/pack/candle_sticks.svg"   class = "max-h-12">
             <div>
-               <h2>Categorieeen (nog Geen rechten)</h2>
+               <h2>Categorieën  (nog Geen rechten)</h2>
                <p class="text-sm text-gray-600">Categorieen voor artikelen</p>
             </div>
          </a>

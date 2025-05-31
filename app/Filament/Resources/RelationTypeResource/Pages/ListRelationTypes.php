@@ -17,13 +17,13 @@ class ListRelationTypes extends ListRecords
                 ->label('Relatie Type toevoegen')
 
                 ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Object Type toevoegen')
+                ->modalHeading('Relatie Type toevoegen')
                 ->modalDescription('Voeg een nieuw relatie type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
 
-                ->label('Object Type toevoegen'),
+                ->label('Relatie Type toevoegen'),
         ];
     }
 

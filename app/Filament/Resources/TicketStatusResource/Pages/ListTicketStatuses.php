@@ -14,21 +14,21 @@ class ListTicketStatuses extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Relatie Type toevoegen')
+                ->label('Ticket Status toevoegen')
 
                 ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Ticket type toevoegen')
+                ->modalHeading('Ticket Type toevoegen')
                 ->modalDescription('Voeg een nieuw ticket type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalSubmitActionLabel('Opslaan')
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
 
-                ->label('Object Type toevoegen'),
+                ->label('Ticket Status toevoegen'),
         ];
     }
 
     public function getHeading(): string
     {
-        return "Ticket Types - Overzicht";
+        return "Ticket Statuses - Overzicht";
     }
 }
