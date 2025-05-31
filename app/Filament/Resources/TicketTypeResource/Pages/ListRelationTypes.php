@@ -14,7 +14,7 @@ class ListTicketTypes extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('Relatie Type toevoegen')
+                ->label('Ticket Type toevoegen')
 
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Ticket type toevoegen')
@@ -23,7 +23,7 @@ class ListTicketTypes extends ListRecords
                 ->modalIcon('heroicon-o-plus')
                 ->icon('heroicon-m-plus')
 
-                ->label('Object Type toevoegen'),
+                ->label('Ticket Type toevoegen'),
         ];
     }
 
