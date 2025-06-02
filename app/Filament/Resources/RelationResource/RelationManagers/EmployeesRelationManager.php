@@ -91,12 +91,6 @@ class EmployeesRelationManager extends RelationManager
                     ->url(fn($record) => "mailto:{$record->email}")
                     ->label('E-mailadres'),
 
-                TextColumn::make('department')
-                    ->placeholder('-')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Afdeling'),
-
                 TextColumn::make('function')
                     ->placeholder('-')
                     ->searchable()
