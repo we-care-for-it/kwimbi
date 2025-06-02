@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use SocialiteProviders\Azure\Provider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-
+use App\Policies\ActivityPolicy;
+ 
+use Spatie\Activitylog\Models\Activity;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+ Gate::policy(Activity::class, ActivityPolicy::class);
         // Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
         //     $event->extendSocialite('azure', \SocialiteProviders\Azure\Provider::class);
         // });

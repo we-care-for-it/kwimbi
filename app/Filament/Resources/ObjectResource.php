@@ -171,7 +171,9 @@ class ObjectResource extends Resource
                                             $employee->id => "{$employee->first_name} {$employee->last_name}",
                                         ])
                                 )
-                                ->label('Medewerker'),
+                                ->label('Medewerker')
+                            //          ->visible(fn($record) => in_array('Medewerker', $record?->type?->visibility) ? true : false),
+                                ->placeholder("Niet opgegeven"),
 
                             TextInput::make('uuid')
                                 ->label('Uniek id nummer')

@@ -393,6 +393,16 @@ class TicketResource extends Resource
             RelationManagers\TimeTrackingRelationManager::class,
         ];
     }
+
+    public static function getModelLabel(): string
+    {
+        return 'Ticket';
+    }
+    public static function getPluralModelLabel(): string
+    {
+        return 'Tickets';
+    }
+
     public static function getPages(): array
     {
         return [

@@ -30,7 +30,6 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
@@ -39,9 +38,9 @@ class TaskResource extends Resource
 {
     protected static ?string $model            = Task::class;
     protected static ?string $navigationIcon   = 'heroicon-o-list-bullet';
-    protected static ?string $navigationLabel  = 'Taken';
-    protected static ?string $pluralModelLabel = 'Taken';
-    protected static ?string $title            = 'Taken';
+    protected static ?string $navigationLabel  = 'Mijn taken';
+    protected static ?string $pluralModelLabel = 'Mijn taken';
+    protected static ?string $title            = 'Mijn taken';
 
     protected $listeners = ["refresh" => '$refresh'];
     public static function getNavigationBadge(): ?string
@@ -241,6 +240,11 @@ class TaskResource extends Resource
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
+
+            ->query(
+                Task::query()->where('employee_id', auth()->user()->id)
+            )
+
             ->persistSearchInSession()
             ->searchable()
             ->persistColumnSearchesInSession()
@@ -249,17 +253,17 @@ class TaskResource extends Resource
             )
             ->columns([
 
-                TileColumn::make('employee')
-                // ->description(fn($record) => $record->AssignedByUser->email)
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        return $record?->employee?->name;
-                    })
-                    ->description(fn($record) => $record->employee?->email)
-                    ->label('Toegewezen medewerker')
+                // TileColumn::make('employee')
+                // // ->description(fn($record) => $record->AssignedByUser->email)
+                //     ->sortable()
+                //     ->getStateUsing(function ($record): ?string {
+                //         return $record?->employee?->name;
+                //     })
+                //     ->description(fn($record) => $record->employee?->email)
+                //     ->label('Toegewezen medewerker')
 
-                    ->image(fn($record) => $record?->employee?->avatar)
-                    ->placeholder('Geen'),
+                //     ->image(fn($record) => $record?->employee?->avatar)
+                //     ->placeholder('Geen'),
                 //Tables\Columns\TextColumn::make('id')
                 // ->description(function ($record): ?string {
                 //     if ($record?->private) {
@@ -381,6 +385,7 @@ class TaskResource extends Resource
             ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
+
                 EditAction::make()
                     ->modalHeading('Taak Bewerken')
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
@@ -405,6 +410,8 @@ class TaskResource extends Resource
                         ->modalDescription(
                             "Weet je zeker dat je deze actie wilt activeren"
                         ),
+
+                    //      ActivityLogTimelineTableAction::make('Logboek'),
 
                 ]),
 

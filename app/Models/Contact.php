@@ -56,9 +56,9 @@ class Contact extends Model implements HasCustomFields
 
     }
 
-    public function relation(): HasMany
+    public function relation()
     {
-        return $this->hasMany(Relation::class, 'id', 'relation_id');
+        return $this->hasOne(Relation::class, 'id', 'relation_id');
     }
 
     public function projects(): HasMany
@@ -85,4 +85,5 @@ class Contact extends Model implements HasCustomFields
     {
         return $this->hasMany(ContactObject::class, 'contact_id', 'id');
     }
+
 }

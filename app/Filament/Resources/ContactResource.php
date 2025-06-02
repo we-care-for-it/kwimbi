@@ -6,6 +6,7 @@ use App\Filament\Resources\ContactResource\RelationManagers;
 use App\Models\Employee;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
@@ -47,6 +48,7 @@ class ContactResource extends Resource
 
         return [
             'E-mailadres' => $record?->email ?? "Onbekend",
+            'Relatie'     => empty($record?->relation?->name) ? 'Geen' : $record->relation->name,
         ];
 
     }
@@ -90,9 +92,12 @@ class ContactResource extends Resource
                                     ->label('Functie')
                                     ->maxLength(255),
 
-                                Forms\Components\TextInput::make('department')
+                                Select::make('department')
                                     ->label('Afdeling')
-                                    ->maxLength(255),
+                                //  ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
+                                    ->searchable()
+                                    ->relationship(name: 'department', titleAttribute: 'name')
+                                    ->placeholder('Selecteer een afdeling'),
 
                             ])]),
 
@@ -122,20 +127,20 @@ class ContactResource extends Resource
                 //             ]),
                 //     ]),
 
-                Forms\Components\Section::make('Sociaal media')
-                    ->schema([
-                        Forms\Components\TextInput::make('linkedin')
-                            ->label('LinkedIn')
-                            ->maxLength(255),
+                // Forms\Components\Section::make('Sociaal media')
+                //     ->schema([
+                //         Forms\Components\TextInput::make('linkedin')
+                //             ->label('LinkedIn')
+                //             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('twitter')
-                            ->label('Twitter')
-                            ->maxLength(255),
+                //         Forms\Components\TextInput::make('twitter')
+                //             ->label('Twitter')
+                //             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('facebook')
-                            ->label('Facebook')
-                            ->maxLength(255),
-                    ])->collapsible(),
+                //         Forms\Components\TextInput::make('facebook')
+                //             ->label('Facebook')
+                //             ->maxLength(255),
+                //     ])->collapsible(),
 
                 // Add the CustomFieldsComponent
                 CustomFieldsComponent::make()
@@ -155,7 +160,7 @@ class ContactResource extends Resource
                             ->icon('heroicon-o-information-circle')
                             ->schema([
                                 TextEntry::make('name')->label('Naam')->placeholder('-'),
-                                TextEntry::make('department')->label('Afdeling')->placeholder('-'),
+                                TextEntry::make('department.name')->label('Afdeling')->placeholder('-'),
                                 TextEntry::make('function')->label('Functie')->placeholder('-'),
                                 //    TextEntry::make('company.name')->label('Bedrijf')->placeholder('-'),
                                 TextEntry::make('email')->label('E-mail')->placeholder('-'),
@@ -168,13 +173,13 @@ class ContactResource extends Resource
                                     ->Icon('heroicon-o-link'),
                             ])->columns(4),
 
-                        Tabs\Tab::make('Social Media')
-                            ->icon('heroicon-o-share')
-                            ->schema([
-                                TextEntry::make('linkedin')->label('LinkedIn')->placeholder('-'),
-                                TextEntry::make('twitter')->label('Twitter')->placeholder('-'),
-                                TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
-                            ])->columns(4),
+                        // Tabs\Tab::make('Social Media')
+                        //     ->icon('heroicon-o-share')
+                        //     ->schema([
+                        //         TextEntry::make('linkedin')->label('LinkedIn')->placeholder('-'),
+                        //         TextEntry::make('twitter')->label('Twitter')->placeholder('-'),
+                        //         TextEntry::make('facebook')->label('Facebook')->placeholder('-'),
+                        //     ])->columns(4),
 
                         //     Tabs\Tab::make('Adresgegevens')
                         //         ->icon('heroicon-o-map')
@@ -229,11 +234,6 @@ class ContactResource extends Resource
                     ->url(function ($record) {
                         return "/relations/" . $record->relation_id;
                     })
-                    ->toggleable(),
-
-                TextColumn::make("department")
-                    ->label("Afdeling")
-                    ->placeholder("-")
                     ->toggleable(),
 
                 TextColumn::make("function")

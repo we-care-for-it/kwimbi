@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ObjectTypeResource\Pages;
 use App\Models\ObjectType;
 use Filament\Forms;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,28 +24,36 @@ class ObjectTypeResource extends Resource
 
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->columnSpan('full')
                     ->maxLength(255),
 
-                Section::make('Modules')
-                    ->description('Een selectie van de modules voor deze relatie type')
-                    ->schema([
+                ToggleButtons::make('options')
+                    ->label('Opties')
+                    ->multiple()
+                    ->options([
+                        'Keuringen'            => 'Keuringen',
+                        'Onderhoudscontracten' => 'Onderhoudscontracten',
+                        'Tickets'              => 'Tickets',
+                        'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
 
-                        ToggleButtons::make('options')
-                            ->label('Opties')
-                            ->multiple()
-                            ->options([
-                                'Keuringen'            => 'Keuringen',
-                                'Onderhoudscontracten' => 'Onderhoudscontracten',
-                                'Tickets'              => 'Tickets',
-                                'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
+                    ])
+                    ->required()
+                    ->inline()
+                    ->columns(2),
 
-                            ])
-                            ->required()
-                            ->inline()
-                            ->columns(2),
-
-                    ]),
+                ToggleButtons::make('visibility')
+                    ->label('Koppelbaar aan')
+                    ->multiple()
+                    ->options([
+                        'Medewerker' => 'Medewerker',
+                        'Locatie'    => 'Locatie',
+                        'Werkplek'   => 'Werkplek',
+                        'Afdeling'   => 'Afdeling',
+                    ])
+                    ->required()
+                    ->inline(),
             ]);
+
     }
 
     public static function table(Table $table): Table
@@ -68,6 +75,12 @@ class ObjectTypeResource extends Resource
                     ->label('Opties')
                     ->badge(),
 
+                Tables\Columns\TextColumn::make('visibility')
+                    ->label('Zichtbaarheid')
+                    ->placeholder('-')
+
+                    ->badge(),
+
             ])
             ->filters([
                 Tables\Filters\Filter::make('is_active')
@@ -80,7 +93,7 @@ class ObjectTypeResource extends Resource
                     ->modalDescription('Pas het bestaande object type aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
+
                 ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

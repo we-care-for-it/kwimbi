@@ -34,7 +34,6 @@ class DepartmentResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make("location_id")
                     ->label("Locatie")
-                    ->required()
                     ->options(
                         Location::pluck("name", "id")
                     ),

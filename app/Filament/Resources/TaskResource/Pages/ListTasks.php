@@ -28,7 +28,7 @@ class ListTasks extends ListRecords
     }
     public function getHeading(): string
     {
-        return "Taak - Overzicht";
+        return "Mijn taken - Overzicht";
     }
 
     public function getTabs(): array

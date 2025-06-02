@@ -3,17 +3,19 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
+use App\Mail\UserWelcomeMail;
 use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Rawilk\FilamentPasswordInput\Password;
+use Illuminate\Support\Facades\Mail;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Tapp\FilamentAuthenticationLog\RelationManagers\AuthenticationLogsRelationManager;
 
@@ -37,14 +39,14 @@ class UserResource extends Resource
                 ->label('E-mail')
                 ->email(),
 
-            Password::make('password')
-                ->copyable()
-                ->copyMessage('Wachtwoord gekopieerd')
-                ->copyable(color: 'success')
-                ->regeneratePassword()
-                ->maxLength(10)
-                ->password()
-                ->label('Wachtwoord'),
+            // Password::make('password')
+            //     ->copyable()
+            //     ->copyMessage('Wachtwoord gekopieerd')
+            //     ->copyable(color: 'success')
+            //     ->regeneratePassword()
+            //     ->maxLength(10)
+            //     ->password()
+            //     ->label('Wachtwoord'),
 
             Select::make('roles')
                 ->relationship('roles', 'name')
@@ -103,6 +105,24 @@ class UserResource extends Resource
                     ->modalHeading('Verwijderen')
                     ->color('danger'),
 
+                Action::make('sendMail')
+                    ->label('Send Mail')
+                    ->action(function ($record) {
+                        $user              = $record;
+                        $token             = app('auth.password.broker')->createToken($user);
+                        $notification      = new \Filament\Notifications\Auth\ResetPassword($token);
+                        $notification->url = \Filament\Facades\Filament::getResetPasswordUrl($token, $user);
+                        $user->notify($notification);
+                        $record['token'] = $token;
+                        Mail::to($record->email)->send(new UserWelcomeMail($record));
+                    })
+                    ->requiresConfirmation()
+                    ->modalIcon('heroicon-o-envelope')
+                    ->modalHeading('Welkoms e-mail versturen?')
+                    ->modalDescription('Door de welkoms e-mail te versturen, ontvangt de gebruiker een link om zijn wachtwoord opnieuw in te stellen.')
+                    ->modalSubmitActionLabel('Versturen')
+                    ->color('success')
+                    ->label('Verstuur welkoms e-mail'),
             ])
             ->bulkActions([
                 DeleteBulkAction::make(),
