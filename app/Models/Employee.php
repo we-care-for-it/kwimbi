@@ -43,6 +43,6 @@ class Employee extends Model implements Auditable
     }
     public function department()
     {
-        return $this->hasMany(relationDepartment::class, 'id', 'department');
+        return $this->hasOne(relationDepartment::class, 'id', 'department');
     }
 }
