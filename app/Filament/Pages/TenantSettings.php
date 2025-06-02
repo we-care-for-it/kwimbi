@@ -30,7 +30,7 @@ class TenantSettings extends Page implements HasForms
     public $use_inspections;
     public $use_locations;
     public $use_tickets;
-    public $use_incidents;
+
     public $use_vehiclemanagement;
     public $use_gps_tracker;
     public $use_api_connection;
@@ -67,7 +67,6 @@ class TenantSettings extends Page implements HasForms
             'use_inspections'           => $this->getSetting('use_inspections'),
             'use_locations'             => $this->getSetting('use_locations'),
             'use_tickets'               => $this->getSetting('use_tickets'),
-            'use_incidents'             => $this->getSetting('use_incidents'),
             'use_vehiclemanagement'     => $this->getSetting('use_vehiclemanagement'),
             'use_gps_tracker'           => $this->getSetting('use_gps_tracker'),
             'use_api_connection'        => $this->getSetting('use_api_connection'),
@@ -123,11 +122,6 @@ class TenantSettings extends Page implements HasForms
 
                                     ToggleButtons::make('use_inspections')
                                         ->label('Keuringen')
-                                        ->boolean()
-                                        ->inline(),
-
-                                    ToggleButtons::make('use_incidents')
-                                        ->label('Storingen')
                                         ->boolean()
                                         ->inline(),
 

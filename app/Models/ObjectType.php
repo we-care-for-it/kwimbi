@@ -17,7 +17,8 @@ class ObjectType extends Model implements Auditable
     ];
 
     protected $casts = [
-        'options' => 'array',
+        'options'    => 'array',
+        'visibility' => 'array',
     ];
 
 }

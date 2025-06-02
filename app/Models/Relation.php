@@ -33,11 +33,6 @@ class Relation extends Model implements HasCustomFields
     //     });
     // }
 
-    public function departments(): HasMany
-    {
-        return $this->hasMany(Department::class);
-    }
-
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'customer_id', 'id');
@@ -124,6 +119,11 @@ class Relation extends Model implements HasCustomFields
     public function attachments()
     {
         return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');
+    }
+
+    public function departments()
+    {
+        return $this->hasMany(relationDepartment::class, 'relation_id', 'id');
     }
 
 }

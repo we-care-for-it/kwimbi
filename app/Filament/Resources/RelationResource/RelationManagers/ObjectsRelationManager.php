@@ -5,6 +5,8 @@ use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\ObjectModel;
 use App\Models\ObjectType;
+use App\Models\RelationLocation;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -52,33 +54,6 @@ class ObjectsRelationManager extends RelationManager
                                 ->required()->afterStateUpdated(function (callable $set) {
                                 $set('brand_id', null);
                             }),
-
-                            //     ->createOptionForm([
-
-                            //         TextInput::make('name')
-                            //             ->label('Nieuwe categorie naam')
-                            //             ->required()
-                            //             ->columnSpan('full')
-                            //             ->maxLength(50),
-
-                            //         ToggleButtons::make('options')
-                            //             ->label('Opties')
-                            //             ->multiple()
-                            //             ->options([
-                            //                 'Keuringen'            => 'Keuringen',
-                            //                 'Onderhoudscontracten' => 'Onderhoudscontracten',
-                            //                 'Tickets'              => 'Tickets',
-                            //                 'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
-
-                            //             ])
-                            //             ->required()
-                            //             ->inline()
-                            //         ,
-
-                            //     ])->createOptionUsing(function (array $data): int {
-
-                            //     return ObjectType::create($data)->getKey();
-                            // }),
 
                             Select::make('brand_id')
                                 ->label('Merk')
@@ -140,20 +115,57 @@ class ObjectsRelationManager extends RelationManager
                     Step::make('Toewijzing')
                         ->schema([
 
-                            TextInput::make('serial_number')
-                                ->label('Serienummer'),
+                            Grid::make(2)
 
-                            Select::make('employee_id')
-                                ->searchable(['first_name', 'last_name', 'email'])
-                                ->options(
-                                    Employee::where('relation_id', $this->ownerRecord->id)
-                                        ->get()
-                                        ->mapWithKeys(fn($employee) => [
-                                            $employee->id => "{$employee->first_name} {$employee->last_name}",
-                                        ])
-                                )
-                                ->label('Medewerker'),
+                                ->schema([
 
+                                    TextInput::make('serial_number')
+                                        ->label('Serienummer'),
+
+                                    Select::make('employee_id')
+                                        ->searchable(['first_name', 'last_name', 'email'])
+                                        ->options(
+                                            Employee::where('relation_id', $this->ownerRecord->id)
+                                                ->get()
+                                                ->mapWithKeys(fn($employee) => [
+                                                    $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                                ])
+                                        )
+                                        ->label('Gebruiker')
+                                        ->visible(function ($record, callable $get) {
+                                            $object_data = ObjectType::where('id', $get('type_id'))->first();
+                                            if ($object_data?->visibility) {
+                                                return in_array('Medewerker', $object_data?->visibility) ? true : false;;
+                                            } else {
+                                                return false;
+                                            }
+                                        }),
+
+                                    Select::make('department_id')
+                                        ->label('Afdeling')
+                                        ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
+                                        ->searchable()
+                                        ->visible(function ($record, callable $get) {
+                                            $object_data = ObjectType::where('id', $get('type_id'))->first();
+                                            if ($object_data?->visibility) {
+                                                return in_array('Afdeling', $object_data?->visibility) ? true : false;;
+                                            } else {
+                                                return false;
+                                            }
+                                        })
+                                        ->placeholder('Selecteer een afdeling'),
+
+                                    Select::make('location_id')
+                                        ->searchable(['name', 'address', 'place'])
+                                        ->options(
+                                            RelationLocation::where('relation_id', $this->ownerRecord->id)
+                                                ->get()
+                                                ->mapWithKeys(fn($ObjectLocation) => [
+                                                    $ObjectLocation->id => "{$ObjectLocation->name} {$ObjectLocation->address}",
+                                                ])
+                                        )
+                                        ->label('Locatie'),
+                                ]),
                             TextInput::make('uuid')
                                 ->label('Uniek id nummer')
                                 ->hint('Scan een barcode sticker'),
@@ -210,7 +222,7 @@ class ObjectsRelationManager extends RelationManager
 
                 TextColumn::make("employee.name")
                     ->badge()
-                    ->label("Medewerker")
+                    ->label("Gebruiker")
                     ->placeholder("-")
                     ->toggleable()
                     ->sortable()
@@ -218,6 +230,13 @@ class ObjectsRelationManager extends RelationManager
 
                 TextColumn::make("serial_number")
                     ->label("Serienummer")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make("location.name")
+                    ->label("Locatie")
                     ->placeholder("-")
                     ->toggleable()
                     ->sortable()
@@ -234,6 +253,7 @@ class ObjectsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->modalHeading('Object aanmaken')
+                    ->modalDescription('Koppel vaste objecten aan een locatie of een medewerker. Wil je objecten koppelen aan aan een medewerker of locatie? Maak dan eerst een medewerker of locatie aan.')
                     ->label('Toevoegen')
                     ->icon('heroicon-m-plus'),
             ])

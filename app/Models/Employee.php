@@ -41,5 +41,8 @@ class Employee extends Model implements Auditable
         return $this->hasMany(Project::class, 'contact_id', 'id');
 
     }
-
+    public function department()
+    {
+        return $this->hasMany(relationDepartment::class, 'id', 'department');
+    }
 }

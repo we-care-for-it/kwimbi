@@ -52,9 +52,11 @@ class EmployeesRelationManager extends RelationManager
                     ->email()
                     ->maxLength(255),
 
-                Forms\Components\TextInput::make('department')
+                Forms\Components\Select::make('department')
                     ->label('Afdeling')
-                    ->maxLength(255),
+                    ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
+                    ->searchable()
+                    ->placeholder('Selecteer een afdeling'),
 
                 Forms\Components\TextInput::make('function')
                     ->label('Functie')

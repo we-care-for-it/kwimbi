@@ -85,4 +85,5 @@ class Contact extends Model implements HasCustomFields
     {
         return $this->hasMany(ContactObject::class, 'contact_id', 'id');
     }
+
 }

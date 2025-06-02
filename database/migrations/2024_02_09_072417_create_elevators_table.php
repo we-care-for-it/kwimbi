@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('unit_no')->nullable();
             $table->string('remark')->nullable();
             $table->string('install_date')->nullable();
-            
+
             $table->string('type_id')->nullable();
             $table->integer('nobo_no')->nullable();
             $table->integer('address_id')->nullable();
             $table->integer('customer_id')->nullable();
             $table->integer('supplier_id')->nullable();
-
+            $table->integer('location_id')->nullable();
             // $table->integer('management_company_id')->nullable();
 
             $table->integer('object_type_id')->nullable();
@@ -42,11 +42,11 @@ return new class extends Migration
             $table->integer('carrying_capacity')->nullable();
             $table->string('energy_label')->nullable();
             $table->integer('status_id')->nullable();
-            
+
             $table->date('current_inspection_end_date')->nullable();
             $table->integer('current_inspection_status_id')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies');
-            
+
             $table->timestamps();
             $table->softDeletes();
 
