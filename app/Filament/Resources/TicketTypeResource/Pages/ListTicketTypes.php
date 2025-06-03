@@ -31,6 +31,6 @@ class ListTicketTypes extends ListRecords
 
     public function getHeading(): string
     {
-        return "Ticket Types - Overzicht";
+        return "Ticket Categorieën  - Overzicht";
     }
 }

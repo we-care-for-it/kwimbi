@@ -5,7 +5,7 @@ use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\ObjectModel;
 use App\Models\ObjectType;
-use App\Models\RelationLocation;
+use App\Models\relationLocation;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
