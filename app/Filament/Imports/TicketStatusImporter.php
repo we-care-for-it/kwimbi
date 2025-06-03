@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Filament\Imports;
 
-use App\Models\TicketStatus;
+use App\Models\ticketStatus;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 
 class TicketStatusImporter extends Importer
 {
-    protected static ?string $model = TicketStatus::class;
-
+    protected static ?string $model = ticketStatus::class;
+    protected $connection           = 'df';
     public static function getColumns(): array
     {
         return [
@@ -25,14 +24,14 @@ class TicketStatusImporter extends Importer
         ];
     }
 
-    public function resolveRecord(): ?TicketStatus
+    public function resolveRecord(): ?ticketStatus
     {
         // return TicketStatus::firstOrNew([
         //     // Update existing records, matching them by `$this->data['column_name']`
         //     'email' => $this->data['email'],
         // ]);
 
-        return new TicketStatus();
+        return new ticketStatus();
     }
 
     public static function getCompletedNotificationBody(Import $import): string
