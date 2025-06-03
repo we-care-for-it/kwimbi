@@ -29,7 +29,7 @@ class TicketRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-        // $ownerModel is of actual type Job
+
         return $ownerRecord->tickets->count();
     }
 
