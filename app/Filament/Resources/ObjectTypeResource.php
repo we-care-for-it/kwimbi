@@ -1,6 +1,7 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Imports\ObjectTypeImporter;
 use App\Filament\Resources\ObjectTypeResource\Pages;
 use App\Models\ObjectType;
 use Filament\Forms;
@@ -8,6 +9,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -59,6 +61,11 @@ class ObjectTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ImportAction::make()
+                    ->importer(ObjectTypeImporter::class)
+                    ->label('Importeren'),
+            ])
             ->columns([
 
                 Tables\Columns\ToggleColumn::make('is_active')

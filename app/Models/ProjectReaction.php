@@ -36,9 +36,8 @@ class ProjectReaction extends Model implements Auditable
 
     public function status()
     {
-        return $this->hasMany(Statuses::class, 'id', 'status_id')->where('model', 'Project');
+        return $this->belongsTo(ProjectStatus::class);
     }
-
     public function user()
     {
         return $this->belongsTo(User::class);

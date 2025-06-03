@@ -1,7 +1,9 @@
 <?php
 namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
+use App\Models\ProjectStatus;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -40,12 +42,11 @@ class ReactionsRelationManager extends RelationManager
                 ->autosize()
                 ->required(),
 
-            // Select::make("status_id")
-            //     ->label("Status")
-            //     ->placeholder("Huidige status")
-            //     ->options(
-            //         Statuses::where("model", "Project")->pluck("name", "id")
-            //     ),
+            Select::make("status_id")
+                ->label("Status")
+                ->reactive()
+                ->options(ProjectStatus::whereIsActive(1)->orderBy('sort', 'asc')->pluck('name', 'id'))
+                ->default(1),
 
             DateTimePicker::make("created_at")
                 ->label("Invoegdatum / tijd")
@@ -59,6 +60,12 @@ class ReactionsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute("name")
             ->columns([
+
+                Tables\Columns\TextColumn::make("status.name")
+                    ->sortable()
+                    ->label("Status")
+                    ->placeholder('-')
+                    ->badge(),
                 Tables\Columns\TextColumn::make("created_at")
                     ->dateTime("d-m-Y H:i:s")
                     ->sortable()
@@ -69,11 +76,7 @@ class ReactionsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make("reaction")
                     ->label('Reactie')
                     ->grow(true)->wrap(),
-                Tables\Columns\TextColumn::make("status.name")
-                    ->sortable()
-                    ->label("Status")
-                    ->placeholder('-')
-                    ->badge(),
+
             ])->emptyState(view('partials.empty-state-small'))
             ->filters([
                 //No Filters
