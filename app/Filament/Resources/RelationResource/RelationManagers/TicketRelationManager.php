@@ -209,7 +209,7 @@ class TicketRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable()
                     ->label('Prioriteit'),
-                Tables\Columns\TextColumn::make('status_id')
+                Tables\Columns\TextColumn::make('status.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
