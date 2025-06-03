@@ -109,12 +109,6 @@ class ContactsRelationManager extends RelationManager
                     ->toggleable()
                     ->sortable(),
 
-                TextColumn::make('department')
-                    ->placeholder('-')
-                    ->label('Afdeling')
-                    ->toggleable()
-                    ->sortable(),
-
                 TextColumn::make('function')
                     ->placeholder('-')
                     ->toggleable()

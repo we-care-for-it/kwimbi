@@ -52,7 +52,7 @@ class EmployeesRelationManager extends RelationManager
                     ->email()
                     ->maxLength(255),
 
-                Forms\Components\Select::make('department')
+                Forms\Components\Select::make('department_id')
                     ->label('Afdeling')
                     ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
                     ->searchable()
@@ -90,6 +90,10 @@ class EmployeesRelationManager extends RelationManager
                     ->searchable()
                     ->url(fn($record) => "mailto:{$record->email}")
                     ->label('E-mailadres'),
+
+                TextColumn::make('department.name')
+                    ->label('Afdeling')
+                    ->placeholder(''),
 
                 TextColumn::make('function')
                     ->placeholder('-')
