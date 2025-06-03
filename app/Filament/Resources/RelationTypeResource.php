@@ -38,7 +38,6 @@ class RelationTypeResource extends Resource
                             ->multiple()
                             ->options([
                                 'Medewerkers'     => 'Medewerkers',
-                                'Contactpersonen' => 'Contactpersonen',
                                 'Tickets'         => 'Tickets',
                                 'Bijlages'        => 'Bijlages',
                                 'Tijdregistratie' => 'Tijdregistratie',

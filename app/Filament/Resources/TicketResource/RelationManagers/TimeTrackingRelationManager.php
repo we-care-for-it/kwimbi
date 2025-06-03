@@ -1,8 +1,8 @@
 <?php
 namespace App\Filament\Resources\TicketResource\RelationManagers;
 
-use App\Enums\TicketStatus;
 use App\Models\Ticket;
+use App\Models\ticketStatus;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -66,7 +66,7 @@ class TimeTrackingRelationManager extends RelationManager
 
                 Forms\Components\select::make('ticket_status_id')
                     ->label('Status')
-                    ->options(TicketStatus::Class),
+                    ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
 
             ]);
     }
