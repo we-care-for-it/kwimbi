@@ -209,7 +209,7 @@ class TicketRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable()
                     ->label('Prioriteit'),
-                Tables\Columns\TextColumn::make('status_id')
+                Tables\Columns\TextColumn::make('status.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -299,6 +299,7 @@ class TicketRelationManager extends RelationManager
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make()
                         ->tooltip('Bewerken')
+                        ->slideOver()
                     ,
 
                     Tables\Actions\DeleteAction::make()
@@ -313,6 +314,7 @@ class TicketRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->modalWidth(MaxWidth::FourExtraLarge)
                     ->modalHeading('Ticket toevoegen')
+                    ->slideOver()
                     ->modalDescription('Geef de onderstaande gegevens op om de ticket aan te maken.')
                 //  ->icon('heroicon-m-plus')
                 // ->modalIcon('heroicon-o-plus')
