@@ -310,7 +310,7 @@ class ProjectsResource extends Resource
                     ->searchable()
                     ->color(fn($record) => strtotime($record?->date_of_execution) < time() ? "danger" : "success"),
 
-                Tables\Columns\TextColumn::make("status_id")
+                Tables\Columns\TextColumn::make("status.name")
                     ->label("Status")
                     ->sortable()
                     ->toggleable()

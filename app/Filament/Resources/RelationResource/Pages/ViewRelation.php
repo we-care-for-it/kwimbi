@@ -17,6 +17,7 @@ class ViewRelation extends ViewRecord
             Action::make('back')
                 ->label('Terug naar overzicht')
                 ->link()
+                ->slideOver()
                 ->url(url()->previous())
                 ->color('gray'),
 

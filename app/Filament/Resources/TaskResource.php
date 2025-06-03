@@ -393,16 +393,18 @@ class TaskResource extends Resource
                     ->slideOver()
                     ->label('Bewerken')
                 ,
+                DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
+                    ->icon('heroicon-o-check')
+                    ->modalIcon('heroicon-o-check')
+                    ->modalHeading('Actie voltooien')
+                    ->tooltip('Voltooien')
+                    ->label('Voltooien'),
 
                 Tables\Actions\ActionGroup::make([
 
-                    DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
-                        ->icon('heroicon-o-check')
-                        ->modalIcon('heroicon-o-check')
-                        ->modalHeading('Actie voltooien')
-                        ->color('info')
-                        ->tooltip('Voltooien')
-                        ->label('Voltooien'),
+                    DeleteAction::make()
+                        ->tooltip('Verwijderen')
+                        ->label('Verwijderen'),
 
                     RestoreAction::make()
                         ->color("danger")

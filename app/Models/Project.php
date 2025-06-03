@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Enums\ProjectStatus;
-use App\Models\Statuses;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
@@ -25,12 +23,17 @@ class Project extends Model implements Auditable, HasCustomFields
         'customer_id' => 'required',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'status_id' => ProjectStatus::class,
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'status_id' => ProjectStatus::class,
 
-        ];
+    //     ];
+    // }
+
+    public function status()
+    {
+        return $this->belongsTo(ProjectStatus::class);
     }
 
     // Number of items to be shown per page
@@ -38,11 +41,6 @@ class Project extends Model implements Auditable, HasCustomFields
 
     // Attributes that should be mass-assignable
     protected $fillable = ['slug', 'name', 'description', 'code', 'customer_id', 'progress', 'end_date', 'begin_date', 'status_id', 'budget_hours', 'budget_costs', 'contact_person_name'];
-
-    public function status()
-    {
-        return $this->hasOne(Statuses::class, 'id', 'status_id')->where('model', 'project');
-    }
 
     public function customer()
     {

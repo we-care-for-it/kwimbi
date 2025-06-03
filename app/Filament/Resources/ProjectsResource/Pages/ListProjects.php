@@ -2,10 +2,14 @@
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
 use App\Filament\Resources\ProjectsResource;
+use App\Models\Project;
+use App\Models\ProjectStatus;
 use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Actions;
+use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
+use Illuminate\Database\Eloquent\Builder;
 use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 
 class ListProjects extends ListRecords
@@ -30,5 +34,27 @@ class ListProjects extends ListRecords
     public function getHeading(): string
     {
         return "Project - Overzicht";
+    }
+
+    public function getTabs(): array
+    {
+
+        $projectStatuses = ProjectStatus::whereIsActive(1)->orderBy('sort', 'asc')->get();
+
+        $data_all = Project::whereHas('status', function ($query) {
+            $query->where('is_active', 1);
+        });
+
+        $tabs['Alles'] = Tab::make()
+            ->modifyQueryUsing(fn(Builder $query) => $data_all)
+            ->badge($data_all->count());
+
+        foreach ($projectStatuses as $projectStatus) {
+            $tabs[$projectStatus->name] = Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('status_id', $projectStatus->id))
+                ->badge(Project::query()->where('status_id', $projectStatus->id)->count());
+        }
+
+        return $tabs;
     }
 }

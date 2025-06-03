@@ -5,6 +5,10 @@ use App\Models\Company;
 use Filament\Navigation\MenuItem;
 use App\Filament\Pages\Tenancy\RegisterCompany;
 use Filament\Http\Middleware\Authenticate;
+use lockscreen\FilamentLockscreen\Lockscreen;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -92,7 +96,7 @@ class AppPanelProvider extends PanelProvider
 ])
 ->plugins([
     \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-  FilamentAuthenticationLogPlugin::make()
+//  FilamentAuthenticationLogPlugin::make()
 ])->passwordReset()
  
  ->favicon(asset('/images/ico.png')) 
@@ -136,7 +140,7 @@ class AppPanelProvider extends PanelProvider
         AutoLogoutPlugin::make()
 
             ->color(Color::Emerald)                         // Set the color. Defaults to Zinc
-            ->disableIf(fn () => auth()->id() === 1)        // Disable the user with ID 1
+          //  ->disableIf(fn () => auth()->id() === 1)        // Disable the user with ID 1
             ->logoutAfter(Carbon::SECONDS_PER_MINUTE * 5)   // Logout the user after 5 minutes
             ->withoutWarning()                              // Disable the warning before logging out
             ->withoutTimeLeft()                             // Disable the time left
@@ -212,6 +216,7 @@ FilamentSocialitePlugin::make()
             ->widgets([
               
             ])
+ ->plugin(new Lockscreen())
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -229,7 +234,7 @@ FilamentSocialitePlugin::make()
                 DispatchServingFilamentEvent::class,
             ])   ->authMiddleware([
                 // ...
-               //  Locker::class, // <- Add this
+              Locker::class, // <- Add this
             ])
 // ->tenantMiddleware([
      //                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
