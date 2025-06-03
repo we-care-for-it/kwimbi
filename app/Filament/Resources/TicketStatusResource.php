@@ -27,6 +27,7 @@ class TicketStatusResource extends Resource
 
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
 
                 // Section::make('Modules')
@@ -90,10 +91,8 @@ class TicketStatusResource extends Resource
             ->actions([
 
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Relatie type')
-                    ->modalDescription('Pas het bestaande object type aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
+                    ->modalHeading('Ticket type bewerken')
+
                 ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

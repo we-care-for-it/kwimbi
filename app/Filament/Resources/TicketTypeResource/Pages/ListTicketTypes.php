@@ -3,6 +3,7 @@ namespace App\Filament\Resources\TicketTypeResource\Pages;
 
 use App\Filament\Resources\TicketTypeResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -13,17 +14,18 @@ class ListTicketTypes extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Terug naar overzicht')
+                ->link()
+                ->url(url()->previous())
+                ->color('gray'),
+
             Actions\CreateAction::make()
-                ->label('Ticket Type toevoegen')
+                ->label('Toevoegen')
+                ->modalWidth(MaxWidth::ExtraLarge)
+                ->icon('heroicon-o-plus')
+                ->modalHeading('Ticket type toevoegen'),
 
-                ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Ticket type toevoegen')
-                ->modalDescription('Voeg een nieuw ticket type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
-                ->modalSubmitActionLabel('Opslaan')
-                ->modalIcon('heroicon-o-plus')
-                ->icon('heroicon-m-plus')
-
-                ->label('Ticket Type toevoegen'),
         ];
     }
 
