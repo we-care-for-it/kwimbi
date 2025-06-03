@@ -313,8 +313,6 @@ class RelationResource extends Resource
                         'ZW' => 'Zimbabwe',
                     ])
                     ->default('NL')
-                    ->required();
-                
                     ->columnSpan(2),
 
                 Forms\Components\TextInput::make("gps_lat")
