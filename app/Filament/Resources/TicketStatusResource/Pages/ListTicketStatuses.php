@@ -3,6 +3,7 @@ namespace App\Filament\Resources\TicketStatusResource\Pages;
 
 use App\Filament\Resources\TicketStatusResource;
 use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 
@@ -13,17 +14,17 @@ class ListTicketStatuses extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Terug naar instellingen')
+                ->link()
+                ->url(url()->previous())
+                ->color('gray'),
+
             Actions\CreateAction::make()
-                ->label('Ticket Status toevoegen')
+                ->label('Toevoegen')
+                ->modalWidth(MaxWidth::ExtraLarge)
+                ->modalHeading('Ticket type toevoegen'),
 
-                ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Ticket Type toevoegen')
-                ->modalDescription('Voeg een nieuw ticket type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
-                ->modalSubmitActionLabel('Opslaan')
-                ->modalIcon('heroicon-o-plus')
-                ->icon('heroicon-m-plus')
-
-                ->label('Ticket Status toevoegen'),
         ];
     }
 

@@ -1,13 +1,16 @@
 <?php
 namespace App\Filament\Resources;
 
+use App\Filament\Imports\TicketTypeImporter;
 use App\Filament\Resources\TicketTypeResource\Pages;
 use App\Models\ticketType;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 
 class TicketTypeResource extends Resource
@@ -24,8 +27,10 @@ class TicketTypeResource extends Resource
             ->schema([
 
                 Forms\Components\TextInput::make('name')
+                    ->label('Naam')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
 
                 // Section::make('Modules')
                 //     ->description('Een selectie van de modules voor deze relatie type')
@@ -55,6 +60,11 @@ class TicketTypeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                ImportAction::make()
+                    ->importer(TicketTypeImporter::class)
+                    ->label('Importeren'),
+            ])
             ->reorderable('sort')
             ->reorderRecordsTriggerAction(
                 fn(Action $action, bool $isReordering) => $action
@@ -83,10 +93,9 @@ class TicketTypeResource extends Resource
             ->actions([
 
                 Tables\Actions\EditAction::make()
-                    ->modalHeading('Relatie type')
-                    ->modalDescription('Pas het bestaande object type aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                    ->label('Bewerken')
-                    ->modalIcon('heroicon-m-pencil-square')
+                    ->modalHeading('Ticket type bewerken')
+                    ->modalWidth(MaxWidth::ExtraLarge)
+
                 ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')
