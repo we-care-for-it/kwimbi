@@ -173,10 +173,9 @@ class QuotesRelationManager extends RelationManager
                         ->label("Nummer")
                         ->placeholder('-'),
 
-                    TextInput::make("Price")
+                    TextInput::make("price")
                         ->label("Prijs")
                         ->placeholder('-')
-                        ->numeric()
                         ->prefix('€'),
 
                 ])

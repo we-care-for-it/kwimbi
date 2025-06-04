@@ -1,11 +1,11 @@
 <?php
 namespace App\Filament\Resources;
 
-use App\Enums\ProjectStatus;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use App\Models\Employee;
 use App\Models\Project;
+use App\Models\ProjectStatus;
 use App\Models\Relation;
 use App\Models\relationLocation;
 use Filament\Forms;
@@ -111,7 +111,7 @@ class ProjectsResource extends Resource
                             Select::make("status_id")
                                 ->label("Status")
                                 ->reactive()
-                                ->options(ProjectStatus::class)
+                                ->options(ProjectStatus::pluck('name', 'id'))
                                 ->default(1),
 
                             Select::make("customer_id")
@@ -343,7 +343,7 @@ class ProjectsResource extends Resource
             ->filters([
                 SelectFilter::make("status_id")
                     ->label("Status")
-                    ->options(ProjectStatus::class)
+                    ->options(ProjectStatus::pluck('name', 'id'))
                     ->searchable()
 
                     ->preload(),

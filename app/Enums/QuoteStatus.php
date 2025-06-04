@@ -10,7 +10,7 @@ enum QuoteStatus: string implements HasLabel {
     case GEACCEPTEERD   = '4';
     case AFGEWEZEN      = '5';
     case VERVALLEN      = '6';
-    case OMGEZET        = '7';
+    case ONTVANGEN      = '9';
 
     public function getlabel(): string
     {
@@ -21,7 +21,7 @@ enum QuoteStatus: string implements HasLabel {
             self::GEACCEPTEERD => 'Geaccepteerd',
             self::AFGEWEZEN => 'Afgewezen',
             self::VERVALLEN => 'Vervallen',
-            self::OMGEZET => 'Omgezet naar opdracht',
+            self::ONTVANGEN => 'Ontvangen',
 
         };
     }

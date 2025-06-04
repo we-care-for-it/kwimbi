@@ -46,7 +46,7 @@ class ReactionsRelationManager extends RelationManager
                 ->label("Status")
                 ->reactive()
                 ->options(ProjectStatus::whereIsActive(1)->orderBy('sort', 'asc')->pluck('name', 'id'))
-                ->default(1),
+            ,
 
             DateTimePicker::make("created_at")
                 ->label("Invoegdatum / tijd")
