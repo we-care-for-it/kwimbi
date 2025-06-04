@@ -17,11 +17,12 @@ class ViewRelation extends ViewRecord
             Action::make('back')
                 ->label('Terug naar overzicht')
                 ->link()
-                ->slideOver()
+
                 ->url(url()->previous())
                 ->color('gray'),
 
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
+                ->slideOver()
             ,
 
             CommentsAction::make(),
