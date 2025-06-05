@@ -44,9 +44,9 @@ class TaskResource extends Resource
 
     protected $listeners = ["refresh" => '$refresh'];
     public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
+{
+    return (string) Task::where('employee_id', auth()->id())->count();
+}
     public static function form(Form $form): Form
     {
         return $form

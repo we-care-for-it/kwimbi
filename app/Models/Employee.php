@@ -45,4 +45,10 @@ class Employee extends Model implements Auditable
     {
         return $this->hasOne(relationDepartment::class, 'id', 'department_id');
     }
+
+// In your Employee model
+public function user()
+{
+    return $this->belongsTo(User::class)->withDefault();
+}
 }
