@@ -502,6 +502,7 @@ class ProjectsResource extends Resource
             RelationManagers\ReactionsRelationManager::class,
             RelationManagers\TimeTrackingRelationManager::class,
             RelationManagers\QuotesRelationManager::class,
+            RelationManagers\AttachmentsRelationManager::class,
         ];
     }
 

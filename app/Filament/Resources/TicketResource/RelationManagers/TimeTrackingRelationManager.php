@@ -120,7 +120,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->toggleable()
                     ->width('200px')
                     ->sortable(),
-                TextColumn::make('Werkzaamheden')
+                TextColumn::make('description')
                     ->label('Activiteit')
                     ->wrap()
                     ->placeholder('-')

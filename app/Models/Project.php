@@ -80,4 +80,10 @@ class Project extends Model implements Auditable, HasCustomFields
     {
         return $this->hasMany(\App\Models\timeTracking::class);
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');
+    }
+
 }
