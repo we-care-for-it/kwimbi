@@ -5,15 +5,15 @@ use App\Models\Company;
 use Filament\Navigation\MenuItem;
 use App\Filament\Pages\Tenancy\RegisterCompany;
 use Filament\Http\Middleware\Authenticate;
-use lockscreen\FilamentLockscreen\Lockscreen;
-use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+//use lockscreen\FilamentLockscreen\Lockscreen;
+//use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+//use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
-use Laravel\Socialite\Contracts\User as SocialiteUserContract;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -216,7 +216,7 @@ FilamentSocialitePlugin::make()
             ->widgets([
               
             ])
- ->plugin(new Lockscreen())
+// ->plugin(new Lockscreen())
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -234,7 +234,7 @@ FilamentSocialitePlugin::make()
                 DispatchServingFilamentEvent::class,
             ])   ->authMiddleware([
                 // ...
-              Locker::class, // <- Add this
+            //  Locker::class, // <- Add this
             ])
 // ->tenantMiddleware([
      //                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
