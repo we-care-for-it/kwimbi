@@ -286,21 +286,17 @@ class TicketRelationManager extends RelationManager
             ->filtersFormColumns(4)
             ->actions([
 
-                Tables\Actions\ViewAction::make('OpenTicket')
-                    ->label('Bekijk')
-                    ->icon('heroicon-s-pencil')
-                ,
+                // Tables\Actions\ViewAction::make('OpenTicket')
+                //     ->label('Bekijk')
+                //     ->icon('heroicon-s-pencil')
+                //     ->slideOver(),
 
                 Tables\Actions\EditAction::make('editTicket')
-                    ->label('Snel bewerken')
-                    ->icon('heroicon-s-pencil')
-                ,
+                    ->label('Bewerken')
+                    ->slideOver()
+                    ->icon('heroicon-s-pencil'),
 
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
-                        ->tooltip('Bewerken')
-                        ->slideOver()
-                    ,
 
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
