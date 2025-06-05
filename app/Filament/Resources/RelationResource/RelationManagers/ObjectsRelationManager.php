@@ -260,12 +260,14 @@ class ObjectsRelationManager extends RelationManager
             ->actions([
 
                 Tables\Actions\RestoreAction::make(),
+
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Object Bewerken')
+                    ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken'),
+
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
-                        ->modalHeading('Object Bewerken')
-                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                        ->tooltip('Bewerken')
-                    ,
+
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')
