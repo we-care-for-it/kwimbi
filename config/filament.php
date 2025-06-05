@@ -13,6 +13,8 @@ return [
             'auth'       => [
                 'guard' => 'tenant',
             ],
+                'remember' => true,  // Enable remember me functionality
+                'remember_for' => 30, // Minutes (60 = 1 hour, 30 = 30 minutes)
         ],
         // ... your admin panel
     ],
