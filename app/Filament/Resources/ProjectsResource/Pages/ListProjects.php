@@ -41,13 +41,9 @@ class ListProjects extends ListRecords
 
         $projectStatuses = ProjectStatus::whereIsActive(1)->orderBy('sort', 'asc')->get();
 
-        $data_all = Project::whereHas('status', function ($query) {
-            $query->where('is_active', 1);
-        });
-
         $tabs['Alles'] = Tab::make()
-            ->modifyQueryUsing(fn(Builder $query) => $data_all)
-            ->badge($data_all->count());
+            ->modifyQueryUsing(fn(Builder $query) => Project::query())
+            ->badge(Project::count());
 
         foreach ($projectStatuses as $projectStatus) {
             $tabs[$projectStatus->name] = Tab::make()

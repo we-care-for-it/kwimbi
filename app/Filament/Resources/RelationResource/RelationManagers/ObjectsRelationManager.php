@@ -16,6 +16,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
@@ -249,6 +250,10 @@ class ObjectsRelationManager extends RelationManager
             })
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                SelectFilter::make('type_id')
+                    ->label('Categorie')
+                    ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
+
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
@@ -260,12 +265,14 @@ class ObjectsRelationManager extends RelationManager
             ->actions([
 
                 Tables\Actions\RestoreAction::make(),
+
+                Tables\Actions\EditAction::make()
+                    ->modalHeading('Object Bewerken')
+                    ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
+                    ->tooltip('Bewerken'),
+
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
-                        ->modalHeading('Object Bewerken')
-                        ->modalDescription('Pas de bestaande object aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
-                        ->tooltip('Bewerken')
-                    ,
+
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')
