@@ -17,7 +17,6 @@ use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -253,18 +252,18 @@ class LocationsRelationManager extends RelationManager
                     ->label('Bekijk')
                     ->icon('heroicon-s-eye'),
 
-                Tables\Actions\ActionGroup::make([
+                // Tables\Actions\ActionGroup::make([
 
-                    Tables\Actions\EditAction::make()
-                        ->label('Wijzigen')
+                //     Tables\Actions\EditAction::make()
+                //         ->label('Wijzigen')
 
-                        ->modalHeading('Locatie wijzigen'),
+                //         ->modalHeading('Locatie wijzigen'),
 
-                    Tables\Actions\DeleteAction::make()
-                        ->label('Verwijder'),
+                //     Tables\Actions\DeleteAction::make()
+                //         ->label('Verwijder'),
 
-                    RestoreAction::make(),
-                ]),
+                //     RestoreAction::make(),
+                // ]),
 
                 // Tables\Actions\ViewAction::make('openLocation')
                 //     ->label('Bekijk')

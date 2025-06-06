@@ -2,7 +2,6 @@
 namespace App\Filament\Resources\TicketResource\RelationManagers;
 
 use App\Models\Ticket;
-use App\Models\ticketStatus;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -24,10 +23,6 @@ class TimeTrackingRelationManager extends RelationManager
     protected static ?string $icon        = 'heroicon-o-clock';
 
     #[On('refreshForm')]
-    public function refreshForm(): void
-    {
-        $this->fillForm();
-    }
 
     // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     // {
@@ -56,6 +51,7 @@ class TimeTrackingRelationManager extends RelationManager
                 Forms\Components\Select::make('work_type_id')
                     ->label('Uursoort')
                     ->searchable()
+                    ->default(setting('default_hourtype_timeregistration'))
                     ->options(workorderActivities::where('is_active', 1)->pluck("name", "id")->toArray())
                     ->required(),
                 Forms\Components\Textarea::make('description')
@@ -64,9 +60,9 @@ class TimeTrackingRelationManager extends RelationManager
                     ->required()
                     ->columnSpan('full'),
 
-                Forms\Components\select::make('ticket_status_id')
-                    ->label('Status')
-                    ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
+                // Forms\Components\select::make('ticket_status_id')
+                //     ->label('Status')
+                //     ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
 
             ]);
     }
@@ -132,13 +128,13 @@ class TimeTrackingRelationManager extends RelationManager
                 //     ->toggleable()
                 //     ->offColor('danger')
                 //     ->width(100),
-                TextColumn::make('ticket_status_id')
-                    ->badge()
-                    ->label('Ticket status')
-                    ->placeholder('Geen status update')
-                    ->toggleable()
-                    ->width('200px')
-                    ->sortable(),
+                // TextColumn::make('status.name')
+                //     ->badge()
+                //     ->label('Ticket status')
+                //     ->placeholder('Geen status update')
+                //     ->toggleable()
+                //     ->width('200px')
+                //     ->sortable(),
 
             ])
             ->filters([
@@ -165,8 +161,10 @@ class TimeTrackingRelationManager extends RelationManager
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->mutateFormDataUsing(function (array $data): array {
+
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
                         Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
+
                         return $data;
                     })
                     ->modalIcon('heroicon-m-pencil-square'),

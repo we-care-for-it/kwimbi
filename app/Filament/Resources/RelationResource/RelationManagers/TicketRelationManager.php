@@ -53,7 +53,7 @@ class TicketRelationManager extends RelationManager
                             ->searchable(['first_name', 'last_name', 'email'])
 
                             ->options(
-                                Employee::where('relation_id', $this->ownerRecord->id)
+                                Employee::where('relation_id', $this->ownerRecord->relation_id)
                                     ->get()
                                     ->mapWithKeys(fn($employee) => [
                                         $employee->id => "{$employee->first_name} {$employee->last_name}",
@@ -103,7 +103,7 @@ class TicketRelationManager extends RelationManager
                                 return Employee::create($data)->getKey();
                             })
 
-                            ->label('Conmtactpersoon')
+                            ->label('Contactpersoon')
 
                             ->columnSpan(2)
                         ,

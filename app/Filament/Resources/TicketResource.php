@@ -15,12 +15,12 @@ use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\RestoreAction;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -53,27 +53,48 @@ class TicketResource extends Resource
             ->schema([
                 Section::make()
                     ->schema([
-                        // Forms\Components\Select::make('created_by_user')
-                        //     ->label('Created By')
-                        //     ->searchable()
-                        //     ->relationship(name: 'employees', titleAttribute: 'first_name')
 
-                        // ,
+                        Forms\Components\Select::make('created_by_user')
+                            ->searchable(['first_name', 'last_name', 'email'])
+
+                            ->options(function (callable $get) {
+                                $companyId = $get('relation_id'); // or use $get('record.company_id') if editing
+                                return \App\Models\Employee::query()
+                                    ->where('relation_id', $companyId)
+                                    ->get()
+                                    ->mapWithKeys(fn($employee) => [
+                                        $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                    ]);
+
+                            })
+
+                            ->preload()
+
+                            ->label('Contactpersoon')
+
+                            ->columnSpan(2)
+                        ,
 
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->default(0)
-                            ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
+                            ->options(ticketStatus::pluck('name', 'id')),
                         Forms\Components\Select::make('type_id')
-                            ->label('Categorie')
+                            ->label('Type')
                             ->default('2')
-                            ->options(ticketType::pluck('name', 'id', )),
+                            ->options(ticketType::pluck('name', 'id')),
 
-                        Forms\Components\Select::make('prio')
-                            ->label('Prioriteit')
+                        ToggleButtons::make('prio')
                             ->options(Priority::class)
-                            ->default('3'),
+
+                            ->colors([
+                                '1' => 'info',
+                                '2' => 'warning',
+                                '3' => 'success',
+
+                            ])
+                            ->default(3)->grouped()
+                            ->label('Prioriteit'),
 
                     ])->columns(3),
 
@@ -145,7 +166,12 @@ class TicketResource extends Resource
 
                     Components\TextEntry::make('relation.name')
                         ->label("Relatie")
-                        ->placeholder("Niet opgegeven"),
+                        ->placeholder("Niet opgegeven")
+
+                        ->Url(function (object $record) {
+                            return "/relations/" . $record->relation_id . "";
+                        })
+                        ->icon("heroicon-c-link"),
 
                     Components\TextEntry::make('type.name')
                         ->label("Type")
@@ -268,7 +294,7 @@ class TicketResource extends Resource
                     ->sortable()
                     ->toggleable()
                     ->placeholder('Algemeen')
-                    ->label('Categorie'),
+                    ->label('Type'),
                 Tables\Columns\TextColumn::make('description')
                     ->limit(50)
                     ->toggleable()
@@ -325,7 +351,7 @@ class TicketResource extends Resource
                     ->label('Status')
                     ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
                 SelectFilter::make('type_id')
-                    ->label('Categorie')
+                    ->label('Type')
                     ->options(ticketType::pluck('name', 'id')),
 
                 SelectFilter::make('department_id')
@@ -350,10 +376,10 @@ class TicketResource extends Resource
             ->filtersFormColumns(4)
             ->actions([
 
-                Tables\Actions\EditAction::make('editTicket')
-                    ->label('Snel bewerken')
-                    ->icon('heroicon-s-pencil')
-                ,
+                // Tables\Actions\EditAction::make('editTicket')
+                //     ->label('Snel bewerken')
+                //     ->icon('heroicon-s-pencil')
+                // ,
 
                 Tables\Actions\ViewAction::make('openLocation')
                     ->label('Bekijk')
@@ -365,16 +391,16 @@ class TicketResource extends Resource
                     ->modalDescription(
                         "Weet je zeker dat je deze actie wilt activeren"
                     ),
-                Tables\Actions\ActionGroup::make([
+                //     Tables\Actions\ActionGroup::make([
 
-                    DeleteAction::make()
-                        ->modalIcon('heroicon-o-trash')
-                        ->tooltip('Verwijderen')
-                        ->modalHeading('Verwijderen')
-                        ->color('danger'),
-                    Tables\Actions\EditAction::make(),
+                // DeleteAction::make()
+                //     ->modalIcon('heroicon-o-trash')
+                //     ->tooltip('Verwijderen')
+                //     ->modalHeading('Verwijderen')
+                //     ->color('danger'),
+                // Tables\Actions\EditAction::make(),
 
-                ]),
+                // ]),
 
             ])->recordUrl(
             fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record])

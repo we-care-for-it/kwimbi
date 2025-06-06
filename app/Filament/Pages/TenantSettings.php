@@ -3,6 +3,7 @@ namespace App\Filament\Pages;
 
 use App\Models\relationType;
 use App\Models\tenantSetting;
+use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -57,44 +58,45 @@ class TenantSettings extends Page implements HasForms
     public $mail_encryption;
     public $management_relation_group;
     public $tasks_in_location;
+    public $default_hourtype_timeregistration;
     public function mount(): void
     {
         $this->form->fill([
-            'object_supplier_group'     => $this->getSetting('object_supplier_group'),
-            'seo_title'                 => $this->getSetting('seo_title'),
-            'use_projects'              => $this->getSetting('use_projects') ?? false,
-            'use_timetracking'          => $this->getSetting('use_timetracking'),
-            'use_inspections'           => $this->getSetting('use_inspections'),
-            'use_locations'             => $this->getSetting('use_locations'),
-            'use_tickets'               => $this->getSetting('use_tickets'),
-            'use_vehiclemanagement'     => $this->getSetting('use_vehiclemanagement'),
-            'use_gps_tracker'           => $this->getSetting('use_gps_tracker'),
-            'use_api_connection'        => $this->getSetting('use_api_connection'),
-            'use_workorders'            => $this->getSetting('use_workorders'),
-            'inspection_relation_group' => $this->getSetting('inspection_relation_group'),
-            'use_company_departments'   => $this->getSetting('use_company_departments'),
-            'use_company_locations'     => $this->getSetting('use_company_locations'),
-            'use_company_warehouses'    => $this->getSetting('use_company_warehouses'),
-            'use_company_spaces'        => $this->getSetting('use_company_spaces'),
-            'color1'                    => $this->getSetting('color1'),
-            'color2'                    => $this->getSetting('color2'),
-            'company_logo'              => $this->getSetting('company_logo'),
-            'company_favo_logo'         => $this->getSetting('company_favo_logo'),
-            'company_name'              => $this->getSetting('company_name'),
-            'portal_menu_position'      => $this->getSetting('portal_menu_position'),
+            'object_supplier_group'             => $this->getSetting('object_supplier_group'),
+            'seo_title'                         => $this->getSetting('seo_title'),
+            'use_projects'                      => $this->getSetting('use_projects') ?? false,
+            'use_timetracking'                  => $this->getSetting('use_timetracking'),
+            'use_inspections'                   => $this->getSetting('use_inspections'),
+            'use_locations'                     => $this->getSetting('use_locations'),
+            'use_tickets'                       => $this->getSetting('use_tickets'),
+            'use_vehiclemanagement'             => $this->getSetting('use_vehiclemanagement'),
+            'use_gps_tracker'                   => $this->getSetting('use_gps_tracker'),
+            'use_api_connection'                => $this->getSetting('use_api_connection'),
+            'use_workorders'                    => $this->getSetting('use_workorders'),
+            'inspection_relation_group'         => $this->getSetting('inspection_relation_group'),
+            'use_company_departments'           => $this->getSetting('use_company_departments'),
+            'use_company_locations'             => $this->getSetting('use_company_locations'),
+            'use_company_warehouses'            => $this->getSetting('use_company_warehouses'),
+            'use_company_spaces'                => $this->getSetting('use_company_spaces'),
+            'color1'                            => $this->getSetting('color1'),
+            'color2'                            => $this->getSetting('color2'),
+            'company_logo'                      => $this->getSetting('company_logo'),
+            'company_favo_logo'                 => $this->getSetting('company_favo_logo'),
+            'company_name'                      => $this->getSetting('company_name'),
+            'portal_menu_position'              => $this->getSetting('portal_menu_position'),
 
-            'mail_mailer'               => $this->getSetting('mail_mailer'),
-            'mail_host'                 => $this->getSetting('mail_host'),
-            'mail_port'                 => $this->getSetting('mail_port'),
-            'mail_username'             => $this->getSetting('mail_username'),
+            'mail_mailer'                       => $this->getSetting('mail_mailer'),
+            'mail_host'                         => $this->getSetting('mail_host'),
+            'mail_port'                         => $this->getSetting('mail_port'),
+            'mail_username'                     => $this->getSetting('mail_username'),
 
-            'mail_username'             => $this->getSetting('mail_username'),
-            'mail_password'             => $this->getSetting('mail_password'),
-            'mail_from_address'         => $this->getSetting('mail_from_address'),
-            'mail_from_name'            => $this->getSetting('mail_from_name'),
-            'mail_encryption'           => $this->getSetting('mail_encryption'),
-            'management_relation_group' => $this->getSetting('management_relation_group'),
-            'tasks_in_location'         => $this->getSetting('tasks_in_location'),
+            'mail_username'                     => $this->getSetting('mail_username'),
+            'mail_password'                     => $this->getSetting('mail_password'),
+            'mail_from_address'                 => $this->getSetting('mail_from_address'),
+            'mail_from_name'                    => $this->getSetting('mail_from_name'),
+            'mail_encryption'                   => $this->getSetting('mail_encryption'),
+            'management_relation_group'         => $this->getSetting('management_relation_group'),
+            'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
 
         ]);
     }
@@ -202,6 +204,16 @@ class TenantSettings extends Page implements HasForms
 
                     Forms\Components\Tabs\Tab::make('Relatie categorieen')
                         ->schema([
+
+                            Section::make()
+                                ->columns(4)
+                                ->schema([
+
+                                    Forms\Components\Select::make('default_hourtype_timeregistration')
+                                        ->label('Standaard uurtype tijdregistratie')
+                                        ->options(workorderActivities::pluck('name', 'id')),
+
+                                ])->description('Selecteer standaard relatie categorieen per onderdeel'),
 
                             Section::make()
                                 ->columns(4)

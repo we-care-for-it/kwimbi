@@ -28,10 +28,10 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use DutchCodingCompany\FilamentSocialite\Provider;
 use Filament\Support\Enums\MaxWidth;
 use Carbon\Carbon;
-use Niladam\FilamentAutoLogout\AutoLogoutPlugin;
- //use lockscreen\FilamentLockscreen\Lockscreen;
-//use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
-//use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
+//use Niladam\FilamentAutoLogout\AutoLogoutPlugin;
+ use lockscreen\FilamentLockscreen\Lockscreen;
+use lockscreen\FilamentLockscreen\Http\Middleware\Locker;
+use lockscreen\FilamentLockscreen\Http\Middleware\LockerTimer;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
@@ -136,17 +136,7 @@ class AppPanelProvider extends PanelProvider
         ]),
         ])
 
- ->plugins([
-        AutoLogoutPlugin::make()
-
-            ->color(Color::Emerald)                         // Set the color. Defaults to Zinc
-          //  ->disableIf(fn () => auth()->id() === 1)        // Disable the user with ID 1
-            ->logoutAfter(Carbon::SECONDS_PER_MINUTE * 5)   // Logout the user after 5 minutes
-            ->withoutWarning()                              // Disable the warning before logging out
-            ->withoutTimeLeft()                             // Disable the time left
-            ->timeLeftText('Je word straks automatiche uitgelogd')      // Change the time left text
-            ->timeLeftText('')                              // Remove the time left text (displays only countdown)
-    ])
+ 
 
 
 //->plugin(\TomatoPHP\FilamentPWA\FilamentPWAPlugin::make())
@@ -156,7 +146,7 @@ class AppPanelProvider extends PanelProvider
                  //   ->addTwoFactorMenuItem() // Add 2FA settings to user menu items
 
       //  ])
- //->plugin(new Lockscreen())   // <- Add this
+->plugin(new Lockscreen())   // <- Add this
  
 
 
@@ -173,7 +163,7 @@ class AppPanelProvider extends PanelProvider
    	
             ->maxContentWidth(MaxWidth::Full)
   ->sidebarCollapsibleOnDesktop()
-            ->unsavedChangesAlerts()
+        
             ->breadcrumbs(true)
  ->plugins([
               
@@ -234,7 +224,7 @@ FilamentSocialitePlugin::make()
                 DispatchServingFilamentEvent::class,
             ])   ->authMiddleware([
                 // ...
-            //  Locker::class, // <- Add this
+              Locker::class, // <- Add this
             ])
 // ->tenantMiddleware([
      //                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class
