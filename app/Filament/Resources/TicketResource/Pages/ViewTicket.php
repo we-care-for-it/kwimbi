@@ -17,6 +17,16 @@ class ViewTicket extends ViewRecord
         $this->fillForm();
     }
 
+    public function getTitle(): string
+    {
+        return 'Bekijk ticket: #' . $this->record->id;
+    }
+
+    // public function getHeader(): string
+    // {
+    //     return 'Bekijk ticket: #' . $this->record->id;
+    // }
+
     protected static string $resource = TicketResource::class;
 
     protected $listeners = ["refresh" => '$refresh'];

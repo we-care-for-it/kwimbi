@@ -59,4 +59,9 @@ class Ticket extends Model
         return $this->hasMany(ticketReplies::class);
     }
 
+    public function object()
+    {
+        return $this->hasOne(Elevator::class, 'id', 'asset_id');
+    }
+
 }

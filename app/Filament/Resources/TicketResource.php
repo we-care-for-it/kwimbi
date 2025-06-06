@@ -182,10 +182,6 @@ class TicketResource extends Resource
                         ->label("Status")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
-                    Components\TextEntry::make('AssignedByUser.name')
-                        ->label("Medewerker")
-                        ->badge()
-                        ->placeholder("Niet toegewezen"),
 
                     // TileEntry::make('AssignedByUser.name')
                     //     ->columnSpanFull()
@@ -213,12 +209,49 @@ class TicketResource extends Resource
                         ->label("Prioriteit")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
+                    Components\TextEntry::make('AssignedByUser.name')
+                        ->label("Medewerker")
+                        ->badge()
+                        ->placeholder("Niet toegewezen"),
 
                     Components\TextEntry::make('department.name')
                         ->label("Afdeling")
                         ->placeholder("Niet opgegeven"),
+                ])->columns(5),
 
-                ])->columns(4),
+            \Filament\Infolists\Components\Section::make('Object gegevens')
+
+                ->schema([
+
+                    Components\TextEntry::make('object.name')
+                        ->label("Naam")
+                        ->placeholder("Niet opgegeven")
+                        ->Url(function (object $record) {
+                            return "/objects/" . $record->asset_id . "";
+                        })
+                        ->icon("heroicon-c-link"),
+
+                    Components\TextEntry::make('object.type.name')
+                        ->label("Type")
+                        ->badge()
+                        ->placeholder("Niet opgegeven")
+                    ,
+
+                    Components\TextEntry::make('object.brand.name')
+                        ->label("Merk")
+                        ->placeholder("Niet opgegeven")
+                    ,
+
+                    Components\TextEntry::make('object.model.name')
+                        ->label("Type")
+                        ->placeholder("Niet opgegeven")
+                    ,
+
+                    Components\TextEntry::make('object.serial_number')
+                        ->label("Serienummer")
+                        ->placeholder("Niet opgegeven"),
+
+                ])->columns(5),
 
             \Filament\Infolists\Components\Section::make('Ticket omschrijving')
                 ->schema([
