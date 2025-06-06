@@ -10,12 +10,14 @@ use Livewire\Attributes\On;
 
 class ViewTicket extends ViewRecord
 {
-    protected static string $resource = TicketResource::class;
+
     #[On('refreshForm')]
     public function refreshForm(): void
     {
         $this->fillForm();
     }
+
+    protected static string $resource = TicketResource::class;
 
     protected $listeners = ["refresh" => '$refresh'];
 
@@ -25,12 +27,13 @@ class ViewTicket extends ViewRecord
             Action::make('back')
                 ->label('Terug naar overzicht')
                 ->link()
-                ->icon('heroicon-s-map-pin')
                 ->url(url()->previous())
                 ->color('gray'),
 
-            Actions\EditAction::make()->icon('heroicon-m-pencil-square')
-            ,
+            Actions\EditAction::make()
+                ->slideOver()
+
+                ->icon('heroicon-m-pencil-square'),
 
             ActionGroup::make([
                 Actions\DeleteAction::make('Verwijderen'),

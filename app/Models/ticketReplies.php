@@ -1,16 +1,15 @@
 <?php
 namespace App\Models;
 
-use App\Enums\TicketStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class ticketReplies extends Model
 {
 
-    protected $casts = [
-        'status_id' => TicketStatus::class,
-    ];
+    // protected $casts = [
+    //     'status_id' => TicketStatus::class,
+    // ];
 
     public static function boot()
     {

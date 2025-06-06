@@ -275,15 +275,15 @@ class TicketsRelationManager extends RelationManager
                     ->icon('heroicon-s-pencil')
                 ,
 
-                Tables\Actions\EditAction::make('editTicket')
-                    ->label('Snel bewerken')
-                    ->icon('heroicon-s-pencil')
-                ,
+                // Tables\Actions\EditAction::make('editTicket')
+                //     ->label('Snel bewerken')
+                //     ->icon('heroicon-s-pencil')
+                // ,
 
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
-                        ->tooltip('Bewerken')
-                    ,
+                    // Tables\Actions\EditAction::make()
+                    //     ->tooltip('Bewerken')
+                    // ,
 
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
