@@ -160,13 +160,14 @@ class TimeTrackingRelationManager extends RelationManager
                     ->modalHeading('Activiteit bewerken')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
-                    ->mutateFormDataUsing(function (array $data): array {
+                    ->slideOver()
+                // ->mutateFormDataUsing(function (array $data): array {
 
-                        $data['relation_id'] = $this->ownerRecord?->relation_id;
-                        Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
+                //     $data['relation_id'] = $this->ownerRecord?->relation_id;
+                //     Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
 
-                        return $data;
-                    })
+                //     return $data;
+                // })
                     ->modalIcon('heroicon-m-pencil-square'),
 
                 ActionGroup::make([
