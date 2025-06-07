@@ -284,4 +284,9 @@ class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
         return $this->belongsTo(ObjectModel::class);
     }
 
+    public function assetToTickets()
+    {
+        return $this->hasMany(\App\Models\AssetToTicket::class, 'object_id');
+    }
+
 }

@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Enums\Priority;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ticket extends Model
@@ -62,6 +63,12 @@ class Ticket extends Model
     public function object()
     {
         return $this->hasOne(Elevator::class, 'id', 'asset_id');
+    }
+
+    public function objects(): HasMany
+    {
+        return $this->hasMany(assetToTicket::class, 'ticket_id', 'id');
+
     }
 
 }

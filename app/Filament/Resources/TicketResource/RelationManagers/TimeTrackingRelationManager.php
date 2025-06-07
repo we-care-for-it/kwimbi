@@ -145,6 +145,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalHeading('Activiteit toevoegen')
                     ->label('Activiteit toevoegen')
+                    ->link()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
                         $data['ticket_id']   = $this->ownerRecord?->id;
