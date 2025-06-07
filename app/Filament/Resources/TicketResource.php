@@ -19,6 +19,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Infolists\Components;
 use Filament\Infolists\Infolist;
+use Filament\Resources\RelationManagers\RelationGroup;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\RestoreAction;
@@ -219,39 +220,39 @@ class TicketResource extends Resource
                         ->placeholder("Niet opgegeven"),
                 ])->columns(5),
 
-            \Filament\Infolists\Components\Section::make('Object gegevens')
+            // \Filament\Infolists\Components\Section::make('Object gegevens')
 
-                ->schema([
+            //     ->schema([
 
-                    Components\TextEntry::make('object.name')
-                        ->label("Naam")
-                        ->placeholder("Niet opgegeven")
-                        ->Url(function (object $record) {
-                            return "/objects/" . $record->asset_id . "";
-                        })
-                        ->icon("heroicon-c-link"),
+            //         Components\TextEntry::make('object.name')
+            //             ->label("Naam")
+            //             ->placeholder("Niet opgegeven")
+            //             ->Url(function (object $record) {
+            //                 return "/objects/" . $record->asset_id . "";
+            //             })
+            //             ->icon("heroicon-c-link"),
 
-                    Components\TextEntry::make('object.type.name')
-                        ->label("Type")
-                        ->badge()
-                        ->placeholder("Niet opgegeven")
-                    ,
+            //         Components\TextEntry::make('object.type.name')
+            //             ->label("Type")
+            //             ->badge()
+            //             ->placeholder("Niet opgegeven")
+            //         ,
 
-                    Components\TextEntry::make('object.brand.name')
-                        ->label("Merk")
-                        ->placeholder("Niet opgegeven")
-                    ,
+            //         Components\TextEntry::make('object.brand.name')
+            //             ->label("Merk")
+            //             ->placeholder("Niet opgegeven")
+            //         ,
 
-                    Components\TextEntry::make('object.model.name')
-                        ->label("Type")
-                        ->placeholder("Niet opgegeven")
-                    ,
+            //         Components\TextEntry::make('object.model.name')
+            //             ->label("Type")
+            //             ->placeholder("Niet opgegeven")
+            //         ,
 
-                    Components\TextEntry::make('object.serial_number')
-                        ->label("Serienummer")
-                        ->placeholder("Niet opgegeven"),
+            //         Components\TextEntry::make('object.serial_number')
+            //             ->label("Serienummer")
+            //             ->placeholder("Niet opgegeven"),
 
-                ])->columns(5),
+            //     ])->columns(5),
 
             \Filament\Infolists\Components\Section::make('Ticket omschrijving')
                 ->schema([
@@ -448,8 +449,10 @@ class TicketResource extends Resource
     public static function getRelations(): array
     {
         return [
-
-            RelationManagers\TimeTrackingRelationManager::class,
+            RelationGroup::make('', [
+                RelationManagers\ObjectsRelationManager::class,
+                RelationManagers\TimeTrackingRelationManager::class,
+            ]),
         ];
     }
 
