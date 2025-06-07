@@ -56,8 +56,6 @@ class TicketResource extends Resource
                     ->schema([
 
                         Forms\Components\Select::make('created_by_user')
-                            ->searchable(['first_name', 'last_name', 'email'])
-
                             ->options(function (callable $get) {
                                 $companyId = $get('relation_id'); // or use $get('record.company_id') if editing
                                 return \App\Models\Employee::query()
@@ -343,7 +341,6 @@ class TicketResource extends Resource
                     })
                 //     ->description(fn($record) => $record->AssignedByUser?->email)
                     ->label('Toegewezen medewerker')
-                    ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar)
                     ->placeholder('Geen'),
 

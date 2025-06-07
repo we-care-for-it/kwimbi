@@ -28,7 +28,7 @@ class ObjectsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\select::make('object_id')
+                Forms\Components\Select::make('object_id')
                     ->required()
                     ->label('Kies een object')
                     ->columnSpan('full')
