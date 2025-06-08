@@ -130,7 +130,7 @@ class ObjectsRelationManager extends RelationManager
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('Ontkoppel'),
                 ]),
             ])->emptyState(view("partials.empty-state-small"));
     }

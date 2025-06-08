@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources\TicketResource\RelationManagers;
 
-use App\Models\Ticket;
 use App\Models\workorderActivities;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -149,7 +148,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
                         $data['ticket_id']   = $this->ownerRecord?->id;
-                        Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
+                        // Ticket::whereId($this->ownerRecord->id)->update(['status_id' => $data['ticket_status_id']]);
                         return $data;
                     })
 
