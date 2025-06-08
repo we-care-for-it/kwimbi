@@ -158,6 +158,12 @@ class RelationLocationResource extends Resource
                     ->label("GPS longitude")
                     ->hidden()
                     ->columnSpan(1),
+
+                Forms\Components\Checkbox::make("is_standard_location")
+                    ->label("Standaard locatie")
+                    ->default(false)
+                    ->columnSpan('full'),
+
             ])]),
 
             // Forms\Components\Section::make("Afbeeldingen gegevens")->collapsible()->schema([Grid::make(4)->schema([

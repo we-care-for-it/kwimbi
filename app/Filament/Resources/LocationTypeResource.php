@@ -4,8 +4,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\LocationTypeResource\Pages;
 use App\Models\locationType;
 use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,9 +32,9 @@ class LocationTypeResource extends Resource
                     ->description('Een selectie van de modules voor deze locatie type')
                     ->schema([
 
-                        ToggleButtons::make('options')
+                        CheckboxList::make('options')::make('options')
                             ->label('Opties')
-                            ->multiple()
+
                             ->options([
                                 'Afbeeldingen'    => 'Afbeeldingen',
                                 'Contactpersonen' => 'Contactpersonen',
@@ -45,7 +45,6 @@ class LocationTypeResource extends Resource
                                 'Tickets'         => 'Tickets',
                             ])
                             ->required()
-                            ->inline()
                             ->columns(2),
 
                     ]),

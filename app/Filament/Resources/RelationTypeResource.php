@@ -4,8 +4,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationTypeResource\Pages;
 use App\Models\relationType;
 use Filament\Forms;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -33,21 +33,20 @@ class RelationTypeResource extends Resource
                     ->description('Een selectie van de modules voor deze relatie type')
                     ->schema([
 
-                        ToggleButtons::make('options')
+                        CheckboxList::make('options')
                             ->label('Opties')
-                            ->multiple()
+
                             ->options([
                                 'Medewerkers'     => 'Medewerkers',
                                 'Tickets'         => 'Tickets',
                                 'Bijlages'        => 'Bijlages',
                                 'Tijdregistratie' => 'Tijdregistratie',
                                 'Projecten'       => 'Projecten',
-                                'Locaties'        => 'Locaties',
                                 'Objecten'        => 'Objecten',
                                 'Afdelingen'      => 'Afdelingen',
                             ])
                             ->required()
-                            ->inline()
+
                             ->columns(2),
 
                     ]),
