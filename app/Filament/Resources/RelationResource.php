@@ -385,7 +385,7 @@ class RelationResource extends Resource
                                 ->columnSpan(2)
                                 ->getStateUsing(function ($record): ?string {
                                     if ($record?->parentaddress->address) {
-                                        return $record?->parentaddress->address . " " . $record->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
+                                        return $record?->parentaddress?->address . " " . $record?->parentaddress?->zipcode . " - " . $record?->parentaddress?->place;
                                     } else {
                                         return "Geen locatie toegevoegd";
                                     }
