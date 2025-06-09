@@ -113,7 +113,7 @@ class Relation extends Model implements HasCustomFields
 
     public function parentaddress()
     {
-        return $this->hasOne(relationLocation::class)->where('is_standard_location', 1);
+        return $this->hasOne(relationLocation::class)->where('type_id', setting('default_parent_location'));
     }
 
     public function attachments()

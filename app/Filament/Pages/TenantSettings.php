@@ -1,6 +1,7 @@
 <?PHP
 namespace App\Filament\Pages;
 
+use App\Models\locationType;
 use App\Models\relationType;
 use App\Models\tenantSetting;
 use App\Models\workorderActivities;
@@ -58,6 +59,8 @@ class TenantSettings extends Page implements HasForms
     public $mail_encryption;
     public $management_relation_group;
     public $tasks_in_location;
+    public $default_parent_location;
+
     public $default_hourtype_timeregistration;
     public function mount(): void
     {
@@ -97,6 +100,7 @@ class TenantSettings extends Page implements HasForms
             'mail_encryption'                   => $this->getSetting('mail_encryption'),
             'management_relation_group'         => $this->getSetting('management_relation_group'),
             'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
+            'default_parent_location'           => $this->getSetting('default_parent_location'),
 
         ]);
     }
@@ -230,6 +234,10 @@ class TenantSettings extends Page implements HasForms
                                     Forms\Components\Select::make('management_relation_group')
                                         ->label('Beheerder')
                                         ->options(relationType::pluck('name', 'id')),
+
+                                    Forms\Components\Select::make('default_parent_location')
+                                        ->label('Standaard hoofdlocatie')
+                                        ->options(locationType::pluck('name', 'id')),
 
                                 ])->description('Selecteer standaard relatie categorieen per onderdeel'),
 
