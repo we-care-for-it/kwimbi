@@ -159,10 +159,10 @@ class RelationLocationResource extends Resource
                     ->hidden()
                     ->columnSpan(1),
 
-                Forms\Components\Checkbox::make("is_standard_location")
-                    ->label("Standaard locatie")
-                    ->default(false)
-                    ->columnSpan('full'),
+                // Forms\Components\Checkbox::make("is_standard_location")
+                //     ->label("Standaard locatie")
+                //     ->default(false)
+                //     ->columnSpan('full'),
 
             ])]),
 

@@ -483,7 +483,7 @@ class RelationResource extends Resource
                 ->placeholder('-')
                 ->label('Plaats'),
 
-            Tables\Columns\TextColumn::make('parentaddress.type.name')
+            Tables\Columns\TextColumn::make('type.name')
                 ->label('Categorie')
                 ->columnSpan("full")
                 ->badge()
