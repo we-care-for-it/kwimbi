@@ -257,6 +257,7 @@ class ObjectsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
+                    ->link()
                     ->modalHeading('Object aanmaken')
                     ->modalDescription('Koppel vaste objecten aan een locatie of een medewerker. Wil je objecten koppelen aan aan een medewerker of locatie? Maak dan eerst een medewerker of locatie aan.')
                     ->label('Toevoegen')

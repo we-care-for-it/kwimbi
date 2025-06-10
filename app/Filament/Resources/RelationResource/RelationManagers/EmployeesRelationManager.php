@@ -117,7 +117,7 @@ class EmployeesRelationManager extends RelationManager
                     ->modalDescription('Voeg een nieuwe medewerker toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
-
+                    ->link()
                     ->label('Medewerker toevoegen'),
 
             ])
@@ -126,6 +126,7 @@ class EmployeesRelationManager extends RelationManager
 
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk')
+
                     ->icon('heroicon-s-eye'),
 
                 Tables\Actions\ActionGroup::make([

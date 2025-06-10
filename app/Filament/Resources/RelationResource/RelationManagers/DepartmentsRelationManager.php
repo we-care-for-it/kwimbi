@@ -77,6 +77,8 @@ class DepartmentsRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()->label('Afdeling aanmaken')
+                    ->link()
+                    ->icon('heroicon-m-plus')
                     ->modalHeading('Locatie toevoegen'),
             ])
             ->actions([
