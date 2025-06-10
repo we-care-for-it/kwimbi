@@ -118,6 +118,10 @@ class EmployeesRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->link()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['type_id'] = 1;
+                        return $data;
+                    })
                     ->label('Medewerker toevoegen'),
 
             ])

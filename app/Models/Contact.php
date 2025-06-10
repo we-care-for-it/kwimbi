@@ -31,6 +31,11 @@ class Contact extends Model implements HasCustomFields
         return $this->belongsTo(Company::class);
     }
 
+    public function newQuery()
+    {
+        return parent::newQuery()->where('type_id', 2);
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(AssetCategory::class);

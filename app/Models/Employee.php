@@ -14,7 +14,7 @@ class Employee extends Model implements Auditable
     use UsesCustomFields;
     use HasFilamentComments;
     use \OwenIt\Auditing\Auditable;
-    //  public $table = "object_building_types";
+    public $table = "contacts";
     //  protected $fillable = ['name', 'is_active'];
 
     public function getNameAttribute()
@@ -29,6 +29,16 @@ class Employee extends Model implements Auditable
         } else {
             return '/images/noavatar.jpg';
         }
+    }
+
+/**
+ * Get a new query builder for the model's table.
+ *
+ * @return \Illuminate\Database\Eloquent\Builder
+ */
+    public function newQuery()
+    {
+        return parent::newQuery()->where('type_id', 1);
     }
 
     public function relation()
@@ -47,8 +57,8 @@ class Employee extends Model implements Auditable
     }
 
 // In your Employee model
-public function user()
-{
-    return $this->belongsTo(User::class)->withDefault();
-}
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withDefault();
+    }
 }

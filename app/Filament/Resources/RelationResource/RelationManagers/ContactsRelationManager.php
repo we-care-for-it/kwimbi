@@ -136,13 +136,17 @@ class ContactsRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->modalHeading('Contactpersoon tovoegen')
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['type_id'] = 2;
+                        return $data;
+                    })
                 ,
             ])
             ->actions([
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk contact')
                     ->color('primary')
-                > link()
+                    ->link()
                     ->url(function ($record) {
                         return "/contacts/" . $record->id;
                     })->icon('heroicon-s-eye'),
