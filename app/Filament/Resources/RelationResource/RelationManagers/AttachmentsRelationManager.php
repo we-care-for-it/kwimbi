@@ -87,6 +87,7 @@ class AttachmentsRelationManager extends RelationManager
                     $data['company_id'] = Filament::getTenant()->id;
                     return $data;
                 })->label('Bijlage toevoegen')
+                    ->link()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus'),
             ])

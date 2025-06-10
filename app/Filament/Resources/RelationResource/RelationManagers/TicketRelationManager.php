@@ -300,6 +300,8 @@ class TicketRelationManager extends RelationManager
             ->headerActions([
 
                 Tables\Actions\CreateAction::make()
+                    ->link()
+                    ->icon('heroicon-m-plus')
                     ->modalWidth(MaxWidth::FourExtraLarge)
                     ->modalHeading('Ticket toevoegen')
                     ->slideOver()

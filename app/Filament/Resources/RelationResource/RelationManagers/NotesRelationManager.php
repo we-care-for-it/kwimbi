@@ -72,7 +72,7 @@ class NotesRelationManager extends RelationManager
                     return $data;
                 })->label('Notitie toevoegen')
                     ->modalHeading('Notitie toevoegen')
-
+                    ->link()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus'),
 

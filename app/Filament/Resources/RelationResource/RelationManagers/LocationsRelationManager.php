@@ -17,7 +17,6 @@ use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -101,11 +100,6 @@ class LocationsRelationManager extends RelationManager
                     ->hidden()
                     ->columnSpan(1),
 
-                Forms\Components\Checkbox::make("is_standard_location")
-                    ->label("Standaard locatie")
-                    ->default(true)
-                    ->columnSpan('full'),
-
             ])]),
 
             Forms\Components\Section::make("Afbeeldingen")
@@ -160,14 +154,6 @@ class LocationsRelationManager extends RelationManager
             })
             ->columns([
 
-                BooleanColumn::make('is_standard_location')
-                    ->label('Hoofdlocatie')
-                    ->trueIcon('heroicon-o-check-circle') // Optional customization
-                    ->falseIcon('heroicon-o-x-circle')    // Optional customization
-                    ->trueColor('success')
-                    ->width('20px') // Optional: green color for true
-                    ->falseColor('danger'),
-
                 Tables\Columns\TextColumn::make("address")
                     ->toggleable()
                     ->label('Adres')
@@ -177,7 +163,7 @@ class LocationsRelationManager extends RelationManager
                         return $record->address . "-" . $record->zipcode . " - " . $record->place;
                     })
                     ->searchable()
-                    //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
+                //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
                     ->description(function ($record) {
                         return $record?->name;
                     }),
@@ -253,12 +239,14 @@ class LocationsRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->slideOver()
+                    ->link()
                     ->modalHeading('Locatie toevoegen'),
             ])
             ->actions([
 
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk')
+
                     ->icon('heroicon-s-eye'),
 
                 // Tables\Actions\ActionGroup::make([

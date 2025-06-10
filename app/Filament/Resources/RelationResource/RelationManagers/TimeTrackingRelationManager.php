@@ -139,6 +139,7 @@ class TimeTrackingRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->icon('heroicon-m-plus')
+                    ->link()
                     ->modalIcon('heroicon-o-plus')
                 ,
             ])

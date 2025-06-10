@@ -91,7 +91,7 @@ class TasksRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
-
+                    ->link()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['model_id'] = $this->ownerRecord->id;
                         $data['model']    = 'relation';

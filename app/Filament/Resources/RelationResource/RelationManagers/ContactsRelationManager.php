@@ -142,6 +142,7 @@ class ContactsRelationManager extends RelationManager
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk contact')
                     ->color('primary')
+                > link()
                     ->url(function ($record) {
                         return "/contacts/" . $record->id;
                     })->icon('heroicon-s-eye'),
