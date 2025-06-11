@@ -60,7 +60,7 @@ class WorkorderActivitieResource extends Resource
                     ->searchable(),
                 TextColumn::make('default_time')
                     ->placeholder('-')
-                    ->label('Standardtijd')
+                    ->label('Standaardtijd')
                     ->date("h:s")
                     ->searchable(),
                 TextColumn::make('description')
@@ -75,10 +75,8 @@ class WorkorderActivitieResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Type Werkzaamheid Bewerken')
-                    ->modalDescription('Pas de bestaande type werkzaamheid aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
-                    ->label('')
-                    ->modalIcon('heroicon-m-pencil-square')
+                    ->label('Bewerken')
                 ,
                 Tables\Actions\DeleteAction::make()
                     ->modalIcon('heroicon-o-trash')

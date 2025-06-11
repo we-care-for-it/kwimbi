@@ -141,29 +141,20 @@
     <x-filament::dropdown.list>
 
 
-    <x-filament::dropdown.list.item tag="a" href="/changelog"  icon="heroicon-o-document-text">
+    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/changelog"  icon="heroicon-o-document-text">
     Changelog
     </x-filament::dropdown.list.item>
 
 
-    <x-filament::dropdown.list.item tag="a" href="#"  icon="heroicon-o-user">
+    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/feature-requests"  icon="heroicon-o-user">
     Feature request
     </x-filament::dropdown.list.item>
 
 
-    <x-filament::dropdown.list.item tag="a" href="#"  icon="heroicon-o-bug-ant">
-    Bug rapporteren
+    <x-filament::dropdown.list.item  href="https://kwimbi.instatus.com/"    icon="heroicon-o-server">
+    Serverstatus
     </x-filament::dropdown.list.item>
 
-
-    <x-filament::dropdown.list.item tag="a" href="#"  icon="heroicon-o-server">
-    Server status
-    </x-filament::dropdown.list.item>
-
-
-    <x-filament::dropdown.list.item tag="a" href="#"  icon="heroicon-o-lifebuoy">
-    Helpdesk
-    </x-filament::dropdown.list.item>
 
 </x-filament::dropdown.list>
 

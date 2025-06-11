@@ -10,9 +10,10 @@ use Filament\Tables\Table;
 
 class chexResource extends Resource
 {
-    protected static ?string $model          = chex::class;
-    protected static ?string $slug           = 'connection.elevators.chex';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $model                 = chex::class;
+    protected static ?string $slug                  = 'connection.elevators.chex';
+    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
