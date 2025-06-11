@@ -75,7 +75,7 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('description')->grow(true)->label('Omschrijving')
                 ,
 
-            ])->emptyState(view('partials.empty-state-small'))
+            ])->emptyState(view('partials.empty-state'))
             ->filters([
                 //
             ])

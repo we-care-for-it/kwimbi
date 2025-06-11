@@ -58,7 +58,7 @@ class NotesRelationManager extends RelationManager
                 // }
                 // ),
 
-            ])->emptyState(view('partials.empty-state-small'))
+            ])->emptyState(view('partials.empty-state'))
 
             ->filters([
                 //

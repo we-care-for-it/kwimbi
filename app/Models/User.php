@@ -19,6 +19,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles, AuthenticationLoggable;
 
+    // public function newQuery()
+    // {
+    //     return parent::newQuery()->whereNot('id', 1);
+    // }
+
     public function canAccessPanel(Panel $panel): bool
     {
 

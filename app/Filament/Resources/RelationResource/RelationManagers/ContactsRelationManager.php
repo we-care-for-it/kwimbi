@@ -123,7 +123,7 @@ class ContactsRelationManager extends RelationManager
                     ->label('Telefoonnummers')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
-            ->emptyState(view('partials.empty-state-small'))
+            ->emptyState(view('partials.empty-state'))
             ->recordUrl(function ($record) {
                 return "/contacts/" . $record->id;
             })
@@ -135,6 +135,7 @@ class ContactsRelationManager extends RelationManager
                     ->label('Contacpersoon toevoegen')
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
+                    ->link()
                     ->modalHeading('Contactpersoon tovoegen')
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['type_id'] = 2;
