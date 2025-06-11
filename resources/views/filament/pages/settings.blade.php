@@ -102,10 +102,10 @@
             <div>
                <h2 class="text-lg font-semibold mb-2">Categorieen</h2>
                <ul class="list-disc list-inside space-y-1">
-                  <li><a href="/ticket-type" class="text-black hover:underline">Tickets</a></li>
-                  <li><a href="/relation-type" class="text-black hover:underline">Relaties</a></li>
-                  <li><a href="/contact-type" class="text-black hover:underline">Contactpersonen</a></li>
-                  <li><a href="/locationv-type" class="text-black hover:underline">Locaties</a></li>
+                  <li><a href="/ticket-types" class="text-black hover:underline">Tickets</a></li>
+                  <li><a href="/relation-types" class="text-black hover:underline">Relaties</a></li>
+                  <li><a href="/contact-types" class="text-black hover:underline">Contactpersonen</a></li>
+                  <li><a href="/locationv-types" class="text-black hover:underline">Locaties</a></li>
                </ul>
             </div>
          </div>
@@ -183,7 +183,7 @@
                <p class="text-sm text-gray-600">Koppelings instellingen</p>
             </div>
          </a>
-         @endif
       </div>
+      @endif
    </div>
 </x-filament-panels::page>

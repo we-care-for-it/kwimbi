@@ -10,9 +10,10 @@ use Filament\Tables\Table;
 
 class liftinstituutResource extends Resource
 {
-    protected static ?string $model          = liftinstituut::class;
-    protected static ?string $slug           = 'connection.elevators.liftinstituut';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $model                 = liftinstituut::class;
+    protected static ?string $slug                  = 'connection.elevators.liftinstituut';
+    protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
