@@ -108,7 +108,7 @@ class EmployeesRelationManager extends RelationManager
                     ->label('Telefoonnummer')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
             ])
-            ->emptyState(view('partials.empty-state-small'))
+            ->emptyState(view('partials.empty-state'))
 
             ->headerActions([
                 Tables\Actions\CreateAction::make()

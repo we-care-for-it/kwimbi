@@ -326,7 +326,7 @@ class RelationResource extends Resource
 
         return [
             'Naam'      => $record?->name ?? "Onbekend",
-            'Categorie' => $record?->typ?->name,
+            'Categorie' => $record?->type?->name ?? "Onbekend",
         ];
 
     }

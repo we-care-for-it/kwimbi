@@ -60,6 +60,7 @@ class TenantSettings extends Page implements HasForms
     public $management_relation_group;
     public $tasks_in_location;
     public $default_parent_location;
+    public $environment_elevator;
 
     public $default_hourtype_timeregistration;
     public function mount(): void
@@ -101,6 +102,7 @@ class TenantSettings extends Page implements HasForms
             'management_relation_group'         => $this->getSetting('management_relation_group'),
             'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
             'default_parent_location'           => $this->getSetting('default_parent_location'),
+            'environment_elevator'              => $this->getSetting('environment_elevator'),
 
         ]);
     }
@@ -121,6 +123,19 @@ class TenantSettings extends Page implements HasForms
                     Forms\Components\Tabs\Tab::make('Modules')
 
                         ->schema([
+
+                            Section::make('environment')
+                                ->visible(fn() => auth()->id() === 1)
+                                ->label('omgevingsinstellingen')
+                                ->columns(4)
+                                ->schema([
+
+                                    ToggleButtons::make('environment_elevator')
+                                        ->label('Liften & roltrappen modulle')
+                                        ->boolean()
+                                        ->inline(),
+
+                                ]),
 
                             Section::make('Objecten')
                                 ->columns(4)

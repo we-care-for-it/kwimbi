@@ -2,8 +2,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ContactResource\Pages;
-use App\Filament\Resources\ContactResource\RelationManagers;
-use App\Models\allContact;
+use App\Models\contact;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -29,7 +28,7 @@ use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
 
 class ContactResource extends Resource
 {
-    protected static ?string $model = allContact::class;
+    protected static ?string $model = contact::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-user-group';
     protected static ?string $navigationLabel       = "Contactpersonen";
@@ -312,7 +311,7 @@ class ContactResource extends Resource
         return [
 
             //    RelationManagers\RelationRelationManager::class,
-            RelationManagers\ProjectsRelationManager::class,
+            // RelationManagers\ProjectsRelationManager::class,
 
         ];
     }
