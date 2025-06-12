@@ -30,6 +30,8 @@ class SetDatabaseBySubdomain
 
         Config::set('database.default', 'tenant');
 
+        Config::set('filesystems.disks.tenant.root', storage_path('app/public/tenant/' . $tenant->id));
+
         Config::set('app.url', $tenant->domain);
         DB::setDefaultConnection('tenant');
         DB::purge('tenant');
