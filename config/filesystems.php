@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'sftp'),
+    'default' => env('FILESYSTEM_DISK', 'tenant'),
 
     /*
     |--------------------------------------------------------------------------
@@ -58,10 +58,17 @@ return [
 
         'local'   => [
             'driver' => 'local',
-            'root'   => storage_path('app/private'),
+            'root'   => storage_path('app/public/tenant'),
+            'path'   => storage_path('tenant/vls'),
             'serve'  => true,
             'throw'  => false,
+
             'report' => false,
+        ],
+
+        'tenant'  => [
+            'driver' => 'local',
+            'root'   => storage_path('tenant/vls/'),
         ],
 
         'public'  => [

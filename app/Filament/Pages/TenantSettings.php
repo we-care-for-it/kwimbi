@@ -294,6 +294,7 @@ class TenantSettings extends Page implements HasForms
                                 ->columns(2)
                                 ->schema([
                                     FileUpload::make('company_logo')
+                                        ->disk('tenant')
                                         ->image()
                                         ->label('Bedrijfslogo')
                                         ->imageEditor()
@@ -306,6 +307,7 @@ class TenantSettings extends Page implements HasForms
                                             '1:1',
                                         ]),
                                     FileUpload::make('company_favo_logo')
+                                        ->disk('tenant')
                                         ->image()
                                         ->label('Favo icon')
                                         ->helperText('Upload een icoon die wordt getoond in het tab van de browser. Wij adviseren een png-afbeelding met een formaat van 32 x 32 pixels. Max. 1MB')
