@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Middleware;
 
+use App\Middleware\SetUserStoragePath;
 use App\Models\Tenant;
 use Closure;
 use Illuminate\Support\Facades\App;
@@ -16,6 +17,8 @@ class SetDatabaseBySubdomain
         $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
         Cache::put('tenant', $tenant);
 
+        SetUserStoragePath::class;
+
         Config::set('database.connections.tenant', [
             'driver'   => env('DB_CONNECTION'),
             'host'     => env('DB_HOST', '127.0.0.1'),
@@ -29,8 +32,17 @@ class SetDatabaseBySubdomain
         ]);
 
         Config::set('database.default', 'tenant');
+        // Config::set('filesystems.disks.tenant.root', storage_path('app/public/tenant/' . $tenant->id));
 
-        Config::set('filesystems.disks.tenant.root', storage_path('app/public/tenant/' . $tenant->id));
+        // Example: assume tenant ID is resolved via auth or tenancy
+        // $tenantId = 'vls';
+
+        // $diskConfig = [
+        //     'driver' => 'local',
+        //     'root'   => storage_path("/app/public/tenants/{$tenantId}"),
+        // ];
+
+        // config(["filesystems.disks.tenant" => $diskConfig]);
 
         Config::set('app.url', $tenant->domain);
         DB::setDefaultConnection('tenant');
