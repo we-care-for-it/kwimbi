@@ -61,6 +61,7 @@ class TenantSettings extends Page implements HasForms
     public $tasks_in_location;
     public $default_parent_location;
     public $environment_elevator;
+    public $upload_path;
 
     public $default_hourtype_timeregistration;
     public function mount(): void
@@ -103,6 +104,7 @@ class TenantSettings extends Page implements HasForms
             'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
             'default_parent_location'           => $this->getSetting('default_parent_location'),
             'environment_elevator'              => $this->getSetting('environment_elevator'),
+            'upload_path'                       => $this->getSetting('upload_path'),
 
         ]);
     }
@@ -129,6 +131,9 @@ class TenantSettings extends Page implements HasForms
                                 ->label('omgevingsinstellingen')
                                 ->columns(4)
                                 ->schema([
+
+                                    TextInput::make('upload_path')
+                                        ->label('Upload path'),
 
                                     ToggleButtons::make('environment_elevator')
                                         ->label('Liften & roltrappen modulle')
@@ -294,12 +299,11 @@ class TenantSettings extends Page implements HasForms
                                 ->columns(2)
                                 ->schema([
                                     FileUpload::make('company_logo')
-                                        ->disk('tenant')
                                         ->image()
+
                                         ->label('Bedrijfslogo')
                                         ->imageEditor()
                                         ->helperText('Upload hier het logo dat we moeten tonen in je portaal. Wij adviseren een png-afbeelding met een formaat van 330 x 65 pixels, indien je logo groter is zullen wij deze verkleinen. Wanneer je geen eigen logo upload wordt het logo van Desknow getoond. Max 2MB.')
-
                                         ->imageEditorAspectRatios([
                                             null,
                                             '16:9',
@@ -307,7 +311,7 @@ class TenantSettings extends Page implements HasForms
                                             '1:1',
                                         ]),
                                     FileUpload::make('company_favo_logo')
-                                        ->disk('tenant')
+
                                         ->image()
                                         ->label('Favo icon')
                                         ->helperText('Upload een icoon die wordt getoond in het tab van de browser. Wij adviseren een png-afbeelding met een formaat van 32 x 32 pixels. Max. 1MB')
@@ -407,7 +411,7 @@ class TenantSettings extends Page implements HasForms
             ->title('Instellingen opgeslagen')
             ->success()
             ->send();
-        redirect(request()->header('Referer'));
+        //   redirect(request()->header('Referer'));
     }
 
     private function getSetting($key)

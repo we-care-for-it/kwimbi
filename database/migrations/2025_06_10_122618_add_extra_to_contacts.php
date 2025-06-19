@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('contacts', function (Blueprint $table) {
             $table->softDeletes();
-            $table->interger('department_id')->nullable();
+            $table->integer('department_id')->nullable();
         });
     }
 
