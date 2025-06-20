@@ -46,7 +46,7 @@
         "relaticle/custom-fields": "^1.4",
         "rmsramos/activitylog": "^1.0",
         "rupadana/filament-api-service": "^3.4",
-        "sentry/sentry-laravel": "^4.13",
+        "sentry/sentry-laravel": "^4.15",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
         "socialiteproviders/microsoft-azure": "^5.2",
         "spatie/laravel-activitylog": "^4.10",
