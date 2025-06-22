@@ -16,7 +16,7 @@ class SetDatabaseBySubdomain
 
        //  Config::set('database.connections.mysql');
        // $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
-        Cache::put('tenant', $tenant);
+      //  Cache::put('tenant', $tenant);
 
  
 
