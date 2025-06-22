@@ -108,6 +108,7 @@ class ObjectsRelationManager extends RelationManager
                                 ->reactive()
                                 ->disabled(fn(callable $get) => ! $get('brand_id')),
 
+                    
                             TextInput::make('name')
                                 ->label('Naam'),
 
@@ -122,6 +123,16 @@ class ObjectsRelationManager extends RelationManager
 
                                     TextInput::make('serial_number')
                                         ->label('Serienummer'),
+
+                                                    
+                            TextInput::make('nobo_no')
+                                ->label('Nobonummer')
+                                ->visible(function ($record) {
+                                    return setting('environment_elevator');
+                                }),
+
+
+                                
 
                                     Select::make('employee_id')
                                         ->searchable(['first_name', 'last_name', 'email'])

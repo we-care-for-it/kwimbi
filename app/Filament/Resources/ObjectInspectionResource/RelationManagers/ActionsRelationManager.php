@@ -49,13 +49,12 @@ class ActionsRelationManager extends RelationManager
 
                 Select::make('for_user_id')
 
-                    ->options(User::where('company_id', Filament::getTenant()->id)->pluck('name', 'id'))
+                    ->options(User::pluck('name', 'id'))
 
                     ->searchable()
                     ->label('Medewerker')
 
-                ,
-                Select::make('company_id')
+      
 
                     ->options(Company::pluck('name', 'id'))
 

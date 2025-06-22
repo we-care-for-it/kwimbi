@@ -14,37 +14,26 @@ class SetDatabaseBySubdomain
     public function handle($request, Closure $next)
     {
 
+         Config::set('database.connections.mysql');
         $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
         Cache::put('tenant', $tenant);
 
-        SetUserStoragePath::class;
+ 
 
-        Config::set('database.connections.tenant', [
-            'driver'   => env('DB_CONNECTION'),
-            'host'     => env('DB_HOST', '127.0.0.1'),
-            'port'     => env('DB_PORT', '3306'),
-            'database' => $tenant->database ?? "dd",
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'prefix'   => '',
-            'strict'   => true,
-            'engine'   => null,
-        ]);
+        // Config::set('database.connections.tenant', [
+        //     'driver'   => env('DB_CONNECTION'),
+        //     'host'     => env('DB_HOST', '127.0.0.1'),
+        //     'port'     => env('DB_PORT', '3306'),
+        //     'database' => $tenant->database,
+        //     'username' => env('DB_USERNAME', 'root'),
+        //     'password' => env('DB_PASSWORD', ''),
+        //     'prefix'   => '',
+        //     'strict'   => true,
+        //     'engine'   => null,
+        // ]);
 
-        Config::set('database.default', 'tenant');
-        // Config::set('filesystems.disks.tenant.root', storage_path('app/public/tenant/' . $tenant->id));
-
-        // Example: assume tenant ID is resolved via auth or tenancy
-        // $tenantId = 'vls';
-
-        // $diskConfig = [
-        //     'driver' => 'local',
-        //     'root'   => storage_path("/app/public/tenants/{$tenantId}"),
-        // ];
-
-        // config(["filesystems.disks.tenant" => $diskConfig]);
-
-        Config::set('app.url', $tenant->domain);
+        // Config::set('database.default', 'tenant');
+        // Config::set('app.url', $tenant->domain);
         DB::setDefaultConnection('tenant');
         DB::purge('tenant');
 

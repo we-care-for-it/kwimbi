@@ -168,7 +168,6 @@ class ItemdataRelationManager extends RelationManager
                             'type_id'           => 2,
                             'created_at'        => date("Y-m-d H:i:s"),
                             'item_id'           => $this->ownerRecord->id,
-                            'company_id'        => Filament::getTenant()->id,
                             'create_by_user_id' => auth()->id(),
                         ]);
 

@@ -16,17 +16,14 @@ class ImportChex extends Command
 
     public function handle()
     {
-
-        $importsdata = external::where('is_active', 1)->get();
-
-        foreach ($importsdata as $data) {
-
+ 
+ if (env('CHEX_TOKEN')) {
             try {
                 $url                = config("services.chex.url") . "/inspections";
                 $schedule_run_token = Str::random();
 
                 $response = Http::withoutVerifying()->withHeaders([
-                    "Authorization" => $data->token_1,
+                    "Authorization" => config("services.chex.token"),
                 ])->get($url, [
                     "fromDate" => $data->from_date ?? "2025-01-01",
                     //date('Y-m-d'),
@@ -60,8 +57,7 @@ class ImportChex extends Command
 
                         [
                             "status_id"             => $status_id,
-                            "inspection_company_id" => $data->relation_id,
-                            "company_id"            => $data->company_id,
+                            "inspection_company_id" => config("services.chex.company_id"),
                             "type"                  => $item->inspectionType,
                             "nobo_number"           => $item->objectId,
                             "elevator_id"           => $elevator_information?->id,
@@ -86,7 +82,7 @@ class ImportChex extends Command
                     $url = config("services.chex.url") . "/inspections/" . $item->inspectionId;
 
                     $response = Http::withoutVerifying()->withHeaders([
-                        "Authorization" => $data->token_1,
+                        "Authorization" => config("services.chex.token"),
                     ])->get($url);
 
                     $records       = json_decode($response->getBody())->result;
@@ -118,7 +114,6 @@ class ImportChex extends Command
                             ],
                             [
                                 "zin_code"           => $item->code,
-                                "company_id"         => $data->company_id,
                                 "comment"            => $item->comment,
                                 "type"               => $item->type,
                                 "inspection_id"      => $inspection_data_from_db->id,
@@ -136,17 +131,15 @@ class ImportChex extends Command
 
             }
 
-            DB::table('external')->where('id', $data->id)->update([
-                'from_date' => date('Y-m-d'),
-            ]);
+            // DB::table('external')->where('id', $data->id)->update([
+            //     'from_date' => date('Y-m-d'),
+            // ]);
 
             ExternalApiLog::insert(
                 [
                     "model"              => "ObjectInspection",
                     "logitem"            => $logitem,
                     "model_sub"          => 'Chex',
-                    "company_id"         => $data->company_id,
-                    "external_id"        => $data->id,
                     "status_id"          => '1',
                     "schedule_run_token" => $schedule_run_token,
                 ]

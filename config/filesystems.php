@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'tenant'),
+    'default' => env('FILESYSTEM_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,11 +65,16 @@ return [
 
             'report' => false,
         ],
-
-        'tenant'  => [
+    'external'   => [
             'driver' => 'local',
-            'root'   => storage_path('tenant/vls/'),
+            'root'   => storage_path('app/public/tenant'),
+            'path'   => storage_path('tenant/vls'),
+            'serve'  => true,
+            'throw'  => false,
+
+            'report' => false,
         ],
+
 
         'public'  => [
             'driver'     => 'local',

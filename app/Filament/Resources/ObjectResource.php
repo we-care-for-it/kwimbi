@@ -162,18 +162,18 @@ class ObjectResource extends Resource
                             TextInput::make('serial_number')
                                 ->label('Serienummer'),
 
-                            Select::make('employee_id')
-                                ->searchable(['first_name', 'last_name', 'email'])
-                                ->options(
-                                    Employee::where('relation_id', $this->ownerRecord->id)
-                                        ->get()
-                                        ->mapWithKeys(fn($employee) => [
-                                            $employee->id => "{$employee->first_name} {$employee->last_name}",
-                                        ])
-                                )
-                                ->label('Medewerker')
-                            //          ->visible(fn($record) => in_array('Medewerker', $record?->type?->visibility) ? true : false),
-                                ->placeholder("Niet opgegeven"),
+                            // Select::make('employee_id')
+                            //     ->searchable(['first_name', 'last_name', 'email'])
+                            //     ->options(
+                            //         Employee::where('relation_id', $this->ownerRecord->id)
+                            //             ->get()
+                            //             ->mapWithKeys(fn($employee) => [
+                            //                 $employee->id => "{$employee->first_name} {$employee->last_name}",
+                            //             ])
+                            //     )
+                            //     ->label('Medewerker')
+                            //       ->visible(fn($record) => in_array('Medewerker', $record?->type?->visibility) ? true : false)
+                            //     ->placeholder("Niet opgegeven"),
 
                             TextInput::make('uuid')
                                 ->label('Uniek id nummer')
