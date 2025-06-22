@@ -14,8 +14,8 @@ class SetDatabaseBySubdomain
     public function handle($request, Closure $next)
     {
 
-         Config::set('database.connections.mysql');
-        $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
+       //  Config::set('database.connections.mysql');
+       // $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
         Cache::put('tenant', $tenant);
 
  
@@ -34,8 +34,8 @@ class SetDatabaseBySubdomain
 
         // Config::set('database.default', 'tenant');
         // Config::set('app.url', $tenant->domain);
-        DB::setDefaultConnection('tenant');
-        DB::purge('tenant');
+        // DB::setDefaultConnection('tenant');
+        // DB::purge('tenant');
 
         return $next($request);
     }
