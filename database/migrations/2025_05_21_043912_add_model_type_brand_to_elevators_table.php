@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('elevators', function (Blueprint $table) {
-            $table->dropColumn(['model_id', 'type_id', 'brand_id']);
+          //  $table->dropColumn(['model_id', 'type_id', 'brand_id']);
         });
     }
 };
