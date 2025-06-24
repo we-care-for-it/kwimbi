@@ -27,8 +27,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
     ->create();
 
-$app->useStoragePath('/sssstorage');
-return $app;
+// $app->useStoragePath('/sssstorage');
+// return $app;
 
 
 

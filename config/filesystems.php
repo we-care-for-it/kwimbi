@@ -56,15 +56,11 @@ return [
             // 'useAgent' => true,
         ],
 
-        'local'   => [
-            'driver' => 'local',
-            'root'   => storage_path('app/public/tenant'),
-            'path'   => storage_path('tenant/vls'),
-            'serve'  => true,
-            'throw'  => false,
+    'local' => [
+        'driver' => 'local',
+        'root' => storage_path('app'),
+    ],
 
-            'report' => false,
-        ],
     'external'   => [
             'driver' => 'local',
             'root'   => storage_path('app/public/tenant'),
