@@ -105,7 +105,7 @@
                   <li><a href="/ticket-types" class="text-black hover:underline">Tickets</a></li>
                   <li><a href="/relation-types" class="text-black hover:underline">Relaties</a></li>
                   <li><a href="/contact-types" class="text-black hover:underline">Contactpersonen</a></li>
-                  <li><a href="/locationv-types" class="text-black hover:underline">Locaties</a></li>
+                  <li><a href="/location-types" class="text-black hover:underline">Locaties</a></li>
                </ul>
             </div>
          </div>

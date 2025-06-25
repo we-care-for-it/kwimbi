@@ -133,6 +133,7 @@ class ContactsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make('createContact')
                     ->label('Contacpersoon toevoegen')
+                     ->slideover()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->link()
@@ -146,6 +147,7 @@ class ContactsRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk contact')
+                       ->slideover()
                     ->color('primary')
                     ->link()
                     ->url(function ($record) {

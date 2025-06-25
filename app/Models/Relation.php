@@ -79,7 +79,7 @@ class Relation extends Model implements HasCustomFields
 
     public function notes()
     {
-        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'Relation');
+        return $this->hasMany(Note::class, 'item_id', 'id')->where('model', 'relation');
     }
 
     public function tickets()

@@ -111,6 +111,7 @@ class EmployeesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->modalWidth(MaxWidth::FourExtraLarge)
                     ->modalHeading('Medewerker toevoegen')
+                                     ->slideover()
                     ->modalDescription('Voeg een nieuwe medewerker toe door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
@@ -127,15 +128,18 @@ class EmployeesRelationManager extends RelationManager
 
                 Tables\Actions\ViewAction::make('openContact')
                     ->label('Bekijk')
-
                     ->icon('heroicon-s-eye'),
+
+                    Tables\Actions\EditAction::make()
+                        ->label('Bewerken')
+                        ->slideover()
+                        ->modalHeading('Contactpersoon wijzigen'),
+
+
 
                 Tables\Actions\ActionGroup::make([
 
-                    Tables\Actions\EditAction::make()
-                        ->label('Wijzigen')
-                        ->modalHeading('Contactpersoon wijzigen'),
-
+     
                     Tables\Actions\DeleteAction::make()
                         ->label('Verwijder'),
                 ])
