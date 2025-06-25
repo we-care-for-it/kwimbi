@@ -200,9 +200,6 @@ class LocationsRelationManager extends RelationManager
                     ->toggleable()
                     ->sortable()
                     ->badge()
-                    ->visible(function (): ?string {
-                        return $this->getOwnerRecord()->type->has_objects ?? false;
-                    })
                     ->alignment(Alignment::Center)
                     ->color("success"),
 

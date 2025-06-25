@@ -42,7 +42,7 @@ class RelationTypeResource extends Resource
                                 'Bijlages'        => 'Bijlages',
                                 'Tijdregistratie' => 'Tijdregistratie',
                                 'Projecten'       => 'Projecten',
-                                'Objecten'        => 'Objecten',
+                                // 'Objecten'        => 'Objecten',
                                 'Contactpersonen' => 'Contactpersonen',
                                 'Afdelingen'      => 'Afdelingen',
                             ])
