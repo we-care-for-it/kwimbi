@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Resources\RelationResource\RelationManagers;
 
-use App\Enums\Priority;
+ 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -9,7 +9,7 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Enums\Priority;
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
@@ -40,11 +40,10 @@ class TasksRelationManager extends RelationManager
                 Forms\Components\TimePicker::make('end_time')
                     ->label('Eindtijd'),
 
-                Forms\Components\Select::make('priority')
-                    ->placeholder('Geen')
-                    ->default(3)
+   Forms\Components\ToggleButtons::make('priority')
                     ->options(Priority::class)
-                    ->searchable()
+
+                    ->default(3)->grouped()
                     ->label('Prioriteit'),
 
                 // Forms\Components\DatePicker::make('deadline')
@@ -58,6 +57,21 @@ class TasksRelationManager extends RelationManager
             ->emptyState(view('partials.empty-state'))
             ->recordTitleAttribute('title')
             ->columns([
+
+                     
+                Tables\Columns\TextColumn::make('priority')
+                    ->badge()
+                    ->sortable()
+                    ->label('Prioriteit'),
+
+
+                                Tables\Columns\TextColumn::make('title')
+                    ->label('Titel')
+                    ->searchable()
+                    ->placeholder('-')
+                    ->sortable(),
+
+
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
                     ->searchable()
@@ -103,12 +117,12 @@ class TasksRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\DeleteAction::make()
                     ->label('Voltooi taak'),
-
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()
+           Tables\Actions\EditAction::make()
                         ->tooltip('Bewerken')
                     ,
 
+                Tables\Actions\ActionGroup::make([
+         
                     Tables\Actions\DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')

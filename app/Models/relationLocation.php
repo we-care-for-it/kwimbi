@@ -39,7 +39,7 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id');
+        return $this->hasMany(Elevator::class, 'location_id', 'id');
     }
 
     public function relation()

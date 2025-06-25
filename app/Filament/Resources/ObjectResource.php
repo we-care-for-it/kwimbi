@@ -8,6 +8,12 @@ use App\Models\Customer;
 use App\Models\Elevator;
 use App\Models\Employee;
 use App\Models\ObjectModel;
+ 
+ 
+ 
+ 
+use App\Models\relationLocation;
+
 use App\Models\ObjectType;
 use Awcodes\FilamentBadgeableColumn\Components\Badge;
 use Filament\Forms\Components\Select;
@@ -33,6 +39,9 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Checkbox;
+use Filament\Tables\Columns\ViewColumn;
 
 class ObjectResource extends Resource
 {
@@ -57,7 +66,7 @@ class ObjectResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
+         return $form
             ->schema([
 
                 Wizard::make([
@@ -68,113 +77,158 @@ class ObjectResource extends Resource
                                 ->label('Categorie')
                                 ->options(ObjectType::pluck('name', 'id'))
                                 ->reactive()
-                                ->required()->afterStateUpdated(function (callable $set) {
-                                $set('brand_id', null);
-                            }),
+                                ->required(),
+                                // ->afterStateUpdated(function (callable $set) {
+                                // $set('brand_id', null);
+                          //  }),
 
+
+                          
+                              TextInput::make('supplier')
+                                ->label('Leverancier'),
+
+                            TextInput::make('brand')
+                                ->label('Merk')
+                                // ->options(function (callable $get) {
+                                //     $type_id = $get('type_id');
+
+                                //     return ObjectModel::query()
+                                //         ->when($type_id, fn($query) => $query->where('type_id', $type_id))
+                                //         ->get()
+                                //         ->groupBy('brand_id')
+                                //         ->map(fn($group) => $group->first()) // Only one per brand
+                                //         ->filter(fn($item) => $item->brand)  // Ensure brand exists
+                                //         ->mapWithKeys(fn($item) => [
+                                //             $item->brand_id => $item->brand->name,
+                                //         ])
+                                //         ->toArray();
+                                // })
+  
+                                ->disabled(fn(callable $get) => ! $get('type_id')),
                             //     ->createOptionForm([
-
                             //         TextInput::make('name')
-                            //             ->label('Nieuwe categorie naam')
+                            //             ->label('Nieuwe merknaam')
                             //             ->required()
                             //             ->columnSpan('full')
                             //             ->maxLength(50),
-
-                            //         ToggleButtons::make('options')
-                            //             ->label('Opties')
-                            //             ->multiple()
-                            //             ->options([
-                            //                 'Keuringen'            => 'Keuringen',
-                            //                 'Onderhoudscontracten' => 'Onderhoudscontracten',
-                            //                 'Tickets'              => 'Tickets',
-                            //                 'Onderhoudsbeurten'    => 'Onderhoudsbeurten',
-
-                            //             ])
-                            //             ->required()
-                            //             ->inline()
-                            //         ,
-
                             //     ])->createOptionUsing(function (array $data): int {
-
-                            //     return ObjectType::create($data)->getKey();
+                            //     return Brand::create($data)->getKey();
                             // }),
-
-                            Select::make('brand_id')
-                                ->label('Merk')
-                                ->options(function (callable $get) {
-                                    $type_id = $get('type_id');
-
-                                    return ObjectModel::query()
-                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id))
-                                        ->get()
-                                        ->groupBy('brand_id')
-                                        ->map(fn($group) => $group->first()) // Only one per brand
-                                        ->filter(fn($item) => $item->brand)  // Ensure brand exists
-                                        ->mapWithKeys(fn($item) => [
-                                            $item->brand_id => $item->brand->name,
-                                        ])
-                                        ->toArray();
-                                })
-
-                                ->reactive()
-                                ->disabled(fn(callable $get) => ! $get('type_id'))
-                                ->createOptionForm([
-                                    TextInput::make('name')
-                                        ->label('Nieuwe merknaam')
-                                        ->required()
-                                        ->columnSpan('full')
-                                        ->maxLength(50),
-                                ])->createOptionUsing(function (array $data): int {
-                                return Brand::create($data)->getKey();
-                            }),
-
-                            Select::make('model_id')
+ 
+                              TextInput::make('model')
                                 ->label('Model')
-                                ->options(function (callable $get) {
-                                    $type_id  = $get('type_id');
-                                    $brand_id = $get('brand_id');
+                                
+                                // ::make('model_id')
+                                // ->label('Model')
+                                // ->options(function (callable $get) {
+                                //     $type_id  = $get('type_id');
+                                //     $brand_id = $get('brand_id');
 
-                                    return ObjectModel::query()
-                                        ->when($type_id, fn($query) => $query->where('type_id', $type_id)->where('brand_id', $brand_id))
-                                        ->get()
-                                        ->mapWithKeys(function ($data) {
+                                //     return ObjectModel::query()
+                                //         ->when($type_id, fn($query) => $query->where('type_id', $type_id)->where('brand_id', $brand_id))
+                                //         ->get()
+                                //         ->mapWithKeys(function ($data) {
 
-                                            return [
-                                                $data->id => collect([
-                                                    $data->name,
+                                //             return [
+                                //                 $data->id => collect([
+                                //                     $data->name,
 
-                                                ])->filter()->implode(', '),
-                                            ];
-                                        })
-                                        ->toArray();
-                                })
-                                ->reactive()
-                                ->disabled(fn(callable $get) => ! $get('brand_id')),
+                                //                 ])->filter()->implode(', '),
+                                //             ];
+                                //         })
+                                //         ->toArray();
+                                // })
+                                // ->reactive()
+                           //     ->disabled(fn(callable $get) => ! $get('brand_id'))
+                            ,
 
+                    
                             TextInput::make('name')
-                                ->label('Naam'),
+                                ->label('Naam')
 
                         ])->columns(2),
+
+
+
+
+                    Step::make('Eigenschappen')
+                        ->schema([
+
+                            Grid::make(3)
+
+                                ->schema([
+
+  TextInput::make('stopping_places')->label('Aantal stopplaatsen')->integer(),
+    TextInput::make('carrying_capacity')->label('Draaggewicht ') ->integer(),
+    Select::make('energy_label')->label('Energielabel ')
+    
+                                ->searchable()
+                                        ->options(
+                                            [
+                                                'A' => 'A',
+                                                'B' => 'B',
+                                                'C' => 'C',
+                                                'D' => 'D',
+                                                'E' => 'E',
+                                                'F' => 'F',
+                                                'G' => 'G',
+                                                'H' => 'H',
+
+                                            ]
+
+                                        ) ,
+                Select::make('drive_type')->label('Aandrijving ')
+    
+                                ->searchable()
+                                        ->options(
+                                            [
+                                                'Tractie ' => 'Tractie',
+                                                'Hydraulisch' => 'Hydraulisch',
+                                      
+
+                                            ]
+
+                                        ) ,
+                                                                    
+
+                                        
+
+
+
+Checkbox::make('fire_elevator')->inline(true)->label('Brandweerlift'),
+Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
+
+
+
+
+                                ])
+                                   ])  ->visible(function ($record) {
+                                    return setting('environment_elevator');
+                                }),
+ 
 
                     Step::make('Toewijzing')
                         ->schema([
 
-                            TextInput::make('serial_number')
-                                ->label('Serienummer'),
+                            Grid::make(2)
 
-                            // Select::make('employee_id')
-                            //     ->searchable(['first_name', 'last_name', 'email'])
-                            //     ->options(
-                            //         Employee::where('relation_id', $this->ownerRecord->id)
-                            //             ->get()
-                            //             ->mapWithKeys(fn($employee) => [
-                            //                 $employee->id => "{$employee->first_name} {$employee->last_name}",
-                            //             ])
-                            //     )
-                            //     ->label('Medewerker')
-                            //       ->visible(fn($record) => in_array('Medewerker', $record?->type?->visibility) ? true : false)
-                            //     ->placeholder("Niet opgegeven"),
+                                ->schema([
 
+                                    TextInput::make('serial_number')
+                                        ->label('Serienummer'),
+
+                                                    
+                            TextInput::make('nobo_no')
+                                ->label('Nobonummer')
+                                ->visible(function ($record) {
+                                    return setting('environment_elevator');
+                                }),
+
+
+                                
+ 
+ 
+                                ]),
                             TextInput::make('uuid')
                                 ->label('Uniek id nummer')
                                 ->hint('Scan een barcode sticker'),
@@ -242,10 +296,12 @@ class ObjectResource extends Resource
                     ->placeholder('-')
                     ->sortable()
                     ->date('d-m-Y'),
-                Tables\Columns\TextColumn::make("location.address")
-                    ->label("Adres")
-                    ->searchable()
-                    ->sortable(),
+          TextColumn::make("location.name")
+                    ->label("Locatie")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make("incidents_count")
                     ->toggleable()
@@ -360,7 +416,7 @@ class ObjectResource extends Resource
                                 Column::make("energy_label")->heading("Energielael"),
                                 Column::make("construction_year")->heading("Bouwjaar"),
                                 Column::make("status_id")->heading("Status"),
-                                Column::make("supplier.name")->heading("Leverancier"),
+                                Column::make("supplier")->heading("Leverancier"),
                                 Column::make("stopping_places")->heading("Stopplaatsen"),
                                 Column::make("inspectioncompany.name")->heading("Keuringsinstantie"),
                                 Column::make("name")->heading("Naam"),
@@ -383,10 +439,11 @@ class ObjectResource extends Resource
                         Tabs\Tab::make('Basisinformatie')
                             ->icon('heroicon-o-information-circle')
                             ->schema([
-                                TextEntry::make('unit_no')
-                                    ->label('Unitnummer')
-                                    ->placeholder('Niet opgegeven'),
-                                TextEntry::make('nobo_no')
+                   
+                                TextEntry::make('nobo_no')->visible(function ($record) {
+                                    return setting('environment_elevator');
+                                })
+ 
                                     ->label('NOBO Nummer')
                                     ->placeholder('Niet opgegeven'),
                                 TextEntry::make('type.name')
@@ -446,7 +503,7 @@ class ObjectResource extends Resource
                         Tabs\Tab::make('Partijen')
                             ->icon('heroicon-o-user-group')
                             ->schema([
-                                TextEntry::make('supplier.name')
+                                TextEntry::make('supplier')
                                     ->label('Leverancier')
                                     ->placeholder('Niet opgegeven'),
                                 TextEntry::make('maintenance_company.name')
@@ -467,7 +524,10 @@ class ObjectResource extends Resource
                                 //     return in_array('Beheerder', $record?->location->type->options) ? true : false;;
                                 // })
 
-                            ])->columns(2),
+                            ])->columns(4)->visible(function ($record) {
+                                    return setting('environment_elevator');
+                                })
+ ,
 
                         Tabs\Tab::make('Afbeeldingen')
                             ->icon('heroicon-o-photo')
@@ -480,6 +540,35 @@ class ObjectResource extends Resource
                                     ->ring(5)
                                     ->collection('objectimages'),
                             ]),
+
+                              Tabs\Tab::make('Eigenschappen')
+                       
+
+                            ->schema([
+
+                                
+                                 TextEntry::make('stopping_places')
+                                    ->label('Stopplaatsen')
+                                    ->placeholder('Niet opgegeven'),
+
+
+                                      TextEntry::make('supplier')
+                                    ->label('Leverancier')
+                                    ->placeholder('Niet opgegeven'),
+           TextEntry::make('brand')
+                                    ->label('Merk')
+                                    ->placeholder('Niet opgegeven'),
+
+                                               TextEntry::make('model')
+                                    ->label('Model')
+                                    ->placeholder('Niet opgegeven'),
+
+                            ]) ->columns(4) ->visible(function ($record) {
+                            return setting('environment_elevator');
+                    }),
+   
+
+
 
                     ]),
                 \Filament\Infolists\Components\Section::make()
@@ -515,6 +604,7 @@ class ObjectResource extends Resource
         return [
             "index"   => Pages\ListObjects::route("/"),
             "view"    => Pages\ViewObject::route("/{record}"),
+  
             "monitor" => Pages\MonitorObject::route("/{record}/monitoring"),
         ];
     }
