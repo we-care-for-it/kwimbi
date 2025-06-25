@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\RelationLocationResource\Pages;
 use App\Filament\Resources\RelationLocationResource\RelationManagers;
 use App\Models\ObjectBuildingType;
+use App\Models\locationType;
 use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -159,6 +160,46 @@ class RelationLocationResource extends Resource
                     ->hidden()
                     ->columnSpan(1),
 
+
+                       Select::make("building_type_id")
+                                ->options(ObjectBuildingType::pluck("name", "id"))
+
+                                ->reactive()
+                                ->searchable()
+
+                                ->label("Gebouwtype"),
+
+
+                                                Select::make('type_id')
+                    ->label('Type')
+                    ->default(1)
+                    ->options(locationType::pluck('name', 'id')),
+
+
+
+                            Select::make("management_id")
+                                ->searchable()
+                                ->label("Relatie")
+                                ->options(function () {
+                                    return \App\Models\Relation::all()
+                                        ->groupBy('type.name')
+                                        ->mapWithKeys(function ($group, $category) {
+                                            return [
+                                                $category => $group->pluck('name', 'id')->toArray(),
+                                            ];
+                                        })->toArray();
+                                })
+                                ->reactive()
+                                ->searchable()
+
+                                ->label("Beheerder")
+
+                                ->visible(function (object $record) {
+                                    return in_array('Beheerder', $record?->type->options) ? true : false;;
+                                })
+
+
+
                 // Forms\Components\Checkbox::make("is_standard_location")
                 //     ->label("Standaard locatie")
                 //     ->default(false)
@@ -201,56 +242,8 @@ class RelationLocationResource extends Resource
 
                 ->columns(1),
 
-            Forms\Components\Section::make("Gebouwgegevens")
-                ->schema([Forms\Components\Grid::make(2)
-
-                        ->schema([
-
-                            // Forms\Components\TextInput::make("construction_year")
-
-                            //     ->columnSpan(1)
-                            //     ->label("Bouwjaar"),
-
-                            // Forms\Components\TextInput::make("levels")
-
-                            //     ->columnSpan(1)
-                            //     ->label("Verdiepingen"),
-
-                            Select::make("building_type_id")
-                                ->options(ObjectBuildingType::pluck("name", "id"))
-
-                                ->reactive()
-                                ->searchable()
-
-                                ->label("Gebouwtype"),
-
-                            Select::make("management_id")
-                                ->searchable()
-                                ->label("Relatie")
-                                ->options(function () {
-                                    return \App\Models\Relation::all()
-                                        ->groupBy('type.name')
-                                        ->mapWithKeys(function ($group, $category) {
-                                            return [
-                                                $category => $group->pluck('name', 'id')->toArray(),
-                                            ];
-                                        })->toArray();
-                                })
-                                ->reactive()
-                                ->searchable()
-
-                                ->label("Beheerder")
-
-                                ->visible(function (object $record) {
-                                    return in_array('Beheerder', $record?->type->options) ? true : false;;
-                                })
-
-                                ->columnSpan(1),
-
-                        ])])
-                ->columnSpan(["lg" => 3])
-
-            , CustomFieldsComponent::make()
+ 
+  CustomFieldsComponent::make()
                 ->columnSpanFull(),
 
         ])
@@ -422,4 +415,12 @@ class RelationLocationResource extends Resource
             //'edit'  => Pages\EditRelationLocation::route('/{record}/edit'),
         ];
     }
+
+
+      public static function getModelLabel(): string
+    {
+        return 'Relatie locatie';
+    }
+
+
 }

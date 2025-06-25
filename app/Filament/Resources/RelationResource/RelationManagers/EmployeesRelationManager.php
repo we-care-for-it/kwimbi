@@ -52,11 +52,8 @@ class EmployeesRelationManager extends RelationManager
                     ->email()
                     ->maxLength(255),
 
-                Forms\Components\Select::make('department_id')
-                    ->label('Afdeling')
-                    ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
-                    ->searchable()
-                    ->placeholder('Selecteer een afdeling'),
+                Forms\Components\TextInput::make('department')
+                    ->label('Afdeling'),
 
                 Forms\Components\TextInput::make('function')
                     ->label('Functie')
@@ -91,9 +88,9 @@ class EmployeesRelationManager extends RelationManager
                     ->url(fn($record) => "mailto:{$record->email}")
                     ->label('E-mailadres'),
 
-                TextColumn::make('department.name')
+                TextColumn::make('department')
                     ->label('Afdeling')
-                    ->placeholder(''),
+                    ->placeholder('-'),
 
                 TextColumn::make('function')
                     ->placeholder('-')
@@ -137,8 +134,7 @@ class EmployeesRelationManager extends RelationManager
 
                     Tables\Actions\EditAction::make()
                         ->label('Wijzigen')
-
-                        ->modalHeading('COntact wijzigen'),
+                        ->modalHeading('Contactpersoon wijzigen'),
 
                     Tables\Actions\DeleteAction::make()
                         ->label('Verwijder'),

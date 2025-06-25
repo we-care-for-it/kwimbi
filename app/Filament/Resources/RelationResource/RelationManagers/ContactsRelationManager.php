@@ -57,9 +57,9 @@ class ContactsRelationManager extends RelationManager
                             ->email()
                             ->maxLength(255),
 
-                        // Forms\Components\TextInput::make('department')
-                        //     ->label('Afdeling')
-                        //     ->maxLength(255),
+                        Forms\Components\TextInput::make('department')
+                            ->label('Afdeling')
+                            ->maxLength(255),
 
                         Forms\Components\TextInput::make('function')
                             ->label('Functie')

@@ -303,7 +303,7 @@ class RelationResource extends Resource
             RelationManagers\AttachmentsRelationManager::class,
             RelationManagers\TimeTrackingRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
-            RelationManagers\DepartmentsRelationManager::class,
+            //RelationManagers\DepartmentsRelationManager::class,
         ];
     }
 
