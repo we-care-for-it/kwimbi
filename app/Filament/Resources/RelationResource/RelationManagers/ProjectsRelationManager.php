@@ -174,7 +174,7 @@ class ProjectsRelationManager extends RelationManager
                 Action::make('openproject')
                     ->label('Meer informatie')
                     ->url(function ($record) {
-                        return "/projects/" . $record->model_id;
+                        return "/projects/" . $record->id;
                     })->icon('heroicon-s-eye'),
 
             ])

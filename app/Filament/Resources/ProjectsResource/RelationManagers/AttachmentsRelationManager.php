@@ -49,10 +49,9 @@ class AttachmentsRelationManager extends RelationManager
                     ->columnSpan(3)
                     ->preserveFilenames()
                     ->required()
-                    ->visibility('private')
                     ->directory(function () {
                         $parent_id = $this->getOwnerRecord()->id; // Assuming you've set up relationships with eloquent
-                        return '/uploads/location/' . $parent_id . '/attachments';
+                        return '/uploads/project/' . $parent_id . '/attachments';
                     }),
 
             ]);
@@ -101,7 +100,7 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
 
-                    ->action(fn($record) => Storage::download($record->filename))
+                    ->action(fn($record) => response()->download(public_path('storage/'.$record->filename)))
                     ->icon('heroicon-o-document-arrow-down'),
 
                 Tables\Actions\ActionGroup::make([
