@@ -101,8 +101,7 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
 
-                    ->action(fn($record) => Storage::disk('private')
-                            ->download($record->filename))
+                    ->action(fn($record) => Storage::download($record->filename))
                     ->icon('heroicon-o-document-arrow-down'),
 
                 Tables\Actions\ActionGroup::make([
