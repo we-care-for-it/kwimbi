@@ -224,7 +224,7 @@ class QuotesRelationManager extends RelationManager
                     ->label('Bijlage')
                     ->columnSpan(3)
                     ->preserveFilenames()
-                    ->visibility('private')->directory(function () {
+                    ->directory(function () {
                     $parent_id = $this->getOwnerRecord()->id;
                     return '/uploads/project/' . $parent_id . '/quotes';
                 })])->columns(2)
@@ -294,7 +294,7 @@ class QuotesRelationManager extends RelationManager
                     ->action(fn($record) => response()->download(public_path('storage/'.$record->filename)))
                     ->icon('heroicon-o-document-arrow-down'),
 
-                    
+
                 Tables\Actions\EditAction::make()
                     ->modalWidth(MaxWidth::SixExtraLarge), Tables\Actions\DeleteAction::make()
                     ->modalHeading('Offerte toevoegen')
