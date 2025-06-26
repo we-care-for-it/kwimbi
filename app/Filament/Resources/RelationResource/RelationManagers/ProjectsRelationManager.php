@@ -160,7 +160,10 @@ class ProjectsRelationManager extends RelationManager
                     ->placeholder('Onbekend')
                     ->sortable()
                     ->badge(),
-            ])
+            ])->recordUrl(
+            fn($record): string => route('filament.app.resources.projects.view', ['record' => $record])
+        )
+         
             ->filters([
                 SelectFilter::make("status_id")
                     ->label("Status")
