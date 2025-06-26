@@ -88,7 +88,7 @@ class AttachmentsRelationManager extends RelationManager
 
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id']     = auth()->id();
-                    $data['project_id']  = $this->getOwnerRecord()->id;
+                    $data['item_id']  = $this->getOwnerRecord()->id;
                     $data['relation_id'] = $this->getOwnerRecord()->relation_id;
                     $data['model']       = 'project';
                     return $data;

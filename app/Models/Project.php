@@ -83,7 +83,7 @@ class Project extends Model implements Auditable, HasCustomFields
 
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'Relation');
+        return $this->hasMany(Attachment::class, 'item_id', 'id')->where('model', 'project');
     }
 
     public function objects()
