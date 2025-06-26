@@ -37,8 +37,7 @@ class AttachmentsRelationManager extends RelationManager
                     ->rows(7)
                     ->label('Omschrijving')
                     ->columnSpan(3)
-                    ->autosize()
-                    ->required(),
+                    ->autosize(),
 
                 Select::make('type_id')
                     ->label('Categorie')
@@ -62,22 +61,22 @@ class AttachmentsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->label('Medewerker')
-                ,
-
+                Tables\Columns\TextColumn::make('user.name')->label('Medewerker'),
+                
+                Tables\Columns\TextColumn::make('type.name')
+                    ->label('Categorie')
+                    ->sortable()
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Datum / tijd')
                     ->sortable()
                     ->dateTime("d-m-Y H:i"),
 
-                Tables\Columns\TextColumn::make('description')->grow(true)->label('Omschrijving'),
+                Tables\Columns\TextColumn::make('description')
+                    ->grow(true)
+                    ->label('Omschrijving')
+                    ->placeholder('Geen omschrijving'),
 
-                Tables\Columns\TextColumn::make('type.name')
-                    ->label('Categorie')
-                    ->sortable()
-                    ->badge()
-
-                ,
 
             ])->emptyState(view('partials.empty-state-small'))
             ->filters([
@@ -92,6 +91,7 @@ class AttachmentsRelationManager extends RelationManager
                     $data['model']       = 'project';
                     return $data;
                 })->label('Bijlage toevoegen')
+                ->link()
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus'),
             ])
