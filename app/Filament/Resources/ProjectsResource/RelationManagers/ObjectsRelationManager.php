@@ -1,5 +1,5 @@
 <?php
-namespace App\Filament\Resources\TicketResource\RelationManagers;
+namespace App\Filament\Resources\ProjectsResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -120,11 +120,10 @@ class ObjectsRelationManager extends RelationManager
             ->actions([
                 //  Tables\Actions\EditAction::make(),
                 //    Tables\Actions\DetachAction::make(),
-
-                  Tables\Actions\Action::make('openObject')
+                    Tables\Actions\Action::make('openObject')
                       ->icon('heroicon-m-eye')
-                       ->url(fn($record) => "/objects/" . $record?->id),
-
+                       ->url(fn($record) => "/objects/" . $record?->id)
+                                 ,
                 Tables\Actions\DeleteAction::make()->label('Ontkoppel')
                     ->icon('heroicon-o-trash')
                     ->modalHeading('Ontkoppel object')

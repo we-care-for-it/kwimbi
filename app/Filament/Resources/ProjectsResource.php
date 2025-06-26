@@ -499,6 +499,8 @@ class ProjectsResource extends Resource
     public static function getRelations(): array
     {
         return [
+
+            RelationManagers\ObjectsRelationManager::class,
             RelationManagers\ReactionsRelationManager::class,
             RelationManagers\TimeTrackingRelationManager::class,
             RelationManagers\QuotesRelationManager::class,

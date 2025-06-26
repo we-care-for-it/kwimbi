@@ -101,6 +101,13 @@ class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
         return $this->hasOne(Relation::class, 'id', 'maintenance_company_id');
     }
 
+
+        public function tickets()
+    {
+        return $this->hasOne(assetToTicket::class, 'id', 'object_id');
+    }
+
+
     public function inspectioncompany()
     {
         return $this->hasOne(Relation::class, 'id', 'inspection_company_id');

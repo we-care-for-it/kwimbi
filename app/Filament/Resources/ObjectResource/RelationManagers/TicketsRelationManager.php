@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TicketsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'Incidents';
+    protected static string $relationship = 'tickets';
     protected static ?string $title       = 'Storingen';
     protected static bool $isLazy         = false;
 
@@ -27,11 +27,11 @@ class TicketsRelationManager extends RelationManager
             ->count();
     }
 
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
+    // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    // {
 
-        return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
-    }
+    //     return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
+    // }
 
     public function form(Form $form): Form
     {
