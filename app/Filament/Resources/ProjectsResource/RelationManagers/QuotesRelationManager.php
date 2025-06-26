@@ -287,6 +287,14 @@ class QuotesRelationManager extends RelationManager
 
             ->actions([
 
+
+                                Tables\Actions\Action::make('Download')
+                    ->label('Download bestand')
+
+                    ->action(fn($record) => response()->download(public_path('storage/'.$record->filename)))
+                    ->icon('heroicon-o-document-arrow-down'),
+
+                    
                 Tables\Actions\EditAction::make()
                     ->modalWidth(MaxWidth::SixExtraLarge), Tables\Actions\DeleteAction::make()
                     ->modalHeading('Offerte toevoegen')
