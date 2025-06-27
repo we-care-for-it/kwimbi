@@ -222,12 +222,21 @@ class QuotesRelationManager extends RelationManager
 
             Section::make()->schema([FileUpload::make('attachment')
                     ->label('Bijlage')
+                             ->acceptedFileTypes(['application/pdf'])
                     ->columnSpan(3)
+                    
+                           ->directory(function () {
+                        $parent_id = $this->getOwnerRecord()->id; 
+                        return '/uploads/project/' . $parent_id . '/qoutes';
+                    })
+
                     ->preserveFilenames()
-                    ->directory(function () {
-                    $parent_id = $this->getOwnerRecord()->id;
-                    return '/uploads/project/' . $parent_id . '/quotes';
-                })])->columns(2)
+                //     ->directory(function () {
+                  
+                //     return ;
+                // })
+                // 
+                ])->columns(2)
                 ->columnSpan(2),
 
         ]);
@@ -291,8 +300,11 @@ class QuotesRelationManager extends RelationManager
                                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
 
-                    ->action(fn($record) => response()->download(public_path('storage/'.$record->filename)))
-                    ->icon('heroicon-o-document-arrow-down'),
+                    ->action(fn($record) => response()->download(public_path('storage/'.$record->attachment)))
+    
+                  
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->visible(fn($record) => !empty($record->attachment) && file_exists(public_path('storage/' . $record->attachment))),
 
 
                 Tables\Actions\EditAction::make()
