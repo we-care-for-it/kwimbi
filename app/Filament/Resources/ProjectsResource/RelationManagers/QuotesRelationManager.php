@@ -295,17 +295,11 @@ class QuotesRelationManager extends RelationManager
                     ->modalWidth(MaxWidth::SixExtraLarge)])
 
             ->actions([
-
-
-                                Tables\Actions\Action::make('Download')
+                Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
-
                     ->action(fn($record) => response()->download(public_path('storage/'.$record->attachment)))
-    
-                  
                     ->icon('heroicon-o-document-arrow-down')
                     ->visible(fn($record) => !empty($record->attachment) && file_exists(public_path('storage/' . $record->attachment))),
-
 
                 Tables\Actions\EditAction::make()
                     ->modalWidth(MaxWidth::SixExtraLarge), Tables\Actions\DeleteAction::make()
