@@ -2,7 +2,7 @@
 namespace App\Filament\Resources\Connections\Elevators;
 
 use App\Filament\Resources\Connections\Elevators\liftinstituutResource\Pages;
-use App\Models\Connections\Elevators\liftinstituut;
+use App\Models\external;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -10,7 +10,7 @@ use Filament\Tables\Table;
 
 class liftinstituutResource extends Resource
 {
-    protected static ?string $model                 = liftinstituut::class;
+    protected static ?string $model                 = external::class;
     protected static ?string $slug                  = 'connection.elevators.liftinstituut';
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static bool $shouldRegisterNavigation = false;

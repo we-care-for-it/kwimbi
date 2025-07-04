@@ -2,7 +2,7 @@
 namespace App\Filament\Resources\Connections\Elevators;
 
 use App\Filament\Resources\Connections\Elevators\chexResource\Pages;
-use App\Models\Connections\Elevators\chex;
+use App\Models\external;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -10,7 +10,7 @@ use Filament\Tables\Table;
 
 class chexResource extends Resource
 {
-    protected static ?string $model                 = chex::class;
+    protected static ?string $model                 = external::class;
     protected static ?string $slug                  = 'connection.elevators.chex';
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
     protected static bool $shouldRegisterNavigation = false;
