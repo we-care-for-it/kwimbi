@@ -18,7 +18,6 @@ class CreateFirewallIpsTable extends Migration
             $table->integer('log_id')->nullable();
             $table->boolean('blocked')->default(1);
             $table->integer('prefix_size')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->index('ip');
             $table->timestamps();
             $table->softDeletes();
