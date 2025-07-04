@@ -24,13 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->command->call('shield:generate', ['--panel' => 'App', '--all' => 'true']);
         $this->command->call('shield:super-admin', ['--user' => $superAdmin->id, '--panel' => 'App']);
         $this->call([
-            UserSeeder::class,
-            CompanySeeder::class,
-            CompanyUserSeeder::class,
-            ObjectTypeSeeder::class,
-            WorkActivitieSeeder::class,
-            ObjectBuildingTypeSeeder::class,
-            RelationTypeSeeder::class,
+            // UserSeeder::class,
+            // CompanySeeder::class,
+            // CompanyUserSeeder::class,
+            // ObjectTypeSeeder::class,
+            // WorkActivitieSeeder::class,
+            // ObjectBuildingTypeSeeder::class,
+            // RelationTypeSeeder::class,
         ]);
 
     }
