@@ -42,7 +42,7 @@ return new class extends Migration
             $table->string('customer_id')->nullable();
 
             $table->string('vehicle_id')->nullable();
-            // ->nullable()->constrained('companies');
+            //   
             $table->timestamps();
             $table->softDeletes();
 

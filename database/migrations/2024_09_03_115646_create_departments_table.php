@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained();
             $table->string('name');
             $table->longText('description')->nullable();
-            ->nullable()->constrained('companies');
+              
 
             $table->timestamps();
         });

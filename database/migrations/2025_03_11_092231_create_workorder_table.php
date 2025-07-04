@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('relation_id')->nullable();
             $table->foreignId('contact_id')->nullable();
             $table->foreignId('status_id')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
         });
     }

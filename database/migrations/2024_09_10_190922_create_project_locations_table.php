@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('project_id')->nullable();
             $table->longtext('location_id')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
             $table->SoftDeletes();
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
             $table->softDeletes();
 

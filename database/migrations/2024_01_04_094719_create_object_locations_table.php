@@ -42,7 +42,7 @@ return new class extends Migration
             $table->string('housenumber')->nullable();
             $table->string('construction_year')->nullable();
             $table->string('building_access_type_id')->nullable();
-            ->nullable()->constrained('companies');
+              
             
             $table->timestamps();
             $table->softDeletes();

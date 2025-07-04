@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('module_id')->nullable();
             $table->integer('upload_type_id')->nullable();
-            ->nullable()->constrained('companies');
+              
 
             $table->timestamps();
             $table->softDeletes();

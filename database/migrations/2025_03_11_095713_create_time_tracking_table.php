@@ -22,7 +22,7 @@ return new class extends Migration
             $table->dateTime('started_at')->nullable();
             $table->dateTime('ended_at')->nullable();
             $table->integer('duration')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
         });
     }

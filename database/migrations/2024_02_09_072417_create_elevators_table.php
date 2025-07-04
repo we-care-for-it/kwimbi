@@ -45,7 +45,7 @@ return new class extends Migration
 
             $table->date('current_inspection_end_date')->nullable();
             $table->integer('current_inspection_status_id')->nullable();
-            ->nullable()->constrained('companies');
+              
 
             $table->timestamps();
             $table->softDeletes();

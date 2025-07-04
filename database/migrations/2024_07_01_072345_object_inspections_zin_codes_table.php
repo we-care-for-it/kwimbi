@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->nullable();
             $table->longText('description')->nullable();
-            ->nullable()->constrained('companies');
+              
 
             $table->timestamps();
             $table->softDeletes(); 

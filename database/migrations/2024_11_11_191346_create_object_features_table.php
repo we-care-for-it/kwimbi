@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('object_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->string('is_active')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->softDeletes();
             $table->timestamps();
         });

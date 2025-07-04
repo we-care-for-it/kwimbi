@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); 
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
-            ->nullable()->constrained('companies');
+              
 
             $table->timestamps();
             $table->softDeletes();

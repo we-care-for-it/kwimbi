@@ -26,7 +26,7 @@ return new class extends Migration
             $table->time('begin_time')->nullable();
             $table->integer('private')->nullable();
             $table->integer('type_id')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
         });
     }

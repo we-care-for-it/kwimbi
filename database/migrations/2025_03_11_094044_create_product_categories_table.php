@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->integer('amount')->nullable();
             $table->json('suppliers')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->softDeletes();   
             $table->timestamps();
         });

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('phone_number', 15)->nullable();
             $table->string('mobile_number', 15)->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
         });
     }

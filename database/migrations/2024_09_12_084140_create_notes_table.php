@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('note');
             $table->string('user_id');
             $table->integer('item_id');
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
             $table->softDeletes();
             

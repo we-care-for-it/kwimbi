@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('contract')->nullable();
             $table->integer('maintenance_company_id')->nullable();
             $table->longText('remark')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->softDeletes();
             $table->timestamps();
 

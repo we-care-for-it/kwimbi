@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('is_active')->nullable();
             $table->string('model');
             $table->string('description');
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
             $table->softDeletes();
         });

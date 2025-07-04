@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->integer('elevator_id')->nullable();
             $table->longText('remark')->nullable();
 	        $table->longText('document')->nullable();
-            ->nullable()->constrained('companies');
+              
             $table->timestamps();
             $table->softDeletes();
         });
