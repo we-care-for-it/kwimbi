@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('token_1')->nullable();
             $table->string('token_2')->nullable();
 	        $table->string('password')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
 
             $table->timestamps();
             $table->softDeletes(); 

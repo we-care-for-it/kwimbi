@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('note');
             $table->string('user_id');
             $table->integer('item_id');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
             

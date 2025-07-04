@@ -17,7 +17,6 @@ return new class extends Migration
             $table->integer('status_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('incident_id')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
          

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('directory')->nullable();  
             $table->string('filename')->nullable();   
             $table->string('description')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+ 
 
             $table->timestamps();
             $table->softDeletes();   

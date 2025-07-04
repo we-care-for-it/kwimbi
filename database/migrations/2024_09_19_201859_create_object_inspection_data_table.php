@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->string('schedule_run_token')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
 
             $table->timestamps();
             $table->softDeletes();

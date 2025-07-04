@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->longtext('error')->nullable();
             $table->integer('is_active')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();   
         });

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('visible_object_suppliers')->nullable()->default('0');
             $table->boolean('visible_object_maintenance_companies')->nullable()->default('0');
             $table->boolean('visible_object_attachments')->nullable()->default('0');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
 
             $table->timestamps();
             $table->softDeletes(); 

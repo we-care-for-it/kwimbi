@@ -30,7 +30,7 @@ return new class extends Migration
             $table->longtext('employee_id')->nullable();
             $table->longtext('image')->nullable();
             $table->integer('warehouse_id')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+       
 
             $table->timestamps();
             $table->softDeletes(); 

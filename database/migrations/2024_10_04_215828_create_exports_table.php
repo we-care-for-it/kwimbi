@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('total_rows');
             $table->unsignedInteger('successful_rows')->default(0);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
         });
     }

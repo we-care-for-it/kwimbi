@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('emailaddress')->nullable();
             $table->string('phonenumber')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
 
             $table->timestamps();
             $table->softDeletes(); 

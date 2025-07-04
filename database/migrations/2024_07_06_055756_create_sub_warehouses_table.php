@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('warehouse_id')->nullable();
             $table->string('name')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
 
             $table->timestamps();
             $table->softDeletes(); 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('portnumber'); 
             $table->string('security_protocol');
-            $table->foreignId('company_id'); 
+            ; 
             $table->datetime('last_success_at')->nullable();; 
             $table->datetime('last_error_at')->nullable();;
             $table->string('last_error_message')->nullable();

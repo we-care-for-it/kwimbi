@@ -25,8 +25,7 @@ return new class extends Migration
 
             $table->integer('type_id')->nullable();
             $table->dateTime('report_date_time')->nullable();
-            
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+ 
             $table->timestamps();
             $table->softDeletes();
         });

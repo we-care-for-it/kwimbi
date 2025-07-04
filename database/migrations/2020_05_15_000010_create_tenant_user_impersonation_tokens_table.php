@@ -24,7 +24,7 @@ class CreateTenantUserImpersonationTokensTable extends Migration
             $table->timestamp('created_at');
 
             $table->foreign('tenant_id')->references('id')->on('tenants')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
         });
     }
 

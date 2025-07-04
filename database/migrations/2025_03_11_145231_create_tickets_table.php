@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('created_by_user')->nullable();
             $table->foreignId('assigned_by_user')->nullable();
             $table->integer('model')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
         });
     }

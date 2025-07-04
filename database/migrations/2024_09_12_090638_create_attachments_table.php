@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->string('user_id');
             $table->integer('item_id')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('last_error_datetime')->nullable();
             $table->timestamp('last_action_datetime')->nullable();
             $table->boolean('status_id')->default(false);
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
         });
     }

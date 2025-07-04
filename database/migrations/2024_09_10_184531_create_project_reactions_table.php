@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longtext('reaction')->nullable();
             $table->integer('user_id')->nullable();
             $table->integer('status_id')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
             $table->SoftDeletes();
         });

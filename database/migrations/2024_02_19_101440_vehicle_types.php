@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vehicle_types', function (Blueprint $table) {
             $table->longtext('name')->nullable();
             $table->boolean('is_active');
-            $table->foreignId('company_id')->nullable()->constrained('companies');            
+            ->nullable()->constrained('companies');            
             $table->softDeletes();
         });
         }

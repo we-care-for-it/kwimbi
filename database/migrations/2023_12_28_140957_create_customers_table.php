@@ -33,8 +33,6 @@ return new class extends Migration
             $table->string('language')->nullable();
             $table->string('country')->nullable();
             $table->boolean('is_active')->nullable()->default('1');
-            $table->foreignId('company_id')->nullable()->constrained('companies');
-            
             $table->timestamps();
             $table->softDeletes();
         });

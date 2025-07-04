@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('model');
             $table->string('name')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
+            ->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
 

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
             $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained('companies');
             $table->timestamps();
             $table->softDeletes();
         });
