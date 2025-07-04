@@ -58,22 +58,25 @@ class ObjectTypeResource extends Resource {
                 'Roltrappen'            => 'Roltrappen',
                 'Garantie'              => 'Garantie',
                 'E-Mail instellingen'   => 'E-Mail instellingen',
-                'Netwerken'         => 'Netwerken LAN',
-                'Aankoopgegevens'      => 'Aankoop gegevens',
+                'Netwerken'             => 'Netwerken LAN',
+                'Aankoopgegevens'       => 'Aankoop gegevens',
+                'Afbeeldingen'          => 'Afbeeldingen',
+                'Voertuigen'            => 'Voertuigbeheer',
             ])
             ->descriptions([
-            'Keuringen'             => 'Beheer en plan keuringen van installaties.',
-            'Onderhoudscontracten'  => 'Overzicht en beheer van onderhoudscontracten.',
-            'Tickets'               => 'Klachten en serviceverzoeken beheren.',
-            'Onderhoudsbeurten'     => 'Periodieke onderhoudsbeurten beheren en plannen.',
-            'Liften'                => 'Module specifiek voor liftenbeheer.',
-            'Roltrappen'            => 'Module specifiek voor roltrappenbeheer',
-            'Garantie'              => 'Beheer garantievoorwaarden en vervaldata.',
-            'E-Mail instellingen'   => 'Instellingen voor e-mailverkeer en notificaties.',
-            'Netwerken'             => 'Netwerkgegevens beheren zoals LAN, WIFI & IP-adressen.',
-            'Aankoopgegevens'       => 'Beheer van inkoopgegevens, facturen en leveranciers.',
-        ])
-       
+                'Keuringen'             => 'Beheer en plan keuringen van installaties',
+                'Onderhoudscontracten'  => 'Overzicht en beheer van onderhoudscontracten',
+                'Tickets'               => 'Klachten en serviceverzoeken beheren',
+                'Onderhoudsbeurten'     => 'Periodieke onderhoudsbeurten beheren en plannen',
+                'Liften'                => 'Module specifiek voor liftenbeheer',
+                'Roltrappen'            => 'Module specifiek voor roltrappenbeheer',
+                'Garantie'              => 'Beheer garantievoorwaarden en vervaldata',
+                'E-Mail instellingen'   => 'Instellingen voor e-mailverkeer en notificaties',
+                'Netwerken'             => 'Netwerkgegevens beheren zoals LAN, WIFI & IP-adressen',
+                'Aankoopgegevens'       => 'Beheer van inkoopgegevens, facturen en leveranciers',
+                'Afbeeldingen'          => 'Afbeeldingen Bibliotheek',
+                'Voertuigen'            => 'Registratie en onderhoud van voertuigen.',
+            ])
             ->bulkToggleable()
             ->columns(1)
             ->required()
