@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('project_id')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
-            ->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
