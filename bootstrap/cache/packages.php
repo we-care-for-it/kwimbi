@@ -328,6 +328,17 @@
       0 => 'Mvenghaus\\FilamentScheduleMonitor\\ServiceProvider',
     ),
   ),
+  'nben/filament-record-nav' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentRecordNav' => 'Nben\\FilamentRecordNav\\Facades\\FilamentRecordNav',
+    ),
+    'providers' => 
+    array (
+      0 => 'Nben\\FilamentRecordNav\\FilamentRecordNavServiceProvider',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

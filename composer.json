@@ -35,6 +35,7 @@
         "marjose123/filament-lockscreen": "^2.4",
         "martinpetricko/filament-sentry-feedback": "^1.0",
         "mvenghaus/filament-plugin-schedule-monitor": "^3.0",
+        "nben/filament-record-nav": "^1.0",
         "niladam/filament-auto-logout": "^1.0",
         "owen-it/laravel-auditing": "^13.6",
         "owenvoke/blade-fontawesome": "^2.8",

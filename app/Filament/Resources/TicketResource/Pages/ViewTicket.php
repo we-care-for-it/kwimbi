@@ -8,9 +8,19 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Tables\Actions\ActionGroup;
 use Livewire\Attributes\On;
 
+use Nben\FilamentRecordNav\Concerns\WithRecordNavigation;
+ use Nben\FilamentRecordNav\Actions\NextRecordAction;
+use Nben\FilamentRecordNav\Actions\PreviousRecordAction;
+ 
+ 
+
+
 class ViewTicket extends ViewRecord
 {
 
+ 
+ use WithRecordNavigation;
+ 
     #[On('refreshForm')]
     public function refreshForm(): void
     {
@@ -48,6 +58,12 @@ class ViewTicket extends ViewRecord
             ActionGroup::make([
                 Actions\DeleteAction::make('Verwijderen'),
             ]),
+
+             
+            PreviousRecordAction::make(),
+            NextRecordAction::make(),
+ 
+
 
         ];
     }

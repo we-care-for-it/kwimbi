@@ -20,7 +20,7 @@ class ListObjectTypes extends ListRecords
                 ->modalHeading('Object Type toevoegen')
                 ->modalDescription('Voeg een nieuw object type toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalSubmitActionLabel('Opslaan')
-
+                ->slideOver()
                 ->label('Object Type toevoegen'),
         ];
     }

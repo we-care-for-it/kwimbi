@@ -135,7 +135,7 @@
             <div>
                <h2 class="text-lg font-semibold mb-2">Objecten</h2>
                <ul class="list-disc list-inside space-y-1">
-                  <li><a href="/object-type" class="text-black hover:underline">Categorieen</a></li>
+                  <li><a href="/object-types" class="text-black hover:underline">Categorieen</a></li>
                   <li><a href="/brands" class="text-black hover:underline"></a>Merken en modellen</li>
                </ul>
             </div>
