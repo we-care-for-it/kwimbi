@@ -171,7 +171,7 @@ class RelationLocationResource extends Resource
 
 
                                                 Select::make('type_id')
-                    ->label('Type')
+                         ->label('Categorie')
                     ->default(1)
                     ->options(locationType::pluck('name', 'id')),
 
@@ -191,6 +191,7 @@ class RelationLocationResource extends Resource
                                 })
                                 ->reactive()
                                 ->searchable()
+                                             ->columnSpan(2)
 
                                 ->label("Beheerder")
 

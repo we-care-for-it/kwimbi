@@ -186,6 +186,7 @@ class ObjectLocationResource extends Resource
                                         'type_id' => 2,
                                     ])->id;
                                 })
+                                    ->columnSpan(3)
                                 ->options(Relation::where('type_id', 2)->pluck('name', 'id')),
 
                         ])]),
