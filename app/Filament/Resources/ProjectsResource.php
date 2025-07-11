@@ -29,6 +29,8 @@ use Filament\Tables\Table;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
+use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
+use Filament\Forms\Components\Actions\Action;
 
 class ProjectsResource extends Resource
 {
@@ -82,6 +84,27 @@ class ProjectsResource extends Resource
                             "xl"      => 2,
                             "2xl"     => 2,
                         ])->schema([
+
+                              TextInput::make("id")
+                               ->disabled() // start disabled
+                        ->registerActions([
+                            $editAction = Action::make('enableNotes')
+                                ->label('Edit')
+                                ->icon('heroicon-o-pencil-square')
+                                ->action(fn (TextInput $component) => $component->disabled(false)),
+                        ])
+                        ->suffixAction($editAction)
+ 
+
+                       ->label('Projectnummer')
+                        ->numeric()
+                        ->minValue(0)
+                        ->default(fn () => Project::max('id') + 1)
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->helperText('Dit projectnummer moet uniek zijn.'),
+
+
                             Forms\Components\TextInput::make("name")
                                 ->label("Omschrijving")
                                 ->maxLength(255)
@@ -106,6 +129,12 @@ class ProjectsResource extends Resource
                         ])->schema([
                             TextInput::make("budget_costs")
                                 ->label("Budget")
+                                ->numeric()
+                                ->minValue(0)
+                                ->suffixIcon("heroicon-o-currency-euro"),
+                            TextInput::make("cost_price")
+                                ->numeric()
+                                ->minValue(0)
                                 ->suffixIcon("heroicon-o-currency-euro"),
 
                             Select::make("status_id")
@@ -226,9 +255,9 @@ class ProjectsResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make("id")
                     ->label("#")
-                    ->getStateUsing(function (Project $record): ?string {
-                        return sprintf("%05d", $record?->id);
-                    })
+                    // ->getStateUsing(function (Project $record): ?string {
+                    //     return sprintf("%05d", $record?->id);
+                    // })
                     ->searchable()
                     ->sortable()
                     ->toggleable()
@@ -325,13 +354,21 @@ class ProjectsResource extends Resource
                     ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('budget_costs')
-
+                
                     ->toggleable()
-
                     ->sortable()
                     ->money('EUR')
                     ->label("Budget")
                     ->alignment('center'),
+
+     
+                Tables\Columns\TextColumn::make('cost_price')
+                    ->toggleable()
+                    ->sortable()
+                    ->money('EUR')
+                    ->label("Kosten")
+                    ->alignment('center'),
+
 
                 Tables\Columns\TextColumn::make('reactions_count')
                     ->counts('reactions')
@@ -410,6 +447,12 @@ class ProjectsResource extends Resource
                                 TextEntry::make('status.name')
                                     ->label('Status')
                                     ->badge()
+                                    ->placeholder('-'),
+                                
+                                    TextEntry::make('cost_price')
+                                    ->label('Budget')
+                                    ->money('EUR')
+                                      ->label('Kosten')
                                     ->placeholder('-'),
                                 TextEntry::make('budget_costs')
                                     ->label('Budget')

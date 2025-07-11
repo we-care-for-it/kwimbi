@@ -388,6 +388,13 @@
       0 => 'Parallax\\FilamentComments\\FilamentCommentsServiceProvider',
     ),
   ),
+  'pelmered/filament-money-field' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Pelmered\\FilamentMoneyField\\FilamentMoneyFieldServiceProvider',
+    ),
+  ),
   'php-mqtt/laravel-client' => 
   array (
     'aliases' => 

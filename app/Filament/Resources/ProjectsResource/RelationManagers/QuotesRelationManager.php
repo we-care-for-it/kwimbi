@@ -21,6 +21,9 @@ use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Smalot\PdfParser\Parser;
+        use Illuminate\Http\Request;
 
 class QuotesRelationManager extends RelationManager
 {
@@ -220,23 +223,35 @@ class QuotesRelationManager extends RelationManager
                 ->columns(2)
                 ->columnSpan(2),
 
-            Section::make()->schema([FileUpload::make('attachment')
-                    ->label('Bijlage')
-                             ->acceptedFileTypes(['application/pdf'])
-                    ->columnSpan(3)
-                    
-                           ->directory(function () {
-                        $parent_id = $this->getOwnerRecord()->id; 
-                        return '/uploads/project/' . $parent_id . '/qoutes';
-                    })
+            Section::make()->schema([
 
-                    ->preserveFilenames()
+
+                 FileUpload::make('attachment')
+                    ->label('Bijlage')
+                    ->acceptedFileTypes(['application/pdf']) // Only accept PDFs
+                    ->reactive()
+                    ->moveFiles()
+                    ->columnSpan(3)
+                    ->directory(function () {
+                        return '/uploads/project/' . $this->getOwnerRecord()->id . '/quotes';
+                    })
+                    ->preserveFilenames(), // Retain original filenames
+
+ 
+
+                    
+
+                    
                 //     ->directory(function () {
                   
                 //     return ;
                 // })
                 // 
-                ])->columns(2)
+                ])
+                  
+            
+            
+            ->columns(2)
                 ->columnSpan(2),
 
         ]);
@@ -290,6 +305,7 @@ class QuotesRelationManager extends RelationManager
             ])
             ->headerActions([Tables\Actions\CreateAction::make()
                     ->label("Offerte toevoegen")
+                    
                     ->modalHeading('Offerte toevoegen')
                     ->modalDescription('Geef de gegevens van de offerte in het onderstaande formulier')
                     ->modalWidth(MaxWidth::SixExtraLarge)])
@@ -301,7 +317,8 @@ class QuotesRelationManager extends RelationManager
                     ->icon('heroicon-o-document-arrow-down')
                     ->visible(fn($record) => !empty($record->attachment) && file_exists(public_path('storage/' . $record->attachment))),
 
-                Tables\Actions\EditAction::make()
+                Tables\Actions\EditAction::make()   
+                
                     ->modalWidth(MaxWidth::SixExtraLarge), Tables\Actions\DeleteAction::make()
                     ->modalHeading('Offerte toevoegen')
                     ->label('')])

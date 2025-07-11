@@ -40,6 +40,7 @@
         "owen-it/laravel-auditing": "^13.6",
         "owenvoke/blade-fontawesome": "^2.8",
         "parallax/filament-comments": "^1.5",
+        "pelmered/filament-money-field": "^1.5",
         "php-mqtt/laravel-client": "^1.6",
         "pxlrbt/filament-activity-log": "^1.1",
         "pxlrbt/filament-excel": "^2.4",
