@@ -23,7 +23,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Smalot\PdfParser\Parser;
-        use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
+use Filament\Forms\Set;
 
 class QuotesRelationManager extends RelationManager
 {
@@ -235,11 +236,43 @@ class QuotesRelationManager extends RelationManager
                     ->directory(function () {
                         return '/uploads/project/' . $this->getOwnerRecord()->id . '/quotes';
                     })
-                    ->preserveFilenames(), // Retain original filenames
+                     ->getUploadedFileNameForStorageUsing(function ($file, Set $set) {
+        // Access temporary file data here
+
+           $parser = new \Smalot\PdfParser\Parser();
+        $pdfPath =$file->getRealPath();
+
+        if (! file_exists($pdfPath)) {
+            Notification::make()
+                ->title('PDF bestand niet gevonden')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
+        $pdf = $parser->parseFile($pdfPath);
+        $text = $pdf->getText();
+
+
+               if (preg_match('/OF-\d{5}/', $text, $matches)) {
+             //   dd();
+             // 
+             $set('number',$matches[0]);
+        }
+
+
+
+return "/".$pdfPath;
+ 
+
+    }),
+          
 
  
 
                     
+
 
                     
                 //     ->directory(function () {
@@ -305,7 +338,6 @@ class QuotesRelationManager extends RelationManager
             ])
             ->headerActions([Tables\Actions\CreateAction::make()
                     ->label("Offerte toevoegen")
-                    
                     ->modalHeading('Offerte toevoegen')
                     ->modalDescription('Geef de gegevens van de offerte in het onderstaande formulier')
                     ->modalWidth(MaxWidth::SixExtraLarge)])
@@ -314,8 +346,67 @@ class QuotesRelationManager extends RelationManager
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
                     ->action(fn($record) => response()->download(public_path('storage/'.$record->attachment)))
-                    ->icon('heroicon-o-document-arrow-down')
-                    ->visible(fn($record) => !empty($record->attachment) && file_exists(public_path('storage/' . $record->attachment))),
+                    ->icon('heroicon-o-document-arrow-down'),
+                  
+
+ Tables\Actions\Action::make('RecPDF')
+    ->label('Herkenne')
+    ->action(function ($record) {
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdfPath = storage_path('app/public/' . $record->attachment);
+
+        if (! file_exists($pdfPath)) {
+            Notification::make()
+                ->title('PDF bestand niet gevonden')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
+        $pdf = $parser->parseFile($pdfPath);
+        $text = $pdf->getText();
+
+
+     
+        //Offerte nummer E-Boekhouden        
+        if (preg_match('/OF-\d{5}/', $text, $matches)) {
+             //   dd($matches[0]);
+        }
+
+               //Offerte nummer E-Boekhouden        
+if (preg_match('/(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/', $text, $m)) {
+    $date = $m[0];    // Full match, e.g. '18-03-2025'
+    // $day  = $m[1];    // '18'
+    // $month= $m[2];    // '03'
+    // $year = $m[3];    // '2025'
+}
+
+
+if (preg_match('/Totaal te betalen\s*€\s*([\d\.\s,]+)/u', $text, $m)) {
+    $amount = $m[1];                // '1.439,90'
+    // Normalize to float:
+    $normalized = floatval(str_replace(['.', ','], ['', '.'], $amount));
+    // => 1439.90 (float)
+ 
+} else {
+    $amount = null;
+}
+
+
+
+// if (preg_match('/Uw kenmerk:\s*([^\r\n]+)/u', $text, $k)) {
+//         dd( trim($k[1]));
+//     }
+ 
+
+
+
+     
+    })
+    ->visible(fn($record) => ! empty($record->attachment)),
+
+
 
                 Tables\Actions\EditAction::make()   
                 
