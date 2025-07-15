@@ -40,7 +40,7 @@ class Project extends Model implements Auditable, HasCustomFields
     protected $perPage = 20;
 
     // Attributes that should be mass-assignable
-    protected $fillable = ['slug', 'name', 'description', 'code', 'customer_id', 'progress', 'end_date', 'begin_date', 'status_id', 'budget_hours', 'budget_costs', 'contact_person_name'];
+    protected $fillable = ['id','slug', 'name', 'description', 'code', 'customer_id', 'progress', 'end_date', 'begin_date', 'status_id', 'budget_hours', 'budget_costs', 'contact_person_name'];
 
     public function customer()
     {

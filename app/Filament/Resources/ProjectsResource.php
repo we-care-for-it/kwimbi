@@ -45,7 +45,7 @@ class ProjectsResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected $listeners = ["refresh" => '$refresh'];
-    private null $id;
+
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -86,7 +86,7 @@ class ProjectsResource extends Resource
                         ])->schema([
 
                               TextInput::make("id")
-                               ->disabled() // start disabled
+                     
                         ->registerActions([
                             $editAction = Action::make('enableNotes')
                                 ->label('Edit')
