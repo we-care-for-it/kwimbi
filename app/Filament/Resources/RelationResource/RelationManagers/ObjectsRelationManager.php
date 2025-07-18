@@ -22,7 +22,11 @@ use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Forms\Components\Checkbox;
 use Filament\Tables\Columns\ViewColumn;
-
+use Filament\Tables\Grouping\Group;
+use App\Filament\Exports\ObjectsExporter;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Actions\Exports\Models\Export;
+use Filament\Tables\Actions\ExportBulkAction;
 class ObjectsRelationManager extends RelationManager
 {
     protected static bool $isScopedToTenant = false;
@@ -268,6 +272,30 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
     public function table(Table $table): Table
     {
         return $table
+            ->groups([
+            Group::make('type.name')
+                ->label('Categorie name'),
+
+                            Group::make('type.name')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Merk'),
+
+                            Group::make('brand')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Merk'),
+
+                
+                            Group::make('model')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Model'),
+
+                
+                            Group::make('"employee.name')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Gebruiker')
+
+        ])      ->defaultGroup('type.name')
+
             ->columns([
 
                 TextColumn::make("type.name")
@@ -326,12 +354,12 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make("location.name")
-                    ->label("Locatie")
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
+                // TextColumn::make("location.name")
+                //     ->label("Locatie")
+                //     ->placeholder("-")
+                //     ->toggleable()
+                //     ->sortable()
+                //     ->searchable(),
 
                 TextColumn::make("drive_type")
                     ->label("Aandrijving")
@@ -407,10 +435,15 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                         ->modalHeading('Verwijderen')
                         ->color('danger'),
 
-                ]),
+                ])
+        
             ])
             ->bulkActions([
-                //
+                ExportBulkAction::make()
+                ->label('Exporteren')
+                ->fileName(fn (Export $export): string => "objecten-{$export->getKey()}")
+                ->exporter(ObjectsExporter::class)
+                ->modalHeading('Exporteerd gegevens') 
             ]);
     }
 }
