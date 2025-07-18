@@ -18,7 +18,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
-
+use App\Filament\Exports\ObjectsExporter;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Actions\Exports\Models\Export;
+use Filament\Tables\Actions\ExportBulkAction;
 use App\Models\Brand;
 use App\Models\Employee;
 use App\Models\ObjectModel;
@@ -33,7 +36,7 @@ use Filament\Forms\Components\Wizard\Step;
 
 
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Tables\Grouping\Group;
 
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Forms\Components\Checkbox;
@@ -288,6 +291,32 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
      public function table(Table $table): Table
     {
         return $table
+  ->groups([
+
+          Group::make('type.name')
+                ->label('Categorie name'),
+
+                            Group::make('type.name')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Merk'),
+
+                            Group::make('brand')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Merk'),
+
+                
+                            Group::make('model')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Model'),
+
+                
+                            Group::make('"employee.name')
+                               ->titlePrefixedWithLabel(false)
+                ->label('Gebruiker')
+
+        ])      ->defaultGroup('type.name')
+
+
             ->columns([
 
                 TextColumn::make("type.name")
@@ -424,7 +453,11 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                 ]),
             ])
             ->bulkActions([
-                //
+                ExportBulkAction::make()
+                ->label('Exporteren')
+                ->fileName(fn (Export $export): string => "objecten-{$export->getKey()}")
+                ->exporter(ObjectsExporter::class)
+                ->modalHeading('Exporteerd gegevens') 
             ]);
     }
 }
