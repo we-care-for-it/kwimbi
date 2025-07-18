@@ -39,11 +39,11 @@ class ObjectsRelationManager extends RelationManager
         // $ownerModel is of actual type Job
         return $ownerRecord->objects->count();
     }
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
+    // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    // {
 
-        return in_array('Objecten', $ownerRecord?->type?->options) ? true : false;
-    }
+    //     return in_array('Objecten', $ownerRecord?->type?->options) ? true : false;
+    // }
 
     public function form(Form $form): Form
     {
