@@ -431,7 +431,14 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                     ->modalHeading('Object aanmaken')
                     ->modalDescription('Koppel vaste objecten aan een locatie of een medewerker. Wil je objecten koppelen aan aan een medewerker of locatie? Maak dan eerst een medewerker of locatie aan.')
                     ->label('Toevoegen')
-                    ->icon('heroicon-m-plus'),
+                    ->icon('heroicon-m-plus')
+                            ->mutateFormDataUsing(function (array $data): array {
+
+        $data['customer_id'] = $this->ownerRecord?->id;
+                    
+
+        return $data;
+    }),
             ])
             ->actions([
 
