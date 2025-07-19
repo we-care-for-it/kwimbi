@@ -225,7 +225,8 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                     Select::make('employee_id')
                                         ->searchable(['first_name', 'last_name', 'email'])
                                         ->options(
-                                            Employee::where('relation_id', $this->ownerRecord->id)
+                                            Employee::where('relation_id', $this->ownerRecord->relation_id)
+                                          
                                                 ->get()
                                                 ->mapWithKeys(fn($employee) => [
                                                     $employee->id => "{$employee->first_name} {$employee->last_name}",

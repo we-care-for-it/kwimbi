@@ -347,6 +347,18 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->sortable()
                     ->searchable(),
 
+
+
+                    
+
+                TextColumn::make("location.name")
+                    ->label("Locatie")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+
+
                 TextColumn::make("serial_number")
                     ->label("Serienummer")
                     ->placeholder("-")
