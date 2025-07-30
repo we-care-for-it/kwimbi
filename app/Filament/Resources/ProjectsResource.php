@@ -74,6 +74,7 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
+                
                 Forms\Components\Section::make()
                     ->schema([
                         Grid::make([
@@ -105,12 +106,12 @@ class ProjectsResource extends Resource
                         ->helperText('Dit projectnummer moet uniek zijn.'),
 
 
-                            Forms\Components\TextInput::make("name")
+                            Forms\Components\TextArea::make("name")
                                 ->label("Omschrijving")
                                 ->maxLength(255)
                                 ->required()
                                 ->columnSpan("full"),
-                            TextInput::make("description")
+                                Forms\Components\TextArea::make("description")
                                 ->label("Opmerking")
                                 ->columnSpan("full"),
                         ]),
@@ -132,11 +133,6 @@ class ProjectsResource extends Resource
                                 ->numeric()
                                 ->minValue(0)
                                 ->suffixIcon("heroicon-o-currency-euro"),
-                            TextInput::make("cost_price")
-                                ->numeric()
-                                ->minValue(0)
-                                ->suffixIcon("heroicon-o-currency-euro"),
-
                             Select::make("status_id")
                                 ->label("Status")
                                 ->reactive()
@@ -265,7 +261,7 @@ class ProjectsResource extends Resource
                     ->verticalAlignment(VerticalAlignment::Start),
 
                 Tables\Columns\TextColumn::make("contact.name")
-                    ->toggleable()
+              ->toggleable(isToggledHiddenByDefault: true)
                     ->Url(function ($record) {
                         return "/contacts/" . $record->contact_id . "";
                     })
@@ -295,10 +291,11 @@ class ProjectsResource extends Resource
                     })
                     ->color('primary')
                     ->searchable()
-                    ->toggleable()
+               
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
                     ->label("Adres")
+                           ->toggleable(isToggledHiddenByDefault: true)
                     ->description(function (Project $record) {
                         if (! $record?->location_id) {
                             return "Geen locatie gekoppeld";
@@ -354,7 +351,6 @@ class ProjectsResource extends Resource
                     ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('budget_costs')
-                
                     ->toggleable()
                     ->sortable()
                     ->money('EUR')
@@ -364,6 +360,7 @@ class ProjectsResource extends Resource
      
                 Tables\Columns\TextColumn::make('cost_price')
                     ->toggleable()
+                    ->label( "Kosten")
                     ->sortable()
                     ->money('EUR')
                     ->label("Kosten")
@@ -426,16 +423,21 @@ class ProjectsResource extends Resource
     {
         return $infolist
             ->schema([
+            
+                         Section::make()
+                             ->schema([
+                              TextEntry::make('name')
+                                    ->label('Omschrijving')
+                                    ->placeholder('-')
+                             ]),
+
                 Tabs::make('Project Details')
                     ->columnSpan('full')
                     ->tabs([
                         Tabs\Tab::make('Algemene Informatie')
                             ->icon('heroicon-o-information-circle')
                             ->schema([
-                                TextEntry::make('name')
-                                    ->label('Omschrijving')
-                                    ->placeholder('-'),
-
+             
                                 TextEntry::make('contact.name')
                                     ->label('Contactpersoon')
                                     ->icon("heroicon-c-link")
