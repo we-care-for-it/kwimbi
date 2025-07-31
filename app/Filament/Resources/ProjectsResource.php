@@ -106,12 +106,12 @@ class ProjectsResource extends Resource
                         ->helperText('Dit projectnummer moet uniek zijn.'),
 
 
-                            Forms\Components\TextArea::make("name")
+                            Forms\Components\Textarea::make("name")
                                 ->label("Omschrijving")
                                 ->maxLength(255)
                                 ->required()
                                 ->columnSpan("full"),
-                                Forms\Components\TextArea::make("description")
+                                Forms\Components\Textarea::make("description")
                                 ->label("Opmerking")
                                 ->columnSpan("full"),
                         ]),
@@ -179,7 +179,7 @@ class ProjectsResource extends Resource
                                         ->toArray();
                                 })
                                 ->reactive()
-                                ->disabled(fn(callable $get) => ! $get('customer_id'))
+                              //  ->disabled(fn(callable $get) => ! $get('customer_id'))
                                 ->placeholder('Selecteer een locatie'),
 
                             // return relationLocation::query()
