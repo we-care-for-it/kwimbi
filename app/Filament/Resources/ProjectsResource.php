@@ -139,24 +139,25 @@ class ProjectsResource extends Resource
                                 ->options(ProjectStatus::pluck('name', 'id'))
                                 ->default(1),
 
-                            Select::make("customer_id")
-                                ->searchable()
-                                ->label("Relatie")
-                                ->options(function () {
-                                    return \App\Models\Relation::all()
-                                        ->groupBy('type.name')
-                                        ->mapWithKeys(function ($group, $category) {
-                                            return [
-                                                $category => $group->pluck('name', 'id')->toArray(),
-                                            ];
-                                        })->toArray();
-                                })
+                            // Select::make("customer_id")
+                            //     ->searchable()
+                            //     ->label("Relatie")
+                            //     ->options(function () {
+                            //         return \App\Models\Relation::all()
+                            //             ->groupBy('type.name')
+                            //             ->mapWithKeys(function ($group, $category) {
+                            //                 return [
+                            //                     $category => $group->pluck('name', 'id')->toArray(),
+                            //                 ];
+                            //             })->toArray();
+                            //     })
+                               
 
-                                ->afterStateUpdated(function (callable $set) {
-                                    $set('location_id', null);
-                                    $set('contact_id', null);
-                                })
-                                ->reactive(),
+                            //     ->afterStateUpdated(function (callable $set) {
+                            //         $set('location_id', null);
+                            //         $set('contact_id', null);
+                            //     })
+                            //                                   ->reactive(),
 
                             Select::make("location_id")
                                 ->label('Locatie')
@@ -353,6 +354,7 @@ class ProjectsResource extends Resource
                 Tables\Columns\TextColumn::make('budget_costs')
                     ->toggleable()
                     ->sortable()
+                    ->placeholder("-")
                     ->money('EUR')
                     ->label("Budget")
                     ->alignment('center'),

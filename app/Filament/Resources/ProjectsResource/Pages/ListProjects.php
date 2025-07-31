@@ -18,19 +18,19 @@ class ListProjects extends ListRecords
     protected static ?string $title   = 'Projecten';
     use InteractsWithCustomFields;
     use HasResizableColumn;
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make()
-                ->modalWidth(MaxWidth::FourExtraLarge)
-                ->modalHeading('Project toevoegen')
-                ->modalDescription('Voeg een nieuwe project toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
-                ->icon('heroicon-m-plus')
-                ->modalIcon('heroicon-o-plus')
-                ->slideOver()
-                ->label('Project toevoegen'),
-        ];
-    }
+    // protected function getHeaderActions(): array
+    // {
+    //     return [
+    //         Actions\CreateAction::make()
+    //             ->modalWidth(MaxWidth::FourExtraLarge)
+    //             ->modalHeading('Project toevoegen')
+    //             ->modalDescription('Voeg een nieuwe project toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
+    //             ->icon('heroicon-m-plus')
+    //             ->modalIcon('heroicon-o-plus')
+    //             ->slideOver()
+    //             ->label('Project toevoegen'),
+    //     ];
+    // }
     public function getHeading(): string
     {
         return "Project - Overzicht";
