@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('unit_no')->nullable();
             $table->string('remark')->nullable();
             $table->string('install_date')->nullable();
-
-            $table->string('type_id')->nullable();
+            $table->bigInteger('type_id')->unsigned();
             $table->integer('nobo_no')->nullable();
             $table->integer('address_id')->nullable();
             $table->integer('customer_id')->nullable();

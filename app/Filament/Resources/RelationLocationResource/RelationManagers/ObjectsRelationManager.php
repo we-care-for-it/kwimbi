@@ -83,7 +83,7 @@ class ObjectsRelationManager extends RelationManager
                           //  }),
 
                             TextInput::make('brand')
-                                ->label('Merk')
+                                ->label('Merk'),
                                 // ->options(function (callable $get) {
                                 //     $type_id = $get('type_id');
 
@@ -99,7 +99,7 @@ class ObjectsRelationManager extends RelationManager
                                 //         ->toArray();
                                 // })
   
-                                ->disabled(fn(callable $get) => ! $get('type_id')),
+                             //   ->disabled(fn(callable $get) => ! $get('type_id')),
                             //     ->createOptionForm([
                             //         TextInput::make('name')
                             //             ->label('Nieuwe merknaam')
@@ -435,7 +435,7 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                     ->icon('heroicon-m-plus')
                             ->mutateFormDataUsing(function (array $data): array {
 
-        $data['customer_id'] = $this->ownerRecord?->id;
+        $data['customer_id'] = $this->ownerRecord?->relation_id;
                     
 
         return $data;
