@@ -74,6 +74,7 @@ class ProjectsResource extends Resource
     {
         return $form
             ->schema([
+                
                 Forms\Components\Section::make()
                     ->schema([
                         Grid::make([
@@ -105,12 +106,12 @@ class ProjectsResource extends Resource
                         ->helperText('Dit projectnummer moet uniek zijn.'),
 
 
-                            Forms\Components\TextInput::make("name")
+                            Forms\Components\Textarea::make("name")
                                 ->label("Omschrijving")
                                 ->maxLength(255)
                                 ->required()
                                 ->columnSpan("full"),
-                            TextInput::make("description")
+                                Forms\Components\Textarea::make("description")
                                 ->label("Opmerking")
                                 ->columnSpan("full"),
                         ]),
@@ -132,11 +133,6 @@ class ProjectsResource extends Resource
                                 ->numeric()
                                 ->minValue(0)
                                 ->suffixIcon("heroicon-o-currency-euro"),
-                            TextInput::make("cost_price")
-                                ->numeric()
-                                ->minValue(0)
-                                ->suffixIcon("heroicon-o-currency-euro"),
-
                             Select::make("status_id")
                                 ->label("Status")
                                 ->reactive()
@@ -155,41 +151,44 @@ class ProjectsResource extends Resource
                                             ];
                                         })->toArray();
                                 })
+                               
 
-                                ->afterStateUpdated(function (callable $set) {
-                                    $set('location_id', null);
-                                    $set('contact_id', null);
-                                })
-                                ->reactive(),
+                            //     ->afterStateUpdated(function (callable $set) {
+                            //         $set('location_id', null);
+                            //         $set('contact_id', null);
+                            //     })
+                            //                                   ->reactive(),
 
-                            Select::make("location_id")
-                                ->label('Locatie')
-                                ->options(function (callable $get) {
-                                    $relationId = $get('customer_id');
+                            // Select::make("location_id")
+                            //     ->label('Locatie')
+                            //     ->searchable()
+                            //     ->options(function (callable $get) {
+                            //         $relationId = $get('customer_id');
 
-                                    return relationLocation::query()
-                                        ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
-                                        ->get()
-                                        ->mapWithKeys(function ($location) {
-                                            return [
-                                                $location->id => collect([
-                                                    $location->address,
-                                                    $location->zipcode,
-                                                    $location->place,
-                                                ])->filter()->implode(', '),
-                                            ];
-                                        })
-                                        ->toArray();
-                                })
-                                ->reactive()
-                                ->disabled(fn(callable $get) => ! $get('customer_id'))
-                                ->placeholder('Selecteer een locatie'),
+                            //         return relationLocation::query()
+                            //             ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                            //             ->get()
+                            //             ->mapWithKeys(function ($location) {
+                            //                 return [
+                            //                     $location->id => collect([
+                            //                         $location->address,
+                            //                         $location->zipcode,
+                            //                         $location->place,
+                            //                     ])->filter()->implode(', '),
+                            //                 ];
+                            //             })
+                            //             ->toArray();
+                            //     })
 
-                            // return relationLocation::query()
-                            //
-                            //     ->get()
+                            //        ->reactive()
+                            //   //  ->disabled(fn(callable $get) => ! $get('customer_id'))
+                            //     ->placeholder('Selecteer een locatie'),
 
-                            Select::make("contact_id")
+                            // // return relationLocation::query()
+                            // //
+                            // //     ->get()
+
+                            ,Select::make("contact_id")
                                 ->options(function (callable $get) {
                                     $relationId   = $get('customer_id');
                                     $locationData = relationLocation::whereId($get('location_id'))->first();
@@ -205,7 +204,7 @@ class ProjectsResource extends Resource
                                                 $contact->id => collect([
                                                     $contact->first_name,
                                                     $contact->last_name,
-                                                ])->filter()->implode(', '),
+                                                ])->filter()->implode(' '),
                                             ];
                                         })
                                         ->toArray();
@@ -213,8 +212,8 @@ class ProjectsResource extends Resource
                                 })
                                 ->searchable()
 
-                                ->reactive()
-                                ->label('Contactpersoon'),
+                               ->reactive()
+                               ->label('Contactpersoon')
                         ]),
                     ])->columnSpan("full"),
 
@@ -264,13 +263,13 @@ class ProjectsResource extends Resource
                     ->wrap()
                     ->verticalAlignment(VerticalAlignment::Start),
 
-                Tables\Columns\TextColumn::make("contact.name")
-                    ->toggleable()
-                    ->Url(function ($record) {
-                        return "/contacts/" . $record->contact_id . "";
-                    })
-                    ->placeholder('-')
-                    ->label("Contactpersoon"),
+            //     Tables\Columns\TextColumn::make("contact.name")
+            //   ->toggleable(isToggledHiddenByDefault: true)
+            //         ->Url(function ($record) {
+            //             return "/contacts/" . $record->contact_id . "";
+            //         })
+            //         ->placeholder('-')
+            //         ->label("Contactpersoon"),
 
                 Tables\Columns\TextColumn::make("name")
                     ->label("Omschrijving")
@@ -295,15 +294,16 @@ class ProjectsResource extends Resource
                     })
                     ->color('primary')
                     ->searchable()
-                    ->toggleable()
+                    ->placeholder('-')
                     ->sortable()
                     ->verticalAlignment(VerticalAlignment::Start)
-                    ->label("Adres")
+                    ->label("Relatie")
+                           ->toggleable(isToggledHiddenByDefault: true)
                     ->description(function (Project $record) {
-                        if (! $record?->location_id) {
-                            return "Geen locatie gekoppeld";
+                        if (! $record?->contact?->name) {
+                            return null;
                         } else {
-                            return $record->location?->address . " - " . $record->location?->zipcode . "  " . $record->location?->place;
+                            return  $record?->contact?->name;
                         }
                     }),
 
@@ -354,9 +354,9 @@ class ProjectsResource extends Resource
                     ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('budget_costs')
-                
                     ->toggleable()
                     ->sortable()
+                    ->placeholder("-")
                     ->money('EUR')
                     ->label("Budget")
                     ->alignment('center'),
@@ -364,11 +364,18 @@ class ProjectsResource extends Resource
      
                 Tables\Columns\TextColumn::make('cost_price')
                     ->toggleable()
+                    ->placeholder( "-")
                     ->sortable()
                     ->money('EUR')
                     ->label("Kosten")
                     ->alignment('center'),
 
+                Tables\Columns\TextColumn::make('objects_count')
+                    ->counts('objects')
+                    ->badge()
+                    ->label("Objecten")
+                    ->toggleable()
+                    ->alignment('center'),
 
                 Tables\Columns\TextColumn::make('reactions_count')
                     ->counts('reactions')
@@ -386,6 +393,7 @@ class ProjectsResource extends Resource
                     ->preload(),
                 SelectFilter::make("customer_id")
                     ->label("Relatie")
+                    ->placeholder("Selecteer een relatie")
                     ->options(Relation::get()->pluck("name", "id"))
                     ->searchable()
                     ->preload(),
@@ -426,16 +434,30 @@ class ProjectsResource extends Resource
     {
         return $infolist
             ->schema([
+            
+                         Section::make()
+                             ->schema([
+                              TextEntry::make('name')
+                                    ->label('Omschrijving')
+                                    ->placeholder('-')
+                             ]),
+
                 Tabs::make('Project Details')
                     ->columnSpan('full')
                     ->tabs([
                         Tabs\Tab::make('Algemene Informatie')
                             ->icon('heroicon-o-information-circle')
                             ->schema([
-                                TextEntry::make('name')
-                                    ->label('Omschrijving')
-                                    ->placeholder('-'),
+             
 
+                                   TextEntry::make('customer.name')
+                                    ->label('Relatie')
+                                    ->icon("heroicon-c-link")
+                                    ->Url(function ($record) {
+                                        return "/relations/" . $record->customer_id . "";
+                                    })
+                                    ->placeholder('-'),
+                                    
                                 TextEntry::make('contact.name')
                                     ->label('Contactpersoon')
                                     ->icon("heroicon-c-link")
@@ -461,27 +483,7 @@ class ProjectsResource extends Resource
 
                             ])->columns(4),
 
-                        Tabs\Tab::make('Relatie & Locatie')
-                            ->icon('heroicon-o-map-pin')
-                            ->schema([
-                                TextEntry::make('customer.name')
-                                    ->label('Relatie')
-                                    ->icon("heroicon-c-link")
-                                    ->Url(function ($record) {
-                                        return "/relations/" . $record->customer_id . "";
-                                    })
-                                    ->placeholder('-'),
-                                TextEntry::make('location.address')
-                                    ->label('Adres')
-                                    ->placeholder('-'),
-                                TextEntry::make('location.zipcode')
-                                    ->label('Postcode')
-                                    ->placeholder('-'),
-                                TextEntry::make('location.place')
-                                    ->label('Plaats')
-                                    ->placeholder('-'),
-                            ])->columns(2),
-
+                        
                         Tabs\Tab::make('Planning')
                             ->icon('heroicon-o-calendar')
                             ->schema([

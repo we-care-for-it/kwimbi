@@ -7,6 +7,7 @@ use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Tables\Actions\ActionGroup;
 use Parallax\FilamentComments\Actions\CommentsAction;
+use Illuminate\Support\Str;
 
 class ViewProjects extends ViewRecord
 {
@@ -44,11 +45,26 @@ class ViewProjects extends ViewRecord
 
     public function getHeading(): string
     {
-        return $this->getRecord()->name;
+        return  'Project # ' . $this->getRecord()->id;
     }
     public function getTitle(): string
     {
-        return $this->getRecord()->name;
+        return  'Project # ' . $this->getRecord()->id;
     }
+
+
+
+public function getBreadcrumbs(): array
+    {
+        return [
+            '/projects' => 'Projecten',
+
+            'Project # ' . $this->getRecord()->id
+        
+        ];
+    }
+    
+    
+
 
 }
