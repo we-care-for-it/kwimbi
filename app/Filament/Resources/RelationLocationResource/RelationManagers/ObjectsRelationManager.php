@@ -435,8 +435,8 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                     ->icon('heroicon-m-plus')
                             ->mutateFormDataUsing(function (array $data): array {
 
-        $data['customer_id'] = $this->ownerRecord?->relation_id;
-                    
+                        $data['customer_id'] = $this->ownerRecord?->relation_id;
+                      $data['location_id'] = $this->ownerRecord?->is;
 
         return $data;
     }),

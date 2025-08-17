@@ -347,12 +347,15 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->sortable()
                     ->searchable(),
 
-
-
-                    
-
-                TextColumn::make("location.name")
+                TextColumn::make("location")
                     ->label("Locatie")
+                    ->getStateUsing(function ($record): ?string {
+                        if ($record?->location?->name) {
+                            return $record?->location->name;
+                        } else {
+                            return $record?->location?->address . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
+                        }
+                    })
                     ->placeholder("-")
                     ->toggleable()
                     ->sortable()
@@ -366,12 +369,12 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->sortable()
                     ->searchable(),
 
-                // TextColumn::make("location.name")
-                //     ->label("Locatie")
-                //     ->placeholder("-")
-                //     ->toggleable()
-                //     ->sortable()
-                //     ->searchable(),
+                TextColumn::make("location.name")
+                    ->label("Locatie")
+                    ->placeholder("-")
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make("drive_type")
                     ->label("Aandrijving")
