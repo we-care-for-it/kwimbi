@@ -146,8 +146,8 @@ class RelationLocationResource extends Resource
                     ->required()
                     ->columnSpan(2),
 
-                Forms\Components\TextInput::make("housenumber")
-                    ->label("Huisnummer"),
+                // Forms\Components\TextInput::make("housenumber")
+                //     ->label("Huisnummer"),
 
                 Forms\Components\TextInput::make("place")
                     ->label("Plaats"), Forms\Components\TextInput::make("province")

@@ -336,7 +336,7 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->description(fn($record) => $record->function)
                     ->placeholder("-")
                     ->sortable()
-
+ ->label('Naam')
                     ->image(fn($record) => $record->avatar),
 
                 TextColumn::make("employee.name")
@@ -353,7 +353,8 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                         if ($record?->location?->name) {
                             return $record?->location->name;
                         } else {
-                            return $record?->location?->address . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
+                            return $record?->location?->address;
+                            // . " - " . $record?->location?->zipcode . " " . $record?->location?->place;
                         }
                     })
                     ->placeholder("-")

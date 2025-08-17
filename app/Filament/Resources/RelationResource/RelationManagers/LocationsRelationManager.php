@@ -97,21 +97,7 @@ class LocationsRelationManager extends RelationManager
                     ->default(1)
                     ->options(locationType::pluck('name', 'id')),
 
-                      Forms\Components\Select::make("management_id")
-                                ->searchable()
-                                ->label("Beheerder")
-                                ->preload()
-                                ->createOptionForm([
-                                    Forms\Components\TextInput::make('name'),
-                                ])
-                                ->createOptionUsing(function (array $data) {
-                                    return Relation::create([
-                                        'name'    => $data['name'],
-                                        'type_id' => 2,
-                                    ])->id;
-                                })
-                                  ->columnSpan(2)
-                                ->options(Relation::where('type_id', 2)->pluck('name', 'id')),
+   
 
 
                 Forms\Components\TextInput::make("gps_lon")
