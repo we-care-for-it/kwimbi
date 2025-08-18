@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketsRelationManager extends RelationManager
 {
     protected static string $relationship = 'tickets';
-    protected static ?string $title       = 'Storingen';
+    protected static ?string $title       = 'Tickets';
     protected static bool $isLazy         = false;
 
     public static function getBadge($ownerRecord, string $pageClass): ?string
@@ -27,11 +27,15 @@ class TicketsRelationManager extends RelationManager
             ->count();
     }
 
-    // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    // {
+ 
 
-    //     return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
-    // }
+    
+    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    {
+
+        return in_array('Tickets', $ownerRecord?->type?->options) ? true : false;
+    }
+
 
     public function form(Form $form): Form
     {
@@ -73,8 +77,8 @@ class TicketsRelationManager extends RelationManager
                     ->maxLength(255)
                     ->columnSpan('3'),
 
-                Checkbox::make('standing_still')
-                    ->label('Door deze storing is de lift buiten bedrijf')
+                // Checkbox::make('standing_still')
+                //     ->label('Door deze storing is de lift buiten bedrijf')
                     ->columnSpan('3')])]);
     }
 

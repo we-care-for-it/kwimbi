@@ -222,25 +222,25 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
 
                                 
 
-                                    Select::make('employee_id')
-                                        ->searchable(['first_name', 'last_name', 'email'])
-                                        ->options(
-                                            Employee::where('relation_id', $this->ownerRecord->relation_id)
+                                    // Select::make('employee_id')
+                                    //     ->searchable(['first_name', 'last_name', 'email'])
+                                    //     ->options(
+                                    //         Employee::where('relation_id', $this->ownerRecord->relation_id)
                                           
-                                                ->get()
-                                                ->mapWithKeys(fn($employee) => [
-                                                    $employee->id => "{$employee->first_name} {$employee->last_name}",
-                                                ])
-                                        )
-                                        ->label('Gebruiker')
-                                        ->visible(function ($record, callable $get) {
-                                            $object_data = ObjectType::where('id', $get('type_id'))->first();
-                                            if ($object_data?->visibility) {
-                                                return in_array('Medewerker', $object_data?->visibility) ? true : false;;
-                                            } else {
-                                                return false;
-                                            }
-                                        }),
+                                    //             ->get()
+                                    //             ->mapWithKeys(fn($employee) => [
+                                    //                 $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                    //             ])
+                                    //     )
+                                    //     ->label('Gebruiker')
+                                    //     ->visible(function ($record, callable $get) {
+                                    //         $object_data = ObjectType::where('id', $get('type_id'))->first();
+                                    //         if ($object_data?->visibility) {
+                                    //             return in_array('Medewerker', $object_data?->visibility) ? true : false;;
+                                    //         } else {
+                                    //             return false;
+                                    //         }
+                                    //     }),
 
                                     Select::make('department_id')
                                         ->label('Afdeling')

@@ -370,13 +370,7 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make("location.name")
-                    ->label("Locatie")
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
-
+ 
                 TextColumn::make("drive_type")
                     ->label("Aandrijving")
                     ->visible(function ($record) {
@@ -424,6 +418,15 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                 SelectFilter::make('type_id')
                     ->label('Categorie')
                     ->options(ObjectType::where('is_active', 1)->pluck('name', 'id')),
+                SelectFilter::make('location_id')
+                    ->label('Locatie')
+     ->options(
+                                            RelationLocation::where('relation_id', $this->ownerRecord->id)
+                                                ->get()
+                                                ->mapWithKeys(fn($ObjectLocation) => [
+                                                    $ObjectLocation->id => "{$ObjectLocation->name} {$ObjectLocation->address}",
+                                                ])
+                                        )
 
             ])
             ->headerActions([
