@@ -75,7 +75,7 @@ class TicketsRelationManager extends RelationManager
                     ->rows(10)
                     ->label('Storingsomschrijving')
                     ->maxLength(255)
-                    ->columnSpan('3'),
+                    ->columnSpan('3')
 
                 // Checkbox::make('standing_still')
                 //     ->label('Door deze storing is de lift buiten bedrijf')

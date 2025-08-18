@@ -6,12 +6,13 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
+use App\Models\Employee;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-
+use Filament\Tables\Filters\SelectFilter;
 class EmployeesRelationManager extends RelationManager
 {
     protected static string $relationship = 'employees';
@@ -72,8 +73,35 @@ class EmployeesRelationManager extends RelationManager
 
             ->filters([
                 TrashedFilter::make(),
-            ])
 
+                SelectFilter::make('department')
+                    ->label('Afdeling')
+                    ->options(
+                    Employee::where('type_id', 1)
+                        ->select('department')
+                        ->distinct()
+                        ->pluck('department')
+                        ->mapWithKeys(fn ($dept) => [
+                            $dept ?? 'null' => $dept ?? 'Geen afdeling',
+                        ])
+                        ->toArray()
+                        ),
+
+                 SelectFilter::make('function')
+                    ->label('Functie')
+                    ->options(
+                    Employee::where('type_id', 1)
+                        ->select('function')
+                        ->distinct()
+                        ->pluck('function')
+                        ->mapWithKeys(fn ($func) => [
+                            $func ?? 'null' => $func ?? 'Geen functie',
+                        ])
+                        ->toArray()
+                        ),
+                
+        ])
+   
             ->columns([
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
