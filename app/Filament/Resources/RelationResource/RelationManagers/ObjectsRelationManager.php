@@ -203,24 +203,24 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
 
                                 
 
-                                    Select::make('employee_id')
-                                        ->searchable(['first_name', 'last_name', 'email'])
-                                        ->options(
-                                            Employee::where('relation_id', $this->ownerRecord->id)
-                                                ->get()
-                                                ->mapWithKeys(fn($employee) => [
-                                                    $employee->id => "{$employee->first_name} {$employee->last_name}",
-                                                ])
-                                        )
-                                        ->label('Gebruiker')
-                                        ->visible(function ($record, callable $get) {
-                                            $object_data = ObjectType::where('id', $get('type_id'))->first();
-                                            if ($object_data?->visibility) {
-                                                return in_array('Medewerker', $object_data?->visibility) ? true : false;;
-                                            } else {
-                                                return false;
-                                            }
-                                        }),
+                                    // Select::make('employee_id')
+                                    //     ->searchable(['first_name', 'last_name', 'email'])
+                                    //     ->options(
+                                    //         Employee::where('relation_id', $this->ownerRecord->id)
+                                    //             ->get()
+                                    //             ->mapWithKeys(fn($employee) => [
+                                    //                 $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                    //             ])
+                                    //     )
+                                    //     ->label('Gebruiker')
+                                    //     ->visible(function ($record, callable $get) {
+                                    //         $object_data = ObjectType::where('id', $get('type_id'))->first();
+                                    //         if ($object_data?->visibility) {
+                                    //             return in_array('Medewerker', $object_data?->visibility) ? true : false;;
+                                    //         } else {
+                                    //             return false;
+                                    //         }
+                                    //     }),
 
                                     Select::make('department_id')
                                         ->label('Afdeling')
@@ -290,9 +290,9 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                 ->label('Model'),
 
                 
-                            Group::make('"employee.name')
-                               ->titlePrefixedWithLabel(false)
-                ->label('Gebruiker')
+                //             Group::make('"employee.name')
+                //                ->titlePrefixedWithLabel(false)
+                // ->label('Gebruiker')
 
         ])      ->defaultGroup('type.name')
 
@@ -339,13 +339,13 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
  ->label('Naam')
                     ->image(fn($record) => $record->avatar),
 
-                TextColumn::make("employee.name")
-                    ->badge()
-                    ->label("Gebruiker")
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
+                // TextColumn::make("employee.name")
+                //     ->badge()
+                //     ->label("Gebruiker")
+                //     ->placeholder("-")
+                //     ->toggleable()
+                //     ->sortable()
+                //     ->searchable(),
 
                 TextColumn::make("location")
                     ->label("Locatie")
@@ -358,9 +358,7 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                         }
                     })
                     ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
+                    ->toggleable() ,
 
 
                 TextColumn::make("serial_number")
