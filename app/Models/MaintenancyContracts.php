@@ -13,7 +13,7 @@ class MaintenancyContracts extends Model implements Auditable
     use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['option1','option2', 'option3','type_id','document', 'begindate','enddate' ,'elevator_id','maintenancy_companie_id'];
+    protected $fillable = ['option1','option2', 'option3','type_id','document', 'begindate','enddate' ,'object_id','maintenancy_companie_id'];
 
     protected $appends = [];
 

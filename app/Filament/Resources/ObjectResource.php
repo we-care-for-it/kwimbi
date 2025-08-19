@@ -591,11 +591,13 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
     {
         return [
             RelationManagers\TicketsRelationManager::class,
-            RelationManagers\MaintenanceContractsRelationManager::class,
-            RelationManagers\MaintenanceVisitsRelationManager::class,
-            RelationManagers\inspectionsRelationManager::class,
-            //       RelationManagers\ObjectMonitoringRelationManager::class,
+           //  RelationManagers\employeesRelationManager::class,
             RelationManagers\AttachmentRelationManager::class,
+            // RelationManagers\MaintenanceContractsRelationManager::class,
+            // RelationManagers\MaintenanceVisitsRelationManager::class,
+            // RelationManagers\inspectionsRelationManager::class,
+            // RelationManagers\ObjectMonitoringRelationManager::class,
+
         ];
     }
 

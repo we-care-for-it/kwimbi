@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('execution_date')->nullable();
             $table->longtext('remark')->nullable();
             $table->longtext('attachment')->nullable();
-            $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
+            $table->foreignId('object_id')->references('id')->on('elevators')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -81,7 +81,7 @@ class ViewObjectInspection extends ViewRecord
                 ->visible(fn($record) => $record->elevator->id ?? false)
                 ->icon('heroicon-c-arrows-up-down')
                 ->url(function ($record) {
-                    return "/objects/" . $record->elevator_id . "/?activeRelationManager=3";
+                    return "/objects/" . $record->object_id . "/?activeRelationManager=3";
 
                 }),
 

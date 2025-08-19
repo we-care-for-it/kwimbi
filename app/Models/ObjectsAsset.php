@@ -56,15 +56,20 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
         'status_id', 'energy_label', 'customer_id', 'management_id', 'inspection_state_id', 'supplier_id', 'remark', 'address_id', 'inspection_company_id', 'maintenance_company_id', 'stopping_places', 'carrying_capacity', 'energy_label', 'stretcher_elevator', 'fire_elevator', 'object_type_id', 'construction_year', 'nobo_no', 'name', 'unit_no',
     ];
 
+
     public function latestInspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'elevator_id')->latest('end_date');
+        return $this->hasOne(ObjectInspection::class, 'object_id')->latest('end_date');
     }
 
     public function employee()
     {
         return $this->hasOne(Employee::class, 'id', 'employee_id');
     }
+
+ 
+    
+
 
     public function location()
     {
@@ -130,12 +135,12 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'elevator_id', 'id')->orderby('end_date', 'desc');
+        return $this->hasMany(ObjectInspection::class, 'object_id', 'id')->orderby('end_date', 'desc');
     }
 
     public function inspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'id', 'elevator_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
+        return $this->hasOne(ObjectInspection::class, 'id', 'object_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
     }
 
     // protected static function boot(): void
@@ -160,12 +165,12 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 
     public function incidents()
     {
-        return $this->hasMany(ObjectIncident::class);
+        return $this->hasMany(ObjectIncident::class,'object_id');
     }
 
     public function incident_stand_still()
     {
-        return $this->hasOne(ObjectIncident::class)->where('standing_still', 1);
+        return $this->hasOne(ObjectIncident::class, 'object_id')->where('standing_still', 1);
     }
 
     public function maintenance()

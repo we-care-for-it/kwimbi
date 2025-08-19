@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('startdate')->nullable();
             $table->date('enddate')->nullable();
             $table->integer('count_of_maintenance')->nullable();
-            $table->integer('elevator_id')->nullable();
+            $table->integer('object_id')->nullable();
             $table->longText('contract')->nullable();
             $table->integer('maintenance_company_id')->nullable();
             $table->longText('remark')->nullable();

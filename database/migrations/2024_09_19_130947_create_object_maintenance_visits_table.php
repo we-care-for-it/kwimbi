@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->integer('status_id')->nullable();
             $table->integer('workorder_number')->nullable();
             $table->integer('maintenance_company_id')->nullable();
-            $table->integer('elevator_id')->nullable();
+            $table->integer('object_id')->nullable();
             $table->longText('remark')->nullable();
 	        $table->longText('document')->nullable();
               

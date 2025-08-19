@@ -22,7 +22,7 @@ class ObjectInspection extends Model
 
     public function elevator()
     {
-        return $this->belongsTo(ObjectsAsset::class, 'elevator_id', 'id');
+        return $this->belongsTo(ObjectsAsset::class, 'object_id', 'id');
     }
 
     public function itemdata()
@@ -52,12 +52,12 @@ class ObjectInspection extends Model
 
             $elevator_data = ObjectsAsset::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
-                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE  object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
-                        ->where('elevator_id', $request->elevator_id)
+                        ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE  object_inspections.object_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+                        ->where('object_id', $request->object_id)
 
                 )->first();
 
-            ObjectsAsset::where('id', $request->elevator_id)->update([
+            ObjectsAsset::where('id', $request->object_id)->update([
                 'current_inspection_end_date'  => $elevator_data->latestInspection->end_date ?? null,
                 'current_inspection_status_id' => $elevator_data->latestInspection->status_id ?? null,
             ]);
@@ -74,12 +74,12 @@ class ObjectInspection extends Model
     //         $elevators = ObjectsAsset::query()
     //         ->whereHas('latestInspection', fn($subQuery) => $subQuery
     //                 ->where('end_date', '<', Carbon::today())
-    //                 ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
+    //                 ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.object_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
     //         )
-    //         ->where('id', $request->elevator_id)
+    //         ->where('id', $request->object_id)
     //         ->first();
 
-    //         ObjectsAsset::where('id', $request->elevator_id)->update([
+    //         ObjectsAsset::where('id', $request->object_id)->update([
     //             'current_inspection_end_date'  => $elevator->latestInspection->end_date ?? null,
     //             'current_inspection_status_id' => $elevator->latestInspection->status_id ?? null,
     //         ]);

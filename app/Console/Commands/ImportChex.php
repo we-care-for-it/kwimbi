@@ -60,7 +60,7 @@ class ImportChex extends Command
                             "inspection_company_id" => config("services.chex.company_id"),
                             "type"                  => $item->inspectionType,
                             "nobo_number"           => $item->objectId,
-                            "elevator_id"           => $elevator_information?->id,
+                            "object_id"           => $elevator_information?->id,
                             "executed_datetime"     => $item->inspectionDate,
                             "if_match"              => isset($elevator_information->id) ? 1 : 0,
                             "end_date"              => $item->expiryDate,
@@ -72,7 +72,7 @@ class ImportChex extends Command
                     $inspection_data_from_db = DB::table('object_inspections')
                         ->where('status_id', $status_id)
                         ->where('nobo_number', $item->objectId)
-                        ->where('elevator_id', $elevator_information?->id)
+                        ->where('object_id', $elevator_information?->id)
                         ->where('schedule_run_token', $schedule_run_token)
 
                         ->first();

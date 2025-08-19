@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longtext('remark')->nullable();
             $table->longtext('document')->nullable();
             $table->longtext('certification')->nullable();
-            $table->integer('elevator_id')->references('id')->on('elevators')->nullable();
+            $table->integer('object_id')->references('id')->on('elevators')->nullable();
             $table->string('inspection_company_id')->nullable();
             $table->string('nobo_number')->nullable();
             $table->string('if_match')->nullable();

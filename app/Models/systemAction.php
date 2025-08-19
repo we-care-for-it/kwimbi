@@ -18,7 +18,7 @@ class systemAction extends Model implements Auditable
     public $table = "actions";
 
     protected $fillable = [
-        'elevator_id',
+        'object_id',
         'private_action',
     ];
 

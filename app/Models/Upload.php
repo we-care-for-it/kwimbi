@@ -12,7 +12,7 @@ class Upload extends Model implements Auditable
     protected $fillable = [
         'type',
         'filename',
-        'elevator_id',
+        'object_id',
         'add_by_user_id',
         'incident_id',
         'relation_id',

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('object_incidents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('elevator_id')->references('id')->on('elevators')->nullable();
+            $table->foreignId('object_id')->references('id')->on('elevators')->nullable();
             $table->string('subject')->nullable();
             $table->longtext('description')->nullable();
             $table->string('contact_name')->nullable();

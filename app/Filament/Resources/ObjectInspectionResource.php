@@ -165,7 +165,7 @@ class ObjectInspectionResource extends Resource
                 ]),
             Grid::make(4)
                 ->schema([
-                    Select::make("elevator_id")
+                    Select::make("object_id")
                         ->label("NoBo Nummer")
                         ->required()
                         ->options(ObjectsAsset::whereNot('nobo_no', null)->pluck('nobo_no', 'id'))
