@@ -53,7 +53,6 @@ class BrandResource extends Resource
                 TextColumn::make('models_count')
                     ->label('Modellen')
                     ->counts('models')
-
                     ->alignCenter()
                     ->badge(),
             ])

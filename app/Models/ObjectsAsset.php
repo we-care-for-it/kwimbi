@@ -72,7 +72,8 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 
     public function employees()
     {
-        return $this->hasMany(ObjectsDocument::class,'object_id');
+
+        return $this->hasMany(ObjectsDocument::class,'object_id')->where('status_id', '!=', 4);
     }
 
  
