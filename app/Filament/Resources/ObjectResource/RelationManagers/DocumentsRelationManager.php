@@ -101,7 +101,7 @@ class DocumentsRelationManager extends RelationManager
                     ->modalSubmitActionLabel('Akkoord')
                     ->form([
                         SignaturePad::make('cancelled_signature')->label('Handtekening')->required(),
-                        Forms\Components\TextArea::make('cancelled_remark')->label('Opmerking'),
+                        Forms\Components\Textarea::make('cancelled_remark')->label('Opmerking'),
                         Forms\Components\Select::make('cancelled_reason')
                             ->label('Reden van annulering')
                             ->columnSpan('full')

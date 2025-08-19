@@ -2,6 +2,8 @@
 namespace App\Models;
 
 use App\Enums\ElevatorStatus;
+
+ use App\Models\ObjectsDocument;
 use App\Enums\InspectionStatus;
 use App\Models\ObjectInspection;
 use Illuminate\Database\Eloquent\Builder;
@@ -67,8 +69,14 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
         return $this->hasOne(Employee::class, 'id', 'employee_id');
     }
 
+
+    public function employees()
+    {
+        return $this->hasMany(ObjectsDocument::class,'object_id');
+    }
+
  
-    
+ 
 
 
     public function location()
