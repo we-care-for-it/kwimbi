@@ -590,6 +590,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
     public static function getRelations(): array
     {
         return [
+                        RelationManagers\DocumentsRelationManager::class,
             RelationManagers\TicketsRelationManager::class,
            //  RelationManagers\employeesRelationManager::class,
             RelationManagers\AttachmentRelationManager::class,

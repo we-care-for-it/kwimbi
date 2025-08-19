@@ -486,6 +486,17 @@
       0 => 'RyanChandler\\BladeCaptureDirective\\BladeCaptureDirectiveServiceProvider',
     ),
   ),
+  'saade/filament-autograph' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentAutograph' => 'Saade\\FilamentAutograph\\Facades\\FilamentAutograph',
+    ),
+    'providers' => 
+    array (
+      0 => 'Saade\\FilamentAutograph\\FilamentAutographServiceProvider',
+    ),
+  ),
   'sentry/sentry-laravel' => 
   array (
     'aliases' => 

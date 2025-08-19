@@ -49,6 +49,7 @@
         "relaticle/custom-fields": "^1.4",
         "rmsramos/activitylog": "^1.0",
         "rupadana/filament-api-service": "^3.4",
+        "saade/filament-autograph": "^3.2",
         "sentry/sentry-laravel": "^4.15",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
         "smalot/pdfparser": "^2.12",

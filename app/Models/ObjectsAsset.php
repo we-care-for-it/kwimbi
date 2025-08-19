@@ -158,6 +158,15 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
         return $this->hasMany(ObjectFeatures::class, 'object_id', 'id');
     }
 
+    public function documents()
+    {
+        return $this->hasMany(ObjectsDocument::class,'object_id');
+    }
+
+
+    
+
+
     public function uploads()
     {
         return $this->hasMany(Upload::class, 'item_id', 'id');
