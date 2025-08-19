@@ -3,6 +3,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Models\ObjectsAsset;
+
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
@@ -89,7 +92,7 @@ class Relation extends Model implements HasCustomFields
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'customer_id', 'id');
+        return $this->hasMany(ObjectsAsset::class, 'customer_id', 'id');
     }
     public function contactsObject(): HasMany
     {

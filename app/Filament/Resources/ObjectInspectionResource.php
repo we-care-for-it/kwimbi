@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 use App\Enums\InspectionStatus;
 use App\Filament\Resources\ObjectInspectionResource\Pages;
 use App\Filament\Resources\ObjectInspectionResource\RelationManagers;
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use App\Models\ObjectInspection;
 use App\Models\Relation;
 use Filament\Forms\Components\DatePicker;
@@ -168,7 +168,7 @@ class ObjectInspectionResource extends Resource
                     Select::make("elevator_id")
                         ->label("NoBo Nummer")
                         ->required()
-                        ->options(Elevator::whereNot('nobo_no', null)->pluck('nobo_no', 'id'))
+                        ->options(ObjectsAsset::whereNot('nobo_no', null)->pluck('nobo_no', 'id'))
                         ->searchable(),
                     Select::make("inspection_company_id")
                         ->label("Keuringsinstantie")

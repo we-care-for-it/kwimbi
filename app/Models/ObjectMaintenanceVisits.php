@@ -15,7 +15,7 @@ class ObjectMaintenanceVisits extends Model implements Auditable
 
     public function elevator()
     {
-        return $this->belongsTo(Elevator::class);
+        return $this->belongsTo(ObjectsAsset::class);
     }
 
     public function maintenance_company()

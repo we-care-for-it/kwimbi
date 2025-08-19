@@ -2,7 +2,7 @@
 namespace App\Filament\Widgets;
 
 use App\Enums\InspectionStatus;
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
@@ -29,7 +29,7 @@ class RejectedInspections extends BaseWidget
     {
         return $table
             ->query(
-                Elevator::whereYear('current_inspection_end_date', date('Y'))
+                ObjectsAsset::whereYear('current_inspection_end_date', date('Y'))
                     ->where('current_inspection_status_id', InspectionStatus::REJECTED)
                     ->limit(10)
             )

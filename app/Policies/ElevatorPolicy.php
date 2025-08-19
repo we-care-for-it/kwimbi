@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ElevatorPolicy

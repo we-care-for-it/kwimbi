@@ -273,9 +273,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
     {
         return $table
             ->groups([
-            Group::make('type.name')
-                ->label('Categorie name'),
-
+   
                             Group::make('type.name')
                                ->titlePrefixedWithLabel(false)
                 ->label('Merk'),
@@ -288,13 +286,9 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                             Group::make('model')
                                ->titlePrefixedWithLabel(false)
                 ->label('Model'),
+ 
 
-                
-                //             Group::make('"employee.name')
-                //                ->titlePrefixedWithLabel(false)
-                // ->label('Gebruiker')
-
-        ])      ->defaultGroup('type.name')
+        ])     // ->defaultGroup('type.name')
 
             ->columns([
 

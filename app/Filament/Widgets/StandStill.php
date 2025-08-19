@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Widgets;
 
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
@@ -29,7 +29,7 @@ class StandStill extends BaseWidget
         $status_id = null;
         return $table
             ->query(
-                Elevator::has("incident_stand_still")->latest()
+                ObjectsAsset::has("incident_stand_still")->latest()
                     ->limit(10))
             ->columns([
                 Tables\Columns\TextColumn::make("location")

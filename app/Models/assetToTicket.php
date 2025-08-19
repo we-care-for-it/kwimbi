@@ -14,7 +14,7 @@ class assetToTicket extends Model
 
     public function object()
     {
-        return $this->hasOne(Elevator::class, 'id', 'object_id');
+        return $this->hasOne(ObjectsAsset::class, 'id', 'object_id');
     }
 
 }

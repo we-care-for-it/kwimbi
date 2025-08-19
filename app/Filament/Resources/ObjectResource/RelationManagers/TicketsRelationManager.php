@@ -138,7 +138,7 @@ class TicketsRelationManager extends RelationManager
                 //     ->mutateFormDataUsing(function (array $data): array {
                 //    dd($data['standing_still']);
 
-                //         Elevator::where('id', $this->ownerRecord->id)
+                //         ObjectsAsset::where('id', $this->ownerRecord->id)
                 //         ->update(['standing_still' => $data->standing_still]);
 
                 //     })

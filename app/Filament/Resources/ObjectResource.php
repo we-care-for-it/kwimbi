@@ -5,7 +5,7 @@ use App\Filament\Resources\ObjectResource\Pages;
 use App\Filament\Resources\ObjectResource\RelationManagers;
 use App\Models\Brand;
 use App\Models\Customer;
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use App\Models\Employee;
 use App\Models\ObjectModel;
  
@@ -45,7 +45,7 @@ use Filament\Tables\Columns\ViewColumn;
 
 class ObjectResource extends Resource
 {
-    protected static ?string $model            = Elevator::class;
+    protected static ?string $model            = ObjectsAsset::class;
     protected static ?string $navigationIcon   = "heroicon-c-arrows-up-down";
     protected static ?string $navigationLabel  = "Objecten";
     protected static ?string $pluralModelLabel = 'Objecten';

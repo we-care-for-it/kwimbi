@@ -33,7 +33,7 @@ class ObjectsRelationManager extends RelationManager
                     ->label('Kies een object')
                     ->columnSpan('full')
                     ->options(function () {
-                        return \App\Models\Elevator::where('customer_id', $this->getOwnerRecord()->relation_id)
+                        return \App\Models\ObjectsAsset::where('customer_id', $this->getOwnerRecord()->relation_id)
                             ->whereDoesntHave('assetToTickets', function ($query) {
                                 $query->where('ticket_id', $this->getOwnerRecord()->id);
                             })

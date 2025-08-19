@@ -62,7 +62,7 @@ class Ticket extends Model
 
     public function object()
     {
-        return $this->hasOne(Elevator::class, 'id', 'asset_id');
+        return $this->hasOne(ObjectsAsset::class, 'id', 'asset_id');
     }
 
     public function objects(): HasMany

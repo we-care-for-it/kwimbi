@@ -2,7 +2,7 @@
 namespace App\Models;
 
 use App\Enums\InspectionStatus;
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +22,7 @@ class ObjectInspection extends Model
 
     public function elevator()
     {
-        return $this->belongsTo(Elevator::class, 'elevator_id', 'id');
+        return $this->belongsTo(ObjectsAsset::class, 'elevator_id', 'id');
     }
 
     public function itemdata()
@@ -50,14 +50,14 @@ class ObjectInspection extends Model
 
         static::saved(function (self $request) {
 
-            $elevator_data = Elevator::query()
+            $elevator_data = ObjectsAsset::query()
                 ->whereHas('latestInspection', fn($subQuery) => $subQuery
                         ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections  WHERE  object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
                         ->where('elevator_id', $request->elevator_id)
 
                 )->first();
 
-            Elevator::where('id', $request->elevator_id)->update([
+            ObjectsAsset::where('id', $request->elevator_id)->update([
                 'current_inspection_end_date'  => $elevator_data->latestInspection->end_date ?? null,
                 'current_inspection_status_id' => $elevator_data->latestInspection->status_id ?? null,
             ]);
@@ -71,7 +71,7 @@ class ObjectInspection extends Model
     }
     //     static::saved(function (self $request) {
 
-    //         $elevators = Elevator::query()
+    //         $elevators = ObjectsAsset::query()
     //         ->whereHas('latestInspection', fn($subQuery) => $subQuery
     //                 ->where('end_date', '<', Carbon::today())
     //                 ->whereColumn('id', DB::raw('(SELECT id FROM object_inspections WHERE object_inspections.elevator_id = elevators.id and deleted_at is null ORDER BY end_date DESC LIMIT 1)'))
@@ -79,7 +79,7 @@ class ObjectInspection extends Model
     //         ->where('id', $request->elevator_id)
     //         ->first();
 
-    //         Elevator::where('id', $request->elevator_id)->update([
+    //         ObjectsAsset::where('id', $request->elevator_id)->update([
     //             'current_inspection_end_date'  => $elevator->latestInspection->end_date ?? null,
     //             'current_inspection_status_id' => $elevator->latestInspection->status_id ?? null,
     //         ]);

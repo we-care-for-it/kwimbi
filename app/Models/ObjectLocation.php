@@ -89,12 +89,12 @@ class ObjectLocation extends Model implements Auditable, HasMedia, HasCustomFiel
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'address_id', 'id');
+        return $this->hasMany(ObjectsAsset::class, 'address_id', 'id');
     }
 
     public function objects_same_complex()
     {
-        return Elevator::whereHas('locations', function ($query) {
+        return ObjectsAsset::whereHas('locations', function ($query) {
             return $query->where('complexnumber', '=', 1);
         })->get();
     }

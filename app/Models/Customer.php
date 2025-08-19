@@ -21,7 +21,7 @@ class Customer extends Model implements Auditable
 
     public function objects()
     {
-        return $this->hasMany(Elevator::class, 'customer_id', 'id');
+        return $this->hasMany(ObjectsAsset::class, 'customer_id', 'id');
     }
 
     public function users()

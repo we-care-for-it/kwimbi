@@ -1,7 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use App\Models\external;
 use App\Models\ExternalApiLog;
 use DB;
@@ -47,7 +47,7 @@ class ImportChex extends Command
                             break;
                     }
 
-                    $elevator_information = Elevator::where(
+                    $elevator_information = ObjectsAsset::where(
                         "nobo_no",
                         $item->objectId
                     )->first();

@@ -93,7 +93,7 @@ class Task extends Model implements HasCustomFields
         //     return ObjectLocation::whereId($this->model_id)->first();
         //     break;
         // case 'object':
-        //     return Elevator::whereId($this->model_id)->first();
+        //     return ObjectsAsset::whereId($this->model_id)->first();
         //     break;
         // case 'contactperson':
         //     return Contact::whereId($this->model_id)->first();

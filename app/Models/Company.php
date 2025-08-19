@@ -73,7 +73,7 @@ class Company extends Model
 
     public function elevators()
     {
-        return $this->hasMany(Elevator::class);
+        return $this->hasMany(ObjectsAsset::class);
     }
 
     public function objectLocations()

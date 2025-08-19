@@ -2,14 +2,14 @@
 
 namespace App\Filament\Exports;
 
-use App\Models\Elevator;
+use App\Models\ObjectsAsset;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
  
 class ObjectsExporter extends Exporter
 {
-    protected static ?string $model = Elevator::class;
+    protected static ?string $model = ObjectsAsset::class;
 
     public static function getColumns(): array
     {

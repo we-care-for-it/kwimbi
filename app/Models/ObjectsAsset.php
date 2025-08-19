@@ -34,10 +34,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @package App
  * @mixin Builder
  */
-class Elevator extends Model implements Auditable, HasMedia, HasCustomFields
+class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 {
     use HasFilamentComments;
-    public $table = "elevators";
+    public $table = "objects";
     use InteractsWithMedia;
     use SoftDeletes;
     use UsesCustomFields;
