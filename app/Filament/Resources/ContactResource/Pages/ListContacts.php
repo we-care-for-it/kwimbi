@@ -20,4 +20,7 @@ class ListContacts extends ListRecords
     {
         return "Contact - Overzicht";
     }
+
+
+    
 }

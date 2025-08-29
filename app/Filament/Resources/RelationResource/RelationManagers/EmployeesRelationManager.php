@@ -13,6 +13,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Tables\Filters\SelectFilter;
+
+
 class EmployeesRelationManager extends RelationManager
 {
     protected static string $relationship = 'employees';
@@ -63,6 +65,9 @@ class EmployeesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('phone_number')
                     ->label('Telefoonnummer')
                     ->maxLength(255),
+
+                 Forms\Components\Checkbox::make('show_in_contactlist')
+                    ->label('Toon in contactpersonen overzicht')
             ]);
     }
 
@@ -90,7 +95,8 @@ class EmployeesRelationManager extends RelationManager
                  SelectFilter::make('function')
                     ->label('Functie')
                     ->options(
-                    Employee::where('type_id', 1)
+                
+                Employee::where('type_id', 1)
                         ->select('function')
                         ->distinct()
                         ->pluck('function')
@@ -99,6 +105,9 @@ class EmployeesRelationManager extends RelationManager
                         ])
                         ->toArray()
                         ),
+
+                        
+                
                 
         ])
    
@@ -132,6 +141,9 @@ class EmployeesRelationManager extends RelationManager
                     ->url(fn($record) => "tel:{$record->contact?->phone_number}")
                     ->label('Telefoonnummer')
                     ->description(fn($record): ?string => $record?->mobile_number ?? null),
+
+
+
             ])
             ->emptyState(view('partials.empty-state'))
 

@@ -72,6 +72,9 @@ class ContactsRelationManager extends RelationManager
                         Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->options(contactType::where('is_active', 1)->pluck("name", "id")),
+
+                        Forms\Components\Checkbox::make('show_in_contactlist')
+                            ->label('Toon in contactpersonen overzicht')
                     ]),
             ]);
     }

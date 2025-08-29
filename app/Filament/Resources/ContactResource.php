@@ -25,6 +25,7 @@ use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
+use Illuminate\Database\Eloquent\Builder;
 
 class ContactResource extends Resource
 {
@@ -197,16 +198,27 @@ class ContactResource extends Resource
             ]);
     }
 
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('show_in_contactlist', true);
+    }
+
+
     public static function table(Table $table): Table
     {
         return $table
-
+            ->striped()
+            ->description('Contactpersonen van relaties')
+            ->deferLoading()
             ->groups([
                 Group::make('relation_id')
                     ->getTitleFromRecordUsing(fn($record): string => ucfirst($record?->name))
                     ->label('Relatie'),
 
             ])
+        
             ->columns([
 
                 TileColumn::make('name')
