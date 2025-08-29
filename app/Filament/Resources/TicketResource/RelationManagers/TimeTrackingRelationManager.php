@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Livewire\Attributes\On;
-
+use Filament\Tables\Columns\IconColumn;
 class TimeTrackingRelationManager extends RelationManager
 {
     protected static string $relationship = 'timeTracking';
@@ -58,7 +58,11 @@ class TimeTrackingRelationManager extends RelationManager
                     ->autosize()
                     ->required()
                     ->columnSpan('full'),
+                 Forms\Components\Toggle::make('invoiceable')
+                    ->label('Facturabel')
+                    ->default(true),
 
+                    
                 // Forms\Components\select::make('ticket_status_id')
                 //     ->label('Status')
                 //     ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
@@ -120,13 +124,12 @@ class TimeTrackingRelationManager extends RelationManager
                     ->wrap()
                     ->placeholder('-')
                     ->searchable(),
-                // ToggleColumn::make('invoiceable')
-                //     ->label('Facturabel')
-                //     ->onColor('success')
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->offColor('danger')
-                //     ->width(100),
+                IconColumn::make('invoiceable')
+                    ->boolean()
+                    ->label('Facturabel')
+                    ->sortable()
+                    ->alignment('center')
+                    ->width(100),
                 // TextColumn::make('status.name')
                 //     ->badge()
                 //     ->label('Ticket status')
@@ -145,6 +148,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->modalHeading('Activiteit toevoegen')
                     ->label('Activiteit toevoegen')
                     ->link()
+                     ->slideOver()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['relation_id'] = $this->ownerRecord?->relation_id;
                         $data['ticket_id']   = $this->ownerRecord?->id;
