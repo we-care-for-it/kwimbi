@@ -60,6 +60,7 @@ class TimeTrackingRelationManager extends RelationManager
                     ->columnSpan('full'),
                  Forms\Components\Toggle::make('invoiceable')
                     ->label('Facturabel')
+
                     ->default(true),
 
                     
@@ -130,6 +131,14 @@ class TimeTrackingRelationManager extends RelationManager
                     ->sortable()
                     ->alignment('center')
                     ->width(100),
+                TextColumn::make('status_id')
+                    ->sortable()
+                    ->label('Status')
+                    ->badge()
+                    ->toggleable()
+                    ->sortable()
+                    ->placeholder('-')
+                    ->searchable(),
                 // TextColumn::make('status.name')
                 //     ->badge()
                 //     ->label('Ticket status')
@@ -163,6 +172,7 @@ class TimeTrackingRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Activiteit bewerken')
                     ->tooltip('Bewerken')
+                   ->hidden(fn($record) => $record->status_id)
                     ->label('Bewerken')
                     ->slideOver()
                 // ->mutateFormDataUsing(function (array $data): array {
@@ -177,9 +187,11 @@ class TimeTrackingRelationManager extends RelationManager
                 ActionGroup::make([
 
                     Tables\Actions\DeleteAction::make()
+                    ->disabled(fn ($record) => $record?->status_id?->value === 1)
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')
-                        ->label('')
+                        ->hidden(fn($record) => $record->status_id)
+                        ->label('Verwijderen')
                         ->modalHeading('Verwijderen')
                         ->color('danger'),
                 ]),

@@ -51,6 +51,7 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
         return setting('use_timetracking') ?? false;
     }
 
+ 
     public static function getPermissionPrefixes(): array
     {
         return [

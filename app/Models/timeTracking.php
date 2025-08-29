@@ -21,6 +21,9 @@ class timeTracking extends Model implements Auditable, HasCustomFields
     public $table       = "time_tracking";
     protected $fillable = ['description', 'weekno', 'relation_id', 'project_id', 'status_id', 'work_type_id', 'invoiceable'];
 
+
+ 
+
     protected static function boot(): void
     {
 
@@ -32,6 +35,8 @@ class timeTracking extends Model implements Auditable, HasCustomFields
                 $model['user_id'] = auth()->id();
             }
         });
+
+
 
     }
     public function status()
