@@ -23,7 +23,8 @@ use Filament\Tables\Grouping\Group; // Alias toevoegen om conflict te voorkomen
 use Filament\Tables\Table;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use Relaticle\CustomFields\Filament\Infolists\CustomFieldsInfolists;
-
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Enums\FiltersLayout;
 class RelationResource extends Resource
 {
 
@@ -177,17 +178,7 @@ class RelationResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return
-
-        // groups([Group::make("type.name")
-        //         ->titlePrefixedWithLabel(false)
-        //         ->label("Categorie"),
-
-        // ])
-        //     ->defaultGroup('type.name')
-        //     ->
-
-        $table->columns([
+        return    $table->columns([
 
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
@@ -250,13 +241,18 @@ class RelationResource extends Resource
         ])
             ->filters([
 
-                SelectFilter::make('type_id')
-                    ->label('Categorie')
-                    ->options(relationType::where('is_active', 1)->pluck('name', 'id')),
-                Tables\Filters\TrashedFilter::make(),
+                // SelectFilter::make('type_id')
+                //     ->label('Categorie')
+                //     ->options(relationType::where('is_active', 1)->pluck('name', 'id')),
+               Tables\Filters\TrashedFilter::make()
+                    ->label('Relaties')
+                    ->trueLabel('Alleen gearchiveerde relaties')
+                    ->falseLabel('Zonder gearchiveerde relaties')
+                    ->placeholder('Alle relaties')
 
-            ],
-            )
+    ], layout: FiltersLayout::Modal)
+            ->filtersFormColumns(2)
+          
             ->actions([
                 ViewAction::make()
                     ->label('Bekijk')
@@ -270,10 +266,13 @@ class RelationResource extends Resource
                         ->label('Bewerken')
 
                     ,
-                    DeleteAction::make()
+                    DeleteAction::make()                  
+                        ->tooltip('Archief relatie')
+                        ->label('Archiveer ')
                         ->modalIcon('heroicon-o-trash')
-                        ->tooltip('Verwijderen')
-                        ->modalHeading('Verwijderen')
+                        ->modalHeading('Archiveren')
+                        ->modalDescription('Weet je zeker dat je deze relatie wilt archiveren?')
+                        ->modalButton('Ja, archiveren')
                         ->color('danger'),
                 ]),
             ])

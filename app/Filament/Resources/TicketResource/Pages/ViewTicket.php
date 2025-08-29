@@ -60,8 +60,8 @@ class ViewTicket extends ViewRecord
             ]),
 
              
-            PreviousRecordAction::make(),
-            NextRecordAction::make(),
+            // PreviousRecordAction::make(),
+            // NextRecordAction::make(),
  
 
 
