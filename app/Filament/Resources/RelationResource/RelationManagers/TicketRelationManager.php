@@ -3,7 +3,7 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Enums\Priority;
 use App\Models\Department;
-use App\Models\Employee;
+use App\Models\Contact;
 use App\Models\Location;
 use App\Models\ticketStatus;
 use App\Models\ticketType;
@@ -53,7 +53,7 @@ class TicketRelationManager extends RelationManager
                             ->searchable(['first_name', 'last_name', 'email'])
 
                             ->options(
-                                Employee::where('relation_id', $this->ownerRecord->relation_id)
+                                Contact::where('relation_id', $this->ownerRecord->relation_id)
                                     ->get()
                                     ->mapWithKeys(fn($employee) => [
                                         $employee->id => "{$employee->first_name} {$employee->last_name}",
@@ -100,7 +100,7 @@ class TicketRelationManager extends RelationManager
                             ->createOptionUsing(function (array $data): int {
 
                                 $data['relation_id'] = $this->ownerRecord->id;
-                                return Employee::create($data)->getKey();
+                                return Contact::create($data)->getKey();
                             })
 
                             ->label('Contactpersoon')

@@ -13,16 +13,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Tables\Filters\SelectFilter;
-
+use App\Models\Contact;
 
 class EmployeesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'employees';
-
+    protected static string $relationship = 'contacts';
     protected static ?string $title = 'Medewerkers';
-
     protected static ?string $modelLabel = 'medewerker';
-
     protected static ?string $pluralModelLabel = 'medewerkers';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
@@ -35,6 +32,8 @@ class EmployeesRelationManager extends RelationManager
 
         return in_array('Medewerkers', $ownerRecord?->type?->options) ? true : false;
     }
+
+
 
     public function form(Form $form): Form
     {
@@ -74,6 +73,9 @@ class EmployeesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+             ->query(
+            Contact::query()->where('type_id', 1) 
+            )
             ->recordTitleAttribute('name')
 
             ->filters([

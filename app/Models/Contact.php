@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model implements HasCustomFields
 {
     use HasFactory;
     use HasFilamentComments;
     use UsesCustomFields;
+        use SoftDeletes;
     /**
      * @var string[]
      */

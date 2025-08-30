@@ -21,10 +21,10 @@ class ContactsRelationManager extends RelationManager
     protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
 
-    public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
-    {
-        return in_array('Contactpersonen', $ownerRecord?->type->options) ? true : false;
-    }
+    // public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
+    // {
+    //     return in_array('Contactpersonen', $ownerRecord?->type->options) ? true : false;
+    // }
 
     public function form(Form $form): Form
     {

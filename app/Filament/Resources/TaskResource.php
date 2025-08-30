@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources;
 
 use App\Enums\Priority;
@@ -33,20 +34,44 @@ use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+use LaraZeus\Tiles\Tables\Columns\TileColumn;
+   use Filament\Tables\Actions\Action;
+   use Illuminate\Support\Carbon;
+   use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class TaskResource extends Resource
+
+class TaskResource extends Resource implements HasShieldPermissions
 {
+
+
+     public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish',
+            'assign_to_employee'
+        ];
+    }
+
+ 
+
+
     protected static ?string $model            = Task::class;
     protected static ?string $navigationIcon   = 'heroicon-o-list-bullet';
-    protected static ?string $navigationLabel  = 'Mijn taken';
-    protected static ?string $pluralModelLabel = 'Mijn taken';
-    protected static ?string $title            = 'Mijn taken';
+    protected static ?string $navigationLabel  = 'Alle taken';
+    protected static ?string $pluralModelLabel = 'Alle taken';
+    protected static ?string $title            = 'Alle taken';
 
     protected $listeners = ["refresh" => '$refresh'];
     public static function getNavigationBadge(): ?string
-{
-    return (string) Task::where('employee_id', auth()->id())->count();
-}
+    {
+        return (string) Task::count();
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -103,29 +128,29 @@ class TaskResource extends Resource
                     })
                     ->reactive(),
 
-                Select::make("make_by_employee_id")
-                    ->label('Contactpersoon')
-                    ->options(function (callable $get) {
-                        $relationId = $get('relation_id');
+                // Select::make("make_by_employee_id")
+                //     ->label('Contactpersoon')
+                //     ->options(function (callable $get) {
+                //         $relationId = $get('relation_id');
 
-                        return Employee::query()
-                            ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
-                            ->get()
-                            ->mapWithKeys(function ($location) {
-                                return [
-                                    $location->id => collect([
-                                        $location->first_name,
-                                        $location->last_name,
+                //         return Employee::query()
+                //             ->when($relationId, fn($query) => $query->where('relation_id', $relationId))
+                //             ->get()
+                //             ->mapWithKeys(function ($location) {
+                //                 return [
+                //                     $location->id => collect([
+                //                         $location->first_name,
+                //                         $location->last_name,
 
-                                    ])->filter()->implode(', '),
-                                ];
-                            })
-                            ->toArray();
-                    })
-                    ->reactive()
-                    ->disabled(fn(callable $get) => ! $get('relation_id'))
+                //                     ])->filter()->implode(', '),
+                //                 ];
+                //             })
+                //             ->toArray();
+                //     })
+                //     ->reactive()
+                //     ->disabled(fn(callable $get) => ! $get('relation_id'))
 
-                    ->placeholder('Selecteer een locatie'),
+                //     ->placeholder('Selecteer een locatie'),
 
                 Select::make("location_id")
                     ->label('Locatie')
@@ -232,7 +257,6 @@ class TaskResource extends Resource
                 // Add the CustomFieldsComponent
 
             ]);
-
     }
 
     public static function table(Table $table): Table
@@ -241,26 +265,27 @@ class TaskResource extends Resource
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
 
-            ->query(
-                Task::query()->where('employee_id', auth()->user()->id)
-            )
+            // ->query(
+            //     Task::query()->where('employee_id', auth()->user()->id)
+            // )
 
             ->persistSearchInSession()
             ->searchable()
             ->persistColumnSearchesInSession()
-            ->recordClasses(fn($record) =>
+            ->recordClasses(
+                fn($record) =>
                 $record->deleted_at ? 'table_row_deleted ' : null
             )
             ->columns([
 
-                // TileColumn::make('employee')
-                // // ->description(fn($record) => $record->AssignedByUser->email)
-                //     ->sortable()
-                //     ->getStateUsing(function ($record): ?string {
-                //         return $record?->employee?->name;
-                //     })
-                //     ->description(fn($record) => $record->employee?->email)
-                //     ->label('Toegewezen medewerker')
+                TileColumn::make('employee')
+                    // ->description(fn($record) => $record->AssignedByUser->email)
+                    ->sortable()
+                    ->getStateUsing(function ($record): ?string {
+                        return $record?->employee?->name;
+                    })
+                    ->description(fn($record) => $record->employee?->email)
+                    ->label('Toegewezen medewerker'),
 
                 //     ->image(fn($record) => $record?->employee?->avatar)
                 //     ->placeholder('Geen'),
@@ -289,7 +314,6 @@ class TaskResource extends Resource
                     ->toggleable()
                     ->getStateUsing(function ($record): ?string {
                         return $record?->related_to?->name;
-
                     })->placeholder('-'),
 
                 Tables\Columns\TextColumn::make('description')
@@ -359,9 +383,9 @@ class TaskResource extends Resource
                     ->dateTime("d-m-Y")
                     ->color(
                         fn($record) => strtotime($record?->deadline) <
-                        time()
-                        ? "danger"
-                        : "success"
+                            time()
+                            ? "danger"
+                            : "success"
                     )
                     ->sortable(),
 
@@ -379,6 +403,14 @@ class TaskResource extends Resource
                                 ];
                             })->toArray();
                     }),
+                SelectFilter::make('employee_id')
+                    ->label('Medewerker')
+                    ->relationship('employee', 'name')
+                    ->default(Auth::id())
+                    ->searchable(),
+
+
+
 
                 TrashedFilter::make(),
 
@@ -391,19 +423,30 @@ class TaskResource extends Resource
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->slideOver()
-                    ->label('Bewerken')
-                ,
-                DeleteAction::make()->modalDescription("Weet je zeker dat je deze actie wilt voltooien ?")
-                    ->icon('heroicon-o-check')
-                    ->modalIcon('heroicon-o-check')
-                    ->modalHeading('Actie voltooien')
-                    ->tooltip('Voltooien')
-                    ->label('Voltooien'),
+                    ->label('Bewerken'),
 
+
+Action::make('complete')
+    ->label('Voltooien')
+    ->icon('heroicon-o-check')
+    ->tooltip('Voltooien')
+    ->color('danger')
+    ->modalHeading('Actie voltooien')
+    ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
+    ->modalIcon('heroicon-o-check')
+    ->requiresConfirmation()
+     ->visible(fn ($record) => $record->employee_id === Auth::id()) // 👈 alleen zichtbaar voor eigenaar
+  
+    ->action(function ($record) {
+         $record->update([
+             'deleted_at' => Carbon::now(),
+        ]);
+    }),
                 Tables\Actions\ActionGroup::make([
 
                     DeleteAction::make()
                         ->tooltip('Verwijderen')
+                        
                         ->label('Verwijderen'),
 
                     RestoreAction::make()
@@ -415,13 +458,14 @@ class TaskResource extends Resource
 
                     //      ActivityLogTimelineTableAction::make('Logboek'),
 
-                ]),
+                ])  ->visible(fn ($record) => $record->employee_id === Auth::id()) // 👈 alleen zichtbaar voor eigenaar
+  ,
 
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    RestoreBulkAction::make(),
+             
+                   
 
                     ExportBulkAction::make()
                         ->exports([

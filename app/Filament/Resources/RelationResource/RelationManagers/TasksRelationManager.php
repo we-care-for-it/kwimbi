@@ -10,6 +10,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\Priority;
+                    use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
@@ -40,6 +44,18 @@ class TasksRelationManager extends RelationManager
                 Forms\Components\TimePicker::make('end_time')
                     ->label('Eindtijd'),
 
+
+
+
+Forms\Components\Select::make('employee_id')
+    ->label('Medewerker')
+    ->options(User::pluck('name', 'id'))  
+    ->default(Auth::id())               
+    ->searchable(),
+
+ 
+
+
    Forms\Components\ToggleButtons::make('priority')
                     ->options(Priority::class)
 
@@ -65,12 +81,12 @@ class TasksRelationManager extends RelationManager
                     ->label('Prioriteit'),
 
 
-                                Tables\Columns\TextColumn::make('title')
+                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
                     ->searchable()
                     ->placeholder('-')
                     ->sortable(),
-
+          
 
                 Tables\Columns\TextColumn::make('title')
                     ->label('Titel')
@@ -107,10 +123,8 @@ class TasksRelationManager extends RelationManager
                     ->label('Taak toevoegen')
                     ->link()
                     ->mutateFormDataUsing(function (array $data): array {
-                        $data['model_id'] = $this->ownerRecord->id;
-                        $data['model']    = 'relation';
                         $data['model_id'] = $this->getOwnerRecord()->id;
-
+                        $data['model']    = 'relation';
                         return $data;
                     }),
             ])

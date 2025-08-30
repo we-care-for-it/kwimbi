@@ -3,6 +3,7 @@ namespace App\Filament\Resources\RelationResource\RelationManagers;
 
 use App\Models\Contact;
 use App\Models\contactType;
+use App\Models\relationLocation;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
@@ -13,10 +14,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-
+use Filament\Tables\Filters\TrashedFilter;
 class ContactsRelationManager extends RelationManager
 {
-    protected static bool $isScopedToTenant = false;
     protected static string $relationship   = 'contacts';
     protected static ?string $icon          = 'heroicon-o-user';
     protected static ?string $title         = 'Contactpersonen';
@@ -69,6 +69,15 @@ class ContactsRelationManager extends RelationManager
                             ->label('Telefoonnummer')
                             ->maxLength(255),
 
+                            
+                        Forms\Components\Select::make("location_id")
+                             ->label("Locatie")
+                             ->required()
+                             ->options(
+                                            relationLocation::where('relation_id', $this->getOwnerRecord()->id)
+    ->pluck('address', 'id')
+                                            ),
+
                         Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->options(contactType::where('is_active', 1)->pluck("name", "id")),
@@ -79,9 +88,16 @@ class ContactsRelationManager extends RelationManager
             ]);
     }
 
+
+ 
+
     public function table(Table $table): Table
     {
         return $table
+    
+           ->query(
+            Contact::query()->where('type_id', 2) 
+            )
             ->columns([
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
@@ -131,7 +147,7 @@ class ContactsRelationManager extends RelationManager
                 return "/contacts/" . $record->id;
             })
             ->filters([
-                //
+                 TrashedFilter::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make('createContact')
@@ -147,19 +163,28 @@ class ContactsRelationManager extends RelationManager
                     })
                 ,
             ])
-            ->actions([
+          ->actions([
+
                 Tables\Actions\ViewAction::make('openContact')
-                    ->label('Bekijk contact')
-                       ->slideover()
-                    ->color('primary')
-                    ->link()
-                    ->url(function ($record) {
-                        return "/contacts/" . $record->id;
-                    })->icon('heroicon-s-eye'),
+                    ->label('Bekijk')
+                    ->icon('heroicon-s-eye'),
 
-                EditAction::make()
+                    Tables\Actions\EditAction::make()
+                        ->label('Bewerken')
+                        ->slideover()
+                        ->modalHeading('Contactpersoon wijzigen'),
 
-                    ->label('Bewerken'),
+
+
+                Tables\Actions\ActionGroup::make([
+
+     
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Verwijder'),
+                ])
+
+                ,
+
             ])
             ->bulkActions([
                 //

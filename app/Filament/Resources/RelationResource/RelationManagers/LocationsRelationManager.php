@@ -246,11 +246,7 @@ class LocationsRelationManager extends RelationManager
             ])
             ->actions([
 
-                Tables\Actions\ViewAction::make('openContact')
-                    ->label('Bekijk')
-
-                    ->icon('heroicon-s-eye'),
-
+          
                 // Tables\Actions\ActionGroup::make([
 
                 //     Tables\Actions\EditAction::make()

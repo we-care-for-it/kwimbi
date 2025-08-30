@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Task;
+use App\Models\ObjectsAsset;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TaskPolicy
+class ObjectsAssetPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_task');
+        return $user->can('view_any_object');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Task $task): bool
+    public function view(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('view_task');
+        return $user->can('view_object');
     }
 
     /**
@@ -31,23 +31,23 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_task');
+        return $user->can('create_object');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Task $task): bool
+    public function update(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('update_task');
+        return $user->can('update_object');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('delete_task');
+        return $user->can('delete_object');
     }
 
     /**
@@ -55,15 +55,15 @@ class TaskPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_task');
+        return $user->can('delete_any_object');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Task $task): bool
+    public function forceDelete(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('{{ ForceDelete }}');
+        return $user->can('force_delete_object');
     }
 
     /**
@@ -71,15 +71,15 @@ class TaskPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('{{ ForceDeleteAny }}');
+        return $user->can('force_delete_any_object');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Task $task): bool
+    public function restore(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('{{ Restore }}');
+        return $user->can('restore_object');
     }
 
     /**
@@ -87,15 +87,15 @@ class TaskPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('{{ RestoreAny }}');
+        return $user->can('restore_any_object');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Task $task): bool
+    public function replicate(User $user, ObjectsAsset $objectsAsset): bool
     {
-        return $user->can('{{ Replicate }}');
+        return $user->can('replicate_object');
     }
 
     /**
@@ -103,6 +103,6 @@ class TaskPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('{{ Reorder }}');
+        return $user->can('reorder_object');
     }
 }
