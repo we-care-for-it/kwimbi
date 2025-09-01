@@ -14,6 +14,8 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
+ 
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -55,8 +57,9 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     //     return $this->$avatarColumn ? Storage::url("$this->$avatarColumn") : null;
     // }
     public function getFilamentAvatarUrl(): ?string
-    {
-        return "storage/" . $this->avatar_url;
+   {
+        $avatarColumn = config('filament-edit-profile.avatar_column', 'avatar_url');
+        return $this->$avatarColumn ? Storage::url($this->$avatarColumn) : null;
     }
     // public function getTenantIdLabel(): string
     // {
