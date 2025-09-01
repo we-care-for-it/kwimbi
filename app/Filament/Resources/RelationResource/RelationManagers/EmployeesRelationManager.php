@@ -24,7 +24,7 @@ class EmployeesRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-        return $ownerRecord->employees()->count();
+        return $ownerRecord->employees()   ->where('type_id', 1)      ->where('relation_id', $ownerRecord->id)->count();
     }
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
@@ -75,6 +75,8 @@ class EmployeesRelationManager extends RelationManager
         return $table
              ->query(
             Contact::query()->where('type_id', 1) 
+            ->where('relation_id', $this->ownerRecord->id)
+
             )
             ->recordTitleAttribute('name')
 

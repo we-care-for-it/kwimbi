@@ -24,7 +24,7 @@ class ContactsRelationManager extends RelationManager
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
         // $ownerModel is of actual type Job
-        return $ownerRecord->contacts->count();
+        return $ownerRecord->contacts     ->where('type_id', 2)      ->where('relation_id', $ownerRecord->id)->count();
     }
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
@@ -97,6 +97,7 @@ class ContactsRelationManager extends RelationManager
     
            ->query(
             Contact::query()->where('type_id', 2) 
+                      ->where('relation_id', $this->ownerRecord->id)
             )
             ->columns([
                 TileColumn::make('name')
