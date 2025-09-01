@@ -65,18 +65,17 @@ return [
 
     'resource_permission_prefixes_labels' => [
         'view' => 'Bekijken',
-        'view_any' => 'Bekijk elke',
+        'view_any' => 'Bekijk alles',
         'create' => 'Aanmaken',
         'update' => 'Bewerken',
         'delete' => 'Verwijderen',
-        'delete_any' => 'Verwijder elke',
+        'delete_any' => 'Verwijder alles',
         'force_delete' => 'Forceer verwijderen',
-        'force_delete_any' => 'Forceer verwijderen elke',
+        'force_delete_any' => 'Forceer verwijderen alles',
         'restore' => 'Herstellen',
-        'restore_any' => 'Herstel elke',
+        'restore_any' => 'Herstel alles',
         'replicate' => 'Repliceren',
-        // 'reorder' => 'Reorder',
- 'assign_to_employee' => 'Toezijen aan medewerker'
+	'assign_to_employee' => 'Toewijzen aan medewerker'
     ],
 
 

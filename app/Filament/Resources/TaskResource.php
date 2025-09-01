@@ -53,7 +53,6 @@ class TaskResource extends Resource implements HasShieldPermissions
             'update',
             'delete',
             'delete_any',
-            'publish',
             'assign_to_employee'
         ];
     }
@@ -201,6 +200,9 @@ class TaskResource extends Resource implements HasShieldPermissions
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
                     ->default(Auth::id())
+->disabled(fn () => auth()->user()->can('assign_to_employee_task'))
+ 
+
 
                     ->label('Interne medewerker'),
                 Select::make('type_id')
