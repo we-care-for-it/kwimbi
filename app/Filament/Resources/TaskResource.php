@@ -53,7 +53,9 @@ class TaskResource extends Resource implements HasShieldPermissions
             'update',
             'delete',
             'delete_any',
-            'assign_to_employee'
+            'assign_to_employee',
+            'edit_any',
+            'compleet_any'
         ];
     }
 
@@ -200,7 +202,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
                     ->default(Auth::id())
-->disabled(fn () => auth()->user()->can('assign_to_employee_task'))
+->visible(fn () => auth()->user()->can('assign_to_employee_task'))
  
 
 
@@ -261,15 +263,26 @@ class TaskResource extends Resource implements HasShieldPermissions
             ]);
     }
 
+
+
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+{
+    $query = parent::getEloquentQuery();
+
+    if (!auth()->user()->can('assign_to_employee_task')) {
+        $query->where('employee_id', auth()->id());
+    }
+
+    return $query;
+}
     public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
 
-            // ->query(
-            //     Task::query()->where('employee_id', auth()->user()->id)
-            // )
+ 
 
             ->persistSearchInSession()
             ->searchable()
@@ -407,9 +420,10 @@ class TaskResource extends Resource implements HasShieldPermissions
                     }),
                 SelectFilter::make('employee_id')
                     ->label('Medewerker')
-                    ->relationship('employee', 'name')
+                        ->options(User::pluck('name', 'id'))
                     ->default(Auth::id())
-                    ->searchable(),
+                    ->searchable()
+                    ->visible(fn () => auth()->user()->can('assign_to_employee_task')),
 
 
 
@@ -417,7 +431,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                 TrashedFilter::make(),
 
             ], layout: FiltersLayout::Modal)
-            ->filtersFormColumns(4)
+            ->filtersFormColumns(3)
             ->actions([
 
                 EditAction::make()
@@ -425,6 +439,9 @@ class TaskResource extends Resource implements HasShieldPermissions
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->slideOver()
+                        ->visible(fn () => auth()->user()->can('edit_any_task'))
+
+
                     ->label('Bewerken'),
 
 
@@ -437,8 +454,13 @@ Action::make('complete')
     ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
     ->modalIcon('heroicon-o-check')
     ->requiresConfirmation()
-     ->visible(fn ($record) => $record->employee_id === Auth::id()) // 👈 alleen zichtbaar voor eigenaar
-  
+    ->visible(fn ($record) =>
+    auth()->user()->can('compleet_any_task') // allowed globally
+    || $record->employee_id === auth()->id() // allowed if owner
+)
+
+
+
     ->action(function ($record) {
          $record->update([
              'deleted_at' => Carbon::now(),
@@ -449,7 +471,11 @@ Action::make('complete')
                     DeleteAction::make()
                         ->tooltip('Verwijderen')
                         
-                        ->label('Verwijderen'),
+                        ->label('Verwijderen')
+                        
+                   
+
+,
 
                     RestoreAction::make()
                         ->color("danger")
@@ -460,7 +486,14 @@ Action::make('complete')
 
                     //      ActivityLogTimelineTableAction::make('Logboek'),
 
-                ])  ->visible(fn ($record) => $record->employee_id === Auth::id()) // 👈 alleen zichtbaar voor eigenaar
+                ])           ->visible(fn ($record) =>
+    auth()->user()->can('delete_any_task') // allowed globally
+    || $record->employee_id === auth()->id() // allowed if owner
+)
+
+                
+                
+                
   ,
 
             ])
