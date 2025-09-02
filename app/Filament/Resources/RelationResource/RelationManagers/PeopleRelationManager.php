@@ -115,6 +115,16 @@ class PeopleRelationManager extends RelationManager
                     ->sortable()
                     ->label('Functie'),
 
+                
+                TextColumn::make('company')
+                    ->placeholder('-')
+                    ->searchable()
+                    ->sortable()
+             ->visible(fn (Closure $get) => $get('type_id') === 1)
+                    ->label('Functie'),
+
+
+
                 TextColumn::make('phone_number')
                     ->placeholder('-')
                     ->searchable()
@@ -145,7 +155,7 @@ class PeopleRelationManager extends RelationManager
             ->actions([
                 Tables\Actions\Action::make('openObject')
                     ->icon('heroicon-m-eye')
-                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                    ->url(fn($record) => route('filament.app.resources.contacts.view', ['record' => $record]))
                     ->label('Bekijk'),
 
                 Tables\Actions\EditAction::make()
