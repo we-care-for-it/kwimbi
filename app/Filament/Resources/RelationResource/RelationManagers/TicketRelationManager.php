@@ -79,8 +79,8 @@ class TicketRelationManager extends RelationManager
                                         
                           Forms\Components\Select::make('type_id')
                             ->options([
-                                '1' => 'Contactpersoon',
-                                '2' => 'Medewerker',
+                                '2' => 'Contactpersoon',
+                                '1' => 'Medewerker',
                             ])
             
                             ->label('Type'),

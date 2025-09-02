@@ -38,6 +38,14 @@ class ContactsRelationManager extends RelationManager
             ->schema([
                 Grid::make(2)
                     ->schema([
+
+                                            Forms\Components\Select::make('type_id')
+                            ->options([
+                                '2' => 'Contactpersoon',
+                                '1' => 'Medewerker',
+                                  ])->default(2),
+
+
                         Forms\Components\TextInput::make('first_name')
                             ->label('Voornaam')
                             ->required()
@@ -47,10 +55,7 @@ class ContactsRelationManager extends RelationManager
                             ->label('Achternaam')
                             ->required()
                             ->maxLength(255),
-
-                        Forms\Components\TextInput::make('company')
-                            ->label('Bedrijf')
-                            ->maxLength(255),
+ 
 
                         Forms\Components\TextInput::make('email')
                             ->label('E-mailadres')
@@ -67,12 +72,14 @@ class ContactsRelationManager extends RelationManager
 
                         Forms\Components\TextInput::make('phone_number')
                             ->label('Telefoonnummer')
+                                ->tel()
+  
+    ->regex('/^\+?\d{6,20}$/')
                             ->maxLength(255),
 
                             
                         Forms\Components\Select::make("location_id")
                              ->label("Locatie")
-                             ->required()
                              ->options(
                                             relationLocation::where('relation_id', $this->getOwnerRecord()->id)
     ->pluck('address', 'id')
@@ -81,10 +88,10 @@ class ContactsRelationManager extends RelationManager
                         Forms\Components\Select::make('type_id')
                             ->label('Categorie')
                             ->options(contactType::where('is_active', 1)->pluck("name", "id")),
-
-                        Forms\Components\Checkbox::make('show_in_contactlist')
-                            ->label('Toon in contactpersonen overzicht')
-                    ]),
+              Forms\Components\Toggle::make('show_in_contactlist')
+                                            ->label('Toon in contactpersonen overzicht')
+                                            ->columnSpan('full')
+                 ]),
             ]);
     }
 
@@ -157,24 +164,20 @@ class ContactsRelationManager extends RelationManager
                     ->icon('heroicon-m-plus')
                     ->modalIcon('heroicon-o-plus')
                     ->link()
-                    ->modalHeading('Contactpersoon tovoegen')
-                    ->mutateFormDataUsing(function (array $data): array {
-                        $data['type_id'] = 2;
-                        return $data;
-                    })
+                    ->modalHeading('Contactpersoon toevoegen')
+                 
                 ,
             ])
           ->actions([
 
-                Tables\Actions\ViewAction::make('openContact')
-                    ->label('Bekijk')
-                    ->icon('heroicon-s-eye'),
-
-                    Tables\Actions\EditAction::make()
-                        ->label('Bewerken')
-                        ->slideover()
-                        ->modalHeading('Contactpersoon wijzigen'),
-
+                      Tables\Actions\Action::make('openObject')
+                    ->icon('heroicon-m-eye')
+                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                    ->label('Bekijk'),
+                
+                Tables\Actions\EditAction::make()
+                        ->label('Snel bewerken')
+                        ->slideover(),
 
 
                 Tables\Actions\ActionGroup::make([

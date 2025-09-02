@@ -61,6 +61,14 @@ class Relation extends Model implements HasCustomFields
         return $this->hasMany(Contact::class);
     }
 
+        public function people(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
+
+
+
+
     public function type()
     {
         return $this->belongsTo(relationType::class);

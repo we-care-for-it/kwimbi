@@ -6,6 +6,10 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
+
+use App\Models\relationLocation;
+use App\Models\contactType;
+
 use App\Models\Employee;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
@@ -14,7 +18,10 @@ use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Tables\Filters\SelectFilter;
 use App\Models\Contact;
-
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\ToggleButtons;
 class EmployeesRelationManager extends RelationManager
 {
     protected static string $relationship = 'contacts';
@@ -37,36 +44,66 @@ class EmployeesRelationManager extends RelationManager
 
     public function form(Form $form): Form
     {
-        return $form
+          return $form
             ->schema([
-                Forms\Components\TextInput::make('first_name')
-                    ->label('Voornaam')
-                    ->required()
-                    ->maxLength(255),
+                Grid::make(2)
+                    ->schema([
 
-                Forms\Components\TextInput::make('last_name')
-                    ->label('Achternaam')
-                    ->required()
-                    ->maxLength(255),
+                                            Forms\Components\Select::make('type_id')
+                            ->options([
+                                '2' => 'Contactpersoon',
+                                '1' => 'Medewerker',
+                            ])->default(1),
 
-                Forms\Components\TextInput::make('email')
-                    ->label('E-mailadres')
-                    ->email()
-                    ->maxLength(255),
 
-                Forms\Components\TextInput::make('department')
-                    ->label('Afdeling'),
+                        Forms\Components\TextInput::make('first_name')
+                            ->label('Voornaam')
+                            ->required()
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('function')
-                    ->label('Functie')
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('last_name')
+                            ->label('Achternaam')
+                            ->required()
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('phone_number')
-                    ->label('Telefoonnummer')
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('company')
+                            ->label('Bedrijf')
+                            ->maxLength(255),
 
-                 Forms\Components\Checkbox::make('show_in_contactlist')
-                    ->label('Toon in contactpersonen overzicht')
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mailadres')
+                            ->email()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('department')
+                            ->label('Afdeling')
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('function')
+                            ->label('Functie')
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('Telefoonnummer')
+                                ->tel()
+  
+    ->regex('/^\+?\d{6,20}$/')
+                            ->maxLength(255),
+
+                            
+                        Forms\Components\Select::make("location_id")
+                             ->label("Locatie")
+                             ->options(
+                                            relationLocation::where('relation_id', $this->getOwnerRecord()->id)
+    ->pluck('address', 'id')
+                                            ),
+
+     
+
+                           Forms\Components\Toggle::make('show_in_contactlist')
+                            ->label('Toon in contactpersonen overzicht')
+                            ->columnSpan('full'),
+                    ]),
             ]);
     }
 
@@ -170,16 +207,14 @@ class EmployeesRelationManager extends RelationManager
 
             ->actions([
 
-                Tables\Actions\ViewAction::make('openContact')
-                    ->label('Bekijk')
-                    ->icon('heroicon-s-eye'),
-
-                    Tables\Actions\EditAction::make()
-                        ->label('Bewerken')
-                        ->slideover()
-                        ->modalHeading('Contactpersoon wijzigen'),
-
-
+          Tables\Actions\Action::make('openObject')
+                    ->icon('heroicon-m-eye')
+                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                    ->label('Bekijk'),
+                
+                Tables\Actions\EditAction::make()
+                        ->label('Snel bewerken')
+                        ->slideover(),
 
                 Tables\Actions\ActionGroup::make([
 

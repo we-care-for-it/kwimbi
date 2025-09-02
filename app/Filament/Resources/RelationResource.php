@@ -294,14 +294,18 @@ class RelationResource extends Resource
         return [
           RelationManagers\ObjectsRelationManager::class,
             RelationManagers\TicketRelationManager::class,
-            RelationManagers\EmployeesRelationManager::class,
-            RelationManagers\ContactsRelationManager::class,
+            RelationManagers\PeopleRelationManager::class,
+        //    RelationManagers\EmployeesRelationManager::class,
+        //    RelationManagers\ContactsRelationManager::class,
             RelationManagers\LocationsRelationManager::class,
             RelationManagers\TasksRelationManager::class,
             RelationManagers\NotesRelationManager::class,
             RelationManagers\AttachmentsRelationManager::class,
             RelationManagers\TimeTrackingRelationManager::class,
             RelationManagers\ProjectsRelationManager::class,
+                   
+            
+
             //RelationManagers\DepartmentsRelationManager::class,
         ];
     }
