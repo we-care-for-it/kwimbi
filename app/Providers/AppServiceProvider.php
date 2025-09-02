@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         FilamentAsset::register([
-            Css::make('custom-stylesheet', __DIR__ . '/../../resources/css/tenant.css'),
+            Css::make('layout', __DIR__ . '/../../resources/css/tenant.css'),
         ]);
         Notifications::verticalAlignment(VerticalAlignment::End);
 

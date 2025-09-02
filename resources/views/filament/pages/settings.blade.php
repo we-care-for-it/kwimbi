@@ -152,7 +152,7 @@
          </div>
       </div>
       <br>
-      @if(setting('environment_elevator'))
+      @if(env('environment_elevator'))
       <h1 class="pb-2 text-lg font-medium text-gray-700 pt-5">Liften & Roltrappen Module</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="object-monitoring-codes">
@@ -162,21 +162,21 @@
                <p class="text-sm text-gray-600">Fout codes voor object monitoring</p>
             </div>
          </a>
-         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection.elevators.modusystem">
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection/elevators/modusystem">
             <img  src = "/images/connections/elevators/modusystem.png"   class = "max-h-12">
             <div>
                <h2>Modusystem </h2>
                <p class="text-sm text-gray-600">Koppelings instellingen</p>
             </div>
          </a>
-         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection.elevators.liftinstituut'">
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection/elevators/liftinstituut">
             <img  src = "/images/connections/elevators/liftinstituut-logo-41197.webp"   class = "max-h-12">
             <div>
                <h2>Liftinstituut </h2>
                <p class="text-sm text-gray-600">Koppelings instellingen</p>
             </div>
          </a>
-         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection.elevators.chex">
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection/elevators/chex">
             <img  src = "/images/connections/elevators/chex.png"   class = "max-h-12">
             <div>
                <h2>Chex </h2>

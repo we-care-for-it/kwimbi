@@ -281,14 +281,18 @@ class ContactResource extends Resource
                 ViewAction::make()
                     ->label('Bekijk')
                     ->modalIcon('heroicon-o-eye'),
-                Tables\Actions\ActionGroup::make([
-                    EditAction::make()
+
+                       EditAction::make()
                         ->modalHeading('Contact Bewerken')
                         ->modalDescription('Pas het bestaande contact aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                         ->tooltip('Bewerken')
                         ->label('Bewerken')
-                        ->modalIcon('heroicon-m-pencil-square')
-                    ,
+                        ->modalIcon('heroicon-m-pencil-square'),
+
+
+                Tables\Actions\ActionGroup::make([
+                 
+        
                     DeleteAction::make()
                         ->modalIcon('heroicon-o-trash')
                         ->tooltip('Verwijderen')

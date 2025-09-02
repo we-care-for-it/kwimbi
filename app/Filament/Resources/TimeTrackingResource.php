@@ -8,7 +8,7 @@ use App\Models\Relation;
 use App\Models\timeTracking;
 use App\Models\User;
 use App\Models\workorderActivities;
-use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+ 
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
@@ -36,23 +36,15 @@ use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use Filament\Tables\Columns\IconColumn;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
-
+   use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+    
 class TimeTrackingResource extends Resource implements HasShieldPermissions
 {
-    protected static ?string $model            = TimeTracking::class;
-    protected static ?string $navigationIcon   = 'heroicon-o-clock';
-    protected static ?string $navigationLabel  = "Tijdregistratie";
-    protected static ?string $title            = "Tijdregistratie";
-    protected static ?string $pluralModelLabel = 'Tijdregistratie';
 
-    public static function shouldRegisterNavigation(): bool
-    {
-        return setting('use_timetracking') ?? false;
-    }
 
- 
-    public static function getPermissionPrefixes(): array
+      public static function getPermissionPrefixes(): array
     {
         return [
             'view',
@@ -61,11 +53,33 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
             'update',
             'delete',
             'delete_any',
-            'publish',
-            'view_all_users',
+            'edit_any',
+            'assign_to_user',
         ];
+
+        
+     
     }
 
+ 
+
+
+
+    protected static ?string $model            = TimeTracking::class;
+    protected static ?string $navigationIcon   = 'heroicon-o-clock';
+    protected static ?string $navigationLabel  = "Tijdregistratie";
+    protected static ?string $title            = "Tijdregistratie";
+    protected static ?string $pluralModelLabel = 'Tijdregistratie';
+    protected static ?string $modelLabel = 'Tijdregistratie';
+
+
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return setting('use_timetracking') ?? false;
+    }
+
+  
     public static function form(Form $form): Form
     {
         return $form
@@ -187,6 +201,9 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                     ->date('d-m-Y')
                     ->placeholder('-')
                     ->searchable(),
+
+
+                    
                 TextColumn::make('time')
                     ->label('Uren')
                     ->getStateUsing(function (timeTracking $record) {
@@ -247,22 +264,24 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                         return "projects/" . $record->project_id;
                     }),
                 TextColumn::make('status_id')
-                    ->sortable()
+ 
                     ->label('Status')
                     ->badge()
                     ->toggleable()
-                    ->sortable()
+            
+
                     ->placeholder('-')
                     ->searchable(),
-                ToggleColumn::make('invoiceable')
+        IconColumn::make('invoiceable')
+                    ->boolean()
                     ->label('Facturabel')
-                    ->onColor('success')
                     ->sortable()
-                    ->toggleable()
-                    ->offColor('danger')
+                    ->alignment('center')
                     ->width(100),
+ 
+             
 
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('periode_id')
                     ->label('Periode')
@@ -352,11 +371,17 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                             })->toArray();
                     }),
 
-                SelectFilter::make('user_id')
+
+                              SelectFilter::make('user_id')
                     ->label('Medewerker')
+                        ->options(User::pluck('name', 'id'))
+                    ->default(Auth::id())
                     ->searchable()
-                    ->options(User::all()->pluck('name', 'id'))
-                    ->visible(fn() => auth()->user()->can('view_any_time::tracking')),
+                    ->visible(fn () => auth()->user()->can('assign_to_user::tracking')),
+
+
+
+ 
 
                 Tables\Filters\TrashedFilter::make(),
 
@@ -383,10 +408,12 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Tijdregistratie Bewerken')
+                    
                     ->modalDescription('Pas de bestaande tijdregistratie aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->label('Bewerken')
                     ->modalIcon('heroicon-m-pencil-square')
+                 ->visible(fn ($record) => $record?->status_id != TimeTrackingStatus::INVOICED)
                 ,
 
                 RestoreAction::make(),
@@ -400,7 +427,9 @@ class TimeTrackingResource extends Resource implements HasShieldPermissions
                         ->modalHeading('Verwijderen')
                         ->color('danger'),
 
-                ]),
+                ])                ->visible(fn ($record) => $record?->status_id != TimeTrackingStatus::INVOICED),
+
+                
 
             ])
 

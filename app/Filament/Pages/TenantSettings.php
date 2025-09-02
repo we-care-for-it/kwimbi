@@ -103,7 +103,6 @@ class TenantSettings extends Page implements HasForms
             'management_relation_group'         => $this->getSetting('management_relation_group'),
             'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
             'default_parent_location'           => $this->getSetting('default_parent_location'),
-            'environment_elevator'              => $this->getSetting('environment_elevator'),
             'upload_path'                       => $this->getSetting('upload_path'),
 
         ]);
@@ -135,10 +134,7 @@ class TenantSettings extends Page implements HasForms
                                     TextInput::make('upload_path')
                                         ->label('Upload path'),
 
-                                    ToggleButtons::make('environment_elevator')
-                                        ->label('Liften & roltrappen modulle')
-                                        ->boolean()
-                                        ->inline(),
+                               
 
                                 ]),
 

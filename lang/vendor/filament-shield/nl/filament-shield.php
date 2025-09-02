@@ -62,24 +62,22 @@ return [
     | Resource Permissions' Labels
     |--------------------------------------------------------------------------
     */
-
     'resource_permission_prefixes_labels' => [
-        'view' => 'Bekijken',
-        'view_any' => 'Bekijk alles',
+        'view' => 'Eigen bekijken',
+        'view_any' => 'Alles bekijken',
+        'edit_any' => 'Alles bewerken',
         'create' => 'Aanmaken',
-        'update' => 'Bewerken',
-        'delete' => 'Verwijderen',
-        'delete_any' => 'Verwijder alles',
-        'force_delete' => 'Forceer verwijderen',
-        'force_delete_any' => 'Forceer verwijderen alles',
+        'update' => 'Eigen bewerken',
+        'delete' => 'Eigen verwijderen',
+        'delete_any' => 'Alles verwijderen',
+        'force_delete' => 'Definitief verwijderen',
+        'force_delete_any' => 'Alles definitief verwijderen',
         'restore' => 'Herstellen',
-        'restore_any' => 'Herstel alles',
-        'replicate' => 'Repliceren',
-	'assign_to_employee' => 'Toewijzen aan medewerker'
+        'restore_any' => 'Alles herstellen',
+        'replicate' => 'Dupliceren',
+        'assign_to_user' => 'Toewijzen aan gebruiker',
+
     ],
-
-
- 
 
 
 

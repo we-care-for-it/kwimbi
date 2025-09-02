@@ -58,7 +58,7 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('created_by_user')
                             ->options(function (callable $get) {
                                 $companyId = $get('relation_id'); // or use $get('record.company_id') if editing
-                                return \App\Models\Employee::query()
+                                return \App\Models\Contact::query()
                                     ->where('relation_id', $companyId)
                                     ->get()
                                     ->mapWithKeys(fn($employee) => [

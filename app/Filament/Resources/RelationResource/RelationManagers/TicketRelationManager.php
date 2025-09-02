@@ -29,7 +29,6 @@ class TicketRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-
         return $ownerRecord->tickets->count();
     }
 
@@ -42,76 +41,91 @@ class TicketRelationManager extends RelationManager
         $options = $ownerRecord->type->options ?? [];
         return in_array('Tickets', (array) $options);
     }
+
     public function form(Form $form): Form
     {
         return $form
             ->schema([
                 Section::make()
                     ->schema([
-
                         Forms\Components\Select::make('created_by_user')
                             ->searchable(['first_name', 'last_name', 'email'])
+                            ->options(function (callable $get) {
+                                $contacts = Contact::query()
+                                    ->where('relation_id', $this->getOwnerRecord()->id)
+                                    ->orderBy('type_id')
+                                    ->orderBy('first_name')
+                                    ->get();
 
-                            ->options(
-                                Contact::where('relation_id', $this->ownerRecord->relation_id)
-                                    ->get()
-                                    ->mapWithKeys(fn($employee) => [
-                                        $employee->id => "{$employee->first_name} {$employee->last_name}",
-                                    ])
-                            )
-
+                                return $contacts
+                                    ->groupBy('type_id')
+                                    ->mapWithKeys(function ($group, $typeId) {
+                                        $label = match ($typeId) {
+                                            2 => 'Contactpersoon',
+                                            1 => 'Medewerker',
+                                            default => 'Overig',
+                                        };
+                                        return [
+                                            $label => $group->mapWithKeys(fn ($employee) => [
+                                                $employee->id => "{$employee->first_name} {$employee->last_name}",
+                                            ]),
+                                        ];
+                                    })
+                                    ->toArray();
+                            })
                             ->createOptionForm([
-
                                 Grid::make(4)
                                     ->schema([
-
+                                        
+                          Forms\Components\Select::make('type_id')
+                            ->options([
+                                '1' => 'Contactpersoon',
+                                '2' => 'Medewerker',
+                            ])
+            
+                            ->label('Type'),
                                         Forms\Components\TextInput::make('first_name')
                                             ->label('Voornaam')
                                             ->required()
                                             ->maxLength(255),
-
                                         Forms\Components\TextInput::make('last_name')
+                                            ->columnSpan('2')
                                             ->label('Achternaam')
                                             ->required()
                                             ->maxLength(255),
-
                                         Forms\Components\TextInput::make('email')
                                             ->columnSpan(2)
                                             ->label('E-mailadres')
                                             ->email()
                                             ->maxLength(255),
-
                                         Forms\Components\TextInput::make('department')
                                             ->label('Afdeling')
                                             ->maxLength(255),
-
                                         Forms\Components\TextInput::make('function')
                                             ->label('Functie')
                                             ->maxLength(255),
-
                                         Forms\Components\TextInput::make('phone_number')
                                             ->label('Telefoonnummer')
                                             ->maxLength(255),
+                                        Forms\Components\Toggle::make('show_in_contactlist')
+                                            ->label('Toon in contactpersonen overzicht')
+                                            ->columnSpan('full')
+
 
                                     ]),
-
                             ])
-
                             ->createOptionUsing(function (array $data): int {
-
                                 $data['relation_id'] = $this->ownerRecord->id;
                                 return Contact::create($data)->getKey();
                             })
-
-                            ->label('Contactpersoon')
-
-                            ->columnSpan(2)
-                        ,
+                            ->label('Melder')
+                            ->columnSpan(2),
 
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
                             ->options(ticketStatus::pluck('name', 'id')),
+
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
@@ -119,73 +133,58 @@ class TicketRelationManager extends RelationManager
 
                         ToggleButtons::make('prio')
                             ->options(Priority::class)
-
                             ->colors([
                                 '1' => 'info',
                                 '2' => 'warning',
                                 '3' => 'success',
-
                             ])
-                            ->default(3)->grouped()
+                            ->default(3)
+                            ->grouped()
                             ->label('Prioriteit'),
-
-                    ])->columns(3),
+                    ])
+                    ->columns(3),
 
                 Section::make()
                     ->schema([
                         Forms\Components\Select::make('department_id')
                             ->label('Afdeling toewijzing')
-
                             ->options(Department::pluck('name', 'id'))
-
                             ->createOptionForm([
-
                                 Grid::make(2)
                                     ->schema([
-
                                         Forms\Components\TextInput::make('name')
                                             ->label('Afdelingsnaam')
                                             ->required(),
-
                                         Forms\Components\Select::make("location_id")
                                             ->label("Locatie")
                                             ->required()
-                                            ->options(
-                                                Location::pluck("name", "id")
-                                            ),
-
+                                            ->options(Location::pluck("name", "id")),
                                     ]),
-
                             ])
-
                             ->createOptionUsing(function (array $data): int {
-
                                 return Department::create($data)->getKey();
                             }),
 
                         Forms\Components\Select::make('assigned_by_user')
                             ->label('Medewerker')
-
-                            ->options(User::pluck('name', 'id'))
+                            ->options(User::get()
+                                ->mapWithKeys(fn($employee) => [
+                                    $employee->id => "{$employee->name}",
+                                ])
+                            )
                             ->searchable()
-                            ->default(Auth::id())
-                            ->label('Medewerker')
-
-                            ->options(
-                                User::get()
-                                    ->mapWithKeys(fn($employee) => [
-                                        $employee->id => "{$employee->name}",
-                                    ])
-                            ),
+                            ->default(Auth::id()),
                     ])
                     ->columns(3),
 
                 Section::make('Ticket omschrijving')
                     ->description('Zoals een foutmelding of aanvraag voor veranderingen')
                     ->schema([
-
-                        Textarea::make('description')->label('Omschrijving')->columnSpan('full')
-                            ->required()->rows(10),
+                        Textarea::make('description')
+                            ->label('Omschrijving')
+                            ->columnSpan('full')
+                            ->required()
+                            ->rows(10),
                     ]),
             ]);
     }
@@ -194,21 +193,18 @@ class TicketRelationManager extends RelationManager
     {
         return $table
             ->columns([
-
                 Tables\Columns\TextColumn::make('id')
                     ->sortable()
                     ->toggleable()
                     ->label('#')
-                    ->getStateUsing(function ($record): ?string {
-                        return sprintf("%05d", $record?->id);
-                    }),
+                    ->getStateUsing(fn ($record) => sprintf("%05d", $record?->id)),
 
-                //     ->label('Medewerker'),
                 Tables\Columns\TextColumn::make('prio')
                     ->badge()
                     ->sortable()
                     ->toggleable()
                     ->label('Prioriteit'),
+
                 Tables\Columns\TextColumn::make('status.name')
                     ->badge()
                     ->sortable()
@@ -216,44 +212,24 @@ class TicketRelationManager extends RelationManager
                     ->label('Status'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->getStateUsing(function ($record): ?string {
-                        return $record?->createByUser?->name;
-                    })
+                    ->getStateUsing(fn ($record) => $record?->createByUser?->name)
                     ->toggleable()
+                    ->placeholder('Algemeen')
                     ->label('Melder'),
 
                 TileColumn::make('AssignedByUser')
-                // ->description(fn($record) => $record->AssignedByUser->email)
                     ->sortable()
                     ->placeholder('Geen')
-                    ->getStateUsing(function ($record): ?string {
-                        return $record?->AssignedByUser?->name;
-                    })
+                    ->getStateUsing(fn($record) => $record?->AssignedByUser?->name)
                     ->label('Medewerker')
                     ->toggleable()
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record?->AssignedByUser?->avatar),
 
-                Tables\Columns\TextColumn::make("address")
-                    ->toggleable()
-                    ->toggleable()
-                    ->label('Locatie')
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-
-                        return $record?->location?->address . "-" . $record?->location?->zipcode . " - " . $record?->location?->place;
-                    })
-                    ->searchable()
-                    //->label(fn() => "Adres (" . $this->getOwnerRecord()->locations()->count() . ")")
-                    ->description(function ($record) {
-                        return $record?->name;
-                    }),
-
                 Tables\Columns\TextColumn::make('department.name')
                     ->sortable()
                     ->toggleable()
                     ->badge()
-                    ->placeholder('-')
                     ->placeholder('Geen')
                     ->label('Afdeling'),
 
@@ -265,40 +241,25 @@ class TicketRelationManager extends RelationManager
                     ->lineClamp(2)
                     ->label('Omschrijving'),
 
-                // Tables\Columns\TextColumn::make('AssignedByUser.name')
-                //     ->sortable()
-                //     ->toggleable()
-                //     ->label('Medewerker'),
-
                 Tables\Columns\TextColumn::make('type.name')
                     ->badge()
                     ->sortable()
                     ->toggleable()
-                    ->label('Type')
-                ,
+                    ->label('Type'),
+            ])
+            ->recordUrl(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))
+            ->filters(
+                [
 
-            ])->recordUrl(
-            fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record])
-        )
-            ->filters([
-
-            ], layout: FiltersLayout::AboveContent)
+                ], layout: FiltersLayout::AboveContent)
             ->filtersFormColumns(4)
             ->actions([
-
-                Tables\Actions\ViewAction::make('OpenTicket')
-                    ->label('Bekijk')
-                    ->icon('heroicon-s-pencil')
-                    ->slideOver(),
-
-                // Tables\Actions\EditAction::make('editTicket')
-                //     ->label('Bewerken')
-                //     ->slideOver()
-                //     ->icon('heroicon-s-pencil'),
-
+                Tables\Actions\Action::make('openObject')
+                    ->icon('heroicon-m-eye')
+                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                    ->label('Bekijk'),
             ])
             ->headerActions([
-
                 Tables\Actions\CreateAction::make()
                     ->link()
                     ->icon('heroicon-m-plus')
@@ -306,16 +267,9 @@ class TicketRelationManager extends RelationManager
                     ->modalHeading('Ticket toevoegen')
                     ->slideOver()
                     ->modalDescription('Geef de onderstaande gegevens op om de ticket aan te maken.')
-                //  ->icon('heroicon-m-plus')
-                // ->modalIcon('heroicon-o-plus')
-                    ->label('Ticket toevoegen')
-                ,
-
+                    ->label('Ticket toevoegen'),
             ])
-
-            ->bulkActions([
-
-            ])->emptyState(view("partials.empty-state"));
+            ->bulkActions([])
+            ->emptyState(view("partials.empty-state"));
     }
-
 }

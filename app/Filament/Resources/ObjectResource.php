@@ -203,7 +203,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
 
                                 ])
                                    ])  ->visible(function ($record) {
-                                    return setting('environment_elevator');
+                                    return env('ENVIRONMENT_ELEVATOR');
                                 }),
  
 
@@ -221,7 +221,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                             TextInput::make('nobo_no')
                                 ->label('Nobonummer')
                                 ->visible(function ($record) {
-                                    return setting('environment_elevator');
+                                    return env('ENVIRONMENT_ELEVATOR');
                                 }),
 
 
@@ -441,7 +441,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                             ->schema([
                    
                                 TextEntry::make('nobo_no')->visible(function ($record) {
-                                    return setting('environment_elevator');
+                                    return env('ENVIRONMENT_ELEVATOR');
                                 })
  
                                     ->label('NOBO Nummer')
@@ -525,7 +525,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                 // })
 
                             ])->columns(4)->visible(function ($record) {
-                                    return setting('environment_elevator');
+                                    return env('ENVIRONMENT_ELEVATOR');
                                 })
  ,
 
@@ -564,7 +564,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                     ->placeholder('Niet opgegeven'),
 
                             ]) ->columns(4) ->visible(function ($record) {
-                            return setting('environment_elevator');
+                            return env('ENVIRONMENT_ELEVATOR');
                     }),
    
 

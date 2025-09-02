@@ -172,7 +172,7 @@ class TimeTrackingRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                     ->modalHeading('Activiteit bewerken')
                     ->tooltip('Bewerken')
-                   ->hidden(fn($record) => $record->status_id)
+                   ->hidden(fn ($record) => $record?->status_id?->value === 1)
                     ->label('Bewerken')
                     ->slideOver()
                 // ->mutateFormDataUsing(function (array $data): array {
