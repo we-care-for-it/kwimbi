@@ -52,7 +52,7 @@ class Ticket extends Model
 
     public function createByUser()
     {
-        return $this->hasOne(Employee::class, 'id', 'created_by_user');
+        return $this->hasOne(Contact::class, 'id', 'created_by_user');
     }
 
     public function replies()

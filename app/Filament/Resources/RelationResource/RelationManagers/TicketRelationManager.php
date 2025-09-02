@@ -211,7 +211,7 @@ class TicketRelationManager extends RelationManager
                     ->toggleable()
                     ->label('Status'),
 
-                Tables\Columns\TextColumn::make('created_at')
+                Tables\Columns\TextColumn::make('created_by_user')
                     ->getStateUsing(fn ($record) => $record?->createByUser?->name)
                     ->toggleable()
                     ->placeholder('Algemeen')
@@ -258,6 +258,10 @@ class TicketRelationManager extends RelationManager
                     ->icon('heroicon-m-eye')
                     ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
                     ->label('Bekijk'),
+                
+                Tables\Actions\EditAction::make()
+                        ->label('Snel bewerken')
+                        ->slideover()
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
