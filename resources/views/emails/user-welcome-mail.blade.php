@@ -178,7 +178,7 @@ account aangemaakt<o:p></o:p></span></p>
     id="_x0000_i1025"
     src="{{$record->base_url}}storage/{{$record?->company_logo}}"
     style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
-    0in;border-top-width:0in;display:block' alt="Kwimbi Logo">
+    0in;border-top-width:0in;display:block'  >
 	
 </center>
 
