@@ -176,13 +176,13 @@ account aangemaakt<o:p></o:p></span></p>
 	
 	<center><img border=0 height=180
     id="_x0000_i1025"
-    src="{{$record->base_url}}/{{$record?->company_logo}}"
+    src="{{$record->base_url}}/storage/{{$record?->company_logo}}"
     style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
     0in;border-top-width:0in;display:block' alt="Kwimbi Logo">
 	
 </center>
 
-{{$record->base_url}}/{{$record?->company_logo}}
+
 </span></a></span><span
     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
     </td>
