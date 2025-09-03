@@ -112,8 +112,11 @@ class UserResource extends Resource
                         $token             = app('auth.password.broker')->createToken($user);
                         $notification      = new \Filament\Notifications\Auth\ResetPassword($token);
                         $notification->url = \Filament\Facades\Filament::getResetPasswordUrl($token, $user);
-                        $user->notify($notification);
+                        // $user->notify($notification);
                         $record['token'] = $token;
+                        $record['url'] = $notification->url;
+                        $record['base_url'] = env('APP_URL');
+                        $record['company_logo'] = setting('company_logo');
                         Mail::to($record->email)->send(new UserWelcomeMail($record));
                     })
                     ->requiresConfirmation()

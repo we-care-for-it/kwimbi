@@ -171,12 +171,18 @@ account aangemaakt<o:p></o:p></span></p>
     solid #EFEFEF .75pt;background:white;padding:15.0pt 15.0pt 15.0pt 15.0pt'>
     <p class=MsoNormal align=center style='text-align:center'><span
     style='mso-fareast-font-family:"Times New Roman";color:black;mso-color-alt:
-    windowtext'><a href="https://www.kwimbi.nl" target="_blank"><span
-    style='text-decoration:none;text-underline:none'><img border=0 height=180
+    windowtext'><a href="{{url()->current()}}" target="_blank"><span
+    style='text-decoration:none;text-underline:none'>
+	
+	<center><img border=0 height=180
     id="_x0000_i1025"
-    src="https://digilevel.test/storage/01JWF0NM0J869QABF7ZZK9AQDM.png"
-    style='border-bottom-width:0in;border-left-width:0in;border-right-width:
-    0in;border-top-width:0in;display:block' alt="Kwimbi Logo"></span></a></span><span
+    src="{{$record->base_url}}/{{$record?->company_logo}}"
+    style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
+    0in;border-top-width:0in;display:block' alt="Kwimbi Logo">
+	
+</center>
+
+</span></a></span><span
     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
     </td>
    </tr>
@@ -184,43 +190,48 @@ account aangemaakt<o:p></o:p></span></p>
     <td style='border:solid #EFEFEF 1.0pt;border-top:none;mso-border-left-alt:
     solid #EFEFEF .75pt;mso-border-bottom-alt:solid #EFEFEF .75pt;mso-border-right-alt:
     solid #EFEFEF .75pt;padding:15.0pt 15.0pt 15.0pt 15.0pt'>
-    <p><span style='color:#37474F'>Beste aaaaaaaaaaaa,<o:p></o:p></span></p>
+    <p><span style='color:#37474F'>Beste {{$record?->name}},<o:p></o:p></span></p>
     <p><span style='color:#37474F'>Er is een account voor je aangemaakt op het
     CRM van <strong><span style='font-family:"Aptos",sans-serif;mso-bidi-font-family:
-    Aptos'>Test locatie</span></strong>. <o:p></o:p></span></p>
+    Aptos'>{{setting('company_name')}}</span></strong>. <o:p></o:p></span></p>
     <p><strong><span style='font-family:"Aptos",sans-serif;mso-bidi-font-family:
     Aptos;color:#37474F'>Gebruikersnaam:</span></strong><span style='color:
     #37474F'> <br>
-    <a href="mailto:j.timmer@wecareforit.nl">j.timmer@wecareforit.nl</a> <o:p></o:p></span></p>
-    <p><span style='color:#37474F'>Om in te kunnen loggen, moet je eerst een
+
+ 
+    <a href=">{{$record?->email}}">{{$record?->email}}</a> <o:p></o:p></span></p>
+    <p><span style='color:#37474F; '>Om in te kunnen loggen, moet je eerst een
     wachtwoord aanmaken. <o:p></o:p></span></p>
     <div align=center>
     <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
      style='mso-cellspacing:0cm;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'
      role=presentation>
      <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
-      <td style='background:#6BB52F;padding:0cm 0cm 0cm 0cm;border-radius: 4px'>
-      <table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
-       style='mso-cellspacing:0cm;mso-yfti-tbllook:1184;mso-padding-alt:0cm 0cm 0cm 0cm'
-       role=presentation>
-       <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
-        <td style='padding:9.0pt 18.0pt 9.0pt 18.0pt'>
-        <p class=MsoNormal><span style='mso-fareast-font-family:"Times New Roman"'><a
-        href="https://digilevel.test/password-reset/reset?email=j.timmer%40wecareforit.nl&amp;token=6ccce54e4310307e5e0791c87479a771745a4f7b252ce9695d3caa30b5ccf080&amp;signature=8249712e5ec5d7f703b322b24d7cd231c0d5eeb4eff0d0f67206bf101a251fec"
-        target="_blank" style='border-radius: 4px;display:inline-block'><b><span
-        style='font-size:10.5pt;color:white;border:none windowtext 1.0pt;
-        mso-border-alt:none windowtext 0cm;padding:0cm;background:#6BB52F;
-        text-decoration:none;text-underline:none'>Wachtwoord aanmaken </span></b></a><o:p></o:p></span></p>
-        </td>
-       </tr>
-      </table>
-      </td>
+    <td style='background:#4a57a3;padding:0cm 0cm 0cm 0cm;border-radius: 4px'>
+<table ...>
+  <tr>
+    <td style='padding:9.0pt 18.0pt 9.0pt 18.0pt'>
+      <p class="MsoNormal">
+        <a href="{{$record->url}}" target="_blank" style="border-radius: 4px; display: inline-block; text-decoration: none;">
+          <b>
+            <span style="font-size:10.5pt; color:white; border:none windowtext 1.0pt;
+            mso-border-alt:none windowtext 0cm; padding:0cm; background:#4a57a3;">
+              Wachtwoord aanmaken
+            </span>
+          </b>
+        </a>
+      </p>
+    </td>
+  </tr>
+</table>
+
+</td>
      </tr>
     </table>
     </div>
     <p><span style='color:#37474F'>Heb je vragen of hulp nodig? Onze
     klantenservice staat klaar om je te helpen. <o:p></o:p></span></p>
-    <p><span style='color:#37474F'>Met vriendelijke groet, <br>
+    <p><span style='color:#37474F'>Met vriendelijke groet, <br><br>
     <strong><span style='font-family:"Aptos",sans-serif;mso-bidi-font-family:
     Aptos'>Kwimbi.nl</span></strong> <o:p></o:p></span></p>
 <!-- Footer -->
@@ -233,8 +244,8 @@ account aangemaakt<o:p></o:p></span></p>
       <td style='border:none;padding:7.5pt 7.5pt 7.5pt 7.5pt'>
       <p class=MsoNormal align=center style='margin-top:15.0pt;text-align:center'><span
       style='font-size:9.0pt;mso-fareast-font-family:"Times New Roman";
-      color:#999999'>© 2025 <a href="https://www.kwimbi.nl" style='#6BB52F'><span
-      style='color:#4A57A3;text-decoration:none;text-underline:none'>www.kwimbi.nl</span></a>
+      color:#999999'>© 2025 <a href="https://www.kwimbi.nl" style="#4a57a3"><span
+      style='color:#4A57A3;text-decoration:none;  text-decoration: none;'>www.kwimbi.nl</span></a>
       <o:p></o:p></span></p>
       </td>
      </tr>
