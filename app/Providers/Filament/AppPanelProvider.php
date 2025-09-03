@@ -218,7 +218,7 @@ FilamentSocialitePlugin::make()
             ->pages([
                 
             ])
-          //  ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+           ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
               
             ])

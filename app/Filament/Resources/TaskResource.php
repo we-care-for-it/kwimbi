@@ -71,7 +71,7 @@ class TaskResource extends Resource implements HasShieldPermissions
     protected $listeners = ["refresh" => '$refresh'];
     public static function getNavigationBadge(): ?string
     {
-        return (string) Task::count();
+            return (string) Task::where('employee_id', auth()->id())->count();
     }
     public static function form(Form $form): Form
     {
@@ -269,10 +269,9 @@ class TaskResource extends Resource implements HasShieldPermissions
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
 {
     $query = parent::getEloquentQuery();
-
-    if (!auth()->user()->can('assign_to_employee_task')) {
+ 
         $query->where('employee_id', auth()->id());
-    }
+ 
 
     return $query;
 }
@@ -418,12 +417,12 @@ class TaskResource extends Resource implements HasShieldPermissions
                                 ];
                             })->toArray();
                     }),
-                SelectFilter::make('employee_id')
-                    ->label('Medewerker')
-                        ->options(User::pluck('name', 'id'))
-                    ->default(Auth::id())
-                    ->searchable()
-                    ->visible(fn () => auth()->user()->can('assign_to_employee_task')),
+                // SelectFilter::make('employee_id')
+                //     ->label('Medewerker')
+                //         ->options(User::pluck('name', 'id'))
+                //     ->default(Auth::id())
+                //     ->searchable()
+                //     ->visible(fn () => auth()->user()->can('assign_to_employee_task')),
 
 
 

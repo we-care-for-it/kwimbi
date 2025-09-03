@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Database\Eloquent\Builder;
 use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
-
+use Illuminate\Support\Facades\Auth;
 class ListTasks extends ListRecords
 {
     use InteractsWithCustomFields;
@@ -31,23 +31,39 @@ class ListTasks extends ListRecords
         return "Mijn taken - Overzicht";
     }
 
+
+ 
+
+
+    public function getHeaderWidgets(): array
+{
+    return [
+          TaskResource\Widgets\Stats::class,
+    ];
+}
+
+
+
+
     public function getTabs(): array
     {
         return [
             'Alles'     => Tab::make(),
             'Hoog'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1)->where('employee_id', auth()->id()))
                 ->badgeColor('danger')
-                ->badge(Task::query()->where('priority', 1)->count()),
+                ->badge(Task::query()->where('priority', 1)->where('employee_id', auth()->id())->count()),
             'Gemiddeld' => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2)->where('employee_id', auth()->id()))
                 ->badgeColor('warning')
-                ->badge(Task::query()->where('priority', 2)->count()),
+                ->badge(Task::query()->where('priority', 2)->where('employee_id', auth()->id())->count()),
             'Laag'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 3))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 3)->where('employee_id', auth()->id()))
                 ->badgeColor('success')
-                ->badge(Task::query()->where('priority', 3)->count()),
+                ->badge(Task::query()->where('priority', 3)->where('employee_id', auth()->id())->count()),
         ];
     }
 
 }
+
+ 
