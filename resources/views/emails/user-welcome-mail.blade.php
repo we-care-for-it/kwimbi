@@ -176,7 +176,7 @@ account aangemaakt<o:p></o:p></span></p>
 	
 	<center><img border=0 height=180
     id="_x0000_i1025"
-    src="{{$record->base_url}}/{{$record?->company_logo}}"
+    src="https://demo.kwimbi.nl/images/kwimbi_avatar.jpg"
     style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
     0in;border-top-width:0in;display:block' alt="Kwimbi Logo">
 	
