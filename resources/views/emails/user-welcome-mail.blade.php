@@ -182,7 +182,7 @@ account aangemaakt<o:p></o:p></span></p>
 	
 </center>
 
-
+{{$record->base_url}}/storage/{{$record?->company_logo}}
 </span></a></span><span
     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
     </td>
