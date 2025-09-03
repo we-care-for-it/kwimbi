@@ -217,11 +217,7 @@ class EmployeesRelationManager extends RelationManager
                         ->slideover(),
 
 
-                 Tables\Actions\Action::make()
-                        ->label('Verstuur wachtwoord resetn')
-                        ->slideover(),
-
-
+ 
 
 
                 Tables\Actions\ActionGroup::make([
