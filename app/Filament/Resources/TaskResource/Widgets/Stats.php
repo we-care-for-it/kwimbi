@@ -24,9 +24,12 @@ class Stats extends BaseWidget
 
             Card::make('Completed Tasks', Task::where('employee_id', $userId)->where('type_id', '2')->count())
                 ->description('Tasks you have finished')
-                ->color('success'),      ];
-                            Card::make('Completed Tasks', Task::where('employee_id', $userId)->where('type_id', '3')->count())
+                ->color('success'),      
+             Card::make('Completed Tasks', Task::where('employee_id', $userId)->where('type_id', '3')->count())
                 ->description('Tasks you have finished')
-                ->color('success');      
+                ->color('success')
+                
+                ];
+                
     }
 }
