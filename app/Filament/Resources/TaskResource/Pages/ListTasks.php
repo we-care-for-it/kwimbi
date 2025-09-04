@@ -34,17 +34,6 @@ class ListTasks extends ListRecords
 
  
 
-
-    public function getHeaderWidgets(): array
-{
-    return [
-          TaskResource\Widgets\Stats::class,
-    ];
-}
-
-
-
-
     public function getTabs(): array
     {
         return [

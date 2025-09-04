@@ -69,6 +69,8 @@ class TaskResource extends Resource implements HasShieldPermissions
     protected static ?string $title            = 'Alle taken';
 
     protected $listeners = ["refresh" => '$refresh'];
+
+
     public static function getNavigationBadge(): ?string
     {
             return (string) Task::where('employee_id', auth()->id())->count();

@@ -3,12 +3,12 @@ namespace App\Filament\Resources\TicketResource\Pages;
 
 use App\Filament\Resources\TicketResource;
 use App\Models\Ticket;
-use App\Models\ticketStatus;
+ 
 use Asmit\ResizedColumn\HasResizableColumn;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
-
+use App\Enums\TicketStatus;
 class ListTickets extends ListRecords
 {
     protected static string $resource = TicketResource::class;
@@ -23,12 +23,12 @@ class ListTickets extends ListRecords
     public function getTabs(): array
     {
 
-        $ticketStatuses = ticketStatus::whereIsActive(1)->orderBy('sort', 'asc')->get();
+        $ticketStatuses = TicketStatus::cases();
 
-        foreach ($ticketStatuses as $ticketStatus) {
-            $tabs[$ticketStatus->name] = Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('status_id', $ticketStatus->id))
-                ->badge(Ticket::query()->where('status_id', $ticketStatus->id)->count());
+      foreach ($ticketStatuses as $ticketStatus) {
+          $tabs[$ticketStatus->getLabel()] = Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('status_id', $ticketStatus->value))
+                ->badge(Ticket::query()->where('status_id', $ticketStatus->value)->count());
         }
 
         $tabs['Hoog'] = Tab::make()

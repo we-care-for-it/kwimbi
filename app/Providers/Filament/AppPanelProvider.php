@@ -122,7 +122,7 @@ class AppPanelProvider extends PanelProvider
     EasyFooterPlugin::make()
    ->withLogo(
             '/images/ico.png', // Path to logo
-            'https://www.workall.nl'                                // URL for logo link (optional)
+            'https://www.kwimbi.nll'                                // URL for logo link (optional)
         )
  ->withFooterPosition('sidebar.footer'),
 ])

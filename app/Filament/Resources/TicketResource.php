@@ -8,7 +8,7 @@ use App\Models\Department;
 use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
-use App\Models\ticketStatus;
+use App\Enums\ticketStatus;
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -77,7 +77,7 @@ class TicketResource extends Resource
                         Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(ticketStatus::pluck('name', 'id')),
+                            ->options(ticketStatus::class),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
@@ -177,7 +177,7 @@ class TicketResource extends Resource
                         ->badge()
                         ->placeholder("Niet opgegeven"),
 
-                    Components\TextEntry::make('status.name')
+                    Components\TextEntry::make('status_id')
                         ->label("Status")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
@@ -309,7 +309,7 @@ class TicketResource extends Resource
                     ->label('Prioriteit'),
 
                 //     ->label('Medewerker'),
-                Tables\Columns\TextColumn::make('status.name')
+                Tables\Columns\TextColumn::make('status_id')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -380,7 +380,7 @@ class TicketResource extends Resource
 
                 SelectFilter::make('status_id')
                     ->label('Status')
-                    ->options(ticketStatus::orderBy('sort')->pluck('name', 'id')),
+                    ->options(TicketStatus::class),
                 SelectFilter::make('type_id')
                     ->label('Type')
                     ->options(ticketType::pluck('name', 'id')),
@@ -389,7 +389,7 @@ class TicketResource extends Resource
                     ->label('Afdeling')
                     ->options(Department::pluck('name', 'id')),
 
-                TernaryFilter::make('email_verified_at')
+                TernaryFilter::make('statsu_id')
                     ->label('Gesloten tickets')
                     ->placeholder('Alle tickets')
                     ->trueLabel('Verbergen')

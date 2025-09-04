@@ -34,7 +34,7 @@ class Task extends Model implements HasCustomFields
     protected function casts(): array
     {
         return [
-            'status_id' => ActionStatus::class,
+            'status_id' => TicketStatus::class,
             'type_id'   => ActionTypes::class,
             'priority'  => Priority::class,
 

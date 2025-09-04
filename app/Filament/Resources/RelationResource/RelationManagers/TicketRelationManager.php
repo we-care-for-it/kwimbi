@@ -5,7 +5,7 @@ use App\Enums\Priority;
 use App\Models\Department;
 use App\Models\Contact;
 use App\Models\Location;
-use App\Models\ticketStatus;
+ 
 use App\Models\ticketType;
 use App\Models\User;
 use Filament\Forms;
@@ -22,6 +22,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
+use Filament\Tables\Filters\TernaryFilter;
+use Illuminate\Database\Eloquent\Builder;
+use App\Enums\TicketStatus;
+use Filament\Tables\Filters\Filter;
+
 
 class TicketRelationManager extends RelationManager
 {
@@ -121,11 +126,10 @@ class TicketRelationManager extends RelationManager
                             ->label('Melder')
                             ->columnSpan(2),
 
-                        Forms\Components\Select::make('status_id')
+              Forms\Components\Select::make('status_id')
                             ->default('1')
                             ->label('Status')
-                            ->options(ticketStatus::pluck('name', 'id')),
-
+                            ->options(ticketStatus::class),
                         Forms\Components\Select::make('type_id')
                             ->label('Type')
                             ->default('2')
@@ -205,7 +209,7 @@ class TicketRelationManager extends RelationManager
                     ->toggleable()
                     ->label('Prioriteit'),
 
-                Tables\Columns\TextColumn::make('status.name')
+                Tables\Columns\TextColumn::make('status_id')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -250,8 +254,21 @@ class TicketRelationManager extends RelationManager
             ->recordUrl(fn($record): string => route('filament.app.resources.tickets.view', ['record' => $record]))
             ->filters(
                 [
-
-                ], layout: FiltersLayout::AboveContent)
+  Filter::make('hide_closed')
+    ->label('Gesloten tickets verbergen')
+    ->toggle() // maakt een aan/uit switch
+    ->default(true) // standaard aan
+    ->query(fn (Builder $query, $state): Builder =>
+        $state
+            ? $query->where('status_id', '!=', 7)
+            : $query
+    )
+    ->indicateUsing(fn ($state): ?string =>
+        $state ? 'Gesloten tickets verborgen' : null
+    )
+    
+    // standaard: gesloten tickets verbergen
+                ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(4)
             ->actions([
                 Tables\Actions\Action::make('openObject')

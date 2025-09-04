@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Enums\Priority;
+use App\Enums\TicketStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +14,7 @@ class Ticket extends Model
     protected $casts = [
 
         'prio' => Priority::class,
+        'status_id' => TicketStatus::class
 
     ];
 
