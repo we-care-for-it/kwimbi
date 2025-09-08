@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\TenantSetting;
+use App\Models\tenantSetting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -23,7 +23,7 @@ if (! function_exists('setting')) {
                 return $settingsCache[$key];
             }
 
-            $value = TenantSetting::where('key', $key)->value('value');
+            $value = tenantSetting::where('key', $key)->value('value');
 
             return $settingsCache[$key] = $value ?? $default;
         }
