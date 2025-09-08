@@ -143,18 +143,17 @@ class ContactResource extends Resource
             ])
             ->columns([
                 TileColumn::make('name')
-                    ->description(fn($record) => $record->function)
+                    ->description(fn($record) => $record->email)
                     ->sortable()
                     ->searchable(['first_name', 'last_name'])
                     ->image(fn($record) => $record->avatar),
 
-                TextColumn::make('email')
+                TextColumn::make('function')
                     ->placeholder('-')
-                    ->icon('heroicon-m-envelope')
                     ->sortable()
                     ->searchable()
-                    ->url(fn(object $record) => 'mailto:' . $record?->email)
-                    ->label('Emailadres'),
+                    ->url(fn(object $record) => $record?->function)
+                    ->label('Functie'),
 
                 TextColumn::make('type_id')
                     ->sortable()
@@ -166,12 +165,18 @@ class ContactResource extends Resource
                 TextColumn::make('relation.name')
                     ->label('Relatie')
                     ->placeholder('-')
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('company')
                     ->label('Bedrijf')
                     ->placeholder('-')
                     ->toggleable(),
+
+                    
+                TextColumn::make('department')
+                    ->label('Afdeling')
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('phone_number')
                     ->label('Telefoonnummer')
