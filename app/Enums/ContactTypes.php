@@ -34,4 +34,6 @@ enum ContactTypes: string implements HasLabel, HasIcon, HasColor {
             self::CONTACT     => 'warning',
         };
     }
+
+    
 }

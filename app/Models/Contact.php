@@ -25,10 +25,7 @@ class Contact extends Model implements HasCustomFields
         'type_id' => ContactTypes::class,
     ];
 
-
-    
-
-
+ 
 
     protected $appends = ['avatar'];
 
@@ -76,18 +73,7 @@ class Contact extends Model implements HasCustomFields
     }
 
 
-     public function getCompanyNameAttribute()
-    {
-        if($this->type_id==1){
-           return $this?->relation?->name;
-        }else{
-            return $this?->company;
-
-        }
-
-    }
-
-
+ 
 
     public function relation()
     {
@@ -118,5 +104,7 @@ class Contact extends Model implements HasCustomFields
     {
         return $this->hasMany(ContactObject::class, 'contact_id', 'id');
     }
+
+    
 
 }

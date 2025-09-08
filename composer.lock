@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3ef8fb277a900342336f78520306cac",
+    "content-hash": "14a8aef3445b328ab4ecc8500b9a99a3",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1077,6 +1077,55 @@
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.351.6"
             },
             "time": "2025-07-24T18:03:51+00:00"
+        },
+        {
+            "name": "awt/apilogger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aungwinthant/apilogger.git",
+                "reference": "558119656dccd34220edc82f22a57ff56de495f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aungwinthant/apilogger/zipball/558119656dccd34220edc82f22a57ff56de495f5",
+                "reference": "558119656dccd34220edc82f22a57ff56de495f5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-libxml": "*"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AWT\\Providers\\ApiLogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AWT\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aung win thant",
+                    "email": "agwinthant@gmail.com"
+                }
+            ],
+            "description": "Small laravel package for viewing api logs which can be used in debugging.",
+            "support": {
+                "issues": "https://github.com/aungwinthant/apilogger/issues",
+                "source": "https://github.com/aungwinthant/apilogger/tree/master"
+            },
+            "time": "2022-10-02T08:13:48+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -18778,7 +18827,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "awt/apilogger": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
