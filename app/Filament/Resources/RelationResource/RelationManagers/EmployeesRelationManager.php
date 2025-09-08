@@ -6,7 +6,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
-
+use App\Enums\ContactTypes;
 use App\Models\relationLocation;
 use App\Models\contactType;
 
@@ -49,11 +49,9 @@ class EmployeesRelationManager extends RelationManager
                 Grid::make(2)
                     ->schema([
 
-                                            Forms\Components\Select::make('type_id')
-                            ->options([
-                                '2' => 'Contactpersoon',
-                                '1' => 'Medewerker',
-                            ])->default(1),
+                        Forms\Components\Select::make('type_id')
+                            ->options(ContactTypes::class)->default(1)
+                            ->label('Type'),
 
 
                         Forms\Components\TextInput::make('first_name')
