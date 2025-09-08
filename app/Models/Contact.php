@@ -10,7 +10,7 @@ use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Enums\ContactTypes;
 class Contact extends Model implements HasCustomFields
 {
     use HasFactory;
@@ -22,16 +22,22 @@ class Contact extends Model implements HasCustomFields
      */
     protected $casts = [
         'metadata' => 'collection',
+        'type_id' => ContactTypes::class,
     ];
+
+
+    
+
+
 
     protected $appends = ['avatar'];
 
     protected $fillable = ['first_name', 'last_name', 'email', 'department', 'function', 'phone_number', 'mobile_number'];
 
-    public function company(): BelongsTo
-    {
-        return $this->belongsTo(Company::class);
-    }
+    // public function company(): BelongsTo
+    // {
+    //     return $this->belongsTo(Company::class);
+    // }
 
     // public function newQuery()
     // {
@@ -67,6 +73,20 @@ class Contact extends Model implements HasCustomFields
         return $this->first_name . " " . $this->last_name;
 
     }
+
+
+     public function getCompanyNameAttribute()
+    {
+        if($this->type_id==1){
+           return $this?->relation?->name;
+        }else{
+            return $this?->company;
+
+        }
+
+    }
+
+
 
     public function relation()
     {

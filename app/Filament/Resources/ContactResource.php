@@ -92,12 +92,14 @@ class ContactResource extends Resource
                                     ->label('Functie')
                                     ->maxLength(255),
 
-                                Select::make('department')
-                                    ->label('Afdeling')
-                                //  ->options(fn() => $this->ownerRecord?->departments?->pluck('name', 'id') ?? [])
-                                    ->searchable()
-                                    ->relationship(name: 'department', titleAttribute: 'name')
-                                    ->placeholder('Selecteer een afdeling'),
+                               Forms\Components\TextInput::make('department')
+                                    ->label('Afdeling'),
+
+                                    
+                               Forms\Components\TextInput::make('company')
+                                    ->label('Bedrijf')
+
+                                 
 
                             ])]),
 
@@ -237,18 +239,15 @@ class ContactResource extends Resource
                     })
                     ->label('Emailadres'),
 
-                TextColumn::make("relation.name")
+                 TextColumn::make("type_id")
                     ->sortable()
                     ->searchable()
-                    ->label("Relatie")
-                    ->placeholder("-")
-                    ->url(function ($record) {
-                        return "/relations/" . $record->relation_id;
-                    })
-                    ->toggleable(),
+                    ->label("Type")
+                    ->badge()
+                    ->placeholder("-"),
 
-                TextColumn::make("function")
-                    ->label("Functie")
+                TextColumn::make("company")
+                    ->label("Bedrijf")
                     ->placeholder("-")
                     ->toggleable(),
 

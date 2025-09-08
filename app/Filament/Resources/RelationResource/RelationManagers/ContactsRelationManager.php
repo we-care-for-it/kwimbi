@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Tables\Filters\TrashedFilter;
+use App\Enums\ContactTypes;
 class ContactsRelationManager extends RelationManager
 {
     protected static string $relationship   = 'contacts';
@@ -40,10 +41,7 @@ class ContactsRelationManager extends RelationManager
                     ->schema([
 
                                             Forms\Components\Select::make('type_id')
-                            ->options([
-                                '2' => 'Contactpersoon',
-                                '1' => 'Medewerker',
-                                  ])->default(2),
+                            ->options(ContactTypes::class)->default(2),
 
 
                         Forms\Components\TextInput::make('first_name')
@@ -65,6 +63,13 @@ class ContactsRelationManager extends RelationManager
                         Forms\Components\TextInput::make('department')
                             ->label('Afdeling')
                             ->maxLength(255),
+
+
+                            
+                        Forms\Components\TextInput::make('company')
+                            ->label('Bedrijf')
+                            ->maxLength(255),
+
 
                         Forms\Components\TextInput::make('function')
                             ->label('Functie')
