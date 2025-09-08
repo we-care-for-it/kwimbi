@@ -2,12 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\CheckApiToken;
+use App\Http\Middleware\checkApiToken;
 use App\Models\Contact;
 use App\Models\Relation;
 use App\Models\Task;
 
-Route::middleware([CheckApiToken::class, 'apilogger'])->group(function () {
+Route::middleware([checkApiToken::class, 'apilogger'])->group(function () {
 
     // Contacts endpoint
         Route::get('/contacts', function (Request $request) {
