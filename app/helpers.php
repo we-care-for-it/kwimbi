@@ -41,7 +41,7 @@ if (! function_exists('setting')) {
      * @param int|null $perPage
      * @return \Illuminate\Http\JsonResponse
      */
-    function api_response($data, Request $request = null, array $filterable = [], int $perPage = null)
+    function api_response($data, ?Request $request = null, array $filterable = [], ?int $perPage = null)
     {
         if ($data instanceof \Illuminate\Database\Eloquent\Builder && $request) {
             foreach ($filterable as $field => $allowedValues) {
