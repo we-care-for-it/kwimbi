@@ -58,6 +58,7 @@ class Contact extends Model implements HasCustomFields
     {
         return $this->hasOne(relationDepartment::class, 'id', 'department_id');
     }
+    
 
     public function getAvatarAttribute($value)
     {

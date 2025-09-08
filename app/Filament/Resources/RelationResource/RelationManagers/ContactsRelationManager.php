@@ -65,7 +65,6 @@ class ContactsRelationManager extends RelationManager
                             ->maxLength(255),
 
 
-                            
                         Forms\Components\TextInput::make('company')
                             ->label('Bedrijf')
                             ->maxLength(255),
