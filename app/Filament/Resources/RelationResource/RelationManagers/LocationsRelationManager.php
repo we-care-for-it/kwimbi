@@ -271,9 +271,14 @@ class LocationsRelationManager extends RelationManager
                     ->slideover()
                     ->modalHeading('Locatie wijzigen'),
 
-                // Tables\Actions\DeleteAction::make()
-                //     ->modalHeading('Bevestig actie')
-                //     ->modalDescription('Weet je zeker dat je deze Locatie wilt verwijderen?'),
+ Tables\Actions\ActionGroup::make([
+
+     
+                    Tables\Actions\DeleteAction::make()
+                        ->label('Verwijder')   ->modalHeading('Locatie verwijderen'),
+                ])
+
+                ,
 
             ])
             ->emptyState(view("partials.empty-state"));

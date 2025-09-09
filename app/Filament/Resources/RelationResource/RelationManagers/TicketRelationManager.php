@@ -106,9 +106,6 @@ class TicketRelationManager extends RelationManager
                                         Forms\Components\TextInput::make('department')
                                             ->label('Afdeling')
                                             ->maxLength(255),
-                                        Forms\Components\TextInput::make('company')
-                                            ->label('Bedrijf')
-                                            ->maxLength(255),
                                         Forms\Components\TextInput::make('phone_number')
                                             ->label('Telefoonnummer')
                                             ->maxLength(255),
