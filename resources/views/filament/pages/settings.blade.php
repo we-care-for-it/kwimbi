@@ -115,7 +115,6 @@
                <h2 class="text-lg font-semibold mb-2">Statussen</h2>
                <ul class="list-disc list-inside space-y-1">
                   <li><a href="/project-statuses" class="text-black hover:underline">Projecten</a></li>
-                  <li><a href="/ticket-statuses" class="text-black hover:underline">Tickets</a></li>
                </ul>
             </div>
          </div>
