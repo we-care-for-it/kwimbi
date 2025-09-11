@@ -17,7 +17,6 @@ class UpdateApiLogsTable extends Migration
         // Step 0: Add new columns first
         Schema::table('api_logs', function (Blueprint $table) {
             $table->longText('payload_raw')->nullable()->after('payload');
-            $table->longText('response')->after('payload_raw');
             $table->longText('response_headers')->after('response');
             $table->text('headers')->nullable()->after('response');
         });
