@@ -21,21 +21,7 @@ class UpdateApiLogsTable extends Migration
             $table->text('headers')->nullable()->after('response');
         });
 
-        // Step 1: Safely convert status_code to integer
-        // Non-numeric values will become NULL
-        DB::statement("
-            ALTER TABLE api_logs
-            ALTER COLUMN status_code TYPE integer
-            USING CASE 
-                WHEN status_code ~ '^[0-9]+$' THEN status_code::integer
-                ELSE NULL
-            END
-        ");
-
-        // Step 2: Ensure the column is nullable in Laravel schema
-        Schema::table('api_logs', function (Blueprint $table) {
-            $table->integer('status_code')->nullable()->change();
-        });
+      
     }
 
     /**
@@ -52,7 +38,6 @@ class UpdateApiLogsTable extends Migration
             $table->dropColumn('headers');
         });
 
-        // Revert status_code to text safely
-        DB::statement('ALTER TABLE api_logs ALTER COLUMN status_code TYPE text USING status_code::text');
+
     }
 }
