@@ -3,6 +3,7 @@ namespace App\Filament\Resources\TaskResource\Pages;
 
 use App\Filament\Resources\TaskResource;
 use App\Models\Task;
+use App\Enums\Priority;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -41,15 +42,15 @@ class ListTasks extends ListRecords
             'Hoog'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1)->where('employee_id', auth()->id()))
                 ->badgeColor('danger')
-                ->badge(Task::query()->where('priority', 1)->where('employee_id', auth()->id())->count()),
+                ->badge(Task::query()->where('priority', Priority::HIGH)->where('employee_id', auth()->id())->count()),
             'Gemiddeld' => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2)->where('employee_id', auth()->id()))
                 ->badgeColor('warning')
-                ->badge(Task::query()->where('priority', 2)->where('employee_id', auth()->id())->count()),
+                ->badge(Task::query()->where('priority', Priority::MEDIUM)->where('employee_id', auth()->id())->count()),
             'Laag'      => Tab::make()
                 ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 3)->where('employee_id', auth()->id()))
                 ->badgeColor('success')
-                ->badge(Task::query()->where('priority', 3)->where('employee_id', auth()->id())->count()),
+                ->badge(Task::query()->where('priority', Priority::LOW)->where('employee_id', auth()->id())->count()),
         ];
     }
 
