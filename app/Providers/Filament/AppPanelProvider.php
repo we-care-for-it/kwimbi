@@ -118,14 +118,14 @@ class AppPanelProvider extends PanelProvider
  ->favicon(asset('/images/ico.png')) 
 
  
-->plugins([
-    EasyFooterPlugin::make()
-   ->withLogo(
-            '/images/ico.png', // Path to logo
-            'https://www.kwimbi.nll'                                // URL for logo link (optional)
-        )
- ->withFooterPosition('sidebar.footer'),
-])
+// ->plugins([
+//     EasyFooterPlugin::make()
+//    ->withLogo(
+//             '/images/ico.png', // Path to logo
+//             'https://www.kwimbi.nll'                                // URL for logo link (optional)
+//         )
+//  ->withFooterPosition('sidebar.footer'),
+// ])
 
 
 ->plugins([

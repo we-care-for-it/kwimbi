@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Enums\ActionTypes;
 use App\Enums\Priority;
+use App\Enums\TaskTypes;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,9 @@ use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ActionToUser;
+
 
 class Task extends Model implements HasCustomFields
 {
@@ -34,45 +38,42 @@ class Task extends Model implements HasCustomFields
     protected function casts(): array
     {
         return [
-            'status_id' => TicketStatus::class,
-            'type_id'   => ActionTypes::class,
+
             'priority'  => Priority::class,
+            'type'      => TaskTypes::class,
 
         ];
     }
 
-    protected static function boot(): void
-    {
-        parent::boot();
 
-        // static::addGlobalScope('company', function (Builder $query) {
-        //     if (auth()->hasUser()) {
-        //         $query->where('company_id', auth()->user()->company_id);
-        //         // or with a `team` relationship defined:
-        //         $query->whereBelongsTo(auth()->user()->company_id);
-        //     }
-        // });
+protected static function booted()
+{
+    static::creating(function ($model) {
+        $model->make_by_employee_id = auth()->id();
 
-        static::creating(function ($model) {
-            $model->make_by_employee_id = $user = auth()->id();;
+        if ($model->employee?->email) {
+            // Bepaal subject
+            $subject = ($model->employee_id != auth()->id())
+                ? "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel')
+                : "Taak aangemaakt: " . ($model->title ?? 'Geen titel');
 
-        });
+            Mail::to($model->employee->email)
+                ->send(new ActionToUser($model, $subject));
+        }
+    });
 
-        static::saved(function (self $request) {
+    static::updating(function ($model) {
+        if ($model->employee?->email) {
+            // Bepaal subject bij update
+            $subject = ($model->employee_id != auth()->id())
+                ? "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel')
+                : "Taak geupdate: " . ($model->title ?? 'Geen titel');
 
-            // IF NOT DIRETY
-            // if ($request->isDirty()) {
-
-            //     $user = User::where('id', $request->employee_id)->first();
-
-            //     if ($user->id != Auth::id()) {
-            //         Mail::to("info@digilevel.nl")->send(new ActionToUser($request));
-            //     }
-
-            // }
-        });
-
-    }
+            Mail::to($model->employee->email)
+                ->send(new ActionToUser($model, $subject));
+        }
+    });
+}
 
     public function employee()
     {

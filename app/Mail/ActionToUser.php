@@ -7,40 +7,37 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use app\Enums\TaskTypes ;
+
 
 class ActionToUser extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(public readonly Task $action)
-    {
-        //
+
+    public $data; 
+
+    public function __construct(
+        public $task,
+        public string $mailsubject
+    ) {
+        $this->data = $task; 
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
-            //$this->request->requestedFor->name . $action
-            //  subject: "EENM ODODO" . $this->action->type_id . " " . $this->action->title
-
-            subject: $this->action?->type . " - " . $this->action->title
+            subject: $this->mailsubject
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
-            view: 'emails.ActionToUser',
+            view: 'emails.task',
+             with: [
+                'data' => $this->data,
+            ],
         );
     }
-
 }

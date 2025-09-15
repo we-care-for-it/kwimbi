@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\Priority;
+use App\Enums\TaskTypes;
 use App\Filament\Resources\TaskResource\Pages;
 use App\Models\Contact;
 use App\Models\Employee;
@@ -35,16 +36,16 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
 use LaraZeus\Tiles\Tables\Columns\TileColumn;
-   use Filament\Tables\Actions\Action;
-   use Illuminate\Support\Carbon;
-   use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Carbon;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
 
 class TaskResource extends Resource implements HasShieldPermissions
 {
 
 
-     public static function getPermissionPrefixes(): array
+    public static function getPermissionPrefixes(): array
     {
         return [
             'view',
@@ -59,7 +60,7 @@ class TaskResource extends Resource implements HasShieldPermissions
         ];
     }
 
- 
+
 
 
     protected static ?string $model            = Task::class;
@@ -73,7 +74,7 @@ class TaskResource extends Resource implements HasShieldPermissions
 
     public static function getNavigationBadge(): ?string
     {
-            return (string) Task::where('employee_id', auth()->id())->count();
+        return (string) Task::where('employee_id', auth()->id())->count();
     }
     public static function form(Form $form): Form
     {
@@ -204,40 +205,29 @@ class TaskResource extends Resource implements HasShieldPermissions
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
                     ->default(Auth::id())
-->visible(fn () => auth()->user()->can('assign_to_employee_task'))
- 
+                    ->visible(fn() => auth()->user()->can('assign_to_employee_task'))
+
 
 
                     ->label('Interne medewerker'),
-                Select::make('type_id')
-                    ->options([
-                        '1' => 'Terugbelnotitie',
-                        '3' => 'Te doen',
-
-                    ])
+                Select::make('type')
+                    ->options(TaskTypes::class)
+                    ->default(TaskTypes::TODO) 
                     ->required()
                     ->searchable()
-                    ->default(3)
                     ->label('Type'),
 
                 ToggleButtons::make('priority')
                     ->options(Priority::class)
-
-                    ->colors([
-                        '1' => 'info',
-                        '2' => 'warning',
-                        '3' => 'success',
-
-                    ])
-                    ->default(3)->grouped()
+                    ->default(Priority::LOW->value)
+                    ->grouped()
                     ->label('Prioriteit'),
 
                 CustomFieldsComponent::make()
                     ->columnSpanFull(),
 
                 Section::make('Planning')
-                    ->collapsed()
-                    ->collapsed()
+                  
                     ->columns(3)
                     ->schema([
 
@@ -269,21 +259,21 @@ class TaskResource extends Resource implements HasShieldPermissions
 
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
-{
-    $query = parent::getEloquentQuery();
- 
-        $query->where('employee_id', auth()->id());
- 
+    {
+        $query = parent::getEloquentQuery();
 
-    return $query;
-}
+        $query->where('employee_id', auth()->id());
+
+
+        return $query;
+    }
     public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
 
- 
+
 
             ->persistSearchInSession()
             ->searchable()
@@ -319,7 +309,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                 //     return sprintf('%06d', $record?->id);
                 // }),
 
-                Tables\Columns\TextColumn::make('type_id')
+                Tables\Columns\TextColumn::make('type')
                     ->badge()
                     ->sortable()
                     ->toggleable()
@@ -440,43 +430,40 @@ class TaskResource extends Resource implements HasShieldPermissions
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->slideOver()
-                        ->visible(fn () => auth()->user()->can('edit_any_task'))
+                    ->visible(fn() => auth()->user()->can('edit_any_task'))
 
 
                     ->label('Bewerken'),
 
 
-Action::make('complete')
-    ->label('Voltooien')
-    ->icon('heroicon-o-check')
-    ->tooltip('Voltooien')
-    ->color('danger')
-    ->modalHeading('Actie voltooien')
-    ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
-    ->modalIcon('heroicon-o-check')
-    ->requiresConfirmation()
-    ->visible(fn ($record) =>
-    auth()->user()->can('compleet_any_task') // allowed globally
-    || $record->employee_id === auth()->id() // allowed if owner
-)
+                Action::make('complete')
+                    ->label('Voltooien')
+                    ->icon('heroicon-o-check')
+                    ->tooltip('Voltooien')
+                    ->color('danger')
+                    ->modalHeading('Actie voltooien')
+                    ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
+                    ->modalIcon('heroicon-o-check')
+                    ->requiresConfirmation()
+                    ->visible(
+                        fn($record) =>
+                        auth()->user()->can('compleet_any_task') // allowed globally
+                            || $record->employee_id === auth()->id() // allowed if owner
+                    )
 
 
 
-    ->action(function ($record) {
-         $record->update([
-             'deleted_at' => Carbon::now(),
-        ]);
-    }),
+                    ->action(function ($record) {
+                        $record->update([
+                            'deleted_at' => Carbon::now(),
+                        ]);
+                    }),
                 Tables\Actions\ActionGroup::make([
 
                     DeleteAction::make()
                         ->tooltip('Verwijderen')
-                        
-                        ->label('Verwijderen')
-                        
-                   
 
-,
+                        ->label('Verwijderen'),
 
                     RestoreAction::make()
                         ->color("danger")
@@ -487,21 +474,17 @@ Action::make('complete')
 
                     //      ActivityLogTimelineTableAction::make('Logboek'),
 
-                ])           ->visible(fn ($record) =>
-    auth()->user()->can('delete_any_task') // allowed globally
-    || $record->employee_id === auth()->id() // allowed if owner
-)
-
-                
-                
-                
-  ,
+                ])->visible(
+                    fn($record) =>
+                    auth()->user()->can('delete_any_task') // allowed globally
+                        || $record->employee_id === auth()->id() // allowed if owner
+                ),
 
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-             
-                   
+
+
 
                     ExportBulkAction::make()
                         ->exports([

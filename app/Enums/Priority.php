@@ -4,30 +4,32 @@ namespace App\Enums;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasLabel;
 
-enum Priority: string implements HasLabel, HasColor {
-    case HIGH   = '1';
-    case MEDIUM = '2';
-    case LOW    = '3';
+enum Priority: string implements HasLabel, HasColor
+{
+    case HIGH   = 'high';
+    case MEDIUM = 'medium';
+    case LOW    = 'low';
 
-    public function getlabel(): string
+    public function getLabel(): string
     {
         return match ($this) {
             self::HIGH   => 'Hoog',
             self::MEDIUM => 'Gemiddeld',
             self::LOW    => 'Laag',
-
         };
     }
 
+    // Optional: uncomment if you want icons
     // public function getIcon(): ?string
     // {
     //     return match ($this) {
-    //         self::EXTERN => 'heroicon-o-cpu-chip',
-    //         self::CLOSED => 'heroicon-m-check',
+    //         self::HIGH => 'heroicon-o-exclamation-triangle',
+    //         self::MEDIUM => 'heroicon-o-exclamation',
+    //         self::LOW => 'heroicon-o-check',
     //     };
     // }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::HIGH   => 'danger',
@@ -35,4 +37,6 @@ enum Priority: string implements HasLabel, HasColor {
             self::LOW    => 'success',
         };
     }
+
+    
 }
