@@ -108,6 +108,11 @@ class EmployeesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+        //  ->recordUrl(fn ($record): string => route(
+        //     'filament.app.resources.employees.view', 
+        //     ['record' => $record]
+        // ))
+
              ->query(
             Contact::query()->where('type_id', 1) 
             ->where('relation_id', $this->ownerRecord->id)
@@ -205,9 +210,9 @@ class EmployeesRelationManager extends RelationManager
 
             ->actions([
 
-          Tables\Actions\Action::make('openObject')
+          Tables\Actions\viewAction::make('openObject')
                     ->icon('heroicon-m-eye')
-                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                 //   ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
                     ->label('Bekijk'),
                 
                 Tables\Actions\EditAction::make()

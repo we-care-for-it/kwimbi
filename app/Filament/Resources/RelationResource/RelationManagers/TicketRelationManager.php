@@ -6,7 +6,7 @@ use App\Models\Department;
 use App\Models\Contact;
 use App\Models\Location;
  
-use App\Models\ticketType;
+use App\Enums\TicketTypes;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -127,19 +127,15 @@ class TicketRelationManager extends RelationManager
                             ->default('1')
                             ->label('Status')
                             ->options(ticketStatus::class),
-                        Forms\Components\Select::make('type_id')
+                        Forms\Components\Select::make('type')
                             ->label('Type')
-                            ->default('2')
-                            ->options(ticketType::pluck('name', 'id')),
+                              ->default(TicketTypes::INCIDENT) 
+                            ->options(TicketTypes::class),
 
-                        ToggleButtons::make('prio')
+                        ToggleButtons::make('priority')
+                            ->required()
                             ->options(Priority::class)
-                            ->colors([
-                                '1' => 'info',
-                                '2' => 'warning',
-                                '3' => 'success',
-                            ])
-                            ->default(3)
+                            ->default(Priority::LOW->value)
                             ->grouped()
                             ->label('Prioriteit'),
                     ])
@@ -200,7 +196,7 @@ class TicketRelationManager extends RelationManager
                     ->label('#')
                     ->getStateUsing(fn ($record) => sprintf("%05d", $record?->id)),
 
-                Tables\Columns\TextColumn::make('prio')
+                Tables\Columns\TextColumn::make('priority')
                     ->badge()
                     ->sortable()
                     ->toggleable()

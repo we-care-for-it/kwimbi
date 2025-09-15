@@ -118,7 +118,7 @@ class TicketsRelationManager extends RelationManager
                             ->default('2')
                             ->options(ticketType::pluck('name', 'id')),
 
-                        ToggleButtons::make('prio')
+                        ToggleButtons::make('priority')
                             ->options(Priority::class)
 
                             ->colors([

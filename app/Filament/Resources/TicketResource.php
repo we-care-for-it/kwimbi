@@ -9,7 +9,7 @@ use App\Models\Location;
 use App\Models\Relation;
 use App\Models\Ticket;
 use App\Enums\ticketStatus;
-use App\Models\ticketType;
+use App\Enums\TicketTypes;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -78,20 +78,15 @@ class TicketResource extends Resource
                             ->default('1')
                             ->label('Status')
                             ->options(ticketStatus::class),
-                        Forms\Components\Select::make('type_id')
+                        Forms\Components\Select::make('type')
                             ->label('Type')
                             ->default('2')
-                            ->options(ticketType::pluck('name', 'id')),
+                            ->options(TicketTypes::class),
 
-                        ToggleButtons::make('prio')
+                        ToggleButtons::make('priority')
                             ->options(Priority::class)
 
-                            ->colors([
-                                '1' => 'info',
-                                '2' => 'warning',
-                                '3' => 'success',
-
-                            ])
+                          
                             ->default(3)->grouped()
                             ->label('Prioriteit'),
 
@@ -204,7 +199,7 @@ class TicketResource extends Resource
                         ->Date('d-m-Y H:i')
                         ->placeholder("Niet toegewezen"),
 
-                    Components\TextEntry::make('prio')
+                    Components\TextEntry::make('priority')
                         ->label("Prioriteit")
                         ->badge()
                         ->placeholder("Niet opgegeven"),
@@ -301,7 +296,7 @@ class TicketResource extends Resource
                         return sprintf("%05d", $record?->id);
                     }),
                 //     ->label('Medewerker'),
-                Tables\Columns\TextColumn::make('prio')
+                Tables\Columns\TextColumn::make(priority::class)
                     ->badge()
                     ->sortable()
                     ->grow(false)
