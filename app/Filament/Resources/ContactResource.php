@@ -6,6 +6,7 @@ use App\Filament\Resources\ContactResource\Pages;
 use App\Models\Contact;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
+ 
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Tabs;
 use Filament\Infolists\Components\TextEntry;
@@ -50,18 +51,21 @@ class ContactResource extends Resource
             'Relatie'     => empty($record?->relation?->name) ? 'Geen' : $record->relation->name,
         ];
     }
-
-    public static function form(Form $form): Form
-    {
-        return $form->schema([
-            Forms\Components\Section::make('')
-                ->schema([
-                    Grid::make(2)->schema([
+public static function form(Form $form): Form
+{
+    return $form->schema([
+        Forms\Components\Section::make('')
+            ->schema([
+                // Row with image, first name, last name
+                Grid::make(3)
+                    ->schema([
                         Forms\Components\FileUpload::make('image')
                             ->label('Afbeelding')
                             ->image()
                             ->nullable()
-                            ->directory('contacts'),
+                            ->imageEditor()
+                            ->directory('contacts')
+                            ->disk('local'),
 
                         Forms\Components\TextInput::make('first_name')
                             ->label('Voornaam')
@@ -72,30 +76,33 @@ class ContactResource extends Resource
                             ->label('Achternaam')
                             ->required()
                             ->maxLength(255),
-
-                        Forms\Components\TextInput::make('email')
-                            ->label('E-mailadres')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('phone_number')
-                            ->label('Telefoonnummer')
-                            ->maxLength(15),
-
-                        Forms\Components\TextInput::make('function')
-                            ->label('Functie')
-                            ->maxLength(255),
-
-                        Forms\Components\TextInput::make('department')
-                            ->label('Afdeling'),
-
-                        Forms\Components\TextInput::make('company')
-                            ->label('Bedrijf'),
                     ]),
-                ]),
 
-            CustomFieldsComponent::make()->columns(1),
-        ]);
-    }
+                // Rest of the fields stacked vertically
+                Forms\Components\TextInput::make('email')
+                    ->label('E-mailadres')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('phone_number')
+                    ->label('Telefoonnummer')
+                    ->maxLength(15),
+
+                Forms\Components\TextInput::make('function')
+                    ->label('Functie')
+                    ->maxLength(255),
+
+                Forms\Components\TextInput::make('department')
+                    ->label('Afdeling'),
+
+                Forms\Components\TextInput::make('company')
+                    ->label('Bedrijf'),
+            ]),
+
+        CustomFieldsComponent::make()->columns(1),
+    ]);
+}
+
+
 
     public static function infolist(Infolist $infolist): Infolist
     {
