@@ -156,7 +156,7 @@ background-color:#FFFFF'>
 	
 	<center><img border=0 height=180
     id="_x0000_i1025"
-    src="{{env(APP_URL)}}/storage/{{$record?->company_logo}}"
+    src="{{ env('APP_URL') }}/storage/{{ $record?->company_logo }}" alt="Company Logo"
     style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
     0in;border-top-width:0in;display:block'  >
 	
