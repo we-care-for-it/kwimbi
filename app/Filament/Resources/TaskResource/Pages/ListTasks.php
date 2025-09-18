@@ -40,15 +40,15 @@ class ListTasks extends ListRecords
         return [
             'Alles'     => Tab::make(),
             'Hoog'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 1)->where('employee_id', auth()->id()))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::HIGH)->where('employee_id', auth()->id()))
                 ->badgeColor('danger')
                 ->badge(Task::query()->where('priority', Priority::HIGH)->where('employee_id', auth()->id())->count()),
             'Gemiddeld' => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 2)->where('employee_id', auth()->id()))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::MEDIUM)->where('employee_id', auth()->id()))
                 ->badgeColor('warning')
                 ->badge(Task::query()->where('priority', Priority::MEDIUM)->where('employee_id', auth()->id())->count()),
             'Laag'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', 3)->where('employee_id', auth()->id()))
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::LOW)->where('employee_id', auth()->id()))
                 ->badgeColor('success')
                 ->badge(Task::query()->where('priority', Priority::LOW)->where('employee_id', auth()->id())->count()),
         ];
