@@ -39,8 +39,8 @@ use LaraZeus\Tiles\Tables\Columns\TileColumn;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Carbon;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-
-
+use Filament\Tables\Columns\TextColumn;
+          use Filament\Tables\Columns\ImageColumn;
 class TaskResource extends Resource implements HasShieldPermissions
 {
 
@@ -87,31 +87,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                     ->helperText(str('Beschrijf de actie of taak ')->inlineMarkdown()->toHtmlString())
                     ->columnSpan('full')
                     ->autosize(),
-
-                // Select::make('model')
-                //     ->options([
-                //         'relation' => 'Relatie',
-                //         //  'project'       => 'Project',
-                //         //   'contactperson' => 'Contactpersoon',
-                //         //  'object'        => 'Object',
-
-                //     ])
-                //     ->searchable()
-                //     ->live()
-                //     ->label('Koppel aan'),
-                // Select::make('model_id')
-                //     ->label('Relatie')
-                // //where('type_id', 5)->
-                //     ->options(function () {
-                //         return \App\Models\Relation::all()
-                //             ->groupBy('type.name')
-                //             ->mapWithKeys(function ($group, $category) {
-                //                 return [
-                //                     $category => $group->pluck('name', 'id')->toArray(),
-                //                 ];
-                //             })->toArray();
-                //     }),
-
+ 
                 Select::make("relation_id")
                     ->searchable()
 
@@ -284,116 +260,79 @@ class TaskResource extends Resource implements HasShieldPermissions
             )
             ->columns([
 
-                TileColumn::make('employee')
-                    // ->description(fn($record) => $record->AssignedByUser->email)
-                    ->sortable()
-                    ->getStateUsing(function ($record): ?string {
-                        return $record?->employee?->name;
-                    })
-                    ->description(fn($record) => $record->employee?->email)
-                    ->label('Toegewezen medewerker'),
 
-                //     ->image(fn($record) => $record?->employee?->avatar)
-                //     ->placeholder('Geen'),
-                //Tables\Columns\TextColumn::make('id')
-                // ->description(function ($record): ?string {
-                //     if ($record?->private) {
-                //         return "Priveactie";
-                //     } else {
-                //         return false;
-                //     }
-                // })
-                // ->label('#')
-                // ->sortable()
-                // ->getStateUsing(function ($record): ?string {
-                //     return sprintf('%06d', $record?->id);
-                // }),
+                
+ImageColumn::make('employee.avatar')
+  ->size(30)
+->tooltip(fn($record) => $record->employee->name)
+->label('')
+ 
+,
 
-                Tables\Columns\TextColumn::make('type')
-                    ->badge()
+
+                  TextColumn::make('type')
+                    ->badge()  // hard width limit
                     ->sortable()
                     ->toggleable()
+                    ->width('100px')
                     ->label('Type'),
+                                   
+                TextColumn::make('priority')
+                    ->badge()
+                    ->sortable()  ->width('150px')
+                    ->toggleable()
+                    ->label('Prioriteit'),
 
-                Tables\Columns\TextColumn::make('related_to')
+
+
+          
+
+
+
+
+
+                    //      TileColumn::make('')
+                    //      ->label('Medewerker')
+                    // ->description(fn($record) => $record->employee->email)
+                    // ->sortable()
+                    // ->searchable(['name', 'last_name'])
+                    // ->image(fn($record) => $record->employee->avatar),
+               
+
+
+                TextColumn::make('related_to')
+             
                     ->label('Relatie')
+                    ->wrap(0)
                     ->toggleable()
                     ->getStateUsing(function ($record): ?string {
                         return $record?->related_to?->name;
                     })->placeholder('-'),
 
-                Tables\Columns\TextColumn::make('description')
+
+       
+                TextColumn::make('description')
                     ->label('Taak')
+                    ->grow()
+                   
                     ->toggleable()
-                    ->wrap()
                     ->placeholder('-'),
 
-                // ->description(function ($record): ?string {
-                //     return $record?->description;
-
-                // }),
-
-                Tables\Columns\TextColumn::make('priority')
-                    ->badge()
-                    ->sortable()
-                    ->toggleable()
-                    ->label('Prioriteit'),
-
-                // Tables\Columns\TextColumn::make('description')
-                //     ->wrap()
-
-                //     ->label('Taak omschrijving')
-                //     ->sortable()->description(function ($record): ?string {
-                //     switch ($record->model) {
-                //         case 'relation':
-                //             return false;
-                //             break;
-                //         case 'project':
-                //             return false;
-                //             break;
-                //         case 'location':
-                //             return false;
-                //             break;
-                //         case 'object':
-                //             $housenumber   = "";
-                //             $complexnumber = "";
-                //             $name          = "";
-                //             if ($record?->related_to?->location->housenumber) {
-                //                 $housenumber = " " . $record->related_to->location->housenumber;
-                //             }
-                //             return $record?->related_to->location?->address . " " . $housenumber . " - " . $record->related_to?->location?->zipcode . " - " . $record->related_to?->location?->place;
-
-                //             break;
-                //         case 'contactperson':
-                //             return $record?->related_to?->email;
-
-                //             break;
-                //         default:
-                //             return false;
-                //     }
-                // }),
-
-                Tables\Columns\TextColumn::make('begin_date')
+                TextColumn::make('begin_date')
                     ->label('Plandatum')
                     ->placeholder('-')
                     ->sortable()
-                    ->dateTime("d-m-Y")
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->sortable(),
+                    ->dateTime('d-m-Y')
+                    ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('deadline')
+                TextColumn::make('deadline')
                     ->label('Einddatum')
                     ->placeholder('-')
-                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->dateTime('d-m-Y')
                     ->sortable()
-                    ->dateTime("d-m-Y")
-                    ->color(
-                        fn($record) => strtotime($record?->deadline) <
-                            time()
-                            ? "danger"
-                            : "success"
-                    )
-                    ->sortable(),
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->color(fn ($record) => strtotime($record?->deadline) < now()->timestamp ? 'danger' : 'success'),
+         
 
             ])
             ->filters([
@@ -516,3 +455,5 @@ class TaskResource extends Resource implements HasShieldPermissions
         ];
     }
 }
+
+ 

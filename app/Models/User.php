@@ -106,15 +106,53 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         ];
     }
 
-    public function getAvatarAttribute($value)
-    {
-        if ($this->image) {
-            return "/storage/" . $this->avatar_url;
-        } else {
-            return '/images/noavatar.jpg';
-        }
+    // public function getAvatarAttribute($value)
+    // {
+    //     if ($this->image) {
+    //         return "/storage/" . $this->avatar_url;
+    //     } else {
+    //         return '/images/noavatar.jpg';
+    //     }
 
+    // }
+ 
+
+
+
+ public function getAvatarAttribute($value)
+{
+    // If user uploaded an avatar
+    if ($this->image) {
+        return "/storage/" . $this->image;
     }
+$parts = preg_split('/\s+/', trim($this->name));
+    if (!$parts) {
+        return '';
+    }
+
+    // first letter of first and last part (if exists)
+    $first = mb_substr($parts[0], 0, 1);
+    $last  = count($parts) > 1 ? mb_substr($parts[count($parts) - 1], 0, 1) : '';
+
+    $initials = mb_strtoupper($first . $last);
+
+    // Pick a background color (you can randomize or hash the user ID for consistency)
+    $colors = ['#1abc9c', '#3498db', '#9b59b6', '#e67e22', '#e74c3c'];
+    $bgColor = $colors[$this->id % count($colors)]; // consistent color per user
+
+    // Encode initials as URL for a small SVG avatar
+    $svg = '<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+        <rect width="100%" height="100%" fill="' . $bgColor . '"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" 
+              font-family="Arial, Helvetica, sans-serif" font-size="48" fill="#ffffff">' 
+              . $initials . '</text>
+    </svg>';
+
+    $encoded = 'data:image/svg+xml;base64,' . base64_encode($svg);
+
+    return $encoded;
+}
+
 
     public function activities()
     {
