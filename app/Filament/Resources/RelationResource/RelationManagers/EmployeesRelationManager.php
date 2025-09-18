@@ -156,12 +156,14 @@ class EmployeesRelationManager extends RelationManager
         ])
    
             ->columns([
+           
                 TileColumn::make('name')
                     ->description(fn($record) => $record->function)
                     ->sortable()
-                    ->searchable()
-                    ->image(fn($record) => $record->avatar)
-                    ->label('Naam'),
+                    ->searchable(['first_name', 'last_name'])
+                    ->image(fn($record) => $record->avatar),
+
+
 
                 TextColumn::make('email')
                     ->placeholder('-')
@@ -173,12 +175,7 @@ class EmployeesRelationManager extends RelationManager
                     ->label('Afdeling')
                     ->placeholder('-'),
 
-                TextColumn::make('function')
-                    ->placeholder('-')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Functie'),
-
+ 
                 TextColumn::make('phone_number')
                     ->placeholder('-')
                     ->searchable()
@@ -210,7 +207,7 @@ class EmployeesRelationManager extends RelationManager
 
             ->actions([
 
-          Tables\Actions\viewAction::make('openObject')
+          Tables\Actions\ViewAction::make('openObject')
                     ->icon('heroicon-m-eye')
                  //   ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
                     ->label('Bekijk'),

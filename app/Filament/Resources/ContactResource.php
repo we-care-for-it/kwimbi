@@ -95,6 +95,7 @@ public static function form(Form $form): Form
                     ->label('Afdeling'),
 
                 Forms\Components\TextInput::make('company')
+                                      ->hidden(fn ($record) => $record->type === 'EMPLOYEE')
                     ->label('Bedrijf'),
             ]),
 
@@ -162,7 +163,7 @@ public static function form(Form $form): Form
                     ->url(fn(object $record) => $record?->function)
                     ->label('Functie'),
 
-                TextColumn::make('type_id')
+                TextColumn::make('type')
                     ->sortable()
                     ->searchable()
                     ->label('Type')
@@ -177,6 +178,7 @@ public static function form(Form $form): Form
                 TextColumn::make('company')
                     ->label('Bedrijf')
                     ->placeholder('-')
+
                     ->toggleable(),
 
                     

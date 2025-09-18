@@ -22,7 +22,7 @@ class Contact extends Model implements HasCustomFields
      */
     protected $casts = [
         'metadata' => 'collection',
-        'type_id' => ContactTypes::class,
+        'type' => ContactTypes::class,
     ];
 
  
