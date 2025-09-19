@@ -22,7 +22,6 @@ class Ticket extends Model
 
 
     
-    if ($model->created_by_user) {
 // protected static function booted()
 // {
 // static::created(function ($model) {
@@ -57,7 +56,7 @@ class Ticket extends Model
     //             ->send(new ActionToUser($model, $subject));
     //     }
     // });
-}
+//}
 
 
     public function relation()
