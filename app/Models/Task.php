@@ -80,6 +80,13 @@ protected static function booted()
         return $this->hasOne(User::class, 'id', 'employee_id');
     }
 
+       public function make_by_employee()
+    {
+        return $this->hasOne(User::class, 'id', 'make_by_employee_id');
+    }
+
+
+
     public function getRelatedToAttribute()
     {
 

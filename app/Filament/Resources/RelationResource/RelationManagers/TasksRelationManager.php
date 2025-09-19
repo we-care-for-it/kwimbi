@@ -10,33 +10,37 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Components\{DatePicker, Section, Select, Textarea, TimePicker, ToggleButtons};
 use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\{Action, ActionGroup, CreateAction, DeleteAction, DeleteBulkAction, EditAction};
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Actions\{
+    Action,
+    ActionGroup,
+    CreateAction,
+    DeleteAction,
+    DeleteBulkAction,
+    EditAction,
+    RestoreAction,
+    RestoreBulkAction
+};
+use Filament\Tables\Columns\{ImageColumn, TextColumn};
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\{SelectFilter, TrashedFilter};
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use LaraZeus\Tiles\Tables\Columns\TileColumn;
-use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
-   use Filament\Tables\Columns\ImageColumn;
- use Filament\Tables\Filters\SelectFilter;
-use Filament\Tables\Actions\RestoreAction;
-use Filament\Tables\Actions\RestoreBulkAction;
- use Filament\Tables\Filters\TrashedFilter;
 use Illuminate\Support\Carbon;
-use Filament\Tables\Enums\FiltersLayout;
+use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
+
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
     protected static ?string $icon = 'heroicon-o-rectangle-stack';
-    protected static ?string $title = 'Taken';
+    protected static ?string $title = 'Mijn taken';
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-        return $ownerRecord->tasks()->count();
+        return (string) Task::where('employee_id', auth()->id())->count();
     }
 
     public function form(Form $form): Form
@@ -116,67 +120,47 @@ class TasksRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
-      return $table
+        return $table
             ->defaultSort('id', 'desc')
-            ->persistSortInSession()
-
-
-
-            ->persistSearchInSession()
-            ->searchable()
-            ->persistColumnSearchesInSession()
-            ->recordClasses(
-                fn($record) =>
-                $record->deleted_at ? 'table_row_deleted ' : null
+                 ->modifyQueryUsing(fn ($query) =>
+                $query->where('employee_id', auth()->id())  
             )
+            ->persistSortInSession()
+            ->searchable()
+            ->persistSearchInSession()
+            ->persistColumnSearchesInSession()
+            ->description('Overzicht van alle taken die aan jou zijn toegewezen.')
+            ->recordClasses(fn ($record) => $record->deleted_at ? 'table_row_deleted' : null)
             ->columns([
+                ImageColumn::make('employee.avatar')
+                    ->size(30)
+                    ->tooltip(fn ($record) => $record?->employee?->name)
+                    ->label(''),
 
-
-                
-ImageColumn::make('employee.avatar')
-  ->size(30)
-->tooltip(fn($record) => $record?->employee?->name)
-->label('')
- 
-,
-
-
-                  TextColumn::make('type')
-                    ->badge()  // hard width limit
+                TextColumn::make('type')
+                    ->badge()
                     ->sortable()
                     ->toggleable()
                     ->width('100px')
                     ->label('Type'),
-                                   
+
                 TextColumn::make('priority')
                     ->badge()
-                    ->sortable()  ->width('150px')
+                    ->sortable()
+                    ->width('150px')
                     ->toggleable()
                     ->label('Prioriteit'),
 
-
-
-          
-
-
-
-
-
-                    //      TileColumn::make('')
-                    //      ->label('Medewerker')
-                    // ->description(fn($record) => $record->employee->email)
-                    // ->sortable()
-                    // ->searchable(['name', 'last_name'])
-                    // ->image(fn($record) => $record->employee->avatar),
-               
-
- 
-       
                 TextColumn::make('description')
                     ->label('Taak')
                     ->grow()
-                   
                     ->toggleable()
+                   ->description(fn ($record) =>
+                        'Door: ' . ($record?->make_by_employee?->name ?? 'Onbekend') .
+                        ' op ' . ($record?->created_at?->translatedFormat('d F Y') ?? '-') .
+                        ' om ' . ($record?->created_at?->translatedFormat('H:i') ?? '-')
+                    )
+
                     ->placeholder('-'),
 
                 TextColumn::make('begin_date')
@@ -189,12 +173,12 @@ ImageColumn::make('employee.avatar')
                 TextColumn::make('deadline')
                     ->label('Einddatum')
                     ->placeholder('-')
-                    ->dateTime('d-m-Y')
                     ->sortable()
+                    ->dateTime('d-m-Y')
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->color(fn ($record) => strtotime($record?->deadline) < now()->timestamp ? 'danger' : 'success'),
-         
-
+                    ->color(fn ($record) =>
+                        strtotime($record?->deadline) < now()->timestamp ? 'danger' : 'success'
+                    ),
             ])
             ->headerActions([
                 CreateAction::make()
@@ -205,54 +189,35 @@ ImageColumn::make('employee.avatar')
                     ->modalIcon('heroicon-o-plus')
                     ->label('Taak toevoegen')
                     ->link()
+                    ->slideover()
                     ->mutateFormDataUsing(fn (array $data): array => [
                         ...$data,
                         'model_id' => $this->getOwnerRecord()->id,
                         'model'    => 'relation',
                     ]),
             ])
-
-              ->filters([
+            ->filters([
                 SelectFilter::make('relation_id')
                     ->label('Relatie')
                     ->searchable()
-                    ->options(function () {
-                        return \App\Models\Relation::all()
-                            ->groupBy('type.name')
-                            ->mapWithKeys(function ($group, $category) {
-                                return [
-                                    $category => $group->pluck('name', 'id')->toArray(),
-                                ];
-                            })->toArray();
-                    }),
-                // SelectFilter::make('employee_id')
-                //     ->label('Medewerker')
-                //         ->options(User::pluck('name', 'id'))
-                //     ->default(Auth::id())
-                //     ->searchable()
-                //     ->visible(fn () => auth()->user()->can('assign_to_employee_task')),
-
-
-
-
+                    ->options(fn () => \App\Models\Relation::all()
+                        ->groupBy('type.name')
+                        ->mapWithKeys(fn ($group, $category) => [
+                            $category => $group->pluck('name', 'id')->toArray(),
+                        ])
+                        ->toArray()
+                    ),
                 TrashedFilter::make(),
-
             ], layout: FiltersLayout::Modal)
             ->filtersFormColumns(3)
-
-
-             ->actions([
-
+            ->actions([
                 EditAction::make()
                     ->modalHeading('Taak Bewerken')
                     ->modalDescription('Pas de bestaande taak aan door de onderstaande gegevens zo volledig mogelijk in te vullen.')
                     ->tooltip('Bewerken')
                     ->slideOver()
-                    ->visible(fn() => auth()->user()->can('edit_any_task'))
-
-
+                    ->visible(fn () => auth()->user()->can('edit_any_task'))
                     ->label('Bewerken'),
-
 
                 Action::make('complete')
                     ->label('Voltooien')
@@ -263,41 +228,24 @@ ImageColumn::make('employee.avatar')
                     ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
                     ->modalIcon('heroicon-o-check')
                     ->requiresConfirmation()
-                    ->visible(
-                        fn($record) =>
-                        auth()->user()->can('compleet_any_task') // allowed globally
-                            || $record->employee_id === auth()->id() // allowed if owner
+                    ->visible(fn ($record) =>
+                        auth()->user()->can('compleet_any_task')
+                        || $record->employee_id === auth()->id()
                     )
+                    ->action(fn ($record) =>
+                        $record->update(['deleted_at' => Carbon::now()])
+                    ),
 
-
-
-                    ->action(function ($record) {
-                        $record->update([
-                            'deleted_at' => Carbon::now(),
-                        ]);
-                    }),
-                Tables\Actions\ActionGroup::make([
-
-                    DeleteAction::make()
-                        ->tooltip('Verwijderen')
-
-                        ->label('Verwijderen'),
-
+                ActionGroup::make([
+                    DeleteAction::make()->tooltip('Verwijderen')->label('Verwijderen'),
                     RestoreAction::make()
-                        ->color("danger")
-                        ->modalHeading('Actie terug plaatsen')
-                        ->modalDescription(
-                            "Weet je zeker dat je deze actie wilt activeren"
-                        ),
-
-                    //      ActivityLogTimelineTableAction::make('Logboek'),
-
-                ])->visible(
-                    fn($record) =>
-                    auth()->user()->can('delete_any_task') // allowed globally
-                        || $record->employee_id === auth()->id() // allowed if owner
+                        ->color('danger')
+                        ->modalHeading('Actie terugplaatsen')
+                        ->modalDescription('Weet je zeker dat je deze actie wilt activeren?'),
+                ])->visible(fn ($record) =>
+                    auth()->user()->can('delete_any_task')
+                    || $record->employee_id === auth()->id()
                 ),
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

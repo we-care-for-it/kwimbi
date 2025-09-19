@@ -248,7 +248,8 @@ class TaskResource extends Resource implements HasShieldPermissions
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
-
+  ->description('Overzicht van alle taken die aan jou zijn toegewezen.')
+          
 
 
             ->persistSearchInSession()
@@ -314,7 +315,11 @@ ImageColumn::make('employee.avatar')
                 TextColumn::make('description')
                     ->label('Taak')
                     ->grow()
-                   
+                      ->description(fn ($record) =>
+                        'Door: ' . ($record?->make_by_employee?->name ?? 'Onbekend') .
+                        ' op ' . ($record?->created_at?->translatedFormat('d F Y') ?? '-') .
+                        ' om ' . ($record?->created_at?->translatedFormat('H:i') ?? '-')
+                    )
                     ->toggleable()
                     ->placeholder('-'),
 
