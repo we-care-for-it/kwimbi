@@ -22,28 +22,29 @@ class Ticket extends Model
 
 
     
-protected static function booted()
-{
-static::created(function ($model) {
     if ($model->created_by_user) {
-        // Ticketnummer = id
-        $ticketnummer = $model->id;
+// protected static function booted()
+// {
+// static::created(function ($model) {
+//     if ($model->created_by_user) {
+//         // Ticketnummer = id
+//         $ticketnummer = $model->id;
 
-        // First 3 letters from app name (uppercase)
-        $shortName = strtoupper(substr(env('APP_NAME', 'My Application'), 0, 3));
+//         // First 3 letters from app name (uppercase)
+//         $shortName = strtoupper(substr(env('APP_NAME', 'My Application'), 0, 3));
 
-        // Subject line
-        $subject = "Ticket #{$shortName}-{$ticketnummer} geregistreerd:";
+//         // Subject line
+//         $subject = "Ticket #{$shortName}-{$ticketnummer} geregistreerd:";
  
-       // Search for user's contact email
-        $contact = Contact::where('id', $model->created_by_user)->first();
+//        // Search for user's contact email
+//         $contact = Contact::where('id', $model->created_by_user)->first();
 
-        if ($contact && $contact->email) {
-            Mail::to($contact->email)
-                ->send(new TicketToUser($model, $subject));
-        }
-    }
-});
+//         if ($contact && $contact->email) {
+//             Mail::to($contact->email)
+//                 ->send(new TicketToUser($model, $subject));
+//         }
+//     }
+// });
 
     // static::updating(function ($model) {
     //     if ($model->employee?->email) {
