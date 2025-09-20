@@ -130,8 +130,11 @@ class TasksRelationManager extends RelationManager
             ->persistSearchInSession()
             ->persistColumnSearchesInSession()
             ->description('Overzicht van alle taken die aan jou zijn toegewezen.')
-            ->recordClasses(fn ($record) => $record->deleted_at ? 'table_row_deleted' : null)
-            ->columns([
+                  ->recordClasses(fn ($record) => 
+            $record->deadline && strtotime($record->deadline) < now()->timestamp
+                ? 'table_row_deleted'
+                : null
+            )  ->columns([
                 ImageColumn::make('employee.avatar')
                     ->size(30)
                     ->tooltip(fn ($record) => $record?->employee?->name)

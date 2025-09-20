@@ -65,9 +65,9 @@ class TaskResource extends Resource implements HasShieldPermissions
 
     protected static ?string $model            = Task::class;
     protected static ?string $navigationIcon   = 'heroicon-o-list-bullet';
-    protected static ?string $navigationLabel  = 'Alle taken';
-    protected static ?string $pluralModelLabel = 'Alle taken';
-    protected static ?string $title            = 'Alle taken';
+    protected static ?string $navigationLabel  = 'Mijn taken';
+    protected static ?string $pluralModelLabel = 'Mijn taken';
+    protected static ?string $title            = 'Mijn taken';
 
     protected $listeners = ["refresh" => '$refresh'];
 
@@ -255,9 +255,10 @@ class TaskResource extends Resource implements HasShieldPermissions
             ->persistSearchInSession()
             ->searchable()
             ->persistColumnSearchesInSession()
-            ->recordClasses(
-                fn($record) =>
-                $record->deleted_at ? 'table_row_deleted ' : null
+            ->recordClasses(fn ($record) => 
+            $record->deadline && strtotime($record->deadline) < now()->timestamp
+                ? 'table_row_deleted'
+                : null
             )
             ->columns([
 
