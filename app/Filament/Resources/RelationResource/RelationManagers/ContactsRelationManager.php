@@ -176,7 +176,7 @@ class ContactsRelationManager extends RelationManager
 
                       Tables\Actions\Action::make('openObject')
                     ->icon('heroicon-m-eye')
-                    ->url(fn($record) => route('filament.app.resources.tickets.view', ['record' => $record]))
+                    ->url(fn($record) => route('filament.app.resources.contacts.view', ['record' => $record]))
                     ->label('Bekijk'),
                 
                 Tables\Actions\EditAction::make()
