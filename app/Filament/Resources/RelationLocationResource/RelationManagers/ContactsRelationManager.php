@@ -127,7 +127,7 @@ class ContactsRelationManager extends RelationManager
 
                     ->modalHeading('Contactpersoon toevoegen')
                     ->mutateFormDataUsing(function (array $data): array {
-
+                         $data['type_id'] = 2;
                         $data['relation_id'] = $this->getOwnerRecord()->relation_id;
                         return $data;
                     }),

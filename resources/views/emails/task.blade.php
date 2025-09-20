@@ -112,20 +112,20 @@
                 </tr>
                 @endif
 
-                @if($data->make_by_employee_id)
+               @if($data->make_by_employee_id)
                 <tr>
-                  <td style="background:#f9f9f9; font-weight:bold;">Aangemaakt door</td>
-                  <td>{{ $data?->make_by_employee?->name }}</td>
-                </tr>
-                @endif
-                  
-                @if($data->employee_id)
-                <tr>
-                  <td style="background:#f9f9f9; font-weight:bold;">Toegewezen aan</td>
-                  <td>{{ $data?->employee?->name }}</td>
+                    <td style="background:#f9f9f9; font-weight:bold;">Aangemaakt door</td>
+                    <td>{{ $data?->make_by_employee?->name }}</td>
                 </tr>
                 @endif
 
+                @if($data->employee_id && $data->employee_id !== $data->make_by_employee_id)
+                  <tr>
+                    <td style="background:#f9f9f9; font-weight:bold;">Toegewezen aan</td>
+                    <td>{{ $data?->employee?->name }}</td>
+                  </tr>
+                @endif
+                
                 @if($data->created_by)
                 <tr>
                   <td style="background:#f9f9f9; font-weight:bold;">Aangemaakt door</td>

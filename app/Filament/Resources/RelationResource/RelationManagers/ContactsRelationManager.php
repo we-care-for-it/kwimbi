@@ -123,8 +123,8 @@ class ContactsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
 
-                TextColumn::make("type.name")
-                    ->label("Categorie")
+                TextColumn::make("location")
+                    ->label("Locatie")
                     ->placeholder("-")
                     ->badge()
                     ->color('primary')
