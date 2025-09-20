@@ -249,7 +249,7 @@ class TasksRelationManager extends RelationManager
                     auth()->user()->can('delete_any_task')
                     || $record->employee_id === auth()->id()
                 ),
-            ])
+            ])  ->emptyState(view('partials.empty-state'))
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     DeleteBulkAction::make()->label('Geselecteerde verwijderen'),
