@@ -164,19 +164,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                     })
                     ->label('Project'),
 
-                Select::make('model_id')
-                    ->options(Contact::where('company_id')->pluck('first_name', 'id'))
-                    ->searchable()
-                    ->visible(function (Get $get, Set $set) {
-                        return $get('model') == 'contactperson' ?? false;
-                    })
-                    ->label('Contactpersoon'),
-                Select::make('model_id')
-                    ->options(ObjectLocation::pluck('name', 'id'))
-                    ->visible(function (Get $get, Set $set) {
-                        return $get('model') == 'location' ?? false;
-                    })
-                    ->label('Locatie'),
+                
 
                 Select::make('employee_id')
                     ->options(User::pluck('name', 'id'))
