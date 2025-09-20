@@ -236,9 +236,7 @@ class TaskResource extends Resource implements HasShieldPermissions
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
-  ->description('Overzicht van alle taken die aan jou zijn toegewezen.')
-          
-
+ 
 
             ->persistSearchInSession()
             ->searchable()
@@ -254,7 +252,15 @@ class TaskResource extends Resource implements HasShieldPermissions
                 
 ImageColumn::make('employee.avatar')
   ->size(30)
-->tooltip(fn($record) => $record->employee->name)
+->tooltip(fn($record) => "Toegewezen aan door: ".$record->employee->name)
+->label('')
+ 
+,
+                
+ImageColumn::make('make_by_employee.avatar')
+  ->size(30)
+   ->visible(fn () => request()->query('activeTab') !== 'Aangemaakt door mij')
+->tooltip(fn($record) => "Aangemaakt door: ".$record->make_by_employee->name)
 ->label('')
  
 ,
@@ -304,13 +310,22 @@ ImageColumn::make('employee.avatar')
                 TextColumn::make('description')
                     ->label('Taak')
                     ->grow()
-                      ->description(fn ($record) =>
-                        'Door: ' . ($record?->make_by_employee?->name ?? 'Onbekend') .
+                     ->description(fn ($record) =>
+                    $record?->make_by_employee_id === auth()->id()
+                        ? ($record?->created_at
+                            ? $record->created_at->translatedFormat('d F Y \o\m H:i')
+                            : '-'
+                        )
+                        : 'Door: ' . ($record?->make_by_employee?->name ?? 'Onbekend') .
                         ' op ' . ($record?->created_at?->translatedFormat('d F Y') ?? '-') .
                         ' om ' . ($record?->created_at?->translatedFormat('H:i') ?? '-')
-                    )
+                )
                     ->toggleable()
                     ->placeholder('-'),
+
+                   
+
+
 
                 TextColumn::make('begin_date')
                     ->label('Plandatum')

@@ -38,20 +38,25 @@ class ListTasks extends ListRecords
     public function getTabs(): array
     {
         return [
-            'Alles'     => Tab::make(),
-            'Hoog'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::HIGH)->where('employee_id', auth()->id()))
+
+             'Alle' => Tab::make()
+            ->modifyQueryUsing(fn (Builder $query) => 
+                $query->where(function ($q) {
+                    $q->where('make_by_employee_id', auth()->id())
+                      ->orWhere('employee_id', auth()->id());
+                })
+            ),
+               
+            'Toegewezen aan mij'      => Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => $query->where('employee_id', auth()->id()))
                 ->badgeColor('danger')
-                ->badge(Task::query()->where('priority', Priority::HIGH)->where('employee_id', auth()->id())->count()),
-            'Gemiddeld' => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::MEDIUM)->where('employee_id', auth()->id()))
+                ->badge(Task::query()->where('employee_id', auth()->id())->count()),
+
+            'Aangemaakt door mij' => Tab::make()
+                ->ModifyQueryUsing(fn(Builder $query) => Task::query()->where('make_by_employee_id', auth()->id()))
                 ->badgeColor('warning')
-                ->badge(Task::query()->where('priority', Priority::MEDIUM)->where('employee_id', auth()->id())->count()),
-            'Laag'      => Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('priority', Priority::LOW)->where('employee_id', auth()->id()))
-                ->badgeColor('success')
-                ->badge(Task::query()->where('priority', Priority::LOW)->where('employee_id', auth()->id())->count()),
-        ];
+                ->badge(Task::query()->where('make_by_employee_id', auth()->id())->count()),
+          ];
     }
 
 }
