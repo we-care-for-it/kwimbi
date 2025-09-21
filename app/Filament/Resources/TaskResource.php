@@ -252,7 +252,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                 
 ImageColumn::make('employee.avatar')
   ->size(30)
-->tooltip(fn($record) => "Toegewezen aan door: ".$record->employee->name)
+->tooltip(fn($record) => "Toegewezen aan door: ".$record?->employee?->name)
 ->label('')
  
 ,
