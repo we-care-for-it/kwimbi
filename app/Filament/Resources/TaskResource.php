@@ -260,7 +260,7 @@ ImageColumn::make('employee.avatar')
 ImageColumn::make('make_by_employee.avatar')
   ->size(30)
    ->visible(fn () => request()->query('activeTab') !== 'Aangemaakt door mij')
-->tooltip(fn($record) => "Aangemaakt door: ".$record->make_by_employee->name)
+->tooltip(fn($record) => "Aangemaakt door: ".$record?->make_by_employee?->name)
 ->label('')
  
 ,
