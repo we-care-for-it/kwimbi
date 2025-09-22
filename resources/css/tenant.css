@@ -35,6 +35,12 @@
   background-color: rgb(252, 241, 241);
 }
 
+
+.table_row_warning {
+  background-color: rgb(255, 252, 216);
+}
+
+
 .fi-ac {
   float: right;
 }

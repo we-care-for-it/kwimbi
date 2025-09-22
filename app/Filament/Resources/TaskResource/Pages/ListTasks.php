@@ -11,11 +11,31 @@ use Filament\Support\Enums\MaxWidth;
 use Illuminate\Database\Eloquent\Builder;
 use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 use Illuminate\Support\Facades\Auth;
+
 class ListTasks extends ListRecords
 {
     use InteractsWithCustomFields;
     protected static string $resource = TaskResource::class;
     protected static ?string $title   = 'Alle acties';
+
+    protected $listeners = [
+    'filter-tasks' => 'applyFilter',
+];
+
+public $taskFilter = 'all';
+public $taskStatsActiveFilter = 'all'; // Voor visuele hint
+
+public function applyFilter($event)
+{
+    $filter = $event['type'] ?? 'all';
+    $this->taskFilter = $filter;
+    $this->taskStatsActiveFilter = $filter;
+
+    // Optioneel: scroll naar boven of focus tabel
+}
+
+
+
     protected function getHeaderActions(): array
     {
         return [
@@ -32,6 +52,14 @@ class ListTasks extends ListRecords
         return "Mijn taken - Overzicht";
     }
 
+protected function getHeaderWidgets(): array
+{
+    return [
+      \App\Filament\Resources\TaskResource\Widgets\TaskStats::class,
+       //\App\Filament\Resources\TaskResource\Widgets\TasksByPriorityChart::class,
+      //  \App\Filament\Resources\TaskResource\Widgets\TasksByPriorityPie::class,
+    ];
+}
 
  
 
