@@ -15,12 +15,7 @@ class UpcomingTaskStats extends BaseWidget
     protected static ?string $heading = 'Aankomende taken';
     protected static ?string $pollingInterval = '60s';
     protected int | string | array $columnSpan = '6';
- 
- protected ?string $tableHeight = '100px';
-protected function getTableWrapperClasses(): ?string
-{
-    return 'bg-white shadow rounded-lg p-4';
-}
+    protected ?string $tableHeight = '100px';
     
     protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
     {

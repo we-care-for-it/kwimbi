@@ -16,11 +16,9 @@ class TodayTaskStats extends BaseWidget
     protected static ?string $heading = 'Mijn taken vandaag';
     protected static ?string $pollingInterval = '60s';
     protected int | string | array $columnSpan = '6';
-protected ?string $tableHeight = '400px'; // fixed table height
+    protected ?string $tableHeight = '400px'; // fixed table height
 
     
- 
-
     protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
     {
         return Task::query()

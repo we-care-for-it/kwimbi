@@ -48,7 +48,7 @@ class TaskStats extends BaseWidget
 
             Card::make('Vandaag Te Doen', $todayTasks)
                 ->color('primary')
-                ->description('Taken die vandaag of eerder gestart moesten zijn')
+                ->description('Taken die vandaag gepland zijn')
                 ->descriptionIcon('heroicon-m-calendar-days'),
         
 
