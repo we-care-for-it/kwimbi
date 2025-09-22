@@ -19,7 +19,7 @@ enum TaskTypes: string implements HasLabel, HasColor, HasIcon
     public function getLabel(): string
     {
         return match ($this) {
-            self::CALL_NOTE => 'Terug bel notite',
+            self::CALL_NOTE => 'Bel notite',
             self::TODO => 'Taak',
             self::EMAIL => 'E-mail versturen',
             self::MEETING => 'Vergadering',
