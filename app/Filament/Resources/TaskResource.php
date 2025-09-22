@@ -23,9 +23,6 @@ use Illuminate\Support\Facades\Auth;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Relaticle\CustomFields\Filament\Forms\Components\CustomFieldsComponent;
-use App\Filament\Resources\TaskResource\Widgets\TaskStats;
-use App\Filament\Resources\TaskResource\Widgets\TasksByPriority;
-
 
 class TaskResource extends Resource implements HasShieldPermissions
 {
@@ -50,32 +47,13 @@ class TaskResource extends Resource implements HasShieldPermissions
         return (string) Task::where('employee_id', auth()->id())->count();
     }
 
-
-
-//   protected function getHeaderWidgets(): array
-//     {
-//         return [
-//             TaskResource\Widgets\TasksByPriority::class,
-//         ];
-//     }
-
-
     public static function getNavigationBadgeColor(): ?string
     {
         $count = Task::where('employee_id', auth()->id())->count();
 
-        if ($count === 0) {
-            return null;
-        }
-
-        if ($count < 5) {
-            return 'success';
-        }
-
-        if ($count < 10) {
-            return 'warning';
-        }
-
+        if ($count === 0) return null;
+        if ($count < 5) return 'success';
+        if ($count < 10) return 'warning';
         return 'danger';
     }
 
@@ -85,7 +63,7 @@ class TaskResource extends Resource implements HasShieldPermissions
             Textarea::make('description')
                 ->rows(3)
                 ->label('Uitgebreide omschrijving')
-                ->helperText(str('Beschrijf de actie of taak ')->inlineMarkdown()->toHtmlString())
+                ->helperText(str('Beschrijf de actie of taak')->inlineMarkdown()->toHtmlString())
                 ->columnSpanFull()
                 ->autosize(),
 
@@ -160,6 +138,11 @@ class TaskResource extends Resource implements HasShieldPermissions
 
     public static function table(Table $table): Table
     {
+        $today = Carbon::today();
+        $tomorrow = Carbon::tomorrow();
+        $nextWeekStart = Carbon::now()->addWeek()->startOfWeek();
+        $nextWeekEnd = Carbon::now()->addWeek()->endOfWeek();
+
         return $table
             ->defaultSort('id', 'desc')
             ->persistSortInSession()
@@ -256,31 +239,63 @@ class TaskResource extends Resource implements HasShieldPermissions
                         default => 'gray',
                     }),
             ])
-           ->filters([
-    SelectFilter::make('relation_id')
-        ->label('Relatie')
-        ->searchable()
-        ->options(fn() => \App\Models\Relation::all()
-            ->groupBy('type.name')
-            ->mapWithKeys(fn($group, $category) => [
-                $category => $group->pluck('name', 'id')->toArray(),
-            ])
-            ->toArray()
-        ),
+            ->filters([
+                SelectFilter::make('relation_id')
+                    ->label('Relatie')
+                    ->searchable()
+                    ->options(fn() => \App\Models\Relation::all()
+                        ->groupBy('type.name')
+                        ->mapWithKeys(fn($group, $category) => [
+                            $category => $group->pluck('name', 'id')->toArray(),
+                        ])
+                        ->toArray()
+                    ),
 
-    // 🆕 Start Today filter
-    \Filament\Tables\Filters\Filter::make('start_today')
-        ->label('Start vandaag')
-        ->query(fn($query) => $query->whereDate('begin_date', now()->toDateString())),
+                SelectFilter::make('status_filter')
+                    ->label('Status')
+                    ->options([
+                        'onbekend'         => 'Onbekend',
+                        'verlopen'         => 'Verlopen',
+                        'nog_niet_gestart' => 'Nog niet gestart',
+                        'gestart'          => 'Gestart',
+                    ])
+                    ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
+                        $value = $data['status_filter'] ?? null;
+                        if (! $value) return;
 
-    // 🆕 Coming Up filter
-    \Filament\Tables\Filters\Filter::make('coming_up')
-        ->label('Komende taken')
-        ->query(fn($query) => $query->whereDate('begin_date', '>', now()->toDateString())),
+                        switch ($value) {
+                            case 'onbekend':
+                                $query->whereNull('begin_date')->whereNull('deadline');
+                                break;
+                            case 'verlopen':
+                                $query->whereNotNull('deadline')->where('deadline', '<', now()->startOfDay());
+                                break;
+                            case 'nog_niet_gestart':
+                                $query->whereNotNull('begin_date')->where('begin_date', '>', now()->endOfDay());
+                                break;
+                            case 'gestart':
+                                $query->whereNotNull('begin_date')
+                                    ->where('begin_date', '<=', now()->endOfDay())
+                                    ->where(fn($sub) => $sub->whereNull('deadline')->orWhere('deadline', '>=', now()->startOfDay()));
+                                break;
+                        }
+                    }),
 
-    TrashedFilter::make(),
-], layout: FiltersLayout::Modal)
-            ->filtersFormColumns(3)
+                SelectFilter::make('delete')
+                    ->label('Status')
+                    ->options([
+                        'open'   => 'Open taken',
+                        'closed' => 'Voltooide taken',
+                        'all'    => 'Alle taken',
+                    ])
+                    ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data) {
+                        $values = $data['values'] ?? [];
+                        if (in_array('open', $values)) $query->orWhereNull('deleted_at');
+                        if (in_array('closed', $values)) $query->orWhereNotNull('deleted_at');
+                        if (in_array('all', $values)) $query->withTrashed();
+                    }),
+            ], layout: FiltersLayout::Modal)
+            ->filtersFormColumns(2)
             ->actions([
                 EditAction::make()
                     ->modalHeading('Taak Bewerken')
@@ -299,9 +314,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                     ->modalDescription('Weet je zeker dat je deze actie wilt voltooien?')
                     ->modalIcon('heroicon-o-check')
                     ->requiresConfirmation()
-                    ->visible(fn($record) =>
-                        auth()->user()->can('compleet_any_task') || $record->employee_id === auth()->id()
-                    )
+                    ->visible(fn($record) => auth()->user()->can('compleet_any_task') || $record->employee_id === auth()->id())
                     ->action(fn($record) => $record->update(['deleted_at' => Carbon::now()])),
 
                 ActionGroup::make([
@@ -310,9 +323,7 @@ class TaskResource extends Resource implements HasShieldPermissions
                         ->color('danger')
                         ->modalHeading('Actie terug plaatsen')
                         ->modalDescription('Weet je zeker dat je deze actie wilt activeren'),
-                ])->visible(fn($record) =>
-                    auth()->user()->can('delete_any_task') || $record->employee_id === auth()->id()
-                ),
+                ])->visible(fn($record) => auth()->user()->can('delete_any_task') || $record->employee_id === auth()->id()),
             ])
             ->bulkActions([
                 BulkActionGroup::make([

@@ -34,11 +34,7 @@ class TaskStats extends BaseWidget
             ->where('begin_date', '>', $today)
             ->count();
 
-        // Helper functie voor actieve klasse
-        $getCardClass = fn($type) => 'bg-white shadow-lg rounded-xl text-gray-800 cursor-pointer' . 
-            ($this->activeFilter === $type ? ' border-2 border-primary' : '');
-
-        return [
+         return [
             Card::make('Totaal Taken', $total)
                 ->description('Alle taken die aan jou zijn toegewezen')
                 ->descriptionIcon('heroicon-m-clipboard-document-list'),
@@ -47,29 +43,20 @@ class TaskStats extends BaseWidget
             Card::make('Voltooide Taken', $completed)
                 ->description('Afgeronde en gearchiveerde taken')
                 ->descriptionIcon('heroicon-m-check-circle')
-                ->color('success')
-                ->extraAttributes([
-                    'class' => $getCardClass('completed'),
-                    'wire:click' => "\$dispatch('filter-tasks', { type: 'completed' })",
-                ]),
+                ->color('success'),
+           
 
             Card::make('Vandaag Te Doen', $todayTasks)
                 ->color('primary')
                 ->description('Taken die vandaag of eerder gestart moesten zijn')
-                ->descriptionIcon('heroicon-m-calendar-days')
-                ->extraAttributes([
-                    'class' => $getCardClass('today'),
-              'wire:click' => "\$dispatch('filter-tasks', 'today')",
-                ]),
+                ->descriptionIcon('heroicon-m-calendar-days'),
+        
 
             Card::make('Komende Taken', $upcoming)
                 ->color('secondary')
                 ->description('Taken die later starten')
-                ->descriptionIcon('heroicon-m-clock')
-                ->extraAttributes([
-                    'class' => $getCardClass('upcoming'),
-                    'wire:click' => "\$dispatch('filter-tasks', { type: 'upcoming' })",
-                ]),
+                ->descriptionIcon('heroicon-m-clock'),
+              
         ];
     }
 }
