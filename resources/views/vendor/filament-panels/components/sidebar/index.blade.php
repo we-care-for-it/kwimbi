@@ -124,8 +124,12 @@
             </div>
         @endif
         <center>
-        <img  style = "    position: relative;
-  width: 100px;"  src = "{{asset('storage/'.setting('company_logo'))}}">
+ 
+
+<!-- <img 
+    class="sidebar-logo transition-all duration-300" 
+    src="{{ asset('storage/' . setting('company_logo')) }}" 
+    alt="Bedrijfslogo"> -->
 
 
 

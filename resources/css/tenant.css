@@ -12,7 +12,15 @@
   @apply bg-gray-50 dark:bg-gray-950 !important;
 }
 
+/* Normal state */
+.sidebar-logo {
+    width: 200px; /* Adjust to your full menu width */
+}
 
+/* Collapsed state */
+[data-sidebar-collapsed="true"] .sidebar-logo {
+    width: 50px; /* Smaller size when collapsed */
+}
 
 .fi-topbar {
   font-weight: normal !important;
