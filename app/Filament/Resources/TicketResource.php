@@ -378,7 +378,7 @@ class TicketResource extends Resource
                     ->options(TicketStatus::class),
                 SelectFilter::make('type_id')
                     ->label('Type')
-                    ->options(ticketType::pluck('name', 'id')),
+                    ->options(TicketTypes::class),
 
                 SelectFilter::make('department_id')
                     ->label('Afdeling')

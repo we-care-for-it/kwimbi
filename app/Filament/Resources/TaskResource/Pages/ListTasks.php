@@ -11,13 +11,14 @@ use Filament\Support\Enums\MaxWidth;
 use Illuminate\Database\Eloquent\Builder;
 use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
 use Illuminate\Support\Facades\Auth;
+use Asmit\ResizedColumn\HasResizableColumn;
 
 class ListTasks extends ListRecords
 {
     use InteractsWithCustomFields;
     protected static string $resource = TaskResource::class;
     protected static ?string $title   = 'Alle acties';
-
+    use HasResizableColumn;
     
     protected function getHeaderActions(): array
     {

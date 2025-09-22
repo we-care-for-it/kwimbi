@@ -20,34 +20,34 @@ class ListTickets extends ListRecords
     //     ];
     // }
 
-    public function getTabs(): array
-    {
+    // public function getTabs(): array
+    // {
 
-        $ticketStatuses = TicketStatus::cases();
+    //     $ticketStatuses = TicketStatus::cases();
 
-      foreach ($ticketStatuses as $ticketStatus) {
-          $tabs[$ticketStatus->getLabel()] = Tab::make()
-                ->ModifyQueryUsing(fn(Builder $query) => $query->where('status_id', $ticketStatus->value))
-                ->badge(Ticket::query()->where('status_id', $ticketStatus->value)->count());
-        }
+    //   foreach ($ticketStatuses as $ticketStatus) {
+    //       $tabs[$ticketStatus->getLabel()] = Tab::make()
+    //             ->ModifyQueryUsing(fn(Builder $query) => $query->where('status_id', $ticketStatus->value))
+    //             ->badge(Ticket::query()->where('status_id', $ticketStatus->value)->count());
+    //     }
 
-        $tabs['Hoog'] = Tab::make()
-            ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 1))
-            ->badgeColor('danger')
-            ->badge(Ticket::query()->where('prio', 1)->count());
+    //     $tabs['Hoog'] = Tab::make()
+    //         ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 1))
+    //         ->badgeColor('danger')
+    //         ->badge(Ticket::query()->where('prio', 1)->count());
 
-        $tabs['Gemiddeld'] = Tab::make()
-            ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 21))
-            ->badgeColor('warning')
-            ->badge(Ticket::query()->where('prio', 2)->count());
+    //     $tabs['Gemiddeld'] = Tab::make()
+    //         ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 21))
+    //         ->badgeColor('warning')
+    //         ->badge(Ticket::query()->where('prio', 2)->count());
 
-        $tabs['Laag'] = Tab::make()
-            ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 3))
-            ->badgeColor('success')
-            ->badge(Ticket::query()->where('prio', 3)->count());
+    //     $tabs['Laag'] = Tab::make()
+    //         ->ModifyQueryUsing(fn(Builder $query) => $query->where('prio', 3))
+    //         ->badgeColor('success')
+    //         ->badge(Ticket::query()->where('prio', 3)->count());
 
-        return $tabs;
-    }
+    //     return $tabs;
+    // }
 
     // public function getTabs(): array
     // {
