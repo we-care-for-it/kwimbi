@@ -48,31 +48,27 @@ class Task extends Model implements HasCustomFields
 
 protected static function booted()
 {
-    static::creating(function ($model) {
-        $model->make_by_employee_id = auth()->id();
+static::creating(function ($model) {
+    $model->make_by_employee_id = auth()->id();
 
-        if ($model->employee?->email) {
-            // Bepaal subject
-            $subject = ($model->employee_id != auth()->id())
-                ? "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel')
-                : "Taak aangemaakt: " . ($model->title ?? 'Geen titel');
+    // Alleen mail verzenden als de taak aan iemand anders wordt toegewezen
+    if ($model->employee_id != auth()->id() && $model->employee?->email) {
+        $subject = "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel');
 
-            Mail::to($model->employee->email)
-                ->send(new ActionToUser($model, $subject));
-        }
-    });
+        Mail::to($model->employee->email)
+            ->send(new ActionToUser($model, $subject));
+    }
+});
 
-    static::updating(function ($model) {
-        if ($model->employee?->email) {
-            // Bepaal subject bij update
-            $subject = ($model->employee_id != auth()->id())
-                ? "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel')
-                : "Taak geupdate: " . ($model->title ?? 'Geen titel');
+static::updating(function ($model) {
+    // Alleen mail verzenden als de taak aan iemand anders wordt toegewezen
+    if ($model->employee_id != auth()->id() && $model->employee?->email) {
+        $subject = "🚨 Taak toegewezen aan jou: " . ($model->title ?? 'Geen titel');
 
-            Mail::to($model->employee->email)
-                ->send(new ActionToUser($model, $subject));
-        }
-    });
+        Mail::to($model->employee->email)
+            ->send(new ActionToUser($model, $subject));
+    }
+});
 }
 
     public function employee()
