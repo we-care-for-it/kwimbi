@@ -76,7 +76,7 @@ class Relation extends Model implements HasCustomFields
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'model_id', 'id')->where('model', 'relation');
+        return $this->hasMany(Task::class, 'relation_id', 'id');
     }
 
     public function company()

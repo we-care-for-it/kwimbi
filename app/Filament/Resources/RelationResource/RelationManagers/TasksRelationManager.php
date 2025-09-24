@@ -40,8 +40,14 @@ class TasksRelationManager extends RelationManager
 
     public static function getBadge(Model $ownerRecord, string $pageClass): ?string
     {
-        return (string) Task::where('employee_id', auth()->id())->count();
+        return $ownerRecord->tasks()->where('employee_id', auth()->id())->count();
     }
+
+    public static function isBadgeLive(): bool
+{
+    return true; 
+}
+
 
     public function form(Form $form): Form
     {
@@ -53,39 +59,39 @@ class TasksRelationManager extends RelationManager
                 ->columnSpanFull()
                 ->autosize(),
 
-            Select::make('location_id')
-                ->label('Locatie')
-                ->options(fn () => RelationLocation::query()
-                    ->where('relation_id', $this->getOwnerRecord()->id)
-                    ->get()
-                    ->mapWithKeys(fn ($location) => [
-                        $location->id => collect([
-                            $location->address,
-                            $location->zipcode,
-                            $location->place,
-                        ])->filter()->implode(', '),
-                    ])
-                    ->toArray()
-                )
-                ->reactive()
-                ->visible(fn () => setting('tasks_in_location') ?? false)
-                ->placeholder('Selecteer een locatie'),
+            // Select::make('location_id')
+            //     ->label('Locatie')
+            //     ->options(fn () => RelationLocation::query()
+            //         ->where('relation_id', $this->getOwnerRecord()->id)
+            //         ->get()
+            //         ->mapWithKeys(fn ($location) => [
+            //             $location->id => collect([
+            //                 $location->address,
+            //                 $location->zipcode,
+            //                 $location->place,
+            //             ])->filter()->implode(', '),
+            //         ])
+            //         ->toArray()
+            //     )
+            //     ->reactive()
+            //     ->visible(fn () => setting('tasks_in_location') ?? false)
+            //     ->placeholder('Selecteer een locatie'),
 
-            Select::make('model_id')
-                ->options(Project::pluck('name', 'id'))
-                ->visible(fn (Get $get) => $get('model') === 'project')
-                ->label('Project'),
+            // Select::make('model_id')
+            //     ->options(Project::pluck('name', 'id'))
+            //     ->visible(fn (Get $get) => $get('model') === 'project')
+            //     ->label('Project'),
 
-            Select::make('model_id')
-                ->options(Contact::pluck('first_name', 'id'))
-                ->searchable()
-                ->visible(fn (Get $get) => $get('model') === 'contactperson')
-                ->label('Contactpersoon'),
+            // Select::make('model_id')
+            //     ->options(Contact::pluck('first_name', 'id'))
+            //     ->searchable()
+            //     ->visible(fn (Get $get) => $get('model') === 'contactperson')
+            //     ->label('Contactpersoon'),
 
-            Select::make('model_id')
-                ->options(ObjectLocation::pluck('name', 'id'))
-                ->visible(fn (Get $get) => $get('model') === 'location')
-                ->label('Locatie'),
+            // Select::make('model_id')
+            //     ->options(ObjectLocation::pluck('name', 'id'))
+            //     ->visible(fn (Get $get) => $get('model') === 'location')
+            //     ->label('Locatie'),
 
             Select::make('employee_id')
                 ->options(User::pluck('name', 'id'))
@@ -195,8 +201,8 @@ class TasksRelationManager extends RelationManager
                     ->slideover()
                     ->mutateFormDataUsing(fn (array $data): array => [
                         ...$data,
-                        'model_id' => $this->getOwnerRecord()->id,
-                        'model'    => 'relation',
+                        'relation_id' => $this->getOwnerRecord()->id,
+                        'employee_id'    => auth()->id(),
                     ]),
             ])
             ->filters([
