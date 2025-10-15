@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\ObjectInspection;
+use App\Models\ElevatorInspection;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ObjectInspectionPolicy
@@ -21,7 +21,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ObjectInspection $objectInspection): bool
+    public function view(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('view_object::inspection');
     }
@@ -37,7 +37,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ObjectInspection $objectInspection): bool
+    public function update(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('update_object::inspection');
     }
@@ -45,7 +45,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ObjectInspection $objectInspection): bool
+    public function delete(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('delete_object::inspection');
     }
@@ -61,7 +61,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, ObjectInspection $objectInspection): bool
+    public function forceDelete(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('force_delete_object::inspection');
     }
@@ -77,7 +77,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, ObjectInspection $objectInspection): bool
+    public function restore(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('restore_object::inspection');
     }
@@ -93,7 +93,7 @@ class ObjectInspectionPolicy
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, ObjectInspection $objectInspection): bool
+    public function replicate(User $user, ElevatorInspection $objectInspection): bool
     {
         return $user->can('replicate_object::inspection');
     }

@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Enums\ElevatorStatus;
 use App\Enums\InspectionStatus;
-use App\Models\ObjectInspection;
+ 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

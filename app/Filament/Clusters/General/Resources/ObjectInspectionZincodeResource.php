@@ -3,9 +3,9 @@
 namespace App\Filament\Clusters\General\Resources;
 
 use App\Filament\Clusters\General;
-use App\Filament\Clusters\General\Resources\ObjectInspectionZincodeResource\Pages;
-use App\Filament\Clusters\General\Resources\ObjectInspectionZincodeResource\RelationManagers;
-use App\Models\ObjectInspectionZincode;
+use App\Filament\Clusters\General\Resources\ElevatorInspectionZincodeResource\Pages;
+use App\Filament\Clusters\General\Resources\ElevatorInspectionZincodeResource\RelationManagers;
+use App\Models\ElevatorInspectionZincode;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -23,9 +23,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
 
-class ObjectInspectionZincodeResource extends Resource
+class ElevatorInspectionZincodeResource extends Resource
 {
-    protected static ?string $model = ObjectInspectionZincode::class;
+    protected static ?string $model = ElevatorInspectionZincode::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $cluster = General::class;
     protected static ? string $navigationGroup = 'Keuringen';
@@ -94,9 +94,9 @@ class ObjectInspectionZincodeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListObjectInspectionZincodes::route('/'),
-          //  'create' => Pages\CreateObjectInspectionZincode::route('/create'),
-          //  'edit' => Pages\EditObjectInspectionZincode::route('/{record}/edit'),
+            'index' => Pages\ListElevatorInspectionZincodes::route('/'),
+          //  'create' => Pages\CreateElevatorInspectionZincode::route('/create'),
+          //  'edit' => Pages\EditElevatorInspectionZincode::route('/{record}/edit'),
         ];
     }
 }

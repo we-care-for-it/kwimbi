@@ -5,7 +5,7 @@ use App\Enums\ElevatorStatus;
 
  use App\Models\ObjectsDocument;
 use App\Enums\InspectionStatus;
-use App\Models\ObjectInspection;
+use App\Models\ElevatorInspection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,7 +61,7 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 
     public function latestInspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'object_id')->latest('end_date');
+        return $this->hasOne(ElevatorInspection::class, 'object_id')->latest('end_date');
     }
 
     public function employee()
@@ -144,12 +144,12 @@ class ObjectsAsset extends Model implements Auditable, HasMedia, HasCustomFields
 
     public function inspections()
     {
-        return $this->hasMany(ObjectInspection::class, 'object_id', 'id')->orderby('end_date', 'desc');
+        return $this->hasMany(ElevatorInspection::class, 'object_id', 'id')->orderby('end_date', 'desc');
     }
 
     public function inspection()
     {
-        return $this->hasOne(ObjectInspection::class, 'id', 'object_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
+        return $this->hasOne(ElevatorInspection::class, 'id', 'object_id')->orderBy('end_date', 'desc')->orderBy('executed_datetime', 'desc');
     }
 
     // protected static function boot(): void

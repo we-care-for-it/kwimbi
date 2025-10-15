@@ -375,40 +375,8 @@ ViewColumn::make('fire_elevator')->view('filament.tables.columns.elevators.prope
                     ->searchable(),
 
  
-                TextColumn::make("drive_type")
-                    ->label("Aandrijving")
-                    ->visible(function ($record) {
-                            return setting('environment_elevator');
-                    })
-                    ->badge()
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),
-
-               
-                TextColumn::make("stopping_places")
-                    ->label("Stopplaasen")
-                    ->visible(function ($record) {
-                            return setting('environment_elevator');
-                    })
-                    ->badge()
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(),     
-    
         
 
-ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')      ->label("Energylabel")
-           
-                    ->placeholder("-")
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable()     ->visible(function ($record) {
-                            return setting('environment_elevator');
-                    }),
-     
  
 
 

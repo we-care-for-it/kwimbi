@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('customer_id')->nullable();
             $table->integer('supplier_id')->nullable();
             $table->integer('location_id')->nullable();
-            // $table->integer('management_company_id')->nullable();
+            $table->integer('management_company_id')->nullable();
 
             $table->integer('object_type_id')->nullable();
             $table->integer('speakconnection')->nullable();

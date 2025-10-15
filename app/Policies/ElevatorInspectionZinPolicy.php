@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Elevator;
+use App\Models\ElevatorInspectionZin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ElevatorPolicy
+class ElevatorInspectionZinPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class ElevatorPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_elevator');
+        return $user->can('view_any_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Elevator $elevator): bool
+    public function view(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('view_elevator');
+        return $user->can('view_elevator::inspection::zin');
     }
 
     /**
@@ -31,23 +31,23 @@ class ElevatorPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_elevator');
+        return $user->can('create_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Elevator $elevator): bool
+    public function update(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('update_elevator');
+        return $user->can('update_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Elevator $elevator): bool
+    public function delete(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('delete_elevator');
+        return $user->can('delete_elevator::inspection::zin');
     }
 
     /**
@@ -55,15 +55,15 @@ class ElevatorPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_elevator');
+        return $user->can('delete_any_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Elevator $elevator): bool
+    public function forceDelete(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('force_delete_elevator');
+        return $user->can('force_delete_elevator::inspection::zin');
     }
 
     /**
@@ -71,15 +71,15 @@ class ElevatorPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_elevator');
+        return $user->can('force_delete_any_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Elevator $elevator): bool
+    public function restore(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('restore_elevator');
+        return $user->can('restore_elevator::inspection::zin');
     }
 
     /**
@@ -87,15 +87,15 @@ class ElevatorPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_elevator');
+        return $user->can('restore_any_elevator::inspection::zin');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Elevator $elevator): bool
+    public function replicate(User $user, ElevatorInspectionZin $elevatorInspectionZin): bool
     {
-        return $user->can('replicate_elevator');
+        return $user->can('replicate_elevator::inspection::zin');
     }
 
     /**
@@ -103,6 +103,6 @@ class ElevatorPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_elevator');
+        return $user->can('reorder_elevator::inspection::zin');
     }
 }

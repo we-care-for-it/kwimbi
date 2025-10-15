@@ -1,7 +1,7 @@
 <?php
 namespace App\Console\Commands;
 
-use App\Models\ObjectsAsset;
+use App\Models\Elevator;
 use App\Models\external;
 use App\Models\ExternalApiLog;
 use DB;
@@ -47,12 +47,12 @@ class ImportChex extends Command
                             break;
                     }
 
-                    $elevator_information = ObjectsAsset::where(
+                    $elevator_information = Elevator::where(
                         "nobo_no",
                         $item->objectId
                     )->first();
 
-                    $inspection_insert = DB::table('object_inspections')->updateOrInsert(
+                    $inspection_insert = DB::table('elevator_inspections')->updateOrInsert(
                         ["external_uuid" => $item->inspectionId],
 
                         [
@@ -69,7 +69,7 @@ class ImportChex extends Command
                         ]
                     );
 
-                    $inspection_data_from_db = DB::table('object_inspections')
+                    $inspection_data_from_db = DB::table('elevator_inspections')
                         ->where('status_id', $status_id)
                         ->where('nobo_number', $item->objectId)
                         ->where('object_id', $elevator_information?->id)
@@ -86,7 +86,7 @@ class ImportChex extends Command
                     ])->get($url);
 
                     $records       = json_decode($response->getBody())->result;
-                    $inspection_id = DB::table('object_inspections')->where(
+                    $inspection_id = DB::table('elevator_inspections')->where(
                         "external_uuid",
                         $item->inspectionId
                     )->update([
@@ -96,18 +96,18 @@ class ImportChex extends Command
 
                     //Check of of er goedgekeurd is met acties
                     if ($records->comments && $status_id == 1) {
-                        DB::table('object_inspections')->where('external_uuid', $item->inspectionId)->update(['status_id' => 2]);
+                        DB::table('elevator_inspections')->where('external_uuid', $item->inspectionId)->update(['status_id' => 2]);
                     }
 
                     foreach ($records->comments as $item) {
                         if ($item->status == "Herhaling") {
-                            DB::table('object_inspections')->where(
+                            DB::table('elevator_inspections')->where(
                                 "external_uuid",
                                 $inspection_data_from_db->external_uuid
                             )->update(["status_id" => 6]);
                         }
 
-                        DB::table('object_inspection_data')->updateOrInsert(
+                        DB::table('elevator_inspection_data')->updateOrInsert(
                             [
                                 "inspection_id" => $inspection_data_from_db->id,
                                 "zin_code"      => $item->code,
@@ -137,7 +137,7 @@ class ImportChex extends Command
 
             ExternalApiLog::insert(
                 [
-                    "model"              => "ObjectInspection",
+                    "model"              => "ElevatorInspection",
                     "logitem"            => $logitem,
                     "model_sub"          => 'Chex',
                     "status_id"          => '1',

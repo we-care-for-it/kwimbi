@@ -168,6 +168,13 @@
                <p class="text-sm text-gray-600">Koppelings instellingen</p>
             </div>
          </a>
+         <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/elevator-inspection-zins">
+            <img  src = "/images/connections/elevators/modusystem.png"   class = "max-h-12">
+            <div>
+               <h2>ZIN CODES </h2>
+               <p class="text-sm text-gray-600">Koppelings instellingen</p>
+            </div>
+         </a>
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="/connection/elevators/liftinstituut">
             <img  src = "/images/connections/elevators/liftinstituut-logo-41197.webp"   class = "max-h-12">
             <div>
