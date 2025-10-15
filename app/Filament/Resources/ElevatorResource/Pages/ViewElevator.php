@@ -111,6 +111,7 @@ class ViewElevator extends ViewRecord
                 Actions\EditAction::make('cancel_top')
 
                     ->icon('heroicon-m-pencil-square')
+                    ->slideOver()
                     ->label('Wijzig'),
 
                 CommentsAction::make(),

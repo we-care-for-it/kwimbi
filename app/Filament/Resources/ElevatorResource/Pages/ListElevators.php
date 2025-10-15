@@ -4,13 +4,13 @@ namespace App\Filament\Resources\ElevatorResource\Pages;
 use App\Filament\Resources\ElevatorResource;
 use Filament\Resources\Pages\ListRecords;
 use Relaticle\CustomFields\Filament\Tables\Concerns\InteractsWithCustomFields;
-
+use Asmit\ResizedColumn\HasResizableColumn;
 class ListElevators extends ListRecords
 {
     protected static string $resource = ElevatorResource::class;
     use InteractsWithCustomFields;
     protected static ?string $title = 'Objecten';
-
+    use HasResizableColumn;
     // protected function getHeaderActions(): array
     // {
     //     return [
