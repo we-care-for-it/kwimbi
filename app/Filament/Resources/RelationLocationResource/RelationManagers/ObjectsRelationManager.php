@@ -70,12 +70,14 @@ class ObjectsRelationManager extends RelationManager
             ->schema([
 
                 Wizard::make([
-                    Step::make('Hardware informatie')
+                    Step::make('Object inforssmatie')
                         ->schema([
 
                             Select::make('type_id')
                                 ->label('Categorie')
-                                ->options(ObjectType::pluck('name', 'id'))
+  ->options(\App\Models\ObjectType::whereJsonContains('visibility', 'Locatie')->pluck('name', 'id')->toArray())
+  
+   
                                 ->reactive()
                                 ->required(),
                                 // ->afterStateUpdated(function (callable $set) {
@@ -143,17 +145,20 @@ class ObjectsRelationManager extends RelationManager
 
                         ])->columns(2),
 
+ 
 
 
 
-                    Step::make('Eigenschappen')
+
+                    Step::make('Lift Eigenschappen')
                         ->schema([
 
                             Grid::make(3)
 
                                 ->schema([
-
-  TextInput::make('stopping_places')->label('Aantal stopplaatsen')->integer(),
+ 
+                                    
+     TextInput::make('stopping_places')->label('Aantal stopplaatsen')->integer(),
     TextInput::make('carrying_capacity')->label('Draaggewicht ') ->integer(),
     Select::make('energy_label')->label('Energielabel ')
     
@@ -199,7 +204,13 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                 ])
                                    ])  ->visible(function ($record) {
                                     return setting('environment_elevator');
-                                }),
+                                })  ->visible(fn (callable $get) => 
+
+        $get('type_id') &&
+        \App\Models\ObjectType::where('id', $get('type_id'))
+            ->whereJsonContains('options', 'Liften')
+            ->exists()
+    ),
  
 
                     Step::make('Toewijzing')
@@ -430,8 +441,9 @@ ViewColumn::make('energy_label')->view('filament.tables.columns.energylabel')   
                 Tables\Actions\CreateAction::make()
                     ->link()
                     ->modalHeading('Object aanmaken')
-                    ->modalDescription('Koppel vaste objecten aan een locatie of een medewerker. Wil je objecten koppelen aan aan een medewerker of locatie? Maak dan eerst een medewerker of locatie aan.')
+                 //   ->modalDescription('Koppel vaste objecten aan een locatie of een medewerker. Wil je objecten koppelen aan aan een medewerker of locatie? Maak dan eerst een medewerker of locatie aan.')
                     ->label('Toevoegen')
+                    ->slideOver()
                     ->icon('heroicon-m-plus')
                             ->mutateFormDataUsing(function (array $data): array {
 

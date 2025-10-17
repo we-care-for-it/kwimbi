@@ -1,5 +1,8 @@
 @props([
     'navigation',
+        'sidebarCollapsible' => true,
+            'label' => null,
+
 ])
 
 @php
@@ -71,6 +74,8 @@
             </div>
 
             @if (filament()->isSidebarCollapsibleOnDesktop())
+
+            
                 <x-filament::icon-button
                     color="white"
                     :icon="$isRtl ? 'heroicon-o-chevron-left' : 'heroicon-o-chevron-right'"
@@ -125,14 +130,13 @@
         @endif
         <center>
  
-
+ 
 <!-- <img 
     class="sidebar-logo transition-all duration-300" 
     src="{{ asset('storage/' . setting('company_logo')) }}" 
     alt="Bedrijfslogo"> -->
-
-
-
+ 
+                
   </center>
         <ul class="fi-sidebar-nav-groups -mx-2 flex flex-col gap-y-7">
             @foreach ($navigation as $group)
@@ -145,14 +149,48 @@
                     :attributes="\Filament\Support\prepare_inherited_attributes($group->getExtraSidebarAttributeBag())"
                 />
             @endforeach
-        </ul>
+        </ul> 
+    
+<div id = ""class="flex flex-col p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
+    @php $user = auth()->user(); @endphp
+ 
 
+    @php
+    $sidebarCollapsible = $sidebarCollapsible && filament()->isSidebarCollapsibleOnDesktop();
+    $hasDropdown = filled($label) && filled($icon) && $sidebarCollapsible;
+@endphp
+
+   @if ($sidebarCollapsible)
+ssssssssss
+   @endif
+
+    {{-- Avatar + user info --}}
+    <div class="flex items-center gap-3">
+        <img
+            src="{{ $user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
+            alt="{{ $user->name }}"
+            class="w-8 h-8 rounded-full"
+        >
+
+        {{-- User info (name & email) --}}
+        <div class="flex flex-col ml-2 sidebar-user-info transition-all duration-200">
+            <p class="text-gray-900 dark:text-white text-sm sidebar-user-name">{{ $user->name }}</p>
+            <p class="text-gray-500 dark:text-gray-400 text-xs sidebar-user-email">{{ $user->email }}</p>
+        </div>
+    </div>
+</div>
+
+        
         <script>
             var collapsedGroups = JSON.parse(
                 localStorage.getItem('collapsedGroups'),
+             
             )
 
             if (collapsedGroups === null || collapsedGroups === 'null') {
+
+                   alert('sad');
+
                 localStorage.setItem(
                     'collapsedGroups',
                     JSON.stringify(@js(
@@ -167,6 +205,7 @@
 
             collapsedGroups = JSON.parse(
                 localStorage.getItem('collapsedGroups'),
+
             )
 
             document
@@ -186,6 +225,8 @@
                     group
                         .querySelector('.fi-sidebar-group-collapse-button')
                         .classList.add('rotate-180')
+
+                 
                 })
         </script>
 
@@ -195,3 +236,4 @@
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_FOOTER) }}
 </aside>
 {{-- format-ignore-end --}}
+ 

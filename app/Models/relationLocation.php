@@ -42,6 +42,8 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
         return $this->hasMany(ObjectsAsset::class, 'location_id', 'id');
     }
 
+ 
+
     public function relation()
     {
         return $this->belongsTo(Relation::class);

@@ -102,6 +102,10 @@ class Relation extends Model implements HasCustomFields
     {
         return $this->hasMany(ObjectsAsset::class, 'customer_id', 'id');
     }
+
+
+   
+
     public function contactsObject(): HasMany
     {
         return $this->hasMany(ContactObject::class, 'model_id', 'id');

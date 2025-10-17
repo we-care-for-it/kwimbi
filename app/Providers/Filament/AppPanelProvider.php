@@ -178,8 +178,8 @@ class AppPanelProvider extends PanelProvider
             ->path('')
    	
             ->maxContentWidth(MaxWidth::Full)
-  ->sidebarCollapsibleOnDesktop()
-        
+  ->sidebarCollapsibleOnDesktop(false)
+ 
             ->breadcrumbs(true)
  ->plugins([
               
@@ -200,8 +200,7 @@ FilamentSocialitePlugin::make()
 
         
                     ]) 
-
-   ->sidebarCollapsibleOnDesktop()
+ 
  
    ->topNavigation(setting('portal_menu_position') ?? false) 
  

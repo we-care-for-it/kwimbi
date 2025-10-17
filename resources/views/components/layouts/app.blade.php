@@ -75,6 +75,15 @@
             --collapsed-sidebar-width: {{ filament()->getCollapsedSidebarWidth() }};
             --default-theme-mode: {{ filament()->getDefaultThemeMode()->value }};
         }
+
+
+
+
+
+
+
+
+        php artisan vendor:publish --tag=filament-views
     </style>
 
     @stack('styles')
