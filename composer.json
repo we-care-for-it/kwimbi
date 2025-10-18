@@ -26,6 +26,7 @@
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
+        "jaysontemporas/page-bookmarks": "1.0",
         "joaopaulolndev/filament-edit-profile": "^1.0",
         "lara-zeus/tiles": "*",
         "laravel/framework": "^11.31",

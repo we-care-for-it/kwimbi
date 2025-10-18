@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd73c8a40bbe4b091bfa626458010368",
+    "content-hash": "5123f8041a74577f12c80bb97c813b82",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3815,6 +3815,56 @@
                 "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.3.6"
             },
             "time": "2025-09-30T16:22:43+00:00"
+        },
+        {
+            "name": "jaysontemporas/page-bookmarks",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jayson-temporas/page-bookmarks.git",
+                "reference": "adcbfeebe0c604ede707cb903da9af5e612c4252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jayson-temporas/page-bookmarks/zipball/adcbfeebe0c604ede707cb903da9af5e612c4252",
+                "reference": "adcbfeebe0c604ede707cb903da9af5e612c4252",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.2",
+                "spatie/laravel-package-tools": "^1.18"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.17",
+                "php": "^8.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jaysontemporas\\PageBookmarks\\PageBookmarksServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jaysontemporas\\PageBookmarks\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jayson Temporas"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/jayson-temporas/page-bookmarks/issues",
+                "source": "https://github.com/jayson-temporas/page-bookmarks/tree/v1.0.0"
+            },
+            "time": "2025-06-21T06:33:48+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
+use JaysonTemporas\PageBookmarks\Traits\HasBookmarks;
+
 
 class Relation extends Model implements HasCustomFields
 {
@@ -18,6 +20,7 @@ class Relation extends Model implements HasCustomFields
     use SoftDeletes;
     use HasFilamentComments;
     use UsesCustomFields;
+    use HasBookmarks;
     protected $fillable = [
         'name',
     ];

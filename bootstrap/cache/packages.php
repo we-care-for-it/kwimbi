@@ -206,6 +206,13 @@
       0 => 'Hasnayeen\\Themes\\ThemesServiceProvider',
     ),
   ),
+  'jaysontemporas/page-bookmarks' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Jaysontemporas\\PageBookmarks\\PageBookmarksServiceProvider',
+    ),
+  ),
   'jenssegers/agent' => 
   array (
     'aliases' => 
