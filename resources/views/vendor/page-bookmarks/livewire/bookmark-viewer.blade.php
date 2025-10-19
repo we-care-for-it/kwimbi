@@ -1,7 +1,7 @@
 <div class="flex">
     <x-filament::icon-button
         icon="{{ $this->getIcons()['view_bookmarks'] }}"
-        color="gray"
+        class="text-white transition-colors hover:text-primary-500"
         x-on:click="$dispatch('open-modal', { id: 'bookmark-items-modal' })"
     />
 
