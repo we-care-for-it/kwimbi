@@ -2,7 +2,7 @@
     <!-- Bookmark Icon Button -->
     <x-filament::icon-button
         icon="{{ $this->getIcons()['add_bookmark'] }}"
-        class="text-white transition-colors hover:text-primary-500"
+        class="text-white transition-colors hover:text-white"
         x-on:click="$dispatch('open-modal', { id: 'bookmark-form-modal' }); $nextTick(() => {
             // Try to get the title from h1 tag
             const h1 = document.querySelector('h1');
@@ -25,14 +25,14 @@
         id="bookmark-form-modal"
         width="md"
         :slide-over="config('page-bookmarks.modal.add_bookmark') === 'slideOver' ? true : false"
-        heading="Add Bookmark"
+        heading="Bladwijzer toevoegen"
     >
         <form wire:submit.prevent="save">
             {{ $this->form }}
 
             <div class="flex justify-end mt-6 gap-x-2">
                 <x-filament::button type="submit">
-                  Opslaan
+                    Opslaan
                 </x-filament::button>
             </div>
         </form>
