@@ -235,6 +235,13 @@
       0 => 'Joaopaulolndev\\FilamentEditProfile\\FilamentEditProfileServiceProvider',
     ),
   ),
+  'kirschbaum-development/commentions' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kirschbaum\\Commentions\\CommentionsServiceProvider',
+    ),
+  ),
   'kirschbaum-development/eloquent-power-joins' => 
   array (
     'providers' => 

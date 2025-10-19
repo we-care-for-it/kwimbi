@@ -142,7 +142,7 @@
                                             class="ml-auto"
                                         />
 
-                                               <span class="text-sm truncate" style = "color: red">Verwijder</span>
+                                               <span class="text-sm truncate" style = "color: red"></span>
 
                                 
                                 </div>

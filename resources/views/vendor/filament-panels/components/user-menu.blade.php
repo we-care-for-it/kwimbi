@@ -14,6 +14,99 @@
 
 {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_BEFORE) }}
 
+
+
+
+
+
+
+
+
+
+<x-filament::dropdown
+    placement="bottom-end"
+    teleport
+    :attributes="
+        \Filament\Support\prepare_inherited_attributes($attributes)
+            ->class(['fi-user-menu'])
+    "
+>
+    <x-slot name="trigger">
+        <button
+            aria-label="{{ __('filament-panels::layout.actions.open_user_menu.label') }}"
+            type="button"
+
+            class="shrink-0"
+        >
+        <svg style = "color: white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+</svg>
+
+        </button>
+    </x-slot>
+
+    @if ($profileItem?->isVisible() ?? true)
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_BEFORE) }}
+
+
+
+        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_AFTER) }}
+    @endif
+
+
+
+<!-- 
+
+    <x-filament::dropdown.list>
+
+
+    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/changelog"  icon="heroicon-o-document-text">
+    Changelog
+    </x-filament::dropdown.list.item>
+
+
+    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/feature-requests"  icon="heroicon-o-user">
+    Feature request
+    </x-filament::dropdown.list.item>
+
+
+    <x-filament::dropdown.list.item  href="https://kwimbi.instatus.com/"    icon="heroicon-o-server">
+    Serverstatus
+    </x-filament::dropdown.list.item>
+
+
+</x-filament::dropdown.list>
+ -->
+
+
+
+</x-filament::dropdown>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <button
+
+            type="button"
+
+            class="shrink-0"
+        >
+   <a href = "/settings">     <svg style = "color: white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+</svg></a>
+
+
+        </button>
+
 <x-filament::dropdown
     placement="bottom-end"
     teleport
@@ -95,95 +188,3 @@
         </x-filament::dropdown.list.item>
     </x-filament::dropdown.list>
 </x-filament::dropdown>
-
-
-
-
-
-
-
-
-
-<x-filament::dropdown
-    placement="bottom-end"
-    teleport
-    :attributes="
-        \Filament\Support\prepare_inherited_attributes($attributes)
-            ->class(['fi-user-menu'])
-    "
->
-    <x-slot name="trigger">
-        <button
-            aria-label="{{ __('filament-panels::layout.actions.open_user_menu.label') }}"
-            type="button"
-
-            class="shrink-0"
-        >
-        <svg style = "color: white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-</svg>
-
-        </button>
-    </x-slot>
-
-    @if ($profileItem?->isVisible() ?? true)
-        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_BEFORE) }}
-
-
-
-        {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::USER_MENU_PROFILE_AFTER) }}
-    @endif
-
-
-
-
-
-    <x-filament::dropdown.list>
-
-
-    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/changelog"  icon="heroicon-o-document-text">
-    Changelog
-    </x-filament::dropdown.list.item>
-
-
-    <x-filament::dropdown.list.item tag="a" href="https://kwimbi.canny.io/feature-requests"  icon="heroicon-o-user">
-    Feature request
-    </x-filament::dropdown.list.item>
-
-
-    <x-filament::dropdown.list.item  href="https://kwimbi.instatus.com/"    icon="heroicon-o-server">
-    Serverstatus
-    </x-filament::dropdown.list.item>
-
-
-</x-filament::dropdown.list>
-
-
-
-
-</x-filament::dropdown>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <button
-
-            type="button"
-
-            class="shrink-0"
-        >
-   <a href = "/settings">     <svg style = "color: white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-</svg></a>
-
-
-        </button>
