@@ -14,13 +14,13 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
- 
+ use JaysonTemporas\PageBookmarks\Traits\HasBookmarks;
 use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
-    use HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles, AuthenticationLoggable;
-
+    use HasBookmarks,HasFactory, Notifiable, LogsActivity, TwoFactorAuthenticatable, HasApiTokens, HasRoles, AuthenticationLoggable;
+  
     // public function newQuery()
     // {
     //     return parent::newQuery()->whereNot('id', 1);

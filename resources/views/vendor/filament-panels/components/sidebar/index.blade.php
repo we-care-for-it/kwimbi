@@ -160,18 +160,14 @@
     $hasDropdown = filled($label) && filled($icon) && $sidebarCollapsible;
 @endphp
 
-   @if ($sidebarCollapsible)
-ssssssssss
-   @endif
 
     {{-- Avatar + user info --}}
     <div class="flex items-center gap-3">
-        <img
-            src="{{ $user->avatar_url ?? 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
-            alt="{{ $user->name }}"
-            class="w-8 h-8 rounded-full"
-        >
-
+    <img
+        src="{{ $user->avatar_url ? '/storage/'.$user->avatar_url : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
+        alt="{{ $user->name }}"
+        class="w-8 h-8 rounded-full border border-gray-300"
+    />
         {{-- User info (name & email) --}}
         <div class="flex flex-col ml-2 sidebar-user-info transition-all duration-200">
             <p class="text-gray-900 dark:text-white text-sm sidebar-user-name">{{ $user->name }}</p>
