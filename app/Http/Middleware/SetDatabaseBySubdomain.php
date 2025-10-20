@@ -17,7 +17,6 @@ class SetDatabaseBySubdomain
         Config::set('database.connections.mysql');
        $tenant = Tenant::where('domain', $request->getHost())->where('is_active', 1)->first();
         Cache::put('tenant', $tenant);
-
  
 
         Config::set('database.connections.tenant', [
@@ -31,11 +30,10 @@ class SetDatabaseBySubdomain
              'strict'   => true,
              'engine'   => null,
          ]);
-
-         Config::set('database.default', 'tenant');
-         Config::set('app.url', $tenant->domain);
+         
+        Config::set('database.default', 'tenant');
+        Config::set('app.url', $tenant->domain);
         DB::setDefaultConnection('tenant');
-        DB::purge('tenant');
 
         return $next($request);
     }
