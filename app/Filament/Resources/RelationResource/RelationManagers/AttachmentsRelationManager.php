@@ -50,7 +50,8 @@ class AttachmentsRelationManager extends RelationManager
                     ->columnSpan(3)
                     ->preserveFilenames()
                     ->required()
-                    ->visibility('private')
+                    ->disk(config('filesystems.default')) // use the tenant disk
+                    ->downloadable()
                     ->directory(function () {
                         $parent_id = $this->getOwnerRecord()->id; // Assuming you've set up relationships with eloquent
                         return '/uploads/location/' . $parent_id . '/attachments';
@@ -84,7 +85,7 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()->mutateFormDataUsing(function (array $data): array {
                     $data['user_id']    = auth()->id();
                     $data['model']      = "Relation";
-                    $data['company_id'] = Filament::getTenant()->id;
+                //    $data['company_id'] = Filament::getTenant()->id;
                     return $data;
                 })->label('Bijlage toevoegen')
                     ->link()
@@ -96,7 +97,7 @@ class AttachmentsRelationManager extends RelationManager
                 Tables\Actions\Action::make('Download')
                     ->label('Download bestand')
 
-                    ->action(fn($record) => Storage::disk('private')
+                    ->action(fn($record) => Storage::disk(config('filesystems.default'))
                             ->download($record->filename))
                     ->icon('heroicon-o-document-arrow-down'),
 

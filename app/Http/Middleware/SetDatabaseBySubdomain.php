@@ -35,6 +35,26 @@ class SetDatabaseBySubdomain
         Config::set('app.url', $tenant->domain);
         DB::setDefaultConnection('tenant');
 
+
+        // Step 4: Configure storage for the tenant
+    $tenantDisk = 'tenant_' . $tenant->domain; // unique disk name per tenant
+    $tenantPath = storage_path('app/tenants/' . $tenant->domain);
+
+    // Dynamically add a disk for this tenant
+    Config::set("filesystems.disks.$tenantDisk", [
+        'driver' => 'local',
+        'root' => $tenantPath,
+    ]);
+
+    // Optionally, make it the default disk
+    Config::set('filesystems.default', $tenantDisk);
+
+    // Step 5: Ensure tenant directory exists
+    if (!file_exists($tenantPath)) {
+        mkdir($tenantPath, 0775, true);
+    }
+
+
         return $next($request);
     }
 
