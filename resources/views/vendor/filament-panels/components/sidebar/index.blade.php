@@ -185,8 +185,6 @@
 
             if (collapsedGroups === null || collapsedGroups === 'null') {
 
-                   alert('sad');
-
                 localStorage.setItem(
                     'collapsedGroups',
                     JSON.stringify(@js(
