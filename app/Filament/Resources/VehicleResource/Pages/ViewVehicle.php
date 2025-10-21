@@ -13,12 +13,12 @@ class ViewVehicle extends ViewRecord
     protected function getHeaderActions():
     array {
         return [
-            Action::make('back')
+            // Action::make('back')
 
-                ->label('Terug naar overzicht')
-                ->link()
-                ->url('/vehicles')
-                ->color('gray'),
+            //     ->label('Terug naar overzicht')
+            //     ->link()
+            //     ->url('/vehicles')
+            //     ->color('gray'),
             Actions\EditAction::make()->icon('heroicon-m-pencil-square')
             ,
             Actions\DeleteAction::make()->icon('heroicon-m-trash'),

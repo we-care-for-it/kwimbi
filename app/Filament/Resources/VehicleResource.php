@@ -36,8 +36,10 @@ class VehicleResource extends Resource
     protected static ?string $navigationLabel       = 'Voertuigen';
     protected static ?string $pluralModelLabel      = 'Voertuigen';
     protected static ?string $title                 = 'Voertuigen';
-    protected static ?string $navigationGroup       = 'Beheer';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup       = 'Mijn bedrijf';
+    protected static bool $shouldRegisterNavigation = true;
+
+
     public static function getGloballySearchableAttributes(): array
     {
         return ["kenteken"];
@@ -109,10 +111,10 @@ class VehicleResource extends Resource
                 Tabs\Tab::make('Datums')
                     ->icon('heroicon-m-bell')
                     ->schema([
-                        TextEntry::make('vervaldatum_apk')->label('Vervaldatum APK')->placeholder('-'),
-                        TextEntry::make('datum_tenaamstelling_dt')->label('Datum Tenaamstelling')->placeholder('-'),
-                        TextEntry::make('datum_eerste_toelating_dt')->label('Datum Eerste Toelating')->placeholder('-'),
-                        TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Eerste Tenaamstelling in Nederland')->placeholder('-'),
+                        TextEntry::make('vervaldatum_apk')->label('Vervaldatum APK')->placeholder('-')->date('d-m-Y') ,
+                        TextEntry::make('datum_tenaamstelling_dt')->label('Datum Tenaamstelling')->placeholder('-')->date('d-m-Y') ,
+                        TextEntry::make('datum_eerste_toelating_dt')->label('Datum Eerste Toelating')->placeholder('-')->date('d-m-Y') ,
+                        TextEntry::make('datum_eerste_tenaamstelling_in_nederland')->label('Datum Tenaamstelling in NL')->placeholder('-')->date('d-m-Y') ,
                         TextEntry::make('jaar_laatste_registratie_tellerstand')->label('Jaar Laatste Registratie Tellerstand')->placeholder('-'),
                     ])->columns(3),
 

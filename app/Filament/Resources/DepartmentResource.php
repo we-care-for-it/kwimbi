@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+
 class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
@@ -37,7 +38,8 @@ class DepartmentResource extends Resource
                     ->label("Locatie")
                     ->options(
                         Location::pluck("name", "id")
-                    ),
+                    )
+                    ->default(Location::orderBy('id')->value('id'))
 
             ]);
 

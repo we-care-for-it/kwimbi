@@ -17,12 +17,12 @@ class WarehouseResource extends Resource
     protected static ?string $model = warehouse::class;
 
     protected static ?string $navigationIcon        = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup       = 'Objecten';
     protected static ?int $navigationSort           = 7;
     protected static ?string $navigationLabel       = "Magazijnen";
     protected static ?string $title                 = "Magazijnen";
     protected static ?string $pluralModelLabel      = 'Magazijnen';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup       = 'Mijn bedrijf';
+    protected static bool $shouldRegisterNavigation = true;
 
     public static function form(Form $form): Form
     {
@@ -42,7 +42,8 @@ class WarehouseResource extends Resource
                     )->columnSpan("full"),
                 Forms\Components\Toggle::make('is_active')
                     ->label('Actief')
-                    ->default(true),
+                    ->default(Location::orderBy('id')->value('id'))
+
 
             ]);
     }

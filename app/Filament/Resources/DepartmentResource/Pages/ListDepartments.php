@@ -14,16 +14,8 @@ class ListDepartments extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-
-            Action::make('back')
-                ->label('Terug naar mijn bedrijf')
-                ->link()
-                ->url(url()->previous())
-                ->color('gray'),
-
             Actions\CreateAction::make()
                 ->label('Afdeling toevoegen')
-
                 ->modalDescription('Voeg een nieuwe afdeling toe door de onderstaande gegeven zo volledig mogelijk in te vullen.')
                 ->modalWidth(MaxWidth::FourExtraLarge)
                 ->modalHeading('Afdeling toevoegen')
