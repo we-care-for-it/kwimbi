@@ -19,7 +19,8 @@ class DepartmentResource extends Resource
     protected static ?string $navigationLabel       = "Afdelingen";
     protected static ?string $title                 = "Afdelingen";
     protected static ?string $pluralModelLabel      = 'Afdelingen';
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Mijn bedrijf';
+    protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
