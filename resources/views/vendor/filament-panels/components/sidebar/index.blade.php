@@ -151,7 +151,8 @@
             @endforeach
         </ul> 
     
-<div id = ""class="flex flex-col p-4 border-t border-gray-200 dark:border-gray-700 mt-auto">
+ 
+<div id = ""class="flex flex-col p-4   dark:border-gray-700 mt-auto">
     @php $user = auth()->user(); @endphp
  
 
@@ -162,6 +163,8 @@
 
 
     {{-- Avatar + user info --}}
+
+ 
     <div class="flex items-center gap-3">
     <img
         src="{{ $user->avatar_url ? '/storage/'.$user->avatar_url : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
@@ -171,7 +174,7 @@
         {{-- User info (name & email) --}}
         <div class="flex flex-col ml-2 sidebar-user-info transition-all duration-200">
             <p class="text-gray-900 dark:text-white text-sm sidebar-user-name">{{ $user->name }}</p>
-            <p class="text-gray-500 dark:text-gray-400 text-xs sidebar-user-email">{{ $user->email }}</p>
+            <p class="text-gray-500 dark:text-gray-400 text-xs sidebar-user-email">{{ setting('company_name') }}</p>
         </div>
     </div>
 </div>
