@@ -20,13 +20,9 @@ class ExpiredInspections extends ChartWidget
         return 'Aankomende keuringen die gaan verlopen in ' . date('Y');
     }
 
- public static function canView(): bool
+    public static function canView(): bool
     {
-        if (env('ENVIRONMENT_ELEVATOR')) {
-            return true;
-        } else {
-            return false;
-        }
+       return setting('module_elevators') ?? false;
     }
 
 

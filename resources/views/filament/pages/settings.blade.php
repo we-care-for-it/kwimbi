@@ -151,7 +151,7 @@
          </div>
       </div>
       <br>
-      @if(env('environment_elevator'))
+      @if(setting('module_elevators'))
       <h1 class="pb-2 text-lg font-medium text-gray-700 pt-5">Liften & Roltrappen Module</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
          <a class="content flex  py-5  gap-4 p-3 bg-white rounded-lg border border-gray-400" href="object-monitoring-codes">

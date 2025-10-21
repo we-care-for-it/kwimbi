@@ -21,13 +21,9 @@ class InspectionsChart extends ChartWidget
         return 'Het verloop van de keuringen van het huidige jaar';
     }
 
- public static function canView(): bool
+    public static function canView(): bool
     {
-        if (env('ENVIRONMENT_ELEVATOR')) {
-            return true;
-        } else {
-            return false;
-        }
+       return setting('module_elevators') ?? false;
     }
 
 

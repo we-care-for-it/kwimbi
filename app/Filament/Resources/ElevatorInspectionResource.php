@@ -43,8 +43,8 @@ class ElevatorInspectionResource extends Resource
     protected static ?int $navigationSort      = 4;
 
     public static function shouldRegisterNavigation(): bool
-    {
-        return setting('use_inspections') ?? false;
+    { 
+         return setting('module_elevators') ?? false;
     }
 public static function infolist(\Filament\Infolists\Infolist $infolist): \Filament\Infolists\Infolist
 {

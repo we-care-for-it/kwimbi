@@ -62,6 +62,7 @@ class TenantSettings extends Page implements HasForms
     public $default_parent_location;
     public $environment_elevator;
     public $upload_path;
+    public $module_elevators;
 
     public $default_hourtype_timeregistration;
     public function mount(): void
@@ -104,6 +105,8 @@ class TenantSettings extends Page implements HasForms
             'default_hourtype_timeregistration' => $this->getSetting('default_hourtype_timeregistration'),
             'default_parent_location'           => $this->getSetting('default_parent_location'),
             'upload_path'                       => $this->getSetting('upload_path'),
+            'module_elevators'                  => $this->getSetting('module_elevators'),
+
 
         ]);
     }
@@ -177,6 +180,14 @@ class TenantSettings extends Page implements HasForms
                                         ->label('Voortuigbeheer')
                                         ->boolean()
                                         ->inline(),
+
+
+                                    ToggleButtons::make('module_elevators')
+                                        ->label('Liften module')
+                                        ->boolean()
+                                        ->inline(),
+
+
 
                                     ToggleButtons::make('use_gps_tracker')
                                         ->label('Voortuig GPS Tracker')

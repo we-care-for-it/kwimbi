@@ -50,6 +50,13 @@ class ElevatorResource extends Resource
         return static::getModel()::count();
     }
 
+
+    public static function shouldRegisterNavigation(): bool
+    { 
+        return setting('module_elevators') ?? false;
+    }
+
+
     public static function getGlobalSearchResultTitle($record): string
     {
         return $record->name;

@@ -18,11 +18,7 @@ class RejectedInspections extends BaseWidget
 
     public static function canView(): bool
     {
-        if (env('ENVIRONMENT_ELEVATOR')) {
-            return true;
-        } else {
-            return false;
-        }
+       return setting('module_elevators') ?? false;
     }
 
     public function table(Table $table): Table

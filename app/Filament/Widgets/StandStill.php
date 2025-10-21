@@ -15,13 +15,9 @@ class StandStill extends BaseWidget
     protected static ?string $maxHeight        = '300px';
     protected static bool $isLazy              = false;
 
- public static function canView(): bool
+    public static function canView(): bool
     {
-        if (env('ENVIRONMENT_ELEVATOR')) {
-            return true;
-        } else {
-            return false;
-        }
+       return setting('module_elevators') ?? false;
     }
 
 
