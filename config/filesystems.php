@@ -39,6 +39,13 @@ return [
                         'visibility' => 'public',
         ],
 
+              // Tenant disk template
+        'tenant' => [
+            'driver' => 'local',
+            'root' => storage_path('app/tenants'), // base folder for tenants
+        ],
+
+        
          'sftp' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

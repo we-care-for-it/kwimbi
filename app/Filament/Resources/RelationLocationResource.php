@@ -229,13 +229,13 @@ class RelationLocationResource extends Resource
                     SpatieMediaLibraryFileUpload::make('relationlocationimage')
                         ->responsiveImages()
                         ->image()
-                              ->disk(config('filesystems.default'))
+                        ->disk(config('filesystems.default'))
                         ->hiddenlabel()
                         ->panelLayout('grid')
                         ->maxFiles(8)
                         ->label('Afbeeldingen')
                         ->multiple()
-                        ->collection('relationlocationimages'),
+                        ->collection('location'),
 
                 ])
                 ->collapsible()
@@ -382,7 +382,7 @@ class RelationLocationResource extends Resource
                         ->ring(5)
               
                         ->placeholder('Geen afbeeldingen')
-                        ->collection('relationlocationimages')])->collapsible()
+                        ->collection('location')])->collapsible()
                 ->collapsed(false)
                
                 ->visible(function (object $record) {

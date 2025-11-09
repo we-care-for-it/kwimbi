@@ -36,7 +36,8 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('relationlocationimages')
-            ->useDisk(config('filesystems.default')) // ✅ same tenant disk
+            ->useDisk(config('filesystems.default')) 
+       
             ->singleFile();
 
             
@@ -44,15 +45,7 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
             
     }
 
-  public function getPath(Media $media): string
-    {
-        // Files will go to storage/app/location/images/{model_id}/
-        return 'location/images/' . $media->model->id . '/';
-    }
-
-
-    //   return 'uploads/location/' . $media->model->id . '/';
-      
+ 
     
     // Validation rules for this model
     static $rules = [];

@@ -22,7 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'webhook/*',
         ]);
 
-        $middleware->append(\App\Http\Middleware\SetDatabaseBySubdomain::class);
+        $middleware->append(\App\Http\Middleware\SetTenantContext::class);
+ 
          // Middleware groups
         $middleware->appendToGroup('api', CheckApiToken::class);
 

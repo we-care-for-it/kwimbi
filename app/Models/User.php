@@ -16,6 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticatable;
  use JaysonTemporas\PageBookmarks\Traits\HasBookmarks;
 use Illuminate\Support\Facades\Storage;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
@@ -172,10 +173,10 @@ $parts = preg_split('/\s+/', trim($this->name));
     //     return $this->belongsToMany(Company::class);
     // }
 
-    // public function company(): BelongsTo
-    // {
-    //     return $this->belongsTo(Company::class);
-    // }
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
     // public function getTenants(Panel $panel): array | Collection
     // {
