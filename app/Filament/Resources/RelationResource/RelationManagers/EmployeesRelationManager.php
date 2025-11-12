@@ -64,10 +64,6 @@ class EmployeesRelationManager extends RelationManager
                             ->required()
                             ->maxLength(255),
 
-                        Forms\Components\TextInput::make('company')
-                            ->label('Bedrijf')
-                            ->maxLength(255),
-
                         Forms\Components\TextInput::make('email')
                             ->label('E-mailadres')
                             ->email()
