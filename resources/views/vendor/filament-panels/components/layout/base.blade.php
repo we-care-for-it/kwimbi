@@ -37,7 +37,7 @@
         @endphp
 
         <title>
-            {{ filled($title) ? "{$title} - " : null }}  {{ $tenantData->name}}
+            {{ $tenantData?->name ?? 'Kwimbi' }}
         </title>
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_BEFORE, scopes: $livewire->getRenderHookScopes()) }}
