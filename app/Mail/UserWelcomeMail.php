@@ -15,6 +15,9 @@ class UserWelcomeMail extends Mailable
 
     public function __construct($record)
     {
+
+
+        
         $this->record = $record;
     }
 

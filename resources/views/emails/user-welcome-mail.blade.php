@@ -117,6 +117,15 @@ div.WordSection1
 	font-size:10.0pt;
 	font-family:"Times New Roman",serif;}
 </style>
+
+
+@php
+    $tenantInfo = Cache::get('tenant');
+	$tenantData = json_decode($tenantInfo->data);
+@endphp
+
+
+
 <![endif]-->
 <meta http-equiv=X-UA-Compatible content="IE=edge">
 </head>
@@ -174,15 +183,20 @@ account aangemaakt<o:p></o:p></span></p>
     windowtext'><a href="{{url()->current()}}" target="_blank"><span
     style='text-decoration:none;text-underline:none'>
 	
-	<center><img border=0 height=180
-    id="_x0000_i1025"
-    src="{{$record->base_url}}storage/{{$record?->company_logo}}"
-    style='height: 50px; border-bottom-width:0in;border-left-width:0in;border-right-width:
-    0in;border-top-width:0in;display:block'  >
-	
+	<center>
+		
+	   <img 
+            src="{{ $tenantData->logo}}"
+            alt="Company Logo" 
+            style = "max-height: 50px;"
+            class="max-h-10 mb-4"
+        >
+		
+ 
+ 
 </center>
 
- 
+
 </span></a></span><span
     style='mso-fareast-font-family:"Times New Roman"'><o:p></o:p></span></p>
     </td>
@@ -191,16 +205,16 @@ account aangemaakt<o:p></o:p></span></p>
     <td style='border:solid #EFEFEF 1.0pt;border-top:none;mso-border-left-alt:
     solid #EFEFEF .75pt;mso-border-bottom-alt:solid #EFEFEF .75pt;mso-border-right-alt:
     solid #EFEFEF .75pt;padding:15.0pt 15.0pt 15.0pt 15.0pt'>
-    <p><span style='color:#37474F'>Beste {{$record?->name}},<o:p></o:p></span></p>
+    <p><span style='color:#37474F'>Beste {{$record->name}}<o:p></o:p></span></p>
     <p><span style='color:#37474F'>Er is een account voor je aangemaakt op het
     CRM van <strong><span style='font-family:"Aptos",sans-serif;mso-bidi-font-family:
-    Aptos'>{{setting('company_name')}}</span></strong>. <o:p></o:p></span></p>
+    Aptos'>{{$tenantInfo->name}}</span></strong>. <o:p></o:p></span></p>
     <p><strong><span style='font-family:"Aptos",sans-serif;mso-bidi-font-family:
     Aptos;color:#37474F'>Gebruikersnaam:</span></strong><span style='color:
     #37474F'> <br>
 
  
-    <a href=">{{$record?->email}}">{{$record?->email}}</a> <o:p></o:p></span></p>
+    <a href="{{$record?->email}}">{{$record?->email}}</a> <o:p></o:p></span></p>
     <p><span style='color:#37474F; '>Om in te kunnen loggen, moet je eerst een
     wachtwoord aanmaken. <o:p></o:p></span></p>
     <div align=center>

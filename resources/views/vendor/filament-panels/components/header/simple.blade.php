@@ -4,14 +4,27 @@
     'subheading' => null,
 ])
 
+
+@php
+    $tenantInfo = Cache::get('tenant');
+	$tenantData = json_decode($tenantInfo->data);
+@endphp
+
+
+
 <header class="fi-simple-header flex flex-col items-center pb-10">
-    @if ($logo)
+
+
+ 
+    @if ($tenantData->logo)
         <img 
-            src="{{ setting('company_logo') ? Storage::url(setting('company_logo')) : asset('/images/logo-color.png') }}" 
-            alt="Company Logo" 
-            style = "max-height: 100px;"
-            class="max-h-10 mb-4"
+            src="{{ $tenantData->logo}}" 
+            alt="{{ $tenantData->name}}" 
+            style = "max-height: 150px;"
+            class="  mb-4"
         >
+        @else
+        
     @endif
 
     @if (filled($heading))

@@ -11,6 +11,15 @@
         'dark' => filament()->hasDarkModeForced(),
     ])
 >
+
+
+@php
+    $tenantInfo = Cache::get('tenant');
+	$tenantData = json_decode($tenantInfo->data);
+@endphp
+
+
+
     <head>
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::HEAD_START, scopes: $livewire->getRenderHookScopes()) }}
 
@@ -28,7 +37,7 @@
         @endphp
 
         <title>
-            {{ filled($title) ? "{$title} - " : null }}  {{setting('company_name')}}
+            {{ filled($title) ? "{$title} - " : null }}  {{ $tenantData->name}}
         </title>
 
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::STYLES_BEFORE, scopes: $livewire->getRenderHookScopes()) }}

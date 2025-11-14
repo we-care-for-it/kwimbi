@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+
 
 if (! function_exists('table_exists')) {
     function table_exists(string $tableName): bool
@@ -97,4 +99,22 @@ if (! function_exists('setting')) {
             'url' => env('APP_URL'),
         ]);
     }
+
+if (!function_exists('tenant')) {
+    /**
+     * Get the current tenant information from cache.
+     *
+     * @param  string|null $key Specific key to get from tenant array/object
+     * @param  mixed $default Default value if key does not exist
+     * @return mixed
+     */
+    function tenant(?string $key = null, $default = null)
+    {
+        $tenant = Cache::get('tenant');
+ 
+        dd( $tenant);
+    }
+}
+
+
 }
