@@ -16,15 +16,15 @@
 
 
  
-    @if ($tenantData->logo)
+    @if ($tenantData?->logo)
         <img 
-            src="{{ $tenantData->logo}}" 
-            alt="{{ $tenantData->name}}" 
+            src="{{ $tenantData?->logo}}" 
+            alt="{{ $tenantData?->name}}" 
             style = "max-height: 150px;"
             class="  mb-4"
         >
         @else
-        
+
     @endif
 
     @if (filled($heading))
