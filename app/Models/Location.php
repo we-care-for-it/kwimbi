@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
+
+
 /**
  * @method static create(array $array)
  */
@@ -19,6 +22,23 @@ class Location extends Model
     {
         return $this->hasMany(Department::class);
     }
+
+
+    
+    
+    public function registerMediaCollections(): void
+    {
+
+        $tenant = Cache::get('tenant');
+$tenantDisk = 'tenant_' . $tenant->code;
+        $this->addMediaCollection('relationlocationimages')
+            ->useDisk($tenantDisk) 
+            ->singleFile();
+
+            
+    }
+
+
 
     public function workplaces(): HasManyThrough
     {

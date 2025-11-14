@@ -10,6 +10,7 @@ use Relaticle\CustomFields\Models\Concerns\UsesCustomFields;
 use Relaticle\CustomFields\Models\Contracts\HasCustomFields;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Support\Facades\Cache;
 
 /**
 
@@ -22,6 +23,8 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
     use InteractsWithMedia;
     use \OwenIt\Auditing\Auditable;
     use HasFilamentComments;
+ 
+
     use UsesCustomFields;
     // protected function casts(): array
     // {
@@ -31,16 +34,16 @@ class relationLocation extends Model implements Auditable, HasMedia, HasCustomFi
     //     ];
     // }
 
-
+ 
     
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('relationlocationimages')
-            ->useDisk(config('filesystems.default')) 
-       
-            ->singleFile();
 
-            
+        $tenant = Cache::get('tenant');
+$tenantDisk = 'tenant_' . $tenant->code;
+        $this->addMediaCollection('relationlocationimages')
+            ->useDisk($tenantDisk) 
+            ->singleFile();
 
             
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-
+use Illuminate\Support\Facades\Cache;
 class Vehicle extends Model implements Auditable, HasMedia
 {
     use SoftDeletes;
@@ -18,6 +18,22 @@ class Vehicle extends Model implements Auditable, HasMedia
         'gps_object_id',
 
     ];
+
+
+    
+    
+    public function registerMediaCollections(): void
+    {
+
+        $tenant = Cache::get('tenant');
+$tenantDisk = 'tenant_' . $tenant->code;
+        $this->addMediaCollection('relationlocationimages')
+            ->useDisk($tenantDisk) 
+            ->singleFile();
+
+            
+    }
+
 
     ///protected $appends = ['location_name'];
 
