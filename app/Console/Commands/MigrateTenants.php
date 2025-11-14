@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class MigrateTenants extends Command
 {
-    protected $signature = 'migrate:tenants';
+    protected $signature = 'migrate:tenant';
     protected $description = 'Run migrations for all tenant databases safely';
 
     public function handle()
