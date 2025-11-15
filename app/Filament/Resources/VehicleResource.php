@@ -26,7 +26,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Table;
-
+use Illuminate\Support\Facades\Cache;
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
@@ -78,12 +78,13 @@ class VehicleResource extends Resource
                         ->placeholder("Niet opgegeven"),
                 ]),
 
-            Section::make('Afbeeldingen')
+            Section::make('Afbeeldddingen')
                 ->schema([
                     SpatieMediaLibraryImageEntry::make('vehicleimage')
                         ->hiddenLabel()
                         ->height(200)
                         ->ring(5)
+                          ->disk(fn () => 'tenant_' . Cache::get('tenant')->code)
                         ->placeholder('Geen afbeeldingen')
                         ->collection('vehicleimages')])->collapsible()
                 ->collapsed(false)
@@ -268,6 +269,7 @@ class VehicleResource extends Resource
                             ->responsiveImages()
                             ->image()
                             ->hiddenLabel()
+                            ->disk(fn () => 'tenant_' . Cache::get('tenant')->code)
                             ->panelLayout('grid')
                             ->maxFiles(8)
                             ->label('Afbeeldingen')
@@ -332,7 +334,7 @@ class VehicleResource extends Resource
                     ->label('Afbeelding')
                     ->placeholder('-')
                     ->toggleable()
-                    ->limit(2)
+                              ->limit(2)
                     ->collection('vehicleimages'),
 
                 Tables\Columns\TextColumn::make('merk')

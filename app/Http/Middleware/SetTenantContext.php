@@ -50,7 +50,9 @@ class SetTenantContext
 
         Config::set("filesystems.disks.$tenantDiskName", [
             'driver' => 'local',
-            'root' => $tenantPath,
+  
+              'root' => storage_path("app/tenants/{$tenant->code}"),
+    'url' => "http://{$tenant->domain}/tenants/{$tenant->code}",
         ]);
 
         Config::set('filesystems.default', $tenantDiskName);

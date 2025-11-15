@@ -11,6 +11,17 @@ Route::get('/run-migration', function () {
     return redirect('/');
 });
 
+
+Route::get('/tenants/{tenant}/{path}', function ($tenant, $path) {
+    $file = storage_path("app/tenants/{$tenant}/{$path}");
+    if (!file_exists($file)) {
+        abort(404);
+    }
+    return response()->file($file);
+})->where('path', '.*');
+
+
+
 Route::get('/setup', function () {
 
 

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'tenant'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,10 +39,12 @@ return [
                         'visibility' => 'public',
         ],
 
+
+        
               // Tenant disk template
         'tenant' => [
             'driver' => 'local',
-            'root' => storage_path('app/tenants'), // base folder for tenants
+            'root' =>  env('APP_URL') . storage_path('app/tenants'), // base folder for tenants
         ],
 
         
