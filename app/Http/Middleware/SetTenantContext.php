@@ -38,7 +38,7 @@ class SetTenantContext
         Config::set('database.default', 'tenant');
         DB::setDefaultConnection('tenant');
 
-        Config::set('app.url', $tenant->domain);
+        Config::set('app.url', "https://".$tenant->domain);
 
         $tenant_code = $tenant->code;
         $tenantDiskName = 'tenant_' . $tenant_code;
@@ -52,7 +52,7 @@ class SetTenantContext
             'driver' => 'local',
   
               'root' => storage_path("app/tenants/{$tenant->code}"),
-    'url' => "http://{$tenant->domain}/tenants/{$tenant->code}",
+    'url' => "https://{$tenant->domain}/tenants/{$tenant->code}",
         ]);
 
         Config::set('filesystems.default', $tenantDiskName);

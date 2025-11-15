@@ -99,20 +99,11 @@ if (! function_exists('setting')) {
             'url' => env('APP_URL'),
         ]);
     }
-
-if (!function_exists('tenant')) {
-    /**
-     * Get the current tenant information from cache.
-     *
-     * @param  string|null $key Specific key to get from tenant array/object
-     * @param  mixed $default Default value if key does not exist
-     * @return mixed
-     */
-    function tenant(?string $key = null, $default = null)
+if (! function_exists('tenant_disk')) {
+    function tenant_disk(): string
     {
         $tenant = Cache::get('tenant');
- 
-        dd( $tenant);
+        return $tenant ? 'tenant_' . $tenant->code : 'default';
     }
 }
 

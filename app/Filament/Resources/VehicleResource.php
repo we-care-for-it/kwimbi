@@ -78,17 +78,16 @@ class VehicleResource extends Resource
                         ->placeholder("Niet opgegeven"),
                 ]),
 
-            Section::make('Afbeeldddingen')
+            Section::make('Afbeeldingen')
                 ->schema([
                     SpatieMediaLibraryImageEntry::make('vehicleimage')
                         ->hiddenLabel()
                         ->height(200)
                         ->ring(5)
-                          ->disk(fn () => 'tenant_' . Cache::get('tenant')->code)
-                        ->placeholder('Geen afbeeldingen')
+                        ->disk(tenant_disk())
                         ->collection('vehicleimages')])->collapsible()
-                ->collapsed(false)
-                ->persistCollapsed(),
+                        ->collapsed(false)
+                        ->persistCollapsed(),
 
             Tabs::make('Tabs')->tabs([
                 Tabs\Tab::make('Algemeen')
@@ -265,15 +264,18 @@ class VehicleResource extends Resource
                     ->description('Afbeeldingen van het voertuig')
                     ->compact()
                     ->schema([
-                        SpatieMediaLibraryFileUpload::make('vehicleimage')
-                            ->responsiveImages()
-                            ->image()
-                            ->hiddenLabel()
-                            ->disk(fn () => 'tenant_' . Cache::get('tenant')->code)
-                            ->panelLayout('grid')
+                        SpatieMediaLibraryFileUpload::make('vehicleimage')                   
+                       ->disk(tenant_disk())      ->panelLayout('grid')
                             ->maxFiles(8)
                             ->label('Afbeeldingen')
+                            ->multiple() 
+                            ->preserveFilenames()
+                            ->previewable()
+                            ->maxFiles(8)
                             ->multiple()
+                            ->hiddenLabel() 
+                            ->reorderable()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png'])
                             ->collection('vehicleimages'),
                     ]),
 
