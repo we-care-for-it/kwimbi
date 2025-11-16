@@ -50,13 +50,23 @@ class SetTenantContext
 
         Config::set("filesystems.disks.$tenantDiskName", [
             'driver' => 'local',
-  
-              'root' => storage_path("app/tenants/{$tenant->code}"),
-    'url' => "https://{$tenant->domain}/tenants/{$tenant->code}",
+            'root'   => storage_path("app/tenants/{$tenant->code}"),
+            'url'    => "https://{$tenant->domain}/tenants/{$tenant->code}",
         ]);
 
-        Config::set('filesystems.default', $tenantDiskName);
+ 
+        config([
+            'services.azure' => [
+                'client_id' => $tenant->azure_client_id,
+                'client_secret' => $tenant->azure_client_secret,
+                'redirect' => $tenant->azure_redirect_uri,
+                'tenant_id' => $tenant->azure_tenant_id,
+            ],
+        ]);
 
         return $next($request);
-    }
+ 
+   
+   }
+
 }
