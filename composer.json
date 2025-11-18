@@ -39,7 +39,7 @@
         "martinpetricko/filament-sentry-feedback": "^1.0",
         "mvenghaus/filament-plugin-schedule-monitor": "^3.0",
         "nben/filament-record-nav": "^1.0",
-        "niladam/filament-auto-logout": "^1.0",
+        "niladam/filament-auto-logout": "^2.0",
         "owen-it/laravel-auditing": "^13.6",
         "owenvoke/blade-fontawesome": "^2.8",
         "parallax/filament-comments": "^1.5",
