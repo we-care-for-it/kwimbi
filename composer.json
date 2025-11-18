@@ -8,6 +8,10 @@
         "framework"
     ],
     "license": "MIT",
+    
+    "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
     "require": {
         "php": "^8.2",
         "asmit/resized-column": "^1.0",
