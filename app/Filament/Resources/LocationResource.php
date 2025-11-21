@@ -22,7 +22,7 @@ class LocationResource extends Resource
 {
     protected static ?string $model                 = Location::class;
     protected static bool $shouldRegisterNavigation = true;
-    protected static ?string $navigationGroup = 'Mijn bedrijf';
+    protected static ?string $navigationGroup = 'Mijn bedrijf je';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
