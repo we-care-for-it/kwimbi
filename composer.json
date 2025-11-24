@@ -54,7 +54,7 @@
         "rappasoft/laravel-authentication-log": "^4.0",
         "rawilk/filament-password-input": "^2.0",
         "relaticle/custom-fields": "^1.4",
-        "rmsramos/activitylog": "^1.0",
+        "rmsramos/activitylog": "^2.0",
         "rupadana/filament-api-service": "^3.4",
         "saade/filament-autograph": "^3.2",
         "sentry/sentry-laravel": "^4.15",
