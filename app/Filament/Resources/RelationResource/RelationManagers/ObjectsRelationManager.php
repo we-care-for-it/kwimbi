@@ -7,7 +7,7 @@ use App\Models\{
     Employee,
     ObjectModel,
     ObjectType,
-    RelationLocation
+    relationLocation
 };
 use App\Filament\Exports\ObjectsExporter;
 use Filament\Actions\Exports\Models\Export;
@@ -122,7 +122,7 @@ class ObjectsRelationManager extends RelationManager
                                 ->label('Locatie')
                                 ->searchable(['name', 'address', 'place'])
                                 ->options(
-                                    RelationLocation::where('relation_id', $this->ownerRecord->id)
+                                    relationLocation::where('relation_id', $this->ownerRecord->id)
                                         ->get()
                                         ->mapWithKeys(fn($loc) => [
                                             $loc->id => "{$loc->name} {$loc->address}",
@@ -208,7 +208,7 @@ class ObjectsRelationManager extends RelationManager
                 SelectFilter::make('location_id')
                     ->label('Locatie')
                     ->options(
-                        RelationLocation::where('relation_id', $this->ownerRecord->id)
+                        relationLocation::where('relation_id', $this->ownerRecord->id)
                             ->get()
                             ->mapWithKeys(fn($loc) => [
                                 $loc->id => "{$loc->name} {$loc->address}",

@@ -12,6 +12,11 @@ Route::get('/run-migration', function () {
 });
 
 
+Route::get('/tenant-not-found', function () {
+    return view('errors.tenant-not-found');
+})->name('tenant.notfound');
+
+
 Route::get('/tenants/{tenant}/{path}', function ($tenant, $path) {
     $file = storage_path("app/tenants/{$tenant}/{$path}");
     if (!file_exists($file)) {

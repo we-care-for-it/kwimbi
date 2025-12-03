@@ -18,7 +18,7 @@ class SetTenantContext
             ->first();
 
         if (!$tenant) {
-            abort(404, 'Tenant not found.');
+            return redirect()->route('tenant.notfound');
         }
 
         Cache::put('tenant', $tenant);
