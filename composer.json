@@ -26,7 +26,7 @@
         "dutchcodingcompany/filament-developer-logins": "^1.6",
         "dutchcodingcompany/filament-socialite": "^2.3",
         "eightynine/filament-excel-import": "^3.1",
-        "filament/filament": "^3.2",
+        "filament/filament": "^3.3",
         "filament/spatie-laravel-media-library-plugin": "^3.3",
         "flowframe/laravel-trend": "^0.3.0",
         "hasnayeen/themes": "^3.0",
