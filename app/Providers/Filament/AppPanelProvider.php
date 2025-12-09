@@ -47,19 +47,14 @@ use Asmit\ResizedColumn\ResizedColumnPlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
 
-use Filament\Icons\HeroiconsIconSet;
-use Filament\Icons\IconManager;
+ 
 
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-
-         ->icons([
-            'heroicon' => HeroiconsIconSet::class,
-        ])
-
+ 
     ->plugins([
             // ... other plugins
             ResizedColumnPlugin::make()
