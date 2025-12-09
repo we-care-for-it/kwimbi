@@ -64,14 +64,7 @@ class AppServiceProvider extends ServiceProvider
         ]);
         Filament::serving(function () {
             Filament::registerUserMenuItems([
-                // UserMenuItem::make()
-                //     ->label('Instellingen')
-                //     ->url(route('filament.admin.general'))
-                //     ->icon('heroicon-s-cog'),
-                // UserMenuItem::make()
-                //     ->label('Logboek')
-                //     ->url(route('filament.admin.logs'))
-                //     ->icon('heroicon-m-clipboard-document-list'),
+            
                 UserMenuItem::make()
                     ->label('Mijn profiel')
                     ->url('/my-profile')
