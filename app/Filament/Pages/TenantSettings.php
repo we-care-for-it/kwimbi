@@ -20,8 +20,6 @@ class TenantSettings extends Page implements HasForms
 {
 
     use InteractsWithForms;
-
-   // protected static ?string $navigationIcon        = 'heroicon-o-cog';
     protected static string $view                   = 'filament.pages.tenant-settings';
     protected static ?string $navigationLabel       = 'Settings';
     protected static bool $shouldRegisterNavigation = false;

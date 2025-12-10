@@ -29,10 +29,7 @@ class InspectionsRelationManager extends RelationManager
     //     return in_array('Keuringen', $ownerRecord?->type?->options) ? true : false;
     // }
 
-    public function getContentTabIcon(): ?string
-    {
-        return 'heroicon-m-cog';
-    }
+ 
     public static function getBadge($ownerRecord, string $pageClass): ?string
     {
         return $ownerRecord->inspections->count();
