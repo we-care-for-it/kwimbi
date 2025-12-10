@@ -11,13 +11,7 @@ return [
     | other UI elements where an application name needs to be displayed.
     |
     */
-//     'providers' => [
-//     // ...
-//     App\Providers\AppServiceProvider::class,
-//     App\Providers\AuthServiceProvider::class, // ← Ensure this exists
-//     App\Providers\TenantPanelProvider::class,
-//     // ...
-// ],
+  
 
     'env'             => env('APP_ENV', 'production'),
 
