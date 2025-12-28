@@ -18,7 +18,7 @@ use Illuminate\Support\ServiceProvider;
 use SocialiteProviders\Azure\Provider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use Spatie\Activitylog\Models\Activity;
-
+use Illuminate\Support\Facades\Blade;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-    Blade::anonymousComponentPath(__DIR__.'/../../vendor/blade-ui-kit/blade-heroicons/resources/svg', 'heroicon'),
+    Blade::anonymousComponentPath(__DIR__.'/../../vendor/blade-ui-kit/blade-heroicons/resources/svg', 'heroicon');
 
         Gate::policy(Activity::class, ActivityPolicy::class);
         // Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
