@@ -34,11 +34,7 @@
   font-weight: normal !important;
 }
 
-.fi-input-wrp {
-  background-color: white !important;
-  border-radius: 2px !important;
-}
-
+ 
  
 
 
@@ -101,10 +97,7 @@
   ;
 }
 
-.fi-layout {
-  background-color: white !important;
-  ;
-}
+
 
 .fi-global-search-result-group {
   background-color: white !important;
