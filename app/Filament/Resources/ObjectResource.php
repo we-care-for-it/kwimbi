@@ -440,13 +440,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                             ->icon('heroicon-o-information-circle')
                             ->schema([
                    
-                                TextEntry::make('nobo_no')->visible(function ($record) {
-                                    return env('ENVIRONMENT_ELEVATOR');
-                                })
- 
-                                    ->label('NOBO Nummer')
-                                    ->placeholder('Niet opgegeven'),
-                                TextEntry::make('type.name')
+                                                           TextEntry::make('type.name')
                                     ->label('Type')
                                     ->badge()
                                     ->color('success')
@@ -457,27 +451,11 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                 TextEntry::make('construction_year')
                                     ->label('Bouwjaar')
                                     ->placeholder('Niet opgegeven'),
-                                ViewEntry::make('energy_label')
-                                    ->view('filament.infolists.entries.energylabel')
-                                    ->label('Energielabel')
-                                    ->placeholder('Niet opgegeven'),
                                 TextEntry::make('status_id')
                                     ->label('Status')
                                     ->badge()
                                     ->placeholder('Niet opgegeven'),
-                                TextEntry::make('latestInspection.status_id')
-                                    ->label('Keuringsstatus')
-                                    ->badge()
-                                    ->placeholder('Onbekend')
-                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
-                                ,
-                                TextEntry::make('current_inspection_end_date')
-                                    ->label('Keuringsverloop datum')
-                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
-
-                                    ->date('d-m-Y')
-                                    ->placeholder('Onbekend'),
-
+                               
                             ])->columns(4),
 
                         Tabs\Tab::make('Locatie & Relatie')
@@ -500,34 +478,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
                                     ->placeholder('Niet opgegeven'),
                             ])->columns(2),
 
-                        Tabs\Tab::make('Partijen')
-                            ->icon('heroicon-o-user-group')
-                            ->schema([
-                                TextEntry::make('supplier')
-                                    ->label('Leverancier')
-                                    ->placeholder('Niet opgegeven'),
-                                TextEntry::make('maintenance_company.name')
-                                    ->label('Onderhoudspartij')
-                                    ->placeholder('Niet opgegeven'),
-                                TextEntry::make('inspectioncompany.name')
-                                    ->label('Keuringsinstantie')
-                                    ->visible(fn($record) => in_array('Keuringen', $record?->type?->options) ? true : false)
-
-                                    ->placeholder('Niet opgegeven')
-                                    ->hidden(),
-                                // TextEntry::make('location.management.name')
-                                //     ->label('Beheerder')
-                                //     ->visible(fn($record) => in_array('Beheerder', $record?->location?->type?->options) ? true : false)
-
-                                // ->visible(function ($record) {
-
-                                //     return in_array('Beheerder', $record?->location->type->options) ? true : false;;
-                                // })
-
-                            ])->columns(4)->visible(function ($record) {
-                                    return env('ENVIRONMENT_ELEVATOR');
-                                })
- ,
+                      
 
                         Tabs\Tab::make('Afbeeldingen')
                             ->icon('heroicon-o-photo')
@@ -546,12 +497,7 @@ Checkbox::make('stretcher_elevator')->inline(true)->label('Brancardlift '),
 
                             ->schema([
 
-                                
-                                 TextEntry::make('stopping_places')
-                                    ->label('Stopplaatsen')
-                                    ->placeholder('Niet opgegeven'),
-
-
+                            
                                       TextEntry::make('supplier')
                                     ->label('Leverancier')
                                     ->placeholder('Niet opgegeven'),
