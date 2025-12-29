@@ -383,17 +383,7 @@ class TicketResource extends Resource
                 SelectFilter::make('department_id')
                     ->label('Afdeling')
                     ->options(Department::pluck('name', 'id')),
-
-                TernaryFilter::make('statsu_id')
-                    ->label('Gesloten tickets')
-                    ->placeholder('Alle tickets')
-                    ->trueLabel('Verbergen')
-                    ->falseLabel('Tonen')
-                    ->queries(
-                        true: fn(Builder $query)  => $query->whereNot('status_id', 7),
-                        false: fn(Builder $query) => $query->where('status_id', 7),
-                        blank: fn(Builder $query) => $query, // In this example, we do not want to filter the query when it is blank.
-                    ),
+ 
                 // ->default(1)
 
                 TrashedFilter::make(),
