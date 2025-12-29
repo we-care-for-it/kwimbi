@@ -365,24 +365,7 @@ class TicketResource extends Resource
 
             ])
             ->filters([
-                SelectFilter::make('relation_id')
-                    ->label('Relatie')
-
-                    ->options(Relation::all()->pluck("name", "id")),
-                SelectFilter::make('assigned_by_user')
-                    ->label('Medewerker')
-                    ->options(User::all()->pluck("name", "id")),
-
-                SelectFilter::make('status_id')
-                    ->label('Status')
-                    ->options(TicketStatus::class),
-                SelectFilter::make('type_id')
-                    ->label('Type')
-                    ->options(TicketTypes::class),
-
-                SelectFilter::make('department_id')
-                    ->label('Afdeling')
-                    ->options(Department::pluck('name', 'id')),
+                
  
                 // ->default(1)
 
