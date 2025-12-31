@@ -296,12 +296,18 @@ class TicketResource extends Resource
                         return sprintf("%05d", $record?->id);
                     }),
                 //     ->label('Medewerker'),
-                Tables\Columns\TextColumn::make(priority::class)
+ 
+
+
+                    
+                Tables\Columns\TextColumn::make('priority')
                     ->badge()
                     ->sortable()
-                    ->grow(false)
                     ->toggleable()
                     ->label('Prioriteit'),
+
+
+
 
                 //     ->label('Medewerker'),
                 Tables\Columns\TextColumn::make('status_id')
